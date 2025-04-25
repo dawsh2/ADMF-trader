@@ -1,0 +1,153 @@
+2025-04-24 23:04:45,546 - INFO - [DetailedDebug] - Starting detailed order flow debug script
+2025-04-24 23:04:45,546 - INFO - [DetailedDebug] - ================================================
+2025-04-24 23:04:45,546 - INFO - [DetailedDebug] - === Starting Detailed Order-Fill Flow Debug ===
+2025-04-24 23:04:45,546 - INFO - [DetailedDebug] - ================================================
+2025-04-24 23:04:45,546 - INFO - [DetailedDebug] - STEP 1: Inspecting key functions
+2025-04-24 23:04:45,546 - INFO - [DetailedDebug] - Inspecting create_fill_event function...
+2025-04-24 23:04:45,546 - INFO - [DetailedDebug] - Source for create_fill_event:
+def create_fill_event(symbol, direction, quantity, price, 
+                     commission=0.0, timestamp=None, order_id=None):
+    """Create a standardized fill event."""
+    # Create the event
+    fill = FillEvent(symbol, direction, quantity, price, 
+                    commission, timestamp)
+    
+    # CRITICAL: Add order_id to the data dictionary
+    if order_id is not None:
+        # Ensure data is a dictionary
+        if not hasattr(fill, 'data'):
+            fill.data = {}
+        
+        # Set the order_id
+        fill.data['order_id'] = order_id
+        
+        # Debug log to verify
+        import logging
+        logging.getLogger(__name__).debug(f"Added order_id to fill: {order_id}")
+    
+    return fill
+
+2025-04-24 23:04:45,546 - INFO - [DetailedDebug] - Signature for create_fill_event: (symbol, direction, quantity, price, commission=0.0, timestamp=None, order_id=None)
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - STEP 2: Creating system components
+2025-04-24 23:04:45,547 - DEBUG - [src.core.events.event_bus] - Registered handler for ORDER
+2025-04-24 23:04:45,547 - DEBUG - [src.core.events.event_bus] - Registered handler for ORDER
+2025-04-24 23:04:45,547 - DEBUG - [src.core.events.event_bus] - Registered handler for FILL
+2025-04-24 23:04:45,547 - DEBUG - [src.core.events.event_bus] - Registered handler for ORDER
+2025-04-24 23:04:45,547 - DEBUG - [src.core.events.event_bus] - Registered handler for FILL
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - STEP 3: Instrumenting broker's process_order method
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - STEP 4: Instrumenting order manager methods
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - STEP 5: Direct test with fixed order ID
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Generated test order ID: 7f6bef25-792f-430f-bb84-bcb5a686e848
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Added order_id to order event data: 7f6bef25-792f-430f-bb84-bcb5a686e848
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Processing order DIRECTLY through broker...
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - >>> BROKER.process_order entry point
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - --- Input Order Event Details ---
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Event Type: ORDER
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Event ID: ca844a06-8e29-4757-8407-f44ac92373e4
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Event Timestamp: 2025-04-24 23:04:45.547231
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Event Data: {"symbol": "AAPL", "order_type": "MARKET", "direction": "BUY", "quantity": 100, "price": 150.0, "order_id": "7f6bef25-792f-430f-bb84-bcb5a686e848"}
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Symbol: AAPL
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Direction: BUY
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Quantity: 100
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Price: 150.0
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - ----------------------------------------
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Extracted order_id from event data: 7f6bef25-792f-430f-bb84-bcb5a686e848
+2025-04-24 23:04:45,547 - DEBUG - [src.execution.broker.broker_simulator] - Broker extracted order_id: 7f6bef25-792f-430f-bb84-bcb5a686e848
+2025-04-24 23:04:45,547 - DEBUG - [src.core.events.event_utils] - Added order_id to fill: 7f6bef25-792f-430f-bb84-bcb5a686e848
+2025-04-24 23:04:45,547 - INFO - [src.execution.broker.broker_simulator] - Broker processed order: BUY 100 AAPL @ 150.00
+2025-04-24 23:04:45,547 - INFO - [src.execution.broker.broker_simulator] - Broker emitting fill event for AAPL
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - --- Output Fill Event Details ---
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Event Type: FILL
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Event ID: ebc987fb-29a4-4497-bbbe-ffebbd0f16ef
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Event Timestamp: 2025-04-24 23:04:45.547231
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Event Data: {"symbol": "AAPL", "direction": "BUY", "quantity": 100, "price": 150.0, "commission": 0.0, "order_id": "7f6bef25-792f-430f-bb84-bcb5a686e848"}
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Symbol: AAPL
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Direction: BUY
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Quantity: 100
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Price: 150.0
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - ----------------------------------------
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Fill event contains order_id: 7f6bef25-792f-430f-bb84-bcb5a686e848
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - <<< BROKER.process_order exit point
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Broker returned a fill event
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Fill contains order_id: 7f6bef25-792f-430f-bb84-bcb5a686e848
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - ✓ Original order ID matches fill order ID in direct test!
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - STEP 6: Full event flow test
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Generated flow test order ID: e0e2cee1-1caa-48c0-8e58-a710427eb0e2
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Added order_id to flow order event data: e0e2cee1-1caa-48c0-8e58-a710427eb0e2
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Emitting order event through event bus...
+2025-04-24 23:04:45,547 - DEBUG - [src.core.events.event_bus] - Emitting ORDER event (ID: b8f0ce4b-2116-4231-90ba-4a6a65c2d6ff)
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - >>> BROKER.process_order entry point
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - --- Input Order Event Details ---
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Event Type: ORDER
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Event ID: b8f0ce4b-2116-4231-90ba-4a6a65c2d6ff
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Event Timestamp: 2025-04-24 23:04:45.547758
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Event Data: {"symbol": "MSFT", "order_type": "MARKET", "direction": "BUY", "quantity": 50, "price": 250.0, "order_id": "e0e2cee1-1caa-48c0-8e58-a710427eb0e2"}
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Symbol: MSFT
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Direction: BUY
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Quantity: 50
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Price: 250.0
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - ----------------------------------------
+2025-04-24 23:04:45,547 - INFO - [DetailedDebug] - Extracted order_id from event data: e0e2cee1-1caa-48c0-8e58-a710427eb0e2
+2025-04-24 23:04:45,547 - DEBUG - [src.execution.broker.broker_simulator] - Broker extracted order_id: e0e2cee1-1caa-48c0-8e58-a710427eb0e2
+2025-04-24 23:04:45,547 - DEBUG - [src.core.events.event_utils] - Added order_id to fill: e0e2cee1-1caa-48c0-8e58-a710427eb0e2
+2025-04-24 23:04:45,548 - INFO - [src.execution.broker.broker_simulator] - Broker processed order: BUY 50 MSFT @ 250.00
+2025-04-24 23:04:45,548 - INFO - [src.execution.broker.broker_simulator] - Broker emitting fill event for MSFT
+2025-04-24 23:04:45,548 - INFO - [DetailedDebug] - --- Output Fill Event Details ---
+2025-04-24 23:04:45,548 - INFO - [DetailedDebug] - Event Type: FILL
+2025-04-24 23:04:45,548 - INFO - [DetailedDebug] - Event ID: d373bf13-0ac5-48c1-906a-6b8539ddd8d4
+2025-04-24 23:04:45,548 - INFO - [DetailedDebug] - Event Timestamp: 2025-04-24 23:04:45.547758
+2025-04-24 23:04:45,548 - INFO - [DetailedDebug] - Event Data: {"symbol": "MSFT", "direction": "BUY", "quantity": 50, "price": 250.0, "commission": 0.0, "order_id": "e0e2cee1-1caa-48c0-8e58-a710427eb0e2"}
+2025-04-24 23:04:45,548 - INFO - [DetailedDebug] - Symbol: MSFT
+2025-04-24 23:04:45,548 - INFO - [DetailedDebug] - Direction: BUY
+2025-04-24 23:04:45,548 - INFO - [DetailedDebug] - Quantity: 50
+2025-04-24 23:04:45,548 - INFO - [DetailedDebug] - Price: 250.0
+2025-04-24 23:04:45,548 - INFO - [DetailedDebug] - ----------------------------------------
+2025-04-24 23:04:45,548 - INFO - [DetailedDebug] - Fill event contains order_id: e0e2cee1-1caa-48c0-8e58-a710427eb0e2
+2025-04-24 23:04:45,548 - INFO - [DetailedDebug] - <<< BROKER.process_order exit point
+2025-04-24 23:04:45,548 - INFO - [src.execution.broker.broker_simulator] - Broker emitting fill event for MSFT
+2025-04-24 23:04:45,548 - DEBUG - [src.core.events.event_bus] - Emitting FILL event (ID: d373bf13-0ac5-48c1-906a-6b8539ddd8d4)
+2025-04-24 23:04:45,548 - DEBUG - [src.execution.order_manager] - Found order_id in fill event: e0e2cee1-1caa-48c0-8e58-a710427eb0e2
+2025-04-24 23:04:45,548 - ERROR - [src.execution.order_manager] - Order e0e2cee1-1caa-48c0-8e58-a710427eb0e2 not found in order manager
+2025-04-24 23:04:45,548 - DEBUG - [src.execution.order_manager] - Found order_id in fill event: e0e2cee1-1caa-48c0-8e58-a710427eb0e2
+2025-04-24 23:04:45,548 - ERROR - [src.execution.order_manager] - Order e0e2cee1-1caa-48c0-8e58-a710427eb0e2 not found in order manager
+2025-04-24 23:04:45,548 - DEBUG - [src.execution.order_manager] - Order stored with ID: e0e2cee1-1caa-48c0-8e58-a710427eb0e2
+2025-04-24 23:04:45,548 - DEBUG - [src.core.events.event_bus] - Emitting PORTFOLIO event (ID: dedd977c-c879-4b41-96a7-018224c79717)
+2025-04-24 23:04:45,548 - INFO - [src.execution.order_manager] - Created order: Order(e0e2cee1-1caa-48c0-8e58-a710427eb0e2, MSFT, BUY, 50, PENDING)
+2025-04-24 23:04:45,548 - DEBUG - [src.execution.order_manager] - Order e0e2cee1-1caa-48c0-8e58-a710427eb0e2 already being tracked
+2025-04-24 23:04:45,653 - INFO - [DetailedDebug] - STEP 7: Direct test of order manager
+2025-04-24 23:04:45,653 - INFO - [DetailedDebug] - Generated direct order ID: f1c54008-08f5-478c-b994-2167140a9ebd
+2025-04-24 23:04:45,653 - INFO - [DetailedDebug] - Manually added order f1c54008-08f5-478c-b994-2167140a9ebd to order manager
+2025-04-24 23:04:45,653 - INFO - [DetailedDebug] - Added order_id to direct fill event data: f1c54008-08f5-478c-b994-2167140a9ebd
+2025-04-24 23:04:45,653 - INFO - [DetailedDebug] - Calling on_fill method directly...
+2025-04-24 23:04:45,653 - INFO - [DetailedDebug] - >>> ORDER_MANAGER.on_fill entry point
+2025-04-24 23:04:45,653 - INFO - [DetailedDebug] - --- Input Fill Event Details ---
+2025-04-24 23:04:45,653 - INFO - [DetailedDebug] - Event Type: FILL
+2025-04-24 23:04:45,653 - INFO - [DetailedDebug] - Event ID: bac93072-60f1-497c-adef-7cee9d52a348
+2025-04-24 23:04:45,653 - INFO - [DetailedDebug] - Event Timestamp: 2025-04-24 23:04:45.653535
+2025-04-24 23:04:45,653 - INFO - [DetailedDebug] - Event Data: {"symbol": "GOOGL", "direction": "BUY", "quantity": 25, "price": 100.0, "commission": 0.0, "order_id": "f1c54008-08f5-478c-b994-2167140a9ebd"}
+2025-04-24 23:04:45,653 - INFO - [DetailedDebug] - Symbol: GOOGL
+2025-04-24 23:04:45,653 - INFO - [DetailedDebug] - Direction: BUY
+2025-04-24 23:04:45,653 - INFO - [DetailedDebug] - Quantity: 25
+2025-04-24 23:04:45,653 - INFO - [DetailedDebug] - Price: 100.0
+2025-04-24 23:04:45,653 - INFO - [DetailedDebug] - ----------------------------------------
+2025-04-24 23:04:45,653 - INFO - [DetailedDebug] - Found order_id in fill event data: f1c54008-08f5-478c-b994-2167140a9ebd
+2025-04-24 23:04:45,653 - INFO - [DetailedDebug] - Orders in manager before fill: ['e0e2cee1-1caa-48c0-8e58-a710427eb0e2', 'f1c54008-08f5-478c-b994-2167140a9ebd']
+2025-04-24 23:04:45,653 - DEBUG - [src.execution.order_manager] - Found order_id in fill event: f1c54008-08f5-478c-b994-2167140a9ebd
+2025-04-24 23:04:45,653 - DEBUG - [src.execution.order_manager] - Found matching order: Order(f1c54008-08f5-478c-b994-2167140a9ebd, GOOGL, BUY, 25, CREATED)
+2025-04-24 23:04:45,654 - DEBUG - [src.core.events.event_bus] - Emitting PORTFOLIO event (ID: 7cb4fa41-f30a-42d8-b3c7-303009ecffbb)
+2025-04-24 23:04:45,654 - INFO - [src.execution.order_manager] - Updated order with fill: Order(f1c54008-08f5-478c-b994-2167140a9ebd, GOOGL, BUY, 25, FILLED)
+2025-04-24 23:04:45,654 - INFO - [DetailedDebug] - on_fill completed successfully
+2025-04-24 23:04:45,654 - INFO - [DetailedDebug] - <<< ORDER_MANAGER.on_fill exit point
+2025-04-24 23:04:45,654 - INFO - [DetailedDebug] - STEP 8: Analyzing results
+2025-04-24 23:04:45,654 - INFO - [DetailedDebug] - Final orders in manager: ['e0e2cee1-1caa-48c0-8e58-a710427eb0e2', 'f1c54008-08f5-478c-b994-2167140a9ebd']
+2025-04-24 23:04:45,654 - INFO - [DetailedDebug] - All tracked IDs:
+2025-04-24 23:04:45,654 - INFO - [DetailedDebug] -   original_order_id: 7f6bef25-792f-430f-bb84-bcb5a686e848
+2025-04-24 23:04:45,654 - INFO - [DetailedDebug] -   broker_extracted_order_id: e0e2cee1-1caa-48c0-8e58-a710427eb0e2
+2025-04-24 23:04:45,654 - INFO - [DetailedDebug] -   broker_fill_order_id: e0e2cee1-1caa-48c0-8e58-a710427eb0e2
+2025-04-24 23:04:45,654 - INFO - [DetailedDebug] -   direct_fill_order_id: 7f6bef25-792f-430f-bb84-bcb5a686e848
+2025-04-24 23:04:45,654 - INFO - [DetailedDebug] -   flow_order_id: e0e2cee1-1caa-48c0-8e58-a710427eb0e2
+2025-04-24 23:04:45,654 - INFO - [DetailedDebug] -   direct_order_id: f1c54008-08f5-478c-b994-2167140a9ebd
+2025-04-24 23:04:45,654 - INFO - [DetailedDebug] -   manager_received_fill_order_id: f1c54008-08f5-478c-b994-2167140a9ebd
+2025-04-24 23:04:45,654 - INFO - [DetailedDebug] - ✓ Direct test: Original order ID matches fill order ID
+2025-04-24 23:04:45,654 - INFO - [DetailedDebug] - === Detailed Order-Fill Flow Debug Complete ===
+2025-04-24 23:04:45,654 - INFO - [DetailedDebug] - Debug script completed successfully

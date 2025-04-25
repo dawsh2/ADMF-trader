@@ -192,7 +192,6 @@ def create_order_event(symbol, order_type, direction, quantity,
     
     return order
 
-
 def create_fill_event(symbol, direction, quantity, price, 
                      commission=0.0, timestamp=None, order_id=None):
     """Create a standardized fill event."""
@@ -200,11 +199,21 @@ def create_fill_event(symbol, direction, quantity, price,
     fill = FillEvent(symbol, direction, quantity, price, 
                     commission, timestamp)
     
-    # Add order_id to the data (critical for order tracking)
-    if order_id:
+    # CRITICAL: Add order_id to the data dictionary
+    if order_id is not None:
+        # Ensure data is a dictionary
+        if not hasattr(fill, 'data'):
+            fill.data = {}
+        
+        # Set the order_id
         fill.data['order_id'] = order_id
+        
+        # Debug log to verify
+        import logging
+        logging.getLogger(__name__).debug(f"Added order_id to fill: {order_id}")
     
     return fill
+
 
 
 def create_websocket_event(connection_id, state, data=None, timestamp=None):

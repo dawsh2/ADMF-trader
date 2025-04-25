@@ -97,20 +97,23 @@ class BacktestCoordinator:
                 logger.error("No risk manager available")
                 return False
             
-            # Create broker
-            if self.container and self.container.has('broker'):
-                self.broker = self.container.get('broker')
-            else:
-                from src.execution.broker.broker_simulator import SimulatedBroker
-                self.broker = SimulatedBroker(self.event_bus)
-            
+
             # Create order manager
             if self.container and self.container.has('order_manager'):
                 self.order_manager = self.container.get('order_manager')
             else:
                 from src.execution.order_manager import OrderManager
                 self.order_manager = OrderManager(self.event_bus, self.broker)
-            
+
+            # Create broker
+            if self.container and self.container.has('broker'):
+                self.broker = self.container.get('broker')
+            else:
+                from src.execution.broker.broker_simulator import SimulatedBroker
+                self.broker = SimulatedBroker(self.event_bus)
+
+
+                
             # Create strategy
             if self.container and self.container.has('strategy'):
                 self.strategy = self.container.get('strategy')
@@ -142,11 +145,12 @@ class BacktestCoordinator:
             self.order_manager.broker = self.broker
             
             # Register components with event manager
+            # Register components with event manager in this order:
             self.event_manager.register_component('data_handler', self.data_handler)
             self.event_manager.register_component('portfolio', self.portfolio)
             self.event_manager.register_component('risk_manager', self.risk_manager)
-            self.event_manager.register_component('broker', self.broker)
-            self.event_manager.register_component('order_manager', self.order_manager)
+            self.event_manager.register_component('order_manager', self.order_manager) # Order manager first
+            self.event_manager.register_component('broker', self.broker)               # Broker second
             self.event_manager.register_component('strategy', self.strategy)
             
             logger.info("Backtest setup complete")

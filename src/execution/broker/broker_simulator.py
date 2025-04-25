@@ -61,52 +61,62 @@ class SimulatedBroker(BrokerBase):
         # Register for events
         if self.event_bus:
             self.event_bus.register(EventType.ORDER, self.on_order)
-    
+
+
     def on_order(self, order_event):
         """
         Handle order events.
-        
+
         Args:
             order_event: Order event to process
         """
-        # Track order ID to prevent duplicate processing
+        # Extract order ID from the order event
         order_id = None
         if hasattr(order_event, 'data') and isinstance(order_event.data, dict):
             order_id = order_event.data.get('order_id')
-            
-        # Skip if already processed this order
-        if order_id and order_id in self.processed_order_ids:
-            logger.debug(f"Order {order_id} already processed by broker, skipping")
-            return
-            
-        # Process order to get fill
-        fill_event = self.process_order(order_event)
-        
-        # Emit fill event if created
-        if fill_event and self.event_bus:
-            # Keep track of order ID to prevent duplicate processing
-            if order_id:
-                self.processed_order_ids.add(order_id)
-                
-                # Make sure fill has the order ID for tracing
-                if hasattr(fill_event, 'data') and isinstance(fill_event.data, dict):
-                    fill_event.data['order_id'] = order_id
-                    
-            # Emit the fill event
-            logger.info(f"Broker emitting fill event for {fill_event.get_symbol()}")
-            self.event_bus.emit(fill_event)
 
+        # Process the order
+        fill_event = self.process_order(order_event)
+
+        # If a fill was generated, emit it
+        if fill_event and self.event_bus:
+            self.event_bus.emit(fill_event)            
+    # def on_order(self, order_event):
+    #     """
+    #     Handle order events.
+        
+    #     Args:
+    #         order_event: Order event to process
+    #     """
+    #     # Track order ID to prevent duplicate processing
+    #     order_id = None
+    #     if hasattr(order_event, 'data') and isinstance(order_event.data, dict):
+    #         order_id = order_event.data.get('order_id')
+            
+    #     # Skip if already processed this order
+    #     if order_id and order_id in self.processed_order_ids:
+    #         logger.debug(f"Order {order_id} already processed by broker, skipping")
+    #         return
+            
+    #     # Process order to get fill
+    #     fill_event = self.process_order(order_event)
+        
+    #     # Emit fill event if created
+    #     if fill_event and self.event_bus:
+    #         # Keep track of order ID to prevent duplicate processing
+    #         if order_id:
+    #             self.processed_order_ids.add(order_id)
+                
+    #             # Make sure fill has the order ID for tracing
+    #             if hasattr(fill_event, 'data') and isinstance(fill_event.data, dict):
+    #                 fill_event.data['order_id'] = order_id
+                    
+    #         # Emit the fill event
+    #         logger.info(f"Broker emitting fill event for {fill_event.get_symbol()}")
+    #         self.event_bus.emit(fill_event)
 
     def process_order(self, order_event):
-        """
-        Process an order event.
-
-        Args:
-            order_event: Order event to process
-
-        Returns:
-            Fill event or None
-        """
+        """Process an order event."""
         self.stats['orders_processed'] += 1
 
         try:
@@ -116,14 +126,16 @@ class SimulatedBroker(BrokerBase):
             quantity = order_event.get_quantity()
             price = order_event.get_price()
 
-            # Extract order ID from the event data - CRITICAL FOR MATCHING
+            # CRITICAL: Extract order ID directly
             order_id = None
             if hasattr(order_event, 'data') and isinstance(order_event.data, dict):
                 order_id = order_event.data.get('order_id')
 
-                # Log to verify we got the order_id
-                if order_id:
-                    logger.debug(f"Broker processing order with ID: {order_id}")
+            # Log the extracted order ID for verification
+            if order_id:
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.debug(f"Broker extracted order_id: {order_id}")
 
             # Apply slippage to price
             if direction == 'BUY':
@@ -134,9 +146,10 @@ class SimulatedBroker(BrokerBase):
             # Calculate commission
             commission = abs(quantity * fill_price) * self.commission
 
-            # Create fill event with explicit order_id
+            # CRITICAL: Create fill event with explicit order_id
             from src.core.events.event_utils import create_fill_event
 
+            # Create fill and EXPLICITLY pass the order_id
             fill_event = create_fill_event(
                 symbol=symbol,
                 direction=direction,
@@ -144,26 +157,31 @@ class SimulatedBroker(BrokerBase):
                 price=fill_price,
                 commission=commission,
                 timestamp=order_event.get_timestamp(),
-                order_id=order_id  # Pass the exact same order_id
+                order_id=order_id  # Important: Pass the exact same order_id
             )
 
             # Double-check the order_id was transferred
-            if order_id and 'order_id' not in fill_event.data:
-                # Force it in case fill event creation didn't handle it
+            if order_id and (not hasattr(fill_event, 'data') or 'order_id' not in fill_event.data):
+                # Force it if create_fill_event failed to handle it
+                if not hasattr(fill_event, 'data'):
+                    fill_event.data = {}
                 fill_event.data['order_id'] = order_id
-                logger.debug(f"Manually added order_id to fill: {order_id}")
+
+                import logging
+                logging.getLogger(__name__).debug(f"Manually forced order_id on fill: {order_id}")
 
             self.stats['fills_generated'] += 1
             logger.info(f"Broker processed order: {direction} {quantity} {symbol} @ {fill_price:.2f}")
-            if order_id:
-                logger.info(f"Fill event created with order_id: {order_id}")
+            logger.info(f"Broker emitting fill event for {symbol}")
 
             return fill_event
 
         except Exception as e:
             self.stats['errors'] += 1
             logger.error(f"Error processing order: {e}", exc_info=True)
-            return None            
+            return None
+            
+
  
 
 
