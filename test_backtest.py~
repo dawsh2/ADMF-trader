@@ -1,0 +1,66 @@
+# visualize_results.py
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import os
+
+def plot_equity_curve(equity_curve_file='equity_curve.csv', output_file='equity_curve.png'):
+    """Plot equity curve and drawdown."""
+    if not os.path.exists(equity_curve_file):
+        print(f"Equity curve file not found: {equity_curve_file}")
+        return
+    
+    # Load equity curve
+    df = pd.read_csv(equity_curve_file, parse_dates=True, index_col=0)
+    
+    if 'equity' not in df.columns:
+        print("Equity column not found in file")
+        return
+    
+    # Calculate additional metrics if not already present
+    if 'returns' not in df.columns:
+        df['returns'] = df['equity'].pct_change()
+    
+    if 'drawdown' not in df.columns:
+        df['cum_max'] = df['equity'].cummax()
+        df['drawdown'] = (df['cum_max'] - df['equity']) / df['cum_max']
+    
+    # Create figure with two subplots
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8), gridspec_kw={'height_ratios': [3, 1]})
+    
+    # Plot equity curve
+    ax1.plot(df.index, df['equity'], label='Portfolio Equity', color='blue')
+    ax1.set_title('Equity Curve')
+    ax1.set_ylabel('Portfolio Value ($)')
+    ax1.grid(True)
+    
+    # Plot drawdown
+    ax2.fill_between(df.index, 0, df['drawdown'] * 100, color='red', alpha=0.3)
+    ax2.set_title('Drawdown')
+    ax2.set_ylabel('Drawdown (%)')
+    ax2.set_ylim(df['drawdown'].max() * 100 * 1.5, 0)  # Invert y-axis
+    ax2.grid(True)
+    
+    # Calculate performance metrics
+    total_return = (df['equity'].iloc[-1] / df['equity'].iloc[0]) - 1
+    annual_return = (1 + total_return) ** (252 / len(df)) - 1 if len(df) > 0 else 0
+    sharpe = np.sqrt(252) * df['returns'].mean() / df['returns'].std() if df['returns'].std() > 0 else 0
+    max_dd = df['drawdown'].max() * 100
+    
+    # Add text box with metrics
+    text = f"Total Return: {total_return:.2%}\n"
+    text += f"Annual Return: {annual_return:.2%}\n"
+    text += f"Sharpe Ratio: {sharpe:.2f}\n"
+    text += f"Max Drawdown: {max_dd:.2f}%"
+    
+    ax1.text(0.02, 0.05, text, transform=ax1.transAxes, fontsize=10,
+             verticalalignment='bottom', bbox={'boxstyle': 'round', 'facecolor': 'white', 'alpha': 0.7})
+    
+    plt.tight_layout()
+    plt.savefig(output_file)
+    print(f"Equity curve plot saved to {output_file}")
+    
+    plt.close()
+
+if __name__ == "__main__":
+    plot_equity_curve()

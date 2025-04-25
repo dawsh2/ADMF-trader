@@ -172,4 +172,5 @@ class StandardRiskManager(RiskManagerBase):
         # Calculate order size (difference between target and current)
         order_size = target_size - current_quantity
         
+
         return order_size    

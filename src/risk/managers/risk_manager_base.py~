@@ -6,8 +6,8 @@ import uuid
 from abc import ABC, abstractmethod
 from typing import Dict, Any, Optional, List, Tuple, Union
 
-from src.core.events.event_types import EventType
-from src.core.events.event_utils import EventTracker
+from core.events.event_types import EventType
+from core.events.event_utils import EventTracker
 
 logger = logging.getLogger(__name__)
 

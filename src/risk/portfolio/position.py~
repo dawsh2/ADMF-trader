@@ -6,7 +6,7 @@ import uuid
 import logging
 from typing import Dict, Any, List, Optional, Union
 
-from src.core.events.utils import ObjectRegistry
+from core.events.utils import ObjectRegistry
 
 logger = logging.getLogger(__name__)
 

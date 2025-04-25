@@ -1,3 +1,4 @@
+# src/data/historical_data_handler.py (fixed version)
 """
 Handler for historical data.
 """
@@ -16,22 +17,32 @@ logger = logging.getLogger(__name__)
 
 class HistoricalDataHandler(DataHandlerBase):
     """Handler for historical data."""
-    
+
+    # Fix for src/data/historical_data_handler.py
     def __init__(self, data_source: DataSourceBase, bar_emitter, max_bars_history: int = 100):
         """
         Initialize the historical data handler.
-        
+
         Args:
             data_source: Data source to use
             bar_emitter: Emitter for bar events
             max_bars_history: Maximum number of bars to keep in history
         """
-        super().__init__(bar_emitter)
-        self.data_source = data_source
-        self.data_frames = {}  # symbol -> DataFrame
-        self.current_idx = {}  # symbol -> current index
-        self.bars_history = {}  # symbol -> deque of BarEvents
+        # Store attributes directly rather than using super().__init__
+        self._name = self.__class__.__name__  # Store name attribute from DataHandlerBase
+        self.data_source = data_source        # Explicitly store data_source
+        self.bar_emitter = bar_emitter        # Explicitly store bar_emitter
+        self.data_frames = {}                 # symbol -> DataFrame
+        self.current_idx = {}                 # symbol -> current index
+        self.bars_history = {}                # symbol -> deque of BarEvents
         self.max_bars_history = max_bars_history
+        self.stats = {                        # Initialize stats from DataHandlerBase
+            'bars_processed': 0,
+            'symbols_loaded': 0,
+            'errors': 0
+        }    
+    
+
     
     def load_data(self, symbols: Union[str, List[str]], start_date=None, 
                 end_date=None, timeframe='1m') -> None:

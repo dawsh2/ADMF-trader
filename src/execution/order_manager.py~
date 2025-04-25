@@ -7,8 +7,8 @@ import datetime
 from enum import Enum
 from typing import Dict, Any, List, Optional, Tuple, Union
 
-from src.core.events.event_types import EventType, Event
-from src.core.events.event_utils import create_order_event, EventTracker
+from core.events.event_types import EventType, Event
+from core.events.event_utils import create_order_event, EventTracker
 
 logger = logging.getLogger(__name__)
 

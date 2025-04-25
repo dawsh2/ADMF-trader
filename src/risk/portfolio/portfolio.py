@@ -7,8 +7,8 @@ import logging
 import uuid
 from typing import Dict, Any, List, Optional, Union
 
-from core.events.event_types import EventType, Event
-from core.events.event_utils import create_signal_event, EventTracker
+from src.core.events.event_types import EventType, Event
+from src.core.events.event_utils import create_signal_event, EventTracker
 from .position import Position
 
 logger = logging.getLogger(__name__)
