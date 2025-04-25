@@ -138,3 +138,24 @@ class Config:
             if isinstance(section_data, dict):
                 section = self.get_section(section_name)
                 section.update(section_data)
+
+
+class ConfigurableContainer(Container):
+    def __init__(self, config=None):
+        super().__init__()
+        self.config = config or Config()
+        
+    def register_component_with_config(self, name, component_class, config_section):
+        """Register a component with configuration from a specific section."""
+        # Get configuration for this component
+        section = self.config.get_section(config_section)
+        
+        # Register component
+        self.register(name, component_class)
+        
+        # Configure component after creation
+        component = self.get(name)
+        if hasattr(component, 'configure'):
+            component.configure(section)
+            
+        return component                

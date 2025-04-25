@@ -78,3 +78,24 @@ class Container:
     def reset(self) -> None:
         """Reset all singleton instances."""
         self._instances.clear()
+
+
+class ConfigurableContainer(Container):
+    def __init__(self, config=None):
+        super().__init__()
+        self.config = config or Config()
+        
+    def register_component_with_config(self, name, component_class, config_section):
+        """Register a component with configuration from a specific section."""
+        # Get configuration for this component
+        section = self.config.get_section(config_section)
+        
+        # Register component
+        self.register(name, component_class)
+        
+        # Configure component after creation
+        component = self.get(name)
+        if hasattr(component, 'configure'):
+            component.configure(section)
+            
+        return component        
