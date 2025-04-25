@@ -1,201 +1,31 @@
-
-
-# src/portfolio/portfolio.py
-from .position import Position
-from core.events.event_types import EventType
+"""
+Portfolio management for tracking positions and equity.
+"""
 import pandas as pd
+import datetime
 import logging
-from typing import Dict, Any, List, Optional
+import uuid
+from typing import Dict, Any, List, Optional, Union
+
+from core.events.event_types import EventType, Event
+from core.events.event_utils import create_signal_event, EventTracker
+from .position import Position
 
 logger = logging.getLogger(__name__)
 
-@ObjectRegistry.register
-class Position:
-    """Class representing a position in a single instrument."""
-    
-    def __init__(self, symbol, quantity=0, cost_basis=0.0):
-        """
-        Initialize a position.
-        
-        Args:
-            symbol: Position symbol
-            quantity: Initial position quantity (positive for long, negative for short)
-            cost_basis: Initial cost basis
-        """
-        self.symbol = symbol
-        self.quantity = quantity
-        self.cost_basis = cost_basis
-        self.realized_pnl = 0.0
-        self.market_value = 0.0
-        self.current_price = cost_basis if cost_basis > 0 else 0.0
-        
-        # Track transactions for analysis
-        self.transactions = []
-        
-        # Initialize internal tracking
-        self._total_cost = abs(quantity) * cost_basis if quantity != 0 else 0.0
-    
-    def update(self, quantity_change, price, timestamp=None):
-        """
-        Update position with a new transaction.
-        
-        Args:
-            quantity_change: Change in quantity (positive for buys, negative for sells)
-            price: Transaction price
-            timestamp: Optional transaction timestamp
-            
-        Returns:
-            float: Realized P&L if any
-        """
-        timestamp = timestamp or datetime.now()
-        
-        # Record transaction
-        transaction = {
-            'timestamp': timestamp,
-            'quantity': quantity_change,
-            'price': price,
-            'type': 'BUY' if quantity_change > 0 else 'SELL',
-        }
-        self.transactions.append(transaction)
-        
-        # Track realized P&L for position reduction
-        realized_pnl = 0.0
-        
-        # Update position
-        if self.quantity * quantity_change >= 0:
-            # Adding to position or opening new position
-            new_quantity = self.quantity + quantity_change
-            new_cost = self._total_cost + (quantity_change * price)
-            
-            # Update position
-            self.quantity = new_quantity
-            self._total_cost = new_cost
-            
-            # Update cost basis if position exists
-            if new_quantity != 0:
-                self.cost_basis = new_cost / abs(new_quantity)
-        else:
-            # Reducing or closing position
-            if abs(quantity_change) <= abs(self.quantity):
-                # Partial reduction
-                reduction_ratio = abs(quantity_change) / abs(self.quantity)
-                reduced_cost = self._total_cost * reduction_ratio
-                
-                # Calculate realized P&L
-                if self.quantity > 0:  # Long position
-                    realized_pnl = abs(quantity_change) * (price - self.cost_basis)
-                else:  # Short position
-                    realized_pnl = abs(quantity_change) * (self.cost_basis - price)
-                
-                # Update position
-                self.quantity += quantity_change
-                self._total_cost -= reduced_cost
-                # Cost basis remains the same
-                
-            else:
-                # Position flip
-                # First close existing position
-                if self.quantity > 0:  # Long position
-                    realized_pnl = self.quantity * (price - self.cost_basis)
-                else:  # Short position
-                    realized_pnl = abs(self.quantity) * (self.cost_basis - price)
-                
-                # Then open new position in opposite direction
-                new_quantity = self.quantity + quantity_change  # Will be opposite sign
-                self.quantity = new_quantity
-                self._total_cost = abs(new_quantity) * price
-                self.cost_basis = price
-        
-        # Update realized P&L
-        self.realized_pnl += realized_pnl
-        
-        # Update current price and market value
-        self.current_price = price
-        self.market_value = self.current_price * self.quantity
-        
-        return realized_pnl
-    
-    def mark_to_market(self, price):
-        """
-        Mark position to market price.
-        
-        Args:
-            price: Current market price
-            
-        Returns:
-            float: Unrealized P&L
-        """
-        self.current_price = price
-        self.market_value = price * self.quantity
-        return self.unrealized_pnl()
-    
-    def unrealized_pnl(self):
-        """
-        Calculate unrealized P&L.
-        
-        Returns:
-            float: Unrealized P&L
-        """
-        if self.quantity == 0:
-            return 0.0
-            
-        if self.quantity > 0:  # Long position
-            return self.quantity * (self.current_price - self.cost_basis)
-        else:  # Short position
-            return abs(self.quantity) * (self.cost_basis - self.current_price)
-    
-    def total_pnl(self):
-        """
-        Calculate total P&L (realized + unrealized).
-        
-        Returns:
-            float: Total P&L
-        """
-        return self.realized_pnl + self.unrealized_pnl()
-    
-    def __str__(self):
-        return (f"Position({self.symbol}, quantity={self.quantity}, "
-                f"cost_basis={self.cost_basis:.2f}, realized_pnl={self.realized_pnl:.2f})")
-    
-    def to_dict(self):
-        """
-        Convert position to dictionary.
-        
-        Returns:
-            dict: Position as dictionary
-        """
-        return {
-            'symbol': self.symbol,
-            'quantity': self.quantity,
-            'cost_basis': self.cost_basis,
-            'realized_pnl': self.realized_pnl,
-            'unrealized_pnl': self.unrealized_pnl(),
-            'market_value': self.market_value,
-            'current_price': self.current_price
-        }    
-    
-    
-    @classmethod
-    def from_dict(cls, data):
-        """Reconstruct from dictionary."""
-        position = cls(data["symbol"])
-        position.quantity = data["quantity"]
-        position.cost_basis = data["cost_basis"]
-        position.realized_pnl = data["realized_pnl"]
-        return positio
-
-
-class Portfolio:
+class PortfolioManager:
     """Portfolio for tracking positions and equity."""
     
-    def __init__(self, event_bus, initial_cash=10000.0):
+    def __init__(self, event_bus=None, name=None, initial_cash=10000.0):
         """
-        Initialize portfolio.
+        Initialize portfolio manager.
         
         Args:
             event_bus: Event bus for communication
+            name: Portfolio name
             initial_cash: Initial cash balance
         """
+        self._name = name or f"portfolio_{uuid.uuid4().hex[:8]}"
         self.event_bus = event_bus
         self.initial_cash = initial_cash
         self.cash = initial_cash
@@ -203,10 +33,27 @@ class Portfolio:
         self.equity = initial_cash
         self.trades = []  # List of completed trades
         self.equity_curve = []  # List of equity points
+        self.configured = False
+        
+        # Statistics tracking
+        self.stats = {
+            'trades_executed': 0,
+            'long_trades': 0,
+            'short_trades': 0,
+            'winning_trades': 0,
+            'losing_trades': 0,
+            'break_even_trades': 0,
+            'total_pnl': 0.0,
+            'total_commission': 0.0
+        }
+        
+        # Event tracker for analysis
+        self.event_tracker = EventTracker(f"{self._name}_tracker")
         
         # Register for events
-        self.event_bus.register(EventType.FILL, self.on_fill)
-        self.event_bus.register(EventType.BAR, self.on_bar)
+        if self.event_bus:
+            self.event_bus.register(EventType.FILL, self.on_fill)
+            self.event_bus.register(EventType.BAR, self.on_bar)
     
     def configure(self, config):
         """
@@ -217,11 +64,30 @@ class Portfolio:
         """
         # Extract parameters from config
         if hasattr(config, 'as_dict'):
-            config = config.as_dict()
+            config_dict = config.as_dict()
+        else:
+            config_dict = dict(config)
             
-        self.initial_cash = config.get('initial_cash', 10000.0)
+        self.initial_cash = config_dict.get('initial_cash', 10000.0)
         self.cash = self.initial_cash
         self.equity = self.initial_cash
+        self._name = config_dict.get('name', self._name)
+        
+        self.configured = True
+        logger.info(f"Configured portfolio {self._name} with initial cash: ${self.initial_cash:.2f}")
+    
+    def set_event_bus(self, event_bus):
+        """
+        Set the event bus.
+        
+        Args:
+            event_bus: Event bus instance
+        """
+        self.event_bus = event_bus
+        # Register for events
+        if self.event_bus:
+            self.event_bus.register(EventType.FILL, self.on_fill)
+            self.event_bus.register(EventType.BAR, self.on_bar)
     
     def on_fill(self, fill_event):
         """
@@ -230,11 +96,16 @@ class Portfolio:
         Args:
             fill_event: Fill event to process
         """
+        # Track the event
+        self.event_tracker.track_event(fill_event)
+        
+        # Extract fill details
         symbol = fill_event.get_symbol()
         direction = fill_event.get_direction()
         quantity = fill_event.get_quantity()
         price = fill_event.get_price()
         commission = fill_event.get_commission()
+        timestamp = fill_event.get_timestamp()
         
         # Convert to position update 
         quantity_change = quantity if direction == 'BUY' else -quantity
@@ -245,7 +116,7 @@ class Portfolio:
         
         # Update position
         position = self.positions[symbol]
-        pnl = position.update(quantity_change, price, fill_event.get_timestamp())
+        pnl = position.update(quantity_change, price, timestamp)
         
         # Update cash
         trade_value = price * abs(quantity_change)
@@ -255,9 +126,10 @@ class Portfolio:
         # Update equity 
         self.update_equity()
         
-        # Record trade
+        # Track trade for analysis
         trade = {
-            'timestamp': fill_event.get_timestamp(),
+            'id': str(uuid.uuid4()),
+            'timestamp': timestamp,
             'symbol': symbol,
             'direction': direction,
             'quantity': quantity,
@@ -267,7 +139,41 @@ class Portfolio:
         }
         self.trades.append(trade)
         
+        # Update statistics
+        self.stats['trades_executed'] += 1
+        self.stats['total_commission'] += commission
+        
+        if direction == 'BUY':
+            self.stats['long_trades'] += 1
+        else:
+            self.stats['short_trades'] += 1
+            
+        if pnl > 0:
+            self.stats['winning_trades'] += 1
+        elif pnl < 0:
+            self.stats['losing_trades'] += 1
+        else:
+            self.stats['break_even_trades'] += 1
+            
+        self.stats['total_pnl'] += pnl
+        
+        # Log the fill
         logger.info(f"Fill: {direction} {quantity} {symbol} @ {price:.2f}, PnL: {pnl:.2f}")
+        
+        # Emit portfolio update event if event bus is available
+        if self.event_bus:
+            # Create a portfolio event
+            portfolio_event = Event(
+                EventType.PORTFOLIO, 
+                {
+                    'portfolio_id': self._name,
+                    'cash': self.cash,
+                    'equity': self.equity,
+                    'trade': trade
+                },
+                timestamp
+            )
+            self.event_bus.emit(portfolio_event)
     
     def on_bar(self, bar_event):
         """
@@ -278,25 +184,33 @@ class Portfolio:
         """
         symbol = bar_event.get_symbol()
         price = bar_event.get_close()
+        timestamp = bar_event.get_timestamp()
         
         # Mark position to market if exists
         if symbol in self.positions:
-            self.positions[symbol].mark_to_market(price)
+            self.positions[symbol].mark_to_market(price, timestamp)
         
         # Update equity
         self.update_equity()
         
         # Record equity point
         equity_point = {
-            'timestamp': bar_event.get_timestamp(),
-            'equity': self.equity
+            'timestamp': timestamp,
+            'equity': self.equity,
+            'cash': self.cash,
+            'positions_value': self.equity - self.cash
         }
         self.equity_curve.append(equity_point)
     
     def update_equity(self):
-        """Update portfolio equity."""
+        """
+        Update portfolio equity.
+        
+        Returns:
+            float: Current equity value
+        """
         # Sum up all position values
-        position_value = sum(pos.market_value for pos in self.positions.values())
+        position_value = sum(pos.quantity * pos.current_price for pos in self.positions.values())
         self.equity = self.cash + position_value
         
         return self.equity
@@ -329,12 +243,22 @@ class Portfolio:
         Returns:
             Dict with portfolio summary
         """
+        position_value = sum(pos.quantity * pos.current_price for pos in self.positions.values())
+        total_realized_pnl = sum(pos.realized_pnl for pos in self.positions.values())
+        total_unrealized_pnl = sum(pos.unrealized_pnl() for pos in self.positions.values())
+        
         return {
             'cash': self.cash,
             'equity': self.equity,
+            'position_value': position_value,
             'positions': len(self.positions),
-            'realized_pnl': sum(pos.realized_pnl for pos in self.positions.values()),
-            'unrealized_pnl': sum(pos.unrealized_pnl() for pos in self.positions.values())
+            'long_positions': sum(1 for pos in self.positions.values() if pos.quantity > 0),
+            'short_positions': sum(1 for pos in self.positions.values() if pos.quantity < 0),
+            'realized_pnl': total_realized_pnl,
+            'unrealized_pnl': total_unrealized_pnl,
+            'total_pnl': total_realized_pnl + total_unrealized_pnl,
+            'total_commission': self.stats['total_commission'],
+            'trades_executed': self.stats['trades_executed']
         }
     
     def get_equity_curve_df(self):
@@ -348,7 +272,10 @@ class Portfolio:
             return pd.DataFrame()
             
         df = pd.DataFrame(self.equity_curve)
-        df.set_index('timestamp', inplace=True)
+        
+        if not df.empty:
+            df.set_index('timestamp', inplace=True)
+            
         return df
     
     def get_recent_trades(self, n=None):
@@ -365,10 +292,98 @@ class Portfolio:
             return list(self.trades)
         return list(self.trades[-n:])
     
+    def get_trades_as_df(self):
+        """
+        Get trades as DataFrame.
+        
+        Returns:
+            DataFrame with trade data
+        """
+        if not self.trades:
+            return pd.DataFrame()
+            
+        df = pd.DataFrame(self.trades)
+        
+        if not df.empty and 'timestamp' in df.columns:
+            df.set_index('timestamp', inplace=True)
+            
+        return df
+    
+    def get_stats(self):
+        """
+        Get portfolio statistics.
+        
+        Returns:
+            Dict with statistics
+        """
+        # Calculate additional statistics
+        win_rate = 0.0
+        if self.stats['trades_executed'] > 0:
+            win_rate = self.stats['winning_trades'] / self.stats['trades_executed']
+            
+        avg_win = 0.0
+        winning_trades = [trade['pnl'] for trade in self.trades if trade['pnl'] > 0]
+        if winning_trades:
+            avg_win = sum(winning_trades) / len(winning_trades)
+            
+        avg_loss = 0.0
+        losing_trades = [trade['pnl'] for trade in self.trades if trade['pnl'] < 0]
+        if losing_trades:
+            avg_loss = sum(losing_trades) / len(losing_trades)
+            
+        # Update and return stats
+        self.stats.update({
+            'win_rate': win_rate,
+            'avg_win': avg_win,
+            'avg_loss': avg_loss,
+            'profit_factor': abs(avg_win) / abs(avg_loss) if avg_loss != 0 else float('inf')
+        })
+        
+        return dict(self.stats)
+    
     def reset(self):
         """Reset portfolio to initial state."""
         self.cash = self.initial_cash
         self.positions = {}
         self.equity = self.initial_cash
         self.trades = []
-        self.equity_curve = []    
+        self.equity_curve = []
+        
+        # Reset statistics
+        self.stats = {
+            'trades_executed': 0,
+            'long_trades': 0,
+            'short_trades': 0,
+            'winning_trades': 0,
+            'losing_trades': 0,
+            'break_even_trades': 0,
+            'total_pnl': 0.0,
+            'total_commission': 0.0
+        }
+        
+        # Reset event tracker
+        self.event_tracker.reset()
+        
+        logger.info(f"Reset portfolio {self._name} to initial state with cash: ${self.initial_cash:.2f}")
+    
+    def to_dict(self):
+        """
+        Convert portfolio to dictionary.
+        
+        Returns:
+            Dict representation of portfolio
+        """
+        return {
+            'name': self._name,
+            'cash': self.cash,
+            'equity': self.equity,
+            'initial_cash': self.initial_cash,
+            'positions': {symbol: pos.to_dict() for symbol, pos in self.positions.items()},
+            'stats': self.get_stats(),
+            'configured': self.configured
+        }
+    
+    @property
+    def name(self):
+        """Get portfolio name."""
+        return self._name

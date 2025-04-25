@@ -1,0 +1,386 @@
+"""
+Backtest coordinator for running backtests.
+"""
+import logging
+import datetime
+import pandas as pd
+from typing import Dict, Any, List, Optional, Union, Tuple
+
+from core.events.event_types import EventType, Event
+from core.events.event_bus import EventBus
+from core.events.event_manager import EventManager
+from analytics.performance.calculator import PerformanceCalculator
+from analytics.reporting.report_generator import ReportGenerator
+
+logger = logging.getLogger(__name__)
+
+class BacktestCoordinator:
+    """
+    Coordinator for running backtests.
+    
+    This class coordinates the execution of backtests by:
+    - Setting up the event system
+    - Initializing the data handlers
+    - Running the data through the strategy
+    - Collecting and analyzing results
+    """
+    
+    def __init__(self, container=None, config=None):
+        """
+        Initialize backtest coordinator.
+        
+        Args:
+            container: Optional DI container
+            config: Optional configuration
+        """
+        self.container = container
+        self.config = config
+        self.event_bus = None
+        self.event_manager = None
+        self.data_handler = None
+        self.portfolio = None
+        self.risk_manager = None
+        self.broker = None
+        self.order_manager = None
+        self.strategy = None
+        self.calculator = None
+        self.report_generator = None
+        self.results = {}
+        self.configured = False
+    
+    def configure(self, config):
+        """
+        Configure the backtest coordinator.
+        
+        Args:
+            config: Configuration dictionary or ConfigSection
+        """
+        if hasattr(config, 'as_dict'):
+            config_dict = config.as_dict()
+        else:
+            config_dict = dict(config)
+        
+        # Store configuration
+        self.config = config_dict
+        self.configured = True
+    
+    def setup(self):
+        """
+        Set up backtest components.
+        
+        Returns:
+            bool: True if setup successful, False otherwise
+        """
+        try:
+            # Create event system
+            self.event_bus = self.container.get('event_bus') if self.container else EventBus()
+            self.event_manager = self.container.get('event_manager') if self.container else EventManager(self.event_bus)
+            
+            # Create data handler
+            if self.container and self.container.has('data_handler'):
+                self.data_handler = self.container.get('data_handler')
+            else:
+                logger.error("No data handler available")
+                return False
+            
+            # Create portfolio
+            if self.container and self.container.has('portfolio'):
+                self.portfolio = self.container.get('portfolio')
+            else:
+                logger.error("No portfolio available")
+                return False
+            
+            # Create risk manager
+            if self.container and self.container.has('risk_manager'):
+                self.risk_manager = self.container.get('risk_manager')
+            else:
+                logger.error("No risk manager available")
+                return False
+            
+            # Create broker
+            if self.container and self.container.has('broker'):
+                self.broker = self.container.get('broker')
+            else:
+                from execution.broker.broker_simulator import SimulatedBroker
+                self.broker = SimulatedBroker(self.event_bus)
+            
+            # Create order manager
+            if self.container and self.container.has('order_manager'):
+                self.order_manager = self.container.get('order_manager')
+            else:
+                from execution.order_manager import OrderManager
+                self.order_manager = OrderManager(self.event_bus, self.broker)
+            
+            # Create strategy
+            if self.container and self.container.has('strategy'):
+                self.strategy = self.container.get('strategy')
+            else:
+                logger.error("No strategy available")
+                return False
+            
+            # Create performance calculator
+            if self.container and self.container.has('calculator'):
+                self.calculator = self.container.get('calculator')
+            else:
+                self.calculator = PerformanceCalculator()
+            
+            # Create report generator
+            if self.container and self.container.has('report_generator'):
+                self.report_generator = self.container.get('report_generator')
+            else:
+                self.report_generator = ReportGenerator(self.calculator)
+            
+            # Connect components
+            self.data_handler.set_event_bus(self.event_bus)
+            self.portfolio.set_event_bus(self.event_bus)
+            self.risk_manager.set_event_bus(self.event_bus)
+            self.broker.set_event_bus(self.event_bus)
+            self.order_manager.set_event_bus(self.event_bus)
+            
+            # Set dependencies
+            self.risk_manager.portfolio_manager = self.portfolio
+            self.order_manager.broker = self.broker
+            
+            # Register components with event manager
+            self.event_manager.register_component('data_handler', self.data_handler)
+            self.event_manager.register_component('portfolio', self.portfolio)
+            self.event_manager.register_component('risk_manager', self.risk_manager)
+            self.event_manager.register_component('broker', self.broker)
+            self.event_manager.register_component('order_manager', self.order_manager)
+            self.event_manager.register_component('strategy', self.strategy)
+            
+            logger.info("Backtest setup complete")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Error setting up backtest: {e}", exc_info=True)
+            return False
+    
+    def run(self, symbols=None, start_date=None, end_date=None, 
+           initial_capital=100000.0, timeframe='1d'):
+        """
+        Run a backtest.
+        
+        Args:
+            symbols: List of symbols to backtest
+            start_date: Start date for backtest
+            end_date: End date for backtest
+            initial_capital: Initial capital for portfolio
+            timeframe: Data timeframe
+            
+        Returns:
+            Dict: Backtest results
+        """
+        # Use configuration if parameters not provided
+        if self.config:
+            symbols = symbols or self.config.get('symbols')
+            start_date = start_date or self.config.get('start_date')
+            end_date = end_date or self.config.get('end_date')
+            initial_capital = initial_capital or self.config.get('initial_capital', 100000.0)
+            timeframe = timeframe or self.config.get('timeframe', '1d')
+        
+        # Validate parameters
+        if not symbols:
+            logger.error("No symbols provided for backtest")
+            return {}
+        
+        # Convert to list if single symbol
+        if isinstance(symbols, str):
+            symbols = [symbols]
+        
+        # Parse dates if strings
+        if isinstance(start_date, str):
+            start_date = pd.to_datetime(start_date)
+        if isinstance(end_date, str):
+            end_date = pd.to_datetime(end_date)
+        
+        try:
+            # Set up components if not already done
+            if not self.event_bus:
+                success = self.setup()
+                if not success:
+                    logger.error("Backtest setup failed")
+                    return {}
+            
+            # Reset components to initial state
+            self._reset_components()
+            
+            # Configure portfolio with initial capital
+            self.portfolio.initial_cash = initial_capital
+            self.portfolio.cash = initial_capital
+            self.portfolio.equity = initial_capital
+            
+            # Load data
+            logger.info(f"Loading data for symbols: {symbols}")
+            self.data_handler.load_data(symbols, start_date, end_date, timeframe)
+            
+            # Run backtest
+            logger.info("Starting backtest")
+            self._run_backtest()
+            
+            # Process results
+            results = self._process_results()
+            
+            logger.info("Backtest complete")
+            return results
+            
+        except Exception as e:
+            logger.error(f"Error running backtest: {e}", exc_info=True)
+            return {}
+    
+    def _reset_components(self):
+        """Reset all components to initial state."""
+        try:
+            # Reset components
+            if self.data_handler and hasattr(self.data_handler, 'reset'):
+                self.data_handler.reset()
+            if self.portfolio and hasattr(self.portfolio, 'reset'):
+                self.portfolio.reset()
+            if self.risk_manager and hasattr(self.risk_manager, 'reset'):
+                self.risk_manager.reset()
+            if self.broker and hasattr(self.broker, 'reset'):
+                self.broker.reset()
+            if self.order_manager and hasattr(self.order_manager, 'reset'):
+                self.order_manager.reset()
+            if self.strategy and hasattr(self.strategy, 'reset'):
+                self.strategy.reset()
+            
+            # Reset event counts
+            if self.event_bus and hasattr(self.event_bus, 'reset'):
+                self.event_bus.reset()
+                
+            # Reset results
+            self.results = {}
+            
+            logger.info("Reset all components for backtest")
+            
+        except Exception as e:
+            logger.error(f"Error resetting components: {e}", exc_info=True)
+    
+    def _run_backtest(self):
+        """Run the backtest simulation."""
+        # Get symbols from data handler
+        symbols = self.data_handler.get_symbols()
+        if not symbols:
+            logger.warning("No symbols available in data handler")
+            return
+        
+        # Process data events
+        iteration = 0
+        continue_backtest = True
+        
+        while continue_backtest:
+            continue_backtest = False
+            iteration += 1
+            
+            # Process each symbol
+            for symbol in symbols:
+                # Get next bar for this symbol
+                bar = self.data_handler.get_next_bar(symbol)
+                
+                # If we have a bar, process it
+                if bar:
+                    continue_backtest = True
+            
+            # Log progress periodically
+            if iteration % 1000 == 0:
+                logger.info(f"Processed {iteration} iterations")
+        
+        logger.info(f"Backtest completed after {iteration} iterations")
+    
+    def _process_results(self):
+        """
+        Process backtest results.
+        
+        Returns:
+            Dict: Backtest results
+        """
+        # Get equity curve
+        equity_curve = self.portfolio.get_equity_curve_df()
+        
+        # Get trades
+        trades = self.portfolio.get_recent_trades()
+        
+        # Set up performance calculator
+        self.calculator.set_equity_curve(equity_curve)
+        self.calculator.set_trades(trades)
+        
+        # Calculate metrics
+        metrics = self.calculator.calculate_all_metrics()
+        
+        # Generate reports
+        summary_report = self.report_generator.generate_summary_report()
+        detailed_report = self.report_generator.generate_detailed_report()
+        
+        # Collect results
+        results = {
+            'equity_curve': equity_curve,
+            'trades': trades,
+            'metrics': metrics,
+            'summary_report': summary_report,
+            'detailed_report': detailed_report,
+            'stats': {
+                'portfolio': self.portfolio.get_stats(),
+                'risk_manager': self.risk_manager.get_stats() if self.risk_manager else {},
+                'broker': self.broker.get_stats() if self.broker else {},
+                'order_manager': self.order_manager.get_stats() if self.order_manager else {}
+            }
+        }
+        
+        # Store results
+        self.results = results
+        
+        return results
+    
+    def get_performance_summary(self):
+        """
+        Get a performance summary from the last backtest.
+        
+        Returns:
+            Dict: Performance summary
+        """
+        if not self.results:
+            return {}
+        
+        return {
+            'metrics': self.results.get('metrics', {}),
+            'summary_report': self.results.get('summary_report', '')
+        }
+    
+    def get_detailed_report(self):
+        """
+        Get a detailed report from the last backtest.
+        
+        Returns:
+            str: Detailed report
+        """
+        if not self.results:
+            return ""
+        
+        return self.results.get('detailed_report', '')
+
+
+# Factory for creating backtest coordinators
+class BacktestCoordinatorFactory:
+    """Factory for creating backtest coordinators."""
+    
+    @staticmethod
+    def create(container, config=None):
+        """
+        Create a backtest coordinator.
+        
+        Args:
+            container: DI container
+            config: Optional configuration
+            
+        Returns:
+            BacktestCoordinator: Backtest coordinator instance
+        """
+        # Create coordinator
+        coordinator = BacktestCoordinator(container)
+        
+        # Configure if config provided
+        if config:
+            coordinator.configure(config)
+            
+        return coordinator
