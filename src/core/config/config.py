@@ -140,22 +140,107 @@ class Config:
                 section.update(section_data)
 
 
+    def validate(self, schema: ConfigSchema) -> Tuple[bool, List[str]]:
+        """
+        Validate configuration against a schema.
+
+        Args:
+            schema: Schema to validate against
+
+        Returns:
+            Tuple of (is_valid, list of error messages)
+        """
+        return schema.validate(self)
+
+    def apply_schema_defaults(self, schema: ConfigSchema) -> None:
+        """
+        Apply defaults from schema.
+
+        Args:
+            schema: Schema to get defaults from
+        """
+        schema.apply_defaults(self)                
+
+              
+
+
 class ConfigurableContainer(Container):
+    """Container with configuration integration."""
+    
     def __init__(self, config=None):
         super().__init__()
         self.config = config or Config()
+    
+    def register_from_config(self, section_name: str, base_type=None):
+        """
+        Register components defined in a configuration section.
         
-    def register_component_with_config(self, name, component_class, config_section):
-        """Register a component with configuration from a specific section."""
-        # Get configuration for this component
-        section = self.config.get_section(config_section)
-        
-        # Register component
-        self.register(name, component_class)
-        
-        # Configure component after creation
-        component = self.get(name)
-        if hasattr(component, 'configure'):
-            component.configure(section)
+        Args:
+            section_name: Name of the configuration section
+            base_type: Optional base type for verification
             
-        return component                
+        Returns:
+            Dictionary of registered component names to instances
+        """
+        section = self.config.get_section(section_name)
+        registered = {}
+        
+        for component_name, component_config in section.as_dict().items():
+            if not isinstance(component_config, dict) or not component_config.get('enabled', True):
+                continue
+                
+            # Get class information
+            class_path = component_config.get('class')
+            if not class_path:
+                continue
+                
+            try:
+                # Import class
+                module_path, class_name = class_path.rsplit('.', 1)
+                module = __import__(module_path, fromlist=[class_name])
+                component_class = getattr(module, class_name)
+                
+                # Verify base type if provided
+                if base_type and not issubclass(component_class, base_type):
+                    logger.warning(
+                        f"Component class {class_path} does not inherit from {base_type.__name__}"
+                    )
+                    continue
+                
+                # Register component
+                component_id = f"{section_name}.{component_name}"
+                self.register(component_id, component_class)
+                
+                # Configure if component has configure method
+                component = self.get(component_id)
+                if hasattr(component, 'configure'):
+                    params = component_config.get('parameters', {})
+                    component.configure(params)
+                
+                registered[component_id] = component
+            except Exception as e:
+                logger.error(f"Error registering component {component_name}: {e}", exc_info=True)
+        
+        return registered
+    
+    def get_configured(self, component_id: str, config_section: str = None):
+        """
+        Get a component and configure it.
+        
+        Args:
+            component_id: Component ID
+            config_section: Configuration section path (defaults to component_id)
+            
+        Returns:
+            Configured component
+        """
+        # Get component
+        component = self.get(component_id)
+        
+        # Configure if requested
+        if config_section and hasattr(component, 'configure'):
+            section_path = config_section
+            section = self.config.get_section(section_path)
+            component.configure(section)
+        
+        return component
