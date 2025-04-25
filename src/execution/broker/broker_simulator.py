@@ -1,16 +1,16 @@
-# src/execution/broker/simulated_broker.py
-from .broker_base import BrokerBase
-from src.core.events.event_types import EventType
-from src.core.events.event_utils import create_fill_event
+# src/execution/broker/broker_simulator.py
 import logging
 from typing import Dict, Any, Optional
+from src.core.events.event_types import EventType
+from src.core.events.event_utils import create_fill_event
+from src.execution.broker.broker_base import BrokerBase
 
 logger = logging.getLogger(__name__)
 
 class SimulatedBroker(BrokerBase):
     """Simulated broker for executing orders in backtests."""
     
-    def __init__(self, event_bus, name="simulated_broker"):
+    def __init__(self, event_bus=None, name="simulated_broker"):
         """
         Initialize simulated broker.
         
@@ -25,8 +25,12 @@ class SimulatedBroker(BrokerBase):
         self.slippage = 0.0  # Percentage slippage
         self.commission = 0.0  # Percentage commission
         
-        # Register for events
-        self.event_bus.register(EventType.ORDER, self.on_order)
+        # Tracking for processed orders to avoid duplicates
+        self.processed_order_ids = set()
+        
+        # Register for events if event bus provided
+        if self.event_bus:
+            self.event_bus.register(EventType.ORDER, self.on_order)
     
     def configure(self, config):
         """
@@ -36,103 +40,96 @@ class SimulatedBroker(BrokerBase):
             config: Configuration dictionary or ConfigSection
         """
         if hasattr(config, 'as_dict'):
-            config = config.as_dict()
+            config_dict = config.as_dict()
+        else:
+            config_dict = dict(config)
             
-        self.slippage = config.get('slippage', 0.0)
-        self.commission = config.get('commission', 0.0)
+        self.slippage = config_dict.get('slippage', 0.0)
+        self.commission = config_dict.get('commission', 0.0)
         self.initialized = True
-
-    # Fix for broker handling in src/execution/broker/broker_simulator.py
+        
+        logger.info(f"Broker configured with slippage={self.slippage}, commission={self.commission}")
+    
+    def set_event_bus(self, event_bus):
+        """
+        Set the event bus.
+        
+        Args:
+            event_bus: Event bus instance
+        """
+        self.event_bus = event_bus
+        # Register for events
+        if self.event_bus:
+            self.event_bus.register(EventType.ORDER, self.on_order)
+    
     def on_order(self, order_event):
         """
         Handle order events.
-
+        
         Args:
             order_event: Order event to process
         """
-        try:
-            # Process the order
-            fill_event = self.process_order(order_event)
-
-            # If a fill was generated, emit it
-            if fill_event and self.event_bus:
-                # Wait a brief moment to ensure order is processed first
-                import time
-                time.sleep(0.01)
-
-                # Emit the fill event
-                self.event_bus.emit(fill_event)
-        except Exception as e:
-            logger.error(f"Error processing order event: {e}", exc_info=True)    
-
-
+        # Track order ID to prevent duplicate processing
+        order_id = None
+        if hasattr(order_event, 'data') and isinstance(order_event.data, dict):
+            order_id = order_event.data.get('order_id')
             
-    #     """
-    #     Handle order events.
-
-    #     Args:
-    #         order_event: Order event to process
-    #     """
-    #     try:
-    #         # Check if this is a proper OrderEvent or a status update
-    #         if not hasattr(order_event, 'get_symbol') or not hasattr(order_event, 'get_direction'):
-    #             # This might be a status update or other type of event
-    #             if hasattr(order_event, 'data') and isinstance(order_event.data, dict):
-    #                 if order_event.data.get('status_update'):
-    #                     # This is a status update, skip processing
-    #                     logger.debug(f"Received order status update, skipping broker processing")
-    #                     return
-    #             logger.warning(f"Received invalid order event in broker, skipping")
-    #             return
-
-    #         # Process the order
-    #         fill_event = self.process_order(order_event)
-
-    #         # Emit fill event if order was filled
-    #         if fill_event and self.event_bus:
-    #             self.event_bus.emit(fill_event)
-    #             logger.info(f"Broker emitted fill event for {order_event.get_symbol()}")
-    #     except Exception as e:
-    #         self.stats['errors'] += 1
-    #         logger.error(f"Error in broker on_order: {e}", exc_info=True)
-
-    # Fixed process_order method for src/execution/broker/broker_simulator.py
-    # Modify process_order in SimulatedBroker class
-    # Update the SimulatedBroker.process_order method
-
+        # Skip if already processed this order
+        if order_id and order_id in self.processed_order_ids:
+            logger.debug(f"Order {order_id} already processed by broker, skipping")
+            return
+            
+        # Process order to get fill
+        fill_event = self.process_order(order_event)
+        
+        # Emit fill event if created
+        if fill_event and self.event_bus:
+            # Keep track of order ID to prevent duplicate processing
+            if order_id:
+                self.processed_order_ids.add(order_id)
+                
+                # Make sure fill has the order ID for tracing
+                if hasattr(fill_event, 'data') and isinstance(fill_event.data, dict):
+                    fill_event.data['order_id'] = order_id
+                    
+            # Emit the fill event
+            logger.info(f"Broker emitting fill event for {fill_event.get_symbol()}")
+            self.event_bus.emit(fill_event)
+    
     def process_order(self, order_event):
         """
         Process an order event.
-
+        
         Args:
             order_event: Order event to process
-
+            
         Returns:
             Fill event or None
         """
         self.stats['orders_processed'] += 1
-
+        
         try:
+            # Extract order details
             symbol = order_event.get_symbol()
             direction = order_event.get_direction()
             quantity = order_event.get_quantity()
             price = order_event.get_price()
-
-            # Extract order ID from event data
-            order_id = order_event.data.get('order_id')
-
+            
+            # Track order ID for fill event
+            order_id = None
+            if hasattr(order_event, 'data') and isinstance(order_event.data, dict):
+                order_id = order_event.data.get('order_id')
+            
             # Apply slippage to price
             if direction == 'BUY':
                 fill_price = price * (1.0 + self.slippage)
             else:  # SELL
                 fill_price = price * (1.0 - self.slippage)
-
+            
             # Calculate commission
             commission = abs(quantity * fill_price) * self.commission
-
-            # Create fill event with the order_id
-            from src.core.events.event_utils import create_fill_event
-
+            
+            # Create fill event
             fill_event = create_fill_event(
                 symbol=symbol,
                 direction=direction,
@@ -141,24 +138,19 @@ class SimulatedBroker(BrokerBase):
                 commission=commission,
                 timestamp=order_event.get_timestamp()
             )
-
-            # IMPORTANT: Set the order_id in the fill event's data
-            if order_id:
+            
+            # Add order ID to fill event data for tracking
+            if order_id and hasattr(fill_event, 'data') and isinstance(fill_event.data, dict):
                 fill_event.data['order_id'] = order_id
-
+            
             self.stats['fills_generated'] += 1
-            logger.debug(f"Processed order: {direction} {quantity} {symbol} @ {fill_price:.2f}")
-
-            logger.info(f"Broker emitted fill event for {symbol}")
+            
             return fill_event
-
+            
         except Exception as e:
             self.stats['errors'] += 1
-            logger.error(f"Error processing order: {e}")
-            return None    
-
-        
-
+            logger.error(f"Error processing order: {e}", exc_info=True)
+            return None
     
     def get_account_info(self):
         """
@@ -172,3 +164,11 @@ class SimulatedBroker(BrokerBase):
             'account_id': 'simulated',
             'stats': self.get_stats()
         }
+    
+    def reset(self):
+        """Reset broker state."""
+        # Call parent reset
+        super().reset()
+        # Clear processed order IDs
+        self.processed_order_ids.clear()
+        logger.debug(f"Reset broker {self.name}")

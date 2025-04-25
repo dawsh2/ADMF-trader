@@ -1,0 +1,37 @@
+Performance Summary
+==================================================
+
+Returns:
+Total Return: -6.71%
+Annualized Return: -35.92%
+
+Risk Metrics:
+Sharpe Ratio: -1.16
+Sortino Ratio: -0.62
+Maximum Drawdown: 8.51%
+Calmar Ratio: -4.22
+
+Trade Statistics:
+Total Trades: 0
+Win Rate: 0.00%
+Profit Factor: 0.00
+Average Trade: -591.86
+Average Win: 0.00
+Average Loss: 1479.64
+Win/Loss Ratio: 0.00
+
+Equity Curve Statistics:
+Start Date: 2023-01-02 00:00:00
+End Date: 2023-02-28 00:00:00
+Duration: 57 days
+Starting Equity: 100000.00
+Ending Equity: 93285.38
+
+Monthly Returns:
+2023-01: -0.04%
+2023-02: -6.68%
+
+Drawdown Analysis:
+Maximum Drawdown: 8.51%
+Average Drawdown: 4.86%
+Maximum Drawdown Duration: 113 periods

@@ -1,0 +1,20 @@
+backtest:
+  data_dir: test_data
+  initial_capital: 100000.0
+  symbols:
+  - AAPL
+  - MSFT
+  timeframe: 1d
+broker:
+  commission: 0.001
+  slippage: 0.001
+risk_manager:
+  max_position_pct: 0.1
+  position_size: 100
+strategy:
+  ma_crossover:
+    fast_window: 5
+    slow_window: 20
+    symbols:
+    - AAPL
+    - MSFT

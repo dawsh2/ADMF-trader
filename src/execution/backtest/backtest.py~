@@ -6,11 +6,11 @@ import datetime
 import pandas as pd
 from typing import Dict, Any, List, Optional, Union, Tuple
 
-from src.core.events.event_types import EventType, Event
-from src.core.events.event_bus import EventBus
-from src.core.events.event_manager import EventManager
-from src.analytics.performance.calculator import PerformanceCalculator
-from src.analytics.reporting.report_generator import ReportGenerator
+from core.events.event_types import EventType, Event
+from core.events.event_bus import EventBus
+from core.events.event_manager import EventManager
+from analytics.performance.calculator import PerformanceCalculator
+from analytics.reporting.report_generator import ReportGenerator
 
 logger = logging.getLogger(__name__)
 
@@ -101,14 +101,14 @@ class BacktestCoordinator:
             if self.container and self.container.has('broker'):
                 self.broker = self.container.get('broker')
             else:
-                from src.execution.broker.broker_simulator import SimulatedBroker
+                from execution.broker.broker_simulator import SimulatedBroker
                 self.broker = SimulatedBroker(self.event_bus)
             
             # Create order manager
             if self.container and self.container.has('order_manager'):
                 self.order_manager = self.container.get('order_manager')
             else:
-                from src.execution.order_manager import OrderManager
+                from execution.order_manager import OrderManager
                 self.order_manager = OrderManager(self.event_bus, self.broker)
             
             # Create strategy

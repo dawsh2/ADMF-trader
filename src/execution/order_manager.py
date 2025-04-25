@@ -185,11 +185,13 @@ class Order:
 
 class OrderManager:
     """Manager for tracking and processing orders."""
-    
+
+    # This section needs to be added to the OrderManager class in src/execution/order_manager.py
+
     def __init__(self, event_bus=None, broker=None):
         """
         Initialize order manager.
-        
+
         Args:
             event_bus: Event bus for communication
             broker: Broker for order execution
@@ -200,8 +202,123 @@ class OrderManager:
         self.active_orders = set()  # Set of active order IDs
         self.order_history = []  # List of completed orders
         self.configured = False
-        
+
+        # Add tracking sets for processed events
+        self.processed_fill_ids = set()  # To prevent duplicate fill processing
+
         # Statistics
+        self.stats = {
+            'orders_created': 0,
+            'orders_filled': 0,
+            'orders_canceled': 0,
+            'orders_rejected': 0,
+            'orders_expired': 0,
+            'errors': 0  # Add errors counter
+        }
+
+        # Event tracker
+        self.event_tracker = EventTracker("order_manager")
+
+        # Register for events
+        if self.event_bus:
+            self.event_bus.register(EventType.ORDER, self.on_order)
+            self.event_bus.register(EventType.FILL, self.on_fill)
+
+    def on_fill(self, fill_event):
+        """
+        Handle fill events with improved duplicate prevention.
+
+        Args:
+            fill_event: Fill event to process
+        """
+        try:
+            # Generate a unique ID for this fill to prevent duplicate processing
+            fill_id = None
+            if hasattr(fill_event, 'id'):
+                fill_id = fill_event.id
+            else:
+                # Create a fill ID from its data if no ID
+                symbol = fill_event.get_symbol()
+                direction = fill_event.get_direction()
+                quantity = fill_event.get_quantity()
+                price = fill_event.get_price()
+                timestamp = fill_event.get_timestamp()
+                fill_id = f"{symbol}_{direction}_{quantity}_{price}_{timestamp.isoformat()}"
+
+            # Check if we've already processed this fill
+            if fill_id in self.processed_fill_ids:
+                logger.debug(f"Fill {fill_id} already processed, skipping")
+                return
+
+            # Add to processed fills
+            self.processed_fill_ids.add(fill_id)
+
+            # Track the event for analytics
+            self.event_tracker.track_event(fill_event)
+
+            # Extract fill details
+            symbol = fill_event.get_symbol()
+            direction = fill_event.get_direction()
+            quantity = fill_event.get_quantity()
+            price = fill_event.get_price()
+
+            # Get order ID from fill event data
+            order_id = None
+            if hasattr(fill_event, 'data') and isinstance(fill_event.data, dict):
+                order_id = fill_event.data.get('order_id')
+
+            # Find the order
+            order = None
+            if order_id and order_id in self.orders:
+                # We have a direct order match by ID
+                order = self.orders[order_id]
+            else:
+                # Try to match by symbol and direction
+                matching_orders = [
+                    o for o in [self.orders[oid] for oid in self.active_orders]
+                    if o.symbol == symbol and o.direction == direction
+                ]
+
+                if matching_orders:
+                    # Use the oldest matching order
+                    order = min(matching_orders, key=lambda o: o.created_time)
+                    order_id = order.order_id
+                    logger.debug(f"Matched fill to order {order_id} by symbol/direction")
+                else:
+                    # No matching order found
+                    logger.warning(f"No matching order found for fill: {symbol} {direction}")
+                    return
+
+            # Update order with fill information
+            order.update_status(
+                status=OrderStatus.FILLED if quantity >= order.get_remaining_quantity() else OrderStatus.PARTIAL,
+                fill_quantity=quantity,
+                fill_price=price
+            )
+
+            # Check if order is now complete
+            if order.is_filled():
+                if order_id in self.active_orders:
+                    self.active_orders.remove(order_id)
+                self.order_history.append(order)
+                self.stats['orders_filled'] += 1
+
+            # Emit order status event
+            self._emit_order_status_event(order)
+
+            logger.info(f"Updated order with fill: {order}")
+        except Exception as e:
+            logger.error(f"Error processing fill event: {e}", exc_info=True)
+            self.stats['errors'] += 1
+
+    def reset(self):
+        """Reset order manager state."""
+        self.orders = {}
+        self.active_orders = set()
+        self.order_history = []
+        self.processed_fill_ids.clear()  # Clear processed fill IDs
+
+        # Reset statistics
         self.stats = {
             'orders_created': 0,
             'orders_filled': 0,
@@ -210,14 +327,13 @@ class OrderManager:
             'orders_expired': 0,
             'errors': 0
         }
-        
-        # Event tracker
-        self.event_tracker = EventTracker("order_manager")
-        
-        # Register for events
-        if self.event_bus:
-            self.event_bus.register(EventType.ORDER, self.on_order)
-            self.event_bus.register(EventType.FILL, self.on_fill)
+
+        # Reset event tracker
+        self.event_tracker.reset()
+
+        logger.info("Reset order manager")
+    
+
     
     def configure(self, config):
         """
@@ -310,67 +426,7 @@ class OrderManager:
         logger.info(f"Created order: {order}")
         return order.order_id
     
-    def on_fill(self, fill_event):
-        """
-        Handle fill events.
-        
-        Args:
-            fill_event: Fill event to process
-        """
-        try:
-            # Track the event
-            self.event_tracker.track_event(fill_event)
-            
-            # Extract fill details
-            symbol = fill_event.get_symbol()
-            direction = fill_event.get_direction()
-            quantity = fill_event.get_quantity()
-            price = fill_event.get_price()
-            
-            # Get order ID from the fill event data
-            order_id = None
-            if hasattr(fill_event, 'data') and isinstance(fill_event.data, dict):
-                order_id = fill_event.data.get('order_id')
-            
-            # Find the order
-            if order_id and order_id in self.orders:
-                order = self.orders[order_id]
-            else:
-                # Try to match by symbol and direction
-                matching_orders = [
-                    o for o in [self.orders[oid] for oid in self.active_orders]
-                    if o.symbol == symbol and o.direction == direction
-                ]
-                
-                if matching_orders:
-                    # Use the oldest matching order
-                    order = min(matching_orders, key=lambda o: o.created_time)
-                    order_id = order.order_id
-                else:
-                    logger.warning(f"No matching order found for fill: {fill_event}")
-                    return
-            
-            # Update order with fill information
-            order.update_status(
-                status=OrderStatus.FILLED if quantity >= order.get_remaining_quantity() else OrderStatus.PARTIAL,
-                fill_quantity=quantity,
-                fill_price=price
-            )
-            
-            # Check if order is now complete
-            if order.is_filled():
-                if order_id in self.active_orders:
-                    self.active_orders.remove(order_id)
-                self.order_history.append(order)
-                self.stats['orders_filled'] += 1
-            
-            # Emit order status event
-            self._emit_order_status_event(order)
-            
-            logger.info(f"Updated order with fill: {order}")
-        except Exception as e:
-            logger.error(f"Error processing fill event: {e}", exc_info=True)
-            self.stats['errors'] += 1
+ 
     
     def create_order(self, symbol, order_type, direction, quantity, price=None):
         """
@@ -572,26 +628,7 @@ class OrderManager:
         
         return dict(self.stats)
     
-    def reset(self):
-        """Reset order manager state."""
-        self.orders = {}
-        self.active_orders = set()
-        self.order_history = []
-        
-        # Reset statistics
-        self.stats = {
-            'orders_created': 0,
-            'orders_filled': 0,
-            'orders_canceled': 0,
-            'orders_rejected': 0,
-            'orders_expired': 0,
-            'errors': 0
-        }
-        
-        # Reset event tracker
-        self.event_tracker.reset()
-        
-        logger.info("Reset order manager")
+
 
 
 # Factory for creating order managers

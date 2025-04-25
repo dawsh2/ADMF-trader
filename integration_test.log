@@ -1,0 +1,243 @@
+2025-04-24 22:35:36,837 - ADMF-Trader - INFO - === Starting ADMF-Trader Integration Test ===
+2025-04-24 22:35:36,837 - ADMF-Trader - INFO - Creating test data for ['AAPL', 'MSFT']
+2025-04-24 22:35:36,848 - ADMF-Trader - INFO - Created test data for AAPL with 42 bars
+2025-04-24 22:35:36,849 - ADMF-Trader - INFO - Created test data for MSFT with 42 bars
+2025-04-24 22:35:36,850 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-04-24 22:35:36,850 - ADMF-Trader - INFO - Strategy initialized with fast_window=5, slow_window=20
+2025-04-24 22:35:36,850 - src.execution.backtest.backtest - ERROR - Error setting up backtest: 'SimulatedBroker' object has no attribute 'set_event_bus'
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/backtest/backtest.py", line 137, in setup
+    self.broker.set_event_bus(self.event_bus)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SimulatedBroker' object has no attribute 'set_event_bus'. Did you mean: 'event_bus'?
+2025-04-24 22:35:36,851 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_f1d1b3ba to initial state with cash: $100000.00
+2025-04-24 22:35:36,851 - src.execution.order_manager - INFO - Reset order manager
+2025-04-24 22:35:36,851 - src.execution.backtest.backtest - INFO - Reset all components for backtest
+2025-04-24 22:35:36,851 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['AAPL', 'MSFT']
+2025-04-24 22:35:36,851 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file test_data/AAPL_1d.csv
+2025-04-24 22:35:36,853 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 42 rows
+2025-04-24 22:35:36,855 - src.data.sources.csv_handler - INFO - Using 'date' column instead of configured 'timestamp'
+2025-04-24 22:35:36,855 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2023-01-02
+2025-04-24 22:35:36,855 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2023-01-02 00:00:00
+2025-04-24 22:35:36,855 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2023-01-01 00:00:00
+2025-04-24 22:35:36,855 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2023-02-28 00:00:00
+2025-04-24 22:35:36,857 - src.data.sources.csv_handler - INFO - CSVDataSource: Set date as index
+2025-04-24 22:35:36,858 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-24 22:35:36,858 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume']
+2025-04-24 22:35:36,858 - src.data.historical_data_handler - INFO - Loaded 42 bars for AAPL from 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-24 22:35:36,858 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file test_data/MSFT_1d.csv
+2025-04-24 22:35:36,858 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 42 rows
+2025-04-24 22:35:36,858 - src.data.sources.csv_handler - INFO - Using 'date' column instead of configured 'timestamp'
+2025-04-24 22:35:36,858 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2023-01-02
+2025-04-24 22:35:36,858 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2023-01-02 00:00:00
+2025-04-24 22:35:36,859 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2023-01-01 00:00:00
+2025-04-24 22:35:36,859 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2023-02-28 00:00:00
+2025-04-24 22:35:36,859 - src.data.sources.csv_handler - INFO - CSVDataSource: Set date as index
+2025-04-24 22:35:36,859 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-24 22:35:36,859 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume']
+2025-04-24 22:35:36,859 - src.data.historical_data_handler - INFO - Loaded 42 bars for MSFT from 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-24 22:35:36,859 - src.execution.backtest.backtest - INFO - Starting backtest
+2025-04-24 22:35:36,860 - ADMF-Trader - INFO - BUY signal #1 for AAPL at 107.10
+2025-04-24 22:35:36,860 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:36,873 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 107.20, PnL: 0.00, Cash: 89268.86, Equity: 99989.28
+2025-04-24 22:35:36,873 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1046a6a50>
+2025-04-24 22:35:36,873 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 107.20, PnL: 0.00, Cash: 78537.72, Equity: 99978.56
+2025-04-24 22:35:36,873 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:36,873 - src.execution.order_manager - INFO - Updated order with fill: Order(22a67c4d-e711-4aa5-a105-6a4357324c7e, AAPL, BUY, 100, FILLED)
+2025-04-24 22:35:36,873 - src.execution.order_manager - INFO - Created order: Order(22a67c4d-e711-4aa5-a105-6a4357324c7e, AAPL, BUY, 100, FILLED)
+2025-04-24 22:35:36,873 - src.risk.managers.simple - INFO - Created order: BUY 100 AAPL @ 107.10
+2025-04-24 22:35:36,873 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:36,886 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 107.20, PnL: 0.00, Cash: 67806.58, Equity: 99967.84
+2025-04-24 22:35:36,886 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1046d9090>
+2025-04-24 22:35:36,886 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 107.20, PnL: 0.00, Cash: 57075.43, Equity: 99957.12
+2025-04-24 22:35:36,886 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:36,886 - src.execution.order_manager - INFO - Updated order with fill: Order(f036c0bc-541e-48ef-b642-7ad1ba8c1c11, AAPL, BUY, 100, FILLED)
+2025-04-24 22:35:36,886 - src.execution.order_manager - INFO - Created order: Order(f036c0bc-541e-48ef-b642-7ad1ba8c1c11, AAPL, BUY, 100, FILLED)
+2025-04-24 22:35:36,886 - src.risk.managers.simple - INFO - Created order: BUY 100 AAPL @ 107.10
+2025-04-24 22:35:36,886 - ADMF-Trader - INFO - BUY signal #2 for MSFT at 207.74
+2025-04-24 22:35:36,886 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 96 for MSFT (value limit)
+2025-04-24 22:35:36,886 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:36,899 - src.risk.portfolio.portfolio - INFO - Fill: BUY 96 MSFT @ 207.94, PnL: 0.00, Cash: 37092.79, Equity: 99894.32
+2025-04-24 22:35:36,899 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x104651a70>
+2025-04-24 22:35:36,899 - src.risk.portfolio.portfolio - INFO - Fill: BUY 96 MSFT @ 207.94, PnL: 0.00, Cash: 17110.14, Equity: 99874.35
+2025-04-24 22:35:36,899 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:36,899 - src.execution.order_manager - INFO - Updated order with fill: Order(3d203d04-968e-4f7b-9446-c9e54b8628d3, MSFT, BUY, 96, FILLED)
+2025-04-24 22:35:36,899 - src.execution.order_manager - INFO - Created order: Order(3d203d04-968e-4f7b-9446-c9e54b8628d3, MSFT, BUY, 96, FILLED)
+2025-04-24 22:35:36,899 - src.risk.managers.simple - INFO - Created order: BUY 96 MSFT @ 207.74
+2025-04-24 22:35:36,899 - src.risk.managers.simple - INFO - Cash-limited position size: 65 (original: 100)
+2025-04-24 22:35:36,899 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:36,912 - src.risk.portfolio.portfolio - INFO - Fill: BUY 65 MSFT @ 207.94, PnL: 0.00, Cash: 3580.22, Equity: 99860.84
+2025-04-24 22:35:36,912 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x10470c050>
+2025-04-24 22:35:36,912 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 3580.22 < 13516.40, but processing anyway with adjusted quantities
+2025-04-24 22:35:36,912 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 65 to 13
+2025-04-24 22:35:36,912 - src.risk.portfolio.portfolio - INFO - Fill: BUY 13 MSFT @ 207.94, PnL: 0.00, Cash: 863.42, Equity: 99847.32
+2025-04-24 22:35:36,912 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:36,912 - src.execution.order_manager - INFO - Updated order with fill: Order(1d210378-df7f-4e9f-a031-b8a493020d8f, MSFT, BUY, 65, FILLED)
+2025-04-24 22:35:36,912 - src.execution.order_manager - INFO - Created order: Order(1d210378-df7f-4e9f-a031-b8a493020d8f, MSFT, BUY, 65, FILLED)
+2025-04-24 22:35:36,912 - src.risk.managers.simple - INFO - Created order: BUY 65 MSFT @ 207.74
+2025-04-24 22:35:36,912 - ADMF-Trader - INFO - SELL signal #3 for AAPL at 80.93
+2025-04-24 22:35:36,913 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:36,923 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 80.85, PnL: -2635.80, Cash: 8939.96, Equity: 88365.67
+2025-04-24 22:35:36,923 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1046cd950>
+2025-04-24 22:35:36,923 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 80.85, PnL: -2635.80, Cash: 17016.49, Equity: 88357.59
+2025-04-24 22:35:36,923 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:36,923 - src.execution.order_manager - INFO - Updated order with fill: Order(62572bc5-cc02-4b86-9569-cd0539229269, AAPL, SELL, 100, FILLED)
+2025-04-24 22:35:36,923 - src.execution.order_manager - INFO - Created order: Order(62572bc5-cc02-4b86-9569-cd0539229269, AAPL, SELL, 100, FILLED)
+2025-04-24 22:35:36,923 - src.risk.managers.simple - INFO - Created order: SELL 100 AAPL @ 80.93
+2025-04-24 22:35:36,923 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:36,935 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 80.85, PnL: -2635.80, Cash: 25093.03, Equity: 88349.50
+2025-04-24 22:35:36,935 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1046b14f0>
+2025-04-24 22:35:36,935 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 80.85, PnL: -2635.80, Cash: 33169.56, Equity: 88341.42
+2025-04-24 22:35:36,935 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:36,935 - src.execution.order_manager - INFO - Updated order with fill: Order(d2400379-66f5-401d-936a-67f5f8696202, AAPL, SELL, 100, FILLED)
+2025-04-24 22:35:36,935 - src.execution.order_manager - INFO - Created order: Order(d2400379-66f5-401d-936a-67f5f8696202, AAPL, SELL, 100, FILLED)
+2025-04-24 22:35:36,935 - src.risk.managers.simple - INFO - Created order: SELL 100 AAPL @ 80.93
+2025-04-24 22:35:36,935 - ADMF-Trader - INFO - SELL signal #4 for MSFT at 181.51
+2025-04-24 22:35:36,935 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:36,947 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 MSFT @ 181.33, PnL: -2661.33, Cash: 51284.57, Equity: 82110.90
+2025-04-24 22:35:36,947 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1046fd8d0>
+2025-04-24 22:35:36,947 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 MSFT @ 181.33, PnL: -2661.33, Cash: 69399.57, Equity: 82092.77
+2025-04-24 22:35:36,947 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:36,947 - src.execution.order_manager - INFO - Updated order with fill: Order(9fa456a3-520d-4241-88d2-89669af1bdf6, MSFT, SELL, 100, FILLED)
+2025-04-24 22:35:36,947 - src.execution.order_manager - INFO - Created order: Order(9fa456a3-520d-4241-88d2-89669af1bdf6, MSFT, SELL, 100, FILLED)
+2025-04-24 22:35:36,947 - src.risk.managers.simple - INFO - Created order: SELL 100 MSFT @ 181.51
+2025-04-24 22:35:36,948 - src.risk.managers.simple - INFO - Reducing SELL size from -100 to 70 for MSFT
+2025-04-24 22:35:36,948 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:36,960 - src.risk.portfolio.portfolio - INFO - Fill: SELL 70 MSFT @ 181.33, PnL: -1862.93, Cash: 82080.08, Equity: 82080.08
+2025-04-24 22:35:36,960 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x104728460>
+2025-04-24 22:35:36,960 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 70, but processing anyway with adjusted quantities
+2025-04-24 22:35:36,960 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 70 to 0
+2025-04-24 22:35:36,960 - src.risk.portfolio.portfolio - INFO - Fill: SELL 0 MSFT @ 181.33, PnL: 0.00, Cash: 82067.38, Equity: 82067.38
+2025-04-24 22:35:36,960 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:36,960 - src.execution.order_manager - INFO - Updated order with fill: Order(f58c2cf4-2fcf-4a62-b15c-dcfe6ecb5272, MSFT, SELL, 70, FILLED)
+2025-04-24 22:35:36,960 - src.execution.order_manager - INFO - Created order: Order(f58c2cf4-2fcf-4a62-b15c-dcfe6ecb5272, MSFT, SELL, 70, FILLED)
+2025-04-24 22:35:36,960 - src.risk.managers.simple - INFO - Created order: SELL 70 MSFT @ 181.51
+2025-04-24 22:35:36,961 - ADMF-Trader - INFO - BUY signal #5 for AAPL at 116.23
+2025-04-24 22:35:36,961 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:36,974 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 116.35, PnL: 0.00, Cash: 70421.13, Equity: 82055.75
+2025-04-24 22:35:36,974 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1046a9910>
+2025-04-24 22:35:36,974 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 116.35, PnL: 0.00, Cash: 58774.87, Equity: 82044.11
+2025-04-24 22:35:36,974 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:36,974 - src.execution.order_manager - INFO - Updated order with fill: Order(577d2b9d-11be-4f26-9b14-944af5dacdd4, AAPL, BUY, 100, FILLED)
+2025-04-24 22:35:36,974 - src.execution.order_manager - INFO - Created order: Order(577d2b9d-11be-4f26-9b14-944af5dacdd4, AAPL, BUY, 100, FILLED)
+2025-04-24 22:35:36,974 - src.risk.managers.simple - INFO - Created order: BUY 100 AAPL @ 116.23
+2025-04-24 22:35:36,974 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:36,987 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 116.35, PnL: 0.00, Cash: 47128.62, Equity: 82032.48
+2025-04-24 22:35:36,987 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1045ef070>
+2025-04-24 22:35:36,987 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 116.35, PnL: 0.00, Cash: 35482.37, Equity: 82020.84
+2025-04-24 22:35:36,987 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:36,987 - src.execution.order_manager - INFO - Updated order with fill: Order(406ef250-ff8a-4f01-867b-b36687ae67f4, AAPL, BUY, 100, FILLED)
+2025-04-24 22:35:36,987 - src.execution.order_manager - INFO - Created order: Order(406ef250-ff8a-4f01-867b-b36687ae67f4, AAPL, BUY, 100, FILLED)
+2025-04-24 22:35:36,987 - src.risk.managers.simple - INFO - Created order: BUY 100 AAPL @ 116.23
+2025-04-24 22:35:36,987 - ADMF-Trader - INFO - BUY signal #6 for MSFT at 216.72
+2025-04-24 22:35:36,987 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 75 for MSFT (value limit)
+2025-04-24 22:35:36,987 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:36,999 - src.risk.portfolio.portfolio - INFO - Fill: BUY 75 MSFT @ 216.94, PnL: 0.00, Cash: 19195.70, Equity: 81958.08
+2025-04-24 22:35:36,999 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1046fb930>
+2025-04-24 22:35:37,000 - src.risk.portfolio.portfolio - INFO - Fill: BUY 75 MSFT @ 216.94, PnL: 0.00, Cash: 2909.02, Equity: 81941.81
+2025-04-24 22:35:37,000 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:37,000 - src.execution.order_manager - INFO - Updated order with fill: Order(ac5ee601-cc41-4f2f-8897-0eb473f72834, MSFT, BUY, 75, FILLED)
+2025-04-24 22:35:37,000 - src.execution.order_manager - INFO - Created order: Order(ac5ee601-cc41-4f2f-8897-0eb473f72834, MSFT, BUY, 75, FILLED)
+2025-04-24 22:35:37,000 - src.risk.managers.simple - INFO - Created order: BUY 75 MSFT @ 216.72
+2025-04-24 22:35:37,000 - src.risk.managers.simple - INFO - Cash-limited position size: 10 (original: 100)
+2025-04-24 22:35:37,000 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:37,012 - src.risk.portfolio.portfolio - INFO - Fill: BUY 10 MSFT @ 216.94, PnL: 0.00, Cash: 737.47, Equity: 81939.64
+2025-04-24 22:35:37,012 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x10472ced0>
+2025-04-24 22:35:37,012 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 737.47 < 2169.39, but processing anyway with adjusted quantities
+2025-04-24 22:35:37,012 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 10 to 2
+2025-04-24 22:35:37,012 - src.risk.portfolio.portfolio - INFO - Fill: BUY 2 MSFT @ 216.94, PnL: 0.00, Cash: 301.42, Equity: 81937.47
+2025-04-24 22:35:37,013 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:37,013 - src.execution.order_manager - INFO - Updated order with fill: Order(65854981-90d7-460d-978e-ba62ccedb525, MSFT, BUY, 10, FILLED)
+2025-04-24 22:35:37,013 - src.execution.order_manager - INFO - Created order: Order(65854981-90d7-460d-978e-ba62ccedb525, MSFT, BUY, 10, FILLED)
+2025-04-24 22:35:37,013 - src.risk.managers.simple - INFO - Created order: BUY 10 MSFT @ 216.72
+2025-04-24 22:35:37,013 - ADMF-Trader - INFO - SELL signal #7 for AAPL at 99.43
+2025-04-24 22:35:37,013 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:37,025 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 99.33, PnL: -1701.66, Cash: 10224.44, Equity: 75132.27
+2025-04-24 22:35:37,026 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x104702660>
+2025-04-24 22:35:37,026 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 99.33, PnL: -1701.66, Cash: 20147.47, Equity: 75122.34
+2025-04-24 22:35:37,026 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:37,026 - src.execution.order_manager - INFO - Updated order with fill: Order(f0b23a07-77f4-4551-9b89-0b2d05d8169b, AAPL, SELL, 100, FILLED)
+2025-04-24 22:35:37,026 - src.execution.order_manager - INFO - Created order: Order(f0b23a07-77f4-4551-9b89-0b2d05d8169b, AAPL, SELL, 100, FILLED)
+2025-04-24 22:35:37,026 - src.risk.managers.simple - INFO - Created order: SELL 100 AAPL @ 99.43
+2025-04-24 22:35:37,026 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:37,038 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 99.33, PnL: -1701.66, Cash: 30070.49, Equity: 75112.41
+2025-04-24 22:35:37,039 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x104702740>
+2025-04-24 22:35:37,039 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 99.33, PnL: -1701.66, Cash: 39993.51, Equity: 75102.47
+2025-04-24 22:35:37,039 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:37,039 - src.execution.order_manager - INFO - Updated order with fill: Order(17f4a785-0609-4db3-b4c8-ef385a6be241, AAPL, SELL, 100, FILLED)
+2025-04-24 22:35:37,039 - src.execution.order_manager - INFO - Created order: Order(17f4a785-0609-4db3-b4c8-ef385a6be241, AAPL, SELL, 100, FILLED)
+2025-04-24 22:35:37,039 - src.risk.managers.simple - INFO - Created order: SELL 100 AAPL @ 99.43
+2025-04-24 22:35:37,039 - ADMF-Trader - INFO - SELL signal #8 for MSFT at 199.08
+2025-04-24 22:35:37,039 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:37,052 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 MSFT @ 198.88, PnL: -1805.59, Cash: 59861.91, Equity: 72192.64
+2025-04-24 22:35:37,052 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x104702890>
+2025-04-24 22:35:37,052 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 62 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:35:37,052 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 62
+2025-04-24 22:35:37,052 - src.risk.portfolio.portfolio - INFO - Fill: SELL 62 MSFT @ 198.88, PnL: -1119.47, Cash: 72172.75, Equity: 72172.75
+2025-04-24 22:35:37,052 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:37,053 - src.execution.order_manager - INFO - Updated order with fill: Order(3dd92551-11da-4028-ab96-5441e2d9c10f, MSFT, SELL, 100, FILLED)
+2025-04-24 22:35:37,053 - src.execution.order_manager - INFO - Created order: Order(3dd92551-11da-4028-ab96-5441e2d9c10f, MSFT, SELL, 100, FILLED)
+2025-04-24 22:35:37,053 - src.risk.managers.simple - INFO - Created order: SELL 100 MSFT @ 199.08
+2025-04-24 22:35:37,053 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:37,065 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:35:37,065 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 0
+2025-04-24 22:35:37,065 - src.risk.portfolio.portfolio - INFO - Fill: SELL 0 MSFT @ 198.88, PnL: 0.00, Cash: 72152.86, Equity: 72152.86
+2025-04-24 22:35:37,065 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x104702970>
+2025-04-24 22:35:37,065 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:35:37,065 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 0
+2025-04-24 22:35:37,066 - src.risk.portfolio.portfolio - INFO - Fill: SELL 0 MSFT @ 198.88, PnL: 0.00, Cash: 72132.98, Equity: 72132.98
+2025-04-24 22:35:37,066 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:37,066 - src.execution.order_manager - INFO - Updated order with fill: Order(77d8afe3-12f8-4319-9cea-b116bebb1122, MSFT, SELL, 100, FILLED)
+2025-04-24 22:35:37,066 - src.execution.order_manager - INFO - Created order: Order(77d8afe3-12f8-4319-9cea-b116bebb1122, MSFT, SELL, 100, FILLED)
+2025-04-24 22:35:37,066 - src.risk.managers.simple - INFO - Created order: SELL 100 MSFT @ 199.08
+2025-04-24 22:35:37,066 - ADMF-Trader - INFO - BUY signal #9 for AAPL at 92.12
+2025-04-24 22:35:37,066 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:37,079 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 92.21, PnL: 0.00, Cash: 62902.94, Equity: 72123.75
+2025-04-24 22:35:37,079 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x104702ac0>
+2025-04-24 22:35:37,079 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 92.21, PnL: 0.00, Cash: 53672.90, Equity: 72114.53
+2025-04-24 22:35:37,079 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:37,079 - src.execution.order_manager - INFO - Updated order with fill: Order(443d5f26-4db2-4715-a81a-82cf724b0a8a, AAPL, BUY, 100, FILLED)
+2025-04-24 22:35:37,080 - src.execution.order_manager - INFO - Created order: Order(443d5f26-4db2-4715-a81a-82cf724b0a8a, AAPL, BUY, 100, FILLED)
+2025-04-24 22:35:37,080 - src.risk.managers.simple - INFO - Created order: BUY 100 AAPL @ 92.12
+2025-04-24 22:35:37,080 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:37,092 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 92.21, PnL: 0.00, Cash: 44442.86, Equity: 72105.31
+2025-04-24 22:35:37,092 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x104702ba0>
+2025-04-24 22:35:37,093 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 92.21, PnL: 0.00, Cash: 35212.82, Equity: 72096.09
+2025-04-24 22:35:37,093 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:35:37,093 - src.execution.order_manager - INFO - Updated order with fill: Order(1677ffb3-e082-4e96-a580-2e8496059738, AAPL, BUY, 100, FILLED)
+2025-04-24 22:35:37,093 - src.execution.order_manager - INFO - Created order: Order(1677ffb3-e082-4e96-a580-2e8496059738, AAPL, BUY, 100, FILLED)
+2025-04-24 22:35:37,093 - src.risk.managers.simple - INFO - Created order: BUY 100 AAPL @ 92.12
+2025-04-24 22:35:37,093 - ADMF-Trader - INFO - BUY signal #10 for MSFT at 193.14
+2025-04-24 22:35:37,094 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 74 for MSFT (value limit)
+2025-04-24 22:35:37,094 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:37,106 - src.risk.portfolio.portfolio - INFO - Fill: BUY 74 MSFT @ 193.33, PnL: 0.00, Cash: 20892.09, Equity: 72044.94
+2025-04-24 22:35:37,106 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x104702cf0>
+2025-04-24 22:35:37,106 - src.risk.portfolio.portfolio - INFO - Fill: BUY 74 MSFT @ 193.33, PnL: 0.00, Cash: 6571.37, Equity: 72030.63
+2025-04-24 22:35:37,106 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:37,106 - src.execution.order_manager - INFO - Updated order with fill: Order(2200c1fd-90e7-4a79-8ee1-12a247f991ee, MSFT, BUY, 74, FILLED)
+2025-04-24 22:35:37,106 - src.execution.order_manager - INFO - Created order: Order(2200c1fd-90e7-4a79-8ee1-12a247f991ee, MSFT, BUY, 74, FILLED)
+2025-04-24 22:35:37,106 - src.risk.managers.simple - INFO - Created order: BUY 74 MSFT @ 193.14
+2025-04-24 22:35:37,106 - src.risk.managers.simple - INFO - Cash-limited position size: 27 (original: 100)
+2025-04-24 22:35:37,106 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:37,119 - src.risk.portfolio.portfolio - INFO - Fill: BUY 27 MSFT @ 193.33, PnL: 0.00, Cash: 1346.24, Equity: 72025.41
+2025-04-24 22:35:37,119 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x104702dd0>
+2025-04-24 22:35:37,119 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 1346.24 < 5219.91, but processing anyway with adjusted quantities
+2025-04-24 22:35:37,119 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 27 to 5
+2025-04-24 22:35:37,119 - src.risk.portfolio.portfolio - INFO - Fill: BUY 5 MSFT @ 193.33, PnL: 0.00, Cash: 374.37, Equity: 72020.19
+2025-04-24 22:35:37,120 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:35:37,120 - src.execution.order_manager - INFO - Updated order with fill: Order(1a4dbd63-56d5-4149-bba9-a3ac6fe52acc, MSFT, BUY, 27, FILLED)
+2025-04-24 22:35:37,120 - src.execution.order_manager - INFO - Created order: Order(1a4dbd63-56d5-4149-bba9-a3ac6fe52acc, MSFT, BUY, 27, FILLED)
+2025-04-24 22:35:37,120 - src.risk.managers.simple - INFO - Created order: BUY 27 MSFT @ 193.14
+2025-04-24 22:35:37,121 - src.execution.backtest.backtest - INFO - Backtest completed after 43 iterations
+2025-04-24 22:35:37,138 - src.execution.backtest.backtest - INFO - Backtest complete
+2025-04-24 22:35:37,138 - ADMF-Trader - INFO - Executed 40 trades
+2025-04-24 22:35:37,138 - ADMF-Trader - INFO - Trade 1: BUY 100 AAPL @ 107.20, PnL: 0.00
+2025-04-24 22:35:37,138 - ADMF-Trader - INFO - Trade 2: BUY 100 AAPL @ 107.20, PnL: 0.00
+2025-04-24 22:35:37,138 - ADMF-Trader - INFO - Trade 3: BUY 100 AAPL @ 107.20, PnL: 0.00
+2025-04-24 22:35:37,138 - ADMF-Trader - INFO - Trade 4: BUY 100 AAPL @ 107.20, PnL: 0.00
+2025-04-24 22:35:37,138 - ADMF-Trader - INFO - Trade 5: BUY 96 MSFT @ 207.94, PnL: 0.00
+2025-04-24 22:35:37,139 - ADMF-Trader - INFO - Initial equity: $100000.00
+2025-04-24 22:35:37,139 - ADMF-Trader - INFO - Final equity: $69308.91
+2025-04-24 22:35:37,139 - ADMF-Trader - INFO - Total return: -30.69%
+2025-04-24 22:35:37,140 - ADMF-Trader - INFO - Saved equity curve to 'equity_curve.csv'
+2025-04-24 22:35:37,140 - ADMF-Trader - INFO - Saved detailed report to 'backtest_report.txt'

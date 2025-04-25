@@ -15,11 +15,13 @@ logger = logging.getLogger(__name__)
 
 class PortfolioManager:
     """Portfolio for tracking positions and equity."""
-    
+
+    # Add these methods to your PortfolioManager class in src/risk/portfolio/portfolio.py
+
     def __init__(self, event_bus=None, name=None, initial_cash=10000.0):
         """
-        Initialize portfolio manager.
-        
+        Initialize portfolio manager with improved fill tracking.
+
         Args:
             event_bus: Event bus for communication
             name: Portfolio name
@@ -34,7 +36,10 @@ class PortfolioManager:
         self.trades = []  # List of completed trades
         self.equity_curve = []  # List of equity points
         self.configured = False
-        
+
+        # Add set to track processed fills
+        self.processed_fill_ids = set()
+
         # Statistics tracking
         self.stats = {
             'trades_executed': 0,
@@ -46,14 +51,181 @@ class PortfolioManager:
             'total_pnl': 0.0,
             'total_commission': 0.0
         }
-        
+
         # Event tracker for analysis
         self.event_tracker = EventTracker(f"{self._name}_tracker")
-        
+
         # Register for events
         if self.event_bus:
             self.event_bus.register(EventType.FILL, self.on_fill)
             self.event_bus.register(EventType.BAR, self.on_bar)
+
+    def on_fill(self, fill_event):
+        """
+        Handle fill events with duplicate prevention.
+
+        Args:
+            fill_event: Fill event to process
+        """
+        # Generate a unique ID for this fill to prevent duplicate processing
+        fill_id = None
+        if hasattr(fill_event, 'id'):
+            fill_id = fill_event.id
+        else:
+            # Create a fill ID from its data
+            symbol = fill_event.get_symbol()
+            direction = fill_event.get_direction()
+            quantity = fill_event.get_quantity()
+            price = fill_event.get_price()
+            timestamp = fill_event.get_timestamp()
+            fill_id = f"{symbol}_{direction}_{quantity}_{price}_{timestamp.isoformat()}"
+
+        # Check if we've already processed this fill
+        if fill_id in self.processed_fill_ids:
+            logger.debug(f"Fill {fill_id} already processed by portfolio, skipping")
+            return
+
+        # Add to processed fills
+        self.processed_fill_ids.add(fill_id)
+
+        # Track the event
+        self.event_tracker.track_event(fill_event)
+
+        # Extract fill details
+        symbol = fill_event.get_symbol()
+        direction = fill_event.get_direction()
+        quantity = fill_event.get_quantity()
+        price = fill_event.get_price()
+        commission = fill_event.get_commission()
+        timestamp = fill_event.get_timestamp()
+
+        # Convert to position update 
+        quantity_change = quantity if direction == 'BUY' else -quantity
+
+        # Validate trade before processing
+        trade_value = price * abs(quantity_change)
+
+        # Validate cash availability for buys
+        if direction == 'BUY' and trade_value > self.cash:
+            # Not enough cash - adjust quantity or reject
+            max_quantity = int(self.cash / price) if price > 0 else 0
+            if max_quantity < 10:  # Minimum viable quantity
+                logger.warning(f"Invalid trade: Insufficient cash: {self.cash} < {trade_value}, rejecting")
+                return
+
+            logger.warning(f"Adjusting BUY quantity from {quantity} to {max_quantity}")
+            quantity = max_quantity
+            quantity_change = quantity
+            trade_value = price * quantity
+
+        # Validate position size for sells
+        if direction == 'SELL':
+            position = self.get_position(symbol)
+            current_quantity = position.quantity if position else 0
+
+            if abs(quantity_change) > current_quantity:
+                # Not enough position - adjust quantity or reject
+                if current_quantity <= 0:
+                    logger.warning(f"Invalid trade: Insufficient position: {current_quantity} < {quantity}, rejecting")
+                    return
+
+                logger.warning(f"Adjusting SELL quantity from {quantity} to {current_quantity}")
+                quantity = current_quantity
+                quantity_change = -quantity
+                trade_value = price * quantity
+
+        # Get or create position
+        if symbol not in self.positions:
+            self.positions[symbol] = Position(symbol)
+
+        # Update position
+        position = self.positions[symbol]
+        pnl = position.update(quantity_change, price, timestamp)
+
+        # Update cash
+        trade_value = price * abs(quantity_change)
+        self.cash -= trade_value if direction == 'BUY' else -trade_value
+        self.cash -= commission  # Deduct commission
+
+        # Update equity 
+        self.update_equity()
+
+        # Track trade for analysis
+        trade = {
+            'id': str(uuid.uuid4()),
+            'timestamp': timestamp,
+            'symbol': symbol,
+            'direction': direction,
+            'quantity': quantity,
+            'price': price,
+            'commission': commission,
+            'pnl': pnl
+        }
+        self.trades.append(trade)
+
+        # Update statistics
+        self.stats['trades_executed'] += 1
+        self.stats['total_commission'] += commission
+
+        if direction == 'BUY':
+            self.stats['long_trades'] += 1
+        else:
+            self.stats['short_trades'] += 1
+
+        if pnl > 0:
+            self.stats['winning_trades'] += 1
+        elif pnl < 0:
+            self.stats['losing_trades'] += 1
+        else:
+            self.stats['break_even_trades'] += 1
+
+        self.stats['total_pnl'] += pnl
+
+        # Log the fill with more details
+        logger.info(f"Fill: {direction} {quantity} {symbol} @ {price:.2f}, PnL: {pnl:.2f}, Cash: {self.cash:.2f}, Equity: {self.equity:.2f}")
+
+        # Emit portfolio update event if event bus is available
+        if self.event_bus:
+            # Create a portfolio event
+            portfolio_event = Event(
+                EventType.PORTFOLIO, 
+                {
+                    'portfolio_id': self._name,
+                    'cash': self.cash,
+                    'equity': self.equity,
+                    'trade': trade
+                },
+                timestamp
+            )
+            self.event_bus.emit(portfolio_event)
+
+    def reset(self):
+        """Reset portfolio to initial state."""
+        self.cash = self.initial_cash
+        self.positions = {}
+        self.equity = self.initial_cash
+        self.trades = []
+        self.equity_curve = []
+        self.processed_fill_ids.clear()  # Clear processed fill IDs
+
+        # Reset statistics
+        self.stats = {
+            'trades_executed': 0,
+            'long_trades': 0,
+            'short_trades': 0,
+            'winning_trades': 0,
+            'losing_trades': 0,
+            'break_even_trades': 0,
+            'total_pnl': 0.0,
+            'total_commission': 0.0
+        }
+
+        # Reset event tracker
+        self.event_tracker.reset()
+
+        logger.info(f"Reset portfolio {self._name} to initial state with cash: ${self.initial_cash:.2f}")    
+
+
     
     def configure(self, config):
         """
@@ -120,125 +292,7 @@ class PortfolioManager:
 
         return True, ""
 
-    # Update the on_fill method to check trade validity
-    def on_fill(self, fill_event):
-        """
-        Handle fill events.
-
-        Args:
-            fill_event: Fill event to process
-        """
-        # Track the event
-        self.event_tracker.track_event(fill_event)
-
-        # Extract fill details
-        symbol = fill_event.get_symbol()
-        direction = fill_event.get_direction()
-        quantity = fill_event.get_quantity()
-        price = fill_event.get_price()
-        commission = fill_event.get_commission()
-        timestamp = fill_event.get_timestamp()
-
-        # Check if trade is valid
-        is_valid, reason = self._check_trade_validity(direction, quantity, price, symbol)
-        if not is_valid:
-            logger.warning(f"Invalid trade: {reason}, but processing anyway with adjusted quantities")
-            # We'll still process the trade but with adjusted quantities
-            if direction == 'BUY' and self.cash < price * quantity:
-                # Adjust quantity to match available cash (80%)
-                adjusted_quantity = int((self.cash * 0.8) / price)
-                if adjusted_quantity <= 0:
-                    logger.error(f"Cannot process BUY trade, insufficient cash")
-                    return
-                logger.warning(f"Adjusting BUY quantity from {quantity} to {adjusted_quantity}")
-                quantity = adjusted_quantity
-            elif direction == 'SELL':
-                position = self.get_position(symbol)
-                if not position:
-                    logger.error(f"Cannot process SELL trade, no position")
-                    return
-                if position.quantity < quantity:
-                    logger.warning(f"Adjusting SELL quantity from {quantity} to {position.quantity}")
-                    quantity = position.quantity
-
-        # Convert to position update 
-        quantity_change = quantity if direction == 'BUY' else -quantity
-
-        # Get or create position
-        if symbol not in self.positions:
-            self.positions[symbol] = Position(symbol)
-
-        # Update position
-        position = self.positions[symbol]
-        pnl = position.update(quantity_change, price, timestamp)
-
-        # Update cash
-        trade_value = price * abs(quantity_change)
-        if direction == 'BUY':
-            # Don't let cash go negative
-            if self.cash < trade_value:
-                logger.warning(f"Cash would be negative after trade, adjusting")
-                trade_value = min(trade_value, self.cash * 0.9)  # Use at most 90% of available cash
-
-            self.cash -= trade_value
-        else:  # SELL
-            self.cash += trade_value
-
-        self.cash -= commission  # Deduct commission
-
-        # Cap position values to prevent unreasonable values
-        for pos_symbol, pos in self.positions.items():
-            position_value = abs(pos.quantity * pos.current_price)
-            if position_value > self.initial_cash:
-                logger.warning(f"Capping excessive position value for {pos_symbol}: {position_value} -> {self.initial_cash}")
-                # Adjust position quantity to cap at initial cash
-                max_quantity = int(self.initial_cash / pos.current_price)
-                if pos.quantity > 0:
-                    pos.quantity = min(pos.quantity, max_quantity)
-                elif pos.quantity < 0:
-                    pos.quantity = max(pos.quantity, -max_quantity)
-
-        # Update equity 
-        self.update_equity()
-
-        # Ensure cash doesn't go negative
-        if self.cash < 0:
-            logger.warning(f"Cash is negative {self.cash:.2f}, setting to minimum balance")
-            self.cash = 100.0  # Set a minimum cash balance
-
-        # Track trade for analysis
-        trade = {
-            'id': str(uuid.uuid4()),
-            'timestamp': timestamp,
-            'symbol': symbol,
-            'direction': direction,
-            'quantity': quantity,
-            'price': price,
-            'commission': commission,
-            'pnl': pnl
-        }
-        self.trades.append(trade)
-
-        # Update statistics
-        self._update_trade_stats(trade, pnl)
-
-        # Log the fill
-        logger.info(f"Fill: {direction} {quantity} {symbol} @ {price:.2f}, PnL: {pnl:.2f}, Cash: {self.cash:.2f}, Equity: {self.equity:.2f}")
-
-        # Emit portfolio update event if event bus is available
-        if self.event_bus:
-            # Create a portfolio event
-            portfolio_event = Event(
-                EventType.PORTFOLIO, 
-                {
-                    'portfolio_id': self._name,
-                    'cash': self.cash,
-                    'equity': self.equity,
-                    'trade': trade
-                },
-                timestamp
-            )
-            self.event_bus.emit(portfolio_event)
+ 
 
     def _update_trade_stats(self, trade, pnl):
         """Update trade statistics."""
@@ -458,31 +512,8 @@ class PortfolioManager:
         
         return dict(self.stats)
     
-    def reset(self):
-        """Reset portfolio to initial state."""
-        self.cash = self.initial_cash
-        self.positions = {}
-        self.equity = self.initial_cash
-        self.trades = []
-        self.equity_curve = []
-        
-        # Reset statistics
-        self.stats = {
-            'trades_executed': 0,
-            'long_trades': 0,
-            'short_trades': 0,
-            'winning_trades': 0,
-            'losing_trades': 0,
-            'break_even_trades': 0,
-            'total_pnl': 0.0,
-            'total_commission': 0.0
-        }
-        
-        # Reset event tracker
-        self.event_tracker.reset()
-        
-        logger.info(f"Reset portfolio {self._name} to initial state with cash: ${self.initial_cash:.2f}")
-    
+
+
     def to_dict(self):
         """
         Convert portfolio to dictionary.
