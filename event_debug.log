@@ -1,0 +1,399 @@
+2025-04-24 22:13:08,199 - EventDebugger - INFO - Starting ADMF-Trader Event System Debugger
+2025-04-24 22:13:08,199 - EventDebugger - INFO - Patching OrderManager.on_fill method
+2025-04-24 22:13:08,199 - EventDebugger - INFO - Patch applied to OrderManager.on_fill
+2025-04-24 22:13:08,199 - EventDebugger - INFO - Patching SimulatedBroker.process_order method
+2025-04-24 22:13:08,199 - EventDebugger - INFO - Patch applied to SimulatedBroker.process_order
+2025-04-24 22:13:08,199 - EventDebugger - INFO - Patching SimulatedBroker.on_order method
+2025-04-24 22:13:08,199 - EventDebugger - INFO - Patch applied to SimulatedBroker.on_order
+2025-04-24 22:13:08,199 - EventDebugger - INFO - === Starting Basic Order Flow Test ===
+2025-04-24 22:13:08,199 - src.core.events.event_bus - DEBUG - Registered handler for ORDER
+2025-04-24 22:13:08,199 - src.core.events.event_bus - DEBUG - Registered handler for ORDER
+2025-04-24 22:13:08,199 - src.core.events.event_bus - DEBUG - Registered handler for FILL
+2025-04-24 22:13:08,199 - src.core.events.event_bus - DEBUG - Registered handler for FILL
+2025-04-24 22:13:08,199 - src.core.events.event_bus - DEBUG - Registered handler for BAR
+2025-04-24 22:13:08,199 - EventDebugger - INFO - Setting up event handlers...
+2025-04-24 22:13:08,199 - src.core.events.event_bus - DEBUG - Registered handler for ORDER
+2025-04-24 22:13:08,199 - src.core.events.event_bus - DEBUG - Registered handler for ORDER
+2025-04-24 22:13:08,199 - src.core.events.event_bus - DEBUG - Registered handler for FILL
+2025-04-24 22:13:08,199 - src.core.events.event_bus - DEBUG - Registered handler for FILL
+2025-04-24 22:13:08,199 - EventDebugger - INFO - Test 1: Normal order flow
+2025-04-24 22:13:08,199 - EventDebugger - INFO - Created order with ID: 64ecd1aa-39ab-496d-9a50-d28a047d70a2
+2025-04-24 22:13:08,199 - EventDebugger - INFO - Emitting order event...
+2025-04-24 22:13:08,199 - EventDebugger - DEBUG - EVENT EMITTED: ORDER at 2025-04-24 22:13:08.199804
+2025-04-24 22:13:08,199 - EventDebugger - DEBUG -   Order: BUY 100 AAPL @ 150.0
+2025-04-24 22:13:08,199 - EventDebugger - DEBUG -   Order ID: 64ecd1aa-39ab-496d-9a50-d28a047d70a2
+2025-04-24 22:13:08,199 - src.core.events.event_bus - DEBUG - Emitting ORDER event (ID: 807370b6-5e74-4504-989d-935d4277bb25)
+2025-04-24 22:13:08,199 - EventDebugger - DEBUG - Executing patched on_order method
+2025-04-24 22:13:08,199 - EventDebugger - DEBUG - Executing patched process_order method
+2025-04-24 22:13:08,199 - EventDebugger - DEBUG - Processing order with ID: 64ecd1aa-39ab-496d-9a50-d28a047d70a2
+2025-04-24 22:13:08,199 - EventDebugger - DEBUG - Added order_id 64ecd1aa-39ab-496d-9a50-d28a047d70a2 to fill event
+2025-04-24 22:13:08,199 - EventDebugger - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:13:08,212 - EventDebugger - DEBUG - EVENT EMITTED: FILL at 2025-04-24 22:13:08.199804
+2025-04-24 22:13:08,212 - EventDebugger - DEBUG -   Fill: BUY 100 AAPL @ 150.0
+2025-04-24 22:13:08,212 - EventDebugger - DEBUG -   Order ID: 64ecd1aa-39ab-496d-9a50-d28a047d70a2
+2025-04-24 22:13:08,212 - src.core.events.event_bus - DEBUG - Emitting FILL event (ID: a0b04955-4f17-45d5-b42f-da1f4c84ff9c)
+2025-04-24 22:13:08,212 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:08,212 - EventDebugger - DEBUG - Processing fill: BUY 100 AAPL @ 150.00
+2025-04-24 22:13:08,212 - EventDebugger - DEBUG - Fill has order_id: 64ecd1aa-39ab-496d-9a50-d28a047d70a2
+2025-04-24 22:13:08,212 - EventDebugger - WARNING - Creating synthetic order for orphaned fill: AAPL BUY
+2025-04-24 22:13:08,212 - EventDebugger - INFO - Created order: Order(458a5da0-c7a3-4808-aa34-8e738a56eaac, AAPL, BUY, 100, CREATED)
+2025-04-24 22:13:08,212 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:08.212770
+2025-04-24 22:13:08,212 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 02fd5bf2-632a-4b24-b9f0-5cd4cd0240e0)
+2025-04-24 22:13:08,212 - EventDebugger - INFO - Updated order with fill: Order(458a5da0-c7a3-4808-aa34-8e738a56eaac, AAPL, BUY, 100, FILLED)
+2025-04-24 22:13:08,212 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 10000.00 < 15000.00, but processing anyway with adjusted quantities
+2025-04-24 22:13:08,212 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 100 to 53
+2025-04-24 22:13:08,212 - src.risk.portfolio.position - DEBUG - Updating position AAPL: current=0, change=53, price=150.0
+2025-04-24 22:13:08,212 - src.risk.portfolio.position - DEBUG - Opening new position: quantity=53, cost_basis=150.0
+2025-04-24 22:13:08,212 - src.risk.portfolio.portfolio - INFO - Fill: BUY 53 AAPL @ 150.00, PnL: 0.00, Cash: 2050.00, Equity: 10000.00
+2025-04-24 22:13:08,212 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:08.199804
+2025-04-24 22:13:08,213 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 7de30adc-356b-4e20-9052-bf794ba1a08c)
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - Processing fill: BUY 100 AAPL @ 150.00
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - Fill has order_id: 64ecd1aa-39ab-496d-9a50-d28a047d70a2
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - Found matching order by ID: 64ecd1aa-39ab-496d-9a50-d28a047d70a2
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:08.213101
+2025-04-24 22:13:08,213 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 127ccfb0-dd42-4f1d-81fd-ac470d4f3bb8)
+2025-04-24 22:13:08,213 - EventDebugger - INFO - Updated order with fill: Order(458a5da0-c7a3-4808-aa34-8e738a56eaac, AAPL, BUY, 100, FILLED)
+2025-04-24 22:13:08,213 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 2050.00 < 15000.00, but processing anyway with adjusted quantities
+2025-04-24 22:13:08,213 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 100 to 10
+2025-04-24 22:13:08,213 - src.risk.portfolio.position - DEBUG - Updating position AAPL: current=53, change=10, price=150.0
+2025-04-24 22:13:08,213 - src.risk.portfolio.position - DEBUG - Adding to position: quantity=63, cost_basis=150.0
+2025-04-24 22:13:08,213 - src.risk.portfolio.portfolio - INFO - Fill: BUY 10 AAPL @ 150.00, PnL: 0.00, Cash: 550.00, Equity: 10000.00
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:08.199804
+2025-04-24 22:13:08,213 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 517c9705-4326-477f-af7e-9eda575efb43)
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - Emitted fill event for AAPL
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - Executing patched process_order method
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - Processing order with ID: 64ecd1aa-39ab-496d-9a50-d28a047d70a2
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - Added order_id 64ecd1aa-39ab-496d-9a50-d28a047d70a2 to fill event
+2025-04-24 22:13:08,213 - EventDebugger - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - Processing fill: BUY 100 AAPL @ 150.00
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - Fill has order_id: 64ecd1aa-39ab-496d-9a50-d28a047d70a2
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - Found matching order by ID: 64ecd1aa-39ab-496d-9a50-d28a047d70a2
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:08.213698
+2025-04-24 22:13:08,213 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: d63f85f5-8fc4-47c0-9f08-74be6cebe833)
+2025-04-24 22:13:08,213 - EventDebugger - INFO - Updated order with fill: Order(64ecd1aa-39ab-496d-9a50-d28a047d70a2, AAPL, BUY, 100, FILLED)
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:08.213698
+2025-04-24 22:13:08,213 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 2e68d509-eadd-4a83-abd3-3ff046c71348)
+2025-04-24 22:13:08,213 - src.execution.order_manager - INFO - Created order: Order(64ecd1aa-39ab-496d-9a50-d28a047d70a2, AAPL, BUY, 100, FILLED)
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - Executing patched process_order method
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - Processing order with ID: 64ecd1aa-39ab-496d-9a50-d28a047d70a2
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - Added order_id 64ecd1aa-39ab-496d-9a50-d28a047d70a2 to fill event
+2025-04-24 22:13:08,213 - EventDebugger - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - Processing fill: BUY 100 AAPL @ 150.00
+2025-04-24 22:13:08,213 - EventDebugger - DEBUG - Fill has order_id: 64ecd1aa-39ab-496d-9a50-d28a047d70a2
+2025-04-24 22:13:08,214 - EventDebugger - DEBUG - Found matching order by ID: 64ecd1aa-39ab-496d-9a50-d28a047d70a2
+2025-04-24 22:13:08,214 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:08.214018
+2025-04-24 22:13:08,214 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 7ce09727-0a23-4689-a8ed-c1ba95b236e4)
+2025-04-24 22:13:08,214 - EventDebugger - INFO - Updated order with fill: Order(64ecd1aa-39ab-496d-9a50-d28a047d70a2, AAPL, BUY, 100, FILLED)
+2025-04-24 22:13:08,214 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:08.214018
+2025-04-24 22:13:08,214 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 6d08b728-8205-4ede-b007-c45afce270c5)
+2025-04-24 22:13:08,214 - src.execution.order_manager - INFO - Created order: Order(64ecd1aa-39ab-496d-9a50-d28a047d70a2, AAPL, BUY, 100, FILLED)
+2025-04-24 22:13:08,214 - EventDebugger - DEBUG - Executing patched on_order method
+2025-04-24 22:13:08,214 - EventDebugger - DEBUG - Executing patched process_order method
+2025-04-24 22:13:08,214 - EventDebugger - DEBUG - Processing order with ID: 64ecd1aa-39ab-496d-9a50-d28a047d70a2
+2025-04-24 22:13:08,214 - EventDebugger - DEBUG - Added order_id 64ecd1aa-39ab-496d-9a50-d28a047d70a2 to fill event
+2025-04-24 22:13:08,214 - EventDebugger - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:13:08,226 - EventDebugger - DEBUG - EVENT EMITTED: FILL at 2025-04-24 22:13:08.199804
+2025-04-24 22:13:08,226 - EventDebugger - DEBUG -   Fill: BUY 100 AAPL @ 150.0
+2025-04-24 22:13:08,226 - EventDebugger - DEBUG -   Order ID: 64ecd1aa-39ab-496d-9a50-d28a047d70a2
+2025-04-24 22:13:08,226 - src.core.events.event_bus - DEBUG - Emitting FILL event (ID: dc4fb805-f213-4546-8431-a606aaf2b135)
+2025-04-24 22:13:08,226 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:08,226 - EventDebugger - DEBUG - Processing fill: BUY 100 AAPL @ 150.00
+2025-04-24 22:13:08,226 - EventDebugger - DEBUG - Fill has order_id: 64ecd1aa-39ab-496d-9a50-d28a047d70a2
+2025-04-24 22:13:08,226 - EventDebugger - DEBUG - Found matching order by ID: 64ecd1aa-39ab-496d-9a50-d28a047d70a2
+2025-04-24 22:13:08,226 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:08.226950
+2025-04-24 22:13:08,226 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 7645a5f8-138f-4994-824a-e437eb7f13b9)
+2025-04-24 22:13:08,227 - EventDebugger - INFO - Updated order with fill: Order(64ecd1aa-39ab-496d-9a50-d28a047d70a2, AAPL, BUY, 100, FILLED)
+2025-04-24 22:13:08,227 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 550.00 < 15000.00, but processing anyway with adjusted quantities
+2025-04-24 22:13:08,227 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 100 to 2
+2025-04-24 22:13:08,227 - src.risk.portfolio.position - DEBUG - Updating position AAPL: current=63, change=2, price=150.0
+2025-04-24 22:13:08,227 - src.risk.portfolio.position - DEBUG - Adding to position: quantity=65, cost_basis=150.0
+2025-04-24 22:13:08,227 - src.risk.portfolio.portfolio - INFO - Fill: BUY 2 AAPL @ 150.00, PnL: 0.00, Cash: 250.00, Equity: 10000.00
+2025-04-24 22:13:08,227 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:08.199804
+2025-04-24 22:13:08,227 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 23ee9e77-abd4-4256-b54a-072955726268)
+2025-04-24 22:13:08,227 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:08,227 - EventDebugger - DEBUG - Processing fill: BUY 100 AAPL @ 150.00
+2025-04-24 22:13:08,227 - EventDebugger - DEBUG - Fill has order_id: 64ecd1aa-39ab-496d-9a50-d28a047d70a2
+2025-04-24 22:13:08,227 - EventDebugger - DEBUG - Found matching order by ID: 64ecd1aa-39ab-496d-9a50-d28a047d70a2
+2025-04-24 22:13:08,227 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:08.227221
+2025-04-24 22:13:08,227 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: c0e5a81c-df60-4689-8495-98da86df561e)
+2025-04-24 22:13:08,227 - EventDebugger - INFO - Updated order with fill: Order(64ecd1aa-39ab-496d-9a50-d28a047d70a2, AAPL, BUY, 100, FILLED)
+2025-04-24 22:13:08,227 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 250.00 < 15000.00, but processing anyway with adjusted quantities
+2025-04-24 22:13:08,227 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 100 to 1
+2025-04-24 22:13:08,227 - src.risk.portfolio.position - DEBUG - Updating position AAPL: current=65, change=1, price=150.0
+2025-04-24 22:13:08,227 - src.risk.portfolio.position - DEBUG - Adding to position: quantity=66, cost_basis=150.0
+2025-04-24 22:13:08,227 - src.risk.portfolio.portfolio - INFO - Fill: BUY 1 AAPL @ 150.00, PnL: 0.00, Cash: 100.00, Equity: 10000.00
+2025-04-24 22:13:08,227 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:08.199804
+2025-04-24 22:13:08,227 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: d3c5bf5f-04de-4899-8a9c-ef5c629c95db)
+2025-04-24 22:13:08,227 - EventDebugger - DEBUG - Emitted fill event for AAPL
+2025-04-24 22:13:08,227 - EventDebugger - INFO - Order event emitted successfully
+2025-04-24 22:13:08,732 - EventDebugger - INFO - Test 2: Orphaned fill event
+2025-04-24 22:13:08,732 - EventDebugger - INFO - Emitting orphaned fill event...
+2025-04-24 22:13:08,733 - EventDebugger - DEBUG - EVENT EMITTED: FILL at 2025-04-24 22:13:08.732903
+2025-04-24 22:13:08,733 - EventDebugger - DEBUG -   Fill: BUY 10 TSLA @ 800.0
+2025-04-24 22:13:08,733 - EventDebugger - DEBUG -   Order ID: None
+2025-04-24 22:13:08,733 - src.core.events.event_bus - DEBUG - Emitting FILL event (ID: 54f7a999-f206-4052-a77c-aba1aae42884)
+2025-04-24 22:13:08,733 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:08,733 - EventDebugger - DEBUG - Processing fill: BUY 10 TSLA @ 800.00
+2025-04-24 22:13:08,733 - EventDebugger - DEBUG - Fill has order_id: None
+2025-04-24 22:13:08,733 - EventDebugger - WARNING - Creating synthetic order for orphaned fill: TSLA BUY
+2025-04-24 22:13:08,734 - EventDebugger - INFO - Created order: Order(08d24df6-5672-48a3-8e24-b1c8e6ba5148, TSLA, BUY, 10, CREATED)
+2025-04-24 22:13:08,734 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:08.734096
+2025-04-24 22:13:08,734 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 1a8b6396-0ba0-4fe5-b43a-1c902ba93984)
+2025-04-24 22:13:08,734 - EventDebugger - INFO - Updated order with fill: Order(08d24df6-5672-48a3-8e24-b1c8e6ba5148, TSLA, BUY, 10, FILLED)
+2025-04-24 22:13:08,735 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 100.00 < 8000.00, but processing anyway with adjusted quantities
+2025-04-24 22:13:08,735 - src.risk.portfolio.portfolio - ERROR - Cannot process BUY trade, insufficient cash
+2025-04-24 22:13:08,735 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:08,735 - EventDebugger - DEBUG - Processing fill: BUY 10 TSLA @ 800.00
+2025-04-24 22:13:08,735 - EventDebugger - DEBUG - Fill has order_id: None
+2025-04-24 22:13:08,735 - EventDebugger - WARNING - Creating synthetic order for orphaned fill: TSLA BUY
+2025-04-24 22:13:08,735 - EventDebugger - INFO - Created order: Order(fa435daf-5547-4eb3-b7e7-e05afc536273, TSLA, BUY, 10, CREATED)
+2025-04-24 22:13:08,735 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:08.735591
+2025-04-24 22:13:08,735 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 82a74d4e-90fc-4744-91b0-a9db766d0832)
+2025-04-24 22:13:08,735 - EventDebugger - INFO - Updated order with fill: Order(fa435daf-5547-4eb3-b7e7-e05afc536273, TSLA, BUY, 10, FILLED)
+2025-04-24 22:13:08,735 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 100.00 < 8000.00, but processing anyway with adjusted quantities
+2025-04-24 22:13:08,735 - src.risk.portfolio.portfolio - ERROR - Cannot process BUY trade, insufficient cash
+2025-04-24 22:13:08,735 - EventDebugger - INFO - Fill event emitted successfully
+2025-04-24 22:13:09,236 - EventDebugger - INFO - Test 3: Multiple orders for same symbol
+2025-04-24 22:13:09,236 - EventDebugger - INFO - Emitting first MSFT order with ID: 3fc4fb9b-8cf1-4c62-9f3f-449494417dea
+2025-04-24 22:13:09,236 - EventDebugger - DEBUG - EVENT EMITTED: ORDER at 2025-04-24 22:13:09.236637
+2025-04-24 22:13:09,236 - EventDebugger - DEBUG -   Order: BUY 50 MSFT @ 300.0
+2025-04-24 22:13:09,236 - EventDebugger - DEBUG -   Order ID: 3fc4fb9b-8cf1-4c62-9f3f-449494417dea
+2025-04-24 22:13:09,237 - src.core.events.event_bus - DEBUG - Emitting ORDER event (ID: 556e9246-568d-46c4-b2de-bce4314db015)
+2025-04-24 22:13:09,237 - EventDebugger - DEBUG - Executing patched on_order method
+2025-04-24 22:13:09,237 - EventDebugger - DEBUG - Executing patched process_order method
+2025-04-24 22:13:09,237 - EventDebugger - DEBUG - Processing order with ID: 3fc4fb9b-8cf1-4c62-9f3f-449494417dea
+2025-04-24 22:13:09,237 - EventDebugger - DEBUG - Added order_id 3fc4fb9b-8cf1-4c62-9f3f-449494417dea to fill event
+2025-04-24 22:13:09,237 - EventDebugger - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:13:09,249 - EventDebugger - DEBUG - EVENT EMITTED: FILL at 2025-04-24 22:13:09.236637
+2025-04-24 22:13:09,250 - EventDebugger - DEBUG -   Fill: BUY 50 MSFT @ 300.0
+2025-04-24 22:13:09,250 - EventDebugger - DEBUG -   Order ID: 3fc4fb9b-8cf1-4c62-9f3f-449494417dea
+2025-04-24 22:13:09,250 - src.core.events.event_bus - DEBUG - Emitting FILL event (ID: 09d46177-4c19-4446-823e-36ed18f9ff8e)
+2025-04-24 22:13:09,250 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:09,250 - EventDebugger - DEBUG - Processing fill: BUY 50 MSFT @ 300.00
+2025-04-24 22:13:09,250 - EventDebugger - DEBUG - Fill has order_id: 3fc4fb9b-8cf1-4c62-9f3f-449494417dea
+2025-04-24 22:13:09,251 - EventDebugger - WARNING - Creating synthetic order for orphaned fill: MSFT BUY
+2025-04-24 22:13:09,251 - EventDebugger - INFO - Created order: Order(16afa88a-d826-42ff-bbd8-df11f1c7f450, MSFT, BUY, 50, CREATED)
+2025-04-24 22:13:09,251 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:09.251275
+2025-04-24 22:13:09,251 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 33a347c2-61a3-4a2e-b637-2a1b22ec3336)
+2025-04-24 22:13:09,251 - EventDebugger - INFO - Updated order with fill: Order(16afa88a-d826-42ff-bbd8-df11f1c7f450, MSFT, BUY, 50, FILLED)
+2025-04-24 22:13:09,252 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 100.00 < 15000.00, but processing anyway with adjusted quantities
+2025-04-24 22:13:09,252 - src.risk.portfolio.portfolio - ERROR - Cannot process BUY trade, insufficient cash
+2025-04-24 22:13:09,252 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:09,252 - EventDebugger - DEBUG - Processing fill: BUY 50 MSFT @ 300.00
+2025-04-24 22:13:09,252 - EventDebugger - DEBUG - Fill has order_id: 3fc4fb9b-8cf1-4c62-9f3f-449494417dea
+2025-04-24 22:13:09,252 - EventDebugger - DEBUG - Found matching order by ID: 3fc4fb9b-8cf1-4c62-9f3f-449494417dea
+2025-04-24 22:13:09,252 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:09.252763
+2025-04-24 22:13:09,252 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: ebcb5ffd-17f1-44ba-a1eb-64e65d2727f9)
+2025-04-24 22:13:09,252 - EventDebugger - INFO - Updated order with fill: Order(16afa88a-d826-42ff-bbd8-df11f1c7f450, MSFT, BUY, 50, FILLED)
+2025-04-24 22:13:09,253 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 100.00 < 15000.00, but processing anyway with adjusted quantities
+2025-04-24 22:13:09,253 - src.risk.portfolio.portfolio - ERROR - Cannot process BUY trade, insufficient cash
+2025-04-24 22:13:09,253 - EventDebugger - DEBUG - Emitted fill event for MSFT
+2025-04-24 22:13:09,253 - EventDebugger - DEBUG - Executing patched process_order method
+2025-04-24 22:13:09,253 - EventDebugger - DEBUG - Processing order with ID: 3fc4fb9b-8cf1-4c62-9f3f-449494417dea
+2025-04-24 22:13:09,253 - EventDebugger - DEBUG - Added order_id 3fc4fb9b-8cf1-4c62-9f3f-449494417dea to fill event
+2025-04-24 22:13:09,253 - EventDebugger - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:13:09,253 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:09,253 - EventDebugger - DEBUG - Processing fill: BUY 50 MSFT @ 300.00
+2025-04-24 22:13:09,253 - EventDebugger - DEBUG - Fill has order_id: 3fc4fb9b-8cf1-4c62-9f3f-449494417dea
+2025-04-24 22:13:09,253 - EventDebugger - DEBUG - Found matching order by ID: 3fc4fb9b-8cf1-4c62-9f3f-449494417dea
+2025-04-24 22:13:09,253 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:09.253647
+2025-04-24 22:13:09,253 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 8e308e40-6240-4fde-9971-e606a9eef073)
+2025-04-24 22:13:09,253 - EventDebugger - INFO - Updated order with fill: Order(3fc4fb9b-8cf1-4c62-9f3f-449494417dea, MSFT, BUY, 50, FILLED)
+2025-04-24 22:13:09,253 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:09.253647
+2025-04-24 22:13:09,254 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 8e5287fc-cc72-4f1d-8951-ba9fa92d7b58)
+2025-04-24 22:13:09,254 - src.execution.order_manager - INFO - Created order: Order(3fc4fb9b-8cf1-4c62-9f3f-449494417dea, MSFT, BUY, 50, FILLED)
+2025-04-24 22:13:09,254 - EventDebugger - DEBUG - Executing patched process_order method
+2025-04-24 22:13:09,254 - EventDebugger - DEBUG - Processing order with ID: 3fc4fb9b-8cf1-4c62-9f3f-449494417dea
+2025-04-24 22:13:09,254 - EventDebugger - DEBUG - Added order_id 3fc4fb9b-8cf1-4c62-9f3f-449494417dea to fill event
+2025-04-24 22:13:09,254 - EventDebugger - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:13:09,254 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:09,254 - EventDebugger - DEBUG - Processing fill: BUY 50 MSFT @ 300.00
+2025-04-24 22:13:09,254 - EventDebugger - DEBUG - Fill has order_id: 3fc4fb9b-8cf1-4c62-9f3f-449494417dea
+2025-04-24 22:13:09,254 - EventDebugger - DEBUG - Found matching order by ID: 3fc4fb9b-8cf1-4c62-9f3f-449494417dea
+2025-04-24 22:13:09,254 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:09.254573
+2025-04-24 22:13:09,254 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: e8899111-52a5-4b0f-ac7e-b413bdd7f9a6)
+2025-04-24 22:13:09,254 - EventDebugger - INFO - Updated order with fill: Order(3fc4fb9b-8cf1-4c62-9f3f-449494417dea, MSFT, BUY, 50, FILLED)
+2025-04-24 22:13:09,254 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:09.254573
+2025-04-24 22:13:09,254 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: f5059b13-a738-4d24-8fbc-e2b8b6054825)
+2025-04-24 22:13:09,254 - src.execution.order_manager - INFO - Created order: Order(3fc4fb9b-8cf1-4c62-9f3f-449494417dea, MSFT, BUY, 50, FILLED)
+2025-04-24 22:13:09,254 - EventDebugger - DEBUG - Executing patched on_order method
+2025-04-24 22:13:09,254 - EventDebugger - DEBUG - Executing patched process_order method
+2025-04-24 22:13:09,255 - EventDebugger - DEBUG - Processing order with ID: 3fc4fb9b-8cf1-4c62-9f3f-449494417dea
+2025-04-24 22:13:09,255 - EventDebugger - DEBUG - Added order_id 3fc4fb9b-8cf1-4c62-9f3f-449494417dea to fill event
+2025-04-24 22:13:09,255 - EventDebugger - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:13:09,267 - EventDebugger - DEBUG - EVENT EMITTED: FILL at 2025-04-24 22:13:09.236637
+2025-04-24 22:13:09,267 - EventDebugger - DEBUG -   Fill: BUY 50 MSFT @ 300.0
+2025-04-24 22:13:09,267 - EventDebugger - DEBUG -   Order ID: 3fc4fb9b-8cf1-4c62-9f3f-449494417dea
+2025-04-24 22:13:09,268 - src.core.events.event_bus - DEBUG - Emitting FILL event (ID: 43de67c4-47b7-4151-a4d0-4ba0db97af78)
+2025-04-24 22:13:09,268 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:09,268 - EventDebugger - DEBUG - Processing fill: BUY 50 MSFT @ 300.00
+2025-04-24 22:13:09,268 - EventDebugger - DEBUG - Fill has order_id: 3fc4fb9b-8cf1-4c62-9f3f-449494417dea
+2025-04-24 22:13:09,268 - EventDebugger - DEBUG - Found matching order by ID: 3fc4fb9b-8cf1-4c62-9f3f-449494417dea
+2025-04-24 22:13:09,268 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:09.268497
+2025-04-24 22:13:09,268 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 4fc58c5d-8682-494a-bb2c-02c7bbeb6bc7)
+2025-04-24 22:13:09,268 - EventDebugger - INFO - Updated order with fill: Order(3fc4fb9b-8cf1-4c62-9f3f-449494417dea, MSFT, BUY, 50, FILLED)
+2025-04-24 22:13:09,268 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 100.00 < 15000.00, but processing anyway with adjusted quantities
+2025-04-24 22:13:09,268 - src.risk.portfolio.portfolio - ERROR - Cannot process BUY trade, insufficient cash
+2025-04-24 22:13:09,268 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:09,269 - EventDebugger - DEBUG - Processing fill: BUY 50 MSFT @ 300.00
+2025-04-24 22:13:09,269 - EventDebugger - DEBUG - Fill has order_id: 3fc4fb9b-8cf1-4c62-9f3f-449494417dea
+2025-04-24 22:13:09,269 - EventDebugger - DEBUG - Found matching order by ID: 3fc4fb9b-8cf1-4c62-9f3f-449494417dea
+2025-04-24 22:13:09,269 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:09.269218
+2025-04-24 22:13:09,269 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 55157820-7878-42fd-8a1a-c9916acf753f)
+2025-04-24 22:13:09,269 - EventDebugger - INFO - Updated order with fill: Order(3fc4fb9b-8cf1-4c62-9f3f-449494417dea, MSFT, BUY, 50, FILLED)
+2025-04-24 22:13:09,269 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 100.00 < 15000.00, but processing anyway with adjusted quantities
+2025-04-24 22:13:09,269 - src.risk.portfolio.portfolio - ERROR - Cannot process BUY trade, insufficient cash
+2025-04-24 22:13:09,269 - EventDebugger - DEBUG - Emitted fill event for MSFT
+2025-04-24 22:13:09,269 - EventDebugger - INFO - Emitting second MSFT order with ID: a0b4f282-a7fe-4185-8638-881f32fdaf00
+2025-04-24 22:13:09,269 - EventDebugger - DEBUG - EVENT EMITTED: ORDER at 2025-04-24 22:13:09.236669
+2025-04-24 22:13:09,269 - EventDebugger - DEBUG -   Order: BUY 25 MSFT @ 305.0
+2025-04-24 22:13:09,269 - EventDebugger - DEBUG -   Order ID: a0b4f282-a7fe-4185-8638-881f32fdaf00
+2025-04-24 22:13:09,269 - src.core.events.event_bus - DEBUG - Emitting ORDER event (ID: 62bf70b8-f0c3-4ba1-9449-8b2bebbc6dd6)
+2025-04-24 22:13:09,270 - EventDebugger - DEBUG - Executing patched on_order method
+2025-04-24 22:13:09,270 - EventDebugger - DEBUG - Executing patched process_order method
+2025-04-24 22:13:09,270 - EventDebugger - DEBUG - Processing order with ID: a0b4f282-a7fe-4185-8638-881f32fdaf00
+2025-04-24 22:13:09,270 - EventDebugger - DEBUG - Added order_id a0b4f282-a7fe-4185-8638-881f32fdaf00 to fill event
+2025-04-24 22:13:09,270 - EventDebugger - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:13:09,281 - EventDebugger - DEBUG - EVENT EMITTED: FILL at 2025-04-24 22:13:09.236669
+2025-04-24 22:13:09,281 - EventDebugger - DEBUG -   Fill: BUY 25 MSFT @ 305.0
+2025-04-24 22:13:09,281 - EventDebugger - DEBUG -   Order ID: a0b4f282-a7fe-4185-8638-881f32fdaf00
+2025-04-24 22:13:09,281 - src.core.events.event_bus - DEBUG - Emitting FILL event (ID: 8354a150-73dd-4949-871d-dff56ad729ce)
+2025-04-24 22:13:09,281 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:09,282 - EventDebugger - DEBUG - Processing fill: BUY 25 MSFT @ 305.00
+2025-04-24 22:13:09,282 - EventDebugger - DEBUG - Fill has order_id: a0b4f282-a7fe-4185-8638-881f32fdaf00
+2025-04-24 22:13:09,282 - EventDebugger - WARNING - Creating synthetic order for orphaned fill: MSFT BUY
+2025-04-24 22:13:09,282 - EventDebugger - INFO - Created order: Order(e118e988-4f67-4677-a905-c346fa62666f, MSFT, BUY, 25, CREATED)
+2025-04-24 22:13:09,282 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:09.282429
+2025-04-24 22:13:09,282 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 1c7e0056-86e7-4ade-9722-84115c04f771)
+2025-04-24 22:13:09,282 - EventDebugger - INFO - Updated order with fill: Order(e118e988-4f67-4677-a905-c346fa62666f, MSFT, BUY, 25, FILLED)
+2025-04-24 22:13:09,282 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 100.00 < 7625.00, but processing anyway with adjusted quantities
+2025-04-24 22:13:09,282 - src.risk.portfolio.portfolio - ERROR - Cannot process BUY trade, insufficient cash
+2025-04-24 22:13:09,282 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:09,282 - EventDebugger - DEBUG - Processing fill: BUY 25 MSFT @ 305.00
+2025-04-24 22:13:09,282 - EventDebugger - DEBUG - Fill has order_id: a0b4f282-a7fe-4185-8638-881f32fdaf00
+2025-04-24 22:13:09,282 - EventDebugger - DEBUG - Found matching order by ID: a0b4f282-a7fe-4185-8638-881f32fdaf00
+2025-04-24 22:13:09,283 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:09.282983
+2025-04-24 22:13:09,283 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 3589cd6e-e632-47bd-aa7f-c6ef4c39c38e)
+2025-04-24 22:13:09,283 - EventDebugger - INFO - Updated order with fill: Order(e118e988-4f67-4677-a905-c346fa62666f, MSFT, BUY, 25, FILLED)
+2025-04-24 22:13:09,283 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 100.00 < 7625.00, but processing anyway with adjusted quantities
+2025-04-24 22:13:09,283 - src.risk.portfolio.portfolio - ERROR - Cannot process BUY trade, insufficient cash
+2025-04-24 22:13:09,283 - EventDebugger - DEBUG - Emitted fill event for MSFT
+2025-04-24 22:13:09,283 - EventDebugger - DEBUG - Executing patched process_order method
+2025-04-24 22:13:09,283 - EventDebugger - DEBUG - Processing order with ID: a0b4f282-a7fe-4185-8638-881f32fdaf00
+2025-04-24 22:13:09,283 - EventDebugger - DEBUG - Added order_id a0b4f282-a7fe-4185-8638-881f32fdaf00 to fill event
+2025-04-24 22:13:09,283 - EventDebugger - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:13:09,283 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:09,283 - EventDebugger - DEBUG - Processing fill: BUY 25 MSFT @ 305.00
+2025-04-24 22:13:09,284 - EventDebugger - DEBUG - Fill has order_id: a0b4f282-a7fe-4185-8638-881f32fdaf00
+2025-04-24 22:13:09,284 - EventDebugger - DEBUG - Found matching order by ID: a0b4f282-a7fe-4185-8638-881f32fdaf00
+2025-04-24 22:13:09,284 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:09.284164
+2025-04-24 22:13:09,284 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: a962854f-f364-4c17-9fd5-bc288ba5b863)
+2025-04-24 22:13:09,284 - EventDebugger - INFO - Updated order with fill: Order(a0b4f282-a7fe-4185-8638-881f32fdaf00, MSFT, BUY, 25, FILLED)
+2025-04-24 22:13:09,284 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:09.284164
+2025-04-24 22:13:09,284 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 16eca2fb-6fbb-4cf5-ab2d-f2d640fc572e)
+2025-04-24 22:13:09,284 - src.execution.order_manager - INFO - Created order: Order(a0b4f282-a7fe-4185-8638-881f32fdaf00, MSFT, BUY, 25, FILLED)
+2025-04-24 22:13:09,284 - EventDebugger - DEBUG - Executing patched process_order method
+2025-04-24 22:13:09,284 - EventDebugger - DEBUG - Processing order with ID: a0b4f282-a7fe-4185-8638-881f32fdaf00
+2025-04-24 22:13:09,284 - EventDebugger - DEBUG - Added order_id a0b4f282-a7fe-4185-8638-881f32fdaf00 to fill event
+2025-04-24 22:13:09,284 - EventDebugger - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:13:09,284 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:09,284 - EventDebugger - DEBUG - Processing fill: BUY 25 MSFT @ 305.00
+2025-04-24 22:13:09,285 - EventDebugger - DEBUG - Fill has order_id: a0b4f282-a7fe-4185-8638-881f32fdaf00
+2025-04-24 22:13:09,285 - EventDebugger - DEBUG - Found matching order by ID: a0b4f282-a7fe-4185-8638-881f32fdaf00
+2025-04-24 22:13:09,285 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:09.285159
+2025-04-24 22:13:09,285 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 5ce9876d-24b3-4ff7-a155-30f4fc0235fe)
+2025-04-24 22:13:09,285 - EventDebugger - INFO - Updated order with fill: Order(a0b4f282-a7fe-4185-8638-881f32fdaf00, MSFT, BUY, 25, FILLED)
+2025-04-24 22:13:09,285 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:09.285159
+2025-04-24 22:13:09,285 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: e1884bbb-5d57-4829-bc01-ac142f1e518b)
+2025-04-24 22:13:09,285 - src.execution.order_manager - INFO - Created order: Order(a0b4f282-a7fe-4185-8638-881f32fdaf00, MSFT, BUY, 25, FILLED)
+2025-04-24 22:13:09,285 - EventDebugger - DEBUG - Executing patched on_order method
+2025-04-24 22:13:09,285 - EventDebugger - DEBUG - Executing patched process_order method
+2025-04-24 22:13:09,285 - EventDebugger - DEBUG - Processing order with ID: a0b4f282-a7fe-4185-8638-881f32fdaf00
+2025-04-24 22:13:09,285 - EventDebugger - DEBUG - Added order_id a0b4f282-a7fe-4185-8638-881f32fdaf00 to fill event
+2025-04-24 22:13:09,285 - EventDebugger - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:13:09,300 - EventDebugger - DEBUG - EVENT EMITTED: FILL at 2025-04-24 22:13:09.236669
+2025-04-24 22:13:09,303 - EventDebugger - DEBUG -   Fill: BUY 25 MSFT @ 305.0
+2025-04-24 22:13:09,303 - EventDebugger - DEBUG -   Order ID: a0b4f282-a7fe-4185-8638-881f32fdaf00
+2025-04-24 22:13:09,303 - src.core.events.event_bus - DEBUG - Emitting FILL event (ID: a4030111-1921-4f4f-a728-c6853c855b37)
+2025-04-24 22:13:09,303 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:09,303 - EventDebugger - DEBUG - Processing fill: BUY 25 MSFT @ 305.00
+2025-04-24 22:13:09,303 - EventDebugger - DEBUG - Fill has order_id: a0b4f282-a7fe-4185-8638-881f32fdaf00
+2025-04-24 22:13:09,303 - EventDebugger - DEBUG - Found matching order by ID: a0b4f282-a7fe-4185-8638-881f32fdaf00
+2025-04-24 22:13:09,303 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:09.303854
+2025-04-24 22:13:09,304 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 93c0336e-4290-4e70-a356-c6cea2177111)
+2025-04-24 22:13:09,304 - EventDebugger - INFO - Updated order with fill: Order(a0b4f282-a7fe-4185-8638-881f32fdaf00, MSFT, BUY, 25, FILLED)
+2025-04-24 22:13:09,304 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 100.00 < 7625.00, but processing anyway with adjusted quantities
+2025-04-24 22:13:09,304 - src.risk.portfolio.portfolio - ERROR - Cannot process BUY trade, insufficient cash
+2025-04-24 22:13:09,304 - EventDebugger - DEBUG - Executing patched on_fill method
+2025-04-24 22:13:09,304 - EventDebugger - DEBUG - Processing fill: BUY 25 MSFT @ 305.00
+2025-04-24 22:13:09,304 - EventDebugger - DEBUG - Fill has order_id: a0b4f282-a7fe-4185-8638-881f32fdaf00
+2025-04-24 22:13:09,304 - EventDebugger - DEBUG - Found matching order by ID: a0b4f282-a7fe-4185-8638-881f32fdaf00
+2025-04-24 22:13:09,304 - EventDebugger - DEBUG - EVENT EMITTED: PORTFOLIO at 2025-04-24 22:13:09.304406
+2025-04-24 22:13:09,304 - src.core.events.event_bus - DEBUG - Emitting PORTFOLIO event (ID: 550271fb-d4e6-4a8e-9f7a-cf410736ed8f)
+2025-04-24 22:13:09,304 - EventDebugger - INFO - Updated order with fill: Order(a0b4f282-a7fe-4185-8638-881f32fdaf00, MSFT, BUY, 25, FILLED)
+2025-04-24 22:13:09,304 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 100.00 < 7625.00, but processing anyway with adjusted quantities
+2025-04-24 22:13:09,304 - src.risk.portfolio.portfolio - ERROR - Cannot process BUY trade, insufficient cash
+2025-04-24 22:13:09,304 - EventDebugger - DEBUG - Emitted fill event for MSFT
+2025-04-24 22:13:09,805 - EventDebugger - INFO - === Event Summary ===
+2025-04-24 22:13:09,805 - EventDebugger - INFO - ORDER: 3 events
+2025-04-24 22:13:09,806 - EventDebugger - INFO - FILL: 7 events
+2025-04-24 22:13:09,806 - EventDebugger - INFO - PORTFOLIO: 30 events
+2025-04-24 22:13:09,806 - EventDebugger - INFO - === OrderManager State ===
+2025-04-24 22:13:09,806 - EventDebugger - INFO - Total orders: 5
+2025-04-24 22:13:09,806 - EventDebugger - INFO - Active orders: 0
+2025-04-24 22:13:09,806 - EventDebugger - INFO - OrderStatus values: ['CREATED', 'PENDING', 'PARTIAL', 'FILLED', 'CANCELED', 'REJECTED', 'EXPIRED']
+2025-04-24 22:13:09,806 - EventDebugger - DEBUG - === Inspecting OrderManager ===
+2025-04-24 22:13:09,806 - EventDebugger - DEBUG - Attributes:
+2025-04-24 22:13:09,806 - EventDebugger - DEBUG -   active_orders: set()
+2025-04-24 22:13:09,806 - EventDebugger - DEBUG -   broker: <src.execution.broker.broker_simulator.SimulatedBroker object at 0x107db1940>
+2025-04-24 22:13:09,806 - EventDebugger - DEBUG -   configured: False
+2025-04-24 22:13:09,806 - EventDebugger - DEBUG -   event_bus: <src.core.events.event_bus.EventBus object at 0x107db1d30>
+2025-04-24 22:13:09,806 - EventDebugger - DEBUG -   event_tracker: <src.core.events.event_utils.EventTracker object at 0x107db1fd0>
+2025-04-24 22:13:09,806 - EventDebugger - DEBUG -   order_history: [<src.execution.order_manager.Order object at 0x107db2e40>, <src.execution.order_manager.Order object at 0x107db2e40>, <src.execution.order_manager.Order object at 0x107ee5e50>, <src.execution.order_manager.Order object at 0x107ee60d0>, <src.execution.order_manager.Order object at 0x107ee60d0>, <src.execution.order_manager.Order object at 0x107ee60d0>, <src.execution.order_manager.Order object at 0x107f30640>, <src.execution.order_manager.Order object at 0x107f30770>, <src.execution.order_manager.Order object at 0x107f05250>, <src.execution.order_manager.Order object at 0x107f05250>, <src.execution.order_manager.Order object at 0x107f21040>, <src.execution.order_manager.Order object at 0x107f21150>, <src.execution.order_manager.Order object at 0x107f21150>, <src.execution.order_manager.Order object at 0x107f21150>, <src.execution.order_manager.Order object at 0x107eedb50>, <src.execution.order_manager.Order object at 0x107eedb50>, <src.execution.order_manager.Order object at 0x107eed650>, <src.execution.order_manager.Order object at 0x104400230>, <src.execution.order_manager.Order object at 0x104400230>, <src.execution.order_manager.Order object at 0x104400230>]
+2025-04-24 22:13:09,806 - EventDebugger - DEBUG -   orders: {'64ecd1aa-39ab-496d-9a50-d28a047d70a2': <src.execution.order_manager.Order object at 0x107ee60d0>, 'e19af32c-0551-46ec-b9a9-69a13967c53b': <src.execution.order_manager.Order object at 0x107f30640>, 'b391ab93-6835-433a-8f5b-14d64e137108': <src.execution.order_manager.Order object at 0x107f30770>, '3fc4fb9b-8cf1-4c62-9f3f-449494417dea': <src.execution.order_manager.Order object at 0x107f21150>, 'a0b4f282-a7fe-4185-8638-881f32fdaf00': <src.execution.order_manager.Order object at 0x104400230>}
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG -   stats: {'orders_created': 11, 'orders_filled': 20, 'orders_canceled': 0, 'orders_rejected': 0, 'orders_expired': 0, 'errors': 0}
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG - Methods:
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG -   cancel_all_orders()
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG -   cancel_order()
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG -   configure()
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG -   create_order()
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG -   get_active_orders()
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG -   get_order()
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG -   get_order_history()
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG -   get_stats()
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG -   on_fill()
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG -   on_order()
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG -   reset()
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG -   set_broker()
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG -   set_event_bus()
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG - === Inspecting SimulatedBroker ===
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG - Attributes:
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG -   commission: 0.0
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG -   event_bus: <src.core.events.event_bus.EventBus object at 0x107db1d30>
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG -   initialized: False
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG -   name: simulated_broker
+2025-04-24 22:13:09,807 - EventDebugger - DEBUG -   slippage: 0.0
+2025-04-24 22:13:09,808 - EventDebugger - DEBUG -   stats: {'orders_processed': 12, 'fills_generated': 12, 'errors': 0}
+2025-04-24 22:13:09,808 - EventDebugger - DEBUG - Methods:
+2025-04-24 22:13:09,808 - EventDebugger - DEBUG -   configure()
+2025-04-24 22:13:09,808 - EventDebugger - DEBUG -   get_account_info()
+2025-04-24 22:13:09,808 - EventDebugger - DEBUG -   get_stats()
+2025-04-24 22:13:09,808 - EventDebugger - DEBUG -   on_order()
+2025-04-24 22:13:09,808 - EventDebugger - DEBUG -   process_order()
+2025-04-24 22:13:09,808 - EventDebugger - DEBUG -   reset_stats()
+2025-04-24 22:13:09,808 - EventDebugger - INFO - Test completed
+2025-04-24 22:13:09,808 - src.core.events.event_bus - DEBUG - Handler for FILL garbage collected, cleaning up
+2025-04-24 22:13:09,808 - src.core.events.event_bus - DEBUG - Handler for ORDER garbage collected, cleaning up
+2025-04-24 22:13:09,808 - src.core.events.event_bus - DEBUG - Handler for FILL garbage collected, cleaning up
+2025-04-24 22:13:09,808 - src.core.events.event_bus - DEBUG - Handler for ORDER garbage collected, cleaning up
+2025-04-24 22:13:09,808 - src.core.events.event_bus - DEBUG - Handler for ORDER garbage collected, cleaning up
+2025-04-24 22:13:09,808 - src.core.events.event_bus - DEBUG - Handler for ORDER garbage collected, cleaning up
+2025-04-24 22:13:09,808 - src.core.events.event_bus - DEBUG - Handler for FILL garbage collected, cleaning up
+2025-04-24 22:13:09,808 - src.core.events.event_bus - DEBUG - Handler for BAR garbage collected, cleaning up
+2025-04-24 22:13:09,808 - src.core.events.event_bus - DEBUG - Handler for FILL garbage collected, cleaning up
+2025-04-24 22:13:09,808 - EventDebugger - INFO - Event debugging completed!
+2025-04-24 22:13:09,808 - EventDebugger - INFO - Total events logged: 40
+2025-04-24 22:13:09,811 - EventDebugger - INFO - Event log saved to event_log.json

@@ -1,0 +1,1205 @@
+2025-04-24 22:10:13,772 - ADMF-Test - INFO - === Starting Minimal Order-Fill Test ===
+2025-04-24 22:10:13,773 - ADMF-Test - INFO - Test 1: Basic order-fill flow
+2025-04-24 22:10:13,773 - ADMF-Test - INFO - Created order with ID: 88f49696-fb62-4765-90b3-1ff0b24ebb39
+2025-04-24 22:10:13,773 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:10:13,785 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: AAPL BUY
+2025-04-24 22:10:13,785 - src.execution.order_manager - INFO - Created order: Order(88f49696-fb62-4765-90b3-1ff0b24ebb39, AAPL, BUY, 100, CREATED)
+2025-04-24 22:10:13,785 - src.execution.order_manager - INFO - Updated order with fill: Order(88f49696-fb62-4765-90b3-1ff0b24ebb39, AAPL, BUY, 100, FILLED)
+2025-04-24 22:10:13,785 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 150.00, PnL: 0.00, Cash: 85000.00, Equity: 100000.00
+2025-04-24 22:10:13,786 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:10:13,786 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 150.00, PnL: 0.00, Cash: 70000.00, Equity: 100000.00
+2025-04-24 22:10:13,786 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:10:13,786 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:10:13,787 - src.execution.order_manager - INFO - Created order: Order(88f49696-fb62-4765-90b3-1ff0b24ebb39, AAPL, BUY, 100, PENDING)
+2025-04-24 22:10:13,787 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:10:13,787 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:10:13,787 - src.execution.order_manager - INFO - Created order: Order(88f49696-fb62-4765-90b3-1ff0b24ebb39, AAPL, BUY, 100, PENDING)
+2025-04-24 22:10:13,787 - ADMF-Test - INFO - Order correctly registered in order manager
+2025-04-24 22:10:13,787 - ADMF-Test - INFO - Test 2: Orphaned fill handling
+2025-04-24 22:10:13,787 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: MSFT BUY
+2025-04-24 22:10:13,787 - src.execution.order_manager - INFO - Created order: Order(43b6dec0-ab55-408f-99dc-02ff373596df, MSFT, BUY, 50, CREATED)
+2025-04-24 22:10:13,787 - src.execution.order_manager - INFO - Updated order with fill: Order(43b6dec0-ab55-408f-99dc-02ff373596df, MSFT, BUY, 50, FILLED)
+2025-04-24 22:10:13,787 - src.risk.portfolio.portfolio - INFO - Fill: BUY 50 MSFT @ 200.00, PnL: 0.00, Cash: 59990.00, Equity: 99990.00
+2025-04-24 22:10:13,787 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: MSFT BUY
+2025-04-24 22:10:13,787 - src.execution.order_manager - INFO - Created order: Order(8ee6e8f9-0e91-49f1-9be7-b01d3c06cd21, MSFT, BUY, 50, CREATED)
+2025-04-24 22:10:13,787 - src.execution.order_manager - INFO - Updated order with fill: Order(8ee6e8f9-0e91-49f1-9be7-b01d3c06cd21, MSFT, BUY, 50, FILLED)
+2025-04-24 22:10:13,787 - src.risk.portfolio.portfolio - INFO - Fill: BUY 50 MSFT @ 200.00, PnL: 0.00, Cash: 49980.00, Equity: 99980.00
+2025-04-24 22:10:13,787 - ADMF-Test - ERROR - Portfolio not updated from orphaned fill
+2025-04-24 22:10:13,787 - ADMF-Test - INFO - Test 3: Complete order-fill flow
+2025-04-24 22:10:13,787 - ADMF-Test - INFO - Processing order for GOOGL through broker
+2025-04-24 22:10:13,787 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for GOOGL
+2025-04-24 22:10:13,787 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for GOOGL
+2025-04-24 22:10:13,800 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: GOOGL BUY
+2025-04-24 22:10:13,800 - src.execution.order_manager - INFO - Created order: Order(9aa34c1d-45e7-4a6a-ab3b-9dc3c28b542f, GOOGL, BUY, 10, CREATED)
+2025-04-24 22:10:13,800 - src.execution.order_manager - INFO - Updated order with fill: Order(9aa34c1d-45e7-4a6a-ab3b-9dc3c28b542f, GOOGL, BUY, 10, FILLED)
+2025-04-24 22:10:13,800 - src.risk.portfolio.portfolio - INFO - Fill: BUY 10 GOOGL @ 1500.00, PnL: 0.00, Cash: 34980.00, Equity: 99980.00
+2025-04-24 22:10:13,800 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:10:13,800 - src.risk.portfolio.portfolio - INFO - Fill: BUY 10 GOOGL @ 1500.00, PnL: 0.00, Cash: 19980.00, Equity: 99980.00
+2025-04-24 22:10:13,800 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for GOOGL
+2025-04-24 22:10:13,800 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:10:13,800 - src.execution.order_manager - INFO - Created order: Order(9aa34c1d-45e7-4a6a-ab3b-9dc3c28b542f, GOOGL, BUY, 10, PENDING)
+2025-04-24 22:10:13,800 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for GOOGL
+2025-04-24 22:10:13,800 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:10:13,800 - src.execution.order_manager - INFO - Created order: Order(9aa34c1d-45e7-4a6a-ab3b-9dc3c28b542f, GOOGL, BUY, 10, PENDING)
+2025-04-24 22:10:13,905 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:10:13,906 - src.risk.portfolio.portfolio - INFO - Fill: BUY 10 GOOGL @ 1500.00, PnL: 0.00, Cash: 4980.00, Equity: 99980.00
+2025-04-24 22:10:13,906 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:10:13,906 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 4980.00 < 15000.00, but processing anyway with adjusted quantities
+2025-04-24 22:10:13,906 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 10 to 2
+2025-04-24 22:10:13,906 - src.risk.portfolio.portfolio - INFO - Fill: BUY 2 GOOGL @ 1500.00, PnL: 0.00, Cash: 1980.00, Equity: 99980.00
+2025-04-24 22:10:13,906 - ADMF-Test - ERROR - Portfolio not updated from broker-generated fill
+2025-04-24 22:10:13,906 - ADMF-Test - INFO - === Minimal Test Results ===
+2025-04-24 22:10:13,906 - ADMF-Test - INFO - Total orders in manager: 4
+2025-04-24 22:10:13,906 - ADMF-Test - INFO - Active orders: 2
+2025-04-24 22:10:13,906 - ADMF-Test - INFO - Completed orders: 4
+2025-04-24 22:10:13,906 - ADMF-Test - INFO - Portfolio positions: 3
+2025-04-24 22:10:13,906 - ADMF-Test - INFO - Position: AAPL - Quantity: 200
+2025-04-24 22:10:13,907 - ADMF-Test - INFO - Position: MSFT - Quantity: 100
+2025-04-24 22:10:13,907 - ADMF-Test - INFO - Position: GOOGL - Quantity: 32
+2025-04-24 22:10:13,907 - ADMF-Test - INFO - Final portfolio equity: $99980.00
+2025-04-24 22:15:09,955 - ADMF-Test - INFO - === Starting Minimal Order-Fill Test ===
+2025-04-24 22:15:09,955 - ADMF-Test - INFO - Test 1: Basic order-fill flow
+2025-04-24 22:15:09,955 - ADMF-Test - INFO - Created order with ID: 1708dfe8-f103-486b-865b-6ed48ea0ba7c
+2025-04-24 22:15:09,956 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:09,968 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: AAPL BUY
+2025-04-24 22:15:09,968 - src.execution.order_manager - INFO - Created order: Order(1708dfe8-f103-486b-865b-6ed48ea0ba7c, AAPL, BUY, 100, CREATED)
+2025-04-24 22:15:09,968 - src.execution.order_manager - INFO - Updated order with fill: Order(1708dfe8-f103-486b-865b-6ed48ea0ba7c, AAPL, BUY, 100, FILLED)
+2025-04-24 22:15:09,968 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 150.00, PnL: 0.00, Cash: 85000.00, Equity: 100000.00
+2025-04-24 22:15:09,968 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:15:09,969 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 150.00, PnL: 0.00, Cash: 70000.00, Equity: 100000.00
+2025-04-24 22:15:09,969 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:09,969 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:15:09,969 - src.execution.order_manager - INFO - Created order: Order(1708dfe8-f103-486b-865b-6ed48ea0ba7c, AAPL, BUY, 100, PENDING)
+2025-04-24 22:15:09,969 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:09,969 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:15:09,969 - src.execution.order_manager - INFO - Created order: Order(1708dfe8-f103-486b-865b-6ed48ea0ba7c, AAPL, BUY, 100, PENDING)
+2025-04-24 22:15:09,969 - ADMF-Test - INFO - Order correctly registered in order manager
+2025-04-24 22:15:09,969 - ADMF-Test - INFO - Test 2: Orphaned fill handling
+2025-04-24 22:15:09,970 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: MSFT BUY
+2025-04-24 22:15:09,970 - src.execution.order_manager - INFO - Created order: Order(bc4d5e22-d599-4503-b0dd-209586fd90b7, MSFT, BUY, 50, CREATED)
+2025-04-24 22:15:09,970 - src.execution.order_manager - INFO - Updated order with fill: Order(bc4d5e22-d599-4503-b0dd-209586fd90b7, MSFT, BUY, 50, FILLED)
+2025-04-24 22:15:09,970 - src.risk.portfolio.portfolio - INFO - Fill: BUY 50 MSFT @ 200.00, PnL: 0.00, Cash: 59990.00, Equity: 99990.00
+2025-04-24 22:15:09,970 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: MSFT BUY
+2025-04-24 22:15:09,970 - src.execution.order_manager - INFO - Created order: Order(17d0a7fd-90c1-4a1b-9ebd-538145c3287d, MSFT, BUY, 50, CREATED)
+2025-04-24 22:15:09,970 - src.execution.order_manager - INFO - Updated order with fill: Order(17d0a7fd-90c1-4a1b-9ebd-538145c3287d, MSFT, BUY, 50, FILLED)
+2025-04-24 22:15:09,970 - src.risk.portfolio.portfolio - INFO - Fill: BUY 50 MSFT @ 200.00, PnL: 0.00, Cash: 49980.00, Equity: 99980.00
+2025-04-24 22:15:09,970 - ADMF-Test - ERROR - Portfolio not updated from orphaned fill
+2025-04-24 22:15:09,970 - ADMF-Test - INFO - Test 3: Complete order-fill flow
+2025-04-24 22:15:09,970 - ADMF-Test - INFO - Processing order for GOOGL through broker
+2025-04-24 22:15:09,970 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for GOOGL
+2025-04-24 22:15:09,970 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for GOOGL
+2025-04-24 22:15:09,982 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: GOOGL BUY
+2025-04-24 22:15:09,982 - src.execution.order_manager - INFO - Created order: Order(c83953c3-38b1-4c1d-95a6-32f51c106573, GOOGL, BUY, 10, CREATED)
+2025-04-24 22:15:09,982 - src.execution.order_manager - INFO - Updated order with fill: Order(c83953c3-38b1-4c1d-95a6-32f51c106573, GOOGL, BUY, 10, FILLED)
+2025-04-24 22:15:09,983 - src.risk.portfolio.portfolio - INFO - Fill: BUY 10 GOOGL @ 1500.00, PnL: 0.00, Cash: 34980.00, Equity: 99980.00
+2025-04-24 22:15:09,983 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:15:09,983 - src.risk.portfolio.portfolio - INFO - Fill: BUY 10 GOOGL @ 1500.00, PnL: 0.00, Cash: 19980.00, Equity: 99980.00
+2025-04-24 22:15:09,983 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for GOOGL
+2025-04-24 22:15:09,983 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:15:09,983 - src.execution.order_manager - INFO - Created order: Order(c83953c3-38b1-4c1d-95a6-32f51c106573, GOOGL, BUY, 10, PENDING)
+2025-04-24 22:15:09,983 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for GOOGL
+2025-04-24 22:15:09,983 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:15:09,983 - src.execution.order_manager - INFO - Created order: Order(c83953c3-38b1-4c1d-95a6-32f51c106573, GOOGL, BUY, 10, PENDING)
+2025-04-24 22:15:10,088 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:15:10,089 - src.risk.portfolio.portfolio - INFO - Fill: BUY 10 GOOGL @ 1500.00, PnL: 0.00, Cash: 4980.00, Equity: 99980.00
+2025-04-24 22:15:10,089 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:15:10,089 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 4980.00 < 15000.00, but processing anyway with adjusted quantities
+2025-04-24 22:15:10,089 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 10 to 2
+2025-04-24 22:15:10,089 - src.risk.portfolio.portfolio - INFO - Fill: BUY 2 GOOGL @ 1500.00, PnL: 0.00, Cash: 1980.00, Equity: 99980.00
+2025-04-24 22:15:10,089 - ADMF-Test - ERROR - Portfolio not updated from broker-generated fill
+2025-04-24 22:15:10,089 - ADMF-Test - INFO - === Minimal Test Results ===
+2025-04-24 22:15:10,089 - ADMF-Test - INFO - Total orders in manager: 4
+2025-04-24 22:15:10,089 - ADMF-Test - INFO - Active orders: 2
+2025-04-24 22:15:10,089 - ADMF-Test - INFO - Completed orders: 4
+2025-04-24 22:15:10,089 - ADMF-Test - INFO - Portfolio positions: 3
+2025-04-24 22:15:10,089 - ADMF-Test - INFO - Position: AAPL - Quantity: 200
+2025-04-24 22:15:10,089 - ADMF-Test - INFO - Position: MSFT - Quantity: 100
+2025-04-24 22:15:10,089 - ADMF-Test - INFO - Position: GOOGL - Quantity: 32
+2025-04-24 22:15:10,089 - ADMF-Test - INFO - Final portfolio equity: $99980.00
+2025-04-24 22:15:10,097 - ADMF-Trader - INFO - === Starting ADMF-Trader Integration Test ===
+2025-04-24 22:15:10,097 - ADMF-Trader - INFO - Creating test data for ['AAPL', 'MSFT']
+2025-04-24 22:15:10,109 - ADMF-Trader - INFO - Created test data for AAPL with 42 bars
+2025-04-24 22:15:10,110 - ADMF-Trader - INFO - Created test data for MSFT with 42 bars
+2025-04-24 22:15:10,110 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-04-24 22:15:10,110 - ADMF-Trader - INFO - Strategy initialized with fast_window=5, slow_window=20
+2025-04-24 22:15:10,110 - ADMF-Trader - INFO - Loading data for ['AAPL', 'MSFT']
+2025-04-24 22:15:10,111 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file test_data/AAPL_1d.csv
+2025-04-24 22:15:10,112 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 42 rows
+2025-04-24 22:15:10,113 - src.data.sources.csv_handler - INFO - Using 'date' column instead of configured 'timestamp'
+2025-04-24 22:15:10,113 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2023-01-02
+2025-04-24 22:15:10,114 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2023-01-02 00:00:00
+2025-04-24 22:15:10,114 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2023-01-01 00:00:00
+2025-04-24 22:15:10,114 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2023-02-28 00:00:00
+2025-04-24 22:15:10,116 - src.data.sources.csv_handler - INFO - CSVDataSource: Set date as index
+2025-04-24 22:15:10,117 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-24 22:15:10,117 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume']
+2025-04-24 22:15:10,117 - src.data.historical_data_handler - INFO - Loaded 42 bars for AAPL from 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-24 22:15:10,117 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file test_data/MSFT_1d.csv
+2025-04-24 22:15:10,118 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 42 rows
+2025-04-24 22:15:10,118 - src.data.sources.csv_handler - INFO - Using 'date' column instead of configured 'timestamp'
+2025-04-24 22:15:10,118 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2023-01-02
+2025-04-24 22:15:10,118 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2023-01-02 00:00:00
+2025-04-24 22:15:10,119 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2023-01-01 00:00:00
+2025-04-24 22:15:10,119 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2023-02-28 00:00:00
+2025-04-24 22:15:10,119 - src.data.sources.csv_handler - INFO - CSVDataSource: Set date as index
+2025-04-24 22:15:10,119 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-24 22:15:10,119 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume']
+2025-04-24 22:15:10,119 - src.data.historical_data_handler - INFO - Loaded 42 bars for MSFT from 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-24 22:15:10,119 - ADMF-Trader - INFO - Starting backtest execution
+2025-04-24 22:15:10,119 - ADMF-Trader - INFO - Processing data for AAPL
+2025-04-24 22:15:10,120 - ADMF-Trader - INFO - Processed 10 bars for AAPL
+2025-04-24 22:15:10,120 - ADMF-Trader - INFO - Processed 20 bars for AAPL
+2025-04-24 22:15:10,120 - ADMF-Trader - INFO - BUY signal #1 for AAPL at 107.10
+2025-04-24 22:15:10,120 - ADMF-Trader - INFO - Created order: BUY 93 AAPL @ 107.10 (ID: 80fcea3d-0942-4b50-8826-0ad7b7e4968a)
+2025-04-24 22:15:10,120 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,131 - src.risk.portfolio.portfolio - INFO - Fill: BUY 93 AAPL @ 107.10, PnL: 0.00, Cash: 90039.97, Equity: 100000.00
+2025-04-24 22:15:10,131 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: AAPL BUY
+2025-04-24 22:15:10,132 - src.execution.order_manager - INFO - Created order: Order(80fcea3d-0942-4b50-8826-0ad7b7e4968a, AAPL, BUY, 93, CREATED)
+2025-04-24 22:15:10,132 - src.execution.order_manager - INFO - Updated order with fill: Order(80fcea3d-0942-4b50-8826-0ad7b7e4968a, AAPL, BUY, 93, FILLED)
+2025-04-24 22:15:10,132 - src.risk.portfolio.portfolio - INFO - Fill: BUY 93 AAPL @ 107.10, PnL: 0.00, Cash: 80079.94, Equity: 100000.00
+2025-04-24 22:15:10,132 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,132 - ADMF-Trader - INFO - Updated order with fill: Order(80fcea3d-0942-4b50-8826-0ad7b7e4968a, AAPL, BUY, 93, FILLED)
+2025-04-24 22:15:10,132 - src.execution.order_manager - INFO - Created order: Order(80fcea3d-0942-4b50-8826-0ad7b7e4968a, AAPL, BUY, 93, FILLED)
+2025-04-24 22:15:10,132 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,132 - ADMF-Trader - INFO - Updated order with fill: Order(80fcea3d-0942-4b50-8826-0ad7b7e4968a, AAPL, BUY, 93, FILLED)
+2025-04-24 22:15:10,132 - src.execution.order_manager - INFO - Created order: Order(80fcea3d-0942-4b50-8826-0ad7b7e4968a, AAPL, BUY, 93, FILLED)
+2025-04-24 22:15:10,132 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,132 - ADMF-Trader - INFO - Broker emitting fill for AAPL
+2025-04-24 22:15:10,132 - src.risk.portfolio.portfolio - INFO - Fill: BUY 93 AAPL @ 107.10, PnL: 0.00, Cash: 70119.91, Equity: 100000.00
+2025-04-24 22:15:10,132 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:15:10,132 - src.risk.portfolio.portfolio - INFO - Fill: BUY 93 AAPL @ 107.10, PnL: 0.00, Cash: 60159.87, Equity: 100000.00
+2025-04-24 22:15:10,133 - ADMF-Trader - INFO - SELL signal #2 for AAPL at 80.93
+2025-04-24 22:15:10,133 - ADMF-Trader - INFO - Created order: SELL 100 AAPL @ 80.93 (ID: b4a1f0ab-e83f-4120-8ae6-b1c95a714e2e)
+2025-04-24 22:15:10,133 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,145 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 80.93, PnL: -2617.00, Cash: 68252.59, Equity: 90264.76
+2025-04-24 22:15:10,145 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: AAPL SELL
+2025-04-24 22:15:10,145 - src.execution.order_manager - INFO - Created order: Order(b4a1f0ab-e83f-4120-8ae6-b1c95a714e2e, AAPL, SELL, 100, CREATED)
+2025-04-24 22:15:10,145 - src.execution.order_manager - INFO - Updated order with fill: Order(b4a1f0ab-e83f-4120-8ae6-b1c95a714e2e, AAPL, SELL, 100, FILLED)
+2025-04-24 22:15:10,145 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 80.93, PnL: -2617.00, Cash: 76345.30, Equity: 90264.76
+2025-04-24 22:15:10,145 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,145 - ADMF-Trader - INFO - Updated order with fill: Order(b4a1f0ab-e83f-4120-8ae6-b1c95a714e2e, AAPL, SELL, 100, FILLED)
+2025-04-24 22:15:10,145 - src.execution.order_manager - INFO - Created order: Order(b4a1f0ab-e83f-4120-8ae6-b1c95a714e2e, AAPL, SELL, 100, FILLED)
+2025-04-24 22:15:10,145 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,146 - ADMF-Trader - INFO - Updated order with fill: Order(b4a1f0ab-e83f-4120-8ae6-b1c95a714e2e, AAPL, SELL, 100, FILLED)
+2025-04-24 22:15:10,146 - src.execution.order_manager - INFO - Created order: Order(b4a1f0ab-e83f-4120-8ae6-b1c95a714e2e, AAPL, SELL, 100, FILLED)
+2025-04-24 22:15:10,146 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,146 - ADMF-Trader - INFO - Broker emitting fill for AAPL
+2025-04-24 22:15:10,146 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 80.93, PnL: -2617.00, Cash: 84438.01, Equity: 90264.76
+2025-04-24 22:15:10,146 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:15:10,146 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 72 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:15:10,146 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 72
+2025-04-24 22:15:10,146 - src.risk.portfolio.portfolio - INFO - Fill: SELL 72 AAPL @ 80.93, PnL: -1884.24, Cash: 90264.76, Equity: 90264.76
+2025-04-24 22:15:10,146 - ADMF-Trader - INFO - Processed 30 bars for AAPL
+2025-04-24 22:15:10,146 - ADMF-Trader - INFO - BUY signal #3 for AAPL at 116.23
+2025-04-24 22:15:10,146 - ADMF-Trader - INFO - Created order: BUY 77 AAPL @ 116.23 (ID: 13079172-3c2a-45f2-9dcd-5f6f0f3021ee)
+2025-04-24 22:15:10,146 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,159 - src.risk.portfolio.portfolio - INFO - Fill: BUY 77 AAPL @ 116.23, PnL: 0.00, Cash: 81315.06, Equity: 90264.76
+2025-04-24 22:15:10,159 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: AAPL BUY
+2025-04-24 22:15:10,159 - src.execution.order_manager - INFO - Created order: Order(13079172-3c2a-45f2-9dcd-5f6f0f3021ee, AAPL, BUY, 77, CREATED)
+2025-04-24 22:15:10,159 - src.execution.order_manager - INFO - Updated order with fill: Order(13079172-3c2a-45f2-9dcd-5f6f0f3021ee, AAPL, BUY, 77, FILLED)
+2025-04-24 22:15:10,159 - src.risk.portfolio.portfolio - INFO - Fill: BUY 77 AAPL @ 116.23, PnL: 0.00, Cash: 72365.35, Equity: 90264.76
+2025-04-24 22:15:10,159 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,159 - ADMF-Trader - INFO - Updated order with fill: Order(13079172-3c2a-45f2-9dcd-5f6f0f3021ee, AAPL, BUY, 77, FILLED)
+2025-04-24 22:15:10,159 - src.execution.order_manager - INFO - Created order: Order(13079172-3c2a-45f2-9dcd-5f6f0f3021ee, AAPL, BUY, 77, FILLED)
+2025-04-24 22:15:10,159 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,159 - ADMF-Trader - INFO - Updated order with fill: Order(13079172-3c2a-45f2-9dcd-5f6f0f3021ee, AAPL, BUY, 77, FILLED)
+2025-04-24 22:15:10,159 - src.execution.order_manager - INFO - Created order: Order(13079172-3c2a-45f2-9dcd-5f6f0f3021ee, AAPL, BUY, 77, FILLED)
+2025-04-24 22:15:10,159 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,159 - ADMF-Trader - INFO - Broker emitting fill for AAPL
+2025-04-24 22:15:10,159 - src.risk.portfolio.portfolio - INFO - Fill: BUY 77 AAPL @ 116.23, PnL: 0.00, Cash: 63415.64, Equity: 90264.76
+2025-04-24 22:15:10,159 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:15:10,160 - src.risk.portfolio.portfolio - INFO - Fill: BUY 77 AAPL @ 116.23, PnL: 0.00, Cash: 54465.94, Equity: 90264.76
+2025-04-24 22:15:10,160 - ADMF-Trader - INFO - SELL signal #4 for AAPL at 99.43
+2025-04-24 22:15:10,160 - ADMF-Trader - INFO - Created order: SELL 100 AAPL @ 99.43 (ID: b4e4567c-fb86-4108-97e7-e7acef1f06ed)
+2025-04-24 22:15:10,160 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,172 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 99.43, PnL: -1680.10, Cash: 64408.84, Equity: 85090.07
+2025-04-24 22:15:10,172 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: AAPL SELL
+2025-04-24 22:15:10,172 - src.execution.order_manager - INFO - Created order: Order(b4e4567c-fb86-4108-97e7-e7acef1f06ed, AAPL, SELL, 100, CREATED)
+2025-04-24 22:15:10,172 - src.execution.order_manager - INFO - Updated order with fill: Order(b4e4567c-fb86-4108-97e7-e7acef1f06ed, AAPL, SELL, 100, FILLED)
+2025-04-24 22:15:10,173 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 99.43, PnL: -1680.10, Cash: 74351.74, Equity: 85090.07
+2025-04-24 22:15:10,173 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,173 - ADMF-Trader - INFO - Updated order with fill: Order(b4e4567c-fb86-4108-97e7-e7acef1f06ed, AAPL, SELL, 100, FILLED)
+2025-04-24 22:15:10,173 - src.execution.order_manager - INFO - Created order: Order(b4e4567c-fb86-4108-97e7-e7acef1f06ed, AAPL, SELL, 100, FILLED)
+2025-04-24 22:15:10,173 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,173 - ADMF-Trader - INFO - Updated order with fill: Order(b4e4567c-fb86-4108-97e7-e7acef1f06ed, AAPL, SELL, 100, FILLED)
+2025-04-24 22:15:10,173 - src.execution.order_manager - INFO - Created order: Order(b4e4567c-fb86-4108-97e7-e7acef1f06ed, AAPL, SELL, 100, FILLED)
+2025-04-24 22:15:10,173 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,173 - ADMF-Trader - INFO - Broker emitting fill for AAPL
+2025-04-24 22:15:10,173 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 99.43, PnL: -1680.10, Cash: 84294.64, Equity: 85090.07
+2025-04-24 22:15:10,173 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:15:10,173 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 8 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:15:10,173 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 8
+2025-04-24 22:15:10,173 - src.risk.portfolio.portfolio - INFO - Fill: SELL 8 AAPL @ 99.43, PnL: -134.41, Cash: 85090.07, Equity: 85090.07
+2025-04-24 22:15:10,173 - ADMF-Trader - INFO - BUY signal #5 for AAPL at 92.12
+2025-04-24 22:15:10,173 - ADMF-Trader - INFO - Created order: BUY 92 AAPL @ 92.12 (ID: 1bb3ea65-6a38-4349-aeac-285586c41214)
+2025-04-24 22:15:10,173 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,186 - src.risk.portfolio.portfolio - INFO - Fill: BUY 92 AAPL @ 92.12, PnL: 0.00, Cash: 76615.39, Equity: 85090.07
+2025-04-24 22:15:10,186 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: AAPL BUY
+2025-04-24 22:15:10,186 - src.execution.order_manager - INFO - Created order: Order(1bb3ea65-6a38-4349-aeac-285586c41214, AAPL, BUY, 92, CREATED)
+2025-04-24 22:15:10,186 - src.execution.order_manager - INFO - Updated order with fill: Order(1bb3ea65-6a38-4349-aeac-285586c41214, AAPL, BUY, 92, FILLED)
+2025-04-24 22:15:10,186 - src.risk.portfolio.portfolio - INFO - Fill: BUY 92 AAPL @ 92.12, PnL: 0.00, Cash: 68140.71, Equity: 85090.07
+2025-04-24 22:15:10,186 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,186 - ADMF-Trader - INFO - Updated order with fill: Order(1bb3ea65-6a38-4349-aeac-285586c41214, AAPL, BUY, 92, FILLED)
+2025-04-24 22:15:10,186 - src.execution.order_manager - INFO - Created order: Order(1bb3ea65-6a38-4349-aeac-285586c41214, AAPL, BUY, 92, FILLED)
+2025-04-24 22:15:10,186 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,186 - ADMF-Trader - INFO - Updated order with fill: Order(1bb3ea65-6a38-4349-aeac-285586c41214, AAPL, BUY, 92, FILLED)
+2025-04-24 22:15:10,186 - src.execution.order_manager - INFO - Created order: Order(1bb3ea65-6a38-4349-aeac-285586c41214, AAPL, BUY, 92, FILLED)
+2025-04-24 22:15:10,186 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:15:10,186 - ADMF-Trader - INFO - Broker emitting fill for AAPL
+2025-04-24 22:15:10,186 - src.risk.portfolio.portfolio - INFO - Fill: BUY 92 AAPL @ 92.12, PnL: 0.00, Cash: 59666.03, Equity: 85090.07
+2025-04-24 22:15:10,186 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:15:10,187 - src.risk.portfolio.portfolio - INFO - Fill: BUY 92 AAPL @ 92.12, PnL: 0.00, Cash: 51191.35, Equity: 85090.07
+2025-04-24 22:15:10,187 - ADMF-Trader - INFO - Processed 40 bars for AAPL
+2025-04-24 22:15:10,187 - ADMF-Trader - INFO - Finished processing 42 bars for AAPL
+2025-04-24 22:15:10,187 - ADMF-Trader - INFO - Processing data for MSFT
+2025-04-24 22:15:10,188 - ADMF-Trader - INFO - Processed 10 bars for MSFT
+2025-04-24 22:15:10,188 - ADMF-Trader - INFO - Processed 20 bars for MSFT
+2025-04-24 22:15:10,188 - ADMF-Trader - INFO - BUY signal #6 for MSFT at 207.74
+2025-04-24 22:15:10,188 - ADMF-Trader - INFO - Created order: BUY 40 MSFT @ 207.74 (ID: cb98c832-ace5-42f2-a915-95489710788c)
+2025-04-24 22:15:10,188 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,201 - src.risk.portfolio.portfolio - INFO - Fill: BUY 40 MSFT @ 207.74, PnL: 0.00, Cash: 42881.88, Equity: 83610.32
+2025-04-24 22:15:10,201 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: MSFT BUY
+2025-04-24 22:15:10,201 - src.execution.order_manager - INFO - Created order: Order(cb98c832-ace5-42f2-a915-95489710788c, MSFT, BUY, 40, CREATED)
+2025-04-24 22:15:10,201 - src.execution.order_manager - INFO - Updated order with fill: Order(cb98c832-ace5-42f2-a915-95489710788c, MSFT, BUY, 40, FILLED)
+2025-04-24 22:15:10,201 - src.risk.portfolio.portfolio - INFO - Fill: BUY 40 MSFT @ 207.74, PnL: 0.00, Cash: 34572.40, Equity: 83610.32
+2025-04-24 22:15:10,201 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,201 - ADMF-Trader - INFO - Updated order with fill: Order(cb98c832-ace5-42f2-a915-95489710788c, MSFT, BUY, 40, FILLED)
+2025-04-24 22:15:10,201 - src.execution.order_manager - INFO - Created order: Order(cb98c832-ace5-42f2-a915-95489710788c, MSFT, BUY, 40, FILLED)
+2025-04-24 22:15:10,201 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,202 - ADMF-Trader - INFO - Updated order with fill: Order(cb98c832-ace5-42f2-a915-95489710788c, MSFT, BUY, 40, FILLED)
+2025-04-24 22:15:10,202 - src.execution.order_manager - INFO - Created order: Order(cb98c832-ace5-42f2-a915-95489710788c, MSFT, BUY, 40, FILLED)
+2025-04-24 22:15:10,202 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,202 - ADMF-Trader - INFO - Broker emitting fill for MSFT
+2025-04-24 22:15:10,202 - src.risk.portfolio.portfolio - INFO - Fill: BUY 40 MSFT @ 207.74, PnL: 0.00, Cash: 26262.93, Equity: 83610.32
+2025-04-24 22:15:10,202 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:15:10,202 - src.risk.portfolio.portfolio - INFO - Fill: BUY 40 MSFT @ 207.74, PnL: 0.00, Cash: 17953.45, Equity: 83610.32
+2025-04-24 22:15:10,202 - ADMF-Trader - INFO - SELL signal #7 for MSFT at 181.51
+2025-04-24 22:15:10,202 - ADMF-Trader - INFO - Created order: SELL 100 MSFT @ 181.51 (ID: acc2f4c3-bd1d-4d51-9b67-9b422f195853)
+2025-04-24 22:15:10,203 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,213 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 MSFT @ 181.51, PnL: -2622.40, Cash: 36104.74, Equity: 79414.48
+2025-04-24 22:15:10,213 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: MSFT SELL
+2025-04-24 22:15:10,213 - src.execution.order_manager - INFO - Created order: Order(acc2f4c3-bd1d-4d51-9b67-9b422f195853, MSFT, SELL, 100, CREATED)
+2025-04-24 22:15:10,213 - src.execution.order_manager - INFO - Updated order with fill: Order(acc2f4c3-bd1d-4d51-9b67-9b422f195853, MSFT, SELL, 100, FILLED)
+2025-04-24 22:15:10,213 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 60 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:15:10,213 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 60
+2025-04-24 22:15:10,213 - src.risk.portfolio.portfolio - INFO - Fill: SELL 60 MSFT @ 181.51, PnL: -1573.44, Cash: 46995.51, Equity: 79414.48
+2025-04-24 22:15:10,213 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,213 - ADMF-Trader - INFO - Updated order with fill: Order(acc2f4c3-bd1d-4d51-9b67-9b422f195853, MSFT, SELL, 100, FILLED)
+2025-04-24 22:15:10,213 - src.execution.order_manager - INFO - Created order: Order(acc2f4c3-bd1d-4d51-9b67-9b422f195853, MSFT, SELL, 100, FILLED)
+2025-04-24 22:15:10,213 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,213 - ADMF-Trader - INFO - Updated order with fill: Order(acc2f4c3-bd1d-4d51-9b67-9b422f195853, MSFT, SELL, 100, FILLED)
+2025-04-24 22:15:10,213 - src.execution.order_manager - INFO - Created order: Order(acc2f4c3-bd1d-4d51-9b67-9b422f195853, MSFT, SELL, 100, FILLED)
+2025-04-24 22:15:10,213 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,213 - ADMF-Trader - INFO - Broker emitting fill for MSFT
+2025-04-24 22:15:10,214 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:15:10,214 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 0
+2025-04-24 22:15:10,214 - src.risk.portfolio.portfolio - INFO - Fill: SELL 0 MSFT @ 181.51, PnL: 0.00, Cash: 46995.51, Equity: 79414.48
+2025-04-24 22:15:10,214 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:15:10,214 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:15:10,214 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 0
+2025-04-24 22:15:10,214 - src.risk.portfolio.portfolio - INFO - Fill: SELL 0 MSFT @ 181.51, PnL: 0.00, Cash: 46995.51, Equity: 79414.48
+2025-04-24 22:15:10,214 - ADMF-Trader - INFO - Processed 30 bars for MSFT
+2025-04-24 22:15:10,215 - ADMF-Trader - INFO - BUY signal #8 for MSFT at 216.72
+2025-04-24 22:15:10,215 - ADMF-Trader - INFO - Created order: BUY 36 MSFT @ 216.72 (ID: da07368f-d2c9-4a48-893b-6ed64925aa36)
+2025-04-24 22:15:10,215 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,227 - src.risk.portfolio.portfolio - INFO - Fill: BUY 36 MSFT @ 216.72, PnL: 0.00, Cash: 39193.52, Equity: 79414.48
+2025-04-24 22:15:10,227 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: MSFT BUY
+2025-04-24 22:15:10,227 - src.execution.order_manager - INFO - Created order: Order(da07368f-d2c9-4a48-893b-6ed64925aa36, MSFT, BUY, 36, CREATED)
+2025-04-24 22:15:10,227 - src.execution.order_manager - INFO - Updated order with fill: Order(da07368f-d2c9-4a48-893b-6ed64925aa36, MSFT, BUY, 36, FILLED)
+2025-04-24 22:15:10,227 - src.risk.portfolio.portfolio - INFO - Fill: BUY 36 MSFT @ 216.72, PnL: 0.00, Cash: 31391.53, Equity: 79414.48
+2025-04-24 22:15:10,227 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,227 - ADMF-Trader - INFO - Updated order with fill: Order(da07368f-d2c9-4a48-893b-6ed64925aa36, MSFT, BUY, 36, FILLED)
+2025-04-24 22:15:10,227 - src.execution.order_manager - INFO - Created order: Order(da07368f-d2c9-4a48-893b-6ed64925aa36, MSFT, BUY, 36, FILLED)
+2025-04-24 22:15:10,227 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,227 - ADMF-Trader - INFO - Updated order with fill: Order(da07368f-d2c9-4a48-893b-6ed64925aa36, MSFT, BUY, 36, FILLED)
+2025-04-24 22:15:10,227 - src.execution.order_manager - INFO - Created order: Order(da07368f-d2c9-4a48-893b-6ed64925aa36, MSFT, BUY, 36, FILLED)
+2025-04-24 22:15:10,227 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,227 - ADMF-Trader - INFO - Broker emitting fill for MSFT
+2025-04-24 22:15:10,227 - src.risk.portfolio.portfolio - INFO - Fill: BUY 36 MSFT @ 216.72, PnL: 0.00, Cash: 23589.54, Equity: 79414.48
+2025-04-24 22:15:10,227 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:15:10,227 - src.risk.portfolio.portfolio - INFO - Fill: BUY 36 MSFT @ 216.72, PnL: 0.00, Cash: 15787.55, Equity: 79414.48
+2025-04-24 22:15:10,227 - ADMF-Trader - INFO - SELL signal #9 for MSFT at 199.08
+2025-04-24 22:15:10,227 - ADMF-Trader - INFO - Created order: SELL 100 MSFT @ 199.08 (ID: 0c756f33-e648-4d2b-b047-9b8c3592cb7e)
+2025-04-24 22:15:10,227 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,240 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 MSFT @ 199.08, PnL: -1764.01, Cash: 35695.74, Equity: 76874.30
+2025-04-24 22:15:10,240 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: MSFT SELL
+2025-04-24 22:15:10,240 - src.execution.order_manager - INFO - Created order: Order(0c756f33-e648-4d2b-b047-9b8c3592cb7e, MSFT, SELL, 100, CREATED)
+2025-04-24 22:15:10,240 - src.execution.order_manager - INFO - Updated order with fill: Order(0c756f33-e648-4d2b-b047-9b8c3592cb7e, MSFT, SELL, 100, FILLED)
+2025-04-24 22:15:10,240 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 44 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:15:10,240 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 44
+2025-04-24 22:15:10,240 - src.risk.portfolio.portfolio - INFO - Fill: SELL 44 MSFT @ 199.08, PnL: -776.16, Cash: 44455.34, Equity: 76874.30
+2025-04-24 22:15:10,240 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,240 - ADMF-Trader - INFO - Updated order with fill: Order(0c756f33-e648-4d2b-b047-9b8c3592cb7e, MSFT, SELL, 100, FILLED)
+2025-04-24 22:15:10,240 - src.execution.order_manager - INFO - Created order: Order(0c756f33-e648-4d2b-b047-9b8c3592cb7e, MSFT, SELL, 100, FILLED)
+2025-04-24 22:15:10,240 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,240 - ADMF-Trader - INFO - Updated order with fill: Order(0c756f33-e648-4d2b-b047-9b8c3592cb7e, MSFT, SELL, 100, FILLED)
+2025-04-24 22:15:10,241 - src.execution.order_manager - INFO - Created order: Order(0c756f33-e648-4d2b-b047-9b8c3592cb7e, MSFT, SELL, 100, FILLED)
+2025-04-24 22:15:10,241 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,241 - ADMF-Trader - INFO - Broker emitting fill for MSFT
+2025-04-24 22:15:10,241 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:15:10,241 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 0
+2025-04-24 22:15:10,241 - src.risk.portfolio.portfolio - INFO - Fill: SELL 0 MSFT @ 199.08, PnL: 0.00, Cash: 44455.34, Equity: 76874.30
+2025-04-24 22:15:10,241 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:15:10,241 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:15:10,241 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 0
+2025-04-24 22:15:10,241 - src.risk.portfolio.portfolio - INFO - Fill: SELL 0 MSFT @ 199.08, PnL: 0.00, Cash: 44455.34, Equity: 76874.30
+2025-04-24 22:15:10,241 - ADMF-Trader - INFO - BUY signal #10 for MSFT at 193.14
+2025-04-24 22:15:10,241 - ADMF-Trader - INFO - Created order: BUY 39 MSFT @ 193.14 (ID: 8c35e591-af33-4867-b9b7-bd94da3673ee)
+2025-04-24 22:15:10,242 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,254 - src.risk.portfolio.portfolio - INFO - Fill: BUY 39 MSFT @ 193.14, PnL: 0.00, Cash: 36923.00, Equity: 76874.30
+2025-04-24 22:15:10,254 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: MSFT BUY
+2025-04-24 22:15:10,254 - src.execution.order_manager - INFO - Created order: Order(8c35e591-af33-4867-b9b7-bd94da3673ee, MSFT, BUY, 39, CREATED)
+2025-04-24 22:15:10,254 - src.execution.order_manager - INFO - Updated order with fill: Order(8c35e591-af33-4867-b9b7-bd94da3673ee, MSFT, BUY, 39, FILLED)
+2025-04-24 22:15:10,254 - src.risk.portfolio.portfolio - INFO - Fill: BUY 39 MSFT @ 193.14, PnL: 0.00, Cash: 29390.67, Equity: 76874.30
+2025-04-24 22:15:10,254 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,254 - ADMF-Trader - INFO - Updated order with fill: Order(8c35e591-af33-4867-b9b7-bd94da3673ee, MSFT, BUY, 39, FILLED)
+2025-04-24 22:15:10,254 - src.execution.order_manager - INFO - Created order: Order(8c35e591-af33-4867-b9b7-bd94da3673ee, MSFT, BUY, 39, FILLED)
+2025-04-24 22:15:10,254 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,254 - ADMF-Trader - INFO - Updated order with fill: Order(8c35e591-af33-4867-b9b7-bd94da3673ee, MSFT, BUY, 39, FILLED)
+2025-04-24 22:15:10,254 - src.execution.order_manager - INFO - Created order: Order(8c35e591-af33-4867-b9b7-bd94da3673ee, MSFT, BUY, 39, FILLED)
+2025-04-24 22:15:10,254 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:15:10,254 - ADMF-Trader - INFO - Broker emitting fill for MSFT
+2025-04-24 22:15:10,254 - src.risk.portfolio.portfolio - INFO - Fill: BUY 39 MSFT @ 193.14, PnL: 0.00, Cash: 21858.33, Equity: 76874.30
+2025-04-24 22:15:10,254 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:15:10,255 - src.risk.portfolio.portfolio - INFO - Fill: BUY 39 MSFT @ 193.14, PnL: 0.00, Cash: 14325.99, Equity: 76874.30
+2025-04-24 22:15:10,255 - ADMF-Trader - INFO - Processed 40 bars for MSFT
+2025-04-24 22:15:10,255 - ADMF-Trader - INFO - Finished processing 42 bars for MSFT
+2025-04-24 22:15:10,255 - ADMF-Trader - INFO - Processed 84 total bars
+2025-04-24 22:15:10,255 - ADMF-Trader - INFO - Executed 40 trades
+2025-04-24 22:15:10,255 - ADMF-Trader - INFO - Trade 1: BUY 93 AAPL @ 107.10, PnL: 0.00
+2025-04-24 22:15:10,255 - ADMF-Trader - INFO - Trade 2: BUY 93 AAPL @ 107.10, PnL: 0.00
+2025-04-24 22:15:10,255 - ADMF-Trader - INFO - Trade 3: BUY 93 AAPL @ 107.10, PnL: 0.00
+2025-04-24 22:15:10,255 - ADMF-Trader - INFO - Trade 4: BUY 93 AAPL @ 107.10, PnL: 0.00
+2025-04-24 22:15:10,255 - ADMF-Trader - INFO - Trade 5: SELL 100 AAPL @ 80.93, PnL: -2617.00
+2025-04-24 22:15:10,256 - ADMF-Trader - INFO - Initial equity: $100000.00
+2025-04-24 22:15:10,256 - ADMF-Trader - INFO - Final equity: $75948.62
+2025-04-24 22:15:10,256 - ADMF-Trader - INFO - Total return: -24.05%
+2025-04-24 22:15:10,258 - ADMF-Trader - INFO - Saved equity curve to 'equity_curve.csv'
+2025-04-24 22:17:04,536 - ADMF-Test - INFO - === Starting Minimal Order-Fill Test ===
+2025-04-24 22:17:04,536 - ADMF-Test - INFO - Test 1: Basic order-fill flow
+2025-04-24 22:17:04,536 - ADMF-Test - INFO - Created order with ID: 9f30a3dc-a683-470c-b882-09e6e2023f51
+2025-04-24 22:17:04,536 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,549 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: AAPL BUY
+2025-04-24 22:17:04,549 - src.execution.order_manager - INFO - Created order: Order(9f30a3dc-a683-470c-b882-09e6e2023f51, AAPL, BUY, 100, CREATED)
+2025-04-24 22:17:04,549 - src.execution.order_manager - INFO - Updated order with fill: Order(9f30a3dc-a683-470c-b882-09e6e2023f51, AAPL, BUY, 100, FILLED)
+2025-04-24 22:17:04,549 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 150.00, PnL: 0.00, Cash: 85000.00, Equity: 100000.00
+2025-04-24 22:17:04,549 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:17:04,550 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 150.00, PnL: 0.00, Cash: 70000.00, Equity: 100000.00
+2025-04-24 22:17:04,550 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,550 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:17:04,550 - src.execution.order_manager - INFO - Created order: Order(9f30a3dc-a683-470c-b882-09e6e2023f51, AAPL, BUY, 100, PENDING)
+2025-04-24 22:17:04,550 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,550 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:17:04,550 - src.execution.order_manager - INFO - Created order: Order(9f30a3dc-a683-470c-b882-09e6e2023f51, AAPL, BUY, 100, PENDING)
+2025-04-24 22:17:04,550 - ADMF-Test - INFO - Order correctly registered in order manager
+2025-04-24 22:17:04,550 - ADMF-Test - INFO - Test 2: Orphaned fill handling
+2025-04-24 22:17:04,550 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: MSFT BUY
+2025-04-24 22:17:04,550 - src.execution.order_manager - INFO - Created order: Order(814c87d7-7761-40a5-8708-f060cd9af13e, MSFT, BUY, 50, CREATED)
+2025-04-24 22:17:04,550 - src.execution.order_manager - INFO - Updated order with fill: Order(814c87d7-7761-40a5-8708-f060cd9af13e, MSFT, BUY, 50, FILLED)
+2025-04-24 22:17:04,550 - src.risk.portfolio.portfolio - INFO - Fill: BUY 50 MSFT @ 200.00, PnL: 0.00, Cash: 59990.00, Equity: 99990.00
+2025-04-24 22:17:04,550 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: MSFT BUY
+2025-04-24 22:17:04,550 - src.execution.order_manager - INFO - Created order: Order(b702a241-eee6-4971-a01a-b65c5dd09819, MSFT, BUY, 50, CREATED)
+2025-04-24 22:17:04,550 - src.execution.order_manager - INFO - Updated order with fill: Order(b702a241-eee6-4971-a01a-b65c5dd09819, MSFT, BUY, 50, FILLED)
+2025-04-24 22:17:04,550 - src.risk.portfolio.portfolio - INFO - Fill: BUY 50 MSFT @ 200.00, PnL: 0.00, Cash: 49980.00, Equity: 99980.00
+2025-04-24 22:17:04,550 - ADMF-Test - ERROR - Portfolio not updated from orphaned fill
+2025-04-24 22:17:04,550 - ADMF-Test - INFO - Test 3: Complete order-fill flow
+2025-04-24 22:17:04,550 - ADMF-Test - INFO - Processing order for GOOGL through broker
+2025-04-24 22:17:04,550 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for GOOGL
+2025-04-24 22:17:04,551 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for GOOGL
+2025-04-24 22:17:04,563 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: GOOGL BUY
+2025-04-24 22:17:04,563 - src.execution.order_manager - INFO - Created order: Order(548d0912-b637-41f5-b228-ca933c10d298, GOOGL, BUY, 10, CREATED)
+2025-04-24 22:17:04,563 - src.execution.order_manager - INFO - Updated order with fill: Order(548d0912-b637-41f5-b228-ca933c10d298, GOOGL, BUY, 10, FILLED)
+2025-04-24 22:17:04,563 - src.risk.portfolio.portfolio - INFO - Fill: BUY 10 GOOGL @ 1500.00, PnL: 0.00, Cash: 34980.00, Equity: 99980.00
+2025-04-24 22:17:04,563 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:17:04,563 - src.risk.portfolio.portfolio - INFO - Fill: BUY 10 GOOGL @ 1500.00, PnL: 0.00, Cash: 19980.00, Equity: 99980.00
+2025-04-24 22:17:04,563 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for GOOGL
+2025-04-24 22:17:04,563 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:17:04,564 - src.execution.order_manager - INFO - Created order: Order(548d0912-b637-41f5-b228-ca933c10d298, GOOGL, BUY, 10, PENDING)
+2025-04-24 22:17:04,564 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for GOOGL
+2025-04-24 22:17:04,564 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:17:04,564 - src.execution.order_manager - INFO - Created order: Order(548d0912-b637-41f5-b228-ca933c10d298, GOOGL, BUY, 10, PENDING)
+2025-04-24 22:17:04,669 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:17:04,669 - src.risk.portfolio.portfolio - INFO - Fill: BUY 10 GOOGL @ 1500.00, PnL: 0.00, Cash: 4980.00, Equity: 99980.00
+2025-04-24 22:17:04,669 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:17:04,670 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 4980.00 < 15000.00, but processing anyway with adjusted quantities
+2025-04-24 22:17:04,670 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 10 to 2
+2025-04-24 22:17:04,670 - src.risk.portfolio.portfolio - INFO - Fill: BUY 2 GOOGL @ 1500.00, PnL: 0.00, Cash: 1980.00, Equity: 99980.00
+2025-04-24 22:17:04,670 - ADMF-Test - ERROR - Portfolio not updated from broker-generated fill
+2025-04-24 22:17:04,670 - ADMF-Test - INFO - === Minimal Test Results ===
+2025-04-24 22:17:04,670 - ADMF-Test - INFO - Total orders in manager: 4
+2025-04-24 22:17:04,670 - ADMF-Test - INFO - Active orders: 2
+2025-04-24 22:17:04,670 - ADMF-Test - INFO - Completed orders: 4
+2025-04-24 22:17:04,670 - ADMF-Test - INFO - Portfolio positions: 3
+2025-04-24 22:17:04,670 - ADMF-Test - INFO - Position: AAPL - Quantity: 200
+2025-04-24 22:17:04,670 - ADMF-Test - INFO - Position: MSFT - Quantity: 100
+2025-04-24 22:17:04,670 - ADMF-Test - INFO - Position: GOOGL - Quantity: 32
+2025-04-24 22:17:04,670 - ADMF-Test - INFO - Final portfolio equity: $99980.00
+2025-04-24 22:17:04,677 - ADMF-Trader - INFO - === Starting ADMF-Trader Integration Test ===
+2025-04-24 22:17:04,677 - ADMF-Trader - INFO - Creating test data for ['AAPL', 'MSFT']
+2025-04-24 22:17:04,688 - ADMF-Trader - INFO - Created test data for AAPL with 42 bars
+2025-04-24 22:17:04,689 - ADMF-Trader - INFO - Created test data for MSFT with 42 bars
+2025-04-24 22:17:04,689 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-04-24 22:17:04,689 - ADMF-Trader - INFO - Strategy initialized with fast_window=5, slow_window=20
+2025-04-24 22:17:04,689 - ADMF-Trader - INFO - Loading data for ['AAPL', 'MSFT']
+2025-04-24 22:17:04,689 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file test_data/AAPL_1d.csv
+2025-04-24 22:17:04,690 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 42 rows
+2025-04-24 22:17:04,691 - src.data.sources.csv_handler - INFO - Using 'date' column instead of configured 'timestamp'
+2025-04-24 22:17:04,691 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2023-01-02
+2025-04-24 22:17:04,691 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2023-01-02 00:00:00
+2025-04-24 22:17:04,692 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2023-01-01 00:00:00
+2025-04-24 22:17:04,692 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2023-02-28 00:00:00
+2025-04-24 22:17:04,693 - src.data.sources.csv_handler - INFO - CSVDataSource: Set date as index
+2025-04-24 22:17:04,694 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-24 22:17:04,694 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume']
+2025-04-24 22:17:04,694 - src.data.historical_data_handler - INFO - Loaded 42 bars for AAPL from 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-24 22:17:04,694 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file test_data/MSFT_1d.csv
+2025-04-24 22:17:04,694 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 42 rows
+2025-04-24 22:17:04,695 - src.data.sources.csv_handler - INFO - Using 'date' column instead of configured 'timestamp'
+2025-04-24 22:17:04,695 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2023-01-02
+2025-04-24 22:17:04,695 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2023-01-02 00:00:00
+2025-04-24 22:17:04,695 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2023-01-01 00:00:00
+2025-04-24 22:17:04,695 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2023-02-28 00:00:00
+2025-04-24 22:17:04,695 - src.data.sources.csv_handler - INFO - CSVDataSource: Set date as index
+2025-04-24 22:17:04,696 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-24 22:17:04,696 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume']
+2025-04-24 22:17:04,696 - src.data.historical_data_handler - INFO - Loaded 42 bars for MSFT from 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-24 22:17:04,696 - ADMF-Trader - INFO - Starting backtest execution
+2025-04-24 22:17:04,696 - ADMF-Trader - INFO - Processing data for AAPL
+2025-04-24 22:17:04,696 - ADMF-Trader - INFO - Processed 10 bars for AAPL
+2025-04-24 22:17:04,697 - ADMF-Trader - INFO - Processed 20 bars for AAPL
+2025-04-24 22:17:04,697 - ADMF-Trader - INFO - BUY signal #1 for AAPL at 107.10
+2025-04-24 22:17:04,697 - ADMF-Trader - INFO - Created order: BUY 93 AAPL @ 107.10 (ID: 2d1f2070-c38b-4707-bcec-b12b81bd5a27)
+2025-04-24 22:17:04,697 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,709 - src.risk.portfolio.portfolio - INFO - Fill: BUY 93 AAPL @ 107.10, PnL: 0.00, Cash: 90039.97, Equity: 100000.00
+2025-04-24 22:17:04,709 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: AAPL BUY
+2025-04-24 22:17:04,709 - src.execution.order_manager - INFO - Created order: Order(2d1f2070-c38b-4707-bcec-b12b81bd5a27, AAPL, BUY, 93, CREATED)
+2025-04-24 22:17:04,709 - src.execution.order_manager - INFO - Updated order with fill: Order(2d1f2070-c38b-4707-bcec-b12b81bd5a27, AAPL, BUY, 93, FILLED)
+2025-04-24 22:17:04,709 - src.risk.portfolio.portfolio - INFO - Fill: BUY 93 AAPL @ 107.10, PnL: 0.00, Cash: 80079.94, Equity: 100000.00
+2025-04-24 22:17:04,710 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,710 - ADMF-Trader - INFO - Updated order with fill: Order(2d1f2070-c38b-4707-bcec-b12b81bd5a27, AAPL, BUY, 93, FILLED)
+2025-04-24 22:17:04,710 - src.execution.order_manager - INFO - Created order: Order(2d1f2070-c38b-4707-bcec-b12b81bd5a27, AAPL, BUY, 93, FILLED)
+2025-04-24 22:17:04,710 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,710 - ADMF-Trader - INFO - Updated order with fill: Order(2d1f2070-c38b-4707-bcec-b12b81bd5a27, AAPL, BUY, 93, FILLED)
+2025-04-24 22:17:04,710 - src.execution.order_manager - INFO - Created order: Order(2d1f2070-c38b-4707-bcec-b12b81bd5a27, AAPL, BUY, 93, FILLED)
+2025-04-24 22:17:04,710 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,710 - ADMF-Trader - INFO - Broker emitting fill for AAPL
+2025-04-24 22:17:04,710 - src.risk.portfolio.portfolio - INFO - Fill: BUY 93 AAPL @ 107.10, PnL: 0.00, Cash: 70119.91, Equity: 100000.00
+2025-04-24 22:17:04,710 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:17:04,710 - src.risk.portfolio.portfolio - INFO - Fill: BUY 93 AAPL @ 107.10, PnL: 0.00, Cash: 60159.87, Equity: 100000.00
+2025-04-24 22:17:04,710 - ADMF-Trader - INFO - SELL signal #2 for AAPL at 80.93
+2025-04-24 22:17:04,710 - ADMF-Trader - INFO - Created order: SELL 100 AAPL @ 80.93 (ID: f4075dcf-0e47-4909-8c96-6ff1608cf581)
+2025-04-24 22:17:04,710 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,723 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 80.93, PnL: -2617.00, Cash: 68252.59, Equity: 90264.76
+2025-04-24 22:17:04,723 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: AAPL SELL
+2025-04-24 22:17:04,723 - src.execution.order_manager - INFO - Created order: Order(f4075dcf-0e47-4909-8c96-6ff1608cf581, AAPL, SELL, 100, CREATED)
+2025-04-24 22:17:04,723 - src.execution.order_manager - INFO - Updated order with fill: Order(f4075dcf-0e47-4909-8c96-6ff1608cf581, AAPL, SELL, 100, FILLED)
+2025-04-24 22:17:04,723 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 80.93, PnL: -2617.00, Cash: 76345.30, Equity: 90264.76
+2025-04-24 22:17:04,723 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,723 - ADMF-Trader - INFO - Updated order with fill: Order(f4075dcf-0e47-4909-8c96-6ff1608cf581, AAPL, SELL, 100, FILLED)
+2025-04-24 22:17:04,723 - src.execution.order_manager - INFO - Created order: Order(f4075dcf-0e47-4909-8c96-6ff1608cf581, AAPL, SELL, 100, FILLED)
+2025-04-24 22:17:04,723 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,723 - ADMF-Trader - INFO - Updated order with fill: Order(f4075dcf-0e47-4909-8c96-6ff1608cf581, AAPL, SELL, 100, FILLED)
+2025-04-24 22:17:04,723 - src.execution.order_manager - INFO - Created order: Order(f4075dcf-0e47-4909-8c96-6ff1608cf581, AAPL, SELL, 100, FILLED)
+2025-04-24 22:17:04,723 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,723 - ADMF-Trader - INFO - Broker emitting fill for AAPL
+2025-04-24 22:17:04,723 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 80.93, PnL: -2617.00, Cash: 84438.01, Equity: 90264.76
+2025-04-24 22:17:04,723 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:17:04,723 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 72 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:17:04,724 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 72
+2025-04-24 22:17:04,724 - src.risk.portfolio.portfolio - INFO - Fill: SELL 72 AAPL @ 80.93, PnL: -1884.24, Cash: 90264.76, Equity: 90264.76
+2025-04-24 22:17:04,724 - ADMF-Trader - INFO - Processed 30 bars for AAPL
+2025-04-24 22:17:04,724 - ADMF-Trader - INFO - BUY signal #3 for AAPL at 116.23
+2025-04-24 22:17:04,724 - ADMF-Trader - INFO - Created order: BUY 77 AAPL @ 116.23 (ID: e78647eb-634f-48eb-8e21-7c60f65ac6eb)
+2025-04-24 22:17:04,724 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,736 - src.risk.portfolio.portfolio - INFO - Fill: BUY 77 AAPL @ 116.23, PnL: 0.00, Cash: 81315.06, Equity: 90264.76
+2025-04-24 22:17:04,737 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: AAPL BUY
+2025-04-24 22:17:04,737 - src.execution.order_manager - INFO - Created order: Order(e78647eb-634f-48eb-8e21-7c60f65ac6eb, AAPL, BUY, 77, CREATED)
+2025-04-24 22:17:04,737 - src.execution.order_manager - INFO - Updated order with fill: Order(e78647eb-634f-48eb-8e21-7c60f65ac6eb, AAPL, BUY, 77, FILLED)
+2025-04-24 22:17:04,737 - src.risk.portfolio.portfolio - INFO - Fill: BUY 77 AAPL @ 116.23, PnL: 0.00, Cash: 72365.35, Equity: 90264.76
+2025-04-24 22:17:04,737 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,737 - ADMF-Trader - INFO - Updated order with fill: Order(e78647eb-634f-48eb-8e21-7c60f65ac6eb, AAPL, BUY, 77, FILLED)
+2025-04-24 22:17:04,737 - src.execution.order_manager - INFO - Created order: Order(e78647eb-634f-48eb-8e21-7c60f65ac6eb, AAPL, BUY, 77, FILLED)
+2025-04-24 22:17:04,737 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,737 - ADMF-Trader - INFO - Updated order with fill: Order(e78647eb-634f-48eb-8e21-7c60f65ac6eb, AAPL, BUY, 77, FILLED)
+2025-04-24 22:17:04,737 - src.execution.order_manager - INFO - Created order: Order(e78647eb-634f-48eb-8e21-7c60f65ac6eb, AAPL, BUY, 77, FILLED)
+2025-04-24 22:17:04,737 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,737 - ADMF-Trader - INFO - Broker emitting fill for AAPL
+2025-04-24 22:17:04,737 - src.risk.portfolio.portfolio - INFO - Fill: BUY 77 AAPL @ 116.23, PnL: 0.00, Cash: 63415.64, Equity: 90264.76
+2025-04-24 22:17:04,737 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:17:04,737 - src.risk.portfolio.portfolio - INFO - Fill: BUY 77 AAPL @ 116.23, PnL: 0.00, Cash: 54465.94, Equity: 90264.76
+2025-04-24 22:17:04,737 - ADMF-Trader - INFO - SELL signal #4 for AAPL at 99.43
+2025-04-24 22:17:04,737 - ADMF-Trader - INFO - Created order: SELL 100 AAPL @ 99.43 (ID: b97b89c6-552b-411e-8642-0c2de5dbae27)
+2025-04-24 22:17:04,737 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,750 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 99.43, PnL: -1680.10, Cash: 64408.84, Equity: 85090.07
+2025-04-24 22:17:04,750 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: AAPL SELL
+2025-04-24 22:17:04,750 - src.execution.order_manager - INFO - Created order: Order(b97b89c6-552b-411e-8642-0c2de5dbae27, AAPL, SELL, 100, CREATED)
+2025-04-24 22:17:04,750 - src.execution.order_manager - INFO - Updated order with fill: Order(b97b89c6-552b-411e-8642-0c2de5dbae27, AAPL, SELL, 100, FILLED)
+2025-04-24 22:17:04,750 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 99.43, PnL: -1680.10, Cash: 74351.74, Equity: 85090.07
+2025-04-24 22:17:04,750 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,750 - ADMF-Trader - INFO - Updated order with fill: Order(b97b89c6-552b-411e-8642-0c2de5dbae27, AAPL, SELL, 100, FILLED)
+2025-04-24 22:17:04,750 - src.execution.order_manager - INFO - Created order: Order(b97b89c6-552b-411e-8642-0c2de5dbae27, AAPL, SELL, 100, FILLED)
+2025-04-24 22:17:04,750 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,750 - ADMF-Trader - INFO - Updated order with fill: Order(b97b89c6-552b-411e-8642-0c2de5dbae27, AAPL, SELL, 100, FILLED)
+2025-04-24 22:17:04,750 - src.execution.order_manager - INFO - Created order: Order(b97b89c6-552b-411e-8642-0c2de5dbae27, AAPL, SELL, 100, FILLED)
+2025-04-24 22:17:04,750 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,750 - ADMF-Trader - INFO - Broker emitting fill for AAPL
+2025-04-24 22:17:04,750 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 99.43, PnL: -1680.10, Cash: 84294.64, Equity: 85090.07
+2025-04-24 22:17:04,750 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:17:04,751 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 8 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:17:04,751 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 8
+2025-04-24 22:17:04,751 - src.risk.portfolio.portfolio - INFO - Fill: SELL 8 AAPL @ 99.43, PnL: -134.41, Cash: 85090.07, Equity: 85090.07
+2025-04-24 22:17:04,751 - ADMF-Trader - INFO - BUY signal #5 for AAPL at 92.12
+2025-04-24 22:17:04,751 - ADMF-Trader - INFO - Created order: BUY 92 AAPL @ 92.12 (ID: ee2e674e-c110-4317-ad3b-f643872e99f7)
+2025-04-24 22:17:04,751 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,764 - src.risk.portfolio.portfolio - INFO - Fill: BUY 92 AAPL @ 92.12, PnL: 0.00, Cash: 76615.39, Equity: 85090.07
+2025-04-24 22:17:04,764 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: AAPL BUY
+2025-04-24 22:17:04,764 - src.execution.order_manager - INFO - Created order: Order(ee2e674e-c110-4317-ad3b-f643872e99f7, AAPL, BUY, 92, CREATED)
+2025-04-24 22:17:04,764 - src.execution.order_manager - INFO - Updated order with fill: Order(ee2e674e-c110-4317-ad3b-f643872e99f7, AAPL, BUY, 92, FILLED)
+2025-04-24 22:17:04,764 - src.risk.portfolio.portfolio - INFO - Fill: BUY 92 AAPL @ 92.12, PnL: 0.00, Cash: 68140.71, Equity: 85090.07
+2025-04-24 22:17:04,764 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,764 - ADMF-Trader - INFO - Updated order with fill: Order(ee2e674e-c110-4317-ad3b-f643872e99f7, AAPL, BUY, 92, FILLED)
+2025-04-24 22:17:04,764 - src.execution.order_manager - INFO - Created order: Order(ee2e674e-c110-4317-ad3b-f643872e99f7, AAPL, BUY, 92, FILLED)
+2025-04-24 22:17:04,764 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,764 - ADMF-Trader - INFO - Updated order with fill: Order(ee2e674e-c110-4317-ad3b-f643872e99f7, AAPL, BUY, 92, FILLED)
+2025-04-24 22:17:04,764 - src.execution.order_manager - INFO - Created order: Order(ee2e674e-c110-4317-ad3b-f643872e99f7, AAPL, BUY, 92, FILLED)
+2025-04-24 22:17:04,764 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:17:04,764 - ADMF-Trader - INFO - Broker emitting fill for AAPL
+2025-04-24 22:17:04,764 - src.risk.portfolio.portfolio - INFO - Fill: BUY 92 AAPL @ 92.12, PnL: 0.00, Cash: 59666.03, Equity: 85090.07
+2025-04-24 22:17:04,764 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:17:04,765 - src.risk.portfolio.portfolio - INFO - Fill: BUY 92 AAPL @ 92.12, PnL: 0.00, Cash: 51191.35, Equity: 85090.07
+2025-04-24 22:17:04,765 - ADMF-Trader - INFO - Processed 40 bars for AAPL
+2025-04-24 22:17:04,765 - ADMF-Trader - INFO - Finished processing 42 bars for AAPL
+2025-04-24 22:17:04,765 - ADMF-Trader - INFO - Processing data for MSFT
+2025-04-24 22:17:04,766 - ADMF-Trader - INFO - Processed 10 bars for MSFT
+2025-04-24 22:17:04,766 - ADMF-Trader - INFO - Processed 20 bars for MSFT
+2025-04-24 22:17:04,766 - ADMF-Trader - INFO - BUY signal #6 for MSFT at 207.74
+2025-04-24 22:17:04,766 - ADMF-Trader - INFO - Created order: BUY 40 MSFT @ 207.74 (ID: b6518b16-50e3-44ff-a49b-8794ccea8a7d)
+2025-04-24 22:17:04,767 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,779 - src.risk.portfolio.portfolio - INFO - Fill: BUY 40 MSFT @ 207.74, PnL: 0.00, Cash: 42881.88, Equity: 83610.32
+2025-04-24 22:17:04,779 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: MSFT BUY
+2025-04-24 22:17:04,779 - src.execution.order_manager - INFO - Created order: Order(b6518b16-50e3-44ff-a49b-8794ccea8a7d, MSFT, BUY, 40, CREATED)
+2025-04-24 22:17:04,779 - src.execution.order_manager - INFO - Updated order with fill: Order(b6518b16-50e3-44ff-a49b-8794ccea8a7d, MSFT, BUY, 40, FILLED)
+2025-04-24 22:17:04,779 - src.risk.portfolio.portfolio - INFO - Fill: BUY 40 MSFT @ 207.74, PnL: 0.00, Cash: 34572.40, Equity: 83610.32
+2025-04-24 22:17:04,779 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,779 - ADMF-Trader - INFO - Updated order with fill: Order(b6518b16-50e3-44ff-a49b-8794ccea8a7d, MSFT, BUY, 40, FILLED)
+2025-04-24 22:17:04,779 - src.execution.order_manager - INFO - Created order: Order(b6518b16-50e3-44ff-a49b-8794ccea8a7d, MSFT, BUY, 40, FILLED)
+2025-04-24 22:17:04,779 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,779 - ADMF-Trader - INFO - Updated order with fill: Order(b6518b16-50e3-44ff-a49b-8794ccea8a7d, MSFT, BUY, 40, FILLED)
+2025-04-24 22:17:04,779 - src.execution.order_manager - INFO - Created order: Order(b6518b16-50e3-44ff-a49b-8794ccea8a7d, MSFT, BUY, 40, FILLED)
+2025-04-24 22:17:04,779 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,779 - ADMF-Trader - INFO - Broker emitting fill for MSFT
+2025-04-24 22:17:04,779 - src.risk.portfolio.portfolio - INFO - Fill: BUY 40 MSFT @ 207.74, PnL: 0.00, Cash: 26262.93, Equity: 83610.32
+2025-04-24 22:17:04,779 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:17:04,780 - src.risk.portfolio.portfolio - INFO - Fill: BUY 40 MSFT @ 207.74, PnL: 0.00, Cash: 17953.45, Equity: 83610.32
+2025-04-24 22:17:04,780 - ADMF-Trader - INFO - SELL signal #7 for MSFT at 181.51
+2025-04-24 22:17:04,780 - ADMF-Trader - INFO - Created order: SELL 100 MSFT @ 181.51 (ID: 63a84730-893d-480c-aff1-f34ecdfaca2b)
+2025-04-24 22:17:04,780 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,793 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 MSFT @ 181.51, PnL: -2622.40, Cash: 36104.74, Equity: 79414.48
+2025-04-24 22:17:04,793 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: MSFT SELL
+2025-04-24 22:17:04,793 - src.execution.order_manager - INFO - Created order: Order(63a84730-893d-480c-aff1-f34ecdfaca2b, MSFT, SELL, 100, CREATED)
+2025-04-24 22:17:04,793 - src.execution.order_manager - INFO - Updated order with fill: Order(63a84730-893d-480c-aff1-f34ecdfaca2b, MSFT, SELL, 100, FILLED)
+2025-04-24 22:17:04,793 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 60 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:17:04,793 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 60
+2025-04-24 22:17:04,793 - src.risk.portfolio.portfolio - INFO - Fill: SELL 60 MSFT @ 181.51, PnL: -1573.44, Cash: 46995.51, Equity: 79414.48
+2025-04-24 22:17:04,793 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,793 - ADMF-Trader - INFO - Updated order with fill: Order(63a84730-893d-480c-aff1-f34ecdfaca2b, MSFT, SELL, 100, FILLED)
+2025-04-24 22:17:04,793 - src.execution.order_manager - INFO - Created order: Order(63a84730-893d-480c-aff1-f34ecdfaca2b, MSFT, SELL, 100, FILLED)
+2025-04-24 22:17:04,793 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,793 - ADMF-Trader - INFO - Updated order with fill: Order(63a84730-893d-480c-aff1-f34ecdfaca2b, MSFT, SELL, 100, FILLED)
+2025-04-24 22:17:04,793 - src.execution.order_manager - INFO - Created order: Order(63a84730-893d-480c-aff1-f34ecdfaca2b, MSFT, SELL, 100, FILLED)
+2025-04-24 22:17:04,793 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,793 - ADMF-Trader - INFO - Broker emitting fill for MSFT
+2025-04-24 22:17:04,793 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:17:04,793 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 0
+2025-04-24 22:17:04,793 - src.risk.portfolio.portfolio - INFO - Fill: SELL 0 MSFT @ 181.51, PnL: 0.00, Cash: 46995.51, Equity: 79414.48
+2025-04-24 22:17:04,793 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:17:04,793 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:17:04,793 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 0
+2025-04-24 22:17:04,793 - src.risk.portfolio.portfolio - INFO - Fill: SELL 0 MSFT @ 181.51, PnL: 0.00, Cash: 46995.51, Equity: 79414.48
+2025-04-24 22:17:04,793 - ADMF-Trader - INFO - Processed 30 bars for MSFT
+2025-04-24 22:17:04,793 - ADMF-Trader - INFO - BUY signal #8 for MSFT at 216.72
+2025-04-24 22:17:04,794 - ADMF-Trader - INFO - Created order: BUY 36 MSFT @ 216.72 (ID: 33050ea8-7f40-41bb-9416-88f799534271)
+2025-04-24 22:17:04,794 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,806 - src.risk.portfolio.portfolio - INFO - Fill: BUY 36 MSFT @ 216.72, PnL: 0.00, Cash: 39193.52, Equity: 79414.48
+2025-04-24 22:17:04,806 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: MSFT BUY
+2025-04-24 22:17:04,806 - src.execution.order_manager - INFO - Created order: Order(33050ea8-7f40-41bb-9416-88f799534271, MSFT, BUY, 36, CREATED)
+2025-04-24 22:17:04,806 - src.execution.order_manager - INFO - Updated order with fill: Order(33050ea8-7f40-41bb-9416-88f799534271, MSFT, BUY, 36, FILLED)
+2025-04-24 22:17:04,806 - src.risk.portfolio.portfolio - INFO - Fill: BUY 36 MSFT @ 216.72, PnL: 0.00, Cash: 31391.53, Equity: 79414.48
+2025-04-24 22:17:04,806 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,806 - ADMF-Trader - INFO - Updated order with fill: Order(33050ea8-7f40-41bb-9416-88f799534271, MSFT, BUY, 36, FILLED)
+2025-04-24 22:17:04,806 - src.execution.order_manager - INFO - Created order: Order(33050ea8-7f40-41bb-9416-88f799534271, MSFT, BUY, 36, FILLED)
+2025-04-24 22:17:04,806 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,806 - ADMF-Trader - INFO - Updated order with fill: Order(33050ea8-7f40-41bb-9416-88f799534271, MSFT, BUY, 36, FILLED)
+2025-04-24 22:17:04,806 - src.execution.order_manager - INFO - Created order: Order(33050ea8-7f40-41bb-9416-88f799534271, MSFT, BUY, 36, FILLED)
+2025-04-24 22:17:04,806 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,806 - ADMF-Trader - INFO - Broker emitting fill for MSFT
+2025-04-24 22:17:04,806 - src.risk.portfolio.portfolio - INFO - Fill: BUY 36 MSFT @ 216.72, PnL: 0.00, Cash: 23589.54, Equity: 79414.48
+2025-04-24 22:17:04,806 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:17:04,807 - src.risk.portfolio.portfolio - INFO - Fill: BUY 36 MSFT @ 216.72, PnL: 0.00, Cash: 15787.55, Equity: 79414.48
+2025-04-24 22:17:04,807 - ADMF-Trader - INFO - SELL signal #9 for MSFT at 199.08
+2025-04-24 22:17:04,807 - ADMF-Trader - INFO - Created order: SELL 100 MSFT @ 199.08 (ID: 744be0c9-e30f-44c9-8737-8fe13edf6732)
+2025-04-24 22:17:04,807 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,820 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 MSFT @ 199.08, PnL: -1764.01, Cash: 35695.74, Equity: 76874.30
+2025-04-24 22:17:04,820 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: MSFT SELL
+2025-04-24 22:17:04,820 - src.execution.order_manager - INFO - Created order: Order(744be0c9-e30f-44c9-8737-8fe13edf6732, MSFT, SELL, 100, CREATED)
+2025-04-24 22:17:04,820 - src.execution.order_manager - INFO - Updated order with fill: Order(744be0c9-e30f-44c9-8737-8fe13edf6732, MSFT, SELL, 100, FILLED)
+2025-04-24 22:17:04,820 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 44 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:17:04,820 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 44
+2025-04-24 22:17:04,820 - src.risk.portfolio.portfolio - INFO - Fill: SELL 44 MSFT @ 199.08, PnL: -776.16, Cash: 44455.34, Equity: 76874.30
+2025-04-24 22:17:04,820 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,820 - ADMF-Trader - INFO - Updated order with fill: Order(744be0c9-e30f-44c9-8737-8fe13edf6732, MSFT, SELL, 100, FILLED)
+2025-04-24 22:17:04,820 - src.execution.order_manager - INFO - Created order: Order(744be0c9-e30f-44c9-8737-8fe13edf6732, MSFT, SELL, 100, FILLED)
+2025-04-24 22:17:04,820 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,821 - ADMF-Trader - INFO - Updated order with fill: Order(744be0c9-e30f-44c9-8737-8fe13edf6732, MSFT, SELL, 100, FILLED)
+2025-04-24 22:17:04,821 - src.execution.order_manager - INFO - Created order: Order(744be0c9-e30f-44c9-8737-8fe13edf6732, MSFT, SELL, 100, FILLED)
+2025-04-24 22:17:04,821 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,821 - ADMF-Trader - INFO - Broker emitting fill for MSFT
+2025-04-24 22:17:04,821 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:17:04,821 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 0
+2025-04-24 22:17:04,821 - src.risk.portfolio.portfolio - INFO - Fill: SELL 0 MSFT @ 199.08, PnL: 0.00, Cash: 44455.34, Equity: 76874.30
+2025-04-24 22:17:04,821 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:17:04,821 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:17:04,821 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 0
+2025-04-24 22:17:04,821 - src.risk.portfolio.portfolio - INFO - Fill: SELL 0 MSFT @ 199.08, PnL: 0.00, Cash: 44455.34, Equity: 76874.30
+2025-04-24 22:17:04,822 - ADMF-Trader - INFO - BUY signal #10 for MSFT at 193.14
+2025-04-24 22:17:04,822 - ADMF-Trader - INFO - Created order: BUY 39 MSFT @ 193.14 (ID: 372af638-cadd-4bdb-9c3d-1d2f4e6f208f)
+2025-04-24 22:17:04,822 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,834 - src.risk.portfolio.portfolio - INFO - Fill: BUY 39 MSFT @ 193.14, PnL: 0.00, Cash: 36923.00, Equity: 76874.30
+2025-04-24 22:17:04,834 - src.execution.order_manager - WARNING - Creating synthetic order for orphaned fill: MSFT BUY
+2025-04-24 22:17:04,834 - src.execution.order_manager - INFO - Created order: Order(372af638-cadd-4bdb-9c3d-1d2f4e6f208f, MSFT, BUY, 39, CREATED)
+2025-04-24 22:17:04,834 - src.execution.order_manager - INFO - Updated order with fill: Order(372af638-cadd-4bdb-9c3d-1d2f4e6f208f, MSFT, BUY, 39, FILLED)
+2025-04-24 22:17:04,834 - src.risk.portfolio.portfolio - INFO - Fill: BUY 39 MSFT @ 193.14, PnL: 0.00, Cash: 29390.67, Equity: 76874.30
+2025-04-24 22:17:04,834 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,835 - ADMF-Trader - INFO - Updated order with fill: Order(372af638-cadd-4bdb-9c3d-1d2f4e6f208f, MSFT, BUY, 39, FILLED)
+2025-04-24 22:17:04,835 - src.execution.order_manager - INFO - Created order: Order(372af638-cadd-4bdb-9c3d-1d2f4e6f208f, MSFT, BUY, 39, FILLED)
+2025-04-24 22:17:04,835 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,835 - ADMF-Trader - INFO - Updated order with fill: Order(372af638-cadd-4bdb-9c3d-1d2f4e6f208f, MSFT, BUY, 39, FILLED)
+2025-04-24 22:17:04,835 - src.execution.order_manager - INFO - Created order: Order(372af638-cadd-4bdb-9c3d-1d2f4e6f208f, MSFT, BUY, 39, FILLED)
+2025-04-24 22:17:04,835 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:17:04,835 - ADMF-Trader - INFO - Broker emitting fill for MSFT
+2025-04-24 22:17:04,835 - src.risk.portfolio.portfolio - INFO - Fill: BUY 39 MSFT @ 193.14, PnL: 0.00, Cash: 21858.33, Equity: 76874.30
+2025-04-24 22:17:04,835 - src.execution.order_manager - ERROR - Error processing fill event: cannot access local variable 'OrderStatus' where it is not associated with a value
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 507, in on_fill
+    if self.orders[order_id].status not in [OrderStatus.FILLED, OrderStatus.CANCELED]:
+                                            ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'OrderStatus' where it is not associated with a value
+2025-04-24 22:17:04,836 - src.risk.portfolio.portfolio - INFO - Fill: BUY 39 MSFT @ 193.14, PnL: 0.00, Cash: 14325.99, Equity: 76874.30
+2025-04-24 22:17:04,836 - ADMF-Trader - INFO - Processed 40 bars for MSFT
+2025-04-24 22:17:04,837 - ADMF-Trader - INFO - Finished processing 42 bars for MSFT
+2025-04-24 22:17:04,837 - ADMF-Trader - INFO - Processed 84 total bars
+2025-04-24 22:17:04,837 - ADMF-Trader - INFO - Executed 40 trades
+2025-04-24 22:17:04,837 - ADMF-Trader - INFO - Trade 1: BUY 93 AAPL @ 107.10, PnL: 0.00
+2025-04-24 22:17:04,837 - ADMF-Trader - INFO - Trade 2: BUY 93 AAPL @ 107.10, PnL: 0.00
+2025-04-24 22:17:04,837 - ADMF-Trader - INFO - Trade 3: BUY 93 AAPL @ 107.10, PnL: 0.00
+2025-04-24 22:17:04,837 - ADMF-Trader - INFO - Trade 4: BUY 93 AAPL @ 107.10, PnL: 0.00
+2025-04-24 22:17:04,837 - ADMF-Trader - INFO - Trade 5: SELL 100 AAPL @ 80.93, PnL: -2617.00
+2025-04-24 22:17:04,837 - ADMF-Trader - INFO - Initial equity: $100000.00
+2025-04-24 22:17:04,837 - ADMF-Trader - INFO - Final equity: $75948.62
+2025-04-24 22:17:04,837 - ADMF-Trader - INFO - Total return: -24.05%
+2025-04-24 22:17:04,839 - ADMF-Trader - INFO - Saved equity curve to 'equity_curve.csv'
+2025-04-24 22:25:33,943 - ADMF-Test - INFO - === Starting Minimal Order-Fill Test ===
+2025-04-24 22:25:33,943 - ADMF-Test - INFO - Test 1: Basic order-fill flow
+2025-04-24 22:25:33,943 - ADMF-Test - INFO - Created order with ID: 873788c4-d8f0-4244-a46b-3dc2e1e7bd4b
+2025-04-24 22:25:33,943 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:33,954 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1076f27b0>
+2025-04-24 22:25:33,954 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 150.00, PnL: 0.00, Cash: 85000.00, Equity: 100000.00
+2025-04-24 22:25:33,954 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1076f27b0>
+2025-04-24 22:25:33,954 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 150.00, PnL: 0.00, Cash: 70000.00, Equity: 100000.00
+2025-04-24 22:25:33,954 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:33,954 - src.execution.order_manager - INFO - Updated order with fill: Order(cdbab1a7-e4c9-4053-9273-62f7feb5c435, AAPL, BUY, 100, FILLED)
+2025-04-24 22:25:33,954 - src.execution.order_manager - INFO - Created order: Order(cdbab1a7-e4c9-4053-9273-62f7feb5c435, AAPL, BUY, 100, FILLED)
+2025-04-24 22:25:33,954 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:33,954 - src.execution.order_manager - INFO - Updated order with fill: Order(150bec55-0bdb-439d-8d02-b4d6214bf7b9, AAPL, BUY, 100, FILLED)
+2025-04-24 22:25:33,955 - src.execution.order_manager - INFO - Created order: Order(150bec55-0bdb-439d-8d02-b4d6214bf7b9, AAPL, BUY, 100, FILLED)
+2025-04-24 22:25:33,955 - ADMF-Test - ERROR - Order not registered in order manager
+2025-04-24 22:25:33,955 - ADMF-Test - INFO - Test 2: Orphaned fill handling
+2025-04-24 22:25:33,955 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1077703e0>
+2025-04-24 22:25:33,955 - src.risk.portfolio.portfolio - INFO - Fill: BUY 50 MSFT @ 200.00, PnL: 0.00, Cash: 59990.00, Equity: 99990.00
+2025-04-24 22:25:33,955 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1077703e0>
+2025-04-24 22:25:33,955 - src.risk.portfolio.portfolio - INFO - Fill: BUY 50 MSFT @ 200.00, PnL: 0.00, Cash: 49980.00, Equity: 99980.00
+2025-04-24 22:25:33,955 - ADMF-Test - ERROR - Portfolio not updated from orphaned fill
+2025-04-24 22:25:33,955 - ADMF-Test - INFO - Test 3: Complete order-fill flow
+2025-04-24 22:25:33,955 - ADMF-Test - INFO - Processing order for GOOGL through broker
+2025-04-24 22:25:33,955 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for GOOGL
+2025-04-24 22:25:33,955 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for GOOGL
+2025-04-24 22:25:33,967 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x107754dd0>
+2025-04-24 22:25:33,968 - src.risk.portfolio.portfolio - INFO - Fill: BUY 10 GOOGL @ 1500.00, PnL: 0.00, Cash: 34980.00, Equity: 99980.00
+2025-04-24 22:25:33,968 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x107754dd0>
+2025-04-24 22:25:33,968 - src.risk.portfolio.portfolio - INFO - Fill: BUY 10 GOOGL @ 1500.00, PnL: 0.00, Cash: 19980.00, Equity: 99980.00
+2025-04-24 22:25:33,968 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for GOOGL
+2025-04-24 22:25:33,968 - src.execution.order_manager - INFO - Updated order with fill: Order(0b589df9-7a0f-460e-ac19-588a8f49a5da, GOOGL, BUY, 10, FILLED)
+2025-04-24 22:25:33,968 - src.execution.order_manager - INFO - Created order: Order(0b589df9-7a0f-460e-ac19-588a8f49a5da, GOOGL, BUY, 10, FILLED)
+2025-04-24 22:25:33,968 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for GOOGL
+2025-04-24 22:25:33,968 - src.execution.order_manager - INFO - Updated order with fill: Order(a54c39db-8675-449d-ba67-37c381eabf71, GOOGL, BUY, 10, FILLED)
+2025-04-24 22:25:33,968 - src.execution.order_manager - INFO - Created order: Order(a54c39db-8675-449d-ba67-37c381eabf71, GOOGL, BUY, 10, FILLED)
+2025-04-24 22:25:34,068 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x107770640>
+2025-04-24 22:25:34,069 - src.risk.portfolio.portfolio - INFO - Fill: BUY 10 GOOGL @ 1500.00, PnL: 0.00, Cash: 4980.00, Equity: 99980.00
+2025-04-24 22:25:34,069 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x107770640>
+2025-04-24 22:25:34,069 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 4980.00 < 15000.00, but processing anyway with adjusted quantities
+2025-04-24 22:25:34,069 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 10 to 2
+2025-04-24 22:25:34,069 - src.risk.portfolio.portfolio - INFO - Fill: BUY 2 GOOGL @ 1500.00, PnL: 0.00, Cash: 1980.00, Equity: 99980.00
+2025-04-24 22:25:34,069 - ADMF-Test - ERROR - Portfolio not updated from broker-generated fill
+2025-04-24 22:25:34,069 - ADMF-Test - INFO - === Minimal Test Results ===
+2025-04-24 22:25:34,069 - ADMF-Test - INFO - Total orders in manager: 4
+2025-04-24 22:25:34,069 - ADMF-Test - INFO - Active orders: 0
+2025-04-24 22:25:34,069 - ADMF-Test - INFO - Completed orders: 4
+2025-04-24 22:25:34,069 - ADMF-Test - INFO - Portfolio positions: 3
+2025-04-24 22:25:34,069 - ADMF-Test - INFO - Position: AAPL - Quantity: 200
+2025-04-24 22:25:34,069 - ADMF-Test - INFO - Position: MSFT - Quantity: 100
+2025-04-24 22:25:34,069 - ADMF-Test - INFO - Position: GOOGL - Quantity: 32
+2025-04-24 22:25:34,069 - ADMF-Test - INFO - Final portfolio equity: $99980.00
+2025-04-24 22:25:34,075 - ADMF-Trader - INFO - === Starting ADMF-Trader Integration Test ===
+2025-04-24 22:25:34,075 - ADMF-Trader - INFO - Creating test data for ['AAPL', 'MSFT']
+2025-04-24 22:25:34,092 - ADMF-Trader - INFO - Created test data for AAPL with 42 bars
+2025-04-24 22:25:34,093 - ADMF-Trader - INFO - Created test data for MSFT with 42 bars
+2025-04-24 22:25:34,093 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-04-24 22:25:34,093 - ADMF-Trader - INFO - Strategy initialized with fast_window=5, slow_window=20
+2025-04-24 22:25:34,093 - ADMF-Trader - INFO - Loading data for ['AAPL', 'MSFT']
+2025-04-24 22:25:34,094 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file test_data/AAPL_1d.csv
+2025-04-24 22:25:34,095 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 42 rows
+2025-04-24 22:25:34,095 - src.data.sources.csv_handler - INFO - Using 'date' column instead of configured 'timestamp'
+2025-04-24 22:25:34,095 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2023-01-02
+2025-04-24 22:25:34,096 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2023-01-02 00:00:00
+2025-04-24 22:25:34,096 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2023-01-01 00:00:00
+2025-04-24 22:25:34,096 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2023-02-28 00:00:00
+2025-04-24 22:25:34,098 - src.data.sources.csv_handler - INFO - CSVDataSource: Set date as index
+2025-04-24 22:25:34,099 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-24 22:25:34,099 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume']
+2025-04-24 22:25:34,099 - src.data.historical_data_handler - INFO - Loaded 42 bars for AAPL from 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-24 22:25:34,099 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file test_data/MSFT_1d.csv
+2025-04-24 22:25:34,099 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 42 rows
+2025-04-24 22:25:34,099 - src.data.sources.csv_handler - INFO - Using 'date' column instead of configured 'timestamp'
+2025-04-24 22:25:34,099 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2023-01-02
+2025-04-24 22:25:34,100 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2023-01-02 00:00:00
+2025-04-24 22:25:34,100 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2023-01-01 00:00:00
+2025-04-24 22:25:34,100 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2023-02-28 00:00:00
+2025-04-24 22:25:34,100 - src.data.sources.csv_handler - INFO - CSVDataSource: Set date as index
+2025-04-24 22:25:34,100 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-24 22:25:34,100 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume']
+2025-04-24 22:25:34,100 - src.data.historical_data_handler - INFO - Loaded 42 bars for MSFT from 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-24 22:25:34,100 - ADMF-Trader - INFO - Starting backtest execution
+2025-04-24 22:25:34,100 - ADMF-Trader - INFO - Processing data for AAPL
+2025-04-24 22:25:34,101 - ADMF-Trader - INFO - Processed 10 bars for AAPL
+2025-04-24 22:25:34,101 - ADMF-Trader - INFO - Processed 20 bars for AAPL
+2025-04-24 22:25:34,101 - ADMF-Trader - INFO - BUY signal #1 for AAPL at 107.10
+2025-04-24 22:25:34,101 - ADMF-Trader - INFO - Created order: BUY 93 AAPL @ 107.10 (ID: cf3859d7-0206-4084-be6f-e74540ca5fd5)
+2025-04-24 22:25:34,101 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,114 - src.risk.portfolio.portfolio - INFO - Fill: BUY 93 AAPL @ 107.10, PnL: 0.00, Cash: 90039.97, Equity: 100000.00
+2025-04-24 22:25:34,114 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x107746c50>
+2025-04-24 22:25:34,114 - src.risk.portfolio.portfolio - INFO - Fill: BUY 93 AAPL @ 107.10, PnL: 0.00, Cash: 80079.94, Equity: 100000.00
+2025-04-24 22:25:34,114 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,114 - ADMF-Trader - INFO - Updated order with fill: Order(77af0300-affd-4f42-9e2c-fc2aa04bb8af, AAPL, BUY, 93, FILLED)
+2025-04-24 22:25:34,114 - src.execution.order_manager - INFO - Created order: Order(77af0300-affd-4f42-9e2c-fc2aa04bb8af, AAPL, BUY, 93, FILLED)
+2025-04-24 22:25:34,114 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,114 - ADMF-Trader - INFO - Updated order with fill: Order(0f40062c-9426-482a-a294-f80d830a84e3, AAPL, BUY, 93, FILLED)
+2025-04-24 22:25:34,114 - src.execution.order_manager - INFO - Created order: Order(0f40062c-9426-482a-a294-f80d830a84e3, AAPL, BUY, 93, FILLED)
+2025-04-24 22:25:34,114 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,114 - ADMF-Trader - INFO - Broker emitting fill for AAPL
+2025-04-24 22:25:34,114 - src.risk.portfolio.portfolio - INFO - Fill: BUY 93 AAPL @ 107.10, PnL: 0.00, Cash: 70119.91, Equity: 100000.00
+2025-04-24 22:25:34,114 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x107784c80>
+2025-04-24 22:25:34,114 - src.risk.portfolio.portfolio - INFO - Fill: BUY 93 AAPL @ 107.10, PnL: 0.00, Cash: 60159.87, Equity: 100000.00
+2025-04-24 22:25:34,115 - ADMF-Trader - INFO - SELL signal #2 for AAPL at 80.93
+2025-04-24 22:25:34,115 - ADMF-Trader - INFO - Created order: SELL 100 AAPL @ 80.93 (ID: b07b46cb-0bca-40a3-9636-bdf97afe7861)
+2025-04-24 22:25:34,115 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,128 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 80.93, PnL: -2617.00, Cash: 68252.59, Equity: 90264.76
+2025-04-24 22:25:34,128 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x10777af90>
+2025-04-24 22:25:34,128 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 80.93, PnL: -2617.00, Cash: 76345.30, Equity: 90264.76
+2025-04-24 22:25:34,128 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,128 - ADMF-Trader - INFO - Updated order with fill: Order(b27deed2-7bb9-41e9-a1eb-f00ce9b882ae, AAPL, SELL, 100, FILLED)
+2025-04-24 22:25:34,128 - src.execution.order_manager - INFO - Created order: Order(b27deed2-7bb9-41e9-a1eb-f00ce9b882ae, AAPL, SELL, 100, FILLED)
+2025-04-24 22:25:34,128 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,128 - ADMF-Trader - INFO - Updated order with fill: Order(5097a90f-0f8f-4e34-b4b5-addce27acdcd, AAPL, SELL, 100, FILLED)
+2025-04-24 22:25:34,128 - src.execution.order_manager - INFO - Created order: Order(5097a90f-0f8f-4e34-b4b5-addce27acdcd, AAPL, SELL, 100, FILLED)
+2025-04-24 22:25:34,128 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,128 - ADMF-Trader - INFO - Broker emitting fill for AAPL
+2025-04-24 22:25:34,128 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 80.93, PnL: -2617.00, Cash: 84438.01, Equity: 90264.76
+2025-04-24 22:25:34,128 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1076bbd10>
+2025-04-24 22:25:34,128 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 72 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:25:34,128 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 72
+2025-04-24 22:25:34,128 - src.risk.portfolio.portfolio - INFO - Fill: SELL 72 AAPL @ 80.93, PnL: -1884.24, Cash: 90264.76, Equity: 90264.76
+2025-04-24 22:25:34,128 - ADMF-Trader - INFO - Processed 30 bars for AAPL
+2025-04-24 22:25:34,128 - ADMF-Trader - INFO - BUY signal #3 for AAPL at 116.23
+2025-04-24 22:25:34,128 - ADMF-Trader - INFO - Created order: BUY 77 AAPL @ 116.23 (ID: 2195da1e-4539-4463-b299-f640671a2d14)
+2025-04-24 22:25:34,128 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,141 - src.risk.portfolio.portfolio - INFO - Fill: BUY 77 AAPL @ 116.23, PnL: 0.00, Cash: 81315.06, Equity: 90264.76
+2025-04-24 22:25:34,141 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1076bbc50>
+2025-04-24 22:25:34,141 - src.risk.portfolio.portfolio - INFO - Fill: BUY 77 AAPL @ 116.23, PnL: 0.00, Cash: 72365.35, Equity: 90264.76
+2025-04-24 22:25:34,141 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,141 - ADMF-Trader - INFO - Updated order with fill: Order(b051971c-1296-4715-b587-fc7ef936d675, AAPL, BUY, 77, FILLED)
+2025-04-24 22:25:34,141 - src.execution.order_manager - INFO - Created order: Order(b051971c-1296-4715-b587-fc7ef936d675, AAPL, BUY, 77, FILLED)
+2025-04-24 22:25:34,141 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,141 - ADMF-Trader - INFO - Updated order with fill: Order(c4b18856-26b2-4bb9-a051-b221e66c78bd, AAPL, BUY, 77, FILLED)
+2025-04-24 22:25:34,141 - src.execution.order_manager - INFO - Created order: Order(c4b18856-26b2-4bb9-a051-b221e66c78bd, AAPL, BUY, 77, FILLED)
+2025-04-24 22:25:34,141 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,141 - ADMF-Trader - INFO - Broker emitting fill for AAPL
+2025-04-24 22:25:34,141 - src.risk.portfolio.portfolio - INFO - Fill: BUY 77 AAPL @ 116.23, PnL: 0.00, Cash: 63415.64, Equity: 90264.76
+2025-04-24 22:25:34,142 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1077c1db0>
+2025-04-24 22:25:34,142 - src.risk.portfolio.portfolio - INFO - Fill: BUY 77 AAPL @ 116.23, PnL: 0.00, Cash: 54465.94, Equity: 90264.76
+2025-04-24 22:25:34,142 - ADMF-Trader - INFO - SELL signal #4 for AAPL at 99.43
+2025-04-24 22:25:34,142 - ADMF-Trader - INFO - Created order: SELL 100 AAPL @ 99.43 (ID: 2a3ea05a-fb1f-4762-8182-6935d1dffc92)
+2025-04-24 22:25:34,142 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,153 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 99.43, PnL: -1680.10, Cash: 64408.84, Equity: 85090.07
+2025-04-24 22:25:34,153 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1077c1e50>
+2025-04-24 22:25:34,153 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 99.43, PnL: -1680.10, Cash: 74351.74, Equity: 85090.07
+2025-04-24 22:25:34,153 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,153 - ADMF-Trader - INFO - Updated order with fill: Order(1d9c87dc-b3f0-4044-a535-70fe09ee720e, AAPL, SELL, 100, FILLED)
+2025-04-24 22:25:34,153 - src.execution.order_manager - INFO - Created order: Order(1d9c87dc-b3f0-4044-a535-70fe09ee720e, AAPL, SELL, 100, FILLED)
+2025-04-24 22:25:34,153 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,153 - ADMF-Trader - INFO - Updated order with fill: Order(add8f70b-5bdb-4254-bcb7-31fb8cae6981, AAPL, SELL, 100, FILLED)
+2025-04-24 22:25:34,153 - src.execution.order_manager - INFO - Created order: Order(add8f70b-5bdb-4254-bcb7-31fb8cae6981, AAPL, SELL, 100, FILLED)
+2025-04-24 22:25:34,153 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,153 - ADMF-Trader - INFO - Broker emitting fill for AAPL
+2025-04-24 22:25:34,153 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 99.43, PnL: -1680.10, Cash: 84294.64, Equity: 85090.07
+2025-04-24 22:25:34,153 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1077cc9d0>
+2025-04-24 22:25:34,153 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 8 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:25:34,153 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 8
+2025-04-24 22:25:34,153 - src.risk.portfolio.portfolio - INFO - Fill: SELL 8 AAPL @ 99.43, PnL: -134.41, Cash: 85090.07, Equity: 85090.07
+2025-04-24 22:25:34,153 - ADMF-Trader - INFO - BUY signal #5 for AAPL at 92.12
+2025-04-24 22:25:34,154 - ADMF-Trader - INFO - Created order: BUY 92 AAPL @ 92.12 (ID: 39fa6c3e-0ac7-4913-8b45-4de7b6051ecf)
+2025-04-24 22:25:34,154 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,166 - src.risk.portfolio.portfolio - INFO - Fill: BUY 92 AAPL @ 92.12, PnL: 0.00, Cash: 76615.39, Equity: 85090.07
+2025-04-24 22:25:34,166 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x10773be00>
+2025-04-24 22:25:34,166 - src.risk.portfolio.portfolio - INFO - Fill: BUY 92 AAPL @ 92.12, PnL: 0.00, Cash: 68140.71, Equity: 85090.07
+2025-04-24 22:25:34,166 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,166 - ADMF-Trader - INFO - Updated order with fill: Order(8111043f-df06-4cbf-928f-015baebef87d, AAPL, BUY, 92, FILLED)
+2025-04-24 22:25:34,166 - src.execution.order_manager - INFO - Created order: Order(8111043f-df06-4cbf-928f-015baebef87d, AAPL, BUY, 92, FILLED)
+2025-04-24 22:25:34,166 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,166 - ADMF-Trader - INFO - Updated order with fill: Order(6bc44ac3-cf9a-4711-9d59-005cfed6d244, AAPL, BUY, 92, FILLED)
+2025-04-24 22:25:34,167 - src.execution.order_manager - INFO - Created order: Order(6bc44ac3-cf9a-4711-9d59-005cfed6d244, AAPL, BUY, 92, FILLED)
+2025-04-24 22:25:34,167 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for AAPL
+2025-04-24 22:25:34,167 - ADMF-Trader - INFO - Broker emitting fill for AAPL
+2025-04-24 22:25:34,167 - src.risk.portfolio.portfolio - INFO - Fill: BUY 92 AAPL @ 92.12, PnL: 0.00, Cash: 59666.03, Equity: 85090.07
+2025-04-24 22:25:34,167 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x10773be70>
+2025-04-24 22:25:34,167 - src.risk.portfolio.portfolio - INFO - Fill: BUY 92 AAPL @ 92.12, PnL: 0.00, Cash: 51191.35, Equity: 85090.07
+2025-04-24 22:25:34,167 - ADMF-Trader - INFO - Processed 40 bars for AAPL
+2025-04-24 22:25:34,167 - ADMF-Trader - INFO - Finished processing 42 bars for AAPL
+2025-04-24 22:25:34,167 - ADMF-Trader - INFO - Processing data for MSFT
+2025-04-24 22:25:34,168 - ADMF-Trader - INFO - Processed 10 bars for MSFT
+2025-04-24 22:25:34,168 - ADMF-Trader - INFO - Processed 20 bars for MSFT
+2025-04-24 22:25:34,168 - ADMF-Trader - INFO - BUY signal #6 for MSFT at 207.74
+2025-04-24 22:25:34,168 - ADMF-Trader - INFO - Created order: BUY 40 MSFT @ 207.74 (ID: 8f5e7c3f-d9cd-4058-85d8-3d6b944b9616)
+2025-04-24 22:25:34,169 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,181 - src.risk.portfolio.portfolio - INFO - Fill: BUY 40 MSFT @ 207.74, PnL: 0.00, Cash: 42881.88, Equity: 83610.32
+2025-04-24 22:25:34,181 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1077d4ad0>
+2025-04-24 22:25:34,181 - src.risk.portfolio.portfolio - INFO - Fill: BUY 40 MSFT @ 207.74, PnL: 0.00, Cash: 34572.40, Equity: 83610.32
+2025-04-24 22:25:34,181 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,181 - ADMF-Trader - INFO - Updated order with fill: Order(88b20686-7b66-44da-a4db-1cc9954ee013, MSFT, BUY, 40, FILLED)
+2025-04-24 22:25:34,181 - src.execution.order_manager - INFO - Created order: Order(88b20686-7b66-44da-a4db-1cc9954ee013, MSFT, BUY, 40, FILLED)
+2025-04-24 22:25:34,181 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,181 - ADMF-Trader - INFO - Updated order with fill: Order(78df6490-4baf-4d4b-8e8e-2a835e4bf3ad, MSFT, BUY, 40, FILLED)
+2025-04-24 22:25:34,182 - src.execution.order_manager - INFO - Created order: Order(78df6490-4baf-4d4b-8e8e-2a835e4bf3ad, MSFT, BUY, 40, FILLED)
+2025-04-24 22:25:34,182 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,182 - ADMF-Trader - INFO - Broker emitting fill for MSFT
+2025-04-24 22:25:34,182 - src.risk.portfolio.portfolio - INFO - Fill: BUY 40 MSFT @ 207.74, PnL: 0.00, Cash: 26262.93, Equity: 83610.32
+2025-04-24 22:25:34,182 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1077d4b40>
+2025-04-24 22:25:34,182 - src.risk.portfolio.portfolio - INFO - Fill: BUY 40 MSFT @ 207.74, PnL: 0.00, Cash: 17953.45, Equity: 83610.32
+2025-04-24 22:25:34,182 - ADMF-Trader - INFO - SELL signal #7 for MSFT at 181.51
+2025-04-24 22:25:34,182 - ADMF-Trader - INFO - Created order: SELL 100 MSFT @ 181.51 (ID: 62ce80cd-e241-4924-8c15-cd2a301ae029)
+2025-04-24 22:25:34,182 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,193 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 MSFT @ 181.51, PnL: -2622.40, Cash: 36104.74, Equity: 79414.48
+2025-04-24 22:25:34,193 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1077d4ec0>
+2025-04-24 22:25:34,193 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 60 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:25:34,193 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 60
+2025-04-24 22:25:34,193 - src.risk.portfolio.portfolio - INFO - Fill: SELL 60 MSFT @ 181.51, PnL: -1573.44, Cash: 46995.51, Equity: 79414.48
+2025-04-24 22:25:34,193 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,193 - ADMF-Trader - INFO - Updated order with fill: Order(9346c39f-5ca8-4530-bca4-71c52d344269, MSFT, SELL, 100, FILLED)
+2025-04-24 22:25:34,194 - src.execution.order_manager - INFO - Created order: Order(9346c39f-5ca8-4530-bca4-71c52d344269, MSFT, SELL, 100, FILLED)
+2025-04-24 22:25:34,194 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,194 - ADMF-Trader - INFO - Updated order with fill: Order(a0d340c1-079a-43ee-8f06-39ff60b85d8c, MSFT, SELL, 100, FILLED)
+2025-04-24 22:25:34,194 - src.execution.order_manager - INFO - Created order: Order(a0d340c1-079a-43ee-8f06-39ff60b85d8c, MSFT, SELL, 100, FILLED)
+2025-04-24 22:25:34,194 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,194 - ADMF-Trader - INFO - Broker emitting fill for MSFT
+2025-04-24 22:25:34,194 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:25:34,194 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 0
+2025-04-24 22:25:34,194 - src.risk.portfolio.portfolio - INFO - Fill: SELL 0 MSFT @ 181.51, PnL: 0.00, Cash: 46995.51, Equity: 79414.48
+2025-04-24 22:25:34,194 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1077d4f30>
+2025-04-24 22:25:34,194 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:25:34,194 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 0
+2025-04-24 22:25:34,194 - src.risk.portfolio.portfolio - INFO - Fill: SELL 0 MSFT @ 181.51, PnL: 0.00, Cash: 46995.51, Equity: 79414.48
+2025-04-24 22:25:34,194 - ADMF-Trader - INFO - Processed 30 bars for MSFT
+2025-04-24 22:25:34,195 - ADMF-Trader - INFO - BUY signal #8 for MSFT at 216.72
+2025-04-24 22:25:34,195 - ADMF-Trader - INFO - Created order: BUY 36 MSFT @ 216.72 (ID: 27ae8c81-336f-404f-8447-3c7d6bb4b845)
+2025-04-24 22:25:34,195 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,207 - src.risk.portfolio.portfolio - INFO - Fill: BUY 36 MSFT @ 216.72, PnL: 0.00, Cash: 39193.52, Equity: 79414.48
+2025-04-24 22:25:34,207 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1077d52b0>
+2025-04-24 22:25:34,208 - src.risk.portfolio.portfolio - INFO - Fill: BUY 36 MSFT @ 216.72, PnL: 0.00, Cash: 31391.53, Equity: 79414.48
+2025-04-24 22:25:34,208 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,208 - ADMF-Trader - INFO - Updated order with fill: Order(71165f02-0bf2-48df-b80a-9a0d44682904, MSFT, BUY, 36, FILLED)
+2025-04-24 22:25:34,208 - src.execution.order_manager - INFO - Created order: Order(71165f02-0bf2-48df-b80a-9a0d44682904, MSFT, BUY, 36, FILLED)
+2025-04-24 22:25:34,208 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,208 - ADMF-Trader - INFO - Updated order with fill: Order(253c21d3-7267-47fb-a331-18bb7473efa1, MSFT, BUY, 36, FILLED)
+2025-04-24 22:25:34,208 - src.execution.order_manager - INFO - Created order: Order(253c21d3-7267-47fb-a331-18bb7473efa1, MSFT, BUY, 36, FILLED)
+2025-04-24 22:25:34,208 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,208 - ADMF-Trader - INFO - Broker emitting fill for MSFT
+2025-04-24 22:25:34,208 - src.risk.portfolio.portfolio - INFO - Fill: BUY 36 MSFT @ 216.72, PnL: 0.00, Cash: 23589.54, Equity: 79414.48
+2025-04-24 22:25:34,208 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1077d5320>
+2025-04-24 22:25:34,208 - src.risk.portfolio.portfolio - INFO - Fill: BUY 36 MSFT @ 216.72, PnL: 0.00, Cash: 15787.55, Equity: 79414.48
+2025-04-24 22:25:34,208 - ADMF-Trader - INFO - SELL signal #9 for MSFT at 199.08
+2025-04-24 22:25:34,208 - ADMF-Trader - INFO - Created order: SELL 100 MSFT @ 199.08 (ID: a2d02929-888f-47a5-aedb-09f3f228ae51)
+2025-04-24 22:25:34,208 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,219 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 MSFT @ 199.08, PnL: -1764.01, Cash: 35695.74, Equity: 76874.30
+2025-04-24 22:25:34,219 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1077d5400>
+2025-04-24 22:25:34,219 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 44 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:25:34,219 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 44
+2025-04-24 22:25:34,220 - src.risk.portfolio.portfolio - INFO - Fill: SELL 44 MSFT @ 199.08, PnL: -776.16, Cash: 44455.34, Equity: 76874.30
+2025-04-24 22:25:34,220 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,220 - ADMF-Trader - INFO - Updated order with fill: Order(f424572d-f2ec-4170-a6bc-49ad3ecad6e8, MSFT, SELL, 100, FILLED)
+2025-04-24 22:25:34,220 - src.execution.order_manager - INFO - Created order: Order(f424572d-f2ec-4170-a6bc-49ad3ecad6e8, MSFT, SELL, 100, FILLED)
+2025-04-24 22:25:34,220 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,220 - ADMF-Trader - INFO - Updated order with fill: Order(eadff650-5996-4c26-9e20-c5d16097d83c, MSFT, SELL, 100, FILLED)
+2025-04-24 22:25:34,220 - src.execution.order_manager - INFO - Created order: Order(eadff650-5996-4c26-9e20-c5d16097d83c, MSFT, SELL, 100, FILLED)
+2025-04-24 22:25:34,220 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,220 - ADMF-Trader - INFO - Broker emitting fill for MSFT
+2025-04-24 22:25:34,220 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:25:34,220 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 0
+2025-04-24 22:25:34,220 - src.risk.portfolio.portfolio - INFO - Fill: SELL 0 MSFT @ 199.08, PnL: 0.00, Cash: 44455.34, Equity: 76874.30
+2025-04-24 22:25:34,220 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1077d5470>
+2025-04-24 22:25:34,220 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 100, but processing anyway with adjusted quantities
+2025-04-24 22:25:34,220 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 0
+2025-04-24 22:25:34,220 - src.risk.portfolio.portfolio - INFO - Fill: SELL 0 MSFT @ 199.08, PnL: 0.00, Cash: 44455.34, Equity: 76874.30
+2025-04-24 22:25:34,220 - ADMF-Trader - INFO - BUY signal #10 for MSFT at 193.14
+2025-04-24 22:25:34,220 - ADMF-Trader - INFO - Created order: BUY 39 MSFT @ 193.14 (ID: b7d56efe-4c22-492c-8344-e1033837056b)
+2025-04-24 22:25:34,220 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,233 - src.risk.portfolio.portfolio - INFO - Fill: BUY 39 MSFT @ 193.14, PnL: 0.00, Cash: 36923.00, Equity: 76874.30
+2025-04-24 22:25:34,233 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1077d5550>
+2025-04-24 22:25:34,233 - src.risk.portfolio.portfolio - INFO - Fill: BUY 39 MSFT @ 193.14, PnL: 0.00, Cash: 29390.67, Equity: 76874.30
+2025-04-24 22:25:34,233 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,233 - ADMF-Trader - INFO - Updated order with fill: Order(9f9b457a-28c5-49f6-8db2-9502078b8201, MSFT, BUY, 39, FILLED)
+2025-04-24 22:25:34,233 - src.execution.order_manager - INFO - Created order: Order(9f9b457a-28c5-49f6-8db2-9502078b8201, MSFT, BUY, 39, FILLED)
+2025-04-24 22:25:34,233 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,233 - ADMF-Trader - INFO - Updated order with fill: Order(00c3e1d1-3f26-4eb5-ac27-63a1437d94db, MSFT, BUY, 39, FILLED)
+2025-04-24 22:25:34,233 - src.execution.order_manager - INFO - Created order: Order(00c3e1d1-3f26-4eb5-ac27-63a1437d94db, MSFT, BUY, 39, FILLED)
+2025-04-24 22:25:34,233 - src.execution.broker.broker_simulator - INFO - Broker emitted fill event for MSFT
+2025-04-24 22:25:34,233 - ADMF-Trader - INFO - Broker emitting fill for MSFT
+2025-04-24 22:25:34,233 - src.risk.portfolio.portfolio - INFO - Fill: BUY 39 MSFT @ 193.14, PnL: 0.00, Cash: 21858.33, Equity: 76874.30
+2025-04-24 22:25:34,233 - src.execution.order_manager - WARNING - No matching order found for fill: <src.core.events.event_types.FillEvent object at 0x1077d55c0>
+2025-04-24 22:25:34,233 - src.risk.portfolio.portfolio - INFO - Fill: BUY 39 MSFT @ 193.14, PnL: 0.00, Cash: 14325.99, Equity: 76874.30
+2025-04-24 22:25:34,234 - ADMF-Trader - INFO - Processed 40 bars for MSFT
+2025-04-24 22:25:34,234 - ADMF-Trader - INFO - Finished processing 42 bars for MSFT
+2025-04-24 22:25:34,234 - ADMF-Trader - INFO - Processed 84 total bars
+2025-04-24 22:25:34,234 - ADMF-Trader - INFO - Executed 40 trades
+2025-04-24 22:25:34,234 - ADMF-Trader - INFO - Trade 1: BUY 93 AAPL @ 107.10, PnL: 0.00
+2025-04-24 22:25:34,234 - ADMF-Trader - INFO - Trade 2: BUY 93 AAPL @ 107.10, PnL: 0.00
+2025-04-24 22:25:34,234 - ADMF-Trader - INFO - Trade 3: BUY 93 AAPL @ 107.10, PnL: 0.00
+2025-04-24 22:25:34,234 - ADMF-Trader - INFO - Trade 4: BUY 93 AAPL @ 107.10, PnL: 0.00
+2025-04-24 22:25:34,234 - ADMF-Trader - INFO - Trade 5: SELL 100 AAPL @ 80.93, PnL: -2617.00
+2025-04-24 22:25:34,235 - ADMF-Trader - INFO - Initial equity: $100000.00
+2025-04-24 22:25:34,236 - ADMF-Trader - INFO - Final equity: $75948.62
+2025-04-24 22:25:34,236 - ADMF-Trader - INFO - Total return: -24.05%
+2025-04-24 22:25:34,237 - ADMF-Trader - INFO - Saved equity curve to 'equity_curve.csv'

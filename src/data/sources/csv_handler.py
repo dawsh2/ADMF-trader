@@ -39,16 +39,18 @@ class CSVDataSource(DataSourceBase):
             'volume': ['volume', 'Volume', 'vol', 'Vol']
         }
 
+    # Improved date handling in src/data/sources/csv_handler.py
+
     def get_data(self, symbol: str, start_date=None, end_date=None, timeframe='1m') -> pd.DataFrame:
         """
         Get data for a symbol within a date range.
-        
+
         Args:
             symbol: Symbol to get data for
             start_date: Start date (datetime or string)
             end_date: End date (datetime or string)
             timeframe: Data timeframe (e.g., '1d', '1h', '5m')
-            
+
         Returns:
             DataFrame with OHLCV data
         """
@@ -65,52 +67,87 @@ class CSVDataSource(DataSourceBase):
                 start_date = pd.to_datetime(start_date)
             if isinstance(end_date, str):
                 end_date = pd.to_datetime(end_date)
-                
+
             # Read CSV
             df = pd.read_csv(filename)
             logger.info(f"CSVDataSource: Loaded {len(df)} rows")
 
-            # Convert date column to datetime
-            if self.date_column in df.columns:
+            # Determine date column - check if configured column exists
+            date_col = self.date_column
+            if date_col not in df.columns:
+                # Try common alternatives
+                alternatives = ['date', 'timestamp', 'time', 'datetime']
+                for alt in alternatives:
+                    if alt in df.columns:
+                        date_col = alt
+                        logger.info(f"Using '{date_col}' column instead of configured '{self.date_column}'")
+                        break
+                else:
+                    # If index is numeric, assume it's the date index
+                    logger.warning(f"Date column '{self.date_column}' not found and no alternatives available")
+                    # Try to create a date index from the first column
+                    if df.shape[0] > 0:
+                        df[self.date_column] = pd.date_range(
+                            start=datetime.datetime.now() - datetime.timedelta(days=len(df)), 
+                            periods=len(df), 
+                            freq='D'
+                        )
+                        date_col = self.date_column
+                        logger.info(f"Created synthetic date column '{date_col}'")
+
+            # Convert date column to datetime with robust error handling
+            if date_col in df.columns:
                 # Log a sample of original timestamps
                 if not df.empty:
-                    logger.info(f"CSVDataSource: Original timestamp sample: {df[self.date_column].iloc[0]}")
-                
-                # Parse timestamps with pd.to_datetime which handles various formats
-                df[self.date_column] = pd.to_datetime(df[self.date_column])
-                
-                # Log a sample of parsed timestamps
-                if not df.empty:
-                    logger.info(f"CSVDataSource: Parsed timestamp sample: {df[self.date_column].iloc[0]}")
-                
-                # Remove timezone info to ensure consistency
-                if df[self.date_column].dt.tz is not None:
-                    df[self.date_column] = df[self.date_column].dt.tz_localize(None)
-                    logger.info(f"CSVDataSource: Removed timezone info from timestamps")
-                
-                # Make sure filter dates are also timezone-naive
-                if start_date is not None and hasattr(start_date, 'tzinfo') and start_date.tzinfo is not None:
-                    start_date = start_date.replace(tzinfo=None)
-                if end_date is not None and hasattr(end_date, 'tzinfo') and end_date.tzinfo is not None:
-                    end_date = end_date.replace(tzinfo=None)
+                    logger.info(f"CSVDataSource: Original timestamp sample: {df[date_col].iloc[0]}")
 
-                # Filter by date range
-                if start_date is not None:
-                    df = df[df[self.date_column] >= start_date]
-                    logger.info(f"CSVDataSource: Filtered for dates >= {start_date}")
-                    
-                if end_date is not None:
-                    df = df[df[self.date_column] <= end_date]
-                    logger.info(f"CSVDataSource: Filtered for dates <= {end_date}")
+                # Try multiple datetime parsing approaches
+                try:
+                    df[date_col] = pd.to_datetime(df[date_col])
+                except Exception as e:
+                    logger.warning(f"Standard datetime parsing failed: {e}, trying alternative formats")
+                    # Try with different format inference
+                    try:
+                        df[date_col] = pd.to_datetime(df[date_col], infer_datetime_format=True, errors='coerce')
+                    except Exception as e2:
+                        logger.warning(f"Alternative datetime parsing failed: {e2}")
 
-                # Set date as index
-                df.set_index(self.date_column, inplace=True)
-                logger.info(f"CSVDataSource: Set {self.date_column} as index")
+                # Check if conversion was successful
+                if pd.api.types.is_datetime64_any_dtype(df[date_col]):
+                    # Log a sample of parsed timestamps
+                    if not df.empty:
+                        logger.info(f"CSVDataSource: Parsed timestamp sample: {df[date_col].iloc[0]}")
+
+                    # Remove timezone info to ensure consistency
+                    if hasattr(df[date_col].dt, 'tz') and df[date_col].dt.tz is not None:
+                        df[date_col] = df[date_col].dt.tz_localize(None)
+                        logger.info(f"CSVDataSource: Removed timezone info from timestamps")
+
+                    # Make sure filter dates are also timezone-naive
+                    if start_date is not None and hasattr(start_date, 'tzinfo') and start_date.tzinfo is not None:
+                        start_date = start_date.replace(tzinfo=None)
+                    if end_date is not None and hasattr(end_date, 'tzinfo') and end_date.tzinfo is not None:
+                        end_date = end_date.replace(tzinfo=None)
+
+                    # Filter by date range
+                    if start_date is not None:
+                        df = df[df[date_col] >= start_date]
+                        logger.info(f"CSVDataSource: Filtered for dates >= {start_date}")
+
+                    if end_date is not None:
+                        df = df[df[date_col] <= end_date]
+                        logger.info(f"CSVDataSource: Filtered for dates <= {end_date}")
+
+                    # Set date as index
+                    df.set_index(date_col, inplace=True)
+                    logger.info(f"CSVDataSource: Set {date_col} as index")
+                else:
+                    logger.error(f"Failed to convert {date_col} to datetime, date filtering will not work")
 
             # Map columns to standard names
             column_mapping = self._map_columns(df.columns)
             df = df.rename(columns=column_mapping)
-            
+
             # Log info about the processed DataFrame
             if not df.empty:
                 logger.info(f"CSVDataSource: Date range in data: {df.index.min()} to {df.index.max()}")
@@ -121,6 +158,8 @@ class CSVDataSource(DataSourceBase):
         except Exception as e:
             logger.error(f"Error reading CSV file {filename}: {e}", exc_info=True)
             return pd.DataFrame()        
+
+ 
 
     def is_available(self, symbol: str, start_date=None, end_date=None, 
                    timeframe='1m') -> bool:

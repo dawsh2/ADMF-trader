@@ -197,34 +197,41 @@ class EventBus:
     def unregister_async(self, event_type, handler):
         """Unregister an async handler for an event type."""
         return self.unregister(event_type, handler, is_async=True)
-    
+
+    # Fix for event bus in src/core/events/event_bus.py
+
     def emit(self, event):
         """
         Emit an event to registered handlers.
-        
+
         Args:
             event: Event to emit
-            
+
         Returns:
             int: Number of handlers that processed the event
         """
-        event_type = event.get_type()
+        try:
+            event_type = event.get_type()
+        except Exception as e:
+            logger.error(f"Invalid event object, missing get_type() method: {e}")
+            return 0
+
         handlers_called = 0
-        
+
         # Track event count
         if event_type in self.event_counts:
             self.event_counts[event_type] += 1
         else:
             self.event_counts[event_type] = 1
-            
+
         logger.debug(f"Emitting {event_type.name} event (ID: {event.get_id()})")
-        
-        # Process handlers
+
+        # Process handlers with improved error handling
         if event_type in self.handlers:
             # Make a copy to avoid modification during iteration
             handlers_copy = list(self.handlers[event_type])
             dead_refs = []
-            
+
             for handler_ref in handlers_copy:
                 try:
                     # Get actual handler from weakref if needed
@@ -236,49 +243,59 @@ class EventBus:
                             continue
                     else:
                         handler = handler_ref
-                        
-                    # Call the handler
-                    handler(event)
-                    handlers_called += 1
-                except Exception as e:
-                    logger.error(f"Error in handler: {e}", exc_info=True)
-            
+
+                    # Call the handler with exception handling
+                    try:
+                        handler(event)
+                        handlers_called += 1
+                    except Exception as handler_error:
+                        logger.error(f"Error in handler {getattr(handler, '__name__', str(handler))}: {handler_error}", exc_info=True)
+                        # Continue processing other handlers instead of failing
+                except Exception as ref_error:
+                    logger.error(f"Error resolving handler reference: {ref_error}")
+
             # Clean up any dead references
             if dead_refs and event_type in self.handlers:
                 self.handlers[event_type] = [
                     h for h in self.handlers[event_type] 
                     if h not in dead_refs
                 ]
-        
+                logger.debug(f"Cleaned up {len(dead_refs)} dead handler references for {event_type.name}")
+
         return handlers_called
-    
+
     async def emit_async(self, event):
         """
         Emit an event to registered handlers, both sync and async.
-        
+
         This will call sync handlers immediately and wait for all async
         handlers to complete.
-        
+
         Args:
             event: Event to emit
-            
+
         Returns:
             tuple: (sync_handlers_called, async_handlers_called)
         """
-        event_type = event.get_type()
+        try:
+            event_type = event.get_type()
+        except Exception as e:
+            logger.error(f"Invalid event object for async emit, missing get_type() method: {e}")
+            return (0, 0)
+
         sync_handlers_called = 0
         async_handlers_called = 0
-        
+
         # First, call synchronous handlers
         sync_handlers_called = self.emit(event)
-        
-        # Process async handlers
+
+        # Process async handlers with improved error handling
         if event_type in self.async_handlers:
             # Make a copy to avoid modification during iteration
             handlers_copy = list(self.async_handlers[event_type])
             dead_refs = []
             tasks = []
-            
+
             for handler_ref in handlers_copy:
                 try:
                     # Get actual handler from weakref if needed
@@ -290,13 +307,13 @@ class EventBus:
                             continue
                     else:
                         handler = handler_ref
-                        
+
                     # Schedule the handler
                     task = asyncio.create_task(handler(event))
                     tasks.append(task)
                 except Exception as e:
                     logger.error(f"Error scheduling async handler: {e}", exc_info=True)
-            
+
             # Wait for all tasks to complete
             if tasks:
                 results = await asyncio.gather(*tasks, return_exceptions=True)
@@ -305,15 +322,18 @@ class EventBus:
                         logger.error(f"Error in async handler: {result}")
                     else:
                         async_handlers_called += 1
-            
+
             # Clean up any dead references
             if dead_refs and event_type in self.async_handlers:
                 self.async_handlers[event_type] = [
                     h for h in self.async_handlers[event_type] 
                     if h not in dead_refs
                 ]
-        
-        return (sync_handlers_called, async_handlers_called)
+                logger.debug(f"Cleaned up {len(dead_refs)} dead async handler references for {event_type.name}")
+
+        return (sync_handlers_called, async_handlers_called)    
+    
+
     
     def emit_for(self, event_type, data=None, timestamp=None):
         """

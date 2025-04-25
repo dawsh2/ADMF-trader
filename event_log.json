@@ -1,0 +1,601 @@
+[
+  {
+    "type": "ORDER",
+    "timestamp": "2025-04-24 22:13:08.199804",
+    "data": {
+      "symbol": "AAPL",
+      "order_type": "MARKET",
+      "direction": "BUY",
+      "quantity": 100,
+      "price": 150.0,
+      "order_id": "64ecd1aa-39ab-496d-9a50-d28a047d70a2"
+    },
+    "id": "807370b6-5e74-4504-989d-935d4277bb25"
+  },
+  {
+    "type": "FILL",
+    "timestamp": "2025-04-24 22:13:08.199804",
+    "data": {
+      "symbol": "AAPL",
+      "direction": "BUY",
+      "quantity": 100,
+      "price": 150.0,
+      "commission": 0.0,
+      "order_id": "64ecd1aa-39ab-496d-9a50-d28a047d70a2"
+    },
+    "id": "a0b04955-4f17-45d5-b42f-da1f4c84ff9c"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:08.212770",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "458a5da0-c7a3-4808-aa34-8e738a56eaac",
+      "symbol": "AAPL",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 100.0,
+      "remaining_quantity": 0.0,
+      "average_fill_price": 150.0
+    },
+    "id": "02fd5bf2-632a-4b24-b9f0-5cd4cd0240e0"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:08.199804",
+    "data": {
+      "portfolio_id": "portfolio_0c76b0fc",
+      "cash": 2050.0,
+      "equity": 10000.0,
+      "trade": {
+        "id": "1abdf5ae-ea3d-4cbc-8e93-b900e4232fdc",
+        "timestamp": "2025-04-24 22:13:08.199804",
+        "symbol": "AAPL",
+        "direction": "BUY",
+        "quantity": 53,
+        "price": 150.0,
+        "commission": 0.0,
+        "pnl": 0.0
+      }
+    },
+    "id": "7de30adc-356b-4e20-9052-bf794ba1a08c"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:08.213101",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "458a5da0-c7a3-4808-aa34-8e738a56eaac",
+      "symbol": "AAPL",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 200.0,
+      "remaining_quantity": -100.0,
+      "average_fill_price": 150.0
+    },
+    "id": "127ccfb0-dd42-4f1d-81fd-ac470d4f3bb8"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:08.199804",
+    "data": {
+      "portfolio_id": "portfolio_0c76b0fc",
+      "cash": 550.0,
+      "equity": 10000.0,
+      "trade": {
+        "id": "e97a6107-e475-4ca7-8503-70992cc1862b",
+        "timestamp": "2025-04-24 22:13:08.199804",
+        "symbol": "AAPL",
+        "direction": "BUY",
+        "quantity": 10,
+        "price": 150.0,
+        "commission": 0.0,
+        "pnl": 0.0
+      }
+    },
+    "id": "517c9705-4326-477f-af7e-9eda575efb43"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:08.213698",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "64ecd1aa-39ab-496d-9a50-d28a047d70a2",
+      "symbol": "AAPL",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 100.0,
+      "remaining_quantity": 0.0,
+      "average_fill_price": 150.0
+    },
+    "id": "d63f85f5-8fc4-47c0-9f08-74be6cebe833"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:08.213698",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "64ecd1aa-39ab-496d-9a50-d28a047d70a2",
+      "symbol": "AAPL",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 100.0,
+      "remaining_quantity": 0.0,
+      "average_fill_price": 150.0
+    },
+    "id": "2e68d509-eadd-4a83-abd3-3ff046c71348"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:08.214018",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "64ecd1aa-39ab-496d-9a50-d28a047d70a2",
+      "symbol": "AAPL",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 100.0,
+      "remaining_quantity": 0.0,
+      "average_fill_price": 150.0
+    },
+    "id": "7ce09727-0a23-4689-a8ed-c1ba95b236e4"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:08.214018",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "64ecd1aa-39ab-496d-9a50-d28a047d70a2",
+      "symbol": "AAPL",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 100.0,
+      "remaining_quantity": 0.0,
+      "average_fill_price": 150.0
+    },
+    "id": "6d08b728-8205-4ede-b007-c45afce270c5"
+  },
+  {
+    "type": "FILL",
+    "timestamp": "2025-04-24 22:13:08.199804",
+    "data": {
+      "symbol": "AAPL",
+      "direction": "BUY",
+      "quantity": 100,
+      "price": 150.0,
+      "commission": 0.0,
+      "order_id": "64ecd1aa-39ab-496d-9a50-d28a047d70a2"
+    },
+    "id": "dc4fb805-f213-4546-8431-a606aaf2b135"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:08.226950",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "64ecd1aa-39ab-496d-9a50-d28a047d70a2",
+      "symbol": "AAPL",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 200.0,
+      "remaining_quantity": -100.0,
+      "average_fill_price": 150.0
+    },
+    "id": "7645a5f8-138f-4994-824a-e437eb7f13b9"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:08.199804",
+    "data": {
+      "portfolio_id": "portfolio_0c76b0fc",
+      "cash": 250.0,
+      "equity": 10000.0,
+      "trade": {
+        "id": "b825c27a-2b55-4d43-a2df-334929c0cc2c",
+        "timestamp": "2025-04-24 22:13:08.199804",
+        "symbol": "AAPL",
+        "direction": "BUY",
+        "quantity": 2,
+        "price": 150.0,
+        "commission": 0.0,
+        "pnl": 0.0
+      }
+    },
+    "id": "23ee9e77-abd4-4256-b54a-072955726268"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:08.227221",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "64ecd1aa-39ab-496d-9a50-d28a047d70a2",
+      "symbol": "AAPL",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 300.0,
+      "remaining_quantity": -200.0,
+      "average_fill_price": 150.0
+    },
+    "id": "c0e5a81c-df60-4689-8495-98da86df561e"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:08.199804",
+    "data": {
+      "portfolio_id": "portfolio_0c76b0fc",
+      "cash": 100.0,
+      "equity": 10000.0,
+      "trade": {
+        "id": "34c7556f-cde3-4bf0-b534-ced73cbb078a",
+        "timestamp": "2025-04-24 22:13:08.199804",
+        "symbol": "AAPL",
+        "direction": "BUY",
+        "quantity": 1,
+        "price": 150.0,
+        "commission": 0.0,
+        "pnl": 0.0
+      }
+    },
+    "id": "d3c5bf5f-04de-4899-8a9c-ef5c629c95db"
+  },
+  {
+    "type": "FILL",
+    "timestamp": "2025-04-24 22:13:08.732903",
+    "data": {
+      "symbol": "TSLA",
+      "direction": "BUY",
+      "quantity": 10,
+      "price": 800.0,
+      "commission": 8.0
+    },
+    "id": "54f7a999-f206-4052-a77c-aba1aae42884"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:08.734096",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "08d24df6-5672-48a3-8e24-b1c8e6ba5148",
+      "symbol": "TSLA",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 10.0,
+      "remaining_quantity": 0.0,
+      "average_fill_price": 800.0
+    },
+    "id": "1a8b6396-0ba0-4fe5-b43a-1c902ba93984"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:08.735591",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "fa435daf-5547-4eb3-b7e7-e05afc536273",
+      "symbol": "TSLA",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 10.0,
+      "remaining_quantity": 0.0,
+      "average_fill_price": 800.0
+    },
+    "id": "82a74d4e-90fc-4744-91b0-a9db766d0832"
+  },
+  {
+    "type": "ORDER",
+    "timestamp": "2025-04-24 22:13:09.236637",
+    "data": {
+      "symbol": "MSFT",
+      "order_type": "MARKET",
+      "direction": "BUY",
+      "quantity": 50,
+      "price": 300.0,
+      "order_id": "3fc4fb9b-8cf1-4c62-9f3f-449494417dea"
+    },
+    "id": "556e9246-568d-46c4-b2de-bce4314db015"
+  },
+  {
+    "type": "FILL",
+    "timestamp": "2025-04-24 22:13:09.236637",
+    "data": {
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "quantity": 50,
+      "price": 300.0,
+      "commission": 0.0,
+      "order_id": "3fc4fb9b-8cf1-4c62-9f3f-449494417dea"
+    },
+    "id": "09d46177-4c19-4446-823e-36ed18f9ff8e"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:09.251275",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "16afa88a-d826-42ff-bbd8-df11f1c7f450",
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 50.0,
+      "remaining_quantity": 0.0,
+      "average_fill_price": 300.0
+    },
+    "id": "33a347c2-61a3-4a2e-b637-2a1b22ec3336"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:09.252763",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "16afa88a-d826-42ff-bbd8-df11f1c7f450",
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 100.0,
+      "remaining_quantity": -50.0,
+      "average_fill_price": 300.0
+    },
+    "id": "ebcb5ffd-17f1-44ba-a1eb-64e65d2727f9"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:09.253647",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "3fc4fb9b-8cf1-4c62-9f3f-449494417dea",
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 50.0,
+      "remaining_quantity": 0.0,
+      "average_fill_price": 300.0
+    },
+    "id": "8e308e40-6240-4fde-9971-e606a9eef073"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:09.253647",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "3fc4fb9b-8cf1-4c62-9f3f-449494417dea",
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 50.0,
+      "remaining_quantity": 0.0,
+      "average_fill_price": 300.0
+    },
+    "id": "8e5287fc-cc72-4f1d-8951-ba9fa92d7b58"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:09.254573",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "3fc4fb9b-8cf1-4c62-9f3f-449494417dea",
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 50.0,
+      "remaining_quantity": 0.0,
+      "average_fill_price": 300.0
+    },
+    "id": "e8899111-52a5-4b0f-ac7e-b413bdd7f9a6"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:09.254573",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "3fc4fb9b-8cf1-4c62-9f3f-449494417dea",
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 50.0,
+      "remaining_quantity": 0.0,
+      "average_fill_price": 300.0
+    },
+    "id": "f5059b13-a738-4d24-8fbc-e2b8b6054825"
+  },
+  {
+    "type": "FILL",
+    "timestamp": "2025-04-24 22:13:09.236637",
+    "data": {
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "quantity": 50,
+      "price": 300.0,
+      "commission": 0.0,
+      "order_id": "3fc4fb9b-8cf1-4c62-9f3f-449494417dea"
+    },
+    "id": "43de67c4-47b7-4151-a4d0-4ba0db97af78"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:09.268497",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "3fc4fb9b-8cf1-4c62-9f3f-449494417dea",
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 100.0,
+      "remaining_quantity": -50.0,
+      "average_fill_price": 300.0
+    },
+    "id": "4fc58c5d-8682-494a-bb2c-02c7bbeb6bc7"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:09.269218",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "3fc4fb9b-8cf1-4c62-9f3f-449494417dea",
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 150.0,
+      "remaining_quantity": -100.0,
+      "average_fill_price": 300.0
+    },
+    "id": "55157820-7878-42fd-8a1a-c9916acf753f"
+  },
+  {
+    "type": "ORDER",
+    "timestamp": "2025-04-24 22:13:09.236669",
+    "data": {
+      "symbol": "MSFT",
+      "order_type": "MARKET",
+      "direction": "BUY",
+      "quantity": 25,
+      "price": 305.0,
+      "order_id": "a0b4f282-a7fe-4185-8638-881f32fdaf00"
+    },
+    "id": "62bf70b8-f0c3-4ba1-9449-8b2bebbc6dd6"
+  },
+  {
+    "type": "FILL",
+    "timestamp": "2025-04-24 22:13:09.236669",
+    "data": {
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "quantity": 25,
+      "price": 305.0,
+      "commission": 0.0,
+      "order_id": "a0b4f282-a7fe-4185-8638-881f32fdaf00"
+    },
+    "id": "8354a150-73dd-4949-871d-dff56ad729ce"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:09.282429",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "e118e988-4f67-4677-a905-c346fa62666f",
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 25.0,
+      "remaining_quantity": 0.0,
+      "average_fill_price": 305.0
+    },
+    "id": "1c7e0056-86e7-4ade-9722-84115c04f771"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:09.282983",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "e118e988-4f67-4677-a905-c346fa62666f",
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 50.0,
+      "remaining_quantity": -25.0,
+      "average_fill_price": 305.0
+    },
+    "id": "3589cd6e-e632-47bd-aa7f-c6ef4c39c38e"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:09.284164",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "a0b4f282-a7fe-4185-8638-881f32fdaf00",
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 25.0,
+      "remaining_quantity": 0.0,
+      "average_fill_price": 305.0
+    },
+    "id": "a962854f-f364-4c17-9fd5-bc288ba5b863"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:09.284164",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "a0b4f282-a7fe-4185-8638-881f32fdaf00",
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 25.0,
+      "remaining_quantity": 0.0,
+      "average_fill_price": 305.0
+    },
+    "id": "16eca2fb-6fbb-4cf5-ab2d-f2d640fc572e"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:09.285159",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "a0b4f282-a7fe-4185-8638-881f32fdaf00",
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 25.0,
+      "remaining_quantity": 0.0,
+      "average_fill_price": 305.0
+    },
+    "id": "5ce9876d-24b3-4ff7-a155-30f4fc0235fe"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:09.285159",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "a0b4f282-a7fe-4185-8638-881f32fdaf00",
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 25.0,
+      "remaining_quantity": 0.0,
+      "average_fill_price": 305.0
+    },
+    "id": "e1884bbb-5d57-4829-bc01-ac142f1e518b"
+  },
+  {
+    "type": "FILL",
+    "timestamp": "2025-04-24 22:13:09.236669",
+    "data": {
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "quantity": 25,
+      "price": 305.0,
+      "commission": 0.0,
+      "order_id": "a0b4f282-a7fe-4185-8638-881f32fdaf00"
+    },
+    "id": "a4030111-1921-4f4f-a728-c6853c855b37"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:09.303854",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "a0b4f282-a7fe-4185-8638-881f32fdaf00",
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 50.0,
+      "remaining_quantity": -25.0,
+      "average_fill_price": 305.0
+    },
+    "id": "93c0336e-4290-4e70-a356-c6cea2177111"
+  },
+  {
+    "type": "PORTFOLIO",
+    "timestamp": "2025-04-24 22:13:09.304406",
+    "data": {
+      "type": "ORDER_STATUS",
+      "order_id": "a0b4f282-a7fe-4185-8638-881f32fdaf00",
+      "symbol": "MSFT",
+      "direction": "BUY",
+      "status": "FILLED",
+      "filled_quantity": 75.0,
+      "remaining_quantity": -50.0,
+      "average_fill_price": 305.0
+    },
+    "id": "550271fb-d4e6-4a8e-9f7a-cf410736ed8f"
+  }
+]

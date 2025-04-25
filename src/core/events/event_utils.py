@@ -160,16 +160,35 @@ def create_signal_event(signal_value, price, symbol, rule_id=None,
                        confidence, metadata, timestamp)
 
 def create_order_event(symbol, order_type, direction, quantity, 
-                      price=None, timestamp=None):
+                     price=None, timestamp=None):
     """Create a standardized order event."""
-    return OrderEvent(symbol, order_type, direction, quantity, 
-                     price, timestamp)
+    # Import here to avoid circular imports
+    import uuid
+    
+    # Add an order_id to the data
+    order_id = str(uuid.uuid4())
+    
+    # Create the event
+    order = OrderEvent(symbol, order_type, direction, quantity, 
+                      price, timestamp)
+    
+    # Add order_id to the data dictionary
+    order.data['order_id'] = order_id
+    
+    return order
 
 def create_fill_event(symbol, direction, quantity, price, 
-                     commission=0.0, timestamp=None):
+                     commission=0.0, timestamp=None, order_id=None):
     """Create a standardized fill event."""
-    return FillEvent(symbol, direction, quantity, price, 
+    # Create the event
+    fill = FillEvent(symbol, direction, quantity, price, 
                     commission, timestamp)
+    
+    # Add order_id to the data if provided
+    if order_id:
+        fill.data['order_id'] = order_id
+    
+    return fill
 
 def create_websocket_event(connection_id, state, data=None, timestamp=None):
     """Create a standardized WebSocket event."""

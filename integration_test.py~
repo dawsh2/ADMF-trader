@@ -1,0 +1,287 @@
+#!/usr/bin/env python
+# integration_test.py - Test script for ADMF-Trader with fixes
+
+import logging
+import pandas as pd
+import numpy as np
+import datetime
+import os
+import sys
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler('admf_trader_test.log')
+    ]
+)
+logger = logging.getLogger("ADMF-Trader-Test")
+
+# Test imports from the trading system
+from src.core.events.event_bus import EventBus
+from src.core.events.event_manager import EventManager
+from src.core.events.event_emitters import BarEmitter
+from src.data.sources.csv_handler import CSVDataSource
+from src.data.historical_data_handler import HistoricalDataHandler
+from src.risk.portfolio.portfolio import PortfolioManager
+from src.execution.broker.broker_simulator import SimulatedBroker
+from src.execution.order_manager import OrderManager
+from src.risk.managers.simple import SimpleRiskManager
+from src.core.events.event_types import EventType
+from src.core.events.event_utils import create_signal_event
+
+# Create test directory if it doesn't exist
+TEST_DATA_DIR = 'test_data'
+os.makedirs(TEST_DATA_DIR, exist_ok=True)
+
+def create_test_data(symbols, start_date, end_date, force_crossovers=True):
+    """Create test data for the specified symbols."""
+    logger.info(f"Creating test data for {symbols} from {start_date} to {end_date}")
+    
+    # Convert to datetime objects if needed
+    if isinstance(start_date, str):
+        start_date = pd.to_datetime(start_date)
+    if isinstance(end_date, str):
+        end_date = pd.to_datetime(end_date)
+    
+    # Generate date range
+    date_range = pd.date_range(start=start_date, end=end_date, freq='B')
+    
+    for symbol in symbols:
+        # Create base price and price series
+        base_price = 100.0
+        
+        if force_crossovers:
+            # Create prices with guaranteed MA crossovers using sine waves
+            prices = []
+            for i in range(len(date_range)):
+                # Create sine wave with varying period
+                t = i / len(date_range)
+                # Combine multiple sine waves with different frequencies
+                price = base_price + 10 * np.sin(t * 20 * np.pi) + 5 * np.sin(t * 8 * np.pi + 0.5)
+                # Add noise
+                price += np.random.normal(0, 0.5)
+                prices.append(price)
+        else:
+            # Create random walk prices
+            returns = np.random.normal(0.0002, 0.01, size=len(date_range))
+            prices = base_price * np.cumprod(1 + returns)
+        
+        # Create OHLCV data
+        data = []
+        for i, date in enumerate(date_range):
+            close_price = prices[i]
+            # Add intraday variation
+            high_price = close_price * (1 + np.random.uniform(0, 0.02))
+            low_price = close_price * (1 - np.random.uniform(0, 0.02))
+            open_price = low_price + np.random.uniform(0, high_price - low_price)
+            # Generate volume
+            volume = int(np.random.normal(1000000, 200000))
+            if volume < 0:
+                volume = 100000
+            
+            data.append({
+                'date': date,
+                'open': open_price,
+                'high': high_price,
+                'low': low_price,
+                'close': close_price,
+                'volume': volume
+            })
+        
+        # Create DataFrame
+        df = pd.DataFrame(data)
+        
+        # Save to CSV file
+        filename = os.path.join(TEST_DATA_DIR, f"{symbol}_1d.csv")
+        df.to_csv(filename, index=False)
+        logger.info(f"Created test data for {symbol} in {filename} with {len(data)} rows")
+    
+    return True
+
+class SimpleMAStrategy:
+    """Simple Moving Average Crossover Strategy for testing."""
+    
+    def __init__(self, event_bus, symbols, fast_window=10, slow_window=30):
+        """Initialize the strategy."""
+        self.event_bus = event_bus
+        self.symbols = symbols if isinstance(symbols, list) else [symbols]
+        self.fast_window = fast_window
+        self.slow_window = slow_window
+        self.data = {symbol: [] for symbol in self.symbols}
+        self.signal_count = 0
+        
+        logger.info(f"Initializing MA Strategy with fast={fast_window}, slow={slow_window}")
+        
+        # Register for bar events
+        self.event_bus.register(EventType.BAR, self.on_bar)
+    
+    def on_bar(self, bar_event):
+        """Handle bar events."""
+        try:
+            symbol = bar_event.get_symbol()
+            if symbol not in self.symbols:
+                return
+            
+            # Store bar data
+            close_price = bar_event.get_close()
+            timestamp = bar_event.get_timestamp()
+            
+            self.data[symbol].append({
+                'timestamp': timestamp,
+                'close': close_price
+            })
+            
+            # Log every 20 bars
+            bar_count = len(self.data[symbol])
+            if bar_count % 20 == 0:
+                logger.info(f"Processed {bar_count} bars for {symbol}, latest close: {close_price:.2f}")
+            
+            # Wait until we have enough data
+            if bar_count < self.slow_window + 1:
+                return
+            
+            # Calculate moving averages
+            closes = [bar['close'] for bar in self.data[symbol]]
+            fast_ma = sum(closes[-self.fast_window:]) / self.fast_window
+            slow_ma = sum(closes[-self.slow_window:]) / self.slow_window
+            
+            # Previous values for detecting crossovers
+            prev_fast_ma = sum(closes[-(self.fast_window+1):-1]) / self.fast_window
+            prev_slow_ma = sum(closes[-(self.slow_window+1):-1]) / self.slow_window
+            
+            # Log MA values every 10 bars for debugging
+            if bar_count % 10 == 0:
+                logger.info(f"{symbol} MAs - Fast: {fast_ma:.2f}, Slow: {slow_ma:.2f}, Diff: {fast_ma-slow_ma:.2f}")
+            
+            # Generate signal on crossover
+            if prev_fast_ma <= prev_slow_ma and fast_ma > slow_ma:
+                # Buy signal
+                signal = create_signal_event(
+                    signal_value=1,  # Buy
+                    price=close_price,
+                    symbol=symbol,
+                    timestamp=timestamp
+                )
+                self.event_bus.emit(signal)
+                self.signal_count += 1
+                logger.info(f"BUY signal #{self.signal_count} for {symbol} at {close_price:.2f}")
+                
+            elif prev_fast_ma >= prev_slow_ma and fast_ma < slow_ma:
+                # Sell signal
+                signal = create_signal_event(
+                    signal_value=-1,  # Sell
+                    price=close_price,
+                    symbol=symbol,
+                    timestamp=timestamp
+                )
+                self.event_bus.emit(signal)
+                self.signal_count += 1
+                logger.info(f"SELL signal #{self.signal_count} for {symbol} at {close_price:.2f}")
+        except Exception as e:
+            logger.error(f"Error in strategy.on_bar: {e}", exc_info=True)
+
+def run_test(symbols=['AAPL', 'MSFT'], initial_cash=100000.0):
+    """Run integration test with the fixed system."""
+    logger.info("Starting ADMF-Trader integration test")
+    
+    # Create sample data
+    start_date = '2023-01-01'
+    end_date = '2023-12-31'
+    create_test_data(symbols, start_date, end_date)
+    
+    # Create event system
+    event_bus = EventBus()
+    event_manager = EventManager(event_bus)
+    
+    # Create event emitter for bar events
+    bar_emitter = BarEmitter("bar_emitter", event_bus)
+    bar_emitter.start()  # Explicitly start the emitter
+    
+    # Create data components
+    data_source = CSVDataSource(TEST_DATA_DIR)
+    data_handler = HistoricalDataHandler(data_source, bar_emitter)
+    
+    # Create execution components
+    portfolio = PortfolioManager(event_bus, initial_cash=initial_cash)
+    broker = SimulatedBroker(event_bus)
+    order_manager = OrderManager(event_bus, broker)
+    
+    # Create risk manager
+    risk_manager = SimpleRiskManager(event_bus, portfolio)
+    
+    # Create strategy with faster windows to generate more signals
+    strategy = SimpleMAStrategy(event_bus, symbols, fast_window=5, slow_window=20)
+    
+    # Register components with event manager
+    event_manager.register_component('data_handler', data_handler)
+    event_manager.register_component('portfolio', portfolio)
+    event_manager.register_component('risk_manager', risk_manager)
+    event_manager.register_component('broker', broker)
+    event_manager.register_component('order_manager', order_manager)
+    event_manager.register_component('strategy', strategy)
+    
+    # Load data
+    logger.info(f"Loading data for {symbols}")
+    data_handler.load_data(symbols, start_date, end_date, timeframe='1d')
+    
+    # Process data
+    logger.info("Starting backtest")
+    bar_count = 0
+    
+    # Process bar events for each symbol
+    for symbol in data_handler.get_symbols():
+        symbol_bars = 0
+        while True:
+            bar = data_handler.get_next_bar(symbol)
+            if bar is None:
+                break
+            bar_count += 1
+            symbol_bars += 1
+        logger.info(f"Processed {symbol_bars} bars for {symbol}")
+    
+    logger.info(f"Backtest complete, processed {bar_count} total bars")
+    
+    # Get portfolio summary
+    portfolio_summary = portfolio.get_portfolio_summary()
+    logger.info(f"Portfolio summary: {portfolio_summary}")
+    
+    # Get trades
+    trades = portfolio.get_recent_trades()
+    logger.info(f"Executed {len(trades)} trades")
+    
+    # Print trade details
+    for i, trade in enumerate(trades[:5]):  # Show first 5 trades
+        logger.info(f"Trade {i+1}: {trade['direction']} {trade['quantity']} {trade['symbol']} @ {trade['price']:.2f}, PnL: {trade['pnl']:.2f}")
+    
+    # Get equity curve
+    equity_curve = portfolio.get_equity_curve_df()
+    if not equity_curve.empty:
+        logger.info(f"Equity curve from {equity_curve.index.min()} to {equity_curve.index.max()}")
+        logger.info(f"Starting equity: {equity_curve['equity'].iloc[0]:.2f}")
+        logger.info(f"Final equity: {equity_curve['equity'].iloc[-1]:.2f}")
+        logger.info(f"Return: {(equity_curve['equity'].iloc[-1] / equity_curve['equity'].iloc[0] - 1):.2%}")
+        
+        # Save equity curve to CSV
+        equity_curve.to_csv("equity_curve.csv")
+        logger.info("Saved equity curve to 'equity_curve.csv'")
+    
+    return {
+        'portfolio': portfolio,
+        'equity_curve': equity_curve,
+        'trades': trades,
+        'bar_count': bar_count
+    }
+
+if __name__ == "__main__":
+    # Run the test
+    logger.info("Running ADMF-Trader integration test")
+    results = run_test()
+    
+    # Check if trades were generated
+    if len(results['trades']) > 0:
+        logger.info("TEST PASSED: System successfully generated trades")
+    else:
+        logger.error("TEST FAILED: No trades were generated")

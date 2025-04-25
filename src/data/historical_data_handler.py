@@ -18,7 +18,8 @@ logger = logging.getLogger(__name__)
 class HistoricalDataHandler(DataHandlerBase):
     """Handler for historical data."""
 
-    # Fix for src/data/historical_data_handler.py
+    # Fixed version for src/data/historical_data_handler.py
+
     def __init__(self, data_source: DataSourceBase, bar_emitter, max_bars_history: int = 100):
         """
         Initialize the historical data handler.
@@ -30,7 +31,7 @@ class HistoricalDataHandler(DataHandlerBase):
         """
         # Store attributes directly rather than using super().__init__
         self._name = self.__class__.__name__  # Store name attribute from DataHandlerBase
-        self.data_source = data_source        # Explicitly store data_source
+        self.data_source = data_source        # Store as data_source (not _data_source)
         self.bar_emitter = bar_emitter        # Explicitly store bar_emitter
         self.data_frames = {}                 # symbol -> DataFrame
         self.current_idx = {}                 # symbol -> current index
@@ -40,62 +41,63 @@ class HistoricalDataHandler(DataHandlerBase):
             'bars_processed': 0,
             'symbols_loaded': 0,
             'errors': 0
-        }    
-    
+        }
 
-    
+        # Ensure bar emitter is running
+        if self.bar_emitter and hasattr(self.bar_emitter, 'start') and hasattr(self.bar_emitter, 'running'):
+            if not self.bar_emitter.running:
+                self.bar_emitter.start()
+                logger.info(f"Started bar emitter: {self.bar_emitter.name}")
+
     def load_data(self, symbols: Union[str, List[str]], start_date=None, 
-                end_date=None, timeframe='1m') -> None:
+                  end_date=None, timeframe='1m') -> None:
         """Load data for the specified symbols."""
         # Convert single symbol to list
         if isinstance(symbols, str):
             symbols = [symbols]
-        
+
         # Convert string dates to datetime objects if needed
         if isinstance(start_date, str):
             start_date = pd.to_datetime(start_date)
         if isinstance(end_date, str):
             end_date = pd.to_datetime(end_date)
-            
+
         # Load data for each symbol
         for symbol in symbols:
             try:
+                # Use self.data_source instead of self._data_source
                 df = self.data_source.get_data(symbol, start_date, end_date, timeframe)
                 if not df.empty:
-                    # Ensure DataFrame has proper columns and types
-                    required_cols = ['open', 'high', 'low', 'close', 'volume']
-                    if not all(col in df.columns for col in required_cols):
-                        missing = [col for col in required_cols if col not in df.columns]
-                        logger.warning(f"Symbol {symbol} missing columns: {missing}")
-                        continue
-                        
-                    # Convert numeric columns to float
-                    for col in ['open', 'high', 'low', 'close']:
-                        if col in df.columns:
-                            df[col] = pd.to_numeric(df[col], errors='coerce')
-                            
-                    # Convert volume to int
-                    if 'volume' in df.columns:
-                        df['volume'] = pd.to_numeric(df['volume'], errors='coerce').fillna(0).astype(int)
-                    
-                    # Ensure index is a DatetimeIndex
-                    if not isinstance(df.index, pd.DatetimeIndex):
-                        logger.warning(f"Index for {symbol} is not a DatetimeIndex. Converting...")
-                        # Try to convert the index to datetime
-                        df.index = pd.to_datetime(df.index, errors='coerce')
-                        if df.index.isna().any():
-                            logger.warning(f"Some index values for {symbol} couldn't be converted to datetime")
-                    
                     # Store data
                     self.data_frames[symbol] = df
                     self.current_idx[symbol] = 0
                     self.bars_history[symbol] = deque(maxlen=self.max_bars_history)
-                    
+                    self.stats['symbols_loaded'] += 1
+
                     logger.info(f"Loaded {len(df)} bars for {symbol} from {df.index.min()} to {df.index.max()}")
                 else:
                     logger.warning(f"No data found for {symbol}")
             except Exception as e:
-                logger.error(f"Error loading data for {symbol}: {e}")
+                logger.error(f"Error loading data for {symbol}: {e}", exc_info=True)
+                self.stats['errors'] += 1
+
+
+
+    def get_data_source(self) -> Any:
+        """Get the current data source."""
+        return self._data_source
+
+    def set_data_source(self, data_source) -> None:
+        """
+        Set the data source.
+
+        Args:
+            data_source: Data source instance
+        """
+        self._data_source = data_source    
+
+    
+
     
     def get_next_bar(self, symbol: str) -> Optional[BarEvent]:
         """Get the next bar for a symbol."""
