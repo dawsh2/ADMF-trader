@@ -1,0 +1,29 @@
+strategies:
+  ma_ensemble:
+    class: strategies.composite_strategy.CompositeStrategy
+    parameters:
+      combination_method: majority
+      symbols: ['AAPL', 'MSFT']
+      weight: 1.0
+  
+  regime_adaptive:
+    class: strategies.regime_strategy.RegimeStrategy
+    parameters:
+      symbols: ['AAPL', 'MSFT']
+      regime_strategy_type: params
+      regime_mappings:
+        uptrend:
+          components:
+            strategy.ma_fast:
+              lookback: 10
+              threshold: 0.01
+        downtrend:
+          components:
+            strategy.ma_fast:
+              lookback: 5
+              threshold: 0.02
+      components:
+        detector.trend:
+          lookback: 50
+          ma_period: 50
+          threshold: 0.02
