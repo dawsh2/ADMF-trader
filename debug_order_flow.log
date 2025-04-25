@@ -1,0 +1,63 @@
+2025-04-24 23:00:35,035 - INFO - [event_debug.<module>] - Order flow debug script starting
+2025-04-24 23:00:35,035 - INFO - [event_debug.run_order_flow_test] - === Starting Order-Fill Flow Debug ===
+2025-04-24 23:00:35,035 - DEBUG - [event_bus.register] - Registered handler for ORDER
+2025-04-24 23:00:35,035 - DEBUG - [event_bus.register] - Registered handler for ORDER
+2025-04-24 23:00:35,035 - DEBUG - [event_bus.register] - Registered handler for FILL
+2025-04-24 23:00:35,035 - DEBUG - [event_bus.register] - Registered handler for ORDER
+2025-04-24 23:00:35,035 - DEBUG - [event_bus.register] - Registered handler for ORDER
+2025-04-24 23:00:35,035 - DEBUG - [event_bus.register] - Registered handler for FILL
+2025-04-24 23:00:35,035 - INFO - [event_debug.run_order_flow_test] - Step 1: Creating order
+2025-04-24 23:00:35,035 - INFO - [event_debug.run_order_flow_test] - Generated order_id: 8965d6a9-82cf-487b-8f90-e552aae8803a
+2025-04-24 23:00:35,035 - INFO - [event_debug.run_order_flow_test] - Created order event (ID: b3e38e4d-3e24-4858-ab2b-a02029e7b9db) with order_id: 8965d6a9-82cf-487b-8f90-e552aae8803a
+2025-04-24 23:00:35,035 - INFO - [event_debug.run_order_flow_test] - Order event data: {'symbol': 'AAPL', 'order_type': 'MARKET', 'direction': 'BUY', 'quantity': 100, 'price': 150.0, 'order_id': '8965d6a9-82cf-487b-8f90-e552aae8803a'}
+2025-04-24 23:00:35,035 - DEBUG - [event_bus.register] - Registered handler for FILL
+2025-04-24 23:00:35,035 - INFO - [event_debug.run_order_flow_test] - Step 2: Processing order through broker
+2025-04-24 23:00:35,035 - DEBUG - [broker_simulator.process_order] - Broker processing order with ID: 8965d6a9-82cf-487b-8f90-e552aae8803a
+2025-04-24 23:00:35,035 - INFO - [broker_simulator.process_order] - Broker processed order: BUY 100 AAPL @ 150.00
+2025-04-24 23:00:35,035 - INFO - [broker_simulator.process_order] - Fill event created with order_id: 8965d6a9-82cf-487b-8f90-e552aae8803a
+2025-04-24 23:00:35,035 - INFO - [event_debug.run_order_flow_test] - Broker returned fill event (ID: d8502dd8-c292-465b-91cb-b00e2ed930f5)
+2025-04-24 23:00:35,035 - INFO - [event_debug.run_order_flow_test] - Fill event data: {'symbol': 'AAPL', 'direction': 'BUY', 'quantity': 100, 'price': 150.0, 'commission': 0.0, 'order_id': '8965d6a9-82cf-487b-8f90-e552aae8803a'}
+2025-04-24 23:00:35,035 - INFO - [event_debug.run_order_flow_test] - Step 3: Emitting order through event bus
+2025-04-24 23:00:35,035 - INFO - [event_debug.run_order_flow_test] - Generated new order_id: b91f8fda-f599-40be-bb5d-a36ebd9b42bf
+2025-04-24 23:00:35,035 - INFO - [event_debug.run_order_flow_test] - Emitting order event (ID: 567fd465-759d-4a9e-a00c-87cb79df3fae) with order_id: b91f8fda-f599-40be-bb5d-a36ebd9b42bf
+2025-04-24 23:00:35,035 - DEBUG - [event_bus.emit] - Emitting ORDER event (ID: 567fd465-759d-4a9e-a00c-87cb79df3fae)
+2025-04-24 23:00:35,035 - DEBUG - [broker_simulator.process_order] - Broker processing order with ID: b91f8fda-f599-40be-bb5d-a36ebd9b42bf
+2025-04-24 23:00:35,035 - INFO - [broker_simulator.process_order] - Broker processed order: BUY 50 MSFT @ 250.00
+2025-04-24 23:00:35,035 - INFO - [broker_simulator.process_order] - Fill event created with order_id: b91f8fda-f599-40be-bb5d-a36ebd9b42bf
+2025-04-24 23:00:35,035 - INFO - [broker_simulator.on_order] - Broker emitting fill event for MSFT
+2025-04-24 23:00:35,035 - DEBUG - [event_bus.emit] - Emitting FILL event (ID: 32af93b3-170a-4901-adca-8729f9467e4b)
+2025-04-24 23:00:35,035 - DEBUG - [order_manager.on_fill] - Found order_id in fill event: b91f8fda-f599-40be-bb5d-a36ebd9b42bf
+2025-04-24 23:00:35,035 - ERROR - [order_manager.on_fill] - Order b91f8fda-f599-40be-bb5d-a36ebd9b42bf not found in order manager
+2025-04-24 23:00:35,035 - DEBUG - [order_manager.on_fill] - Found order_id in fill event: b91f8fda-f599-40be-bb5d-a36ebd9b42bf
+2025-04-24 23:00:35,035 - ERROR - [order_manager.on_fill] - Order b91f8fda-f599-40be-bb5d-a36ebd9b42bf not found in order manager
+2025-04-24 23:00:35,035 - INFO - [event_debug.fill_callback] - Fill callback received event (ID: 32af93b3-170a-4901-adca-8729f9467e4b)
+2025-04-24 23:00:35,035 - INFO - [event_debug.fill_callback] - Fill event data: {'symbol': 'MSFT', 'direction': 'BUY', 'quantity': 50, 'price': 250.0, 'commission': 0.0, 'order_id': 'b91f8fda-f599-40be-bb5d-a36ebd9b42bf'}
+2025-04-24 23:00:35,035 - INFO - [event_debug.fill_callback] - Fill has order_id: b91f8fda-f599-40be-bb5d-a36ebd9b42bf
+2025-04-24 23:00:35,036 - DEBUG - [order_manager.on_order] - Order stored with ID: b91f8fda-f599-40be-bb5d-a36ebd9b42bf
+2025-04-24 23:00:35,036 - DEBUG - [event_bus.emit] - Emitting PORTFOLIO event (ID: 6624ffa5-d3da-49b2-9aab-bac292e28614)
+2025-04-24 23:00:35,036 - INFO - [order_manager.on_order] - Created order: Order(b91f8fda-f599-40be-bb5d-a36ebd9b42bf, MSFT, BUY, 50, PENDING)
+2025-04-24 23:00:35,036 - DEBUG - [order_manager.on_order] - Order b91f8fda-f599-40be-bb5d-a36ebd9b42bf already being tracked
+2025-04-24 23:00:35,036 - DEBUG - [broker_simulator.on_order] - Order b91f8fda-f599-40be-bb5d-a36ebd9b42bf already processed by broker, skipping
+2025-04-24 23:00:35,137 - INFO - [event_debug.run_order_flow_test] - Step 4: Checking order manager state
+2025-04-24 23:00:35,137 - INFO - [event_debug.run_order_flow_test] - Order manager has 1 orders
+2025-04-24 23:00:35,137 - INFO - [event_debug.run_order_flow_test] - Order in manager: b91f8fda-f599-40be-bb5d-a36ebd9b42bf - Symbol: MSFT, Direction: BUY
+2025-04-24 23:00:35,137 - INFO - [event_debug.run_order_flow_test] - === ID Tracking Summary ===
+2025-04-24 23:00:35,137 - INFO - [event_debug.run_order_flow_test] - original_order_id: 8965d6a9-82cf-487b-8f90-e552aae8803a
+2025-04-24 23:00:35,137 - INFO - [event_debug.run_order_flow_test] - order_event_id: b3e38e4d-3e24-4858-ab2b-a02029e7b9db
+2025-04-24 23:00:35,137 - INFO - [event_debug.run_order_flow_test] - broker_fill_id: d8502dd8-c292-465b-91cb-b00e2ed930f5
+2025-04-24 23:00:35,137 - INFO - [event_debug.run_order_flow_test] - broker_fill_order_id: 8965d6a9-82cf-487b-8f90-e552aae8803a
+2025-04-24 23:00:35,137 - INFO - [event_debug.run_order_flow_test] - new_order_id: b91f8fda-f599-40be-bb5d-a36ebd9b42bf
+2025-04-24 23:00:35,137 - INFO - [event_debug.run_order_flow_test] - new_order_event_id: 567fd465-759d-4a9e-a00c-87cb79df3fae
+2025-04-24 23:00:35,137 - INFO - [event_debug.run_order_flow_test] - fill_event_id: 32af93b3-170a-4901-adca-8729f9467e4b
+2025-04-24 23:00:35,137 - INFO - [event_debug.run_order_flow_test] - fill_order_id: b91f8fda-f599-40be-bb5d-a36ebd9b42bf
+2025-04-24 23:00:35,137 - INFO - [event_debug.run_order_flow_test] - manager_order_bd9b42bf: b91f8fda-f599-40be-bb5d-a36ebd9b42bf
+2025-04-24 23:00:35,137 - ERROR - [event_debug.run_order_flow_test] - ❌ FAIL: Original order ID does not match fill order ID
+2025-04-24 23:00:35,137 - INFO - [event_debug.run_order_flow_test] - ✅ SUCCESS: New order ID found in order manager
+2025-04-24 23:00:35,137 - DEBUG - [event_bus.cleanup] - Handler for FILL garbage collected, cleaning up
+2025-04-24 23:00:35,137 - DEBUG - [event_bus.cleanup] - Handler for ORDER garbage collected, cleaning up
+2025-04-24 23:00:35,137 - DEBUG - [event_bus.cleanup] - Handler for FILL garbage collected, cleaning up
+2025-04-24 23:00:35,137 - DEBUG - [event_bus.cleanup] - Handler for ORDER garbage collected, cleaning up
+2025-04-24 23:00:35,137 - DEBUG - [event_bus.cleanup] - Handler for ORDER garbage collected, cleaning up
+2025-04-24 23:00:35,137 - DEBUG - [event_bus.cleanup] - Handler for ORDER garbage collected, cleaning up
+2025-04-24 23:00:35,137 - DEBUG - [event_bus.cleanup] - Handler for FILL garbage collected, cleaning up
+2025-04-24 23:00:35,138 - INFO - [event_debug.<module>] - Debug script completed successfully

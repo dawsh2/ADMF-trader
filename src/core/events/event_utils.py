@@ -159,16 +159,31 @@ def create_signal_event(signal_value, price, symbol, rule_id=None,
     return SignalEvent(signal_value, price, symbol, rule_id, 
                        confidence, metadata, timestamp)
 
+
 def create_order_event(symbol, order_type, direction, quantity, 
-                     price=None, timestamp=None):
-    """Create a standardized order event."""
-    # Import here to avoid circular imports
+                     price=None, timestamp=None, order_id=None):
+    """
+    Create a standardized order event.
+    
+    Args:
+        symbol: Instrument symbol
+        order_type: Type of order ('MARKET', 'LIMIT', etc.)
+        direction: Trade direction ('BUY' or 'SELL')
+        quantity: Order quantity
+        price: Optional price for limit/stop orders
+        timestamp: Optional timestamp
+        order_id: Optional order ID (will generate if None)
+        
+    Returns:
+        OrderEvent: The created order event
+    """
     import uuid
     
-    # Add an order_id to the data
-    order_id = str(uuid.uuid4())
+    # Generate order_id if not provided
+    if order_id is None:
+        order_id = str(uuid.uuid4())
     
-    # Create the event
+    # Create the order event
     order = OrderEvent(symbol, order_type, direction, quantity, 
                       price, timestamp)
     
@@ -177,6 +192,7 @@ def create_order_event(symbol, order_type, direction, quantity,
     
     return order
 
+
 def create_fill_event(symbol, direction, quantity, price, 
                      commission=0.0, timestamp=None, order_id=None):
     """Create a standardized fill event."""
@@ -184,11 +200,12 @@ def create_fill_event(symbol, direction, quantity, price,
     fill = FillEvent(symbol, direction, quantity, price, 
                     commission, timestamp)
     
-    # Add order_id to the data if provided
+    # Add order_id to the data (critical for order tracking)
     if order_id:
         fill.data['order_id'] = order_id
     
     return fill
+
 
 def create_websocket_event(connection_id, state, data=None, timestamp=None):
     """Create a standardized WebSocket event."""

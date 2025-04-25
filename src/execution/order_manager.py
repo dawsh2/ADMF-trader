@@ -224,37 +224,27 @@ class OrderManager:
             self.event_bus.register(EventType.ORDER, self.on_order)
             self.event_bus.register(EventType.FILL, self.on_fill)
 
+
     def on_fill(self, fill_event):
         """
-        Handle fill events with improved duplicate prevention.
+        Handle fill events.
 
         Args:
             fill_event: Fill event to process
         """
         try:
-            # Generate a unique ID for this fill to prevent duplicate processing
-            fill_id = None
-            if hasattr(fill_event, 'id'):
-                fill_id = fill_event.id
-            else:
-                # Create a fill ID from its data if no ID
-                symbol = fill_event.get_symbol()
-                direction = fill_event.get_direction()
-                quantity = fill_event.get_quantity()
-                price = fill_event.get_price()
-                timestamp = fill_event.get_timestamp()
-                fill_id = f"{symbol}_{direction}_{quantity}_{price}_{timestamp.isoformat()}"
+            # Track processed fills to prevent duplicates
+            if not hasattr(self, '_processed_fills'):
+                self._processed_fills = set()
 
-            # Check if we've already processed this fill
-            if fill_id in self.processed_fill_ids:
+            # Track the event
+            self.event_tracker.track_event(fill_event)
+
+            # Get fill ID to check for duplicates
+            fill_id = fill_event.get_id()
+            if fill_id in self._processed_fills:
                 logger.debug(f"Fill {fill_id} already processed, skipping")
                 return
-
-            # Add to processed fills
-            self.processed_fill_ids.add(fill_id)
-
-            # Track the event for analytics
-            self.event_tracker.track_event(fill_event)
 
             # Extract fill details
             symbol = fill_event.get_symbol()
@@ -262,32 +252,24 @@ class OrderManager:
             quantity = fill_event.get_quantity()
             price = fill_event.get_price()
 
-            # Get order ID from fill event data
+            # Get order ID from the fill event data
             order_id = None
             if hasattr(fill_event, 'data') and isinstance(fill_event.data, dict):
                 order_id = fill_event.data.get('order_id')
+                logger.debug(f"Found order_id in fill event: {order_id}")
 
-            # Find the order
-            order = None
-            if order_id and order_id in self.orders:
-                # We have a direct order match by ID
-                order = self.orders[order_id]
-            else:
-                # Try to match by symbol and direction
-                matching_orders = [
-                    o for o in [self.orders[oid] for oid in self.active_orders]
-                    if o.symbol == symbol and o.direction == direction
-                ]
+            # Require an order_id in the fill
+            if not order_id:
+                logger.error(f"Fill event missing order_id, cannot process: {fill_id}")
+                return
 
-                if matching_orders:
-                    # Use the oldest matching order
-                    order = min(matching_orders, key=lambda o: o.created_time)
-                    order_id = order.order_id
-                    logger.debug(f"Matched fill to order {order_id} by symbol/direction")
-                else:
-                    # No matching order found
-                    logger.warning(f"No matching order found for fill: {symbol} {direction}")
-                    return
+            # Find the order - ONLY use exact order_id match, no fallbacks
+            if order_id not in self.orders:
+                logger.error(f"Order {order_id} not found in order manager")
+                return
+
+            order = self.orders[order_id]
+            logger.debug(f"Found matching order: {order}")
 
             # Update order with fill information
             order.update_status(
@@ -306,10 +288,17 @@ class OrderManager:
             # Emit order status event
             self._emit_order_status_event(order)
 
+            # Mark fill as processed
+            self._processed_fills.add(fill_id)
+
             logger.info(f"Updated order with fill: {order}")
         except Exception as e:
             logger.error(f"Error processing fill event: {e}", exc_info=True)
             self.stats['errors'] += 1
+            
+
+
+
 
     def reset(self):
         """Reset order manager state."""
@@ -371,61 +360,89 @@ class OrderManager:
             broker: Broker instance
         """
         self.broker = broker
-    
+
     def on_order(self, order_event):
         """
         Handle order events.
-        
+
         Args:
             order_event: Order event to process
+
+        Returns:
+            str: Order ID
         """
-        # Track the event
-        self.event_tracker.track_event(order_event)
+        try:
+            # Track the event
+            self.event_tracker.track_event(order_event)
+
+            # Extract order details
+            symbol = order_event.get_symbol()
+            order_type = order_event.get_order_type()
+            direction = order_event.get_direction()
+            quantity = order_event.get_quantity()
+            price = order_event.get_price()
+
+            # Get order_id from event data if present
+            order_id = None
+            if hasattr(order_event, 'data') and isinstance(order_event.data, dict):
+                order_id = order_event.data.get('order_id')
+
+            # If no order_id in data, use event ID
+            if not order_id:
+                order_id = order_event.get_id()
+                logger.debug(f"No order_id in data, using event ID: {order_id}")
+
+            # Check if we're already tracking this order
+            if order_id in self.orders:
+                logger.debug(f"Order {order_id} already being tracked")
+                return order_id
+
+            # Create order object with the same order_id
+            order = Order(
+                symbol=symbol,
+                order_type=order_type,
+                direction=direction,
+                quantity=quantity,
+                price=price,
+                status=OrderStatus.PENDING,
+                order_id=order_id  # Use the same ID
+            )
+
+            # Store under the exact same ID
+            self.orders[order_id] = order
+            self.active_orders.add(order_id)
+
+            # Log the stored ID for verification
+            logger.debug(f"Order stored with ID: {order_id}")
+
+            # Update statistics
+            self.stats['orders_created'] += 1
+
+            # Process the order using broker if available
+            if self.broker:
+                # Make sure the order event has the order_id in data
+                if hasattr(order_event, 'data') and isinstance(order_event.data, dict):
+                    # Ensure the order_id is in the data for the broker to use
+                    if 'order_id' not in order_event.data or order_event.data.get('order_id') != order_id:
+                        order_event.data['order_id'] = order_id
+                        logger.debug(f"Added order_id to event data: {order_id}")
+
+                # Update order status to pending
+                order.status = OrderStatus.PENDING
+
+                # No need to send to broker again if this event came from us
+
+            # Emit order status event
+            self._emit_order_status_event(order)
+
+            logger.info(f"Created order: {order}")
+            return order_id
+        except Exception as e:
+            logger.error(f"Error in on_order: {e}", exc_info=True)
+            self.stats['errors'] += 1
+            return None
         
-        # Extract order details
-        symbol = order_event.get_symbol()
-        order_type = order_event.get_order_type()
-        direction = order_event.get_direction()
-        quantity = order_event.get_quantity()
-        price = order_event.get_price()
-        
-        # Create order object
-        order = Order(
-            symbol=symbol,
-            order_type=order_type,
-            direction=direction,
-            quantity=quantity,
-            price=price
-        )
-        
-        # Track the order
-        self.orders[order.order_id] = order
-        self.active_orders.add(order.order_id)
-        
-        # Update statistics
-        self.stats['orders_created'] += 1
-        
-        # Process the order using broker if available
-        if self.broker:
-            # Update order status to pending
-            order.status = OrderStatus.PENDING
-            
-            # Send to broker
-            fill_event = self.broker.process_order(order_event)
-            
-            # If broker returned a fill event, process it
-            if fill_event:
-                # Make sure the fill event includes the order ID
-                if hasattr(fill_event, 'data') and isinstance(fill_event.data, dict):
-                    fill_event.data['order_id'] = order.order_id
-                self.on_fill(fill_event)
-        
-        # Emit order status event
-        self._emit_order_status_event(order)
-        
-        logger.info(f"Created order: {order}")
-        return order.order_id
-    
+
  
     
     def create_order(self, symbol, order_type, direction, quantity, price=None):

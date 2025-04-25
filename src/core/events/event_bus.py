@@ -210,11 +210,36 @@ class EventBus:
         Returns:
             int: Number of handlers that processed the event
         """
+        # Track processed events to detect duplicates
+        if not hasattr(self, '_processed_event_types'):
+            self._processed_event_types = {}
+
         try:
             event_type = event.get_type()
         except Exception as e:
             logger.error(f"Invalid event object, missing get_type() method: {e}")
             return 0
+
+        # Create a unique signature for this event for deduplication
+        # Usually based on event type and relevant properties
+        if hasattr(event, 'data') and isinstance(event.data, dict):
+            # For signals: combine symbol, direction, timestamp
+            if event_type == EventType.SIGNAL:
+                symbol = event.data.get('symbol', '')
+                signal = event.data.get('signal_value', 0)
+                direction = 'BUY' if signal > 0 else 'SELL' if signal < 0 else 'NEUTRAL'
+                timestamp = event.get_timestamp().isoformat() if hasattr(event, 'get_timestamp') else ''
+                event_signature = f"{symbol}_{direction}_{timestamp}"
+
+                # Skip duplicate signals
+                if event_type in self._processed_event_types and event_signature in self._processed_event_types[event_type]:
+                    logger.debug(f"Duplicate signal event detected: {event_signature}")
+                    return 0
+
+                # Store signature for future reference
+                if event_type not in self._processed_event_types:
+                    self._processed_event_types[event_type] = set()
+                self._processed_event_types[event_type].add(event_signature)
 
         handlers_called = 0
 
@@ -262,7 +287,8 @@ class EventBus:
                 ]
                 logger.debug(f"Cleaned up {len(dead_refs)} dead handler references for {event_type.name}")
 
-        return handlers_called
+        return handlers_called    
+
 
     async def emit_async(self, event):
         """
