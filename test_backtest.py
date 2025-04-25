@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import datetime
 import os
+import shutil  # For deleting directories
 from src.core.events.event_bus import EventBus
 from src.core.events.event_manager import EventManager
 from src.core.events.event_emitters import BarEmitter
@@ -11,11 +12,11 @@ from src.data.sources.csv_handler import CSVDataSource
 from src.data.historical_data_handler import HistoricalDataHandler
 from src.risk.portfolio.portfolio import PortfolioManager
 from src.core.events.event_types import EventType
-from src.core.events.event_utils import create_signal_event
+from src.core.events.event_utils import create_signal_event, create_order_event
 from src.execution.broker.broker_simulator import SimulatedBroker
 from src.execution.order_manager import OrderManager
 
-# Set up logging
+# Set up logging - use DEBUG level for more details
 logging.basicConfig(level=logging.INFO, 
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -169,17 +170,21 @@ class SimpleMAStrategy:
             return
         
         # Store bar data
+        close_price = bar_event.get_close()
+        timestamp = bar_event.get_timestamp()
+        
         self.data[symbol].append({
-            'timestamp': bar_event.get_timestamp(),
-            'close': bar_event.get_close()
+            'timestamp': timestamp,
+            'close': close_price
         })
         
-        # Log every 50 bars
-        if len(self.data[symbol]) % 50 == 0:
-            logger.info(f"Processed {len(self.data[symbol])} bars for {symbol}")
+        # Log every 25 bars
+        bar_count = len(self.data[symbol])
+        if bar_count % 25 == 0:
+            logger.info(f"Processed {bar_count} bars for {symbol}, latest close: {close_price:.2f}")
         
         # Wait until we have enough data
-        if len(self.data[symbol]) < self.slow_window + 1:
+        if bar_count < self.slow_window + 1:
             return
         
         # Calculate moving averages
@@ -191,37 +196,37 @@ class SimpleMAStrategy:
         prev_fast_ma = sum(closes[-(self.fast_window+1):-1]) / self.fast_window
         prev_slow_ma = sum(closes[-(self.slow_window+1):-1]) / self.slow_window
         
-        # Log MA values every 20 bars for debugging
-        if len(self.data[symbol]) % 20 == 0:
-            logger.debug(f"{symbol} MAs - Fast: {fast_ma:.2f}, Slow: {slow_ma:.2f}, Diff: {fast_ma-slow_ma:.2f}")
+        # Log MA values every 10 bars for debugging
+        if bar_count % 10 == 0:
+            logger.info(f"{symbol} MAs - Fast: {fast_ma:.2f}, Slow: {slow_ma:.2f}, Diff: {fast_ma-slow_ma:.2f}")
         
         # Generate signal on crossover
         if prev_fast_ma <= prev_slow_ma and fast_ma > slow_ma:
             # Buy signal
             signal = create_signal_event(
                 signal_value=1,  # Buy
-                price=bar_event.get_close(),
+                price=close_price,
                 symbol=symbol,
-                timestamp=bar_event.get_timestamp()
+                timestamp=timestamp
             )
             self.event_bus.emit(signal)
             self.signal_count += 1
-            logger.info(f"BUY signal #{self.signal_count} for {symbol} at {bar_event.get_close():.2f}")
+            logger.info(f"BUY signal #{self.signal_count} for {symbol} at {close_price:.2f} (Fast MA crossed above Slow MA)")
             
         elif prev_fast_ma >= prev_slow_ma and fast_ma < slow_ma:
             # Sell signal
             signal = create_signal_event(
                 signal_value=-1,  # Sell
-                price=bar_event.get_close(),
+                price=close_price,
                 symbol=symbol,
-                timestamp=bar_event.get_timestamp()
+                timestamp=timestamp
             )
             self.event_bus.emit(signal)
             self.signal_count += 1
-            logger.info(f"SELL signal #{self.signal_count} for {symbol} at {bar_event.get_close():.2f}")
+            logger.info(f"SELL signal #{self.signal_count} for {symbol} at {close_price:.2f} (Fast MA crossed below Slow MA)")
 
 def create_sample_data(data_dir, symbols, start_date, end_date, random_seed=42):
-    """Create sample OHLCV data with price trends suitable for MA crossover testing."""
+    """Create sample OHLCV data with GUARANTEED moving average crossovers."""
     os.makedirs(data_dir, exist_ok=True)
     
     np.random.seed(random_seed)
@@ -232,65 +237,43 @@ def create_sample_data(data_dir, symbols, start_date, end_date, random_seed=42):
     dates = pd.date_range(start=start, end=end, freq='B')  # Business days
     
     for symbol in symbols:
-        # Create price data with clear up and down trends
-        # Start with a base price
+        # Create price data with FORCED crossovers
+        prices = []
         base_price = 100.0
         
-        # Create segments with different trends
-        segment_length = len(dates) // 4  # Divide into 4 segments
-        
-        # Generate price segments with different trends
-        prices = []
-        
-        # Segment 1: Uptrend
-        uptrend = np.linspace(0, 0.3, segment_length)  # 30% increase
-        segment1 = base_price * (1 + uptrend)
-        prices.extend(segment1)
-        
-        # Segment 2: Downtrend
-        last_price = prices[-1]
-        downtrend = np.linspace(0, -0.25, segment_length)  # 25% decrease
-        segment2 = last_price * (1 + downtrend)
-        prices.extend(segment2)
-        
-        # Segment 3: Sideways with volatility
-        last_price = prices[-1]
-        sideways = np.random.normal(0, 0.01, segment_length).cumsum()  # Random walk
-        segment3 = last_price * (1 + sideways)
-        prices.extend(segment3)
-        
-        # Segment 4: Strong uptrend
-        last_price = prices[-1]
-        strong_uptrend = np.linspace(0, 0.4, len(dates) - len(prices))  # Fill remaining days
-        segment4 = last_price * (1 + strong_uptrend)
-        prices.extend(segment4)
-        
-        # Add daily noise
-        daily_returns = np.random.normal(0, 0.005, len(prices))
-        prices = prices * (1 + daily_returns)
+        # Create a simple sine wave pattern with noise to ensure crossovers
+        periods = 6  # Number of complete cycles
+        amplitude = 20  # Price movement range
+        for i in range(len(dates)):
+            # Sine wave component
+            cycle = np.sin(i * periods * 2 * np.pi / len(dates))
+            # Add some noise
+            noise = np.random.normal(0, 0.01)
+            # Calculate price
+            price = base_price + amplitude * cycle + noise * base_price
+            prices.append(price)
         
         # Generate OHLCV data
         data = []
         for i, date in enumerate(dates):
-            if i < len(prices):
-                close = prices[i]
-                # Generate intraday volatility
-                high = close * (1 + abs(np.random.normal(0, 0.005)))
-                low = close * (1 - abs(np.random.normal(0, 0.005)))
-                open_price = low + (high - low) * np.random.random()
-                
-                # Generate volume
-                volume = int(1000000 * (1 + abs(np.random.normal(0, 0.2))))
-                
-                data.append({
-                    'open': open_price,
-                    'high': high,
-                    'low': low,
-                    'close': close,
-                    'volume': volume
-                })
+            close = prices[i]
+            # Generate intraday volatility
+            high = close * (1 + abs(np.random.normal(0, 0.005)))
+            low = close * (1 - abs(np.random.normal(0, 0.005)))
+            open_price = low + (high - low) * np.random.random()
+            
+            # Generate volume with occasional spikes
+            volume = int(1000000 * (1 + abs(np.random.normal(0, 0.2))))
+            
+            data.append({
+                'open': open_price,
+                'high': high,
+                'low': low,
+                'close': close,
+                'volume': volume
+            })
         
-        # Create DataFrame
+        # Create DataFrame with proper datetime index
         df = pd.DataFrame(data, index=dates[:len(data)])
         
         # Save to CSV
@@ -300,8 +283,21 @@ def create_sample_data(data_dir, symbols, start_date, end_date, random_seed=42):
     
     return dates[:len(data)]
 
-def run_backtest(data_dir, symbols, start_date, end_date, initial_cash=100000.0):
+def run_backtest(data_dir, symbols, start_date, end_date, initial_cash=100000.0, force_new_data=True):
     """Run a simple backtest."""
+    # Force creation of new sample data if requested
+    if force_new_data:
+        logger.info("Forcing creation of new sample data")
+        # Delete and recreate the data directory
+        if os.path.exists(data_dir):
+            # Delete all CSV files in the directory
+            for file in os.listdir(data_dir):
+                if file.endswith(".csv"):
+                    os.remove(os.path.join(data_dir, file))
+        
+        # Create new sample data
+        create_sample_data(data_dir, symbols, start_date, end_date)
+    
     # Create components
     event_bus = EventBus()
     event_manager = EventManager(event_bus)
@@ -322,18 +318,8 @@ def run_backtest(data_dir, symbols, start_date, end_date, initial_cash=100000.0)
     risk_manager = SimpleRiskManager(event_bus, portfolio)
     
     # Create strategy with faster moving averages to generate more signals
-    strategy = SimpleMAStrategy(event_bus, symbols, fast_window=5, slow_window=20)
-    
-    # Ensure data files exist, if not create sample data
-    for symbol in symbols:
-        if not os.path.exists(os.path.join(data_dir, f"{symbol}_1d.csv")):
-            logger.warning(f"Data file not found for {symbol}, creating sample data")
-            # Delete all files in the directory and recreate them
-            for file in os.listdir(data_dir):
-                if file.endswith("_1d.csv"):
-                    os.remove(os.path.join(data_dir, file))
-            create_sample_data(data_dir, symbols, start_date, end_date)
-            break
+    # Use even faster MAs to ensure we get signals
+    strategy = SimpleMAStrategy(event_bus, symbols, fast_window=5, slow_window=15)
     
     # Load data
     logger.info(f"Loading data for {symbols} from {start_date} to {end_date}")
@@ -426,7 +412,8 @@ if __name__ == "__main__":
     # Create data directory if it doesn't exist
     os.makedirs(data_dir, exist_ok=True)
     
-    results = run_backtest(data_dir, symbols, start_date, end_date)
+    # Force new data creation
+    results = run_backtest(data_dir, symbols, start_date, end_date, force_new_data=True)
     
     # Print summary
     if 'error' in results:
