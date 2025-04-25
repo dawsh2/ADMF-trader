@@ -38,6 +38,7 @@ from src.execution.broker.broker_simulator import SimulatedBroker
 from src.execution.backtest.backtest import BacktestCoordinator
 from src.analytics.performance.calculator import PerformanceCalculator
 from src.analytics.reporting.report_generator import ReportGenerator
+from src.execution.order_manager import OrderManager
 
 # Create Simple Config class
 class SimpleConfig:
@@ -311,11 +312,21 @@ def setup_container(config):
     risk_manager.max_position_pct = config.get_section('risk_manager').get('max_position_pct', 0.1)
     container.register_instance('risk_manager', risk_manager)
     
-    # Register execution components
+    # Register execution components - MODIFIED ORDER HERE
+    # First create order manager with empty dependencies
+    from src.execution.order_manager import OrderManager
+    order_manager = OrderManager(None, None)
+    container.register_instance('order_manager', order_manager)
+    
+    # Then create broker
     broker = SimulatedBroker(event_bus)
     broker.slippage = config.get_section('broker').get('slippage', 0.0)
     broker.commission = config.get_section('broker').get('commission', 0.0)
     container.register_instance('broker', broker)
+    
+    # Now connect order manager to event bus and broker
+    order_manager.broker = broker
+    order_manager.set_event_bus(event_bus)
     
     # Register analytics components
     calculator = PerformanceCalculator()
@@ -334,6 +345,8 @@ def setup_container(config):
     container.register_instance('backtest', backtest)
     
     return container
+
+
 
 def run_backtest():
     """Run backtest using BacktestCoordinator."""

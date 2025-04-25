@@ -1,418 +1,248 @@
 # src/core/bootstrap.py
-
-import os
 import logging
-import importlib
-from typing import Dict, Any, List, Optional, Type, Tuple
+from typing import Dict, Any, Tuple
 
-from core.config.config import Config
-from core.di.container import Container
-from core.utils.discovery import discover_components
+from src.core.config.config import Config
+from src.core.di.container import Container
+from src.core.events.event_bus import EventBus
+from src.core.events.event_manager import EventManager
+from src.core.utils.registry import Registry
+from src.core.utils.discovery import discover_components
 
 logger = logging.getLogger(__name__)
 
-class BootstrapError(Exception):
-    """Base exception for bootstrap errors."""
-    pass
-
-class ComponentError(BootstrapError):
-    """Error during component initialization."""
-    
-    def __init__(self, component_name, original_error):
-        self.component_name = component_name
-        self.original_error = original_error
-        super().__init__(f"Error initializing component '{component_name}': {original_error}")
-
-class ConfigurationError(BootstrapError):
-    """Error in configuration."""
-    pass
-
-class ModuleError(BootstrapError):
-    """Error loading a module."""
-    
-    def __init__(self, module_name, original_error):
-        self.module_name = module_name
-        self.original_error = original_error
-        super().__init__(f"Error loading module '{module_name}': {original_error}")
-
 class Bootstrap:
-    """Bootstrap the application."""
+    """System bootstrap that handles standard initialization."""
     
-    def __init__(self, config_files=None, env_prefix='TRADING_'):
+    def __init__(self, config_files=None, env_prefix="APP_", log_level=logging.INFO):
         """
-        Initialize bootstrap process.
+        Initialize bootstrap.
         
         Args:
             config_files: List of configuration files to load
-            env_prefix: Prefix for environment variables
+            env_prefix: Environment variable prefix
+            log_level: Logging level
         """
         self.config_files = config_files or []
         self.env_prefix = env_prefix
-        self.container = None
-        self.config = None
-        self._registries = {}
-    
-    def setup(self):
+        self.log_level = log_level
+        self.registries = {}
+        
+    def setup(self) -> Tuple[Container, Config]:
         """
-        Set up the application.
+        Set up the system with standard components.
         
         Returns:
             Tuple of (container, config)
-            
-        Raises:
-            BootstrapError: If bootstrap process fails
         """
-        try:
-            # Initialize configuration
-            self.config = Config()
-            
-            # Register defaults
-            self._register_default_configs(self.config)
-            
-            # Load configuration files
-            for file in self.config_files:
-                try:
-                    self.config.load_file(file)
-                    logger.info(f"Loaded configuration from {file}")
-                except Exception as e:
-                    raise ConfigurationError(f"Error loading config file '{file}': {e}")
-            
-            # Load environment variables
+        # Set up logging
+        logging.basicConfig(
+            level=self.log_level,
+            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        )
+        
+        # Load configuration
+        config = Config()
+        
+        # Load config files
+        for file_path in self.config_files:
             try:
-                self.config.load_env(prefix=self.env_prefix)
-                logger.info(f"Loaded configuration from environment variables with prefix {self.env_prefix}")
+                config.load_file(file_path)
+                logger.info(f"Loaded configuration from {file_path}")
             except Exception as e:
-                raise ConfigurationError(f"Error loading environment variables: {e}")
-            
-            # Initialize container
-            self.container = Container()
-            
-            # Register config in container
-            self.container.register_instance('config', self.config)
-            
-            # Register registries
-            self._initialize_registries()
-            
-            # Register core components
-            try:
-                self._register_core_components()
-            except Exception as e:
-                logger.error(f"Error registering core components: {e}", exc_info=True)
-                raise ComponentError("core", e)
-            
-            # Register module components
-            try:
-                self._register_modules()
-            except ComponentError as e:
-                # Re-raise component errors
-                logger.error(f"Component error during bootstrap: {e}", exc_info=True)
-                raise
-            except Exception as e:
-                logger.error(f"Error registering modules: {e}", exc_info=True)
-                raise BootstrapError(f"Error registering modules: {e}")
-            
-            logger.info("Bootstrap completed successfully")
-            return self.container, self.config
-        except Exception as e:
-            logger.error(f"Bootstrap error: {e}", exc_info=True)
-            # Re-raise to propagate the error
-            raise
+                logger.error(f"Error loading configuration from {file_path}: {e}")
+        
+        # Load environment variables
+        config.load_env(prefix=self.env_prefix)
+        
+        # Create container and register config
+        container = Container()
+        container.register_instance("config", config)
+        
+        # Set up core event system
+        self._setup_event_system(container, config)
+        
+        # Set up data components
+        self._setup_data_components(container, config)
+        
+        # Set up execution components
+        self._setup_execution_components(container, config)
+        
+        # Set up risk components
+        self._setup_risk_components(container, config)
+        
+        # Set up strategy components
+        self._setup_strategy_components(container, config)
+        
+        # Set up analytics components
+        self._setup_analytics_components(container, config)
+        
+        logger.info("System bootstrap complete")
+        return container, config
     
-    def _register_default_configs(self, config):
-        """Register default configurations."""
-        config.register_defaults('core', {
-            'log_level': 'INFO',
-        })
+    def _setup_event_system(self, container, config):
+        """Set up the event system components."""
+        event_bus = EventBus()
+        event_manager = EventManager(event_bus)
         
-        config.register_defaults('data', {
-            'data_dir': './data',
-            'date_format': '%Y-%m-%d',
-            'source': 'csv'
-        })
+        container.register_instance("event_bus", event_bus)
+        container.register_instance("event_manager", event_manager)
         
-        config.register_defaults('strategies', {
-            'enabled': True,
-        })
-        
-        config.register_defaults('execution', {
-            'broker': 'simulated',
-            'slippage': 0.0,
-            'commission': 0.0
-        })
-        
-        config.register_defaults('risk', {
-            'max_position_size': 100,
-            'max_drawdown': 0.1,
-            'max_exposure': 1.0
-        })
+        logger.info("Event system initialized")
     
-    def _initialize_registries(self):
-        """Initialize component registries."""
-        # Import Registry class
-        from core.utils.registry import Registry
+    def _setup_data_components(self, container, config):
+        """Set up data handling components."""
+        from src.core.events.event_emitters import BarEmitter
+        from src.data.historical_data_handler import HistoricalDataHandler
         
-        # Create registries for each module
-        modules = ['data_sources', 'data_handlers', 'transformers', 
-                  'strategies', 'indicators', 'risk_managers', 'brokers']
+        # Get event bus
+        event_bus = container.get("event_bus")
         
-        for module in modules:
-            registry_name = f"{module}_registry"
-            self._registries[module] = Registry()
-            self.container.register_instance(registry_name, self._registries[module])
-            logger.debug(f"Initialized registry: {registry_name}")
-    
-    def _register_core_components(self):
-        """Register core components."""
-        # Register event bus
-        try:
-            from core.events.event_bus import EventBus
-            self.container.register('event_bus', EventBus)
-            logger.info("Registered event bus")
-        except Exception as e:
-            logger.error(f"Error registering event bus: {e}", exc_info=True)
-            raise ComponentError("event_bus", e)
+        # Create bar emitter
+        bar_emitter = BarEmitter("bar_emitter", event_bus)
+        bar_emitter.start()
+        container.register_instance("bar_emitter", bar_emitter)
         
-        # Register event manager
-        try:
-            from core.events.event_manager import EventManager
-            self.container.register('event_manager', EventManager, {'event_bus': 'event_bus'})
-            logger.info("Registered event manager")
-        except Exception as e:
-            logger.error(f"Error registering event manager: {e}", exc_info=True)
-            raise ComponentError("event_manager", e)
-        
-        # Register factories for each module
-        self._register_factories()
-    
-    def _register_factories(self):
-        """Register component factories."""
-        try:
-            # Register data factory
-            from data.factory import ComponentFactory as DataFactory
-            self.container.register('data_factory', DataFactory, 
-                                  {'registry': 'data_sources_registry'})
-            logger.info("Registered data factory")
-            
-            # Register other factories as needed
-        except Exception as e:
-            logger.error(f"Error registering factories: {e}", exc_info=True)
-            raise ComponentError("factories", e)
-    
-    def _register_modules(self):
-        """Register module components."""
-        self._register_data_module()
-        self._register_strategy_module()
-        self._register_execution_module()
-        self._register_analytics_module()
-    
-    def _register_data_module(self):
-        """Register data components."""
-        # Get data config
-        data_config = self.config.get_section('data')
-        data_dir = data_config.get('data_dir', './data')
+        # Set up data source registry
+        data_source_registry = Registry()
+        self.registries["data_sources"] = data_source_registry
         
         # Discover data sources
-        try:
-            from data.data_source_base import DataSourceBase
-            
-            data_sources = discover_components(
-                'data.sources',
-                DataSourceBase,
-                self._registries['data_sources'],
-                enabled_only=False,
-                config=self.config
-            )
-            
-            logger.info(f"Discovered {len(data_sources)} data sources: {', '.join(data_sources.keys())}")
-            
-            # Register default data source based on config
-            source_type = data_config.get('source', 'csv')
-            
-            if source_type in data_sources:
-                source_class = data_sources[source_type]
-                self.container.register(
-                    'data_source',
-                    source_class,
-                    {'data_dir': data_dir}
-                )
-                logger.info(f"Registered {source_type} data source with data_dir={data_dir}")
-            else:
-                # Fallback to explicit import if discovery failed
-                if source_type == 'csv':
-                    from data.sources.csv_handler import CSVDataSource
-                    self.container.register(
-                        'data_source',
-                        CSVDataSource,
-                        {'data_dir': data_dir}
-                    )
-                    logger.info(f"Registered CSV data source (fallback) with data_dir={data_dir}")
-                else:
-                    raise ComponentError("data_source", ValueError(f"Unknown data source type: {source_type}"))
-            
-            # Discover and register data transformers
-            from data.transformers.transformer_base import TransformerBase
-            
-            transformers = discover_components(
-                'data.transformers',
-                TransformerBase,
-                self._registries['transformers'],
-                enabled_only=False,
-                config=self.config
-            )
-            
-            logger.info(f"Discovered {len(transformers)} data transformers: {', '.join(transformers.keys())}")
-            
-            # Register data handler
-            from data.data_handler_base import DataHandlerBase
-            
-            data_handlers = discover_components(
-                'data',
-                DataHandlerBase,
-                self._registries['data_handlers'],
-                enabled_only=False,
-                config=self.config
-            )
-            
-            logger.info(f"Discovered {len(data_handlers)} data handlers: {', '.join(data_handlers.keys())}")
-            
-            # Register historical data handler
-            handler_type = data_config.get('handler', 'historical')
-            
-            if handler_type in data_handlers:
-                handler_class = data_handlers[handler_type]
-                self.container.register(
-                    'data_handler',
-                    handler_class,
-                    {'data_source': 'data_source', 'bar_emitter': 'event_bus'}
-                )
-                logger.info(f"Registered {handler_type} data handler")
-            else:
-                # Fallback to explicit import
-                from data.historical_data_handler import HistoricalDataHandler
-                self.container.register(
-                    'data_handler',
-                    HistoricalDataHandler,
-                    {'data_source': 'data_source', 'bar_emitter': 'event_bus'}
-                )
-                logger.info("Registered historical data handler (fallback)")
-                
-        except Exception as e:
-            logger.error(f"Error registering data module: {e}", exc_info=True)
-            raise ComponentError("data_module", e)
-    
-    def _register_strategy_module(self):
-        """Register strategy components."""
-        # Check if strategies are enabled
-        strategy_config = self.config.get_section('strategies')
-        if not strategy_config.get('enabled', True):
-            logger.info("Strategies disabled in config, skipping")
-            return
+        from src.data.data_source_base import DataSourceBase
+        discover_components(
+            package_name="src.data.sources",
+            base_class=DataSourceBase,
+            registry=data_source_registry,
+            config=config
+        )
         
-        try:
-            # Import base class
-            from strategies.strategy_base import StrategyBase
-            
-            # Discover strategy components
-            strategies = discover_components(
-                'strategies',
-                StrategyBase,
-                self._registries['strategies'],
-                enabled_only=False,
-                config=self.config
-            )
-            
-            logger.info(f"Discovered {len(strategies)} strategies: {', '.join(strategies.keys())}")
-            
-            # Register discovered strategies that are enabled
-            strategy_items = {k: v for k, v in strategy_config.as_dict().items() 
-                             if isinstance(v, dict) and k != 'enabled'}
-            
-            for name, config in strategy_items.items():
-                try:
-                    # Check if strategy is enabled
-                    if not config.get('enabled', False):
-                        logger.info(f"Strategy {name} is disabled in config, skipping")
-                        continue
-                    
-                    # Get strategy class
-                    if name in strategies:
-                        strategy_class = strategies[name]
-                    else:
-                        # Try to load from class path
-                        class_path = config.get('class')
-                        if not class_path:
-                            logger.warning(f"No class defined for strategy {name}, skipping")
-                            continue
-                            
-                        module_path, class_name = class_path.rsplit('.', 1)
-                        try:
-                            module = importlib.import_module(module_path)
-                            strategy_class = getattr(module, class_name)
-                        except ImportError as e:
-                            logger.error(f"Error importing strategy module {module_path}: {e}")
-                            raise ModuleError(module_path, e)
-                        except AttributeError as e:
-                            logger.error(f"Strategy class {class_name} not found in module {module_path}: {e}")
-                            raise ModuleError(module_path, e)
-                    
-                    # Register strategy
-                    strategy_id = f"strategy_{name}"
-                    self.container.register(
-                        strategy_id,
-                        strategy_class,
-                        {'event_bus': 'event_bus', 'data_handler': 'data_handler'}
-                    )
-                    
-                    # Configure strategy
-                    strategy = self.container.get(strategy_id)
-                    if hasattr(strategy, 'configure'):
-                        params = config.get('parameters', {})
-                        strategy.configure(params)
-                    
-                    logger.info(f"Registered and configured strategy: {name}")
-                except Exception as e:
-                    logger.error(f"Error registering strategy {name}: {e}", exc_info=True)
-                    raise ComponentError(f"strategy_{name}", e)
-                
-        except Exception as e:
-            logger.error(f"Error registering strategy module: {e}", exc_info=True)
-            raise ComponentError("strategy_module", e)
-    
-    def _register_execution_module(self):
-        """Register execution components."""
-        # Implementation similar to strategy module
-        execution_config = self.config.get_section('execution')
-        broker_type = execution_config.get('broker', 'simulated')
+        # Create data source
+        data_config = config.get_section("data")
+        source_type = data_config.get("source_type", "csv")
         
-        try:
-            # Register broker
-            if broker_type == 'simulated':
-                from execution.broker.simulated_broker import SimulatedBroker
-                self.container.register(
-                    'broker',
-                    SimulatedBroker,
-                    {'event_bus': 'event_bus'}
-                )
-                
-                # Configure broker
-                broker = self.container.get('broker')
-                if hasattr(broker, 'configure'):
-                    broker.configure(execution_config)
-                
-                logger.info(f"Registered and configured simulated broker")
-            # Add other broker types as needed
-        except Exception as e:
-            logger.error(f"Error registering execution module: {e}", exc_info=True)
-            raise ComponentError("execution_module", e)
+        if source_type == "csv":
+            from src.data.sources.csv_handler import CSVDataSource
+            data_dir = data_config.get("data_dir", "./data")
+            data_source = CSVDataSource(data_dir)
+        else:
+            # Try to get from registry
+            source_class = data_source_registry.get(source_type)
+            if source_class:
+                data_source = source_class()
+            else:
+                logger.warning(f"Unknown data source type: {source_type}, using CSV")
+                from src.data.sources.csv_handler import CSVDataSource
+                data_source = CSVDataSource("./data")
+        
+        container.register_instance("data_source", data_source)
+        
+        # Create data handler
+        data_handler = HistoricalDataHandler(data_source, bar_emitter)
+        container.register_instance("data_handler", data_handler)
+        
+        logger.info(f"Data components initialized with source type: {source_type}")
     
-    def _register_analytics_module(self):
-        """Register analytics components."""
-        # Implementation similar to other modules
-        try:
-            # Register performance calculator
-            from analytics.performance.calculator import PerformanceCalculator
-            self.container.register('performance_calculator', PerformanceCalculator)
-            logger.info("Registered performance calculator")
-        except Exception as e:
-            logger.error(f"Error registering analytics module: {e}", exc_info=True)
-            raise ComponentError("analytics_module", e)
+    def _setup_execution_components(self, container, config):
+        """Set up execution components."""
+        from src.execution.order_manager import OrderManager
+        from src.execution.broker.broker_simulator import SimulatedBroker
+        from src.execution.backtest.backtest import BacktestCoordinator
+        
+        # Get event bus
+        event_bus = container.get("event_bus")
+        
+        # Create order manager with empty dependencies first
+        order_manager = OrderManager(None, None)
+        container.register_instance("order_manager", order_manager)
+        
+        # Create broker
+        broker = SimulatedBroker(event_bus)
+        broker_config = config.get_section("broker")
+        broker.slippage = broker_config.get_float("slippage", 0.0)
+        broker.commission = broker_config.get_float("commission", 0.0)
+        container.register_instance("broker", broker)
+        
+        # Connect order manager
+        order_manager.broker = broker
+        order_manager.set_event_bus(event_bus)
+        
+        # Create backtest coordinator
+        backtest = BacktestCoordinator(container, config)
+        container.register_instance("backtest", backtest)
+        
+        logger.info("Execution components initialized")
+    
+    def _setup_risk_components(self, container, config):
+        """Set up risk management components."""
+        from src.risk.portfolio.portfolio import PortfolioManager
+        from src.risk.managers.simple import SimpleRiskManager
+        
+        # Get event bus
+        event_bus = container.get("event_bus")
+        
+        # Create portfolio
+        portfolio_config = config.get_section("portfolio")
+        initial_cash = portfolio_config.get_float("initial_cash", 100000.0)
+        
+        portfolio = PortfolioManager(event_bus, initial_cash=initial_cash)
+        container.register_instance("portfolio", portfolio)
+        
+        # Create risk manager
+        risk_config = config.get_section("risk_manager")
+        risk_manager = SimpleRiskManager(event_bus, portfolio)
+        risk_manager.position_size = risk_config.get_int("position_size", 100)
+        risk_manager.max_position_pct = risk_config.get_float("max_position_pct", 0.1)
+        container.register_instance("risk_manager", risk_manager)
+        
+        logger.info("Risk components initialized")
+    
+    def _setup_strategy_components(self, container, config):
+        """Set up strategy components."""
+        # Set up strategy registry
+        strategy_registry = Registry()
+        self.registries["strategies"] = strategy_registry
+        
+        # Discover strategies
+        from src.strategy.strategy_base import Strategy
+        discovered = discover_components(
+            package_name="src.strategy.implementations",
+            base_class=Strategy,
+            registry=strategy_registry,
+            config=config
+        )
+        
+        # Create strategy based on config
+        strategy_name = config.get_section("backtest").get("strategy", "ma_crossover")
+        strategy_class = strategy_registry.get(strategy_name)
+        
+        if strategy_class:
+            # Get dependencies
+            event_bus = container.get("event_bus")
+            data_handler = container.get("data_handler")
+            
+            # Create strategy instance
+            strategy = strategy_class(event_bus, data_handler)
+            
+            # Configure strategy
+            strategy_config = config.get_section("strategies").get_section(strategy_name)
+            strategy.configure(strategy_config)
+            
+            container.register_instance("strategy", strategy)
+            logger.info(f"Strategy '{strategy_name}' initialized")
+        else:
+            logger.warning(f"Strategy '{strategy_name}' not found")
+    
+    def _setup_analytics_components(self, container, config):
+        """Set up analytics components."""
+        from src.analytics.performance.calculator import PerformanceCalculator
+        from src.analytics.reporting.report_generator import ReportGenerator
+        
+        # Create performance calculator
+        calculator = PerformanceCalculator()
+        container.register_instance("calculator", calculator)
+        
+        # Create report generator
+        report_generator = ReportGenerator(calculator)
+        container.register_instance("report_generator", report_generator)
+        
+        logger.info("Analytics components initialized")
