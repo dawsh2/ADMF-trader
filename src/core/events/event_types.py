@@ -43,6 +43,106 @@ class Event:
         """Get the unique event ID."""
         return self.id
 
+    def serialize(self):
+        """
+        Serialize event to JSON string with type preservation.
+        
+        Returns:
+            JSON string representation
+        """
+        serialized_data = {
+            'id': self.id,
+            'event_type': self.event_type.name,  # Convert enum to string
+            'timestamp': self.timestamp.isoformat(),  # ISO format for datetime
+            'data': self._prepare_data_for_serialization(self.data)
+        }
+        
+        return json.dumps(serialized_data)
+    
+    def _prepare_data_for_serialization(self, data):
+        """
+        Prepare data for serialization, handling special types.
+        
+        Args:
+            data: Data to prepare
+            
+        Returns:
+            Serialization-ready data
+        """
+        if isinstance(data, dict):
+            result = {}
+            for key, value in data.items():
+                result[key] = self._prepare_data_for_serialization(value)
+            return result
+        elif isinstance(data, list):
+            return [self._prepare_data_for_serialization(item) for item in data]
+        elif isinstance(data, datetime.datetime):
+            return {"__datetime__": value.isoformat()}
+        elif isinstance(data, Enum):
+            return {"__enum__": {"class": value.__class__.__name__, "name": value.name}}
+        elif hasattr(data, "to_dict") and callable(data.to_dict):
+            # Handle custom objects with to_dict method
+            dict_data = data.to_dict()
+            dict_data["__type__"] = data.__class__.__name__
+            return dict_data
+        else:
+            return data
+    
+    @classmethod
+    def deserialize(cls, json_str):
+        """
+        Deserialize JSON string back to Event object.
+        
+        Args:
+            json_str: JSON string from serialize()
+            
+        Returns:
+            Event object
+        """
+        data = json.loads(json_str)
+        
+        # Reconstruct event
+        event_type = EventType[data['event_type']]
+        timestamp = datetime.datetime.fromisoformat(data['timestamp'])
+        event_data = cls._process_serialized_data(data['data'])
+        
+        event = cls(event_type, event_data, timestamp)
+        event.id = data['id']
+        
+        return event
+    
+    @classmethod
+    def _process_serialized_data(cls, data):
+        """
+        Process serialized data back to original types.
+        
+        Args:
+            data: Serialized data
+            
+        Returns:
+            Reconstructed data
+        """
+        if isinstance(data, dict):
+            # Handle special type markers
+            if "__datetime__" in data:
+                return datetime.datetime.fromisoformat(data["__datetime__"])
+            elif "__enum__" in data:
+                enum_data = data["__enum__"]
+                enum_class = globals()[enum_data["class"]]  # Get enum class by name
+                return enum_class[enum_data["name"]]  # Get enum value by name
+            elif "__type__" in data:
+                return ObjectRegistry.from_dict(data)
+            
+            # Regular dict
+            result = {}
+            for key, value in data.items():
+                result[key] = cls._process_serialized_data(value)
+            return result
+        elif isinstance(data, list):
+            return [cls._process_serialized_data(item) for item in data]
+        else:
+            return data
+
 
 class BarEvent(Event):
     """Market data bar event."""

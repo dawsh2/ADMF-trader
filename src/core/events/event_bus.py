@@ -9,14 +9,52 @@ from .event_types import Event, EventType
 logger = logging.getLogger(__name__)
 
 class EventBus:
-    """Central event bus for routing events between system components."""
+    """Enhanced event bus with DI system integration."""
     
-    def __init__(self, use_weak_refs=True):
+    def __init__(self, container=None):
+        """
+        Initialize the event bus.
+        
+        Args:
+            container: Optional DI container
+        """
         self.handlers = {}  # EventType -> list of handlers
         self.async_handlers = {}  # EventType -> list of async handlers
+        self.container = container
         self.event_counts = {}  # For tracking event statistics
-        self.use_weak_refs = use_weak_refs
+        self.use_weak_refs = True
         self.strong_refs = set()  # Keep strong references when needed
+    
+    def set_container(self, container):
+        """Set the DI container."""
+        self.container = container
+    
+    def register_component(self, component_name, event_types=None):
+        """
+        Register a component from the DI container.
+        
+        Args:
+            component_name: Component name in DI container
+            event_types: Optional list of event types to register for
+        """
+        if not self.container:
+            raise ValueError("No container available")
+        
+        component = self.container.get(component_name)
+        
+        if hasattr(component, 'handle'):
+            # Register for specified event types
+            types_to_register = event_types or []
+            
+            # If component has event_types property, use that too
+            if hasattr(component, 'event_types'):
+                types_to_register.extend(component.event_types)
+            
+            # Register for all specified types
+            for event_type in types_to_register:
+                self.register(event_type, component.handle)
+        
+        return component
     
     def register(self, event_type, handler, weak_ref=None):
         """

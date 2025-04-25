@@ -233,3 +233,74 @@ class EventManager:
             
         # Emit lifecycle event
         await self._emit_lifecycle_event_async(LifecycleEvent.INITIALIZED, "event_manager")
+
+
+class EventStorage:
+    """Store events for later replay."""
+    
+    def __init__(self, storage_path=None):
+        self.storage_path = storage_path or './event_storage'
+        os.makedirs(self.storage_path, exist_ok=True)
+    
+    def store_event(self, event):
+        """Store an event."""
+        event_json = event.serialize()
+        event_type = event.get_type().name
+        timestamp = event.get_timestamp().strftime('%Y%m%d_%H%M%S_%f')
+        
+        # Use event type and timestamp in filename
+        filename = f"{event_type}_{timestamp}_{event.get_id()}.json"
+        filepath = os.path.join(self.storage_path, filename)
+        
+        with open(filepath, 'w') as f:
+            f.write(event_json)
+        
+        return filepath
+    
+    def load_events(self, event_types=None, start_time=None, end_time=None):
+        """Load events matching criteria."""
+        events = []
+        files = os.listdir(self.storage_path)
+        
+        # Filter files by event type if specified
+        if event_types:
+            type_names = [t.name for t in event_types]
+            files = [f for f in files if any(f.startswith(t + '_') for t in type_names)]
+        
+        for filename in sorted(files):
+            # Extract timestamp from filename
+            parts = filename.split('_')
+            if len(parts) >= 3:
+                try:
+                    file_timestamp = datetime.datetime.strptime(
+                        '_'.join(parts[1:3]), '%Y%m%d_%H%M%S_%f'
+                    )
+                    
+                    # Skip if before start_time
+                    if start_time and file_timestamp < start_time:
+                        continue
+                        
+                    # Skip if after end_time
+                    if end_time and file_timestamp > end_time:
+                        continue
+                        
+                    # Load event
+                    filepath = os.path.join(self.storage_path, filename)
+                    with open(filepath, 'r') as f:
+                        event_json = f.read()
+                        event = Event.deserialize(event_json)
+                        events.append(event)
+                except:
+                    # Skip files with invalid format
+                    continue
+        
+        return events
+    
+    def replay_events(self, event_bus, event_types=None, start_time=None, end_time=None):
+        """Replay events to an event bus."""
+        events = self.load_events(event_types, start_time, end_time)
+        
+        for event in events:
+            event_bus.emit(event)
+            
+        return len(events)        

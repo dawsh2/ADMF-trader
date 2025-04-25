@@ -1,0 +1,1650 @@
+# Analytics Module Specification
+
+## Overview
+
+The Analytics module provides performance measurement, reporting, and visualization capabilities for the trading framework. This specification focuses on creating a robust analytics system with consistent usage patterns throughout the framework.
+
+## Module Structure
+
+```
+src/core/analytics/
+├── __init__.py
+├── metrics/
+│   ├── __init__.py
+│   ├── returns.py              # Return calculation utilities
+│   ├── risk.py                 # Risk metric calculations
+│   ├── drawdown.py             # Drawdown analysis
+│   ├── trade_metrics.py        # Trade-based metrics
+│   └── statistical.py          # Statistical analysis
+├── performance/
+│   ├── __init__.py
+│   ├── calculator.py           # Performance calculator
+│   ├── attribution.py          # Performance attribution
+│   └── comparison.py           # Strategy comparison
+├── reporting/
+│   ├── __init__.py
+│   ├── report_generator.py     # Report generation
+│   ├── templates/              # Report templates
+│   └── formatters.py           # Data formatting utilities
+├── visualization/
+│   ├── __init__.py
+│   ├── equity_plots.py         # Equity curve visualization
+│   ├── drawdown_plots.py       # Drawdown visualization
+│   ├── trade_plots.py          # Trade visualization
+│   └── dashboard.py            # Interactive dashboards
+└── utils/
+    ├── __init__.py
+    ├── data_preparation.py     # Data preparation utilities
+    ├── statistical_tests.py    # Statistical testing
+    └── result_storage.py       # Result storage utilities
+```
+
+## Key Components
+
+### 1. Metrics Module
+
+#### 1.1 Returns Calculator
+
+The `ReturnsCalculator` provides utilities for calculating various types of returns.
+
+**Key Functionality:**
+- Simple returns calculation
+- Log returns calculation
+- Cumulative returns calculation
+- Rolling returns calculation
+- Time-weighted returns calculation
+- Money-weighted returns calculation
+- Benchmark-relative returns calculation
+
+**Interface:**
+```python
+class ReturnsCalculator:
+    @staticmethod
+    def calculate_simple_returns(prices: pd.Series) -> pd.Series
+    @staticmethod
+    def calculate_log_returns(prices: pd.Series) -> pd.Series
+    @staticmethod
+    def calculate_cumulative_returns(returns: pd.Series) -> pd.Series
+    @staticmethod
+    def calculate_rolling_returns(returns: pd.Series, window: int) -> pd.Series
+    @staticmethod
+    def calculate_time_weighted_returns(equity_curve: pd.DataFrame, flow_column: str = None) -> float
+    @staticmethod
+    def calculate_money_weighted_returns(equity_curve: pd.DataFrame, flow_column: str) -> float
+    @staticmethod
+    def calculate_excess_returns(returns: pd.Series, benchmark_returns: pd.Series) -> pd.Series
+```
+
+#### 1.2 Risk Metrics
+
+The `RiskMetrics` class calculates various risk measures.
+
+**Key Functionality:**
+- Volatility calculation
+- Downside deviation calculation
+- Value at Risk (VaR) calculation
+- Expected Shortfall (ES) calculation
+- Maximum drawdown calculation
+- Underwater analysis
+- Ulcer Index calculation
+- Risk-adjusted return metrics
+
+**Interface:**
+```python
+class RiskMetrics:
+    @staticmethod
+    def calculate_volatility(returns: pd.Series, annualization_factor: int = 252) -> float
+    @staticmethod
+    def calculate_downside_deviation(returns: pd.Series, mar: float = 0) -> float
+    @staticmethod
+    def calculate_var(returns: pd.Series, confidence: float = 0.95) -> float
+    @staticmethod
+    def calculate_expected_shortfall(returns: pd.Series, confidence: float = 0.95) -> float
+    @staticmethod
+    def calculate_max_drawdown(equity_curve: pd.Series) -> float
+    @staticmethod
+    def calculate_underwater(equity_curve: pd.Series) -> pd.Series
+    @staticmethod
+    def calculate_ulcer_index(equity_curve: pd.Series) -> float
+    @staticmethod
+    def calculate_sharpe_ratio(returns: pd.Series, risk_free_rate: float = 0, annualization_factor: int = 252) -> float
+    @staticmethod
+    def calculate_sortino_ratio(returns: pd.Series, risk_free_rate: float = 0, annualization_factor: int = 252) -> float
+    @staticmethod
+    def calculate_calmar_ratio(returns: pd.Series, equity_curve: pd.Series, annualization_factor: int = 252) -> float
+```
+
+#### 1.3 Trade Metrics
+
+The `TradeMetrics` class analyzes individual trades.
+
+**Key Functionality:**
+- Win/loss ratio calculation
+- Average win/loss calculation
+- Profit factor calculation
+- Expectancy calculation
+- Trade duration analysis
+- Trade size analysis
+- Trading frequency analysis
+- Entry/exit analysis
+
+**Interface:**
+```python
+class TradeMetrics:
+    @staticmethod
+    def calculate_win_rate(trades: List[Dict]) -> float
+    @staticmethod
+    def calculate_avg_win_loss(trades: List[Dict]) -> Dict[str, float]
+    @staticmethod
+    def calculate_profit_factor(trades: List[Dict]) -> float
+    @staticmethod
+    def calculate_expectancy(trades: List[Dict]) -> float
+    @staticmethod
+    def analyze_trade_durations(trades: List[Dict]) -> Dict[str, Any]
+    @staticmethod
+    def analyze_trade_sizes(trades: List[Dict]) -> Dict[str, Any]
+    @staticmethod
+    def analyze_trading_frequency(trades: List[Dict]) -> Dict[str, Any]
+    @staticmethod
+    def analyze_entry_exit_timing(trades: List[Dict], market_data: pd.DataFrame) -> Dict[str, Any]
+```
+
+### 2. Performance Module
+
+#### 2.1 Performance Calculator
+
+The `PerformanceCalculator` provides a unified interface for calculating all performance metrics.
+
+**Key Functionality:**
+- Comprehensive performance metrics calculation
+- Equity curve analysis
+- Trade analysis
+- Risk metrics calculation
+- Benchmark comparison
+- Historical performance analysis
+- Custom metric support
+
+**Interface:**
+```python
+class PerformanceCalculator:
+    def __init__(self, equity_curve: pd.DataFrame = None, trades: List[Dict] = None, 
+               benchmark: pd.Series = None, config: Dict = None)
+    def calculate_metrics(self) -> Dict[str, Any]
+    def set_equity_curve(self, equity_curve: pd.DataFrame) -> None
+    def set_trades(self, trades: List[Dict]) -> None
+    def set_benchmark(self, benchmark: pd.Series) -> None
+    def add_custom_metric(self, name: str, metric_function: Callable) -> None
+    def get_returns(self) -> pd.Series
+    def get_drawdowns(self) -> pd.Series
+    def get_underwater(self) -> pd.Series
+    def get_rolling_metrics(self, window: int) -> pd.DataFrame
+```
+
+#### 2.2 Performance Attribution
+
+The `PerformanceAttribution` analyzes the sources of returns.
+
+**Key Functionality:**
+- Strategy contribution analysis
+- Asset/sector attribution
+- Rule-based attribution
+- Factor attribution
+- Time-based attribution
+- Regime-based attribution
+- Decision point attribution
+
+**Interface:**
+```python
+class PerformanceAttribution:
+    def __init__(self, equity_curve: pd.DataFrame, trades: List[Dict], metadata: Dict = None)
+    def attribute_by_strategy(self, strategy_field: str) -> Dict[str, float]
+    def attribute_by_asset(self, asset_field: str) -> Dict[str, float]
+    def attribute_by_rule(self, rule_field: str) -> Dict[str, float]
+    def attribute_by_time_period(self, period: str = 'month') -> Dict[str, float]
+    def attribute_by_regime(self, regime_field: str) -> Dict[str, float]
+    def attribute_by_factor(self, factor_exposures: Dict[str, pd.Series]) -> Dict[str, float]
+    def calculate_decision_attribution(self, decision_metadata: Dict) -> Dict[str, float]
+```
+
+#### 2.3 Strategy Comparison
+
+The `StrategyComparison` compares multiple strategies.
+
+**Key Functionality:**
+- Side-by-side metric comparison
+- Statistical comparison
+- Correlation analysis
+- Equity curve comparison
+- Drawdown comparison
+- Trade pattern comparison
+- Regime-based comparison
+
+**Interface:**
+```python
+class StrategyComparison:
+    def __init__(self, strategies: Dict[str, Dict])
+    def compare_metrics(self, metrics: List[str] = None) -> pd.DataFrame
+    def compare_returns(self) -> pd.DataFrame
+    def compare_drawdowns(self) -> pd.DataFrame
+    def calculate_correlations(self) -> pd.DataFrame
+    def calculate_turn_statistics(self) -> pd.DataFrame
+    def compare_regimes(self, regime_field: str) -> Dict[str, pd.DataFrame]
+    def find_optimal_allocation(self, optimization_metric: str = 'sharpe_ratio') -> Dict[str, float]
+```
+
+### 3. Reporting Module
+
+#### 3.1 Report Generator
+
+The `ReportGenerator` creates performance reports.
+
+**Key Functionality:**
+- Performance report generation
+- Trade report generation
+- Risk report generation
+- Custom report templates
+- Multiple output formats (HTML, PDF, etc.)
+- Interactive reports
+- Scheduled reporting
+
+**Interface:**
+```python
+class ReportGenerator:
+    def __init__(self, template_name: str = 'default', output_format: str = 'html')
+    def generate_performance_report(self, calculator: PerformanceCalculator) -> str
+    def generate_trade_report(self, calculator: PerformanceCalculator) -> str
+    def generate_risk_report(self, calculator: PerformanceCalculator) -> str
+    def generate_custom_report(self, data: Dict[str, Any], template_name: str) -> str
+    def set_template(self, template_name: str) -> None
+    def set_output_format(self, output_format: str) -> None
+    def save_report(self, report: str, filename: str) -> None
+```
+
+#### 3.2 Report Formatters
+
+The `ReportFormatters` provide utilities for formatting data for reports.
+
+**Key Functionality:**
+- Number formatting
+- Date formatting
+- Table formatting
+- Chart formatting
+- Color coding
+- Conditional formatting
+- Custom formatting rules
+
+**Interface:**
+```python
+class ReportFormatters:
+    @staticmethod
+    def format_number(value: float, format_type: str = 'decimal', precision: int = 2) -> str
+    @staticmethod
+    def format_percent(value: float, precision: int = 2) -> str
+    @staticmethod
+    def format_money(value: float, currency: str = ' Analytics Module Specification
+
+## Overview
+
+The Analytics module provides performance measurement, reporting, and visualization capabilities for the trading framework. This specification focuses on creating a robust analytics system with consistent usage patterns throughout the framework.
+
+## Module Structure
+
+```
+analytics/
+├── __init__.py
+├── metrics/
+│   ├── __init__.py
+│   ├── returns.py              # Return calculation utilities
+│   ├── risk.py                 # Risk metric calculations
+│   ├── drawdown.py             # Drawdown analysis
+│   ├── trade_metrics.py        # Trade-based metrics
+│   └── statistical.py          # Statistical analysis
+├── performance/
+│   ├── __init__.py
+│   ├── calculator.py           # Performance calculator
+│   ├── attribution.py          # Performance attribution
+│   └── comparison.py           # Strategy comparison
+├── reporting/
+│   ├── __init__.py
+│   ├── report_generator.py     # Report generation
+│   ├── templates/              # Report templates
+│   └── formatters.py           # Data formatting utilities
+├── visualization/
+│   ├── __init__.py
+│   ├── equity_plots.py         # Equity curve visualization
+│   ├── drawdown_plots.py       # Drawdown visualization
+│   ├── trade_plots.py          # Trade visualization
+│   └── dashboard.py            # Interactive dashboards
+└── utils/
+    ├── __init__.py
+    ├── data_preparation.py     # Data preparation utilities
+    ├── statistical_tests.py    # Statistical testing
+    └── result_storage.py       # Result storage utilities
+```
+
+## Key Components
+
+### 1. Metrics Module
+
+#### 1.1 Returns Calculator
+
+The `ReturnsCalculator` provides utilities for calculating various types of returns.
+
+**Key Functionality:**
+- Simple returns calculation
+- Log returns calculation
+- Cumulative returns calculation
+- Rolling returns calculation
+- Time-weighted returns calculation
+- Money-weighted returns calculation
+- Benchmark-relative returns calculation
+
+**Interface:**
+```python
+class ReturnsCalculator:
+    @staticmethod
+    def calculate_simple_returns(prices: pd.Series) -> pd.Series
+    @staticmethod
+    def calculate_log_returns(prices: pd.Series) -> pd.Series
+    @staticmethod
+    def calculate_cumulative_returns(returns: pd.Series) -> pd.Series
+    @staticmethod
+    def calculate_rolling_returns(returns: pd.Series, window: int) -> pd.Series
+    @staticmethod
+    def calculate_time_weighted_returns(equity_curve: pd.DataFrame, flow_column: str = None) -> float
+    @staticmethod
+    def calculate_money_weighted_returns(equity_curve: pd.DataFrame, flow_column: str) -> float
+    @staticmethod
+    def calculate_excess_returns(returns: pd.Series, benchmark_returns: pd.Series) -> pd.Series
+```
+
+#### 1.2 Risk Metrics
+
+The `RiskMetrics` class calculates various risk measures.
+
+**Key Functionality:**
+- Volatility calculation
+- Downside deviation calculation
+- Value at Risk (VaR) calculation
+- Expected Shortfall (ES) calculation
+- Maximum drawdown calculation
+- Underwater analysis
+- Ulcer Index calculation
+- Risk-adjusted return metrics
+
+**Interface:**
+```python
+class RiskMetrics:
+    @staticmethod
+    def calculate_volatility(returns: pd.Series, annualization_factor: int = 252) -> float
+    @staticmethod
+    def calculate_downside_deviation(returns: pd.Series, mar: float = 0) -> float
+    @staticmethod
+    def calculate_var(returns: pd.Series, confidence: float = 0.95) -> float
+    @staticmethod
+    def calculate_expected_shortfall(returns: pd.Series, confidence: float = 0.95) -> float
+    @staticmethod
+    def calculate_max_drawdown(equity_curve: pd.Series) -> float
+    @staticmethod
+    def calculate_underwater(equity_curve: pd.Series) -> pd.Series
+    @staticmethod
+    def calculate_ulcer_index(equity_curve: pd.Series) -> float
+    @staticmethod
+    def calculate_sharpe_ratio(returns: pd.Series, risk_free_rate: float = 0, annualization_factor: int = 252) -> float
+    @staticmethod
+    def calculate_sortino_ratio(returns: pd.Series, risk_free_rate: float = 0, annualization_factor: int = 252) -> float
+    @staticmethod
+    def calculate_calmar_ratio(returns: pd.Series, equity_curve: pd.Series, annualization_factor: int = 252) -> float
+```
+
+#### 1.3 Trade Metrics
+
+The `TradeMetrics` class analyzes individual trades.
+
+**Key Functionality:**
+- Win/loss ratio calculation
+- Average win/loss calculation
+- Profit factor calculation
+- Expectancy calculation
+- Trade duration analysis
+- Trade size analysis
+- Trading frequency analysis
+- Entry/exit analysis
+
+**Interface:**
+```python
+class TradeMetrics:
+    @staticmethod
+    def calculate_win_rate(trades: List[Dict]) -> float
+    @staticmethod
+    def calculate_avg_win_loss(trades: List[Dict]) -> Dict[str, float]
+    @staticmethod
+    def calculate_profit_factor(trades: List[Dict]) -> float
+    @staticmethod
+    def calculate_expectancy(trades: List[Dict]) -> float
+    @staticmethod
+    def analyze_trade_durations(trades: List[Dict]) -> Dict[str, Any]
+    @staticmethod
+    def analyze_trade_sizes(trades: List[Dict]) -> Dict[str, Any]
+    @staticmethod
+    def analyze_trading_frequency(trades: List[Dict]) -> Dict[str, Any]
+    @staticmethod
+    def analyze_entry_exit_timing(trades: List[Dict], market_data: pd.DataFrame) -> Dict[str, Any]
+```
+
+### 2. Performance Module
+
+#### 2.1 Performance Calculator
+
+The `PerformanceCalculator` provides a unified interface for calculating all performance metrics.
+
+**Key Functionality:**
+- Comprehensive performance metrics calculation
+- Equity curve analysis
+- Trade analysis
+- Risk metrics calculation
+- Benchmark comparison
+- Historical performance analysis
+- Custom metric support
+
+**Interface:**
+```python
+class PerformanceCalculator:
+    def __init__(self, equity_curve: pd.DataFrame = None, trades: List[Dict] = None, 
+               benchmark: pd.Series = None, config: Dict = None)
+    def calculate_metrics(self) -> Dict[str, Any]
+    def set_equity_curve(self, equity_curve: pd.DataFrame) -> None
+    def set_trades(self, trades: List[Dict]) -> None
+    def set_benchmark(self, benchmark: pd.Series) -> None
+    def add_custom_metric(self, name: str, metric_function: Callable) -> None
+    def get_returns(self) -> pd.Series
+    def get_drawdowns(self) -> pd.Series
+    def get_underwater(self) -> pd.Series
+    def get_rolling_metrics(self, window: int) -> pd.DataFrame
+```
+
+#### 2.2 Performance Attribution
+
+The `PerformanceAttribution` analyzes the sources of returns.
+
+**Key Functionality:**
+- Strategy contribution analysis
+- Asset/sector attribution
+- Rule-based attribution
+- Factor attribution
+- Time-based attribution
+- Regime-based attribution
+- Decision point attribution
+
+**Interface:**
+```python
+class PerformanceAttribution:
+    def __init__(self, equity_curve: pd.DataFrame, trades: List[Dict], metadata: Dict = None)
+    def attribute_by_strategy(self, strategy_field: str) -> Dict[str, float]
+    def attribute_by_asset(self, asset_field: str) -> Dict[str, float]
+    def attribute_by_rule(self, rule_field: str) -> Dict[str, float]
+    def attribute_by_time_period(self, period: str = 'month') -> Dict[str, float]
+    def attribute_by_regime(self, regime_field: str) -> Dict[str, float]
+    def attribute_by_factor(self, factor_exposures: Dict[str, pd.Series]) -> Dict[str, float]
+    def calculate_decision_attribution(self, decision_metadata: Dict) -> Dict[str, float]
+```
+
+#### 2.3 Strategy Comparison
+
+The `StrategyComparison` compares multiple strategies.
+
+**Key Functionality:**
+- Side-by-side metric comparison
+- Statistical comparison
+- Correlation analysis
+- Equity curve comparison
+- Drawdown comparison
+- Trade pattern comparison
+- Regime-based comparison
+
+**Interface:**
+```python
+class StrategyComparison:
+    def __init__(self, strategies: Dict[str, Dict])
+    def compare_metrics(self, metrics: List[str] = None) -> pd.DataFrame
+    def compare_returns(self) -> pd.DataFrame
+    def compare_drawdowns(self) -> pd.DataFrame
+    def calculate_correlations(self) -> pd.DataFrame
+    def calculate_turn_statistics(self) -> pd.DataFrame
+    def compare_regimes(self, regime_field: str) -> Dict[str, pd.DataFrame]
+    def find_optimal_allocation(self, optimization_metric: str = 'sharpe_ratio') -> Dict[str, float]
+```
+
+### 3. Reporting Module
+
+#### 3.1 Report Generator
+
+The `ReportGenerator` creates performance reports.
+
+**Key Functionality:**
+- Performance report generation
+- Trade report generation
+- Risk report generation
+- Custom report templates
+- Multiple output formats (HTML, PDF, etc.)
+- Interactive reports
+- Scheduled reporting
+
+**Interface:**
+```python
+class ReportGenerator:
+    def __init__(self, template_name: str = 'default', output_format: str = 'html')
+    def generate_performance_report(self, calculator: PerformanceCalculator) -> str
+    def generate_trade_report(self, calculator: PerformanceCalculator) -> str
+    def generate_risk_report(self, calculator: PerformanceCalculator) -> str
+    def generate_custom_report(self, data: Dict[str, Any], template_name: str) -> str
+    def set_template(self, template_name: str) -> None
+    def set_output_format(self, output_format: str) -> None
+    def save_report(self, report: str, filename: str) -> None
+```
+
+#### 3.2 Report Formatters
+
+The `ReportFormatters` provide utilities for formatting data for reports.
+
+**Key Functionality:**
+- Number formatting
+- Date formatting
+- Table formatting
+- Chart formatting
+- Color coding
+- Conditional formatting
+- Custom formatting rules
+
+**Interface:**
+```python
+class ReportFormatters:
+    @staticmethod
+    def format_number(value: float, format_type: str = 'decimal', precision: int = 2) -> str
+    @staticmethod
+    def format_percent(value: float, precision: int = 2) -> str
+    @staticmethod
+    def format_money(value: float, currency: str = '$', precision: int = 2) -> str
+    @staticmethod
+    def format_date(date: datetime.datetime, format_str: str = '%Y-%m-%d') -> str
+    @staticmethod
+    def format_table(data: pd.DataFrame, formats: Dict[str, str] = None) -> str
+    @staticmethod
+    def color_code(value: float, threshold_map: Dict[str, float], color_map: Dict[str, str]) -> str
+```
+
+### 4. Visualization Module
+
+#### 4.1 Equity Curve Plots
+
+The `EquityPlots` creates equity curve visualizations.
+
+**Key Functionality:**
+- Equity curve plotting
+- Return distribution plotting
+- Cumulative return plotting
+- Benchmark comparison plotting
+- Underwater plot
+- Rolling returns plot
+- Interactive equity charts
+
+**Interface:**
+```python
+class EquityPlots:
+    def __init__(self, figsize: Tuple[int, int] = (10, 6), style: str = 'default')
+    def plot_equity_curve(self, equity_curve: pd.Series, title: str = None) -> plt.Figure
+    def plot_return_distribution(self, returns: pd.Series, title: str = None) -> plt.Figure
+    def plot_cumulative_returns(self, returns: pd.Series, title: str = None) -> plt.Figure
+    def plot_benchmark_comparison(self, returns: pd.Series, benchmark_returns: pd.Series, title: str = None) -> plt.Figure
+    def plot_underwater(self, underwater: pd.Series, title: str = None) -> plt.Figure
+    def plot_rolling_returns(self, returns: pd.Series, window: int = 60, title: str = None) -> plt.Figure
+    def create_interactive_equity_chart(self, equity_curve: pd.Series) -> Any  # Returns a Plotly or Bokeh figure
+```
+
+#### 4.2 Trade Plots
+
+The `TradePlots` creates trade-related visualizations.
+
+**Key Functionality:**
+- Trade entry/exit markers
+- Trade P&L distribution
+- Trade duration visualization
+- Trade size visualization
+- Win/loss visualization
+- Strategy comparison
+- Entry/exit analysis
+
+**Interface:**
+```python
+class TradePlots:
+    def __init__(self, figsize: Tuple[int, int] = (10, 6), style: str = 'default')
+    def plot_trades_on_price(self, price_data: pd.Series, trades: List[Dict], title: str = None) -> plt.Figure
+    def plot_pnl_distribution(self, trades: List[Dict], title: str = None) -> plt.Figure
+    def plot_trade_durations(self, trades: List[Dict], title: str = None) -> plt.Figure
+    def plot_trade_sizes(self, trades: List[Dict], title: str = None) -> plt.Figure
+    def plot_win_loss_chart(self, trades: List[Dict], title: str = None) -> plt.Figure
+    def plot_trade_comparison(self, trade_sets: Dict[str, List[Dict]], title: str = None) -> plt.Figure
+    def plot_entry_exit_analysis(self, trades: List[Dict], price_data: pd.Series, title: str = None) -> plt.Figure
+```
+
+#### 4.3 Dashboard
+
+The `AnalyticsDashboard` creates interactive dashboards.
+
+**Key Functionality:**
+- Interactive performance dashboard
+- Strategy comparison dashboard
+- Risk monitoring dashboard
+- Trade analysis dashboard
+- Custom dashboard creation
+- Dashboard sharing
+- Dashboard updates
+
+**Interface:**
+```python
+class AnalyticsDashboard:
+    def __init__(self, title: str = 'Analytics Dashboard', template: str = 'default')
+    def create_performance_dashboard(self, calculator: PerformanceCalculator) -> Any
+    def create_comparison_dashboard(self, strategies: Dict[str, PerformanceCalculator]) -> Any
+    def create_risk_dashboard(self, calculator: PerformanceCalculator) -> Any
+    def create_trade_dashboard(self, trades: List[Dict], price_data: Dict[str, pd.Series] = None) -> Any
+    def create_custom_dashboard(self, components: List[Dict]) -> Any
+    def save_dashboard(self, dashboard, filename: str) -> None
+    def serve_dashboard(self, dashboard, port: int = 8050) -> None
+```
+
+## Integration with Event System
+
+The Analytics module will integrate with the event system through the following events:
+
+1. **Inputs:**
+   - `BarEvent`: Market data for analysis
+   - `FillEvent`: Trade fills for trade analysis
+   - `PortfolioEvent`: Portfolio updates for performance tracking
+   - `EquityEvent`: Equity updates for performance tracking
+
+2. **Outputs:**
+   - `AnalyticsEvent`: Analytics results
+   - `ReportEvent`: Generated reports
+   - `AlertEvent`: Analytics-based alerts
+
+## Configuration Integration
+
+The Analytics module will be configurable through the configuration system:
+
+```yaml
+analytics:
+  performance:
+    metrics:
+      - total_return
+      - annualized_return
+      - sharpe_ratio
+      - sortino_ratio
+      - max_drawdown
+      - win_rate
+      - profit_factor
+    benchmark: SPY
+    risk_free_rate: 0.0
+  
+  reporting:
+    template: default
+    output_format: html
+    output_directory: ./reports
+    scheduled: true
+    frequency: daily
+  
+  visualization:
+    style: default
+    figsize: [10, 6]
+    dpi: 100
+    interactive: true
+    
+  dashboards:
+    enabled: true
+    port: 8050
+    update_frequency: 10  # seconds
+```
+
+## Testing Strategy
+
+### 1. Unit Tests
+
+- Test all metric calculations with known examples
+- Test report generation with mock data
+- Test visualization functions with mock data
+- Test data processing utilities
+
+### 2. Integration Tests
+
+- Test integration with event system
+- Test integration with configuration system
+- Test performance calculator with real backtest data
+- Test report generation with real backtest data
+
+### 3. System Tests
+
+- End-to-end tests with backtesting system
+- Performance comparisons with other analytics libraries
+- Stress tests with large datasets
+
+## Usage Patterns
+
+To ensure consistent usage throughout the framework, the Analytics module will provide:
+
+### 1. Standard Usage Patterns
+
+```python
+# Standard performance calculation
+calculator = PerformanceCalculator(equity_curve, trades)
+metrics = calculator.calculate_metrics()
+
+# Standard reporting
+report_generator = ReportGenerator()
+report = report_generator.generate_performance_report(calculator)
+report_generator.save_report(report, "performance_report.html")
+
+# Standard visualization
+equity_plots = EquityPlots()
+fig = equity_plots.plot_equity_curve(equity_curve)
+fig.savefig("equity_curve.png")
+```
+
+### 2. Integration Helpers
+
+```python
+# For backtesting
+class BacktestAnalytics:
+    def __init__(self, backtest_result):
+        self.equity_curve = backtest_result.get_equity_curve()
+        self.trades = backtest_result.get_trades()
+        self.calculator = PerformanceCalculator(self.equity_curve, self.trades)
+        
+    def get_metrics(self):
+        return self.calculator.calculate_metrics()
+        
+    def generate_report(self, output_file=None):
+        report_generator = ReportGenerator()
+        report = report_generator.generate_performance_report(self.calculator)
+        if output_file:
+            report_generator.save_report(report, output_file)
+        return report
+        
+    def show_equity_curve(self):
+        equity_plots = EquityPlots()
+        return equity_plots.plot_equity_curve(self.equity_curve)
+```
+
+### 3. Event Handlers
+
+```python
+class AnalyticsEventHandler:
+    def __init__(self, event_bus):
+        self.event_bus = event_bus
+        self.calculator = PerformanceCalculator()
+        self.equity_history = []
+        self.trades = []
+        
+        # Register for events
+        self.event_bus.register(EventType.PORTFOLIO, self.on_portfolio_update)
+        self.event_bus.register(EventType.FILL, self.on_fill)
+        
+    def on_portfolio_update(self, event):
+        # Update equity history
+        self.equity_history.append({
+            'timestamp': event.get_timestamp(),
+            'equity': event.get_equity()
+        })
+        
+        # Update calculator
+        equity_curve = pd.DataFrame(self.equity_history)
+        self.calculator.set_equity_curve(equity_curve)
+        
+    def on_fill(self, event):
+        # Add trade
+        self.trades.append({
+            'timestamp': event.get_timestamp(),
+            'symbol': event.get_symbol(),
+            'direction': event.get_direction(),
+            'quantity': event.get_quantity(),
+            'price': event.get_price(),
+            'commission': event.get_commission()
+        })
+        
+        #, precision: int = 2) -> str
+    @staticmethod
+    def format_date(date: datetime.datetime, format_str: str = '%Y-%m-%d') -> str
+    @staticmethod
+    def format_table(data: pd.DataFrame, formats: Dict[str, str] = None) -> str
+    @staticmethod
+    def color_code(value: float, threshold_map: Dict[str, float], color_map: Dict[str, str]) -> str
+```
+
+### 4. Visualization Module
+
+#### 4.1 Equity Curve Plots
+
+The `EquityPlots` creates equity curve visualizations.
+
+**Key Functionality:**
+- Equity curve plotting
+- Return distribution plotting
+- Cumulative return plotting
+- Benchmark comparison plotting
+- Underwater plot
+- Rolling returns plot
+- Interactive equity charts
+
+**Interface:**
+```python
+class EquityPlots:
+    def __init__(self, figsize: Tuple[int, int] = (10, 6), style: str = 'default')
+    def plot_equity_curve(self, equity_curve: pd.Series, title: str = None) -> plt.Figure
+    def plot_return_distribution(self, returns: pd.Series, title: str = None) -> plt.Figure
+    def plot_cumulative_returns(self, returns: pd.Series, title: str = None) -> plt.Figure
+    def plot_benchmark_comparison(self, returns: pd.Series, benchmark_returns: pd.Series, title: str = None) -> plt.Figure
+    def plot_underwater(self, underwater: pd.Series, title: str = None) -> plt.Figure
+    def plot_rolling_returns(self, returns: pd.Series, window: int = 60, title: str = None) -> plt.Figure
+    def create_interactive_equity_chart(self, equity_curve: pd.Series) -> Any  # Returns a Plotly or Bokeh figure
+```
+
+#### 4.2 Trade Plots
+
+The `TradePlots` creates trade-related visualizations.
+
+**Key Functionality:**
+- Trade entry/exit markers
+- Trade P&L distribution
+- Trade duration visualization
+- Trade size visualization
+- Win/loss visualization
+- Strategy comparison
+- Entry/exit analysis
+
+**Interface:**
+```python
+class TradePlots:
+    def __init__(self, figsize: Tuple[int, int] = (10, 6), style: str = 'default')
+    def plot_trades_on_price(self, price_data: pd.Series, trades: List[Dict], title: str = None) -> plt.Figure
+    def plot_pnl_distribution(self, trades: List[Dict], title: str = None) -> plt.Figure
+    def plot_trade_durations(self, trades: List[Dict], title: str = None) -> plt.Figure
+    def plot_trade_sizes(self, trades: List[Dict], title: str = None) -> plt.Figure
+    def plot_win_loss_chart(self, trades: List[Dict], title: str = None) -> plt.Figure
+    def plot_trade_comparison(self, trade_sets: Dict[str, List[Dict]], title: str = None) -> plt.Figure
+    def plot_entry_exit_analysis(self, trades: List[Dict], price_data: pd.Series, title: str = None) -> plt.Figure
+```
+
+#### 4.3 Dashboard
+
+The `AnalyticsDashboard` creates interactive dashboards.
+
+**Key Functionality:**
+- Interactive performance dashboard
+- Strategy comparison dashboard
+- Risk monitoring dashboard
+- Trade analysis dashboard
+- Custom dashboard creation
+- Dashboard sharing
+- Dashboard updates
+
+**Interface:**
+```python
+class AnalyticsDashboard:
+    def __init__(self, title: str = 'Analytics Dashboard', template: str = 'default')
+    def create_performance_dashboard(self, calculator: PerformanceCalculator) -> Any
+    def create_comparison_dashboard(self, strategies: Dict[str, PerformanceCalculator]) -> Any
+    def create_risk_dashboard(self, calculator: PerformanceCalculator) -> Any
+    def create_trade_dashboard(self, trades: List[Dict], price_data: Dict[str, pd.Series] = None) -> Any
+    def create_custom_dashboard(self, components: List[Dict]) -> Any
+    def save_dashboard(self, dashboard, filename: str) -> None
+    def serve_dashboard(self, dashboard, port: int = 8050) -> None
+```
+
+## Integration with Event System
+
+The Analytics module will integrate with the event system through the following events:
+
+1. **Inputs:**
+   - `BarEvent`: Market data for analysis
+   - `FillEvent`: Trade fills for trade analysis
+   - `PortfolioEvent`: Portfolio updates for performance tracking
+   - `EquityEvent`: Equity updates for performance tracking
+
+2. **Outputs:**
+   - `AnalyticsEvent`: Analytics results
+   - `ReportEvent`: Generated reports
+   - `AlertEvent`: Analytics-based alerts
+
+## Configuration Integration
+
+The Analytics module will be configurable through the configuration system:
+
+```yaml
+analytics:
+  performance:
+    metrics:
+      - total_return
+      - annualized_return
+      - sharpe_ratio
+      - sortino_ratio
+      - max_drawdown
+      - win_rate
+      - profit_factor
+    benchmark: SPY
+    risk_free_rate: 0.0
+  
+  reporting:
+    template: default
+    output_format: html
+    output_directory: ./reports
+    scheduled: true
+    frequency: daily
+  
+  visualization:
+    style: default
+    figsize: [10, 6]
+    dpi: 100
+    interactive: true
+    
+  dashboards:
+    enabled: true
+    port: 8050
+    update_frequency: 10  # seconds
+```
+
+## Testing Strategy
+
+### 1. Unit Tests
+
+- Test all metric calculations with known examples
+- Test report generation with mock data
+- Test visualization functions with mock data
+- Test data processing utilities
+
+### 2. Integration Tests
+
+- Test integration with event system
+- Test integration with configuration system
+- Test performance calculator with real backtest data
+- Test report generation with real backtest data
+
+### 3. System Tests
+
+- End-to-end tests with backtesting system
+- Performance comparisons with other analytics libraries
+- Stress tests with large datasets
+
+## Usage Patterns
+
+To ensure consistent usage throughout the framework, the Analytics module will provide:
+
+### 1. Standard Usage Patterns
+
+```python
+# Standard performance calculation
+calculator = PerformanceCalculator(equity_curve, trades)
+metrics = calculator.calculate_metrics()
+
+# Standard reporting
+report_generator = ReportGenerator()
+report = report_generator.generate_performance_report(calculator)
+report_generator.save_report(report, "performance_report.html")
+
+# Standard visualization
+equity_plots = EquityPlots()
+fig = equity_plots.plot_equity_curve(equity_curve)
+fig.savefig("equity_curve.png")
+```
+
+### 2. Integration Helpers
+
+```python
+# For backtesting
+class BacktestAnalytics:
+    def __init__(self, backtest_result):
+        self.equity_curve = backtest_result.get_equity_curve()
+        self.trades = backtest_result.get_trades()
+        self.calculator = PerformanceCalculator(self.equity_curve, self.trades)
+        
+    def get_metrics(self):
+        return self.calculator.calculate_metrics()
+        
+    def generate_report(self, output_file=None):
+        report_generator = ReportGenerator()
+        report = report_generator.generate_performance_report(self.calculator)
+        if output_file:
+            report_generator.save_report(report, output_file)
+        return report
+        
+    def show_equity_curve(self):
+        equity_plots = EquityPlots()
+        return equity_plots.plot_equity_curve(self.equity_curve)
+```
+
+### 3. Event Handlers
+
+```python
+class AnalyticsEventHandler:
+    def __init__(self, event_bus):
+        self.event_bus = event_bus
+        self.calculator = PerformanceCalculator()
+        self.equity_history = []
+        self.trades = []
+        
+        # Register for events
+        self.event_bus.register(EventType.PORTFOLIO, self.on_portfolio_update)
+        self.event_bus.register(EventType.FILL, self.on_fill)
+        
+    def on_portfolio_update(self, event):
+        # Update equity history
+        self.equity_history.append({
+            'timestamp': event.get_timestamp(),
+            'equity': event.get_equity()
+        })
+        
+        # Update calculator
+        equity_curve = pd.DataFrame(self.equity_history)
+        self.calculator.set_equity_curve(equity_curve)
+        
+    def on_fill(self, event):
+        # Add trade
+        self.trades.append({
+            'timestamp': event.get_timestamp(),
+            'symbol': event.get_symbol(),
+            'direction': event.get_direction(),
+            'quantity': event.get_quantity(),
+            'price': event.get_price(),
+            'commission': event.get_commission()
+        })
+        
+        # Update calculator
+        self.calculator.set_trades(self.trades)
+        
+    def get_current_metrics(self):
+        return self.calculator.calculate_metrics()
+```
+
+## Implementation Plan
+
+### Phase 1: Core Metrics (1 week)
+
+1. Implement ReturnsCalculator
+2. Implement RiskMetrics
+3. Implement TradeMetrics
+4. Add unit tests for all metrics
+
+### Phase 2: Performance Calculator (1 week)
+
+1. Implement PerformanceCalculator
+2. Implement PerformanceAttribution
+3. Implement StrategyComparison
+4. Add unit tests for all components
+
+### Phase 3: Visualization (1 week)
+
+1. Implement EquityPlots
+2. Implement TradePlots
+3. Implement basic dashboard functionality
+4. Add unit tests for visualization components
+
+### Phase 4: Reporting (1 week)
+
+1. Implement ReportGenerator
+2. Create report templates
+3. Implement ReportFormatters
+4. Add unit tests for reporting
+
+### Phase 5: Integration (1 week)
+
+1. Create event handlers
+2. Create integration helpers
+3. Implement configuration integration
+4. Add integration tests
+
+## Dependencies
+
+- pandas
+- numpy
+- matplotlib
+- tabulate
+- jinja2 (for report templates)
+- plotly (for interactive visualizations)
+- dash (for dashboards)
+
+## Success Criteria
+
+1. All analytics components function correctly and pass tests
+2. Consistent usage patterns are established throughout the framework
+3. Documentation is comprehensive and clear
+4. Performance meets or exceeds requirements
+5. Integration with other modules is seamless
+6. Configuration system provides flexibility
+7. Visualization and reporting provide clear insights Analytics Module Specification
+
+## Overview
+
+The Analytics module provides performance measurement, reporting, and visualization capabilities for the trading framework. This specification focuses on creating a robust analytics system with consistent usage patterns throughout the framework.
+
+## Module Structure
+
+```
+analytics/
+├── __init__.py
+├── metrics/
+│   ├── __init__.py
+│   ├── returns.py              # Return calculation utilities
+│   ├── risk.py                 # Risk metric calculations
+│   ├── drawdown.py             # Drawdown analysis
+│   ├── trade_metrics.py        # Trade-based metrics
+│   └── statistical.py          # Statistical analysis
+├── performance/
+│   ├── __init__.py
+│   ├── calculator.py           # Performance calculator
+│   ├── attribution.py          # Performance attribution
+│   └── comparison.py           # Strategy comparison
+├── reporting/
+│   ├── __init__.py
+│   ├── report_generator.py     # Report generation
+│   ├── templates/              # Report templates
+│   └── formatters.py           # Data formatting utilities
+├── visualization/
+│   ├── __init__.py
+│   ├── equity_plots.py         # Equity curve visualization
+│   ├── drawdown_plots.py       # Drawdown visualization
+│   ├── trade_plots.py          # Trade visualization
+│   └── dashboard.py            # Interactive dashboards
+└── utils/
+    ├── __init__.py
+    ├── data_preparation.py     # Data preparation utilities
+    ├── statistical_tests.py    # Statistical testing
+    └── result_storage.py       # Result storage utilities
+```
+
+## Key Components
+
+### 1. Metrics Module
+
+#### 1.1 Returns Calculator
+
+The `ReturnsCalculator` provides utilities for calculating various types of returns.
+
+**Key Functionality:**
+- Simple returns calculation
+- Log returns calculation
+- Cumulative returns calculation
+- Rolling returns calculation
+- Time-weighted returns calculation
+- Money-weighted returns calculation
+- Benchmark-relative returns calculation
+
+**Interface:**
+```python
+class ReturnsCalculator:
+    @staticmethod
+    def calculate_simple_returns(prices: pd.Series) -> pd.Series
+    @staticmethod
+    def calculate_log_returns(prices: pd.Series) -> pd.Series
+    @staticmethod
+    def calculate_cumulative_returns(returns: pd.Series) -> pd.Series
+    @staticmethod
+    def calculate_rolling_returns(returns: pd.Series, window: int) -> pd.Series
+    @staticmethod
+    def calculate_time_weighted_returns(equity_curve: pd.DataFrame, flow_column: str = None) -> float
+    @staticmethod
+    def calculate_money_weighted_returns(equity_curve: pd.DataFrame, flow_column: str) -> float
+    @staticmethod
+    def calculate_excess_returns(returns: pd.Series, benchmark_returns: pd.Series) -> pd.Series
+```
+
+#### 1.2 Risk Metrics
+
+The `RiskMetrics` class calculates various risk measures.
+
+**Key Functionality:**
+- Volatility calculation
+- Downside deviation calculation
+- Value at Risk (VaR) calculation
+- Expected Shortfall (ES) calculation
+- Maximum drawdown calculation
+- Underwater analysis
+- Ulcer Index calculation
+- Risk-adjusted return metrics
+
+**Interface:**
+```python
+class RiskMetrics:
+    @staticmethod
+    def calculate_volatility(returns: pd.Series, annualization_factor: int = 252) -> float
+    @staticmethod
+    def calculate_downside_deviation(returns: pd.Series, mar: float = 0) -> float
+    @staticmethod
+    def calculate_var(returns: pd.Series, confidence: float = 0.95) -> float
+    @staticmethod
+    def calculate_expected_shortfall(returns: pd.Series, confidence: float = 0.95) -> float
+    @staticmethod
+    def calculate_max_drawdown(equity_curve: pd.Series) -> float
+    @staticmethod
+    def calculate_underwater(equity_curve: pd.Series) -> pd.Series
+    @staticmethod
+    def calculate_ulcer_index(equity_curve: pd.Series) -> float
+    @staticmethod
+    def calculate_sharpe_ratio(returns: pd.Series, risk_free_rate: float = 0, annualization_factor: int = 252) -> float
+    @staticmethod
+    def calculate_sortino_ratio(returns: pd.Series, risk_free_rate: float = 0, annualization_factor: int = 252) -> float
+    @staticmethod
+    def calculate_calmar_ratio(returns: pd.Series, equity_curve: pd.Series, annualization_factor: int = 252) -> float
+```
+
+#### 1.3 Trade Metrics
+
+The `TradeMetrics` class analyzes individual trades.
+
+**Key Functionality:**
+- Win/loss ratio calculation
+- Average win/loss calculation
+- Profit factor calculation
+- Expectancy calculation
+- Trade duration analysis
+- Trade size analysis
+- Trading frequency analysis
+- Entry/exit analysis
+
+**Interface:**
+```python
+class TradeMetrics:
+    @staticmethod
+    def calculate_win_rate(trades: List[Dict]) -> float
+    @staticmethod
+    def calculate_avg_win_loss(trades: List[Dict]) -> Dict[str, float]
+    @staticmethod
+    def calculate_profit_factor(trades: List[Dict]) -> float
+    @staticmethod
+    def calculate_expectancy(trades: List[Dict]) -> float
+    @staticmethod
+    def analyze_trade_durations(trades: List[Dict]) -> Dict[str, Any]
+    @staticmethod
+    def analyze_trade_sizes(trades: List[Dict]) -> Dict[str, Any]
+    @staticmethod
+    def analyze_trading_frequency(trades: List[Dict]) -> Dict[str, Any]
+    @staticmethod
+    def analyze_entry_exit_timing(trades: List[Dict], market_data: pd.DataFrame) -> Dict[str, Any]
+```
+
+### 2. Performance Module
+
+#### 2.1 Performance Calculator
+
+The `PerformanceCalculator` provides a unified interface for calculating all performance metrics.
+
+**Key Functionality:**
+- Comprehensive performance metrics calculation
+- Equity curve analysis
+- Trade analysis
+- Risk metrics calculation
+- Benchmark comparison
+- Historical performance analysis
+- Custom metric support
+
+**Interface:**
+```python
+class PerformanceCalculator:
+    def __init__(self, equity_curve: pd.DataFrame = None, trades: List[Dict] = None, 
+               benchmark: pd.Series = None, config: Dict = None)
+    def calculate_metrics(self) -> Dict[str, Any]
+    def set_equity_curve(self, equity_curve: pd.DataFrame) -> None
+    def set_trades(self, trades: List[Dict]) -> None
+    def set_benchmark(self, benchmark: pd.Series) -> None
+    def add_custom_metric(self, name: str, metric_function: Callable) -> None
+    def get_returns(self) -> pd.Series
+    def get_drawdowns(self) -> pd.Series
+    def get_underwater(self) -> pd.Series
+    def get_rolling_metrics(self, window: int) -> pd.DataFrame
+```
+
+#### 2.2 Performance Attribution
+
+The `PerformanceAttribution` analyzes the sources of returns.
+
+**Key Functionality:**
+- Strategy contribution analysis
+- Asset/sector attribution
+- Rule-based attribution
+- Factor attribution
+- Time-based attribution
+- Regime-based attribution
+- Decision point attribution
+
+**Interface:**
+```python
+class PerformanceAttribution:
+    def __init__(self, equity_curve: pd.DataFrame, trades: List[Dict], metadata: Dict = None)
+    def attribute_by_strategy(self, strategy_field: str) -> Dict[str, float]
+    def attribute_by_asset(self, asset_field: str) -> Dict[str, float]
+    def attribute_by_rule(self, rule_field: str) -> Dict[str, float]
+    def attribute_by_time_period(self, period: str = 'month') -> Dict[str, float]
+    def attribute_by_regime(self, regime_field: str) -> Dict[str, float]
+    def attribute_by_factor(self, factor_exposures: Dict[str, pd.Series]) -> Dict[str, float]
+    def calculate_decision_attribution(self, decision_metadata: Dict) -> Dict[str, float]
+```
+
+#### 2.3 Strategy Comparison
+
+The `StrategyComparison` compares multiple strategies.
+
+**Key Functionality:**
+- Side-by-side metric comparison
+- Statistical comparison
+- Correlation analysis
+- Equity curve comparison
+- Drawdown comparison
+- Trade pattern comparison
+- Regime-based comparison
+
+**Interface:**
+```python
+class StrategyComparison:
+    def __init__(self, strategies: Dict[str, Dict])
+    def compare_metrics(self, metrics: List[str] = None) -> pd.DataFrame
+    def compare_returns(self) -> pd.DataFrame
+    def compare_drawdowns(self) -> pd.DataFrame
+    def calculate_correlations(self) -> pd.DataFrame
+    def calculate_turn_statistics(self) -> pd.DataFrame
+    def compare_regimes(self, regime_field: str) -> Dict[str, pd.DataFrame]
+    def find_optimal_allocation(self, optimization_metric: str = 'sharpe_ratio') -> Dict[str, float]
+```
+
+### 3. Reporting Module
+
+#### 3.1 Report Generator
+
+The `ReportGenerator` creates performance reports.
+
+**Key Functionality:**
+- Performance report generation
+- Trade report generation
+- Risk report generation
+- Custom report templates
+- Multiple output formats (HTML, PDF, etc.)
+- Interactive reports
+- Scheduled reporting
+
+**Interface:**
+```python
+class ReportGenerator:
+    def __init__(self, template_name: str = 'default', output_format: str = 'html')
+    def generate_performance_report(self, calculator: PerformanceCalculator) -> str
+    def generate_trade_report(self, calculator: PerformanceCalculator) -> str
+    def generate_risk_report(self, calculator: PerformanceCalculator) -> str
+    def generate_custom_report(self, data: Dict[str, Any], template_name: str) -> str
+    def set_template(self, template_name: str) -> None
+    def set_output_format(self, output_format: str) -> None
+    def save_report(self, report: str, filename: str) -> None
+```
+
+#### 3.2 Report Formatters
+
+The `ReportFormatters` provide utilities for formatting data for reports.
+
+**Key Functionality:**
+- Number formatting
+- Date formatting
+- Table formatting
+- Chart formatting
+- Color coding
+- Conditional formatting
+- Custom formatting rules
+
+**Interface:**
+```python
+class ReportFormatters:
+    @staticmethod
+    def format_number(value: float, format_type: str = 'decimal', precision: int = 2) -> str
+    @staticmethod
+    def format_percent(value: float, precision: int = 2) -> str
+    @staticmethod
+    def format_money(value: float, currency: str = '$', precision: int = 2) -> str
+    @staticmethod
+    def format_date(date: datetime.datetime, format_str: str = '%Y-%m-%d') -> str
+    @staticmethod
+    def format_table(data: pd.DataFrame, formats: Dict[str, str] = None) -> str
+    @staticmethod
+    def color_code(value: float, threshold_map: Dict[str, float], color_map: Dict[str, str]) -> str
+```
+
+### 4. Visualization Module
+
+#### 4.1 Equity Curve Plots
+
+The `EquityPlots` creates equity curve visualizations.
+
+**Key Functionality:**
+- Equity curve plotting
+- Return distribution plotting
+- Cumulative return plotting
+- Benchmark comparison plotting
+- Underwater plot
+- Rolling returns plot
+- Interactive equity charts
+
+**Interface:**
+```python
+class EquityPlots:
+    def __init__(self, figsize: Tuple[int, int] = (10, 6), style: str = 'default')
+    def plot_equity_curve(self, equity_curve: pd.Series, title: str = None) -> plt.Figure
+    def plot_return_distribution(self, returns: pd.Series, title: str = None) -> plt.Figure
+    def plot_cumulative_returns(self, returns: pd.Series, title: str = None) -> plt.Figure
+    def plot_benchmark_comparison(self, returns: pd.Series, benchmark_returns: pd.Series, title: str = None) -> plt.Figure
+    def plot_underwater(self, underwater: pd.Series, title: str = None) -> plt.Figure
+    def plot_rolling_returns(self, returns: pd.Series, window: int = 60, title: str = None) -> plt.Figure
+    def create_interactive_equity_chart(self, equity_curve: pd.Series) -> Any  # Returns a Plotly or Bokeh figure
+```
+
+#### 4.2 Trade Plots
+
+The `TradePlots` creates trade-related visualizations.
+
+**Key Functionality:**
+- Trade entry/exit markers
+- Trade P&L distribution
+- Trade duration visualization
+- Trade size visualization
+- Win/loss visualization
+- Strategy comparison
+- Entry/exit analysis
+
+**Interface:**
+```python
+class TradePlots:
+    def __init__(self, figsize: Tuple[int, int] = (10, 6), style: str = 'default')
+    def plot_trades_on_price(self, price_data: pd.Series, trades: List[Dict], title: str = None) -> plt.Figure
+    def plot_pnl_distribution(self, trades: List[Dict], title: str = None) -> plt.Figure
+    def plot_trade_durations(self, trades: List[Dict], title: str = None) -> plt.Figure
+    def plot_trade_sizes(self, trades: List[Dict], title: str = None) -> plt.Figure
+    def plot_win_loss_chart(self, trades: List[Dict], title: str = None) -> plt.Figure
+    def plot_trade_comparison(self, trade_sets: Dict[str, List[Dict]], title: str = None) -> plt.Figure
+    def plot_entry_exit_analysis(self, trades: List[Dict], price_data: pd.Series, title: str = None) -> plt.Figure
+```
+
+#### 4.3 Dashboard
+
+The `AnalyticsDashboard` creates interactive dashboards.
+
+**Key Functionality:**
+- Interactive performance dashboard
+- Strategy comparison dashboard
+- Risk monitoring dashboard
+- Trade analysis dashboard
+- Custom dashboard creation
+- Dashboard sharing
+- Dashboard updates
+
+**Interface:**
+```python
+class AnalyticsDashboard:
+    def __init__(self, title: str = 'Analytics Dashboard', template: str = 'default')
+    def create_performance_dashboard(self, calculator: PerformanceCalculator) -> Any
+    def create_comparison_dashboard(self, strategies: Dict[str, PerformanceCalculator]) -> Any
+    def create_risk_dashboard(self, calculator: PerformanceCalculator) -> Any
+    def create_trade_dashboard(self, trades: List[Dict], price_data: Dict[str, pd.Series] = None) -> Any
+    def create_custom_dashboard(self, components: List[Dict]) -> Any
+    def save_dashboard(self, dashboard, filename: str) -> None
+    def serve_dashboard(self, dashboard, port: int = 8050) -> None
+```
+
+## Integration with Event System
+
+The Analytics module will integrate with the event system through the following events:
+
+1. **Inputs:**
+   - `BarEvent`: Market data for analysis
+   - `FillEvent`: Trade fills for trade analysis
+   - `PortfolioEvent`: Portfolio updates for performance tracking
+   - `EquityEvent`: Equity updates for performance tracking
+
+2. **Outputs:**
+   - `AnalyticsEvent`: Analytics results
+   - `ReportEvent`: Generated reports
+   - `AlertEvent`: Analytics-based alerts
+
+## Configuration Integration
+
+The Analytics module will be configurable through the configuration system:
+
+```yaml
+analytics:
+  performance:
+    metrics:
+      - total_return
+      - annualized_return
+      - sharpe_ratio
+      - sortino_ratio
+      - max_drawdown
+      - win_rate
+      - profit_factor
+    benchmark: SPY
+    risk_free_rate: 0.0
+  
+  reporting:
+    template: default
+    output_format: html
+    output_directory: ./reports
+    scheduled: true
+    frequency: daily
+  
+  visualization:
+    style: default
+    figsize: [10, 6]
+    dpi: 100
+    interactive: true
+    
+  dashboards:
+    enabled: true
+    port: 8050
+    update_frequency: 10  # seconds
+```
+
+## Testing Strategy
+
+### 1. Unit Tests
+
+- Test all metric calculations with known examples
+- Test report generation with mock data
+- Test visualization functions with mock data
+- Test data processing utilities
+
+### 2. Integration Tests
+
+- Test integration with event system
+- Test integration with configuration system
+- Test performance calculator with real backtest data
+- Test report generation with real backtest data
+
+### 3. System Tests
+
+- End-to-end tests with backtesting system
+- Performance comparisons with other analytics libraries
+- Stress tests with large datasets
+
+## Usage Patterns
+
+To ensure consistent usage throughout the framework, the Analytics module will provide:
+
+### 1. Standard Usage Patterns
+
+```python
+# Standard performance calculation
+calculator = PerformanceCalculator(equity_curve, trades)
+metrics = calculator.calculate_metrics()
+
+# Standard reporting
+report_generator = ReportGenerator()
+report = report_generator.generate_performance_report(calculator)
+report_generator.save_report(report, "performance_report.html")
+
+# Standard visualization
+equity_plots = EquityPlots()
+fig = equity_plots.plot_equity_curve(equity_curve)
+fig.savefig("equity_curve.png")
+```
+
+### 2. Integration Helpers
+
+```python
+# For backtesting
+class BacktestAnalytics:
+    def __init__(self, backtest_result):
+        self.equity_curve = backtest_result.get_equity_curve()
+        self.trades = backtest_result.get_trades()
+        self.calculator = PerformanceCalculator(self.equity_curve, self.trades)
+        
+    def get_metrics(self):
+        return self.calculator.calculate_metrics()
+        
+    def generate_report(self, output_file=None):
+        report_generator = ReportGenerator()
+        report = report_generator.generate_performance_report(self.calculator)
+        if output_file:
+            report_generator.save_report(report, output_file)
+        return report
+        
+    def show_equity_curve(self):
+        equity_plots = EquityPlots()
+        return equity_plots.plot_equity_curve(self.equity_curve)
+```
+
+### 3. Event Handlers
+
+```python
+class AnalyticsEventHandler:
+    def __init__(self, event_bus):
+        self.event_bus = event_bus
+        self.calculator = PerformanceCalculator()
+        self.equity_history = []
+        self.trades = []
+        
+        # Register for events
+        self.event_bus.register(EventType.PORTFOLIO, self.on_portfolio_update)
+        self.event_bus.register(EventType.FILL, self.on_fill)
+        
+    def on_portfolio_update(self, event):
+        # Update equity history
+        self.equity_history.append({
+            'timestamp': event.get_timestamp(),
+            'equity': event.get_equity()
+        })
+        
+        # Update calculator
+        equity_curve = pd.DataFrame(self.equity_history)
+        self.calculator.set_equity_curve(equity_curve)
+        
+    def on_fill(self, event):
+        # Add trade
+        self.trades.append({
+            'timestamp': event.get_timestamp(),
+            'symbol': event.get_symbol(),
+            'direction': event.get_direction(),
+            'quantity': event.get_quantity(),
+            'price': event.get_price(),
+            'commission': event.get_commission()
+        })
+        
+        #

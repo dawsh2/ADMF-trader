@@ -10,8 +10,6 @@ from .event_schema import SchemaValidator
 logger = logging.getLogger(__name__)
 
 class EventHandler(ABC):
-    """Abstract base class for event handlers."""
-    
     def __init__(self, name):
         self.name = name
         self.validator = SchemaValidator()
@@ -41,6 +39,46 @@ class EventHandler(ABC):
         """Get handler statistics."""
         return self.stats
 
+
+class ComponentEventHandler(EventHandler):
+    """Event handler that delegates to a component in a DI container."""
+    
+    def __init__(self, container, component_name, event_types=None):
+        """
+        Initialize the component event handler.
+        
+        Args:
+            container: DI container
+            component_name: Component name in container
+            event_types: Optional list of event types to handle
+        """
+        self.container = container
+        self.component_name = component_name
+        self.event_types = event_types or []
+        self._component = None
+    
+    @property
+    def component(self):
+        """Get the component, lazily loaded from container."""
+        if self._component is None:
+            self._component = self.container.get(self.component_name)
+        return self._component
+    
+    def handle(self, event):
+        """Handle event by delegating to component."""
+        if not event.get_type() in self.event_types:
+            return False
+        
+        if hasattr(self.component, 'handle'):
+            return self.component.handle(event)
+        
+        # Try event-specific handler method
+        handler_name = f"on_{event.get_type().name.lower()}"
+        if hasattr(self.component, handler_name):
+            method = getattr(self.component, handler_name)
+            return method(event)
+        
+        return False    
 
 class AsyncEventHandler(EventHandler):
     """Abstract base class for asynchronous event handlers."""
