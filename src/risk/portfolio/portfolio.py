@@ -151,6 +151,7 @@ class PortfolioManager:
         self.update_equity()
 
         # Track trade for analysis
+        # In the on_fill method after creating the trade record
         trade = {
             'id': str(uuid.uuid4()),
             'timestamp': timestamp,
@@ -162,6 +163,8 @@ class PortfolioManager:
             'pnl': pnl
         }
         self.trades.append(trade)
+        logger.info(f"Trade recorded with PnL: {pnl:.2f}")
+
 
         # Update statistics
         self.stats['trades_executed'] += 1

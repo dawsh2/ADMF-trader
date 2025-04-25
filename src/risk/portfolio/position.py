@@ -55,9 +55,6 @@ class Position:
         timestamp = timestamp or datetime.datetime.now()
         self.last_update = timestamp
 
-        # Debug log for position update
-        logger.debug(f"Updating position {self.symbol}: current={self.quantity}, change={quantity_change}, price={price}")
-
         # Record transaction
         transaction = {
             'timestamp': timestamp,
@@ -67,83 +64,65 @@ class Position:
         }
         self.transactions.append(transaction)
 
-        # Track realized P&L for position reduction
+        # Debug logging
+        logger.debug(f"Position update for {self.symbol}: current={self.quantity}, change={quantity_change}, cost_basis={self.cost_basis}")
+
+        # Initialize realized P&L
         realized_pnl = 0.0
 
-        # Update position
+        # Handle three main cases
         if self.quantity == 0:
-            # Opening new position
+            # Case 1: Opening new position
             self.quantity = quantity_change
             self._total_cost = abs(quantity_change) * price
             self.cost_basis = price
             logger.debug(f"Opening new position: quantity={self.quantity}, cost_basis={self.cost_basis}")
 
         elif self.quantity * quantity_change > 0:
-            # Adding to existing position (same direction)
-            new_quantity = self.quantity + quantity_change
-            new_cost = self._total_cost + (abs(quantity_change) * price)
-
-            # Update position
-            self.quantity = new_quantity
-            self._total_cost = new_cost
-
-            # Update cost basis
-            if abs(new_quantity) > 0:  # Avoid division by zero
-                self.cost_basis = new_cost / abs(new_quantity)
-            logger.debug(f"Adding to position: quantity={self.quantity}, cost_basis={self.cost_basis}")
+            # Case 2: Adding to position (same direction)
+            old_quantity = self.quantity
+            self.quantity += quantity_change
+            self._total_cost += abs(quantity_change) * price
+            if abs(self.quantity) > 0:
+                self.cost_basis = self._total_cost / abs(self.quantity)
+            logger.debug(f"Adding to position: new quantity={self.quantity}, new cost_basis={self.cost_basis}")
 
         else:
-            # Reducing or flipping position (opposite direction)
-            if abs(quantity_change) < abs(self.quantity):
-                # Partial reduction
-                reduction_ratio = abs(quantity_change) / abs(self.quantity)
-                reduced_cost = self._total_cost * reduction_ratio
+            # Case 3: Reducing or flipping position
 
-                # Calculate realized P&L
-                if self.quantity > 0:  # Long position
-                    realized_pnl = abs(quantity_change) * (price - self.cost_basis)
-                else:  # Short position
-                    realized_pnl = abs(quantity_change) * (self.cost_basis - price)
+            # Step 1: Calculate the portion being closed and the P&L on that portion
+            close_quantity = min(abs(quantity_change), abs(self.quantity))
+            close_direction = -1 if self.quantity > 0 else 1
 
-                # Update position
-                self.quantity += quantity_change
-                if abs(self.quantity) > 0:  # Avoid setting _total_cost negative
-                    self._total_cost -= reduced_cost
-                # Cost basis remains the same
-                logger.debug(f"Partial reduction: quantity={self.quantity}, pnl={realized_pnl}")
+            # Calculate P&L on the closed portion
+            if self.quantity > 0:  # Long position being reduced
+                realized_pnl = close_quantity * (price - self.cost_basis)
+            else:  # Short position being reduced
+                realized_pnl = close_quantity * (self.cost_basis - price)
 
-            elif abs(quantity_change) == abs(self.quantity):
-                # Full position closure
-                if self.quantity > 0:  # Long position
-                    realized_pnl = self.quantity * (price - self.cost_basis)
-                else:  # Short position
-                    realized_pnl = abs(self.quantity) * (self.cost_basis - price)
+            logger.debug(f"Closing portion: quantity={close_quantity}, pnl={realized_pnl}")
 
-                # Close position
+            # Step 2: Update position
+            remaining_quantity = self.quantity + quantity_change
+
+            if remaining_quantity == 0:
+                # Fully closed position
                 self.quantity = 0
                 self._total_cost = 0
-                # Cost basis remains for historical reference
-                logger.debug(f"Full position closure: pnl={realized_pnl}")
-
-            else:
-                # Position flip
-                # First close existing position
-                if self.quantity > 0:  # Long position
-                    realized_pnl = self.quantity * (price - self.cost_basis)
-                else:  # Short position
-                    realized_pnl = abs(self.quantity) * (self.cost_basis - price)
-
-                # Then open new position in opposite direction
-                remaining_quantity = quantity_change + self.quantity  # Will be opposite sign of original
+                logger.debug(f"Position fully closed, pnl={realized_pnl}")
+            elif remaining_quantity * self.quantity > 0:
+                # Partially closed position
+                reduction_ratio = close_quantity / abs(self.quantity)
+                self._total_cost *= (1 - reduction_ratio)
                 self.quantity = remaining_quantity
-                self._total_cost = abs(remaining_quantity) * price
+                logger.debug(f"Position partially closed: new quantity={self.quantity}, cost={self._total_cost}")
+            else:
+                # Position flipped to opposite direction
+                flip_quantity = abs(quantity_change) - abs(self.quantity)
+                self.quantity = remaining_quantity
+                self._total_cost = flip_quantity * price
                 self.cost_basis = price
-                logger.debug(f"Position flip: quantity={self.quantity}, cost_basis={self.cost_basis}, pnl={realized_pnl}")
-
-        # Cap realized P&L to avoid extreme values
-        if abs(realized_pnl) > 10000:
-            logger.warning(f"Capping extreme PnL value: {realized_pnl} -> {10000 if realized_pnl > 0 else -10000}")
-            realized_pnl = 10000 if realized_pnl > 0 else -10000
+                logger.debug(f"Position flipped: new quantity={self.quantity}, new cost_basis={self.cost_basis}")
 
         # Update realized P&L
         self.realized_pnl += realized_pnl
@@ -152,7 +131,125 @@ class Position:
         self.current_price = price
         self.market_value = self.current_price * self.quantity
 
-        return realized_pnl        
+        logger.debug(f"Update complete: quantity={self.quantity}, cost_basis={self.cost_basis}, realized_pnl={realized_pnl}")
+
+        return realized_pnl    
+
+ 
+
+    # def update(self, quantity_change: float, price: float, timestamp=None) -> float:
+    #     """
+    #     Update position with a new transaction.
+
+    #     Args:
+    #         quantity_change: Change in quantity (positive for buys, negative for sells)
+    #         price: Transaction price
+    #         timestamp: Optional transaction timestamp
+
+    #     Returns:
+    #         float: Realized P&L if any
+    #     """
+    #     timestamp = timestamp or datetime.datetime.now()
+    #     self.last_update = timestamp
+
+    #     # Debug log for position update
+    #     logger.debug(f"Updating position {self.symbol}: current={self.quantity}, change={quantity_change}, price={price}")
+
+    #     # Record transaction
+    #     transaction = {
+    #         'timestamp': timestamp,
+    #         'quantity': quantity_change,
+    #         'price': price,
+    #         'type': 'BUY' if quantity_change > 0 else 'SELL',
+    #     }
+    #     self.transactions.append(transaction)
+
+    #     # Track realized P&L for position reduction
+    #     realized_pnl = 0.0
+
+    #     # Update position
+    #     if self.quantity == 0:
+    #         # Opening new position
+    #         self.quantity = quantity_change
+    #         self._total_cost = abs(quantity_change) * price
+    #         self.cost_basis = price
+    #         logger.debug(f"Opening new position: quantity={self.quantity}, cost_basis={self.cost_basis}")
+
+    #     elif self.quantity * quantity_change > 0:
+    #         # Adding to existing position (same direction)
+    #         new_quantity = self.quantity + quantity_change
+    #         new_cost = self._total_cost + (abs(quantity_change) * price)
+
+    #         # Update position
+    #         self.quantity = new_quantity
+    #         self._total_cost = new_cost
+
+    #         # Update cost basis
+    #         if abs(new_quantity) > 0:  # Avoid division by zero
+    #             self.cost_basis = new_cost / abs(new_quantity)
+    #         logger.debug(f"Adding to position: quantity={self.quantity}, cost_basis={self.cost_basis}")
+
+    #     else:
+    #         # Reducing or flipping position (opposite direction)
+    #         if abs(quantity_change) < abs(self.quantity):
+    #             # Partial reduction
+    #             reduction_ratio = abs(quantity_change) / abs(self.quantity)
+    #             reduced_cost = self._total_cost * reduction_ratio
+
+    #             # Calculate realized P&L
+    #             if self.quantity > 0:  # Long position
+    #                 realized_pnl = abs(quantity_change) * (price - self.cost_basis)
+    #             else:  # Short position
+    #                 realized_pnl = abs(quantity_change) * (self.cost_basis - price)
+
+    #             # Update position
+    #             self.quantity += quantity_change
+    #             if abs(self.quantity) > 0:  # Avoid setting _total_cost negative
+    #                 self._total_cost -= reduced_cost
+    #             # Cost basis remains the same
+    #             logger.debug(f"Partial reduction: quantity={self.quantity}, pnl={realized_pnl}")
+
+    #         elif abs(quantity_change) == abs(self.quantity):
+    #             # Full position closure
+    #             if self.quantity > 0:  # Long position
+    #                 realized_pnl = self.quantity * (price - self.cost_basis)
+    #             else:  # Short position
+    #                 realized_pnl = abs(self.quantity) * (self.cost_basis - price)
+
+    #             # Close position
+    #             self.quantity = 0
+    #             self._total_cost = 0
+    #             # Cost basis remains for historical reference
+    #             logger.debug(f"Full position closure: pnl={realized_pnl}")
+
+    #         else:
+    #             # Position flip
+    #             # First close existing position
+    #             if self.quantity > 0:  # Long position
+    #                 realized_pnl = self.quantity * (price - self.cost_basis)
+    #             else:  # Short position
+    #                 realized_pnl = abs(self.quantity) * (self.cost_basis - price)
+
+    #             # Then open new position in opposite direction
+    #             remaining_quantity = quantity_change + self.quantity  # Will be opposite sign of original
+    #             self.quantity = remaining_quantity
+    #             self._total_cost = abs(remaining_quantity) * price
+    #             self.cost_basis = price
+    #             logger.debug(f"Position flip: quantity={self.quantity}, cost_basis={self.cost_basis}, pnl={realized_pnl}")
+
+    #     # Cap realized P&L to avoid extreme values
+    #     if abs(realized_pnl) > 10000:
+    #         logger.warning(f"Capping extreme PnL value: {realized_pnl} -> {10000 if realized_pnl > 0 else -10000}")
+    #         realized_pnl = 10000 if realized_pnl > 0 else -10000
+
+    #     # Update realized P&L
+    #     self.realized_pnl += realized_pnl
+
+    #     # Update current price and market value
+    #     self.current_price = price
+    #     self.market_value = self.current_price * self.quantity
+
+    #     return realized_pnl        
     
 
     

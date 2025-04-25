@@ -117,15 +117,51 @@ class PerformanceCalculator:
             results.update(dd_metrics)
             
         return results
-    
+
     def calculate_all_metrics(self):
         """
         Calculate all available metrics.
-        
+
         Returns:
             dict: All metrics
         """
-        return calculate_all_metrics(self.equity_curve, self.trades)
+        if self.equity_curve is None or self.equity_curve.empty:
+            return {'warning': 'No equity curve data available'}
+
+        metrics = {
+            'total_return': total_return(self.equity_curve, self.trades),
+            'annualized_return': annualized_return(self.equity_curve, self.trades),
+            'sharpe_ratio': sharpe_ratio(self.equity_curve, self.trades),
+            'sortino_ratio': sortino_ratio(self.equity_curve, self.trades),
+            'max_drawdown': max_drawdown(self.equity_curve, self.trades),
+            'calmar_ratio': calmar_ratio(self.equity_curve, self.trades)
+        }
+
+        # Add trade-specific metrics if trades are provided
+        if self.trades:
+            metrics.update({
+                'win_rate': win_rate(self.trades),
+                'profit_factor': profit_factor(self.trades),
+                'trade_count': len(self.trades)
+            })
+
+            # Add average trade metrics
+            metrics.update(average_trade(self.trades))
+
+        # Add drawdown statistics
+        metrics.update(drawdown_stats(self.equity_curve))
+
+        return metrics    
+
+
+    # def calculate_all_metrics(self):
+    #     """
+    #     Calculate all available metrics.
+        
+    #     Returns:
+    #         dict: All metrics
+    #     """
+    #     return calculate_all_metrics(self.equity_curve, self.trades)
     
     def get_returns(self):
         """

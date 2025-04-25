@@ -291,50 +291,72 @@ class BacktestCoordinator:
                 logger.info(f"Processed {iteration} iterations")
         
         logger.info(f"Backtest completed after {iteration} iterations")
-    
+
     def _process_results(self):
         """
         Process backtest results.
-        
+
         Returns:
             Dict: Backtest results
         """
-        # Get equity curve
-        equity_curve = self.portfolio.get_equity_curve_df()
-        
-        # Get trades
-        trades = self.portfolio.get_recent_trades()
-        
-        # Set up performance calculator
-        self.calculator.set_equity_curve(equity_curve)
-        self.calculator.set_trades(trades)
-        
-        # Calculate metrics
-        metrics = self.calculator.calculate_all_metrics()
-        
-        # Generate reports
-        summary_report = self.report_generator.generate_summary_report()
-        detailed_report = self.report_generator.generate_detailed_report()
-        
-        # Collect results
-        results = {
-            'equity_curve': equity_curve,
-            'trades': trades,
-            'metrics': metrics,
-            'summary_report': summary_report,
-            'detailed_report': detailed_report,
-            'stats': {
-                'portfolio': self.portfolio.get_stats(),
-                'risk_manager': self.risk_manager.get_stats() if self.risk_manager else {},
-                'broker': self.broker.get_stats() if self.broker else {},
-                'order_manager': self.order_manager.get_stats() if self.order_manager else {}
+        try:
+            # Get equity curve
+            equity_curve = self.portfolio.get_equity_curve_df()
+
+            # Get trades
+            trades = self.portfolio.get_recent_trades()
+
+            # Debug trades
+            logger.info(f"Trade stats: {len(trades)} trades, "
+                        f"{sum(1 for t in trades if t.get('pnl', 0) > 0)} wins, "
+                        f"{sum(1 for t in trades if t.get('pnl', 0) < 0)} losses")
+
+            if trades:
+                pnl_values = [t.get('pnl', 0) for t in trades]
+                logger.info(f"PnL sum: {sum(pnl_values):.2f}")
+                logger.info(f"Min PnL: {min(pnl_values):.2f}, Max PnL: {max(pnl_values):.2f}")
+
+            # Set up performance calculator
+            self.calculator.set_equity_curve(equity_curve)
+            self.calculator.set_trades(trades)
+
+            # Calculate metrics - check that calculator has equity curve and trades
+            print(f"Calculating metrics with {len(trades)} trades")
+            if equity_curve is None or equity_curve.empty:
+                logger.warning("Empty equity curve, metrics will be limited")
+
+            # Calculate metrics
+            metrics = self.calculator.calculate_all_metrics()
+
+            # Generate reports
+            self.report_generator.set_calculator(self.calculator)
+            summary_report = self.report_generator.generate_summary_report()
+            detailed_report = self.report_generator.generate_detailed_report()
+
+            # Collect results
+            results = {
+                'equity_curve': equity_curve,
+                'trades': trades,
+                'metrics': metrics,
+                'summary_report': summary_report,
+                'detailed_report': detailed_report,
+                'stats': {
+                    'portfolio': self.portfolio.get_stats(),
+                    'risk_manager': self.risk_manager.get_stats() if self.risk_manager else {},
+                    'broker': self.broker.get_stats() if self.broker else {},
+                    'order_manager': self.order_manager.get_stats() if self.order_manager else {}
+                }
             }
-        }
-        
-        # Store results
-        self.results = results
-        
-        return results
+
+            # Store results
+            self.results = results
+
+            return results
+        except Exception as e:
+            logger.error(f"Error processing results: {e}", exc_info=True)
+            return {}        
+    
+
     
     def get_performance_summary(self):
         """

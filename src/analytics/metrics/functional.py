@@ -14,7 +14,7 @@ def total_return(equity_curve: pd.DataFrame, trades: List[Dict] = None) -> float
     Returns:
         float: Total return as decimal
     """
-    if len(equity_curve) < 2:
+    if equity_curve is None or not isinstance(equity_curve, pd.DataFrame) or equity_curve.empty or len(equity_curve) < 2:
         return 0.0
         
     initial = equity_curve['equity'].iloc[0]
@@ -22,10 +22,27 @@ def total_return(equity_curve: pd.DataFrame, trades: List[Dict] = None) -> float
     
     return (final - initial) / initial
 
+def calculate_log_returns(equity_curve: pd.DataFrame) -> pd.Series:
+    """
+    Calculate logarithmic returns from equity curve.
+    
+    Args:
+        equity_curve: DataFrame with 'equity' column
+        
+    Returns:
+        pandas.Series: Series of log returns
+    """
+    if equity_curve is None or not isinstance(equity_curve, pd.DataFrame) or equity_curve.empty or len(equity_curve) < 2:
+        return pd.Series()
+    
+    # Calculate log returns: ln(price_t / price_{t-1})
+    log_returns = np.log(equity_curve['equity'] / equity_curve['equity'].shift(1)).dropna()
+    return log_returns
+
 def annualized_return(equity_curve: pd.DataFrame, trades: List[Dict] = None, 
                      trading_days_per_year: int = 252) -> float:
     """
-    Calculate annualized return.
+    Calculate annualized return using log returns.
     
     Args:
         equity_curve: DataFrame with 'equity' column
@@ -38,19 +55,28 @@ def annualized_return(equity_curve: pd.DataFrame, trades: List[Dict] = None,
     if len(equity_curve) < 2:
         return 0.0
         
-    total_ret = total_return(equity_curve, trades)
-    duration_days = (equity_curve.index[-1] - equity_curve.index[0]).days
+    # Calculate using log returns for more accurate compounding
+    initial = equity_curve['equity'].iloc[0]
+    final = equity_curve['equity'].iloc[-1]
     
+    # Calculate time period in years
+    duration_days = (equity_curve.index[-1] - equity_curve.index[0]).days
     if duration_days < 1:
         return 0.0
     
     years = duration_days / 365.0
-    return (1 + total_ret) ** (1 / years) - 1
+    
+    # Calculate log return and then annualize
+    total_log_return = np.log(final / initial)
+    annualized_log_return = total_log_return / years
+    
+    # Convert back to simple return for reporting
+    return np.exp(annualized_log_return) - 1
 
 def sharpe_ratio(equity_curve: pd.DataFrame, trades: List[Dict] = None, 
                 risk_free_rate: float = 0.0, annualization_factor: int = 252) -> float:
     """
-    Calculate Sharpe ratio.
+    Calculate Sharpe ratio using log returns.
     
     Args:
         equity_curve: DataFrame with 'equity' column
@@ -64,14 +90,17 @@ def sharpe_ratio(equity_curve: pd.DataFrame, trades: List[Dict] = None,
     if len(equity_curve) < 2:
         return 0.0
         
-    # Calculate returns
-    returns = equity_curve['equity'].pct_change().dropna()
+    # Calculate log returns
+    returns = calculate_log_returns(equity_curve)
     
     if len(returns) == 0:
         return 0.0
         
+    # Daily risk-free rate using continuous compounding
+    daily_rf_rate = np.log(1 + risk_free_rate) / annualization_factor
+    
     # Calculate annualized Sharpe ratio
-    excess_returns = returns - (risk_free_rate / annualization_factor)
+    excess_returns = returns - daily_rf_rate
     sharpe = excess_returns.mean() / excess_returns.std() * np.sqrt(annualization_factor)
     
     return sharpe
@@ -80,7 +109,7 @@ def sortino_ratio(equity_curve: pd.DataFrame, trades: List[Dict] = None,
                  risk_free_rate: float = 0.0, annualization_factor: int = 252, 
                  target_return: float = 0.0) -> float:
     """
-    Calculate Sortino ratio.
+    Calculate Sortino ratio using log returns.
     
     Args:
         equity_curve: DataFrame with 'equity' column
@@ -95,17 +124,21 @@ def sortino_ratio(equity_curve: pd.DataFrame, trades: List[Dict] = None,
     if len(equity_curve) < 2:
         return 0.0
         
-    # Calculate returns
-    returns = equity_curve['equity'].pct_change().dropna()
+    # Calculate log returns
+    returns = calculate_log_returns(equity_curve)
     
     if len(returns) == 0:
         return 0.0
         
+    # Daily risk-free rate and target rate (continuous compounding)
+    daily_rf_rate = np.log(1 + risk_free_rate) / annualization_factor
+    daily_target_rate = np.log(1 + target_return) / annualization_factor
+    
     # Calculate excess returns
-    excess_returns = returns - (risk_free_rate / annualization_factor)
+    excess_returns = returns - daily_rf_rate
     
     # Calculate downside deviation (standard deviation of negative excess returns)
-    downside_returns = excess_returns[excess_returns < target_return]
+    downside_returns = excess_returns[excess_returns < daily_target_rate]
     
     if len(downside_returns) == 0:
         return float('inf')  # No downside - perfect Sortino!
@@ -158,7 +191,7 @@ def calmar_ratio(equity_curve: pd.DataFrame, trades: List[Dict] = None,
     if len(equity_curve) < 2:
         return 0.0
         
-    # Calculate annualized return
+    # Calculate annualized return (using the improved log-based function)
     annual_ret = annualized_return(equity_curve, trades)
     
     # Calculate maximum drawdown
@@ -299,9 +332,40 @@ def drawdown_stats(equity_curve: pd.DataFrame) -> Dict[str, Any]:
         'max_drawdown_duration': max_duration
     }
 
+def logarithmic_returns_statistics(equity_curve: pd.DataFrame) -> Dict[str, float]:
+    """
+    Calculate various statistics on logarithmic returns.
+    
+    Args:
+        equity_curve: DataFrame with 'equity' column
+        
+    Returns:
+        Dict with return statistics
+    """
+    if len(equity_curve) < 2:
+        return {'mean_log_return': 0.0, 'volatility': 0.0, 'skewness': 0.0, 'kurtosis': 0.0}
+    
+    log_returns = calculate_log_returns(equity_curve)
+    
+    if len(log_returns) == 0:
+        return {'mean_log_return': 0.0, 'volatility': 0.0, 'skewness': 0.0, 'kurtosis': 0.0}
+    
+    # Calculate statistics
+    mean_return = log_returns.mean()
+    volatility = log_returns.std()
+    skewness = log_returns.skew() if hasattr(log_returns, 'skew') else 0.0
+    kurtosis = log_returns.kurtosis() if hasattr(log_returns, 'kurtosis') else 0.0
+    
+    return {
+        'mean_log_return': mean_return,
+        'volatility': volatility,
+        'skewness': skewness,
+        'kurtosis': kurtosis
+    }
+
 def calculate_all_metrics(equity_curve: pd.DataFrame, trades: List[Dict] = None) -> Dict[str, Any]:
     """
-    Calculate all performance metrics.
+    Calculate all performance metrics using improved log return methods.
     
     Args:
         equity_curve: DataFrame with 'equity' column
@@ -310,6 +374,9 @@ def calculate_all_metrics(equity_curve: pd.DataFrame, trades: List[Dict] = None)
     Returns:
         Dict with all metrics
     """
+    if equity_curve is None or not isinstance(equity_curve, pd.DataFrame) or equity_curve.empty:
+        return {'warning': 'No equity curve data available'}
+
     metrics = {
         'total_return': total_return(equity_curve, trades),
         'annualized_return': annualized_return(equity_curve, trades),
@@ -319,11 +386,15 @@ def calculate_all_metrics(equity_curve: pd.DataFrame, trades: List[Dict] = None)
         'calmar_ratio': calmar_ratio(equity_curve, trades)
     }
     
+    # Add log return statistics
+    metrics.update(logarithmic_returns_statistics(equity_curve))
+    
     # Add trade-specific metrics if trades are provided
     if trades:
         metrics.update({
             'win_rate': win_rate(trades),
-            'profit_factor': profit_factor(trades)
+            'profit_factor': profit_factor(trades),
+            'trade_count': len(trades)
         })
         
         # Add average trade metrics

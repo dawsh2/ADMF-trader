@@ -440,6 +440,29 @@ def run_backtest():
 if __name__ == "__main__":
     try:
         results = run_backtest()
+        # After running backtest
+
+        # After results = run_backtest() in the main function:
+        # After results = run_backtest() in the main function:
+
+# After results = run_backtest() in the main function:
+        if results and results.get('success'):
+            print("\n=== Backtest Completed Successfully! ===")
+            # Add this debugging block
+            metrics = results.get('metrics', {})
+            trade_count = metrics.get('trade_count', 0)
+            print(f"\nTrade count: {trade_count}")
+
+            # Print key metrics
+            win_rate = metrics.get('win_rate', 0.0)
+            profit_factor = metrics.get('profit_factor', 0.0)
+            avg_trade = metrics.get('avg_trade', 0.0)
+
+            print(f"Win rate: {win_rate:.2f}")
+            print(f"Profit factor: {profit_factor:.2f}")
+            print(f"Average trade P&L: ${avg_trade:.2f}")        
+
+
         if results and results.get('success'):
             print("\n=== Backtest Completed Successfully! ===")
             print(f"Trades executed: {results.get('trades', 0)}")
@@ -461,3 +484,6 @@ if __name__ == "__main__":
     except Exception as e:
         logger.error(f"Backtest failed with error: {e}", exc_info=True)
         print(f"Error: {e}")
+
+
+        
