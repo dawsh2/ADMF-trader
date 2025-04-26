@@ -1,63 +1,53 @@
 #!/usr/bin/env python
 """
-Simple backtest runner for ADMF-Trader.
+ADMF-Trader Backtest Runner
 
-This script uses the Bootstrap pattern to set up and run a backtest
-using the configuration specified in config/backtest.yaml.
+This script runs a trading strategy backtest using the ADMF-Trader framework.
+It leverages the Bootstrap pattern for clean setup and proper component initialization.
+
+Usage:
+    python run_backtest.py --config config/my_strategy.yaml --output-dir ./results
 """
 import os
 import sys
-import logging
 import argparse
 import datetime
+import logging
 
 from src.core.bootstrap import Bootstrap
-from src.execution.backtest.backtest import BacktestCoordinator
 
 def main():
     """Run backtest using Bootstrap."""
-    # Parse arguments
+    # Parse command-line arguments
     parser = argparse.ArgumentParser(description="Run ADMF-Trader backtest")
     parser.add_argument("--config", default="config/backtest.yaml", help="Configuration file")
     parser.add_argument("--log-level", default="INFO", help="Logging level")
     parser.add_argument("--output-dir", default="./results", help="Results output directory")
     parser.add_argument("--debug", action="store_true", help="Enable debug mode")
+    parser.add_argument("--log-file", default="backtest.log", help="Log file path")
     args = parser.parse_args()
     
-    # Configure logging
-    logging.basicConfig(
-        level=getattr(logging, args.log_level),
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-        handlers=[
-            logging.StreamHandler(),
-            logging.FileHandler('backtest.log', mode='w')
-        ]
-    )
-    logger = logging.getLogger("ADMF-Trader")
-    
-    # Log debug info
-    if args.debug:
-        logger.setLevel(logging.DEBUG)
-        logger.debug("Debug mode enabled")
-        
     # Create output directory
     os.makedirs(args.output_dir, exist_ok=True)
     
-    # Create Bootstrap
+    # Create bootstrap with all configuration options
     bootstrap = Bootstrap(
         config_files=[args.config],
-        log_level=getattr(logging, args.log_level)
+        log_level=getattr(logging, args.log_level),
+        log_file=args.log_file,
+        debug=args.debug
     )
     
     # Set up container with components
-    logger.info("Setting up container...")
     container, config = bootstrap.setup()
     
     # Get backtest coordinator
     backtest = container.get("backtest")
     
     # Set up the backtest
+    logger = logging.getLogger("ADMF-Trader")
     logger.info("Setting up backtest...")
+    
     setup_success = backtest.setup()
     if not setup_success:
         logger.error("Failed to set up backtest")
@@ -72,52 +62,29 @@ def main():
         logger.error("Backtest produced no results")
         return False
     
-    # Save results
-    logger.info("Processing results...")
-    equity_curve = results.get("equity_curve")
-    trades = results.get("trades")
-    detailed_report = results.get("detailed_report", "")
+    # Get report generator for reporting and file saving
+    report_generator = container.get("report_generator")
     
-    # Log basic results
-    if equity_curve is not None and not equity_curve.empty:
-        start_equity = equity_curve['equity'].iloc[0]
-        end_equity = equity_curve['equity'].iloc[-1]
-        total_return = (end_equity - start_equity) / start_equity
-        
-        logger.info(f"Trades executed: {len(trades)}")
-        logger.info(f"Initial equity: ${start_equity:.2f}")
-        logger.info(f"Final equity: ${end_equity:.2f}")
-        logger.info(f"Total return: {total_return:.2%}")
-        
-        # Save equity curve
-        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        equity_curve.to_csv(f"{args.output_dir}/equity_curve_{timestamp}.csv")
-        logger.info(f"Saved equity curve to '{args.output_dir}/equity_curve_{timestamp}.csv'")
-        
-        # Save detailed report
-        with open(f"{args.output_dir}/backtest_report_{timestamp}.txt", 'w') as f:
-            f.write(detailed_report)
-        logger.info(f"Saved detailed report to '{args.output_dir}/backtest_report_{timestamp}.txt'")
+    # Generate timestamp for file naming
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     
-    # Print summary
-    print("\n=== Backtest Results ===")
-    print(f"Trades executed: {len(trades)}")
+    # Save results and get file paths
+    saved_files = report_generator.save_reports(
+        results, 
+        output_dir=args.output_dir,
+        timestamp=timestamp
+    )
     
-    # Print key metrics
-    metrics = results.get('metrics', {})
-    for metric_name in ['total_return', 'sharpe_ratio', 'sortino_ratio', 'max_drawdown', 'win_rate']:
-        if metric_name in metrics:
-            value = metrics[metric_name]
-            if isinstance(value, float):
-                if 'return' in metric_name or 'drawdown' in metric_name or 'rate' in metric_name:
-                    print(f"{metric_name}: {value:.2%}")
-                else:
-                    print(f"{metric_name}: {value:.4f}")
-            else:
-                print(f"{metric_name}: {value}")
+    # Print summary results to console
+    report_generator.print_summary(results)
     
     return True
 
 if __name__ == "__main__":
-    success = main()
-    sys.exit(0 if success else 1)
+    try:
+        success = main()
+        sys.exit(0 if success else 1)
+    except Exception as e:
+        logging.exception("Backtest failed with error")
+        print(f"Error: {e}")
+        sys.exit(1)

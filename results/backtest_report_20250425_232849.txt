@@ -1,0 +1,39 @@
+Performance Summary
+==================================================
+
+Returns:
+Total Return: 0.00%
+Annualized Return: 0.00%
+
+Log Return Analysis:
+Daily Mean Log Return: 0.0000%
+Annualized Volatility: 0.00%
+Skewness: 0.00
+Excess Kurtosis: 0.00
+
+Risk Metrics:
+Sharpe Ratio: nan
+Sortino Ratio: inf
+Maximum Drawdown: 0.00%
+Calmar Ratio: inf
+
+Equity Curve Statistics:
+Start Date: 2023-01-02 00:00:00
+End Date: 2023-02-28 00:00:00
+Duration: 57 days
+Starting Equity: 100000.00
+Ending Equity: 100000.00
+
+Detailed Return Analysis:
+CAGR: 0.00%
+Recent 20-day Volatility (Annualized): 0.00%
+Recent 20-day Sharpe Ratio: nan
+
+Monthly Returns:
+2023-01: 0.00%
+2023-02: 0.00%
+
+Drawdown Analysis:
+Maximum Drawdown: 0.00%
+Average Drawdown: 0.00%
+Maximum Drawdown Duration: 0 periods

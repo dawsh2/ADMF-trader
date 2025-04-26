@@ -1,204 +1,29 @@
 #!/usr/bin/env python
 """
-Simple MA Crossover Backtest Script
+Integration Test Backtest Script
 
-This script runs a Moving Average Crossover strategy backtest using
-the ADMF-Trader framework with proper dependency injection and the
-new Order Registry for centralized order tracking.
+This script runs an integration test with a Moving Average Crossover strategy
+using the ADMF-Trader framework with proper Bootstrap and centralized order registry.
 """
 import os
 import logging
+import argparse
 import datetime
 import pandas as pd
 import numpy as np
 import yaml
-from typing import Dict, List, Optional, Union, Tuple, Any
+import sys
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler('backtest.log', mode='w')
-    ]
-)
-logger = logging.getLogger("ADMF-Trader")
+from src.core.bootstrap import Bootstrap
+from src.core.config.config import Config
 
-# Import system components
-from src.core.di.container import Container
-from src.core.events.event_bus import EventBus
-from src.core.events.event_manager import EventManager
-from src.core.events.event_emitters import BarEmitter
-from src.core.events.event_types import EventType
-from src.data.sources.csv_handler import CSVDataSource
-from src.data.historical_data_handler import HistoricalDataHandler
-from src.risk.portfolio.portfolio import PortfolioManager
-from src.risk.managers.simple import SimpleRiskManager
-from src.execution.broker.broker_simulator import SimulatedBroker
-from src.execution.backtest.backtest import BacktestCoordinator
-from src.analytics.performance.calculator import PerformanceCalculator
-from src.analytics.reporting.report_generator import ReportGenerator
-from src.execution.order_manager import OrderManager
-from src.execution.order_registry import OrderRegistry
-
-# Create Simple Config class
-class SimpleConfig:
-    """Simplified configuration for use in backtest."""
-    
-    def __init__(self, config_dict=None):
-        self.config_dict = config_dict or {}
-    
-    def get_section(self, section_name):
-        """Get a configuration section."""
-        return SimpleSection(section_name, self.config_dict.get(section_name, {}))
-
-class SimpleSection:
-    """Simplified configuration section."""
-    
-    def __init__(self, name, values=None):
-        self.name = name
-        self.values = values or {}
-    
-    def get(self, key, default=None):
-        """Get a configuration value."""
-        return self.values.get(key, default)
-    
-    def as_dict(self):
-        """Get all values as a dictionary."""
-        return dict(self.values)
-    
-    def get_section(self, name):
-        """Get a nested configuration section."""
-        value = self.values.get(name, {})
-        if not isinstance(value, dict):
-            value = {}
-        return SimpleSection(f"{self.name}.{name}", value)
-    
-    def get_float(self, key, default=0.0):
-        """Get a configuration value as a float."""
-        value = self.get(key, default)
-        return float(value)
-    
-    def get_int(self, key, default=0):
-        """Get a configuration value as an int."""
-        value = self.get(key, default)
-        return int(value)
-
-# Create test data directory
-DATA_DIR = 'data'
-os.makedirs(DATA_DIR, exist_ok=True)
-
-class SimpleMAStrategy:
-    """Simple Moving Average Crossover Strategy."""
-    
-    def __init__(self, event_bus, data_handler, name=None, parameters=None):
-        """Initialize the strategy."""
-        self.event_bus = event_bus
-        self.data_handler = data_handler
-        self.name = name or "ma_crossover"
-        self.parameters = parameters or {}
-        
-        # Default parameters
-        self.fast_window = self.parameters.get('fast_window', 10)
-        self.slow_window = self.parameters.get('slow_window', 30)
-        self.symbols = self.parameters.get('symbols', [])
-        
-        # Internal state
-        self.data = {symbol: [] for symbol in self.symbols}
-        self.signal_count = 0
-        self.configured = False
-        
-        logger.info(f"Strategy initialized with fast_window={self.fast_window}, slow_window={self.slow_window}")
-        
-        # Register for bar events
-        if self.event_bus:
-            self.event_bus.register(EventType.BAR, self.on_bar)
-    
-    def configure(self, config):
-        """Configure the strategy with parameters."""
-        if hasattr(config, 'as_dict'):
-            self.parameters = config.as_dict()
-        else:
-            self.parameters = dict(config)
-            
-        # Update parameters
-        self.fast_window = self.parameters.get('fast_window', 10)
-        self.slow_window = self.parameters.get('slow_window', 30)
-        self.symbols = self.parameters.get('symbols', [])
-        
-        # Initialize data storage for each symbol
-        self.data = {symbol: [] for symbol in self.symbols}
-        
-        self.configured = True
-        logger.info(f"Strategy configured with parameters: {self.parameters}")
-    
-    def on_bar(self, bar_event):
-        """Handle bar events."""
-        symbol = bar_event.get_symbol()
-        if symbol not in self.symbols:
-            return
-        
-        # Store bar data
-        close_price = bar_event.get_close()
-        timestamp = bar_event.get_timestamp()
-        
-        if symbol not in self.data:
-            self.data[symbol] = []
-            
-        self.data[symbol].append({
-            'timestamp': timestamp,
-            'close': close_price
-        })
-        
-        # Wait until we have enough data
-        if len(self.data[symbol]) <= self.slow_window:
-            return
-        
-        # Calculate moving averages
-        closes = [bar['close'] for bar in self.data[symbol]]
-        fast_ma = sum(closes[-self.fast_window:]) / self.fast_window
-        slow_ma = sum(closes[-self.slow_window:]) / self.slow_window
-        
-        # Check for crossover
-        prev_fast_ma = sum(closes[-(self.fast_window+1):-1]) / self.fast_window
-        prev_slow_ma = sum(closes[-(self.slow_window+1):-1]) / self.slow_window
-        
-        # Generate signal on crossover
-        from src.core.events.event_utils import create_signal_event
-        
-        if prev_fast_ma <= prev_slow_ma and fast_ma > slow_ma:
-            # Buy signal
-            self.signal_count += 1
-            signal = create_signal_event(
-                signal_value=1,  # Buy
-                price=close_price,
-                symbol=symbol,
-                timestamp=timestamp
-            )
-            logger.info(f"BUY signal #{self.signal_count} for {symbol} at {close_price:.2f}")
-            self.event_bus.emit(signal)
-            
-        elif prev_fast_ma >= prev_slow_ma and fast_ma < slow_ma:
-            # Sell signal
-            self.signal_count += 1
-            signal = create_signal_event(
-                signal_value=-1,  # Sell
-                price=close_price,
-                symbol=symbol,
-                timestamp=timestamp
-            )
-            logger.info(f"SELL signal #{self.signal_count} for {symbol} at {close_price:.2f}")
-            self.event_bus.emit(signal)
-    
-    def reset(self):
-        """Reset strategy state."""
-        self.data = {symbol: [] for symbol in self.symbols}
-        self.signal_count = 0
-
-def create_test_data(symbols, start_date, end_date):
+def create_test_data(symbols, start_date, end_date, data_dir):
     """Create test data with sine wave patterns to ensure MA crossovers."""
+    logger = logging.getLogger(__name__)
     logger.info(f"Creating test data for {symbols}")
+    
+    # Create data directory if needed
+    os.makedirs(data_dir, exist_ok=True)
     
     # Convert dates to datetime objects if needed
     if isinstance(start_date, str):
@@ -245,31 +70,39 @@ def create_test_data(symbols, start_date, end_date):
         
         # Create DataFrame and save to CSV
         df = pd.DataFrame(data)
-        filename = os.path.join(DATA_DIR, f"{symbol}_1d.csv")
+        filename = os.path.join(data_dir, f"{symbol}_1d.csv")
         df.to_csv(filename, index=False)
         logger.info(f"Created test data for {symbol} with {len(data)} bars")
     
     return True
 
-def create_config():
+def create_config(data_dir, config_output_path="backtest_config.yaml"):
     """Create configuration for the backtest."""
     config_dict = {
         'backtest': {
             'initial_capital': 100000.0,
             'symbols': ['AAPL', 'MSFT'],
-            'data_dir': DATA_DIR,
+            'data_dir': data_dir,
             'timeframe': '1d',
+            'strategy': 'ma_crossover'
         },
-        'strategy': {
+        'strategies': {
             'ma_crossover': {
                 'fast_window': 5,  # Use fast window for more signals in test
                 'slow_window': 20,
                 'symbols': ['AAPL', 'MSFT'],
             }
         },
+        'data': {
+            'source_type': 'csv',
+            'data_dir': data_dir,
+        },
         'risk_manager': {
             'position_size': 100,
             'max_position_pct': 0.1,  # Max 10% of equity per position
+        },
+        'portfolio': {
+            'initial_cash': 100000.0,
         },
         'broker': {
             'slippage': 0.001,  # 0.1% slippage
@@ -278,137 +111,75 @@ def create_config():
     }
     
     # Save config to YAML file for reference
-    with open('backtest_config.yaml', 'w') as f:
+    with open(config_output_path, 'w') as f:
         yaml.dump(config_dict, f, default_flow_style=False)
     
-    # Create SimpleConfig object
-    return SimpleConfig(config_dict)
+    # Create Config object
+    config = Config()
+    for section, values in config_dict.items():
+        for key, value in values.items():
+            config.get_section(section).set(key, value)
+    
+    return config
 
-def setup_container(config):
-    """Set up dependency injection container with components."""
-    container = Container()
+def main():
+    """Run integration backtest with test data."""
+    # Parse arguments
+    parser = argparse.ArgumentParser(description="Run ADMF-Trader integration backtest")
+    parser.add_argument("--output-dir", default="./results", help="Results output directory")
+    parser.add_argument("--data-dir", default="./data", help="Data directory")
+    parser.add_argument("--log-file", default="integration_backtest.log", help="Log file path")
+    parser.add_argument("--debug", action="store_true", help="Enable debug mode")
+    args = parser.parse_args()
     
-    # Register core components
-    event_bus = EventBus()
-    event_manager = EventManager(event_bus)
+    # Create data and output directories
+    os.makedirs(args.output_dir, exist_ok=True)
+    os.makedirs(args.data_dir, exist_ok=True)
     
-    container.register_instance('event_bus', event_bus)
-    container.register_instance('event_manager', event_manager)
-    container.register_instance('config', config)
-    
-    # Register event emitters
-    bar_emitter = BarEmitter("bar_emitter", event_bus)
-    bar_emitter.start()  # Explicitly start the emitter
-    container.register_instance('bar_emitter', bar_emitter)
-    
-    # Register data components
-    data_source = CSVDataSource(config.get_section('backtest').get('data_dir', DATA_DIR))
-    container.register_instance('data_source', data_source)
-    
-    data_handler = HistoricalDataHandler(data_source, bar_emitter)
-    container.register_instance('data_handler', data_handler)
-    
-    # Register portfolio and risk management
-    portfolio = PortfolioManager(
-        event_bus, 
-        initial_cash=config.get_section('backtest').get_float('initial_capital', 100000.0)
-    )
-    container.register_instance('portfolio', portfolio)
-    
-    risk_manager = SimpleRiskManager(
-        event_bus,
-        portfolio,
-        name="simple_risk_manager"
-    )
-    risk_manager.position_size = config.get_section('risk_manager').get_int('position_size', 100)
-    risk_manager.max_position_pct = config.get_section('risk_manager').get_float('max_position_pct', 0.1)
-    container.register_instance('risk_manager', risk_manager)
-    
-    # Register strategy
-    strategy_params = config.get_section('strategy').get_section('ma_crossover').as_dict()
-    strategy = SimpleMAStrategy(event_bus, data_handler, name="ma_crossover", parameters=strategy_params)
-    container.register_instance('strategy', strategy)
-    
-    # NEW: Create order registry before execution components
-    order_registry = OrderRegistry(event_bus)
-    container.register_instance('order_registry', order_registry)
-    
-    # Register execution components - NEW ORDER with centralized registry
-    broker = SimulatedBroker(event_bus, order_registry)
-    broker.slippage = config.get_section('broker').get_float('slippage', 0.0)
-    broker.commission = config.get_section('broker').get_float('commission', 0.0)
-    container.register_instance('broker', broker)
-    
-    # Create order manager with registry
-    order_manager = OrderManager(event_bus, broker, order_registry)
-    container.register_instance('order_manager', order_manager)
-    
-    # Register analytics components
-    calculator = PerformanceCalculator()
-    container.register_instance('calculator', calculator)
-    
-    report_generator = ReportGenerator(calculator)
-    container.register_instance('report_generator', report_generator)
-    
-    # Register backtest coordinator
-    backtest = BacktestCoordinator(container, config)
-    container.register_instance('backtest', backtest)
-    
-    # CRITICAL: Register components with event manager in the correct order
-    # 1. Order registry must see all events
-    event_manager.register_component('order_registry', order_registry, 
-                                    [EventType.ORDER, EventType.FILL])
-                                    
-    # 2. Data handler for bar events
-    event_manager.register_component('data_handler', data_handler, [EventType.BAR])
-    
-    # 3. Strategy to generate signals from bars
-    event_manager.register_component('strategy', strategy, [EventType.BAR]) 
-    
-    # 4. Risk manager to generate orders from signals
-    event_manager.register_component('risk_manager', risk_manager, [EventType.SIGNAL])
-    
-    # 5. Order manager to process orders BEFORE broker
-    event_manager.register_component('order_manager', order_manager, 
-                                    [EventType.ORDER, EventType.FILL])
-    
-    # 6. Broker processes orders AFTER order manager registers them
-    event_manager.register_component('broker', broker, 
-                                    [EventType.PORTFOLIO])  # Listen for state changes
-    
-    # 7. Portfolio processes fills last
-    event_manager.register_component('portfolio', portfolio, [EventType.FILL])
-    
-    return container
-
-
-def run_backtest():
-    """Run backtest using BacktestCoordinator."""
-    logger.info("=== Starting ADMF-Trader Backtest with Order Registry ===")
-    
-    # Create test data
+    # Define test parameters
     symbols = ['AAPL', 'MSFT']
     start_date = '2023-01-01'
     end_date = '2023-02-28'  # Shorter period for faster testing
     
-    create_test_data(symbols, start_date, end_date)
+    # Initialize Bootstrap with debug options
+    bootstrap = Bootstrap(
+        log_level=logging.DEBUG if args.debug else logging.INFO,
+        log_file=args.log_file,
+        debug=args.debug
+    )
+    
+    # Initialize logging early for data generation
+    bootstrap._setup_logging()
+    logger = logging.getLogger(__name__)
+    
+    # Create test data
+    logger.info("Generating test data...")
+    create_test_data(symbols, start_date, end_date, args.data_dir)
     
     # Create configuration
-    config = create_config()
+    config_path = "integration_test_config.yaml"
+    logger.info(f"Creating configuration at {config_path}...")
+    config = create_config(args.data_dir, config_path)
     
-    # Set up container with all components
-    container = setup_container(config)
+    # Add config to bootstrap
+    bootstrap.config_files = [config_path]
+    
+    # Set up container with components
+    logger.info("Setting up container...")
+    container, _ = bootstrap.setup()
     
     # Get backtest coordinator
     backtest = container.get('backtest')
     
     # Set up the backtest
+    logger.info("Setting up backtest...")
     setup_success = backtest.setup()
     if not setup_success:
         logger.error("Failed to set up backtest")
         return False
     
     # Run the backtest
+    logger.info("Running backtest...")
     results = backtest.run(
         symbols=symbols,
         start_date=start_date,
@@ -417,56 +188,28 @@ def run_backtest():
         timeframe='1d'
     )
     
-    # Process results
+    # Check if we got any results
     if not results:
-        logger.error("Backtest returned no results!")
-        return {'success': False}
+        logger.error("Backtest produced no results")
+        return False
     
-    # Get equity curve and trades
-    equity_curve = results.get('equity_curve')
-    trades = results.get('trades', [])
+    # Get report generator for reporting and file saving
+    report_generator = container.get("report_generator")
     
-    logger.info(f"Executed {len(trades)} trades")
+    # Generate timestamp for file naming
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     
-    # Show first few trades
-    for i, trade in enumerate(trades[:5]):
-        if i < len(trades):
-            logger.info(f"Trade {i+1}: {trade['direction']} {trade['quantity']} {trade['symbol']} @ {trade['price']:.2f}, PnL: {trade['pnl']:.2f}")
+    # Save results and get file paths
+    saved_files = report_generator.save_reports(
+        results, 
+        output_dir=args.output_dir,
+        timestamp=timestamp
+    )
     
-    # Calculate metrics from equity curve
-    metrics = results.get('metrics', {})
-    total_return = 0.0
+    # Print summary results to console
+    report_generator.print_summary(results)
     
-    if equity_curve is not None and not equity_curve.empty:
-        start_equity = equity_curve['equity'].iloc[0]
-        end_equity = equity_curve['equity'].iloc[-1]
-        total_return = (end_equity / start_equity) - 1
-        
-        logger.info(f"Initial equity: ${start_equity:.2f}")
-        logger.info(f"Final equity: ${end_equity:.2f}")
-        logger.info(f"Total return: {total_return:.2%}")
-        
-        # Save equity curve
-        equity_curve.to_csv("equity_curve.csv")
-        logger.info("Saved equity curve to 'equity_curve.csv'")
-        
-        # Save detailed report
-        detailed_report = results.get('detailed_report', '')
-        if detailed_report:
-            with open('backtest_report.txt', 'w') as f:
-                f.write(detailed_report)
-            logger.info("Saved detailed report to 'backtest_report.txt'")
-    
-    # Print metrics
-    if metrics:
-        logger.info("\nPerformance Metrics:")
-        for metric, value in metrics.items():
-            if isinstance(value, float):
-                logger.info(f"  {metric}: {value:.4f}")
-            else:
-                logger.info(f"  {metric}: {value}")
-    
-    # Get statistics from the order registry
+    # Try to get order registry stats
     try:
         order_registry = container.get('order_registry')
         if order_registry:
@@ -477,46 +220,14 @@ def run_backtest():
     except Exception as e:
         logger.error(f"Error getting order registry stats: {e}")
     
-    return {
-        'success': True,
-        'trades': len(trades),
-        'return': total_return,
-        'metrics': metrics
-    }
+    return True
 
 if __name__ == "__main__":
     try:
-        results = run_backtest()
-        
-        if results and results.get('success'):
-            print("\n=== Backtest Completed Successfully! ===")
-            
-            # Print key metrics
-            metrics = results.get('metrics', {})
-            trade_count = metrics.get('trade_count', 0)
-            win_rate = metrics.get('win_rate', 0.0)
-            profit_factor = metrics.get('profit_factor', 0.0)
-            avg_trade = metrics.get('avg_trade', 0.0)
-            
-            print(f"\nTrade count: {trade_count}")
-            print(f"Win rate: {win_rate:.2f}")
-            print(f"Profit factor: {profit_factor:.2f}")
-            print(f"Average trade P&L: ${avg_trade:.2f}")        
-            print(f"Trades executed: {results.get('trades', 0)}")
-            print(f"Total return: {results.get('return', 0):.2%}")
-            
-            # Print summary metrics
-            print("\nKey Performance Metrics:")
-            key_metrics = ['sharpe_ratio', 'max_drawdown', 'win_rate', 'profit_factor']
-            for metric in key_metrics:
-                if metric in metrics:
-                    print(f"  {metric}: {metrics[metric]:.4f}")
-            
-            print("\nDetailed results saved to backtest_report.txt")
-            print("Equity curve saved to equity_curve.csv")
-        else:
-            print("\n=== Backtest Failed! ===")
-            print("See logs for details.")
+        success = main()
+        print("\n=== Integration Backtest Completed Successfully! ===" if success else "\n=== Integration Backtest Failed! ===")
+        sys.exit(0 if success else 1)
     except Exception as e:
-        logger.error(f"Backtest failed with error: {e}", exc_info=True)
+        logging.exception("Integration backtest failed with error")
         print(f"Error: {e}")
+        sys.exit(1)

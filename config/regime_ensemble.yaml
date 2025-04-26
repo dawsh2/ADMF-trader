@@ -1,0 +1,78 @@
+# Regime-Aware Ensemble Strategy Configuration
+backtest:
+  strategy: regime_ensemble
+  initial_capital: 100000.0
+  symbols: ['AAPL', 'MSFT', 'GOOGL']
+  data_dir: ./data
+  timeframe: 1d
+
+# Strategy-specific parameters
+strategies:
+  regime_ensemble:
+    # Symbols to trade
+    symbols: ['AAPL', 'MSFT', 'GOOGL']
+    
+    # Regime detection parameters
+    volatility_window: 20
+    volatility_threshold: 0.015  # 1.5% daily volatility threshold
+    trend_ma_window: 50
+    trend_threshold: 0.05  # 5% trend threshold
+    
+    # Trend following parameters (MA Crossover)
+    fast_ma_window: 10 
+    slow_ma_window: 30
+    
+    # Mean reversion parameters (RSI)
+    rsi_window: 14
+    rsi_overbought: 70
+    rsi_oversold: 30
+    
+    # Volatility breakout parameters
+    breakout_window: 20
+    breakout_multiplier: 2.0
+    
+    # Rule weights for each regime
+    regime_weights:
+      trend:
+        trend_following: 1.0
+        mean_reversion: 0.2
+        volatility_breakout: 0.5
+      mean_reversion:
+        trend_following: 0.2
+        mean_reversion: 1.0
+        volatility_breakout: 0.3
+      volatile:
+        trend_following: 0.3
+        mean_reversion: 0.3
+        volatility_breakout: 1.0
+      neutral:
+        trend_following: 0.5
+        mean_reversion: 0.5
+        volatility_breakout: 0.5
+
+# Data handling configuration
+data:
+  source_type: csv
+  data_dir: ./data
+
+# Portfolio configuration
+portfolio:
+  initial_cash: 100000.0
+
+# Risk management configuration
+risk_manager:
+  position_size: 100
+  max_position_pct: 0.1  # Maximum 10% per position
+
+# Broker configuration
+broker:
+  slippage: 0.001  # 0.1% slippage
+  commission: 0.001  # 0.1% commission
+
+# Optimization configuration (for future use)
+optimization:
+  enabled: false
+  method: grid
+  metrics:
+    primary: sharpe_ratio
+    secondary: max_drawdown

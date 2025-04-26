@@ -197,6 +197,123 @@ class ReportGenerator:
         with open(filename, 'w') as f:
             f.write(report)
     
+    def save_reports(self, results, output_dir="./results", timestamp=None):
+        """
+        Save all report components to files.
+        
+        Args:
+            results: Backtest results dictionary
+            output_dir: Directory to save results
+            timestamp: Timestamp string (generated if None)
+            
+        Returns:
+            dict: Dictionary with file paths of saved reports
+        """
+        import os
+        import datetime
+        import logging
+        
+        logger = logging.getLogger(__name__)
+        
+        if not results:
+            logger.warning("No results to save")
+            return {}
+        
+        # Create output directory
+        os.makedirs(output_dir, exist_ok=True)
+        
+        # Generate timestamp if not provided
+        if timestamp is None:
+            timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        
+        saved_files = {}
+        
+        # Save equity curve
+        equity_curve = results.get("equity_curve")
+        if equity_curve is not None and not equity_curve.empty:
+            equity_file = f"{output_dir}/equity_curve_{timestamp}.csv"
+            equity_curve.to_csv(equity_file)
+            logger.info(f"Saved equity curve to '{equity_file}'")
+            saved_files["equity_curve_file"] = equity_file
+        
+        # Save detailed report
+        detailed_report = results.get("detailed_report", "")
+        if detailed_report:
+            report_file = f"{output_dir}/backtest_report_{timestamp}.txt"
+            with open(report_file, 'w') as f:
+                f.write(detailed_report)
+            logger.info(f"Saved detailed report to '{report_file}'")
+            saved_files["detailed_report_file"] = report_file
+        
+        # Save trade log if available
+        trades = results.get("trades", [])
+        if trades:
+            try:
+                import pandas as pd
+                trade_df = pd.DataFrame(trades)
+                trade_file = f"{output_dir}/trades_{timestamp}.csv"
+                trade_df.to_csv(trade_file, index=False)
+                logger.info(f"Saved trade log to '{trade_file}'")
+                saved_files["trades_file"] = trade_file
+            except (ImportError, Exception) as e:
+                logger.warning(f"Could not save trade log: {e}")
+        
+        # Add file paths to results
+        results.update(saved_files)
+        
+        return saved_files
+    
+    def print_summary(self, results):
+        """
+        Print a summary of backtest results to console.
+        
+        Args:
+            results: Backtest results dictionary
+        """
+        if not results:
+            print("\n=== Backtest Failed! ===")
+            print("No results were produced.")
+            return
+        
+        # Get key components
+        trades = results.get("trades", [])
+        metrics = results.get("metrics", {})
+        
+        # Print header
+        print("\n=== Backtest Results ===")
+        print(f"Trades executed: {len(trades)}")
+        
+        # Print key metrics
+        key_metrics = [
+            ('total_return', 'Total Return', True),
+            ('sharpe_ratio', 'Sharpe Ratio', False),
+            ('sortino_ratio', 'Sortino Ratio', False),
+            ('max_drawdown', 'Maximum Drawdown', True),
+            ('win_rate', 'Win Rate', True),
+            ('profit_factor', 'Profit Factor', False),
+            ('avg_trade', 'Average Trade', False)
+        ]
+        
+        for metric_key, metric_name, is_percentage in key_metrics:
+            if metric_key in metrics:
+                value = metrics[metric_key]
+                if isinstance(value, float):
+                    if is_percentage:
+                        print(f"{metric_name}: {value:.2%}")
+                    else:
+                        print(f"{metric_name}: {value:.4f}")
+                else:
+                    print(f"{metric_name}: {value}")
+        
+        # Print locations of saved files if available
+        detailed_report_file = results.get("detailed_report_file")
+        if detailed_report_file:
+            print(f"\nDetailed report saved to: {detailed_report_file}")
+        
+        equity_curve_file = results.get("equity_curve_file")
+        if equity_curve_file:
+            print(f"Equity curve saved to: {equity_curve_file}")
+    
     def generate_log_returns_report(self):
         """
         Generate a specialized report focused on log returns analysis.

@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 class Bootstrap:
     """System bootstrap that handles standard initialization."""
     
-    def __init__(self, config_files=None, env_prefix="APP_", log_level=logging.INFO):
+    def __init__(self, config_files=None, env_prefix="APP_", log_level=logging.INFO, log_file="backtest.log", debug=False):
         """
         Initialize bootstrap.
         
@@ -24,10 +24,14 @@ class Bootstrap:
             config_files: List of configuration files to load
             env_prefix: Environment variable prefix
             log_level: Logging level
+            log_file: Log file path
+            debug: Enable debug mode
         """
         self.config_files = config_files or []
         self.env_prefix = env_prefix
         self.log_level = log_level
+        self.log_file = log_file
+        self.debug = debug
         self.registries = {}
         
     def setup(self) -> Tuple[Container, Config]:
@@ -37,11 +41,8 @@ class Bootstrap:
         Returns:
             Tuple of (container, config)
         """
-        # Set up logging
-        logging.basicConfig(
-            level=self.log_level,
-            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-        )
+        # Set up logging with file and console output
+        self._setup_logging()
         
         # Load configuration
         config = Config()
@@ -289,3 +290,36 @@ class Bootstrap:
         container.register_instance("report_generator", report_generator)
         
         logger.info("Analytics components initialized")
+        
+    def _setup_logging(self):
+        """Configure logging system with console and file handlers."""
+        # Create handlers
+        handlers = [
+            logging.StreamHandler(),
+            logging.FileHandler(self.log_file, mode='w')
+        ]
+        
+        # Configure basic logging
+        logging.basicConfig(
+            level=self.log_level,
+            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+            handlers=handlers
+        )
+        
+        # Set up root logger
+        root_logger = logging.getLogger()
+        
+        # Enable debug mode if requested
+        if self.debug:
+            root_logger.setLevel(logging.DEBUG)
+            logger.debug("Debug mode enabled")
+            
+        # Configure specific loggers
+        logging.getLogger("matplotlib").setLevel(logging.WARNING)  # Reduce matplotlib noise
+        logging.getLogger("urllib3").setLevel(logging.WARNING)    # Reduce urllib3 noise
+        
+        logger.info(f"Logging initialized at level {logging.getLevelName(root_logger.level)}")
+        logger.info(f"Log file: {self.log_file}")
+        
+        # Return the root logger for convenience
+        return root_logger
