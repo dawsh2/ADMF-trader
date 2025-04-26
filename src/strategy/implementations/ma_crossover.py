@@ -1,0 +1,166 @@
+"""
+Moving Average Crossover Strategy Implementation.
+
+This strategy generates buy signals when a fast moving average crosses above
+a slow moving average, and sell signals when it crosses below.
+"""
+import logging
+import pandas as pd
+import numpy as np
+from typing import Dict, Any, List, Optional
+
+from src.core.events.event_types import EventType
+from src.core.events.event_utils import create_signal_event
+from src.strategy.strategy_base import Strategy
+
+logger = logging.getLogger(__name__)
+
+class MACrossoverStrategy(Strategy):
+    """Moving Average Crossover strategy implementation."""
+    
+    # Define name as a class variable, not a property
+    name = "ma_crossover"
+    
+    def __init__(self, event_bus, data_handler, name=None, parameters=None):
+        """
+        Initialize the MA Crossover strategy.
+        
+        Args:
+            event_bus: Event bus for communication
+            data_handler: Data handler for market data
+            name: Optional strategy name override
+            parameters: Initial strategy parameters
+        """
+        # Call parent constructor with name from class or override
+        super().__init__(event_bus, data_handler, name or self.name, parameters)
+        
+        # Extract parameters with defaults - using smaller windows for more signals
+        self.fast_window = self.parameters.get('fast_window', 5)
+        self.slow_window = self.parameters.get('slow_window', 15)
+        self.price_key = self.parameters.get('price_key', 'close')
+        
+        # Internal state
+        self.data = {symbol: [] for symbol in self.symbols}
+        self.signal_count = 0
+        
+        # Register for events
+        if self.event_bus:
+            self.event_bus.register(EventType.BAR, self.on_bar)
+            
+        logger.info(f"MA Crossover strategy initialized with fast_window={self.fast_window}, "
+                   f"slow_window={self.slow_window}")
+    
+    def configure(self, config):
+        """Configure the strategy with parameters."""
+        # Call parent configure first
+        super().configure(config)
+        
+        # Update strategy-specific parameters
+        self.fast_window = self.parameters.get('fast_window', 5)  # Changed from 10 to 5
+        self.slow_window = self.parameters.get('slow_window', 15) # Changed from 30 to 15
+        self.price_key = self.parameters.get('price_key', 'close')
+        
+        # Reset data for all configured symbols
+        self.data = {symbol: [] for symbol in self.symbols}
+        
+        logger.info(f"MA Crossover strategy configured with parameters: "
+                   f"fast_window={self.fast_window}, slow_window={self.slow_window}")
+    
+    def on_bar(self, bar_event):
+        """
+        Process a bar event and generate signals with enhanced logging.
+        
+        Args:
+            bar_event: Market data bar event
+            
+        Returns:
+            Optional signal event
+        """
+        # Extract data from bar event
+        symbol = bar_event.get_symbol()
+        
+        # Skip if not in our symbol list
+        if symbol not in self.symbols:
+            return None
+        
+        # Extract price data
+        price = bar_event.get_close()
+        timestamp = bar_event.get_timestamp()
+        
+        # Store data for this symbol
+        if symbol not in self.data:
+            self.data[symbol] = []
+        
+        self.data[symbol].append({
+            'timestamp': timestamp,
+            'price': price
+        })
+        
+        # Debug log - show early data collection
+        if len(self.data[symbol]) <= self.slow_window and len(self.data[symbol]) % 10 == 0:
+            logger.debug(f"Collecting data for {symbol}: {len(self.data[symbol])}/{self.slow_window} bars")
+            
+        # Check if we have enough data
+        if len(self.data[symbol]) <= self.slow_window:
+            return None
+        
+        # Calculate moving averages
+        prices = [bar['price'] for bar in self.data[symbol]]
+        
+        # Calculate fast MA - current and previous
+        fast_ma = sum(prices[-self.fast_window:]) / self.fast_window
+        fast_ma_prev = sum(prices[-(self.fast_window+1):-1]) / self.fast_window
+        
+        # Calculate slow MA - current and previous
+        slow_ma = sum(prices[-self.slow_window:]) / self.slow_window
+        slow_ma_prev = sum(prices[-(self.slow_window+1):-1]) / self.slow_window
+        
+        # Periodic logging of MA values
+        if len(self.data[symbol]) % 10 == 0:
+            logger.debug(f"Symbol: {symbol}, Fast MA: {fast_ma:.2f}, Slow MA: {slow_ma:.2f}, " +
+                       f"Prev Fast: {fast_ma_prev:.2f}, Prev Slow: {slow_ma_prev:.2f}")
+        
+        # Check for crossover
+        signal_value = 0
+        
+        # Buy signal: fast MA crosses above slow MA
+        if fast_ma_prev <= slow_ma_prev and fast_ma > slow_ma:
+            signal_value = 1
+            crossover_pct = (fast_ma - slow_ma) / slow_ma
+            logger.info(f"BUY signal for {symbol}: fast MA ({fast_ma:.2f}) crossed above "
+                       f"slow MA ({slow_ma:.2f}), crossover: {crossover_pct:.4%}")
+        
+        # Sell signal: fast MA crosses below slow MA
+        elif fast_ma_prev >= slow_ma_prev and fast_ma < slow_ma:
+            signal_value = -1
+            crossover_pct = (slow_ma - fast_ma) / slow_ma
+            logger.info(f"SELL signal for {symbol}: fast MA ({fast_ma:.2f}) crossed below "
+                       f"slow MA ({slow_ma:.2f}), crossover: {crossover_pct:.4%}")
+        
+        # Generate and emit signal event if we have a signal
+        if signal_value != 0:
+            self.signal_count += 1
+            signal = create_signal_event(
+                signal_value=signal_value,
+                price=price,
+                symbol=symbol,
+                rule_id=f"{self.name}_{self.signal_count}",
+                timestamp=timestamp
+            )
+            
+            # Emit signal if we have an event bus
+            if self.event_bus:
+                self.event_bus.emit(signal)
+                logger.info(f"Signal #{self.signal_count} emitted for {symbol}: {signal_value}")
+            
+            return signal
+        
+        return None
+    
+    def reset(self):
+        """Reset the strategy state."""
+        # Reset strategy-specific state
+        self.data = {symbol: [] for symbol in self.symbols}
+        self.signal_count = 0
+        
+        logger.info(f"MA Crossover strategy {self.name} reset")

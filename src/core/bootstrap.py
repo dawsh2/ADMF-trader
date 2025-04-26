@@ -1,4 +1,6 @@
-# src/core/bootstrap.py
+"""
+Bootstrap class for setting up the entire system.
+"""
 import logging
 from typing import Dict, Any, Tuple
 
@@ -65,6 +67,9 @@ class Bootstrap:
         # Set up data components
         self._setup_data_components(container, config)
         
+        # Set up order registry first (new component!)
+        self._setup_order_registry(container, config)
+        
         # Set up execution components
         self._setup_execution_components(container, config)
         
@@ -89,6 +94,19 @@ class Bootstrap:
         container.register_instance("event_manager", event_manager)
         
         logger.info("Event system initialized")
+    
+    def _setup_order_registry(self, container, config):
+        """Set up the order registry component."""
+        from src.execution.order_registry import OrderRegistry
+        
+        # Get event bus
+        event_bus = container.get("event_bus")
+        
+        # Create order registry
+        order_registry = OrderRegistry(event_bus)
+        container.register_instance("order_registry", order_registry)
+        
+        logger.info("Order registry initialized")
     
     def _setup_data_components(self, container, config):
         """Set up data handling components."""
@@ -148,29 +166,29 @@ class Bootstrap:
         from src.execution.broker.broker_simulator import SimulatedBroker
         from src.execution.backtest.backtest import BacktestCoordinator
         
-        # Get event bus
+        # Get event bus and order registry
         event_bus = container.get("event_bus")
+        order_registry = container.get("order_registry")
         
-        # Create order manager with empty dependencies first
-        order_manager = OrderManager(None, None)
+        # Create order manager with registry
+        order_manager = OrderManager(event_bus, None, order_registry)
         container.register_instance("order_manager", order_manager)
         
-        # Create broker
-        broker = SimulatedBroker(event_bus)
+        # Create broker with registry
+        broker = SimulatedBroker(event_bus, order_registry)
         broker_config = config.get_section("broker")
         broker.slippage = broker_config.get_float("slippage", 0.0)
         broker.commission = broker_config.get_float("commission", 0.0)
         container.register_instance("broker", broker)
         
-        # Connect order manager
+        # Connect order manager to broker
         order_manager.broker = broker
-        order_manager.set_event_bus(event_bus)
         
         # Create backtest coordinator
         backtest = BacktestCoordinator(container, config)
         container.register_instance("backtest", backtest)
         
-        logger.info("Execution components initialized")
+        logger.info("Execution components initialized with order registry")
     
     def _setup_risk_components(self, container, config):
         """Set up risk management components."""
@@ -192,45 +210,70 @@ class Bootstrap:
         risk_manager = SimpleRiskManager(event_bus, portfolio)
         risk_manager.position_size = risk_config.get_int("position_size", 100)
         risk_manager.max_position_pct = risk_config.get_float("max_position_pct", 0.1)
+        
+        # Log risk manager config
+        logger.info(f"Risk manager configured with position_size={risk_manager.position_size}, max_position_pct={risk_manager.max_position_pct}")
+        
         container.register_instance("risk_manager", risk_manager)
         
         logger.info("Risk components initialized")
     
     def _setup_strategy_components(self, container, config):
-        """Set up strategy components."""
+        """Set up strategy components with improved discovery."""
         # Set up strategy registry
         strategy_registry = Registry()
         self.registries["strategies"] = strategy_registry
         
-        # Discover strategies
-        from src.strategy.strategy_base import Strategy
-        discovered = discover_components(
-            package_name="src.strategy.implementations",
-            base_class=Strategy,
-            registry=strategy_registry,
-            config=config
-        )
+        # Discover strategies with detailed logging
+        try:
+            from src.strategy.strategy_base import Strategy
+            
+            logger.info("Discovering strategy implementations...")
+            discovered = discover_components(
+                package_name="src.strategy.implementations",
+                base_class=Strategy,
+                registry=strategy_registry,
+                config=config
+            )
+            
+            if discovered:
+                logger.info(f"Discovered strategies: {', '.join(discovered.keys())}")
+            else:
+                logger.warning("No strategies discovered! Check implementations directory and class definitions.")
+        except Exception as e:
+            logger.error(f"Error during strategy discovery: {e}", exc_info=True)
+            discovered = {}
         
         # Create strategy based on config
         strategy_name = config.get_section("backtest").get("strategy", "ma_crossover")
+        logger.info(f"Requested strategy: {strategy_name}")
+        
+        # Log available strategies in registry
+        logger.info(f"Available strategies in registry: {strategy_registry.list()}")
+        
+        # Get strategy class
         strategy_class = strategy_registry.get(strategy_name)
         
         if strategy_class:
-            # Get dependencies
-            event_bus = container.get("event_bus")
-            data_handler = container.get("data_handler")
-            
-            # Create strategy instance
-            strategy = strategy_class(event_bus, data_handler)
-            
-            # Configure strategy
-            strategy_config = config.get_section("strategies").get_section(strategy_name)
-            strategy.configure(strategy_config)
-            
-            container.register_instance("strategy", strategy)
-            logger.info(f"Strategy '{strategy_name}' initialized")
+            try:
+                # Get dependencies
+                event_bus = container.get("event_bus")
+                data_handler = container.get("data_handler")
+                
+                # Create strategy instance
+                strategy = strategy_class(event_bus, data_handler)
+                
+                # Configure strategy
+                strategy_config = config.get_section("strategies").get_section(strategy_name)
+                strategy.configure(strategy_config)
+                
+                container.register_instance("strategy", strategy)
+                logger.info(f"Strategy '{strategy_name}' initialized successfully")
+            except Exception as e:
+                logger.error(f"Error initializing strategy '{strategy_name}': {e}", exc_info=True)
+                # Fall back to a placeholder strategy or default implementation if needed
         else:
-            logger.warning(f"Strategy '{strategy_name}' not found")
+            logger.error(f"Strategy '{strategy_name}' not found in registry. Available strategies: {strategy_registry.list()}")
     
     def _setup_analytics_components(self, container, config):
         """Set up analytics components."""

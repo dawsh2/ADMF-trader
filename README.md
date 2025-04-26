@@ -1,204 +1,114 @@
-# Quantitative Trading System
+# ADMF-Trader Framework
 
-A modular, event-driven algorithmic trading system designed for research, backtesting, and deployment of trading strategies.
+An algorithmic trading framework with modular, event-driven architecture.
 
-## Architecture
+## Directory Structure
 
-The system is built around a clear event flow that defines the responsibility of each module:
-
-1. **Data Module**: Raw data → Bar events
-   - Consumes market data from various sources
-   - Produces standardized bar events
-
-2. **Strategy Module**: Bar events → Signal events
-   - Processes bar events using indicators and rules
-   - Produces trading signal events
-
-3. **Risk Module**: Signal events → Order events
-   - Manages portfolio state and position sizing
-   - Produces executable order events
-
-4. **Execution Module**: Order events → Fill events
-   - Handles order execution via brokers
-   - Produces fill events and updates system state
-
-## System Components
-
-### Core Module
-
-- **Event System**: Event types, bus, and utilities
-- **Configuration**: YAML-based configuration with validation
-- **DI Container**: Dependency injection for component creation
-- **Utilities**: Component discovery, registries, etc.
-
-### Data Module
-
-- **Data Sources**: CSV, API, and database handlers
-- **Data Transformers**: Normalization, resampling, etc.
-- **Data Handlers**: Historical and real-time data handlers
-
-### Strategy Module
-
-- **Components**: Base components for strategy building
-- **Indicators**: Technical indicators (MA, RSI, etc.)
-- **Features**: Feature extraction from indicators
-- **Rules**: Trading rules based on indicators and features
-- **Strategies**: Composite and regime-adaptive strategies
-
-### Risk Module
-
-- **Portfolio**: Position tracking and portfolio management
-- **Risk Managers**: Position sizing and risk controls
-- **Risk Limits**: Trading limits and constraint checks
-
-### Execution Module
-
-- **Brokers**: Simulated and live broker interfaces
-- **Order Management**: Order creation, tracking, and updates
-- **Backtesting**: Historical simulation of strategies
-
-### Analytics Module
-
-- **Performance Metrics**: Return, risk, and trade metrics
-- **Reporting**: Report generation and visualization
-
-## Getting Started
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/quantitative-trading.git
-cd quantitative-trading
-
-# Install dependencies
-pip install -r requirements.txt
+```
+ADMF-trader/
+├── config/                 # Configuration files
+│   └── backtest.yaml       # Backtest configuration
+├── data/                   # Market data
+├── results/                # Backtest results
+├── src/                    # Source code
+│   ├── analytics/          # Performance analysis
+│   ├── core/               # Core components
+│   │   ├── config/         # Configuration system
+│   │   ├── di/             # Dependency injection
+│   │   ├── events/         # Event system
+│   │   └── utils/          # Utilities
+│   ├── data/               # Data handling
+│   ├── execution/          # Order execution
+│   ├── risk/               # Risk management
+│   └── strategy/           # Strategy components
+│       ├── components/     # Strategy building blocks
+│       └── implementations/ # Strategy implementations
+├── debug_discovery.py      # Debug component discovery
+├── generate_test_data.py   # Generate test data
+└── run_backtest.py         # Run a backtest
 ```
 
-### Basic Usage
+## Quick Start
+
+1. Generate test data:
+   ```bash
+   python generate_test_data.py --symbols AAPL,MSFT,GOOG --start-date 2023-01-01 --end-date 2023-12-31
+   ```
+
+2. Run a backtest:
+   ```bash
+   python run_backtest.py --config config/backtest.yaml
+   ```
+
+3. Debug component discovery (if needed):
+   ```bash
+   python debug_discovery.py
+   ```
+
+## Component Discovery System
+
+The framework uses a discovery system to find and register components at runtime. This allows for a more modular and extensible architecture. The key components of this system are:
+
+1. **Base Components**: All components (indicators, rules, strategies) inherit from the `Component` base class
+2. **Component Registry**: The `Registry` class tracks available components
+3. **Discovery Utility**: The `discover_components` function finds and registers components
+
+To create a new strategy that will be automatically discovered:
+
+1. Create a new Python module in `src/strategy/implementations/`
+2. Define a strategy class that inherits from `Strategy`
+3. Include a class-level `name` attribute for proper registration:
 
 ```python
-from core.config import Config
-from core.di import Container
-from execution.backtest import BacktestCoordinator
-
-# Load configuration
-config = Config()
-config.load_file("config/backtest.yaml")
-
-# Create container
-container = Container()
-
-# Register components
-container.register("data_handler", HistoricalDataHandler)
-container.register("portfolio", PortfolioManager)
-container.register("risk_manager", StandardRiskManager)
-container.register("strategy", MAStrategyFactory.create)
-
-# Create and run backtest
-backtest = BacktestCoordinator(container, config)
-results = backtest.run(
-    symbols=["AAPL", "MSFT"],
-    start_date="2020-01-01",
-    end_date="2020-12-31"
-)
-
-# Print results
-print(results["summary_report"])
+class MyCustomStrategy(Strategy):
+    # Class-level name for discovery
+    name = "my_custom_strategy"
+    
+    def __init__(self, event_bus, data_handler, name=None, parameters=None):
+        super().__init__(event_bus, data_handler, name or self.name, parameters)
+        # Strategy implementation...
 ```
 
-### Configuration
+## Configuration System
+
+The configuration system uses YAML files to provide flexible configuration:
 
 ```yaml
-# Example configuration file
-
-# Data configuration
-data:
-  source: csv
-  directory: data/historical
-  file_pattern: "{symbol}_{timeframe}.csv"
-
-# Strategy configuration
-strategy:
-  class: strategies.ma_crossover.MACrossoverStrategy
-  parameters:
-    fast_ma: 10
-    slow_ma: 30
-    symbols: ["AAPL", "MSFT"]
-
-# Risk configuration
-risk:
-  position_sizing:
-    method: percent_equity
-    percent: 2.0
-  limits:
-    max_position_size: 1000
-    max_exposure: 1.0
-
-# Execution configuration
-execution:
-  broker:
-    name: simulated
-    slippage:
-      model_type: percentage
-      params:
-        slippage_percent: 0.1
-    commission:
-      model_type: fixed
-      params:
-        commission: 5.0
+# Example strategy configuration
+strategies:
+  ma_crossover:
+    enabled: true  # Enable/disable this strategy
+    fast_window: 10  # Strategy parameters
+    slow_window: 30
+    symbols: ['AAPL', 'MSFT']
 ```
 
-## Architecture Principles
+## Dependency Injection
 
-1. **Modularity**: Components are loosely coupled and can be replaced or extended
-2. **Event-Driven**: Communication between components via events
-3. **Configurability**: Components configurable via YAML
-4. **Testability**: Components can be tested independently
-5. **Dependency Injection**: Components receive dependencies via DI
+The framework uses dependency injection to manage component dependencies. The core of this system is the `Container` class, which is responsible for creating and wiring components together.
 
-## Risk Management
+## Event-Driven Architecture
 
-The Risk Management module handles:
+The event system provides asynchronous communication between components:
 
-- Position tracking for accurate P&L calculation
-- Portfolio state management
-- Position sizing with multiple strategies
-- Risk limits and constraints
-- Order validation
+1. **Events**: Various event types (Bar, Signal, Order, Fill)
+2. **Event Bus**: Central communication hub
+3. **Event Handlers**: Components that process events
+4. **Event Emitters**: Components that emit events
 
-## Execution and Backtesting
+## Adding New Components
 
-The Execution module provides:
+To add new components to the system:
 
-- Broker interfaces for order execution
-- Order management for tracking orders
-- Backtest coordination for historical simulation
+1. **New Indicator**: Create a class in `src/strategy/components/indicators/` that inherits from `Indicator`
+2. **New Rule**: Create a class in `src/strategy/components/rules/` that inherits from `Rule`
+3. **New Strategy**: Create a class in `src/strategy/implementations/` that inherits from `Strategy`
 
-## Analytics and Reporting
+## Troubleshooting
 
-The Analytics module offers:
+If strategies are not being discovered properly:
 
-- Performance metric calculation
-- Detailed reporting of results
-- Trade analysis and visualization
-
-## Future Development
-
-- Optimization module for parameter tuning
-- Machine learning integration
-- Live trading support
-- Web interface for monitoring
-
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+1. Run the debug script: `python debug_discovery.py`
+2. Check that you have a class-level `name` attribute in your strategy
+3. Verify your strategy inherits correctly from the `Strategy` base class
+4. Verify the package structure and imports in `__init__.py` files

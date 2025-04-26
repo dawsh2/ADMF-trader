@@ -1,5 +1,6 @@
-# src/core/utils/discovery.py
-
+"""
+Component discovery utility for finding and registering components.
+"""
 import importlib
 import inspect
 import logging
@@ -51,8 +52,9 @@ def discover_components(
             # Find classes that inherit from base_class
             for name, obj in inspect.getmembers(module, inspect.isclass):
                 if issubclass(obj, base_class) and obj != base_class:
-                    # Extract component name from class or module
-                    if hasattr(obj, 'name'):
+                    # Extract component name
+                    if hasattr(obj, 'name') and isinstance(obj.name, str):
+                        # Use class variable name attribute
                         component_name = obj.name
                     else:
                         # Convert CamelCase to snake_case
@@ -63,19 +65,28 @@ def discover_components(
                     # Check if component is enabled in config
                     if enabled_only and config:
                         section_name = package_name.split('.')[-1]  # e.g., 'strategies'
-                        enabled = config.get(f"{section_name}.{component_name}.enabled", False)
+                        section_path = f"{section_name}.{component_name}"
+                        
+                        # Navigate through config sections
+                        current_section = config
+                        for part in section_path.split('.'):
+                            if hasattr(current_section, 'get_section'):
+                                current_section = current_section.get_section(part)
+                        
+                        # Check enabled flag
+                        enabled = getattr(current_section, 'get', lambda x, y: y)('enabled', True)
                         if not enabled:
                             logger.debug(f"Component {component_name} is disabled in config, skipping")
                             continue
                     
-                    # Add to discovered
+                    # Add to discovered components
                     discovered[component_name] = obj
                     
                     # Register if registry provided
                     if registry is not None and hasattr(registry, 'register'):
                         registry.register(component_name, obj)
-                        logger.info(f"Registered {component_name} in registry")
+                        logger.info(f"Registered component {component_name} in registry")
         except Exception as e:
-            logger.warning(f"Error importing module {module_name}: {e}")
+            logger.warning(f"Error importing module {module_name}: {e}", exc_info=True)
     
     return discovered

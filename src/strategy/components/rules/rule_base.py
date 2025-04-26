@@ -1,13 +1,17 @@
-# src/strategies/components/rules/rule_base.py
-from ..component_base import Component
+"""
+Base class for trading rules.
+"""
 from abc import abstractmethod
 import pandas as pd
 from typing import Any, Dict, List, Optional
+
+from ..component_base import Component
 
 class Rule(Component):
     """Base class for trading rules."""
     
     def __init__(self, name=None, parameters=None):
+        """Initialize rule with parameters."""
         super().__init__(name, parameters)
         self.weight = 1.0  # Default weight for rule combination
     

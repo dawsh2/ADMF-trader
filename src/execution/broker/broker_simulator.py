@@ -11,31 +11,29 @@ logger = logging.getLogger(__name__)
 class SimulatedBroker(BrokerBase):
     """Simulated broker for executing orders in backtests."""
     
-    def __init__(self, event_bus=None, name="simulated_broker"):
+    def __init__(self, event_bus=None, order_registry=None, name="simulated_broker"):
         """
         Initialize simulated broker.
         
         Args:
             event_bus: Event bus for communication
+            order_registry: Order registry for tracking orders
             name: Broker name
         """
         super().__init__(name)
         self.event_bus = event_bus
+        self.order_registry = order_registry
         
         # Default parameters
         self.slippage = 0.0  # Percentage slippage
         self.commission = 0.0  # Percentage commission
         
-        # Tracking for processed orders to avoid duplicates
-        self.processed_order_ids = set()
-        
-        # NEW: Add pending orders queue for order->fill coordination
-        self.pending_orders = {}  # order_id -> (order_event, timestamp)
+        # Tracking for processed order state events
+        self.processed_state_changes = set()
         
         # Register for events if event bus provided
         if self.event_bus:
-            self.event_bus.register(EventType.ORDER, self.on_order)
-            self.event_bus.register(EventType.PORTFOLIO, self.on_portfolio_update)
+            self._register_handlers()
     
     def configure(self, config):
         """
@@ -64,78 +62,127 @@ class SimulatedBroker(BrokerBase):
         """
         self.event_bus = event_bus
         # Register for events
-        if self.event_bus:
-            self.event_bus.register(EventType.ORDER, self.on_order)
-            self.event_bus.register(EventType.PORTFOLIO, self.on_portfolio_update)
+        self._register_handlers()
     
-    def on_order(self, order_event):
+    def set_order_registry(self, order_registry):
         """
-        Handle order events.
+        Set the order registry.
         
         Args:
-            order_event: Order event to process
+            order_registry: Order registry instance
         """
-        # Extract order ID
-        order_id = None
-        if hasattr(order_event, 'data') and isinstance(order_event.data, dict):
-            order_id = order_event.data.get('order_id')
-            logger.debug(f"Broker extracted order_id: {order_id}")
-        
-        # Skip if no order ID
-        if not order_id:
-            logger.warning("Order event missing order_id, cannot process")
+        self.order_registry = order_registry
+    
+    def _register_handlers(self):
+        """Register for events."""
+        if not self.event_bus:
             return
             
-        # Skip if already processed this order
-        if order_id in self.processed_order_ids:
-            logger.debug(f"Order {order_id} already processed by broker, skipping")
-            return
-        
-        # NEW: Add to pending orders queue
-        self.pending_orders[order_id] = (order_event, datetime.datetime.now())
-        logger.debug(f"Added order {order_id} to pending queue, waiting for confirmation")
+        # No longer register for ORDER events directly
+        # Instead, listen for PORTFOLIO events which include state changes
+        self.event_bus.register(EventType.PORTFOLIO, self.on_portfolio_update)
     
     def on_portfolio_update(self, event):
         """
-        Handle portfolio events to detect when order manager has stored an order.
-        This uses portfolio status update events as confirmation.
+        Handle portfolio update events, looking for order state changes.
+        
+        Args:
+            event: Portfolio event to process
         """
-        # Check if this is a status update
-        if (hasattr(event, 'data') and isinstance(event.data, dict) and 
-                event.data.get('status_update') and 'order_id' in event.data):
-            order_id = event.data['order_id']
+        # Skip if not an order state change event
+        if not (hasattr(event, 'data') and 
+                isinstance(event.data, dict) and 
+                event.data.get('order_state_change')):
+            return
+        
+        # Extract state change details
+        order_id = event.data.get('order_id')
+        transition = event.data.get('transition')
+        
+        # Generate a unique ID for this state change to prevent duplicate processing
+        state_change_id = f"{order_id}_{transition}"
+        
+        # Skip if already processed
+        if state_change_id in self.processed_state_changes:
+            return
             
-            # Check if this order is in our pending queue
-            if order_id in self.pending_orders:
-                logger.debug(f"Received confirmation for order {order_id}, processing now")
-                # Now we can process it
-                order_event, _ = self.pending_orders.pop(order_id)
-                fill_event = self.process_order(order_event)
+        self.processed_state_changes.add(state_change_id)
+        
+        # Only process orders that have just transitioned to PENDING
+        if transition == "REGISTERED" or "-> PENDING" in transition:
+            # Get order from registry
+            if not self.order_registry:
+                logger.warning("No order registry available")
+                return
                 
-                # Emit fill event if created
-                if fill_event and self.event_bus:
-                    # Keep track of order ID to prevent duplicate processing
-                    self.processed_order_ids.add(order_id)
-                    
-                    # Make sure fill has the order ID for tracing
-                    if hasattr(fill_event, 'data') and isinstance(fill_event.data, dict):
-                        if 'order_id' not in fill_event.data:
-                            fill_event.data['order_id'] = order_id
-                        
-                    # Emit the fill event
-                    logger.info(f"Broker emitting fill event for {fill_event.get_symbol()}")
-                    self.event_bus.emit(fill_event)
-
+            order = self.order_registry.get_order(order_id)
+            if order:
+                # Process the order
+                self._process_order(order)
+                
+    def _process_order(self, order):
+        """
+        Process an order from the registry.
+        
+        Args:
+            order: Order to process
+        """
+        if not order or not order.is_active():
+            return
+            
+        try:
+            self.stats['orders_processed'] += 1
+            
+            # Extract order details
+            symbol = order.symbol
+            direction = order.direction
+            quantity = order.quantity
+            price = order.price
+            order_id = order.order_id
+            
+            # Apply slippage to price
+            if direction == 'BUY':
+                fill_price = price * (1.0 + self.slippage)
+            else:  # SELL
+                fill_price = price * (1.0 - self.slippage)
+                
+            # Calculate commission
+            commission = abs(quantity * fill_price) * self.commission
+            
+            # Create fill event with explicit order_id
+            fill_event = create_fill_event(
+                symbol=symbol,
+                direction=direction,
+                quantity=quantity,
+                price=fill_price,
+                commission=commission,
+                timestamp=datetime.datetime.now(),
+                order_id=order_id
+            )
+            
+            self.stats['fills_generated'] += 1
+            logger.info(f"Broker processed order: {direction} {quantity} {symbol} @ {fill_price:.2f}")
+            logger.debug(f"Fill event created with order_id: {order_id}")
+            
+            # Emit fill event
+            if self.event_bus:
+                self.event_bus.emit(fill_event)
+                
+        except Exception as e:
+            self.stats['errors'] += 1
+            logger.error(f"Error processing order: {e}", exc_info=True)
+    
     def process_order(self, order_event):
         """
-        Process an order event.
-
+        Legacy method for compatibility.
+        
         Args:
             order_event: Order event to process
-
+            
         Returns:
             Fill event or None
         """
+        logger.warning("Using legacy process_order method - should use order registry instead")
         self.stats['orders_processed'] += 1
 
         try:
@@ -197,9 +244,8 @@ class SimulatedBroker(BrokerBase):
 
     def reset(self):
         """Reset broker state."""
-        # Clear processed order IDs and pending orders
-        self.processed_order_ids.clear()
-        self.pending_orders.clear()
+        # Clear processed state changes
+        self.processed_state_changes.clear()
 
         # Reset statistics without calling super
         self.stats = {

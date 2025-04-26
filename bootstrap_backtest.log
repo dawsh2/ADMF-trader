@@ -1,0 +1,162 @@
+2025-04-25 21:35:31,084 - ADMF-Trader - INFO - === Starting ADMF-Trader Backtest Using Bootstrap ===
+2025-04-25 21:35:31,085 - src.core.bootstrap - INFO - Loaded configuration from backtest_config.yaml
+2025-04-25 21:35:31,085 - src.core.bootstrap - INFO - Event system initialized
+2025-04-25 21:35:31,089 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-04-25 21:35:31,089 - src.core.utils.discovery - INFO - Registered <property object at 0x1094a6340> in registry
+2025-04-25 21:35:31,089 - src.core.bootstrap - INFO - Data components initialized with source type: csv
+2025-04-25 21:35:31,092 - src.core.bootstrap - INFO - Execution components initialized
+2025-04-25 21:35:31,094 - src.core.bootstrap - INFO - Risk manager configured with position_size=100, max_position_pct=0.1
+2025-04-25 21:35:31,094 - src.core.bootstrap - INFO - Risk components initialized
+2025-04-25 21:35:31,094 - src.core.utils.discovery - INFO - Registered <property object at 0x105e1cc70> in registry
+2025-04-25 21:35:31,094 - src.core.bootstrap - WARNING - Strategy 'ma_crossover' not found
+2025-04-25 21:35:31,094 - src.core.bootstrap - INFO - Analytics components initialized
+2025-04-25 21:35:31,094 - src.core.bootstrap - INFO - System bootstrap complete
+2025-04-25 21:35:31,094 - ADMF-Trader - INFO - Strategy not registered by discovery, registering manually
+2025-04-25 21:35:31,094 - ADMF-Trader - INFO - Registered MACrossoverStrategy with registry
+2025-04-25 21:35:31,094 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy initialized with fast_window=10, slow_window=30
+2025-04-25 21:35:31,094 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy configured with fast_window=5, slow_window=20
+2025-04-25 21:35:31,094 - ADMF-Trader - INFO - Registered and configured strategy manually
+2025-04-25 21:35:31,094 - src.execution.backtest.backtest - INFO - Backtest setup complete
+2025-04-25 21:35:31,097 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_e09aea69 to initial state with cash: $100000.00
+2025-04-25 21:35:31,097 - src.risk.managers.simple - INFO - Risk manager risk_manager_4604ac0f reset
+2025-04-25 21:35:31,097 - src.execution.order_manager - INFO - Reset order manager
+2025-04-25 21:35:31,097 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy reset
+2025-04-25 21:35:31,097 - src.execution.backtest.backtest - INFO - Reset all components for backtest
+2025-04-25 21:35:31,097 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['AAPL', 'MSFT']
+2025-04-25 21:35:31,097 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/AAPL_1d.csv
+2025-04-25 21:35:31,099 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 42 rows
+2025-04-25 21:35:31,100 - src.data.sources.csv_handler - INFO - Using 'date' column instead of configured 'timestamp'
+2025-04-25 21:35:31,100 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2023-01-02
+2025-04-25 21:35:31,101 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2023-01-02 00:00:00
+2025-04-25 21:35:31,101 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2023-01-01 00:00:00
+2025-04-25 21:35:31,101 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2023-02-28 00:00:00
+2025-04-25 21:35:31,103 - src.data.sources.csv_handler - INFO - CSVDataSource: Set date as index
+2025-04-25 21:35:31,103 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-25 21:35:31,103 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume']
+2025-04-25 21:35:31,103 - src.data.historical_data_handler - INFO - Loaded 42 bars for AAPL from 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-25 21:35:31,103 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/MSFT_1d.csv
+2025-04-25 21:35:31,104 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 42 rows
+2025-04-25 21:35:31,104 - src.data.sources.csv_handler - INFO - Using 'date' column instead of configured 'timestamp'
+2025-04-25 21:35:31,104 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2023-01-02
+2025-04-25 21:35:31,104 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2023-01-02 00:00:00
+2025-04-25 21:35:31,105 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2023-01-01 00:00:00
+2025-04-25 21:35:31,105 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2023-02-28 00:00:00
+2025-04-25 21:35:31,105 - src.data.sources.csv_handler - INFO - CSVDataSource: Set date as index
+2025-04-25 21:35:31,105 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-25 21:35:31,105 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume']
+2025-04-25 21:35:31,105 - src.data.historical_data_handler - INFO - Loaded 42 bars for MSFT from 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-25 21:35:31,105 - src.execution.backtest.backtest - INFO - Starting backtest
+2025-04-25 21:35:31,106 - src.strategy.implementations.ma_crossover - INFO - BUY signal #1 for AAPL at 107.10
+2025-04-25 21:35:31,106 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 93 for AAPL (value limit)
+2025-04-25 21:35:31,106 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 93 AAPL @ 107.20
+2025-04-25 21:35:31,106 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 0acb607b-3b65-49f8-abc7-e09501aa5a6c
+2025-04-25 21:35:31,106 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for AAPL
+2025-04-25 21:35:31,106 - src.execution.order_manager - INFO - Updated order with fill: Order(0acb607b-3b65-49f8-abc7-e09501aa5a6c, AAPL, BUY, 93, FILLED)
+2025-04-25 21:35:31,106 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 21:35:31,107 - src.risk.portfolio.portfolio - INFO - Fill: BUY 93 AAPL @ 107.20, PnL: 0.00, Cash: 90020.04, Equity: 99990.03
+2025-04-25 21:35:31,107 - src.execution.order_manager - INFO - Created order: Order(0acb607b-3b65-49f8-abc7-e09501aa5a6c, AAPL, BUY, 93, FILLED)
+2025-04-25 21:35:31,107 - src.risk.managers.simple - INFO - Created order: BUY 93 AAPL @ 107.10
+2025-04-25 21:35:31,107 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 93 for AAPL (value limit)
+2025-04-25 21:35:31,107 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 93 for AAPL (value limit)
+2025-04-25 21:35:31,107 - src.strategy.implementations.ma_crossover - INFO - BUY signal #2 for MSFT at 207.74
+2025-04-25 21:35:31,107 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for MSFT (value limit)
+2025-04-25 21:35:31,107 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 48 MSFT @ 207.94
+2025-04-25 21:35:31,107 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 93d86201-8294-4534-8702-c14ccdc92612
+2025-04-25 21:35:31,107 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for MSFT
+2025-04-25 21:35:31,107 - src.execution.order_manager - INFO - Updated order with fill: Order(93d86201-8294-4534-8702-c14ccdc92612, MSFT, BUY, 48, FILLED)
+2025-04-25 21:35:31,107 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 21:35:31,107 - src.risk.portfolio.portfolio - INFO - Fill: BUY 48 MSFT @ 207.94, PnL: 0.00, Cash: 80028.71, Equity: 99970.09
+2025-04-25 21:35:31,107 - src.execution.order_manager - INFO - Created order: Order(93d86201-8294-4534-8702-c14ccdc92612, MSFT, BUY, 48, FILLED)
+2025-04-25 21:35:31,107 - src.risk.managers.simple - INFO - Created order: BUY 48 MSFT @ 207.74
+2025-04-25 21:35:31,107 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for MSFT (value limit)
+2025-04-25 21:35:31,107 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for MSFT (value limit)
+2025-04-25 21:35:31,107 - src.strategy.implementations.ma_crossover - INFO - SELL signal #3 for AAPL at 80.93
+2025-04-25 21:35:31,107 - src.risk.managers.simple - INFO - Reducing SELL size from 100 to 93 for AAPL
+2025-04-25 21:35:31,107 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 93 AAPL @ 80.85
+2025-04-25 21:35:31,107 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 488864ab-b338-4079-81b7-d971d094b38e
+2025-04-25 21:35:31,108 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for AAPL
+2025-04-25 21:35:31,108 - src.execution.order_manager - INFO - Updated order with fill: Order(488864ab-b338-4079-81b7-d971d094b38e, AAPL, SELL, 93, FILLED)
+2025-04-25 21:35:31,108 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -2451.30
+2025-04-25 21:35:31,108 - src.risk.portfolio.portfolio - INFO - Fill: SELL 93 AAPL @ 80.85, PnL: -2451.30, Cash: 87539.89, Equity: 97348.22
+2025-04-25 21:35:31,108 - src.execution.order_manager - INFO - Created order: Order(488864ab-b338-4079-81b7-d971d094b38e, AAPL, SELL, 93, FILLED)
+2025-04-25 21:35:31,108 - src.risk.managers.simple - INFO - Created order: SELL 93 AAPL @ 80.93
+2025-04-25 21:35:31,108 - src.strategy.implementations.ma_crossover - INFO - SELL signal #4 for MSFT at 181.51
+2025-04-25 21:35:31,108 - src.risk.managers.simple - INFO - Reducing SELL size from 100 to 48 for MSFT
+2025-04-25 21:35:31,108 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 48 MSFT @ 181.33
+2025-04-25 21:35:31,108 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 326ee753-adff-45c9-9617-2cf201b5f9f1
+2025-04-25 21:35:31,108 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for MSFT
+2025-04-25 21:35:31,108 - src.execution.order_manager - INFO - Updated order with fill: Order(326ee753-adff-45c9-9617-2cf201b5f9f1, MSFT, SELL, 48, FILLED)
+2025-04-25 21:35:31,108 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -1277.44
+2025-04-25 21:35:31,108 - src.risk.portfolio.portfolio - INFO - Fill: SELL 48 MSFT @ 181.33, PnL: -1277.44, Cash: 96235.09, Equity: 96235.09
+2025-04-25 21:35:31,108 - src.execution.order_manager - INFO - Created order: Order(326ee753-adff-45c9-9617-2cf201b5f9f1, MSFT, SELL, 48, FILLED)
+2025-04-25 21:35:31,108 - src.risk.managers.simple - INFO - Created order: SELL 48 MSFT @ 181.51
+2025-04-25 21:35:31,108 - src.strategy.implementations.ma_crossover - INFO - BUY signal #5 for AAPL at 116.23
+2025-04-25 21:35:31,108 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 82 for AAPL (value limit)
+2025-04-25 21:35:31,108 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 82 AAPL @ 116.35
+2025-04-25 21:35:31,109 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 07425a70-fde2-4fa4-a1fa-69eb5666b60e
+2025-04-25 21:35:31,109 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for AAPL
+2025-04-25 21:35:31,109 - src.execution.order_manager - INFO - Updated order with fill: Order(07425a70-fde2-4fa4-a1fa-69eb5666b60e, AAPL, BUY, 82, FILLED)
+2025-04-25 21:35:31,109 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 21:35:31,109 - src.risk.portfolio.portfolio - INFO - Fill: BUY 82 AAPL @ 116.35, PnL: 0.00, Cash: 86685.17, Equity: 96225.55
+2025-04-25 21:35:31,109 - src.execution.order_manager - INFO - Created order: Order(07425a70-fde2-4fa4-a1fa-69eb5666b60e, AAPL, BUY, 82, FILLED)
+2025-04-25 21:35:31,109 - src.risk.managers.simple - INFO - Created order: BUY 82 AAPL @ 116.23
+2025-04-25 21:35:31,109 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 82 for AAPL (value limit)
+2025-04-25 21:35:31,109 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 82 for AAPL (value limit)
+2025-04-25 21:35:31,109 - src.strategy.implementations.ma_crossover - INFO - BUY signal #6 for MSFT at 216.72
+2025-04-25 21:35:31,109 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 44 for MSFT (value limit)
+2025-04-25 21:35:31,109 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 44 MSFT @ 216.94
+2025-04-25 21:35:31,109 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: bcdd77c2-191c-457e-a61a-d97f25a703ae
+2025-04-25 21:35:31,109 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for MSFT
+2025-04-25 21:35:31,109 - src.execution.order_manager - INFO - Updated order with fill: Order(bcdd77c2-191c-457e-a61a-d97f25a703ae, MSFT, BUY, 44, FILLED)
+2025-04-25 21:35:31,109 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 21:35:31,109 - src.risk.portfolio.portfolio - INFO - Fill: BUY 44 MSFT @ 216.94, PnL: 0.00, Cash: 77130.32, Equity: 96206.48
+2025-04-25 21:35:31,109 - src.execution.order_manager - INFO - Created order: Order(bcdd77c2-191c-457e-a61a-d97f25a703ae, MSFT, BUY, 44, FILLED)
+2025-04-25 21:35:31,109 - src.risk.managers.simple - INFO - Created order: BUY 44 MSFT @ 216.72
+2025-04-25 21:35:31,109 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 44 for MSFT (value limit)
+2025-04-25 21:35:31,109 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 44 for MSFT (value limit)
+2025-04-25 21:35:31,109 - src.strategy.implementations.ma_crossover - INFO - SELL signal #7 for AAPL at 99.43
+2025-04-25 21:35:31,109 - src.risk.managers.simple - INFO - Reducing SELL size from 100 to 82 for AAPL
+2025-04-25 21:35:31,109 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 82 AAPL @ 99.33
+2025-04-25 21:35:31,109 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: db26eec6-d6ce-417d-80df-720cac6e827a
+2025-04-25 21:35:31,109 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for AAPL
+2025-04-25 21:35:31,109 - src.execution.order_manager - INFO - Updated order with fill: Order(db26eec6-d6ce-417d-80df-720cac6e827a, AAPL, SELL, 82, FILLED)
+2025-04-25 21:35:31,109 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -1395.36
+2025-04-25 21:35:31,109 - src.risk.portfolio.portfolio - INFO - Fill: SELL 82 AAPL @ 99.33, PnL: -1395.36, Cash: 85267.20, Equity: 94802.96
+2025-04-25 21:35:31,109 - src.execution.order_manager - INFO - Created order: Order(db26eec6-d6ce-417d-80df-720cac6e827a, AAPL, SELL, 82, FILLED)
+2025-04-25 21:35:31,109 - src.risk.managers.simple - INFO - Created order: SELL 82 AAPL @ 99.43
+2025-04-25 21:35:31,109 - src.strategy.implementations.ma_crossover - INFO - SELL signal #8 for MSFT at 199.08
+2025-04-25 21:35:31,109 - src.risk.managers.simple - INFO - Reducing SELL size from 100 to 44 for MSFT
+2025-04-25 21:35:31,109 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 44 MSFT @ 198.88
+2025-04-25 21:35:31,109 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 2bd92bdb-2392-47d4-ab46-23f1f078bebf
+2025-04-25 21:35:31,109 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for MSFT
+2025-04-25 21:35:31,109 - src.execution.order_manager - INFO - Updated order with fill: Order(2bd92bdb-2392-47d4-ab46-23f1f078bebf, MSFT, SELL, 44, FILLED)
+2025-04-25 21:35:31,109 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -794.46
+2025-04-25 21:35:31,109 - src.risk.portfolio.portfolio - INFO - Fill: SELL 44 MSFT @ 198.88, PnL: -794.46, Cash: 94009.29, Equity: 94009.29
+2025-04-25 21:35:31,110 - src.execution.order_manager - INFO - Created order: Order(2bd92bdb-2392-47d4-ab46-23f1f078bebf, MSFT, SELL, 44, FILLED)
+2025-04-25 21:35:31,110 - src.risk.managers.simple - INFO - Created order: SELL 44 MSFT @ 199.08
+2025-04-25 21:35:31,110 - src.strategy.implementations.ma_crossover - INFO - BUY signal #9 for AAPL at 92.12
+2025-04-25 21:35:31,110 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 AAPL @ 92.21
+2025-04-25 21:35:31,110 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: f3b52447-beb8-4f23-b34c-011f80e728df
+2025-04-25 21:35:31,110 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for AAPL
+2025-04-25 21:35:31,110 - src.execution.order_manager - INFO - Updated order with fill: Order(f3b52447-beb8-4f23-b34c-011f80e728df, AAPL, BUY, 100, FILLED)
+2025-04-25 21:35:31,110 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 21:35:31,110 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 92.21, PnL: 0.00, Cash: 84779.25, Equity: 94000.07
+2025-04-25 21:35:31,110 - src.execution.order_manager - INFO - Created order: Order(f3b52447-beb8-4f23-b34c-011f80e728df, AAPL, BUY, 100, FILLED)
+2025-04-25 21:35:31,110 - src.risk.managers.simple - INFO - Created order: BUY 100 AAPL @ 92.12
+2025-04-25 21:35:31,110 - src.strategy.implementations.ma_crossover - INFO - BUY signal #10 for MSFT at 193.14
+2025-04-25 21:35:31,110 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for MSFT (value limit)
+2025-04-25 21:35:31,110 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 48 MSFT @ 193.33
+2025-04-25 21:35:31,110 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 151d15c1-b81c-419d-a405-79326b84a010
+2025-04-25 21:35:31,110 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for MSFT
+2025-04-25 21:35:31,110 - src.execution.order_manager - INFO - Updated order with fill: Order(151d15c1-b81c-419d-a405-79326b84a010, MSFT, BUY, 48, FILLED)
+2025-04-25 21:35:31,110 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 21:35:31,110 - src.risk.portfolio.portfolio - INFO - Fill: BUY 48 MSFT @ 193.33, PnL: 0.00, Cash: 75490.13, Equity: 93981.58
+2025-04-25 21:35:31,110 - src.execution.order_manager - INFO - Created order: Order(151d15c1-b81c-419d-a405-79326b84a010, MSFT, BUY, 48, FILLED)
+2025-04-25 21:35:31,110 - src.risk.managers.simple - INFO - Created order: BUY 48 MSFT @ 193.14
+2025-04-25 21:35:31,110 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for MSFT (value limit)
+2025-04-25 21:35:31,110 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for MSFT (value limit)
+2025-04-25 21:35:31,110 - src.execution.backtest.backtest - INFO - Backtest completed after 43 iterations
+2025-04-25 21:35:31,111 - src.execution.backtest.backtest - INFO - Trade stats: 10 trades, 0 wins, 4 losses
+2025-04-25 21:35:31,111 - src.execution.backtest.backtest - INFO - PnL sum: -5918.55
+2025-04-25 21:35:31,111 - src.execution.backtest.backtest - INFO - Min PnL: -2451.30, Max PnL: 0.00
+2025-04-25 21:35:31,122 - src.execution.backtest.backtest - INFO - Backtest complete

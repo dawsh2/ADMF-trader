@@ -1,0 +1,41 @@
+2025-04-25 21:36:54,294 - Discovery-Debug - INFO - === Starting Discovery Debugging ===
+2025-04-25 21:36:54,294 - Discovery-Debug - INFO - Attempting to import the strategy implementations module...
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Module imported successfully! Path: ['/Users/daws/ADMF-trader/src/strategy/implementations']
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Checking base class inheritance...
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - MACrossoverStrategy is a subclass of Strategy: True
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Debugging discovery process...
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Looking for components in package: src.strategy.implementations
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Package imported: <module 'src.strategy.implementations' from '/Users/daws/ADMF-trader/src/strategy/implementations/__init__.py'>
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Package path: ['/Users/daws/ADMF-trader/src/strategy/implementations']
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Prefix: src.strategy.implementations.
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Found module: src.strategy.implementations.ma_crossover, is_package: False
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Successfully imported module: src.strategy.implementations.ma_crossover
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Found class: Any
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Class Any is NOT a subclass of Strategy or is Strategy itself
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Found class: EventType
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Class EventType is NOT a subclass of Strategy or is Strategy itself
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Found class: MACrossoverStrategy
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Class MACrossoverStrategy is a subclass of Strategy!
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Using component name from class attribute: <property object at 0x103254fe0>
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Registered <property object at 0x103254fe0> in test registry
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Found class: Strategy
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Class Strategy is NOT a subclass of Strategy or is Strategy itself
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Components registered in the test registry:
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - - <property object at 0x103254fe0>: <class 'src.strategy.implementations.ma_crossover.MACrossoverStrategy'>
+2025-04-25 21:36:54,657 - Discovery-Debug - WARNING - FAILURE: MACrossoverStrategy was NOT registered
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Python module search paths (sys.path):
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - - /Users/daws/ADMF-trader
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - - /opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python313.zip
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - - /opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - - /opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - - /Users/daws/kraken/claudeTrader/venv/lib/python3.13/site-packages
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - - /opt/homebrew/opt/python-tk@3.13/libexec
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Checking module structure...
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Strategy module __init__.py exists and imports: ['Strategy', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__path__', '__spec__', 'components', 'implementations', 'strategy_base']
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Implementations module __init__.py exists and imports: ['MACrossoverStrategy', '__all__', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__path__', '__spec__', 'ma_crossover']
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Inspecting Strategy class...
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Strategy class: <class 'src.strategy.strategy_base.Strategy'>
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Strategy module: src.strategy.strategy_base
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Strategy bases: (<class 'src.strategy.components.component_base.Component'>,)
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - Strategy MRO: (<class 'src.strategy.strategy_base.Strategy'>, <class 'src.strategy.components.component_base.Component'>, <class 'abc.ABC'>, <class 'object'>)
+2025-04-25 21:36:54,657 - Discovery-Debug - INFO - === Discovery Debugging Complete ===

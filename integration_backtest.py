@@ -3,7 +3,8 @@
 Simple MA Crossover Backtest Script
 
 This script runs a Moving Average Crossover strategy backtest using
-the ADMF-Trader framework with proper dependency injection.
+the ADMF-Trader framework with proper dependency injection and the
+new Order Registry for centralized order tracking.
 """
 import os
 import logging
@@ -39,6 +40,7 @@ from src.execution.backtest.backtest import BacktestCoordinator
 from src.analytics.performance.calculator import PerformanceCalculator
 from src.analytics.reporting.report_generator import ReportGenerator
 from src.execution.order_manager import OrderManager
+from src.execution.order_registry import OrderRegistry
 
 # Create Simple Config class
 class SimpleConfig:
@@ -72,6 +74,16 @@ class SimpleSection:
         if not isinstance(value, dict):
             value = {}
         return SimpleSection(f"{self.name}.{name}", value)
+    
+    def get_float(self, key, default=0.0):
+        """Get a configuration value as a float."""
+        value = self.get(key, default)
+        return float(value)
+    
+    def get_int(self, key, default=0):
+        """Get a configuration value as an int."""
+        value = self.get(key, default)
+        return int(value)
 
 # Create test data directory
 DATA_DIR = 'data'
@@ -299,7 +311,7 @@ def setup_container(config):
     # Register portfolio and risk management
     portfolio = PortfolioManager(
         event_bus, 
-        initial_cash=config.get_section('backtest').get('initial_capital', 100000.0)
+        initial_cash=config.get_section('backtest').get_float('initial_capital', 100000.0)
     )
     container.register_instance('portfolio', portfolio)
     
@@ -308,25 +320,28 @@ def setup_container(config):
         portfolio,
         name="simple_risk_manager"
     )
-    risk_manager.position_size = config.get_section('risk_manager').get('position_size', 100)
-    risk_manager.max_position_pct = config.get_section('risk_manager').get('max_position_pct', 0.1)
+    risk_manager.position_size = config.get_section('risk_manager').get_int('position_size', 100)
+    risk_manager.max_position_pct = config.get_section('risk_manager').get_float('max_position_pct', 0.1)
     container.register_instance('risk_manager', risk_manager)
     
-    # Register execution components - MODIFIED ORDER HERE
-    # First create order manager with empty dependencies
-    from src.execution.order_manager import OrderManager
-    order_manager = OrderManager(None, None)
-    container.register_instance('order_manager', order_manager)
+    # Register strategy
+    strategy_params = config.get_section('strategy').get_section('ma_crossover').as_dict()
+    strategy = SimpleMAStrategy(event_bus, data_handler, name="ma_crossover", parameters=strategy_params)
+    container.register_instance('strategy', strategy)
     
-    # Then create broker
-    broker = SimulatedBroker(event_bus)
-    broker.slippage = config.get_section('broker').get('slippage', 0.0)
-    broker.commission = config.get_section('broker').get('commission', 0.0)
+    # NEW: Create order registry before execution components
+    order_registry = OrderRegistry(event_bus)
+    container.register_instance('order_registry', order_registry)
+    
+    # Register execution components - NEW ORDER with centralized registry
+    broker = SimulatedBroker(event_bus, order_registry)
+    broker.slippage = config.get_section('broker').get_float('slippage', 0.0)
+    broker.commission = config.get_section('broker').get_float('commission', 0.0)
     container.register_instance('broker', broker)
     
-    # Now connect order manager to event bus and broker
-    order_manager.broker = broker
-    order_manager.set_event_bus(event_bus)
+    # Create order manager with registry
+    order_manager = OrderManager(event_bus, broker, order_registry)
+    container.register_instance('order_manager', order_manager)
     
     # Register analytics components
     calculator = PerformanceCalculator()
@@ -335,22 +350,41 @@ def setup_container(config):
     report_generator = ReportGenerator(calculator)
     container.register_instance('report_generator', report_generator)
     
-    # Register strategy
-    strategy_params = config.get_section('strategy').get_section('ma_crossover').as_dict()
-    strategy = SimpleMAStrategy(event_bus, data_handler, name="ma_crossover", parameters=strategy_params)
-    container.register_instance('strategy', strategy)
-    
     # Register backtest coordinator
     backtest = BacktestCoordinator(container, config)
     container.register_instance('backtest', backtest)
     
+    # CRITICAL: Register components with event manager in the correct order
+    # 1. Order registry must see all events
+    event_manager.register_component('order_registry', order_registry, 
+                                    [EventType.ORDER, EventType.FILL])
+                                    
+    # 2. Data handler for bar events
+    event_manager.register_component('data_handler', data_handler, [EventType.BAR])
+    
+    # 3. Strategy to generate signals from bars
+    event_manager.register_component('strategy', strategy, [EventType.BAR]) 
+    
+    # 4. Risk manager to generate orders from signals
+    event_manager.register_component('risk_manager', risk_manager, [EventType.SIGNAL])
+    
+    # 5. Order manager to process orders BEFORE broker
+    event_manager.register_component('order_manager', order_manager, 
+                                    [EventType.ORDER, EventType.FILL])
+    
+    # 6. Broker processes orders AFTER order manager registers them
+    event_manager.register_component('broker', broker, 
+                                    [EventType.PORTFOLIO])  # Listen for state changes
+    
+    # 7. Portfolio processes fills last
+    event_manager.register_component('portfolio', portfolio, [EventType.FILL])
+    
     return container
-
 
 
 def run_backtest():
     """Run backtest using BacktestCoordinator."""
-    logger.info("=== Starting ADMF-Trader Backtest ===")
+    logger.info("=== Starting ADMF-Trader Backtest with Order Registry ===")
     
     # Create test data
     symbols = ['AAPL', 'MSFT']
@@ -401,6 +435,8 @@ def run_backtest():
     
     # Calculate metrics from equity curve
     metrics = results.get('metrics', {})
+    total_return = 0.0
+    
     if equity_curve is not None and not equity_curve.empty:
         start_equity = equity_curve['equity'].iloc[0]
         end_equity = equity_curve['equity'].iloc[-1]
@@ -430,47 +466,47 @@ def run_backtest():
             else:
                 logger.info(f"  {metric}: {value}")
     
+    # Get statistics from the order registry
+    try:
+        order_registry = container.get('order_registry')
+        if order_registry:
+            registry_stats = order_registry.get_stats()
+            logger.info("\nOrder Registry Statistics:")
+            for key, value in registry_stats.items():
+                logger.info(f"  {key}: {value}")
+    except Exception as e:
+        logger.error(f"Error getting order registry stats: {e}")
+    
     return {
         'success': True,
         'trades': len(trades),
-        'return': total_return if 'total_return' in locals() else 0,
+        'return': total_return,
         'metrics': metrics
     }
 
 if __name__ == "__main__":
     try:
         results = run_backtest()
-        # After running backtest
-
-        # After results = run_backtest() in the main function:
-        # After results = run_backtest() in the main function:
-
-# After results = run_backtest() in the main function:
+        
         if results and results.get('success'):
             print("\n=== Backtest Completed Successfully! ===")
-            # Add this debugging block
+            
+            # Print key metrics
             metrics = results.get('metrics', {})
             trade_count = metrics.get('trade_count', 0)
-            print(f"\nTrade count: {trade_count}")
-
-            # Print key metrics
             win_rate = metrics.get('win_rate', 0.0)
             profit_factor = metrics.get('profit_factor', 0.0)
             avg_trade = metrics.get('avg_trade', 0.0)
-
+            
+            print(f"\nTrade count: {trade_count}")
             print(f"Win rate: {win_rate:.2f}")
             print(f"Profit factor: {profit_factor:.2f}")
             print(f"Average trade P&L: ${avg_trade:.2f}")        
-
-
-        if results and results.get('success'):
-            print("\n=== Backtest Completed Successfully! ===")
             print(f"Trades executed: {results.get('trades', 0)}")
             print(f"Total return: {results.get('return', 0):.2%}")
             
             # Print summary metrics
             print("\nKey Performance Metrics:")
-            metrics = results.get('metrics', {})
             key_metrics = ['sharpe_ratio', 'max_drawdown', 'win_rate', 'profit_factor']
             for metric in key_metrics:
                 if metric in metrics:
@@ -484,6 +520,3 @@ if __name__ == "__main__":
     except Exception as e:
         logger.error(f"Backtest failed with error: {e}", exc_info=True)
         print(f"Error: {e}")
-
-
-        

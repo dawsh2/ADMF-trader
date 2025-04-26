@@ -97,7 +97,6 @@ class BacktestCoordinator:
                 logger.error("No risk manager available")
                 return False
             
-
             # Create order manager
             if self.container and self.container.has('order_manager'):
                 self.order_manager = self.container.get('order_manager')
@@ -111,8 +110,6 @@ class BacktestCoordinator:
             else:
                 from src.execution.broker.broker_simulator import SimulatedBroker
                 self.broker = SimulatedBroker(self.event_bus)
-
-
                 
             # Create strategy
             if self.container and self.container.has('strategy'):
@@ -144,14 +141,17 @@ class BacktestCoordinator:
             self.risk_manager.portfolio_manager = self.portfolio
             self.order_manager.broker = self.broker
             
-            # Register components with event manager
-            # Register components with event manager in this order:
-            self.event_manager.register_component('data_handler', self.data_handler)
-            self.event_manager.register_component('portfolio', self.portfolio)
-            self.event_manager.register_component('risk_manager', self.risk_manager)
-            self.event_manager.register_component('order_manager', self.order_manager) # Order manager first
-            self.event_manager.register_component('broker', self.broker)               # Broker second
-            self.event_manager.register_component('strategy', self.strategy)
+            # Register components with event manager in the critical corrected order
+            # 1. First register the order manager (so it sees orders before broker processes them)
+            self.event_manager.register_component('order_manager', self.order_manager, [EventType.ORDER, EventType.FILL])
+            # 2. Then register broker (which will process orders)
+            self.event_manager.register_component('broker', self.broker, [EventType.ORDER])
+            # 3. Then register portfolio manager (to track fills)
+            self.event_manager.register_component('portfolio', self.portfolio, [EventType.FILL])
+            # 4. Now register the remaining components
+            self.event_manager.register_component('data_handler', self.data_handler, [EventType.BAR])
+            self.event_manager.register_component('strategy', self.strategy, [EventType.BAR])
+            self.event_manager.register_component('risk_manager', self.risk_manager, [EventType.SIGNAL])
             
             logger.info("Backtest setup complete")
             return True
@@ -176,12 +176,24 @@ class BacktestCoordinator:
             Dict: Backtest results
         """
         # Use configuration if parameters not provided
-        if self.config:
+        if isinstance(self.config, dict):
+            # Handle dictionary config
             symbols = symbols or self.config.get('symbols')
             start_date = start_date or self.config.get('start_date')
             end_date = end_date or self.config.get('end_date')
             initial_capital = initial_capital or self.config.get('initial_capital', 100000.0)
             timeframe = timeframe or self.config.get('timeframe', '1d')
+        else:
+            # Handle Config object
+            try:
+                backtest_config = self.config.get_section('backtest')
+                symbols = symbols or backtest_config.get_list('symbols')
+                start_date = start_date or backtest_config.get('start_date')
+                end_date = end_date or backtest_config.get('end_date')
+                initial_capital = initial_capital or backtest_config.get_float('initial_capital', 100000.0)
+                timeframe = timeframe or backtest_config.get('timeframe', '1d')
+            except Exception as e:
+                logger.warning(f"Error getting config values: {e}, using provided values")
         
         # Validate parameters
         if not symbols:
@@ -287,7 +299,7 @@ class BacktestCoordinator:
                     continue_backtest = True
             
             # Log progress periodically
-            if iteration % 1000 == 0:
+            if iteration % 100 == 0:
                 logger.info(f"Processed {iteration} iterations")
         
         logger.info(f"Backtest completed after {iteration} iterations")
@@ -307,21 +319,23 @@ class BacktestCoordinator:
             trades = self.portfolio.get_recent_trades()
 
             # Debug trades
-            logger.info(f"Trade stats: {len(trades)} trades, "
-                        f"{sum(1 for t in trades if t.get('pnl', 0) > 0)} wins, "
-                        f"{sum(1 for t in trades if t.get('pnl', 0) < 0)} losses")
-
             if trades:
+                logger.info(f"Trade stats: {len(trades)} trades, "
+                          f"{sum(1 for t in trades if t.get('pnl', 0) > 0)} wins, "
+                          f"{sum(1 for t in trades if t.get('pnl', 0) < 0)} losses")
+
                 pnl_values = [t.get('pnl', 0) for t in trades]
-                logger.info(f"PnL sum: {sum(pnl_values):.2f}")
-                logger.info(f"Min PnL: {min(pnl_values):.2f}, Max PnL: {max(pnl_values):.2f}")
+                if pnl_values:
+                    logger.info(f"PnL sum: {sum(pnl_values):.2f}")
+                    logger.info(f"Min PnL: {min(pnl_values):.2f}, Max PnL: {max(pnl_values):.2f}")
 
             # Set up performance calculator
             self.calculator.set_equity_curve(equity_curve)
             self.calculator.set_trades(trades)
 
             # Calculate metrics - check that calculator has equity curve and trades
-            print(f"Calculating metrics with {len(trades)} trades")
+            if trades:
+                print(f"Calculating metrics with {len(trades)} trades")
             if equity_curve is None or equity_curve.empty:
                 logger.warning("Empty equity curve, metrics will be limited")
 
@@ -355,8 +369,6 @@ class BacktestCoordinator:
         except Exception as e:
             logger.error(f"Error processing results: {e}", exc_info=True)
             return {}        
-    
-
     
     def get_performance_summary(self):
         """

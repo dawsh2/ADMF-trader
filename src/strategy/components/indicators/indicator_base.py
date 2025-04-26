@@ -1,8 +1,11 @@
-# src/strategies/components/indicators/indicator_base.py
-from ..component_base import Component
+"""
+Base class for technical indicators.
+"""
 from abc import abstractmethod
 import pandas as pd
 from typing import Any, Dict, List, Optional
+
+from ..component_base import Component
 
 class Indicator(Component):
     """Base class for technical indicators."""

@@ -1,0 +1,37 @@
+# ADMF-Trader backtest configuration
+
+# Backtest settings
+backtest:
+  strategy: ma_crossover  # Strategy name to use (discovered from src/strategy/implementations)
+  initial_capital: 100000.0
+  symbols: ['AAPL', 'MSFT', 'GOOG']
+  timeframe: 1d
+
+# Data settings  
+data:
+  source_type: csv
+  data_dir: ./data
+  
+# Broker settings
+broker:
+  slippage: 0.001  # 0.1% slippage
+  commission: 0.001  # 0.1% commission
+
+# Risk management settings
+risk_manager:
+  position_size: 100  # Default position size
+  max_position_pct: 0.1  # Maximum 10% of equity per position
+
+# Portfolio settings
+portfolio:
+  initial_cash: 100000.0
+  
+# Strategy settings
+strategies:
+  # Moving Average Crossover Strategy
+  ma_crossover:
+    enabled: true
+    fast_window: 5   # Fast moving average window (reduced from 10 to 5)
+    slow_window: 15  # Slow moving average window (reduced from 30 to 15)
+    price_key: close  # Which price to use for calculations
+    symbols: ['AAPL', 'MSFT', 'GOOG']

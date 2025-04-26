@@ -1,6 +1,6 @@
 # src/core/utils/registry.py
 
-from typing import Dict, Type, Any, List
+from typing import Dict, Type, Any, List, Iterator, Tuple
 
 class Registry:
     """Registry for components."""
@@ -40,14 +40,14 @@ class Registry:
         """
         return list(self._components.keys())
     
-    def items(self) -> Dict[str, Any]:
+    def items(self) -> Iterator[Tuple[str, Any]]:
         """
-        Get all components as dictionary.
+        Get all components as key-value pairs.
         
         Returns:
-            Dictionary of name -> component
+            Iterator of (name, component) tuples
         """
-        return dict(self._components)
+        return self._components.items()
     
     def __contains__(self, name: str) -> bool:
         """

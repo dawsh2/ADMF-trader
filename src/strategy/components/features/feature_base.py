@@ -1,8 +1,11 @@
-# src/strategies/components/features/feature_base.py
-from ..component_base import Component
+"""
+Base class for features.
+"""
 from abc import abstractmethod
 import pandas as pd
 from typing import Any, Dict, List, Optional
+
+from ..component_base import Component
 
 class Feature(Component):
     """

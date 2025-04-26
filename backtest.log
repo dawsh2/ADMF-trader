@@ -1,181 +1,1041 @@
-2025-04-25 12:56:10,982 - ADMF-Trader - INFO - === Starting ADMF-Trader Backtest ===
-2025-04-25 12:56:10,982 - ADMF-Trader - INFO - Creating test data for ['AAPL', 'MSFT']
-2025-04-25 12:56:10,990 - ADMF-Trader - INFO - Created test data for AAPL with 42 bars
-2025-04-25 12:56:10,991 - ADMF-Trader - INFO - Created test data for MSFT with 42 bars
-2025-04-25 12:56:10,991 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
-2025-04-25 12:56:10,992 - ADMF-Trader - INFO - Strategy initialized with fast_window=5, slow_window=20
-2025-04-25 12:56:10,992 - src.execution.backtest.backtest - INFO - Backtest setup complete
-2025-04-25 12:56:10,992 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_da168dc8 to initial state with cash: $100000.00
-2025-04-25 12:56:10,992 - src.risk.managers.simple - INFO - Risk manager simple_risk_manager reset
-2025-04-25 12:56:10,992 - src.execution.order_manager - INFO - Reset order manager
-2025-04-25 12:56:10,992 - src.execution.backtest.backtest - INFO - Reset all components for backtest
-2025-04-25 12:56:10,992 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['AAPL', 'MSFT']
-2025-04-25 12:56:10,992 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file data/AAPL_1d.csv
-2025-04-25 12:56:10,994 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 42 rows
-2025-04-25 12:56:10,995 - src.data.sources.csv_handler - INFO - Using 'date' column instead of configured 'timestamp'
-2025-04-25 12:56:10,995 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2023-01-02
-2025-04-25 12:56:10,995 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2023-01-02 00:00:00
-2025-04-25 12:56:10,995 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2023-01-01 00:00:00
-2025-04-25 12:56:10,996 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2023-02-28 00:00:00
-2025-04-25 12:56:10,996 - src.data.sources.csv_handler - INFO - CSVDataSource: Set date as index
-2025-04-25 12:56:10,997 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2023-01-02 00:00:00 to 2023-02-28 00:00:00
-2025-04-25 12:56:10,997 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume']
-2025-04-25 12:56:10,997 - src.data.historical_data_handler - INFO - Loaded 42 bars for AAPL from 2023-01-02 00:00:00 to 2023-02-28 00:00:00
-2025-04-25 12:56:10,997 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file data/MSFT_1d.csv
-2025-04-25 12:56:10,998 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 42 rows
-2025-04-25 12:56:10,998 - src.data.sources.csv_handler - INFO - Using 'date' column instead of configured 'timestamp'
-2025-04-25 12:56:10,998 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2023-01-02
-2025-04-25 12:56:10,998 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2023-01-02 00:00:00
-2025-04-25 12:56:10,998 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2023-01-01 00:00:00
-2025-04-25 12:56:10,998 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2023-02-28 00:00:00
-2025-04-25 12:56:10,998 - src.data.sources.csv_handler - INFO - CSVDataSource: Set date as index
-2025-04-25 12:56:10,999 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2023-01-02 00:00:00 to 2023-02-28 00:00:00
-2025-04-25 12:56:10,999 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume']
-2025-04-25 12:56:10,999 - src.data.historical_data_handler - INFO - Loaded 42 bars for MSFT from 2023-01-02 00:00:00 to 2023-02-28 00:00:00
-2025-04-25 12:56:10,999 - src.execution.backtest.backtest - INFO - Starting backtest
-2025-04-25 12:56:11,000 - ADMF-Trader - INFO - BUY signal #1 for AAPL at 107.10
-2025-04-25 12:56:11,000 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 93 for AAPL (value limit)
-2025-04-25 12:56:11,000 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 93 AAPL @ 107.20
-2025-04-25 12:56:11,000 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 935210a9-d2fd-4fdb-9d09-2d409532ac94
-2025-04-25 12:56:11,000 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for AAPL
-2025-04-25 12:56:11,000 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
-2025-04-25 12:56:11,000 - src.risk.portfolio.portfolio - INFO - Fill: BUY 93 AAPL @ 107.20, PnL: 0.00, Cash: 90020.04, Equity: 99990.03
-2025-04-25 12:56:11,000 - src.execution.order_manager - INFO - Updated order with fill: Order(935210a9-d2fd-4fdb-9d09-2d409532ac94, AAPL, BUY, 93, FILLED)
-2025-04-25 12:56:11,000 - src.execution.order_manager - INFO - Created order: Order(935210a9-d2fd-4fdb-9d09-2d409532ac94, AAPL, BUY, 93, FILLED)
-2025-04-25 12:56:11,000 - src.risk.managers.simple - INFO - Created order: BUY 93 AAPL @ 107.10
-2025-04-25 12:56:11,000 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 93 for AAPL (value limit)
-2025-04-25 12:56:11,000 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 93 for AAPL (value limit)
-2025-04-25 12:56:11,000 - ADMF-Trader - INFO - BUY signal #2 for MSFT at 207.74
-2025-04-25 12:56:11,000 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for MSFT (value limit)
-2025-04-25 12:56:11,001 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 48 MSFT @ 207.94
-2025-04-25 12:56:11,001 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: f9097d55-25fc-4f87-a51e-56a5bdb36c87
-2025-04-25 12:56:11,001 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for MSFT
-2025-04-25 12:56:11,001 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
-2025-04-25 12:56:11,001 - src.risk.portfolio.portfolio - INFO - Fill: BUY 48 MSFT @ 207.94, PnL: 0.00, Cash: 80028.71, Equity: 99970.09
-2025-04-25 12:56:11,001 - src.execution.order_manager - INFO - Updated order with fill: Order(f9097d55-25fc-4f87-a51e-56a5bdb36c87, MSFT, BUY, 48, FILLED)
-2025-04-25 12:56:11,001 - src.execution.order_manager - INFO - Created order: Order(f9097d55-25fc-4f87-a51e-56a5bdb36c87, MSFT, BUY, 48, FILLED)
-2025-04-25 12:56:11,001 - src.risk.managers.simple - INFO - Created order: BUY 48 MSFT @ 207.74
-2025-04-25 12:56:11,001 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for MSFT (value limit)
-2025-04-25 12:56:11,001 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for MSFT (value limit)
-2025-04-25 12:56:11,001 - ADMF-Trader - INFO - SELL signal #3 for AAPL at 80.93
-2025-04-25 12:56:11,001 - src.risk.managers.simple - INFO - Reducing SELL size from 100 to 93 for AAPL
-2025-04-25 12:56:11,001 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 93 AAPL @ 80.85
-2025-04-25 12:56:11,001 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 2c7b04f8-4aad-4da2-a422-9981741c337e
-2025-04-25 12:56:11,001 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for AAPL
-2025-04-25 12:56:11,001 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -2451.30
-2025-04-25 12:56:11,001 - src.risk.portfolio.portfolio - INFO - Fill: SELL 93 AAPL @ 80.85, PnL: -2451.30, Cash: 87539.89, Equity: 97348.22
-2025-04-25 12:56:11,001 - src.execution.order_manager - INFO - Updated order with fill: Order(2c7b04f8-4aad-4da2-a422-9981741c337e, AAPL, SELL, 93, FILLED)
-2025-04-25 12:56:11,001 - src.execution.order_manager - INFO - Created order: Order(2c7b04f8-4aad-4da2-a422-9981741c337e, AAPL, SELL, 93, FILLED)
-2025-04-25 12:56:11,001 - src.risk.managers.simple - INFO - Created order: SELL 93 AAPL @ 80.93
-2025-04-25 12:56:11,001 - ADMF-Trader - INFO - SELL signal #4 for MSFT at 181.51
-2025-04-25 12:56:11,002 - src.risk.managers.simple - INFO - Reducing SELL size from 100 to 48 for MSFT
-2025-04-25 12:56:11,002 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 48 MSFT @ 181.33
-2025-04-25 12:56:11,002 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 80f3182d-28fd-41d1-bb56-09ce26716dc7
-2025-04-25 12:56:11,002 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for MSFT
-2025-04-25 12:56:11,002 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -1277.44
-2025-04-25 12:56:11,002 - src.risk.portfolio.portfolio - INFO - Fill: SELL 48 MSFT @ 181.33, PnL: -1277.44, Cash: 96235.09, Equity: 96235.09
-2025-04-25 12:56:11,002 - src.execution.order_manager - INFO - Updated order with fill: Order(80f3182d-28fd-41d1-bb56-09ce26716dc7, MSFT, SELL, 48, FILLED)
-2025-04-25 12:56:11,002 - src.execution.order_manager - INFO - Created order: Order(80f3182d-28fd-41d1-bb56-09ce26716dc7, MSFT, SELL, 48, FILLED)
-2025-04-25 12:56:11,002 - src.risk.managers.simple - INFO - Created order: SELL 48 MSFT @ 181.51
-2025-04-25 12:56:11,002 - ADMF-Trader - INFO - BUY signal #5 for AAPL at 116.23
-2025-04-25 12:56:11,002 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 82 for AAPL (value limit)
-2025-04-25 12:56:11,002 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 82 AAPL @ 116.35
-2025-04-25 12:56:11,002 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 8c55e84d-ebfc-4443-8d63-1d01ebd1785d
-2025-04-25 12:56:11,002 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for AAPL
-2025-04-25 12:56:11,002 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
-2025-04-25 12:56:11,002 - src.risk.portfolio.portfolio - INFO - Fill: BUY 82 AAPL @ 116.35, PnL: 0.00, Cash: 86685.17, Equity: 96225.55
-2025-04-25 12:56:11,002 - src.execution.order_manager - INFO - Updated order with fill: Order(8c55e84d-ebfc-4443-8d63-1d01ebd1785d, AAPL, BUY, 82, FILLED)
-2025-04-25 12:56:11,002 - src.execution.order_manager - INFO - Created order: Order(8c55e84d-ebfc-4443-8d63-1d01ebd1785d, AAPL, BUY, 82, FILLED)
-2025-04-25 12:56:11,002 - src.risk.managers.simple - INFO - Created order: BUY 82 AAPL @ 116.23
-2025-04-25 12:56:11,002 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 82 for AAPL (value limit)
-2025-04-25 12:56:11,002 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 82 for AAPL (value limit)
-2025-04-25 12:56:11,002 - ADMF-Trader - INFO - BUY signal #6 for MSFT at 216.72
-2025-04-25 12:56:11,002 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 44 for MSFT (value limit)
-2025-04-25 12:56:11,002 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 44 MSFT @ 216.94
-2025-04-25 12:56:11,003 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: ec1e65e4-3bf8-4e78-84e1-08e6c44e4d3e
-2025-04-25 12:56:11,003 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for MSFT
-2025-04-25 12:56:11,003 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
-2025-04-25 12:56:11,003 - src.risk.portfolio.portfolio - INFO - Fill: BUY 44 MSFT @ 216.94, PnL: 0.00, Cash: 77130.32, Equity: 96206.48
-2025-04-25 12:56:11,003 - src.execution.order_manager - INFO - Updated order with fill: Order(ec1e65e4-3bf8-4e78-84e1-08e6c44e4d3e, MSFT, BUY, 44, FILLED)
-2025-04-25 12:56:11,003 - src.execution.order_manager - INFO - Created order: Order(ec1e65e4-3bf8-4e78-84e1-08e6c44e4d3e, MSFT, BUY, 44, FILLED)
-2025-04-25 12:56:11,003 - src.risk.managers.simple - INFO - Created order: BUY 44 MSFT @ 216.72
-2025-04-25 12:56:11,003 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 44 for MSFT (value limit)
-2025-04-25 12:56:11,003 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 44 for MSFT (value limit)
-2025-04-25 12:56:11,003 - ADMF-Trader - INFO - SELL signal #7 for AAPL at 99.43
-2025-04-25 12:56:11,003 - src.risk.managers.simple - INFO - Reducing SELL size from 100 to 82 for AAPL
-2025-04-25 12:56:11,003 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 82 AAPL @ 99.33
-2025-04-25 12:56:11,003 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: bf48f63a-1b10-4db6-9e1a-c8d5f82fc328
-2025-04-25 12:56:11,003 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for AAPL
-2025-04-25 12:56:11,003 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -1395.36
-2025-04-25 12:56:11,003 - src.risk.portfolio.portfolio - INFO - Fill: SELL 82 AAPL @ 99.33, PnL: -1395.36, Cash: 85267.20, Equity: 94802.96
-2025-04-25 12:56:11,003 - src.execution.order_manager - INFO - Updated order with fill: Order(bf48f63a-1b10-4db6-9e1a-c8d5f82fc328, AAPL, SELL, 82, FILLED)
-2025-04-25 12:56:11,003 - src.execution.order_manager - INFO - Created order: Order(bf48f63a-1b10-4db6-9e1a-c8d5f82fc328, AAPL, SELL, 82, FILLED)
-2025-04-25 12:56:11,003 - src.risk.managers.simple - INFO - Created order: SELL 82 AAPL @ 99.43
-2025-04-25 12:56:11,003 - ADMF-Trader - INFO - SELL signal #8 for MSFT at 199.08
-2025-04-25 12:56:11,003 - src.risk.managers.simple - INFO - Reducing SELL size from 100 to 44 for MSFT
-2025-04-25 12:56:11,003 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 44 MSFT @ 198.88
-2025-04-25 12:56:11,003 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 22cf842b-1ce8-4909-99c8-080ac2683c2b
-2025-04-25 12:56:11,003 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for MSFT
-2025-04-25 12:56:11,003 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -794.46
-2025-04-25 12:56:11,003 - src.risk.portfolio.portfolio - INFO - Fill: SELL 44 MSFT @ 198.88, PnL: -794.46, Cash: 94009.29, Equity: 94009.29
-2025-04-25 12:56:11,003 - src.execution.order_manager - INFO - Updated order with fill: Order(22cf842b-1ce8-4909-99c8-080ac2683c2b, MSFT, SELL, 44, FILLED)
-2025-04-25 12:56:11,003 - src.execution.order_manager - INFO - Created order: Order(22cf842b-1ce8-4909-99c8-080ac2683c2b, MSFT, SELL, 44, FILLED)
-2025-04-25 12:56:11,003 - src.risk.managers.simple - INFO - Created order: SELL 44 MSFT @ 199.08
-2025-04-25 12:56:11,003 - ADMF-Trader - INFO - BUY signal #9 for AAPL at 92.12
-2025-04-25 12:56:11,003 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 AAPL @ 92.21
-2025-04-25 12:56:11,003 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 1a6cf87f-3eb0-4a2b-8fd5-8c953f8c3cb9
-2025-04-25 12:56:11,003 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for AAPL
-2025-04-25 12:56:11,003 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
-2025-04-25 12:56:11,003 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 92.21, PnL: 0.00, Cash: 84779.25, Equity: 94000.07
-2025-04-25 12:56:11,003 - src.execution.order_manager - INFO - Updated order with fill: Order(1a6cf87f-3eb0-4a2b-8fd5-8c953f8c3cb9, AAPL, BUY, 100, FILLED)
-2025-04-25 12:56:11,003 - src.execution.order_manager - INFO - Created order: Order(1a6cf87f-3eb0-4a2b-8fd5-8c953f8c3cb9, AAPL, BUY, 100, FILLED)
-2025-04-25 12:56:11,003 - src.risk.managers.simple - INFO - Created order: BUY 100 AAPL @ 92.12
-2025-04-25 12:56:11,004 - ADMF-Trader - INFO - BUY signal #10 for MSFT at 193.14
-2025-04-25 12:56:11,004 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for MSFT (value limit)
-2025-04-25 12:56:11,004 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 48 MSFT @ 193.33
-2025-04-25 12:56:11,004 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: a5ed0d8e-54e9-4480-b224-b2819b42907a
-2025-04-25 12:56:11,004 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for MSFT
-2025-04-25 12:56:11,004 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
-2025-04-25 12:56:11,004 - src.risk.portfolio.portfolio - INFO - Fill: BUY 48 MSFT @ 193.33, PnL: 0.00, Cash: 75490.13, Equity: 93981.58
-2025-04-25 12:56:11,004 - src.execution.order_manager - INFO - Updated order with fill: Order(a5ed0d8e-54e9-4480-b224-b2819b42907a, MSFT, BUY, 48, FILLED)
-2025-04-25 12:56:11,004 - src.execution.order_manager - INFO - Created order: Order(a5ed0d8e-54e9-4480-b224-b2819b42907a, MSFT, BUY, 48, FILLED)
-2025-04-25 12:56:11,004 - src.risk.managers.simple - INFO - Created order: BUY 48 MSFT @ 193.14
-2025-04-25 12:56:11,004 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for MSFT (value limit)
-2025-04-25 12:56:11,004 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for MSFT (value limit)
-2025-04-25 12:56:11,004 - src.execution.backtest.backtest - INFO - Backtest completed after 43 iterations
-2025-04-25 12:56:11,004 - src.execution.backtest.backtest - INFO - Trade stats: 10 trades, 0 wins, 4 losses
-2025-04-25 12:56:11,004 - src.execution.backtest.backtest - INFO - PnL sum: -5918.55
-2025-04-25 12:56:11,005 - src.execution.backtest.backtest - INFO - Min PnL: -2451.30, Max PnL: 0.00
-2025-04-25 12:56:11,012 - src.execution.backtest.backtest - INFO - Backtest complete
-2025-04-25 12:56:11,012 - ADMF-Trader - INFO - Executed 10 trades
-2025-04-25 12:56:11,012 - ADMF-Trader - INFO - Trade 1: BUY 93 AAPL @ 107.20, PnL: 0.00
-2025-04-25 12:56:11,012 - ADMF-Trader - INFO - Trade 2: BUY 48 MSFT @ 207.94, PnL: 0.00
-2025-04-25 12:56:11,012 - ADMF-Trader - INFO - Trade 3: SELL 93 AAPL @ 80.85, PnL: -2451.30
-2025-04-25 12:56:11,012 - ADMF-Trader - INFO - Trade 4: SELL 48 MSFT @ 181.33, PnL: -1277.44
-2025-04-25 12:56:11,012 - ADMF-Trader - INFO - Trade 5: BUY 82 AAPL @ 116.35, PnL: 0.00
-2025-04-25 12:56:11,012 - ADMF-Trader - INFO - Initial equity: $100000.00
-2025-04-25 12:56:11,012 - ADMF-Trader - INFO - Final equity: $93285.38
-2025-04-25 12:56:11,012 - ADMF-Trader - INFO - Total return: -6.71%
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO - Saved equity curve to 'equity_curve.csv'
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO - Saved detailed report to 'backtest_report.txt'
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO - 
-Performance Metrics:
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO -   total_return: -0.0671
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO -   annualized_return: -0.3592
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO -   sharpe_ratio: -1.1878
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO -   sortino_ratio: -0.6331
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO -   max_drawdown: 0.0851
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO -   calmar_ratio: -4.2234
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO -   mean_log_return: -0.0003
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO -   volatility: 0.0037
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO -   skewness: -1.2091
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO -   kurtosis: 14.9442
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO -   win_rate: 0.0000
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO -   profit_factor: 0.0000
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO -   trade_count: 10
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO -   avg_trade: -591.8554
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO -   avg_win: 0.0000
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO -   avg_loss: 1479.6386
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO -   win_loss_ratio: 0.0000
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO -   avg_drawdown: 0.0486
-2025-04-25 12:56:11,013 - ADMF-Trader - INFO -   max_drawdown_duration: 113
+2025-04-25 22:28:40,928 - ADMF-Trader - INFO - Setting up container...
+2025-04-25 22:28:40,930 - src.core.bootstrap - INFO - Loaded configuration from config/backtest.yaml
+2025-04-25 22:28:40,930 - src.core.bootstrap - INFO - Event system initialized
+2025-04-25 22:28:40,932 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-04-25 22:28:40,933 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-04-25 22:28:40,933 - src.core.bootstrap - INFO - Data components initialized with source type: csv
+2025-04-25 22:28:40,938 - src.core.bootstrap - INFO - Order registry initialized
+2025-04-25 22:28:40,940 - src.core.bootstrap - INFO - Execution components initialized with order registry
+2025-04-25 22:28:40,941 - src.core.bootstrap - INFO - Risk manager configured with position_size=100, max_position_pct=0.1
+2025-04-25 22:28:40,941 - src.core.bootstrap - INFO - Risk components initialized
+2025-04-25 22:28:40,943 - src.core.bootstrap - INFO - Discovering strategy implementations...
+2025-04-25 22:28:40,943 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-04-25 22:28:40,943 - src.core.bootstrap - INFO - Discovered strategies: ma_crossover
+2025-04-25 22:28:40,943 - src.core.bootstrap - INFO - Requested strategy: ma_crossover
+2025-04-25 22:28:40,943 - src.core.bootstrap - INFO - Available strategies in registry: ['ma_crossover']
+2025-04-25 22:28:40,943 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy initialized with fast_window=5, slow_window=15
+2025-04-25 22:28:40,943 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy configured with parameters: fast_window=5, slow_window=15
+2025-04-25 22:28:40,943 - src.core.bootstrap - INFO - Strategy 'ma_crossover' initialized successfully
+2025-04-25 22:28:40,943 - src.core.bootstrap - INFO - Analytics components initialized
+2025-04-25 22:28:40,943 - src.core.bootstrap - INFO - System bootstrap complete
+2025-04-25 22:28:40,943 - ADMF-Trader - INFO - Setting up backtest...
+2025-04-25 22:28:40,943 - src.execution.backtest.backtest - INFO - Backtest setup complete
+2025-04-25 22:28:40,943 - ADMF-Trader - INFO - Running backtest...
+2025-04-25 22:28:40,943 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_bf222805 to initial state with cash: $100000.00
+2025-04-25 22:28:40,943 - src.risk.managers.simple - INFO - Risk manager risk_manager_ca4965a4 reset
+2025-04-25 22:28:40,943 - src.execution.order_manager - INFO - Reset order manager
+2025-04-25 22:28:40,943 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy ma_crossover reset
+2025-04-25 22:28:40,943 - src.execution.backtest.backtest - INFO - Reset all components for backtest
+2025-04-25 22:28:40,943 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['AAPL', 'MSFT', 'GOOG']
+2025-04-25 22:28:40,944 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/AAPL_1d.csv
+2025-04-25 22:28:40,950 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 42 rows
+2025-04-25 22:28:40,951 - src.data.sources.csv_handler - INFO - Using 'date' column instead of configured 'timestamp'
+2025-04-25 22:28:40,951 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2023-01-02
+2025-04-25 22:28:40,952 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2023-01-02 00:00:00
+2025-04-25 22:28:40,954 - src.data.sources.csv_handler - INFO - CSVDataSource: Set date as index
+2025-04-25 22:28:40,954 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-25 22:28:40,954 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume']
+2025-04-25 22:28:40,954 - src.data.historical_data_handler - INFO - Loaded 42 bars for AAPL from 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-25 22:28:40,954 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/MSFT_1d.csv
+2025-04-25 22:28:40,955 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 42 rows
+2025-04-25 22:28:40,955 - src.data.sources.csv_handler - INFO - Using 'date' column instead of configured 'timestamp'
+2025-04-25 22:28:40,955 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2023-01-02
+2025-04-25 22:28:40,955 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2023-01-02 00:00:00
+2025-04-25 22:28:40,956 - src.data.sources.csv_handler - INFO - CSVDataSource: Set date as index
+2025-04-25 22:28:40,956 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-25 22:28:40,956 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume']
+2025-04-25 22:28:40,956 - src.data.historical_data_handler - INFO - Loaded 42 bars for MSFT from 2023-01-02 00:00:00 to 2023-02-28 00:00:00
+2025-04-25 22:28:40,956 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/GOOG_1d.csv
+2025-04-25 22:28:40,957 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 260 rows
+2025-04-25 22:28:40,957 - src.data.sources.csv_handler - INFO - Using 'date' column instead of configured 'timestamp'
+2025-04-25 22:28:40,957 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2023-01-02
+2025-04-25 22:28:40,957 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2023-01-02 00:00:00
+2025-04-25 22:28:40,957 - src.data.sources.csv_handler - INFO - CSVDataSource: Set date as index
+2025-04-25 22:28:40,957 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2023-01-02 00:00:00 to 2023-12-29 00:00:00
+2025-04-25 22:28:40,957 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume']
+2025-04-25 22:28:40,957 - src.data.historical_data_handler - INFO - Loaded 260 bars for GOOG from 2023-01-02 00:00:00 to 2023-12-29 00:00:00
+2025-04-25 22:28:40,957 - src.execution.backtest.backtest - INFO - Starting backtest
+2025-04-25 22:28:40,958 - src.strategy.implementations.ma_crossover - INFO - SELL signal for AAPL: fast MA (105.63) crossed below slow MA (105.90), crossover: 0.2514%
+2025-04-25 22:28:40,958 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 90.87
+2025-04-25 22:28:40,958 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,958 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 100, rejecting
+2025-04-25 22:28:40,958 - src.execution.order_registry - INFO - Registered order: 95972b32-c5e0-48c4-a8a3-b116e5f5bd23
+2025-04-25 22:28:40,958 - src.execution.order_manager - INFO - Emitting order event: 95972b32-c5e0-48c4-a8a3-b116e5f5bd23
+2025-04-25 22:28:40,958 - src.strategy.implementations.ma_crossover - INFO - Signal #1 emitted for AAPL: -1
+2025-04-25 22:28:40,959 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MSFT: fast MA (204.71) crossed below slow MA (205.52), crossover: 0.3955%
+2025-04-25 22:28:40,959 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 MSFT @ 189.63
+2025-04-25 22:28:40,959 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,959 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 100, rejecting
+2025-04-25 22:28:40,959 - src.execution.order_registry - INFO - Registered order: cfa2c01a-2828-408f-b0bc-05ccc9a014a0
+2025-04-25 22:28:40,959 - src.execution.order_manager - INFO - Emitting order event: cfa2c01a-2828-408f-b0bc-05ccc9a014a0
+2025-04-25 22:28:40,959 - src.strategy.implementations.ma_crossover - INFO - Signal #2 emitted for MSFT: -1
+2025-04-25 22:28:40,959 - src.strategy.implementations.ma_crossover - INFO - BUY signal for AAPL: fast MA (105.15) crossed above slow MA (104.29), crossover: 0.8231%
+2025-04-25 22:28:40,959 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 AAPL @ 106.23
+2025-04-25 22:28:40,959 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,959 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,959 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 106.23, PnL: 0.00, Cash: 89366.00, Equity: 99989.38
+2025-04-25 22:28:40,959 - src.execution.order_registry - INFO - Registered order: db18d591-1f49-4cb2-94b6-99aa98574e13
+2025-04-25 22:28:40,959 - src.execution.order_manager - INFO - Emitting order event: db18d591-1f49-4cb2-94b6-99aa98574e13
+2025-04-25 22:28:40,959 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 94 for AAPL (value limit)
+2025-04-25 22:28:40,959 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 94 AAPL @ 106.23
+2025-04-25 22:28:40,959 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,959 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,959 - src.risk.portfolio.portfolio - INFO - Fill: BUY 94 AAPL @ 106.23, PnL: 0.00, Cash: 79370.04, Equity: 99979.39
+2025-04-25 22:28:40,959 - src.execution.order_registry - INFO - Registered order: 36a5220c-dd61-4fe8-8001-2d2004fcb611
+2025-04-25 22:28:40,959 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 94 AAPL @ 106.23
+2025-04-25 22:28:40,959 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,959 - src.risk.portfolio.portfolio - INFO - Fill: BUY 94 AAPL @ 106.23, PnL: 0.00, Cash: 69374.08, Equity: 99969.40
+2025-04-25 22:28:40,959 - src.risk.managers.simple - INFO - Created order: BUY 94 AAPL @ 106.13
+2025-04-25 22:28:40,960 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 94 for AAPL (value limit)
+2025-04-25 22:28:40,960 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 94 for AAPL (value limit)
+2025-04-25 22:28:40,960 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 94 for AAPL (value limit)
+2025-04-25 22:28:40,960 - src.strategy.implementations.ma_crossover - INFO - Signal #3 emitted for AAPL: 1
+2025-04-25 22:28:40,960 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MSFT: fast MA (205.35) crossed above slow MA (204.08), crossover: 0.6245%
+2025-04-25 22:28:40,960 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 MSFT @ 206.67
+2025-04-25 22:28:40,960 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,960 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,960 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 MSFT @ 206.67, PnL: 0.00, Cash: 48686.13, Equity: 99948.74
+2025-04-25 22:28:40,960 - src.execution.order_registry - INFO - Registered order: af400532-728d-4172-9b01-b223060ae135
+2025-04-25 22:28:40,960 - src.execution.order_manager - INFO - Emitting order event: af400532-728d-4172-9b01-b223060ae135
+2025-04-25 22:28:40,960 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for MSFT (value limit)
+2025-04-25 22:28:40,960 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 48 MSFT @ 206.67
+2025-04-25 22:28:40,960 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,960 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,960 - src.risk.portfolio.portfolio - INFO - Fill: BUY 48 MSFT @ 206.67, PnL: 0.00, Cash: 38755.91, Equity: 99938.82
+2025-04-25 22:28:40,960 - src.execution.order_registry - INFO - Registered order: 6eb6f82e-c110-4e68-9bf8-b42ceba90216
+2025-04-25 22:28:40,960 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 48 MSFT @ 206.67
+2025-04-25 22:28:40,960 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,960 - src.risk.portfolio.portfolio - INFO - Fill: BUY 48 MSFT @ 206.67, PnL: 0.00, Cash: 28825.69, Equity: 99928.90
+2025-04-25 22:28:40,960 - src.risk.managers.simple - INFO - Created order: BUY 48 MSFT @ 206.47
+2025-04-25 22:28:40,960 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for MSFT (value limit)
+2025-04-25 22:28:40,960 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for MSFT (value limit)
+2025-04-25 22:28:40,960 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for MSFT (value limit)
+2025-04-25 22:28:40,960 - src.strategy.implementations.ma_crossover - INFO - Signal #4 emitted for MSFT: 1
+2025-04-25 22:28:40,960 - src.strategy.implementations.ma_crossover - INFO - SELL signal for AAPL: fast MA (103.44) crossed below slow MA (103.72), crossover: 0.2689%
+2025-04-25 22:28:40,960 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 83.81
+2025-04-25 22:28:40,960 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,960 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -2242.68
+2025-04-25 22:28:40,960 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 83.81, PnL: -2242.68, Cash: 37198.01, Equity: 93461.60
+2025-04-25 22:28:40,960 - src.execution.order_registry - INFO - Registered order: 4893c504-4ac6-4964-8f93-2be8faa953fc
+2025-04-25 22:28:40,960 - src.execution.order_manager - INFO - Emitting order event: 4893c504-4ac6-4964-8f93-2be8faa953fc
+2025-04-25 22:28:40,960 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 83.81
+2025-04-25 22:28:40,961 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,961 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -2242.68
+2025-04-25 22:28:40,961 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 83.81, PnL: -2242.68, Cash: 45570.32, Equity: 93453.22
+2025-04-25 22:28:40,961 - src.execution.order_registry - INFO - Registered order: e90d4188-7ada-4fd8-bdc4-717254014407
+2025-04-25 22:28:40,961 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 83.81
+2025-04-25 22:28:40,961 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 88
+2025-04-25 22:28:40,961 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -1973.56
+2025-04-25 22:28:40,961 - src.risk.portfolio.portfolio - INFO - Fill: SELL 88 AAPL @ 83.81, PnL: -1973.56, Cash: 52936.96, Equity: 93444.84
+2025-04-25 22:28:40,961 - src.risk.managers.simple - INFO - Created order: SELL 100 AAPL @ 83.89
+2025-04-25 22:28:40,961 - src.strategy.implementations.ma_crossover - INFO - Signal #5 emitted for AAPL: -1
+2025-04-25 22:28:40,961 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MSFT: fast MA (198.12) crossed below slow MA (202.22), crossover: 2.0239%
+2025-04-25 22:28:40,961 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 MSFT @ 183.32
+2025-04-25 22:28:40,961 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,961 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -2335.55
+2025-04-25 22:28:40,961 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 MSFT @ 183.32, PnL: -2335.55, Cash: 71250.36, Equity: 88848.83
+2025-04-25 22:28:40,961 - src.execution.order_registry - INFO - Registered order: 4b93a29e-fc3c-485d-9e43-93fd64cc2f29
+2025-04-25 22:28:40,961 - src.execution.order_manager - INFO - Emitting order event: 4b93a29e-fc3c-485d-9e43-93fd64cc2f29
+2025-04-25 22:28:40,961 - src.risk.managers.simple - INFO - Reducing SELL size from 100 to 96 for MSFT
+2025-04-25 22:28:40,961 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 96 MSFT @ 183.32
+2025-04-25 22:28:40,961 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,961 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -2242.13
+2025-04-25 22:28:40,961 - src.risk.portfolio.portfolio - INFO - Fill: SELL 96 MSFT @ 183.32, PnL: -2242.13, Cash: 88831.23, Equity: 88831.23
+2025-04-25 22:28:40,961 - src.execution.order_registry - INFO - Registered order: dcc06392-06b5-43d1-b36e-8576facfacb3
+2025-04-25 22:28:40,961 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 96 MSFT @ 183.32
+2025-04-25 22:28:40,961 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 96, rejecting
+2025-04-25 22:28:40,961 - src.risk.managers.simple - INFO - Created order: SELL 96 MSFT @ 183.50
+2025-04-25 22:28:40,961 - src.strategy.implementations.ma_crossover - INFO - Signal #6 emitted for MSFT: -1
+2025-04-25 22:28:40,962 - src.strategy.implementations.ma_crossover - INFO - BUY signal for AAPL: fast MA (99.10) crossed above slow MA (96.94), crossover: 2.2266%
+2025-04-25 22:28:40,962 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 AAPL @ 106.31
+2025-04-25 22:28:40,962 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,962 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,962 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 106.31, PnL: 0.00, Cash: 78189.41, Equity: 88820.60
+2025-04-25 22:28:40,962 - src.execution.order_registry - INFO - Registered order: 84f4b38a-bf4f-4e17-8f90-5518a059edd1
+2025-04-25 22:28:40,962 - src.execution.order_manager - INFO - Emitting order event: 84f4b38a-bf4f-4e17-8f90-5518a059edd1
+2025-04-25 22:28:40,962 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 83 for AAPL (value limit)
+2025-04-25 22:28:40,962 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 83 AAPL @ 106.31
+2025-04-25 22:28:40,962 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,962 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,962 - src.risk.portfolio.portfolio - INFO - Fill: BUY 83 AAPL @ 106.31, PnL: 0.00, Cash: 69356.69, Equity: 88811.78
+2025-04-25 22:28:40,962 - src.execution.order_registry - INFO - Registered order: 63665e6d-4286-48f5-bfee-be37f8f59af0
+2025-04-25 22:28:40,962 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 83 AAPL @ 106.31
+2025-04-25 22:28:40,962 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,962 - src.risk.portfolio.portfolio - INFO - Fill: BUY 83 AAPL @ 106.31, PnL: 0.00, Cash: 60523.97, Equity: 88802.95
+2025-04-25 22:28:40,962 - src.risk.managers.simple - INFO - Created order: BUY 83 AAPL @ 106.21
+2025-04-25 22:28:40,962 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 83 for AAPL (value limit)
+2025-04-25 22:28:40,962 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 83 for AAPL (value limit)
+2025-04-25 22:28:40,962 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 83 for AAPL (value limit)
+2025-04-25 22:28:40,962 - src.strategy.implementations.ma_crossover - INFO - Signal #7 emitted for AAPL: 1
+2025-04-25 22:28:40,962 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MSFT: fast MA (199.72) crossed above slow MA (197.09), crossover: 1.3371%
+2025-04-25 22:28:40,962 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 MSFT @ 206.83
+2025-04-25 22:28:40,962 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,962 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,962 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 MSFT @ 206.83, PnL: 0.00, Cash: 39820.00, Equity: 88782.27
+2025-04-25 22:28:40,962 - src.execution.order_registry - INFO - Registered order: 1fa81ca0-f906-49ca-85ca-aef85f57f3a9
+2025-04-25 22:28:40,962 - src.execution.order_manager - INFO - Emitting order event: 1fa81ca0-f906-49ca-85ca-aef85f57f3a9
+2025-04-25 22:28:40,962 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 42 for MSFT (value limit)
+2025-04-25 22:28:40,962 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 42 MSFT @ 206.83
+2025-04-25 22:28:40,962 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,962 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,962 - src.risk.portfolio.portfolio - INFO - Fill: BUY 42 MSFT @ 206.83, PnL: 0.00, Cash: 31124.33, Equity: 88773.58
+2025-04-25 22:28:40,962 - src.execution.order_registry - INFO - Registered order: cbce1af5-83de-4482-b9fb-d30657ded64f
+2025-04-25 22:28:40,962 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 42 MSFT @ 206.83
+2025-04-25 22:28:40,963 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,963 - src.risk.portfolio.portfolio - INFO - Fill: BUY 42 MSFT @ 206.83, PnL: 0.00, Cash: 22428.66, Equity: 88764.90
+2025-04-25 22:28:40,963 - src.risk.managers.simple - INFO - Created order: BUY 42 MSFT @ 206.63
+2025-04-25 22:28:40,963 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 42 for MSFT (value limit)
+2025-04-25 22:28:40,963 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 42 for MSFT (value limit)
+2025-04-25 22:28:40,963 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 42 for MSFT (value limit)
+2025-04-25 22:28:40,963 - src.strategy.implementations.ma_crossover - INFO - Signal #8 emitted for MSFT: 1
+2025-04-25 22:28:40,963 - src.strategy.implementations.ma_crossover - INFO - SELL signal for GOOG: fast MA (1157.51) crossed below slow MA (1158.20), crossover: 0.0592%
+2025-04-25 22:28:40,963 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 GOOG @ 1149.61
+2025-04-25 22:28:40,963 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,963 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 100, rejecting
+2025-04-25 22:28:40,963 - src.execution.order_registry - INFO - Registered order: 13eaae7c-3d34-4c7a-993c-3771979d377c
+2025-04-25 22:28:40,963 - src.execution.order_manager - INFO - Emitting order event: 13eaae7c-3d34-4c7a-993c-3771979d377c
+2025-04-25 22:28:40,963 - src.strategy.implementations.ma_crossover - INFO - Signal #9 emitted for GOOG: -1
+2025-04-25 22:28:40,963 - src.strategy.implementations.ma_crossover - INFO - SELL signal for AAPL: fast MA (94.81) crossed below slow MA (95.99), crossover: 1.2374%
+2025-04-25 22:28:40,963 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 83.54
+2025-04-25 22:28:40,963 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,963 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -2276.84
+2025-04-25 22:28:40,963 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 83.54, PnL: -2276.84, Cash: 30774.67, Equity: 79484.07
+2025-04-25 22:28:40,963 - src.execution.order_registry - INFO - Registered order: 8753453f-8e09-412e-82d5-f80d88e23471
+2025-04-25 22:28:40,963 - src.execution.order_manager - INFO - Emitting order event: 8753453f-8e09-412e-82d5-f80d88e23471
+2025-04-25 22:28:40,963 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 83.54
+2025-04-25 22:28:40,963 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,963 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -2276.84
+2025-04-25 22:28:40,963 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 83.54, PnL: -2276.84, Cash: 39120.67, Equity: 79475.71
+2025-04-25 22:28:40,963 - src.execution.order_registry - INFO - Registered order: e532b508-4a8a-4b76-9612-705630b56003
+2025-04-25 22:28:40,963 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 83.54
+2025-04-25 22:28:40,963 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 66
+2025-04-25 22:28:40,963 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -1502.71
+2025-04-25 22:28:40,963 - src.risk.portfolio.portfolio - INFO - Fill: SELL 66 AAPL @ 83.54, PnL: -1502.71, Cash: 44626.19, Equity: 79467.36
+2025-04-25 22:28:40,963 - src.risk.managers.simple - INFO - Created order: SELL 100 AAPL @ 83.63
+2025-04-25 22:28:40,963 - src.strategy.implementations.ma_crossover - INFO - Signal #10 emitted for AAPL: -1
+2025-04-25 22:28:40,964 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MSFT: fast MA (195.22) crossed below slow MA (196.30), crossover: 0.5459%
+2025-04-25 22:28:40,964 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 MSFT @ 183.98
+2025-04-25 22:28:40,964 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,964 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -2285.44
+2025-04-25 22:28:40,964 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 MSFT @ 183.98, PnL: -2285.44, Cash: 63005.65, Equity: 78459.84
+2025-04-25 22:28:40,964 - src.execution.order_registry - INFO - Registered order: 826c0ba3-7b73-4a58-a4fd-eec96679a02e
+2025-04-25 22:28:40,964 - src.execution.order_manager - INFO - Emitting order event: 826c0ba3-7b73-4a58-a4fd-eec96679a02e
+2025-04-25 22:28:40,964 - src.risk.managers.simple - INFO - Reducing SELL size from 100 to 84 for MSFT
+2025-04-25 22:28:40,964 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 84 MSFT @ 183.98
+2025-04-25 22:28:40,964 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,964 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -1919.77
+2025-04-25 22:28:40,964 - src.risk.portfolio.portfolio - INFO - Fill: SELL 84 MSFT @ 183.98, PnL: -1919.77, Cash: 78444.39, Equity: 78444.39
+2025-04-25 22:28:40,964 - src.execution.order_registry - INFO - Registered order: 675b3dd4-eb36-4424-8ea8-8b4c37352143
+2025-04-25 22:28:40,964 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 84 MSFT @ 183.98
+2025-04-25 22:28:40,964 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 84, rejecting
+2025-04-25 22:28:40,964 - src.risk.managers.simple - INFO - Created order: SELL 84 MSFT @ 184.16
+2025-04-25 22:28:40,964 - src.strategy.implementations.ma_crossover - INFO - Signal #11 emitted for MSFT: -1
+2025-04-25 22:28:40,964 - src.strategy.implementations.ma_crossover - INFO - BUY signal for AAPL: fast MA (99.04) crossed above slow MA (94.54), crossover: 4.7529%
+2025-04-25 22:28:40,964 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 AAPL @ 117.50
+2025-04-25 22:28:40,964 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,964 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,964 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 117.50, PnL: 0.00, Cash: 66682.19, Equity: 78432.64
+2025-04-25 22:28:40,964 - src.execution.order_registry - INFO - Registered order: 92e10e1e-1440-4158-a347-a87997175cec
+2025-04-25 22:28:40,964 - src.execution.order_manager - INFO - Emitting order event: 92e10e1e-1440-4158-a347-a87997175cec
+2025-04-25 22:28:40,964 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 66 for AAPL (value limit)
+2025-04-25 22:28:40,964 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 66 AAPL @ 117.50
+2025-04-25 22:28:40,964 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,964 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,964 - src.risk.portfolio.portfolio - INFO - Fill: BUY 66 AAPL @ 117.50, PnL: 0.00, Cash: 58919.14, Equity: 78424.88
+2025-04-25 22:28:40,964 - src.execution.order_registry - INFO - Registered order: 132ddaa6-3db2-47d6-8e07-73a316cd4c7d
+2025-04-25 22:28:40,964 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 66 AAPL @ 117.50
+2025-04-25 22:28:40,964 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,965 - src.risk.portfolio.portfolio - INFO - Fill: BUY 66 AAPL @ 117.50, PnL: 0.00, Cash: 51156.09, Equity: 78417.13
+2025-04-25 22:28:40,965 - src.risk.managers.simple - INFO - Created order: BUY 66 AAPL @ 117.39
+2025-04-25 22:28:40,965 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 66 for AAPL (value limit)
+2025-04-25 22:28:40,965 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 66 for AAPL (value limit)
+2025-04-25 22:28:40,965 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 66 for AAPL (value limit)
+2025-04-25 22:28:40,965 - src.strategy.implementations.ma_crossover - INFO - Signal #12 emitted for AAPL: 1
+2025-04-25 22:28:40,965 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MSFT: fast MA (199.09) crossed above slow MA (194.76), crossover: 2.2212%
+2025-04-25 22:28:40,965 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 MSFT @ 218.24
+2025-04-25 22:28:40,965 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,965 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,965 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 MSFT @ 218.24, PnL: 0.00, Cash: 29310.46, Equity: 78368.07
+2025-04-25 22:28:40,965 - src.execution.order_registry - INFO - Registered order: dd5d700b-3d65-4488-b597-799ca1fa8cca
+2025-04-25 22:28:40,965 - src.execution.order_manager - INFO - Emitting order event: dd5d700b-3d65-4488-b597-799ca1fa8cca
+2025-04-25 22:28:40,965 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 35 for MSFT (value limit)
+2025-04-25 22:28:40,965 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 35 MSFT @ 218.24
+2025-04-25 22:28:40,965 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,965 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,965 - src.risk.portfolio.portfolio - INFO - Fill: BUY 35 MSFT @ 218.24, PnL: 0.00, Cash: 21664.49, Equity: 78360.43
+2025-04-25 22:28:40,965 - src.execution.order_registry - INFO - Registered order: ae4a6fd6-4f4e-488d-b074-04ea025db562
+2025-04-25 22:28:40,965 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 35 MSFT @ 218.24
+2025-04-25 22:28:40,965 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,965 - src.risk.portfolio.portfolio - INFO - Fill: BUY 35 MSFT @ 218.24, PnL: 0.00, Cash: 14018.53, Equity: 78352.79
+2025-04-25 22:28:40,965 - src.risk.managers.simple - INFO - Created order: BUY 35 MSFT @ 218.02
+2025-04-25 22:28:40,965 - src.risk.managers.simple - INFO - Cash-limited position size: 61 (original: 100)
+2025-04-25 22:28:40,965 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 35 for MSFT (value limit)
+2025-04-25 22:28:40,965 - src.risk.managers.simple - INFO - Cash-limited position size: 61 (original: 100)
+2025-04-25 22:28:40,965 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 35 for MSFT (value limit)
+2025-04-25 22:28:40,965 - src.risk.managers.simple - INFO - Cash-limited position size: 61 (original: 100)
+2025-04-25 22:28:40,965 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 35 for MSFT (value limit)
+2025-04-25 22:28:40,965 - src.strategy.implementations.ma_crossover - INFO - Signal #13 emitted for MSFT: 1
+2025-04-25 22:28:40,965 - src.strategy.implementations.ma_crossover - INFO - BUY signal for GOOG: fast MA (1155.68) crossed above slow MA (1155.08), crossover: 0.0519%
+2025-04-25 22:28:40,965 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 GOOG @ 1160.64
+2025-04-25 22:28:40,965 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,965 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 100 to 12
+2025-04-25 22:28:40,965 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,965 - src.risk.portfolio.portfolio - INFO - Fill: BUY 12 GOOG @ 1160.64, PnL: 0.00, Cash: -25.23, Equity: 78199.67
+2025-04-25 22:28:40,965 - src.execution.order_registry - INFO - Registered order: 77ea55ac-4e7d-4a9c-a6a9-46dd0540736f
+2025-04-25 22:28:40,965 - src.execution.order_manager - INFO - Emitting order event: 77ea55ac-4e7d-4a9c-a6a9-46dd0540736f
+2025-04-25 22:28:40,965 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,965 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 6 for GOOG (value limit)
+2025-04-25 22:28:40,965 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,965 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 6 for GOOG (value limit)
+2025-04-25 22:28:40,965 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,965 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 6 for GOOG (value limit)
+2025-04-25 22:28:40,965 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,966 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 6 for GOOG (value limit)
+2025-04-25 22:28:40,966 - src.strategy.implementations.ma_crossover - INFO - Signal #14 emitted for GOOG: 1
+2025-04-25 22:28:40,966 - src.strategy.implementations.ma_crossover - INFO - SELL signal for AAPL: fast MA (99.37) crossed below slow MA (99.99), crossover: 0.6200%
+2025-04-25 22:28:40,966 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 106.99
+2025-04-25 22:28:40,966 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,966 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -1051.45
+2025-04-25 22:28:40,966 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 106.99, PnL: -1051.45, Cash: 10663.08, Equity: 71596.92
+2025-04-25 22:28:40,966 - src.execution.order_registry - INFO - Registered order: 5ac1d74d-83b5-4f1d-ad08-f76764653f79
+2025-04-25 22:28:40,966 - src.execution.order_manager - INFO - Emitting order event: 5ac1d74d-83b5-4f1d-ad08-f76764653f79
+2025-04-25 22:28:40,966 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 106.99
+2025-04-25 22:28:40,966 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,966 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -1051.45
+2025-04-25 22:28:40,966 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 106.99, PnL: -1051.45, Cash: 21351.38, Equity: 71586.22
+2025-04-25 22:28:40,966 - src.execution.order_registry - INFO - Registered order: 8a0789ed-677b-4c10-9b19-34d39aa4c1cb
+2025-04-25 22:28:40,966 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 106.99
+2025-04-25 22:28:40,966 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 32
+2025-04-25 22:28:40,966 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -336.46
+2025-04-25 22:28:40,966 - src.risk.portfolio.portfolio - INFO - Fill: SELL 32 AAPL @ 106.99, PnL: -336.46, Cash: 24764.36, Equity: 71575.52
+2025-04-25 22:28:40,966 - src.risk.managers.simple - INFO - Created order: SELL 100 AAPL @ 107.10
+2025-04-25 22:28:40,966 - src.strategy.implementations.ma_crossover - INFO - Signal #15 emitted for AAPL: -1
+2025-04-25 22:28:40,966 - src.strategy.implementations.ma_crossover - INFO - BUY signal for AAPL: fast MA (100.31) crossed above slow MA (100.05), crossover: 0.2640%
+2025-04-25 22:28:40,966 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 AAPL @ 107.20
+2025-04-25 22:28:40,966 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,966 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,966 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 107.20, PnL: 0.00, Cash: 14033.22, Equity: 71564.80
+2025-04-25 22:28:40,966 - src.execution.order_registry - INFO - Registered order: ccdc4d7e-7105-476a-8283-6fb3b1897d98
+2025-04-25 22:28:40,966 - src.execution.order_manager - INFO - Emitting order event: ccdc4d7e-7105-476a-8283-6fb3b1897d98
+2025-04-25 22:28:40,966 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 66 for AAPL (value limit)
+2025-04-25 22:28:40,966 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 66 AAPL @ 107.20
+2025-04-25 22:28:40,966 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,967 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,967 - src.risk.portfolio.portfolio - INFO - Fill: BUY 66 AAPL @ 107.20, PnL: 0.00, Cash: 6950.66, Equity: 71557.73
+2025-04-25 22:28:40,967 - src.execution.order_registry - INFO - Registered order: f3a62475-f778-41a7-853b-fa82ee669dc2
+2025-04-25 22:28:40,967 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 66 AAPL @ 107.20
+2025-04-25 22:28:40,967 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 66 to 64
+2025-04-25 22:28:40,967 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,967 - src.risk.portfolio.portfolio - INFO - Fill: BUY 64 AAPL @ 107.20, PnL: 0.00, Cash: 82.52, Equity: 71550.65
+2025-04-25 22:28:40,967 - src.risk.managers.simple - INFO - Created order: BUY 66 AAPL @ 107.10
+2025-04-25 22:28:40,967 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,967 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 66 for AAPL (value limit)
+2025-04-25 22:28:40,967 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,967 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 66 for AAPL (value limit)
+2025-04-25 22:28:40,967 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,967 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 66 for AAPL (value limit)
+2025-04-25 22:28:40,967 - src.strategy.implementations.ma_crossover - INFO - Signal #16 emitted for AAPL: 1
+2025-04-25 22:28:40,967 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MSFT: fast MA (199.81) crossed below slow MA (200.30), crossover: 0.2422%
+2025-04-25 22:28:40,967 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 MSFT @ 207.53
+2025-04-25 22:28:40,967 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,967 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -1070.89
+2025-04-25 22:28:40,967 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 MSFT @ 207.53, PnL: -1070.89, Cash: 20814.68, Equity: 74118.93
+2025-04-25 22:28:40,967 - src.execution.order_registry - INFO - Registered order: aa58e8c8-3f8e-4ef6-9089-72e9089fd21c
+2025-04-25 22:28:40,967 - src.execution.order_manager - INFO - Emitting order event: aa58e8c8-3f8e-4ef6-9089-72e9089fd21c
+2025-04-25 22:28:40,967 - src.risk.managers.simple - INFO - Reducing SELL size from 100 to 70 for MSFT
+2025-04-25 22:28:40,967 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 70 MSFT @ 207.53
+2025-04-25 22:28:40,967 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,967 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -749.62
+2025-04-25 22:28:40,967 - src.risk.portfolio.portfolio - INFO - Fill: SELL 70 MSFT @ 207.53, PnL: -749.62, Cash: 35327.20, Equity: 74104.40
+2025-04-25 22:28:40,967 - src.execution.order_registry - INFO - Registered order: 89180e74-676e-4e8c-8e1f-b85fe04d4e16
+2025-04-25 22:28:40,967 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 70 MSFT @ 207.53
+2025-04-25 22:28:40,967 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 70, rejecting
+2025-04-25 22:28:40,967 - src.risk.managers.simple - INFO - Created order: SELL 70 MSFT @ 207.74
+2025-04-25 22:28:40,967 - src.strategy.implementations.ma_crossover - INFO - Signal #17 emitted for MSFT: -1
+2025-04-25 22:28:40,967 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MSFT: fast MA (200.69) crossed above slow MA (200.37), crossover: 0.1572%
+2025-04-25 22:28:40,967 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 MSFT @ 207.94
+2025-04-25 22:28:40,967 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,967 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,967 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 MSFT @ 207.94, PnL: 0.00, Cash: 14511.94, Equity: 74083.60
+2025-04-25 22:28:40,967 - src.execution.order_registry - INFO - Registered order: c646a3d2-0d56-437d-8c2f-e5a254a93593
+2025-04-25 22:28:40,967 - src.execution.order_manager - INFO - Emitting order event: c646a3d2-0d56-437d-8c2f-e5a254a93593
+2025-04-25 22:28:40,967 - src.risk.managers.simple - INFO - Cash-limited position size: 66 (original: 100)
+2025-04-25 22:28:40,967 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 35 for MSFT (value limit)
+2025-04-25 22:28:40,967 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 35 MSFT @ 207.94
+2025-04-25 22:28:40,967 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,968 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,968 - src.risk.portfolio.portfolio - INFO - Fill: BUY 35 MSFT @ 207.94, PnL: 0.00, Cash: 7226.60, Equity: 74076.33
+2025-04-25 22:28:40,968 - src.execution.order_registry - INFO - Registered order: 28c5b4a5-0910-4f22-ba58-6ba58c55eff5
+2025-04-25 22:28:40,968 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 35 MSFT @ 207.94
+2025-04-25 22:28:40,968 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 35 to 34
+2025-04-25 22:28:40,968 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,968 - src.risk.portfolio.portfolio - INFO - Fill: BUY 34 MSFT @ 207.94, PnL: 0.00, Cash: 149.20, Equity: 74069.05
+2025-04-25 22:28:40,968 - src.risk.managers.simple - INFO - Created order: BUY 35 MSFT @ 207.74
+2025-04-25 22:28:40,968 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,968 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 35 for MSFT (value limit)
+2025-04-25 22:28:40,968 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,968 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 35 for MSFT (value limit)
+2025-04-25 22:28:40,968 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,968 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 35 for MSFT (value limit)
+2025-04-25 22:28:40,968 - src.strategy.implementations.ma_crossover - INFO - Signal #18 emitted for MSFT: 1
+2025-04-25 22:28:40,968 - src.strategy.implementations.ma_crossover - INFO - SELL signal for AAPL: fast MA (102.45) crossed below slow MA (105.20), crossover: 2.6103%
+2025-04-25 22:28:40,968 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 88.29
+2025-04-25 22:28:40,968 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,968 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -1891.15
+2025-04-25 22:28:40,968 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 88.29, PnL: -1891.15, Cash: 8969.64, Equity: 70269.14
+2025-04-25 22:28:40,968 - src.execution.order_registry - INFO - Registered order: c948cf16-b692-4ea3-838e-7afaca8bb5ed
+2025-04-25 22:28:40,968 - src.execution.order_manager - INFO - Emitting order event: c948cf16-b692-4ea3-838e-7afaca8bb5ed
+2025-04-25 22:28:40,969 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 88.29
+2025-04-25 22:28:40,969 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,969 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -1891.15
+2025-04-25 22:28:40,969 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 88.29, PnL: -1891.15, Cash: 17790.08, Equity: 70260.32
+2025-04-25 22:28:40,969 - src.execution.order_registry - INFO - Registered order: 57e2cbdc-28ed-493f-a418-6171f598089c
+2025-04-25 22:28:40,969 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 88.29
+2025-04-25 22:28:40,969 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 30
+2025-04-25 22:28:40,969 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -567.35
+2025-04-25 22:28:40,969 - src.risk.portfolio.portfolio - INFO - Fill: SELL 30 AAPL @ 88.29, PnL: -567.35, Cash: 20430.04, Equity: 70251.49
+2025-04-25 22:28:40,969 - src.risk.managers.simple - INFO - Created order: SELL 100 AAPL @ 88.38
+2025-04-25 22:28:40,969 - src.strategy.implementations.ma_crossover - INFO - Signal #19 emitted for AAPL: -1
+2025-04-25 22:28:40,969 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MSFT: fast MA (202.62) crossed below slow MA (205.43), crossover: 1.3704%
+2025-04-25 22:28:40,969 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 MSFT @ 188.72
+2025-04-25 22:28:40,969 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,969 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -1922.28
+2025-04-25 22:28:40,969 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 MSFT @ 188.72, PnL: -1922.28, Cash: 39283.35, Equity: 67121.96
+2025-04-25 22:28:40,969 - src.execution.order_registry - INFO - Registered order: 63884772-e6e4-49ad-b26d-adb755120675
+2025-04-25 22:28:40,969 - src.execution.order_manager - INFO - Emitting order event: 63884772-e6e4-49ad-b26d-adb755120675
+2025-04-25 22:28:40,969 - src.risk.managers.simple - INFO - Reducing SELL size from 100 to 69 for MSFT
+2025-04-25 22:28:40,969 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 69 MSFT @ 188.72
+2025-04-25 22:28:40,969 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,969 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -1326.37
+2025-04-25 22:28:40,969 - src.risk.portfolio.portfolio - INFO - Fill: SELL 69 MSFT @ 188.72, PnL: -1326.37, Cash: 52292.14, Equity: 67108.94
+2025-04-25 22:28:40,969 - src.execution.order_registry - INFO - Registered order: b8de87a7-b565-475d-8312-0b1c9220cfa8
+2025-04-25 22:28:40,969 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 69 MSFT @ 188.72
+2025-04-25 22:28:40,969 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 69, rejecting
+2025-04-25 22:28:40,969 - src.risk.managers.simple - INFO - Created order: SELL 69 MSFT @ 188.91
+2025-04-25 22:28:40,969 - src.strategy.implementations.ma_crossover - INFO - Signal #20 emitted for MSFT: -1
+2025-04-25 22:28:40,970 - src.strategy.implementations.ma_crossover - INFO - BUY signal for AAPL: fast MA (103.72) crossed above slow MA (103.45), crossover: 0.2582%
+2025-04-25 22:28:40,970 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 AAPL @ 102.70
+2025-04-25 22:28:40,970 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,970 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,970 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 102.70, PnL: 0.00, Cash: 42011.44, Equity: 67792.08
+2025-04-25 22:28:40,970 - src.execution.order_registry - INFO - Registered order: ac554247-b7ab-4934-bcec-302dde3bf9f4
+2025-04-25 22:28:40,970 - src.execution.order_manager - INFO - Emitting order event: ac554247-b7ab-4934-bcec-302dde3bf9f4
+2025-04-25 22:28:40,970 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 66 for AAPL (value limit)
+2025-04-25 22:28:40,970 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 66 AAPL @ 102.70
+2025-04-25 22:28:40,970 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,970 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,970 - src.risk.portfolio.portfolio - INFO - Fill: BUY 66 AAPL @ 102.70, PnL: 0.00, Cash: 35226.18, Equity: 67785.30
+2025-04-25 22:28:40,970 - src.execution.order_registry - INFO - Registered order: cfc12807-360e-4d1b-bfd4-5005f487233f
+2025-04-25 22:28:40,970 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 66 AAPL @ 102.70
+2025-04-25 22:28:40,970 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,970 - src.risk.portfolio.portfolio - INFO - Fill: BUY 66 AAPL @ 102.70, PnL: 0.00, Cash: 28440.92, Equity: 67778.52
+2025-04-25 22:28:40,970 - src.risk.managers.simple - INFO - Created order: BUY 66 AAPL @ 102.60
+2025-04-25 22:28:40,970 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 66 for AAPL (value limit)
+2025-04-25 22:28:40,970 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 66 for AAPL (value limit)
+2025-04-25 22:28:40,970 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 66 for AAPL (value limit)
+2025-04-25 22:28:40,970 - src.strategy.implementations.ma_crossover - INFO - Signal #21 emitted for AAPL: 1
+2025-04-25 22:28:40,970 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MSFT: fast MA (204.48) crossed above slow MA (203.77), crossover: 0.3476%
+2025-04-25 22:28:40,970 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 MSFT @ 204.54
+2025-04-25 22:28:40,970 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,970 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,970 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 MSFT @ 204.54, PnL: 0.00, Cash: 7966.01, Equity: 67734.26
+2025-04-25 22:28:40,970 - src.execution.order_registry - INFO - Registered order: f8352fde-ed3f-493f-839c-95230ec4ad2b
+2025-04-25 22:28:40,970 - src.execution.order_manager - INFO - Emitting order event: f8352fde-ed3f-493f-839c-95230ec4ad2b
+2025-04-25 22:28:40,970 - src.risk.managers.simple - INFO - Cash-limited position size: 37 (original: 100)
+2025-04-25 22:28:40,970 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 33 for MSFT (value limit)
+2025-04-25 22:28:40,970 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 33 MSFT @ 204.54
+2025-04-25 22:28:40,970 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,970 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,970 - src.risk.portfolio.portfolio - INFO - Fill: BUY 33 MSFT @ 204.54, PnL: 0.00, Cash: 1209.29, Equity: 67727.51
+2025-04-25 22:28:40,970 - src.execution.order_registry - INFO - Registered order: 0004200a-f0cc-4034-8357-389f25cbeac8
+2025-04-25 22:28:40,971 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 33 MSFT @ 204.54
+2025-04-25 22:28:40,971 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient cash: 1209.290956031604 < 6749.9696026058555, rejecting
+2025-04-25 22:28:40,971 - src.risk.managers.simple - INFO - Created order: BUY 33 MSFT @ 204.34
+2025-04-25 22:28:40,971 - src.risk.managers.simple - INFO - Cash-limited position size: 5 (original: 100)
+2025-04-25 22:28:40,971 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 33 for MSFT (value limit)
+2025-04-25 22:28:40,971 - src.risk.managers.simple - INFO - Cash-limited position size: 5 (original: 100)
+2025-04-25 22:28:40,971 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 33 for MSFT (value limit)
+2025-04-25 22:28:40,971 - src.risk.managers.simple - INFO - Cash-limited position size: 5 (original: 100)
+2025-04-25 22:28:40,971 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 33 for MSFT (value limit)
+2025-04-25 22:28:40,971 - src.strategy.implementations.ma_crossover - INFO - Signal #22 emitted for MSFT: 1
+2025-04-25 22:28:40,971 - src.strategy.implementations.ma_crossover - INFO - SELL signal for AAPL: fast MA (101.86) crossed below slow MA (103.35), crossover: 1.4447%
+2025-04-25 22:28:40,971 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 80.85
+2025-04-25 22:28:40,971 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,971 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -2185.81
+2025-04-25 22:28:40,971 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 80.85, PnL: -2185.81, Cash: 9285.83, Equity: 62987.20
+2025-04-25 22:28:40,971 - src.execution.order_registry - INFO - Registered order: 772ba735-1be9-40a6-9250-e26035841254
+2025-04-25 22:28:40,971 - src.execution.order_manager - INFO - Emitting order event: 772ba735-1be9-40a6-9250-e26035841254
+2025-04-25 22:28:40,971 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 80.85
+2025-04-25 22:28:40,971 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,971 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -2185.81
+2025-04-25 22:28:40,971 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 80.85, PnL: -2185.81, Cash: 17362.36, Equity: 62979.11
+2025-04-25 22:28:40,971 - src.execution.order_registry - INFO - Registered order: 66c6ebac-a2d3-4284-b224-005695c9faa3
+2025-04-25 22:28:40,971 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 80.85
+2025-04-25 22:28:40,971 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 32
+2025-04-25 22:28:40,971 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -699.46
+2025-04-25 22:28:40,971 - src.risk.portfolio.portfolio - INFO - Fill: SELL 32 AAPL @ 80.85, PnL: -699.46, Cash: 19941.35, Equity: 62971.03
+2025-04-25 22:28:40,971 - src.risk.managers.simple - INFO - Created order: SELL 100 AAPL @ 80.93
+2025-04-25 22:28:40,971 - src.strategy.implementations.ma_crossover - INFO - Signal #23 emitted for AAPL: -1
+2025-04-25 22:28:40,971 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MSFT: fast MA (203.01) crossed below slow MA (203.85), crossover: 0.4161%
+2025-04-25 22:28:40,971 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 MSFT @ 181.33
+2025-04-25 22:28:40,971 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,971 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -2321.32
+2025-04-25 22:28:40,971 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 MSFT @ 181.33, PnL: -2321.32, Cash: 38056.36, Equity: 59892.72
+2025-04-25 22:28:40,971 - src.execution.order_registry - INFO - Registered order: b322c219-66cb-4343-a047-9dcb23b72ad7
+2025-04-25 22:28:40,971 - src.execution.order_manager - INFO - Emitting order event: b322c219-66cb-4343-a047-9dcb23b72ad7
+2025-04-25 22:28:40,971 - src.risk.managers.simple - INFO - Reducing SELL size from 100 to 33 for MSFT
+2025-04-25 22:28:40,971 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 33 MSFT @ 181.33
+2025-04-25 22:28:40,971 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,972 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -766.03
+2025-04-25 22:28:40,972 - src.risk.portfolio.portfolio - INFO - Fill: SELL 33 MSFT @ 181.33, PnL: -766.03, Cash: 44034.31, Equity: 59886.74
+2025-04-25 22:28:40,972 - src.execution.order_registry - INFO - Registered order: 830a4a34-6e26-4e3e-a02d-1b7d80e02d1e
+2025-04-25 22:28:40,972 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 33 MSFT @ 181.33
+2025-04-25 22:28:40,972 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 33, rejecting
+2025-04-25 22:28:40,972 - src.risk.managers.simple - INFO - Created order: SELL 33 MSFT @ 181.51
+2025-04-25 22:28:40,972 - src.strategy.implementations.ma_crossover - INFO - Signal #24 emitted for MSFT: -1
+2025-04-25 22:28:40,972 - src.strategy.implementations.ma_crossover - INFO - BUY signal for AAPL: fast MA (97.00) crossed above slow MA (96.32), crossover: 0.7064%
+2025-04-25 22:28:40,972 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 AAPL @ 105.76
+2025-04-25 22:28:40,972 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,972 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,972 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 105.76, PnL: 0.00, Cash: 33447.66, Equity: 60627.02
+2025-04-25 22:28:40,972 - src.execution.order_registry - INFO - Registered order: 711da5d4-8282-4858-8f87-40a3947a6248
+2025-04-25 22:28:40,972 - src.execution.order_manager - INFO - Emitting order event: 711da5d4-8282-4858-8f87-40a3947a6248
+2025-04-25 22:28:40,972 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 57 for AAPL (value limit)
+2025-04-25 22:28:40,972 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 57 AAPL @ 105.76
+2025-04-25 22:28:40,972 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,972 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,972 - src.risk.portfolio.portfolio - INFO - Fill: BUY 57 AAPL @ 105.76, PnL: 0.00, Cash: 27413.27, Equity: 60620.99
+2025-04-25 22:28:40,972 - src.execution.order_registry - INFO - Registered order: ec938975-2020-45e7-8deb-3b8ab48c0c70
+2025-04-25 22:28:40,972 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 57 AAPL @ 105.76
+2025-04-25 22:28:40,972 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,972 - src.risk.portfolio.portfolio - INFO - Fill: BUY 57 AAPL @ 105.76, PnL: 0.00, Cash: 21378.88, Equity: 60614.97
+2025-04-25 22:28:40,973 - src.risk.managers.simple - INFO - Created order: BUY 57 AAPL @ 105.66
+2025-04-25 22:28:40,973 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 57 for AAPL (value limit)
+2025-04-25 22:28:40,973 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 57 for AAPL (value limit)
+2025-04-25 22:28:40,973 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 57 for AAPL (value limit)
+2025-04-25 22:28:40,973 - src.strategy.implementations.ma_crossover - INFO - Signal #25 emitted for AAPL: 1
+2025-04-25 22:28:40,973 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MSFT: fast MA (197.48) crossed above slow MA (197.00), crossover: 0.2435%
+2025-04-25 22:28:40,973 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 MSFT @ 205.26
+2025-04-25 22:28:40,973 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,973 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,973 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 MSFT @ 205.26, PnL: 0.00, Cash: 832.39, Equity: 60571.83
+2025-04-25 22:28:40,973 - src.execution.order_registry - INFO - Registered order: 9a130d2e-4639-481e-be1d-b4e4093f55c8
+2025-04-25 22:28:40,973 - src.execution.order_manager - INFO - Emitting order event: 9a130d2e-4639-481e-be1d-b4e4093f55c8
+2025-04-25 22:28:40,973 - src.risk.managers.simple - INFO - Cash-limited position size: 3 (original: 100)
+2025-04-25 22:28:40,973 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 29 for MSFT (value limit)
+2025-04-25 22:28:40,973 - src.risk.managers.simple - INFO - Cash-limited position size: 3 (original: 100)
+2025-04-25 22:28:40,973 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 29 for MSFT (value limit)
+2025-04-25 22:28:40,973 - src.risk.managers.simple - INFO - Cash-limited position size: 3 (original: 100)
+2025-04-25 22:28:40,973 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 29 for MSFT (value limit)
+2025-04-25 22:28:40,973 - src.risk.managers.simple - INFO - Cash-limited position size: 3 (original: 100)
+2025-04-25 22:28:40,973 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 29 for MSFT (value limit)
+2025-04-25 22:28:40,973 - src.strategy.implementations.ma_crossover - INFO - Signal #26 emitted for MSFT: 1
+2025-04-25 22:28:40,973 - src.strategy.implementations.ma_crossover - INFO - SELL signal for AAPL: fast MA (94.03) crossed below slow MA (95.98), crossover: 2.0319%
+2025-04-25 22:28:40,973 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 86.43
+2025-04-25 22:28:40,973 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,973 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -1933.12
+2025-04-25 22:28:40,973 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 86.43, PnL: -1933.12, Cash: 9466.70, Equity: 54937.31
+2025-04-25 22:28:40,973 - src.execution.order_registry - INFO - Registered order: 1e008f78-8af6-4606-a4b3-defef7019b92
+2025-04-25 22:28:40,973 - src.execution.order_manager - INFO - Emitting order event: 1e008f78-8af6-4606-a4b3-defef7019b92
+2025-04-25 22:28:40,974 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 86.43
+2025-04-25 22:28:40,974 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,974 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -1933.12
+2025-04-25 22:28:40,974 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 86.43, PnL: -1933.12, Cash: 18101.01, Equity: 54928.67
+2025-04-25 22:28:40,974 - src.execution.order_registry - INFO - Registered order: 1af10ded-f431-4921-93fd-013e661b1624
+2025-04-25 22:28:40,974 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 86.43
+2025-04-25 22:28:40,974 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 14
+2025-04-25 22:28:40,974 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -270.64
+2025-04-25 22:28:40,974 - src.risk.portfolio.portfolio - INFO - Fill: SELL 14 AAPL @ 86.43, PnL: -270.64, Cash: 19302.38, Equity: 54920.03
+2025-04-25 22:28:40,974 - src.risk.managers.simple - INFO - Created order: SELL 100 AAPL @ 86.52
+2025-04-25 22:28:40,974 - src.strategy.implementations.ma_crossover - INFO - Signal #27 emitted for AAPL: -1
+2025-04-25 22:28:40,974 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MSFT: fast MA (193.91) crossed below slow MA (196.56), crossover: 1.3478%
+2025-04-25 22:28:40,974 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 MSFT @ 187.24
+2025-04-25 22:28:40,974 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,974 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -1802.27
+2025-04-25 22:28:40,974 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 MSFT @ 187.24, PnL: -1802.27, Cash: 38007.35, Equity: 55023.34
+2025-04-25 22:28:40,974 - src.execution.order_registry - INFO - Registered order: bd5ebad9-6b70-4a4a-9c83-8c8e183f546b
+2025-04-25 22:28:40,974 - src.execution.order_manager - INFO - Emitting order event: bd5ebad9-6b70-4a4a-9c83-8c8e183f546b
+2025-04-25 22:28:40,974 - src.strategy.implementations.ma_crossover - INFO - Signal #28 emitted for MSFT: -1
+2025-04-25 22:28:40,974 - src.strategy.implementations.ma_crossover - INFO - BUY signal for AAPL: fast MA (95.94) crossed above slow MA (94.73), crossover: 1.2733%
+2025-04-25 22:28:40,974 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 AAPL @ 110.35
+2025-04-25 22:28:40,974 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,974 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,974 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 110.35, PnL: 0.00, Cash: 26960.85, Equity: 55112.94
+2025-04-25 22:28:40,974 - src.execution.order_registry - INFO - Registered order: aa08042c-e258-4a08-8359-d35c4158c306
+2025-04-25 22:28:40,974 - src.execution.order_manager - INFO - Emitting order event: aa08042c-e258-4a08-8359-d35c4158c306
+2025-04-25 22:28:40,974 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 49 for AAPL (value limit)
+2025-04-25 22:28:40,974 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 49 AAPL @ 110.35
+2025-04-25 22:28:40,975 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,975 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,975 - src.risk.portfolio.portfolio - INFO - Fill: BUY 49 AAPL @ 110.35, PnL: 0.00, Cash: 21548.07, Equity: 55107.53
+2025-04-25 22:28:40,975 - src.execution.order_registry - INFO - Registered order: faa32ed1-03cd-46bc-970a-0166e04befc7
+2025-04-25 22:28:40,975 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 49 AAPL @ 110.35
+2025-04-25 22:28:40,975 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,975 - src.risk.portfolio.portfolio - INFO - Fill: BUY 49 AAPL @ 110.35, PnL: 0.00, Cash: 16135.28, Equity: 55102.12
+2025-04-25 22:28:40,975 - src.risk.managers.simple - INFO - Created order: BUY 49 AAPL @ 110.24
+2025-04-25 22:28:40,975 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 49 for AAPL (value limit)
+2025-04-25 22:28:40,975 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 49 for AAPL (value limit)
+2025-04-25 22:28:40,975 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 49 for AAPL (value limit)
+2025-04-25 22:28:40,975 - src.strategy.implementations.ma_crossover - INFO - Signal #29 emitted for AAPL: 1
+2025-04-25 22:28:40,975 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MSFT: fast MA (195.95) crossed above slow MA (195.04), crossover: 0.4681%
+2025-04-25 22:28:40,975 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 MSFT @ 209.66
+2025-04-25 22:28:40,975 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,975 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 100 to 76
+2025-04-25 22:28:40,975 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,975 - src.risk.portfolio.portfolio - INFO - Fill: BUY 76 MSFT @ 209.66, PnL: 0.00, Cash: 180.45, Equity: 55081.16
+2025-04-25 22:28:40,975 - src.execution.order_registry - INFO - Registered order: 4cbcfec4-01a5-4c37-a812-ddf04f8c111b
+2025-04-25 22:28:40,975 - src.execution.order_manager - INFO - Emitting order event: 4cbcfec4-01a5-4c37-a812-ddf04f8c111b
+2025-04-25 22:28:40,975 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,975 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 26 for MSFT (value limit)
+2025-04-25 22:28:40,975 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,975 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 26 for MSFT (value limit)
+2025-04-25 22:28:40,975 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,975 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 26 for MSFT (value limit)
+2025-04-25 22:28:40,975 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,975 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 26 for MSFT (value limit)
+2025-04-25 22:28:40,975 - src.strategy.implementations.ma_crossover - INFO - Signal #30 emitted for MSFT: 1
+2025-04-25 22:28:40,976 - src.strategy.implementations.ma_crossover - INFO - SELL signal for AAPL: fast MA (98.84) crossed below slow MA (100.26), crossover: 1.4104%
+2025-04-25 22:28:40,976 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 111.01
+2025-04-25 22:28:40,976 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,976 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 65.19
+2025-04-25 22:28:40,976 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 111.01, PnL: 65.19, Cash: 11270.01, Equity: 53963.20
+2025-04-25 22:28:40,976 - src.execution.order_registry - INFO - Registered order: b192f45b-32a9-439e-9fac-9827df6dba13
+2025-04-25 22:28:40,976 - src.execution.order_manager - INFO - Emitting order event: b192f45b-32a9-439e-9fac-9827df6dba13
+2025-04-25 22:28:40,976 - src.risk.managers.simple - INFO - Reducing SELL size from 100 to 98 for AAPL
+2025-04-25 22:28:40,976 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 98 AAPL @ 111.01
+2025-04-25 22:28:40,976 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,976 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 63.89
+2025-04-25 22:28:40,976 - src.risk.portfolio.portfolio - INFO - Fill: SELL 98 AAPL @ 111.01, PnL: 63.89, Cash: 22137.77, Equity: 53952.32
+2025-04-25 22:28:40,976 - src.execution.order_registry - INFO - Registered order: a82c4428-7ba5-47b4-9847-7aa9bae09f7f
+2025-04-25 22:28:40,976 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 98 AAPL @ 111.01
+2025-04-25 22:28:40,976 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 98, rejecting
+2025-04-25 22:28:40,976 - src.risk.managers.simple - INFO - Created order: SELL 98 AAPL @ 111.12
+2025-04-25 22:28:40,976 - src.strategy.implementations.ma_crossover - INFO - Signal #31 emitted for AAPL: -1
+2025-04-25 22:28:40,976 - src.strategy.implementations.ma_crossover - INFO - BUY signal for AAPL: fast MA (101.18) crossed above slow MA (100.62), crossover: 0.5561%
+2025-04-25 22:28:40,976 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 AAPL @ 111.23
+2025-04-25 22:28:40,976 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,976 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,976 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 111.23, PnL: 0.00, Cash: 11003.77, Equity: 53941.20
+2025-04-25 22:28:40,976 - src.execution.order_registry - INFO - Registered order: e79f6eca-bc30-409f-a69c-2395cb0a0e46
+2025-04-25 22:28:40,976 - src.execution.order_manager - INFO - Emitting order event: e79f6eca-bc30-409f-a69c-2395cb0a0e46
+2025-04-25 22:28:40,976 - src.risk.managers.simple - INFO - Cash-limited position size: 94 (original: 100)
+2025-04-25 22:28:40,976 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for AAPL (value limit)
+2025-04-25 22:28:40,976 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 48 AAPL @ 111.23
+2025-04-25 22:28:40,976 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,976 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,976 - src.risk.portfolio.portfolio - INFO - Fill: BUY 48 AAPL @ 111.23, PnL: 0.00, Cash: 5659.45, Equity: 53935.86
+2025-04-25 22:28:40,977 - src.execution.order_registry - INFO - Registered order: 6bdbc159-546f-499e-89b9-eda1bda2d24c
+2025-04-25 22:28:40,977 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 48 AAPL @ 111.23
+2025-04-25 22:28:40,977 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,977 - src.risk.portfolio.portfolio - INFO - Fill: BUY 48 AAPL @ 111.23, PnL: 0.00, Cash: 315.13, Equity: 53930.52
+2025-04-25 22:28:40,977 - src.risk.managers.simple - INFO - Created order: BUY 48 AAPL @ 111.12
+2025-04-25 22:28:40,977 - src.risk.managers.simple - INFO - Cash-limited position size: 2 (original: 100)
+2025-04-25 22:28:40,977 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for AAPL (value limit)
+2025-04-25 22:28:40,977 - src.risk.managers.simple - INFO - Cash-limited position size: 2 (original: 100)
+2025-04-25 22:28:40,977 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for AAPL (value limit)
+2025-04-25 22:28:40,977 - src.risk.managers.simple - INFO - Cash-limited position size: 2 (original: 100)
+2025-04-25 22:28:40,977 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 48 for AAPL (value limit)
+2025-04-25 22:28:40,977 - src.strategy.implementations.ma_crossover - INFO - Signal #32 emitted for AAPL: 1
+2025-04-25 22:28:40,977 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MSFT: fast MA (199.48) crossed below slow MA (200.45), crossover: 0.4848%
+2025-04-25 22:28:40,977 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 MSFT @ 212.73
+2025-04-25 22:28:40,977 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,977 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 76
+2025-04-25 22:28:40,977 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 233.32
+2025-04-25 22:28:40,977 - src.risk.portfolio.portfolio - INFO - Fill: SELL 76 MSFT @ 212.73, PnL: 233.32, Cash: 16461.04, Equity: 55398.03
+2025-04-25 22:28:40,977 - src.execution.order_registry - INFO - Registered order: b12d4ddc-6329-41fa-921f-1fdffc4960ab
+2025-04-25 22:28:40,977 - src.execution.order_manager - INFO - Emitting order event: b12d4ddc-6329-41fa-921f-1fdffc4960ab
+2025-04-25 22:28:40,977 - src.strategy.implementations.ma_crossover - INFO - Signal #33 emitted for MSFT: -1
+2025-04-25 22:28:40,977 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MSFT: fast MA (202.25) crossed above slow MA (200.97), crossover: 0.6340%
+2025-04-25 22:28:40,977 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 MSFT @ 213.15
+2025-04-25 22:28:40,977 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,977 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 100 to 77
+2025-04-25 22:28:40,977 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,977 - src.risk.portfolio.portfolio - INFO - Fill: BUY 77 MSFT @ 213.15, PnL: 0.00, Cash: 27.02, Equity: 55376.72
+2025-04-25 22:28:40,977 - src.execution.order_registry - INFO - Registered order: a8ead0b2-ae37-416d-8ef0-50a713c208c2
+2025-04-25 22:28:40,977 - src.execution.order_manager - INFO - Emitting order event: a8ead0b2-ae37-416d-8ef0-50a713c208c2
+2025-04-25 22:28:40,977 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,977 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 26 for MSFT (value limit)
+2025-04-25 22:28:40,977 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,977 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 26 for MSFT (value limit)
+2025-04-25 22:28:40,977 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,977 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 26 for MSFT (value limit)
+2025-04-25 22:28:40,977 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,977 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 26 for MSFT (value limit)
+2025-04-25 22:28:40,977 - src.strategy.implementations.ma_crossover - INFO - Signal #34 emitted for MSFT: 1
+2025-04-25 22:28:40,978 - src.strategy.implementations.ma_crossover - INFO - SELL signal for GOOG: fast MA (1424.19) crossed below slow MA (1427.64), crossover: 0.2410%
+2025-04-25 22:28:40,978 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 GOOG @ 1404.26
+2025-04-25 22:28:40,978 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,978 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 12
+2025-04-25 22:28:40,978 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 2923.46
+2025-04-25 22:28:40,978 - src.risk.portfolio.portfolio - INFO - Fill: SELL 12 GOOG @ 1404.26, PnL: 2923.46, Cash: 16737.74, Equity: 52635.22
+2025-04-25 22:28:40,978 - src.execution.order_registry - INFO - Registered order: dd2c812b-9922-4a54-8488-f9cef0c7afc4
+2025-04-25 22:28:40,978 - src.execution.order_manager - INFO - Emitting order event: dd2c812b-9922-4a54-8488-f9cef0c7afc4
+2025-04-25 22:28:40,978 - src.strategy.implementations.ma_crossover - INFO - Signal #35 emitted for GOOG: -1
+2025-04-25 22:28:40,978 - src.strategy.implementations.ma_crossover - INFO - SELL signal for AAPL: fast MA (100.84) crossed below slow MA (104.91), crossover: 3.8796%
+2025-04-25 22:28:40,978 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 AAPL @ 88.01
+2025-04-25 22:28:40,978 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,978 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -2322.19
+2025-04-25 22:28:40,978 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 AAPL @ 88.01, PnL: -2322.19, Cash: 25529.63, Equity: 49629.99
+2025-04-25 22:28:40,978 - src.execution.order_registry - INFO - Registered order: 24fcc240-316e-4065-a2de-9a07d4bef76b
+2025-04-25 22:28:40,978 - src.execution.order_manager - INFO - Emitting order event: 24fcc240-316e-4065-a2de-9a07d4bef76b
+2025-04-25 22:28:40,978 - src.risk.managers.simple - INFO - Reducing SELL size from 100 to 96 for AAPL
+2025-04-25 22:28:40,978 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 96 AAPL @ 88.01
+2025-04-25 22:28:40,978 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,978 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -2229.30
+2025-04-25 22:28:40,978 - src.risk.portfolio.portfolio - INFO - Fill: SELL 96 AAPL @ 88.01, PnL: -2229.30, Cash: 33969.85, Equity: 49621.54
+2025-04-25 22:28:40,978 - src.execution.order_registry - INFO - Registered order: 4a2afe41-1a6b-4dc5-ac55-b73c3000c0a6
+2025-04-25 22:28:40,978 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 96 AAPL @ 88.01
+2025-04-25 22:28:40,978 - src.risk.portfolio.portfolio - WARNING - Invalid trade: Insufficient position: 0 < 96, rejecting
+2025-04-25 22:28:40,979 - src.risk.managers.simple - INFO - Created order: SELL 96 AAPL @ 88.10
+2025-04-25 22:28:40,979 - src.strategy.implementations.ma_crossover - INFO - Signal #36 emitted for AAPL: -1
+2025-04-25 22:28:40,979 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MSFT: fast MA (200.27) crossed below slow MA (204.99), crossover: 2.3068%
+2025-04-25 22:28:40,979 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 MSFT @ 187.02
+2025-04-25 22:28:40,979 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,979 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 77
+2025-04-25 22:28:40,979 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -2012.49
+2025-04-25 22:28:40,979 - src.risk.portfolio.portfolio - INFO - Fill: SELL 77 MSFT @ 187.02, PnL: -2012.49, Cash: 48351.36, Equity: 48351.36
+2025-04-25 22:28:40,979 - src.execution.order_registry - INFO - Registered order: aaf2f583-6dc0-48c5-9f19-5dfb3255ea68
+2025-04-25 22:28:40,979 - src.execution.order_manager - INFO - Emitting order event: aaf2f583-6dc0-48c5-9f19-5dfb3255ea68
+2025-04-25 22:28:40,979 - src.strategy.implementations.ma_crossover - INFO - Signal #37 emitted for MSFT: -1
+2025-04-25 22:28:40,979 - src.strategy.implementations.ma_crossover - INFO - BUY signal for GOOG: fast MA (1410.25) crossed above slow MA (1409.30), crossover: 0.0672%
+2025-04-25 22:28:40,979 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 GOOG @ 1410.42
+2025-04-25 22:28:40,979 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,979 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 100 to 34
+2025-04-25 22:28:40,979 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,979 - src.risk.portfolio.portfolio - INFO - Fill: BUY 34 GOOG @ 1410.42, PnL: 0.00, Cash: 256.11, Equity: 48210.32
+2025-04-25 22:28:40,979 - src.execution.order_registry - INFO - Registered order: 02231a60-f5ff-43e5-a02f-30570bd8c171
+2025-04-25 22:28:40,979 - src.execution.order_manager - INFO - Emitting order event: 02231a60-f5ff-43e5-a02f-30570bd8c171
+2025-04-25 22:28:40,979 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,979 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,979 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,979 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,979 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,979 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,979 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,979 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,979 - src.strategy.implementations.ma_crossover - INFO - Signal #38 emitted for GOOG: 1
+2025-04-25 22:28:40,980 - src.strategy.implementations.ma_crossover - INFO - SELL signal for GOOG: fast MA (1628.20) crossed below slow MA (1632.72), crossover: 0.2765%
+2025-04-25 22:28:40,980 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 GOOG @ 1615.00
+2025-04-25 22:28:40,980 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,980 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 34
+2025-04-25 22:28:40,980 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 6955.82
+2025-04-25 22:28:40,980 - src.risk.portfolio.portfolio - INFO - Fill: SELL 34 GOOG @ 1615.00, PnL: 6955.82, Cash: 55004.64, Equity: 55004.64
+2025-04-25 22:28:40,981 - src.execution.order_registry - INFO - Registered order: 70da5644-c714-4dd3-abfa-ba756ade1f60
+2025-04-25 22:28:40,981 - src.execution.order_manager - INFO - Emitting order event: 70da5644-c714-4dd3-abfa-ba756ade1f60
+2025-04-25 22:28:40,981 - src.strategy.implementations.ma_crossover - INFO - Signal #39 emitted for GOOG: -1
+2025-04-25 22:28:40,981 - src.strategy.implementations.ma_crossover - INFO - BUY signal for GOOG: fast MA (1614.54) crossed above slow MA (1612.17), crossover: 0.1469%
+2025-04-25 22:28:40,981 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 GOOG @ 1622.47
+2025-04-25 22:28:40,981 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,981 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 100 to 33
+2025-04-25 22:28:40,981 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,981 - src.risk.portfolio.portfolio - INFO - Fill: BUY 33 GOOG @ 1622.47, PnL: 0.00, Cash: 1300.75, Equity: 54842.39
+2025-04-25 22:28:40,981 - src.execution.order_registry - INFO - Registered order: 0e5cb878-b9ce-4f0f-bfe1-9ff464c3ef5f
+2025-04-25 22:28:40,981 - src.execution.order_manager - INFO - Emitting order event: 0e5cb878-b9ce-4f0f-bfe1-9ff464c3ef5f
+2025-04-25 22:28:40,981 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,981 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,981 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,981 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,981 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,981 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,981 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,981 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,981 - src.strategy.implementations.ma_crossover - INFO - Signal #40 emitted for GOOG: 1
+2025-04-25 22:28:40,982 - src.strategy.implementations.ma_crossover - INFO - SELL signal for GOOG: fast MA (1882.10) crossed below slow MA (1882.69), crossover: 0.0317%
+2025-04-25 22:28:40,982 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 GOOG @ 1879.73
+2025-04-25 22:28:40,982 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,982 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 33
+2025-04-25 22:28:40,982 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 8489.55
+2025-04-25 22:28:40,982 - src.risk.portfolio.portfolio - INFO - Fill: SELL 33 GOOG @ 1879.73, PnL: 8489.55, Cash: 63143.97, Equity: 63143.97
+2025-04-25 22:28:40,982 - src.execution.order_registry - INFO - Registered order: c659d23e-2192-43c6-a6f2-779dc51b9fd3
+2025-04-25 22:28:40,982 - src.execution.order_manager - INFO - Emitting order event: c659d23e-2192-43c6-a6f2-779dc51b9fd3
+2025-04-25 22:28:40,982 - src.strategy.implementations.ma_crossover - INFO - Signal #41 emitted for GOOG: -1
+2025-04-25 22:28:40,982 - src.strategy.implementations.ma_crossover - INFO - BUY signal for GOOG: fast MA (1884.12) crossed above slow MA (1882.93), crossover: 0.0629%
+2025-04-25 22:28:40,983 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 GOOG @ 1889.61
+2025-04-25 22:28:40,983 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,983 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 100 to 33
+2025-04-25 22:28:40,983 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,983 - src.risk.portfolio.portfolio - INFO - Fill: BUY 33 GOOG @ 1889.61, PnL: 0.00, Cash: 597.91, Equity: 62955.01
+2025-04-25 22:28:40,983 - src.execution.order_registry - INFO - Registered order: 9d44a21a-cdc2-4c38-bacb-8c661e550c4b
+2025-04-25 22:28:40,983 - src.execution.order_manager - INFO - Emitting order event: 9d44a21a-cdc2-4c38-bacb-8c661e550c4b
+2025-04-25 22:28:40,983 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,983 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,983 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,983 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,983 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,983 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,983 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,983 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,983 - src.strategy.implementations.ma_crossover - INFO - Signal #42 emitted for GOOG: 1
+2025-04-25 22:28:40,983 - src.execution.backtest.backtest - INFO - Processed 100 iterations
+2025-04-25 22:28:40,984 - src.strategy.implementations.ma_crossover - INFO - SELL signal for GOOG: fast MA (2197.08) crossed below slow MA (2199.59), crossover: 0.1139%
+2025-04-25 22:28:40,984 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 GOOG @ 2190.64
+2025-04-25 22:28:40,984 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,984 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 33
+2025-04-25 22:28:40,984 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 9934.05
+2025-04-25 22:28:40,984 - src.risk.portfolio.portfolio - INFO - Fill: SELL 33 GOOG @ 2190.64, PnL: 9934.05, Cash: 72669.99, Equity: 72669.99
+2025-04-25 22:28:40,984 - src.execution.order_registry - INFO - Registered order: c8dabb64-731c-48c0-81d5-3f8a33731f59
+2025-04-25 22:28:40,984 - src.execution.order_manager - INFO - Emitting order event: c8dabb64-731c-48c0-81d5-3f8a33731f59
+2025-04-25 22:28:40,984 - src.strategy.implementations.ma_crossover - INFO - Signal #43 emitted for GOOG: -1
+2025-04-25 22:28:40,984 - src.strategy.implementations.ma_crossover - INFO - BUY signal for GOOG: fast MA (2197.63) crossed above slow MA (2196.43), crossover: 0.0548%
+2025-04-25 22:28:40,984 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 GOOG @ 2199.51
+2025-04-25 22:28:40,984 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,984 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 100 to 33
+2025-04-25 22:28:40,984 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,984 - src.risk.portfolio.portfolio - INFO - Fill: BUY 33 GOOG @ 2199.51, PnL: 0.00, Cash: -133.87, Equity: 72450.04
+2025-04-25 22:28:40,984 - src.execution.order_registry - INFO - Registered order: caaa6acb-7e30-4302-b3a1-d492fdd34962
+2025-04-25 22:28:40,984 - src.execution.order_manager - INFO - Emitting order event: caaa6acb-7e30-4302-b3a1-d492fdd34962
+2025-04-25 22:28:40,985 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,985 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,985 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,985 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,985 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,985 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,985 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,985 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,985 - src.strategy.implementations.ma_crossover - INFO - Signal #44 emitted for GOOG: 1
+2025-04-25 22:28:40,985 - src.strategy.implementations.ma_crossover - INFO - SELL signal for GOOG: fast MA (2463.59) crossed below slow MA (2466.70), crossover: 0.1263%
+2025-04-25 22:28:40,986 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 GOOG @ 2449.22
+2025-04-25 22:28:40,986 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,986 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 33
+2025-04-25 22:28:40,986 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 8240.36
+2025-04-25 22:28:40,986 - src.risk.portfolio.portfolio - INFO - Fill: SELL 33 GOOG @ 2449.22, PnL: 8240.36, Cash: 80445.48, Equity: 80445.48
+2025-04-25 22:28:40,986 - src.execution.order_registry - INFO - Registered order: f5e8641b-73ed-4f8a-b45b-5bb3487dee6f
+2025-04-25 22:28:40,986 - src.execution.order_manager - INFO - Emitting order event: f5e8641b-73ed-4f8a-b45b-5bb3487dee6f
+2025-04-25 22:28:40,986 - src.strategy.implementations.ma_crossover - INFO - Signal #45 emitted for GOOG: -1
+2025-04-25 22:28:40,986 - src.strategy.implementations.ma_crossover - INFO - BUY signal for GOOG: fast MA (2449.79) crossed above slow MA (2448.14), crossover: 0.0674%
+2025-04-25 22:28:40,986 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 GOOG @ 2457.51
+2025-04-25 22:28:40,986 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,986 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 100 to 32
+2025-04-25 22:28:40,986 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,986 - src.risk.portfolio.portfolio - INFO - Fill: BUY 32 GOOG @ 2457.51, PnL: 0.00, Cash: 1559.53, Equity: 80199.73
+2025-04-25 22:28:40,986 - src.execution.order_registry - INFO - Registered order: 5205bdcd-d40f-40e1-bd6b-c4cdb105c1ec
+2025-04-25 22:28:40,986 - src.execution.order_manager - INFO - Emitting order event: 5205bdcd-d40f-40e1-bd6b-c4cdb105c1ec
+2025-04-25 22:28:40,986 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,986 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,986 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,986 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,986 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,986 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,986 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,986 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,986 - src.strategy.implementations.ma_crossover - INFO - Signal #46 emitted for GOOG: 1
+2025-04-25 22:28:40,987 - src.strategy.implementations.ma_crossover - INFO - SELL signal for GOOG: fast MA (2669.72) crossed below slow MA (2671.99), crossover: 0.0851%
+2025-04-25 22:28:40,987 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 GOOG @ 2663.08
+2025-04-25 22:28:40,987 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,987 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 32
+2025-04-25 22:28:40,987 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 6578.41
+2025-04-25 22:28:40,987 - src.risk.portfolio.portfolio - INFO - Fill: SELL 32 GOOG @ 2663.08, PnL: 6578.41, Cash: 86511.83, Equity: 86511.83
+2025-04-25 22:28:40,987 - src.execution.order_registry - INFO - Registered order: 18883a6d-dfc2-4c64-8c64-c110b1437f59
+2025-04-25 22:28:40,987 - src.execution.order_manager - INFO - Emitting order event: 18883a6d-dfc2-4c64-8c64-c110b1437f59
+2025-04-25 22:28:40,987 - src.strategy.implementations.ma_crossover - INFO - Signal #47 emitted for GOOG: -1
+2025-04-25 22:28:40,988 - src.strategy.implementations.ma_crossover - INFO - BUY signal for GOOG: fast MA (2652.83) crossed above slow MA (2651.76), crossover: 0.0405%
+2025-04-25 22:28:40,988 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 GOOG @ 2664.61
+2025-04-25 22:28:40,988 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,988 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 100 to 32
+2025-04-25 22:28:40,988 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,988 - src.risk.portfolio.portfolio - INFO - Fill: BUY 32 GOOG @ 2664.61, PnL: 0.00, Cash: 977.73, Equity: 86245.37
+2025-04-25 22:28:40,988 - src.execution.order_registry - INFO - Registered order: fdb105cf-7671-4dff-b43a-b9aea714ecbe
+2025-04-25 22:28:40,988 - src.execution.order_manager - INFO - Emitting order event: fdb105cf-7671-4dff-b43a-b9aea714ecbe
+2025-04-25 22:28:40,988 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,988 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,988 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,988 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,988 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,988 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,988 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,988 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,988 - src.strategy.implementations.ma_crossover - INFO - Signal #48 emitted for GOOG: 1
+2025-04-25 22:28:40,989 - src.strategy.implementations.ma_crossover - INFO - SELL signal for GOOG: fast MA (2919.50) crossed below slow MA (2920.89), crossover: 0.0478%
+2025-04-25 22:28:40,989 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 GOOG @ 2911.57
+2025-04-25 22:28:40,989 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,989 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 32
+2025-04-25 22:28:40,989 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 7902.75
+2025-04-25 22:28:40,989 - src.risk.portfolio.portfolio - INFO - Fill: SELL 32 GOOG @ 2911.57, PnL: 7902.75, Cash: 93856.96, Equity: 93856.96
+2025-04-25 22:28:40,989 - src.execution.order_registry - INFO - Registered order: 7857238c-6d68-4d16-b007-2131524d241b
+2025-04-25 22:28:40,989 - src.execution.order_manager - INFO - Emitting order event: 7857238c-6d68-4d16-b007-2131524d241b
+2025-04-25 22:28:40,989 - src.strategy.implementations.ma_crossover - INFO - Signal #49 emitted for GOOG: -1
+2025-04-25 22:28:40,990 - src.execution.backtest.backtest - INFO - Processed 200 iterations
+2025-04-25 22:28:40,990 - src.strategy.implementations.ma_crossover - INFO - BUY signal for GOOG: fast MA (2922.74) crossed above slow MA (2919.28), crossover: 0.1187%
+2025-04-25 22:28:40,990 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 GOOG @ 2940.21
+2025-04-25 22:28:40,990 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,990 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 100 to 31
+2025-04-25 22:28:40,990 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,990 - src.risk.portfolio.portfolio - INFO - Fill: BUY 31 GOOG @ 2940.21, PnL: 0.00, Cash: 2416.31, Equity: 93562.94
+2025-04-25 22:28:40,990 - src.execution.order_registry - INFO - Registered order: 62b335b4-1b36-4352-a6e4-48811e9f2fea
+2025-04-25 22:28:40,990 - src.execution.order_manager - INFO - Emitting order event: 62b335b4-1b36-4352-a6e4-48811e9f2fea
+2025-04-25 22:28:40,990 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,990 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,990 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,990 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,990 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,990 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,990 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,990 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,990 - src.strategy.implementations.ma_crossover - INFO - Signal #50 emitted for GOOG: 1
+2025-04-25 22:28:40,991 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100065.67005991233 -> 100000
+2025-04-25 22:28:40,991 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100065.67005991233 -> 100000
+2025-04-25 22:28:40,991 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100065.67005991233 -> 100000
+2025-04-25 22:28:40,991 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100267.15324351142 -> 100000
+2025-04-25 22:28:40,991 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100267.15324351142 -> 100000
+2025-04-25 22:28:40,991 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100267.15324351142 -> 100000
+2025-04-25 22:28:40,991 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100631.90205691737 -> 100000
+2025-04-25 22:28:40,991 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100631.90205691737 -> 100000
+2025-04-25 22:28:40,991 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100631.90205691737 -> 100000
+2025-04-25 22:28:40,991 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100687.7611615152 -> 100000
+2025-04-25 22:28:40,991 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100687.7611615152 -> 100000
+2025-04-25 22:28:40,991 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100687.7611615152 -> 100000
+2025-04-25 22:28:40,991 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100422.1365224989 -> 100000
+2025-04-25 22:28:40,991 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100422.1365224989 -> 100000
+2025-04-25 22:28:40,991 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100422.1365224989 -> 100000
+2025-04-25 22:28:40,991 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100262.91591663063 -> 100000
+2025-04-25 22:28:40,992 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100262.91591663063 -> 100000
+2025-04-25 22:28:40,992 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100262.91591663063 -> 100000
+2025-04-25 22:28:40,992 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100355.350409875 -> 100000
+2025-04-25 22:28:40,992 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100355.350409875 -> 100000
+2025-04-25 22:28:40,992 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100355.350409875 -> 100000
+2025-04-25 22:28:40,992 - src.strategy.implementations.ma_crossover - INFO - SELL signal for GOOG: fast MA (3236.51) crossed below slow MA (3236.71), crossover: 0.0062%
+2025-04-25 22:28:40,992 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 GOOG @ 3234.03
+2025-04-25 22:28:40,992 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,992 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 31
+2025-04-25 22:28:40,992 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 9108.36
+2025-04-25 22:28:40,992 - src.risk.portfolio.portfolio - INFO - Fill: SELL 31 GOOG @ 3234.03, PnL: 9108.36, Cash: 102347.90, Equity: 102347.90
+2025-04-25 22:28:40,992 - src.execution.order_registry - INFO - Registered order: 35205881-bc6b-44a5-8048-dd0679d3e57a
+2025-04-25 22:28:40,992 - src.execution.order_manager - INFO - Emitting order event: 35205881-bc6b-44a5-8048-dd0679d3e57a
+2025-04-25 22:28:40,992 - src.strategy.implementations.ma_crossover - INFO - Signal #51 emitted for GOOG: -1
+2025-04-25 22:28:40,992 - src.strategy.implementations.ma_crossover - INFO - BUY signal for GOOG: fast MA (3236.57) crossed above slow MA (3235.64), crossover: 0.0289%
+2025-04-25 22:28:40,992 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 GOOG @ 3242.34
+2025-04-25 22:28:40,992 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,992 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 100 to 31
+2025-04-25 22:28:40,992 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100512.60983394811 -> 100000
+2025-04-25 22:28:40,992 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,992 - src.risk.portfolio.portfolio - INFO - Fill: BUY 31 GOOG @ 3242.34, PnL: 0.00, Cash: 1511.05, Equity: 101511.05
+2025-04-25 22:28:40,992 - src.execution.order_registry - INFO - Registered order: 248fab60-38a1-48bd-9b12-a293dd0b7248
+2025-04-25 22:28:40,992 - src.execution.order_manager - INFO - Emitting order event: 248fab60-38a1-48bd-9b12-a293dd0b7248
+2025-04-25 22:28:40,992 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,992 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,992 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,992 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,992 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,992 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,992 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,992 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 3 for GOOG (value limit)
+2025-04-25 22:28:40,992 - src.strategy.implementations.ma_crossover - INFO - Signal #52 emitted for GOOG: 1
+2025-04-25 22:28:40,992 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100412.19763631182 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100412.19763631182 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100663.31082710311 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100663.31082710311 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 100663.31082710311 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 101124.48842184935 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 101124.48842184935 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 101124.48842184935 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 101086.45581630811 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 101086.45581630811 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 101086.45581630811 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 101879.17931735748 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 101879.17931735748 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 101879.17931735748 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 102629.02951258987 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 102629.02951258987 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 102629.02951258987 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 103472.58614212634 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 103472.58614212634 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 103472.58614212634 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 103946.36567229858 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 103946.36567229858 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 103946.36567229858 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 104489.13433056351 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 104489.13433056351 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 104489.13433056351 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 105628.92009693652 -> 100000
+2025-04-25 22:28:40,993 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 105628.92009693652 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 105628.92009693652 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 106156.86293361503 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 106156.86293361503 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 106156.86293361503 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 106738.69849678331 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 106738.69849678331 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 106738.69849678331 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 107417.94430876494 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 107417.94430876494 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 107417.94430876494 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 107984.38265542881 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 107984.38265542881 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 107984.38265542881 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108312.12322374887 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108312.12322374887 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108312.12322374887 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108345.33157600222 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108345.33157600222 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108345.33157600222 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108996.14094372236 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108996.14094372236 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108996.14094372236 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 109119.52439961421 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 109119.52439961421 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 109119.52439961421 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108994.89404669365 -> 100000
+2025-04-25 22:28:40,994 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108994.89404669365 -> 100000
+2025-04-25 22:28:40,995 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108994.89404669365 -> 100000
+2025-04-25 22:28:40,995 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108614.1513370408 -> 100000
+2025-04-25 22:28:40,995 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108614.1513370408 -> 100000
+2025-04-25 22:28:40,995 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108614.1513370408 -> 100000
+2025-04-25 22:28:40,995 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108602.04927554516 -> 100000
+2025-04-25 22:28:40,995 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108602.04927554516 -> 100000
+2025-04-25 22:28:40,995 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108602.04927554516 -> 100000
+2025-04-25 22:28:40,995 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108445.80160481075 -> 100000
+2025-04-25 22:28:40,995 - src.strategy.implementations.ma_crossover - INFO - SELL signal for GOOG: fast MA (3502.44) crossed below slow MA (3506.27), crossover: 0.1092%
+2025-04-25 22:28:40,995 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 GOOG @ 3494.75
+2025-04-25 22:28:40,995 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,995 - src.risk.portfolio.portfolio - WARNING - Adjusting SELL quantity from 100 to 31
+2025-04-25 22:28:40,995 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 7824.75
+2025-04-25 22:28:40,995 - src.risk.portfolio.portfolio - INFO - Fill: SELL 31 GOOG @ 3494.75, PnL: 7824.75, Cash: 109498.93, Equity: 109498.93
+2025-04-25 22:28:40,995 - src.execution.order_registry - INFO - Registered order: b8e10a31-b4d2-400b-8e0c-1f4e845575a9
+2025-04-25 22:28:40,995 - src.execution.order_manager - INFO - Emitting order event: b8e10a31-b4d2-400b-8e0c-1f4e845575a9
+2025-04-25 22:28:40,995 - src.strategy.implementations.ma_crossover - INFO - Signal #53 emitted for GOOG: -1
+2025-04-25 22:28:40,995 - src.strategy.implementations.ma_crossover - INFO - BUY signal for GOOG: fast MA (3491.19) crossed above slow MA (3489.67), crossover: 0.0437%
+2025-04-25 22:28:40,996 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 GOOG @ 3501.64
+2025-04-25 22:28:40,996 - src.execution.order_registry - WARNING - Invalid state transition: OrderStatus.CREATED -> OrderStatus.FILLED
+2025-04-25 22:28:40,996 - src.risk.portfolio.portfolio - WARNING - Adjusting BUY quantity from 100 to 31
+2025-04-25 22:28:40,996 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108550.91253785096 -> 100000
+2025-04-25 22:28:40,996 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-25 22:28:40,996 - src.risk.portfolio.portfolio - INFO - Fill: BUY 31 GOOG @ 3501.64, PnL: 0.00, Cash: 597.86, Equity: 100597.86
+2025-04-25 22:28:40,996 - src.execution.order_registry - INFO - Registered order: 8d246177-0862-4d75-8ae8-3303174983ce
+2025-04-25 22:28:40,996 - src.execution.order_manager - INFO - Emitting order event: 8d246177-0862-4d75-8ae8-3303174983ce
+2025-04-25 22:28:40,996 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,996 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 2 for GOOG (value limit)
+2025-04-25 22:28:40,996 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,996 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 2 for GOOG (value limit)
+2025-04-25 22:28:40,996 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,996 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 2 for GOOG (value limit)
+2025-04-25 22:28:40,996 - src.risk.managers.simple - INFO - Cash-limited position size: 0 (original: 100)
+2025-04-25 22:28:40,996 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 2 for GOOG (value limit)
+2025-04-25 22:28:40,996 - src.strategy.implementations.ma_crossover - INFO - Signal #54 emitted for GOOG: 1
+2025-04-25 22:28:40,996 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108442.47006778319 -> 100000
+2025-04-25 22:28:40,996 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108442.47006778319 -> 100000
+2025-04-25 22:28:40,996 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108802.0773619288 -> 100000
+2025-04-25 22:28:40,996 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108802.0773619288 -> 100000
+2025-04-25 22:28:40,996 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 108802.0773619288 -> 100000
+2025-04-25 22:28:40,996 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 109138.99456048342 -> 100000
+2025-04-25 22:28:40,996 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 109138.99456048342 -> 100000
+2025-04-25 22:28:40,996 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 109138.99456048342 -> 100000
+2025-04-25 22:28:40,996 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 109878.72927006791 -> 100000
+2025-04-25 22:28:40,996 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 109878.72927006791 -> 100000
+2025-04-25 22:28:40,996 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 109878.72927006791 -> 100000
+2025-04-25 22:28:40,996 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 110328.59361688892 -> 100000
+2025-04-25 22:28:40,996 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 110328.59361688892 -> 100000
+2025-04-25 22:28:40,996 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 110328.59361688892 -> 100000
+2025-04-25 22:28:40,997 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 110786.27357515186 -> 100000
+2025-04-25 22:28:40,997 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 110786.27357515186 -> 100000
+2025-04-25 22:28:40,997 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for GOOG: 110786.27357515186 -> 100000
+2025-04-25 22:28:40,997 - src.execution.backtest.backtest - INFO - Backtest completed after 261 iterations
+2025-04-25 22:28:40,998 - src.execution.backtest.backtest - INFO - Trade stats: 95 trades, 12 wins, 32 losses
+2025-04-25 22:28:40,998 - src.execution.backtest.backtest - INFO - PnL sum: 14502.01
+2025-04-25 22:28:40,998 - src.execution.backtest.backtest - INFO - Min PnL: -2335.55, Max PnL: 9934.05
+2025-04-25 22:28:41,014 - src.execution.backtest.backtest - INFO - Backtest complete
+2025-04-25 22:28:41,014 - ADMF-Trader - INFO - Processing results...
+2025-04-25 22:28:41,014 - ADMF-Trader - INFO - Trades executed: 95
+2025-04-25 22:28:41,014 - ADMF-Trader - INFO - Initial equity: $100000.00
+2025-04-25 22:28:41,014 - ADMF-Trader - INFO - Final equity: $100597.86
+2025-04-25 22:28:41,014 - ADMF-Trader - INFO - Total return: 0.60%
+2025-04-25 22:28:41,017 - ADMF-Trader - INFO - Saved equity curve to './results/equity_curve_20250425_222841.csv'
+2025-04-25 22:28:41,017 - ADMF-Trader - INFO - Saved detailed report to './results/backtest_report_20250425_222841.txt'

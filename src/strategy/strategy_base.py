@@ -104,3 +104,11 @@ class Strategy(Component):
             space['components'] = component_spaces
             
         return space
+
+    def reset(self):
+        """Reset strategy state."""
+        # Default implementation - clear internal state
+        self.data = {symbol: [] for symbol in self.symbols}
+        # Child classes should override this
+        import logging
+        logging.getLogger(__name__).info(f"Strategy {self.name} reset")
