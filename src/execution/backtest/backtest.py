@@ -42,6 +42,7 @@ class BacktestCoordinator:
         self.risk_manager = None
         self.broker = None
         self.order_manager = None
+        self.order_registry = None
         self.strategy = None
         self.calculator = None
         self.report_generator = None
@@ -96,21 +97,28 @@ class BacktestCoordinator:
             else:
                 logger.error("No risk manager available")
                 return False
-            
-            # Create order manager
-            if self.container and self.container.has('order_manager'):
-                self.order_manager = self.container.get('order_manager')
+                
+            # Create order registry (if available)
+            if self.container and self.container.has('order_registry'):
+                self.order_registry = self.container.get('order_registry')
             else:
-                from src.execution.order_manager import OrderManager
-                self.order_manager = OrderManager(self.event_bus, self.broker)
-
+                from src.execution.order_registry import OrderRegistry
+                self.order_registry = OrderRegistry(self.event_bus)
+            
             # Create broker
             if self.container and self.container.has('broker'):
                 self.broker = self.container.get('broker')
             else:
                 from src.execution.broker.broker_simulator import SimulatedBroker
-                self.broker = SimulatedBroker(self.event_bus)
+                self.broker = SimulatedBroker(self.event_bus, self.order_registry)
                 
+            # Create order manager
+            if self.container and self.container.has('order_manager'):
+                self.order_manager = self.container.get('order_manager')
+            else:
+                from src.execution.order_manager import OrderManager
+                self.order_manager = OrderManager(self.event_bus, self.broker, self.order_registry)
+            
             # Create strategy
             if self.container and self.container.has('strategy'):
                 self.strategy = self.container.get('strategy')
@@ -134,24 +142,37 @@ class BacktestCoordinator:
             self.data_handler.set_event_bus(self.event_bus)
             self.portfolio.set_event_bus(self.event_bus)
             self.risk_manager.set_event_bus(self.event_bus)
+            self.order_registry.set_event_bus(self.event_bus)
             self.broker.set_event_bus(self.event_bus)
             self.order_manager.set_event_bus(self.event_bus)
             
             # Set dependencies
             self.risk_manager.portfolio_manager = self.portfolio
-            self.order_manager.broker = self.broker
+            self.broker.set_order_registry(self.order_registry)
+            self.order_manager.set_broker(self.broker)
+            self.order_manager.set_order_registry(self.order_registry)
             
-            # Register components with event manager in the critical corrected order
-            # 1. First register the order manager (so it sees orders before broker processes them)
-            self.event_manager.register_component('order_manager', self.order_manager, [EventType.ORDER, EventType.FILL])
-            # 2. Then register broker (which will process orders)
-            self.event_manager.register_component('broker', self.broker, [EventType.ORDER])
-            # 3. Then register portfolio manager (to track fills)
-            self.event_manager.register_component('portfolio', self.portfolio, [EventType.FILL])
-            # 4. Now register the remaining components
+            # Register components with event manager in the correct order for event flow
+            # 1. Data handler (emits bars)
             self.event_manager.register_component('data_handler', self.data_handler, [EventType.BAR])
+            
+            # 2. Strategy (processes bars and emits signals)
             self.event_manager.register_component('strategy', self.strategy, [EventType.BAR])
+            
+            # 3. Risk manager (processes signals and emits orders)
             self.event_manager.register_component('risk_manager', self.risk_manager, [EventType.SIGNAL])
+            
+            # 4. Order registry (tracks all orders)
+            self.event_manager.register_component('order_registry', self.order_registry, [EventType.ORDER, EventType.FILL])
+            
+            # 5. Broker (processes orders from registry and emits fills)
+            self.event_manager.register_component('broker', self.broker, [EventType.ORDER, EventType.PORTFOLIO])
+            
+            # 6. Order manager (processes fills and updates local order state)
+            self.event_manager.register_component('order_manager', self.order_manager, [EventType.FILL, EventType.PORTFOLIO])
+            
+            # 7. Portfolio (processes fills and updates portfolio state)
+            self.event_manager.register_component('portfolio', self.portfolio, [EventType.FILL, EventType.BAR])
             
             logger.info("Backtest setup complete")
             return True
@@ -187,7 +208,7 @@ class BacktestCoordinator:
             # Handle Config object
             try:
                 backtest_config = self.config.get_section('backtest')
-                symbols = symbols or backtest_config.get_list('symbols')
+                symbols = symbols or backtest_config.get('symbols')
                 start_date = start_date or backtest_config.get('start_date')
                 end_date = end_date or backtest_config.get('end_date')
                 initial_capital = initial_capital or backtest_config.get_float('initial_capital', 100000.0)
@@ -254,6 +275,8 @@ class BacktestCoordinator:
                 self.portfolio.reset()
             if self.risk_manager and hasattr(self.risk_manager, 'reset'):
                 self.risk_manager.reset()
+            if self.order_registry and hasattr(self.order_registry, 'reset'):
+                self.order_registry.reset()
             if self.broker and hasattr(self.broker, 'reset'):
                 self.broker.reset()
             if self.order_manager and hasattr(self.order_manager, 'reset'):
@@ -299,7 +322,7 @@ class BacktestCoordinator:
                     continue_backtest = True
             
             # Log progress periodically
-            if iteration % 100 == 0:
+            if iteration % 1000 == 0:
                 logger.info(f"Processed {iteration} iterations")
         
         logger.info(f"Backtest completed after {iteration} iterations")
@@ -333,17 +356,10 @@ class BacktestCoordinator:
             self.calculator.set_equity_curve(equity_curve)
             self.calculator.set_trades(trades)
 
-            # Calculate metrics - check that calculator has equity curve and trades
-            if trades:
-                print(f"Calculating metrics with {len(trades)} trades")
-            if equity_curve is None or equity_curve.empty:
-                logger.warning("Empty equity curve, metrics will be limited")
-
             # Calculate metrics
             metrics = self.calculator.calculate_all_metrics()
 
             # Generate reports
-            self.report_generator.set_calculator(self.calculator)
             summary_report = self.report_generator.generate_summary_report()
             detailed_report = self.report_generator.generate_detailed_report()
 
@@ -358,7 +374,8 @@ class BacktestCoordinator:
                     'portfolio': self.portfolio.get_stats(),
                     'risk_manager': self.risk_manager.get_stats() if self.risk_manager else {},
                     'broker': self.broker.get_stats() if self.broker else {},
-                    'order_manager': self.order_manager.get_stats() if self.order_manager else {}
+                    'order_manager': self.order_manager.get_stats() if self.order_manager else {},
+                    'order_registry': self.order_registry.get_stats() if self.order_registry else {}
                 }
             }
 

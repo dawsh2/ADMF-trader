@@ -1,0 +1,170 @@
+2025-04-25 22:36:06,526 - Validation - INFO - === Starting Validation Backtest ===
+2025-04-25 22:36:06,526 - Validation - INFO - Creating oscillating data for TEST
+2025-04-25 22:36:06,533 - Validation - INFO - Created test data with 30 bars, saved to validation_data/TEST_1d.csv
+2025-04-25 22:36:06,534 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-04-25 22:36:06,534 - Validation - INFO - Strategy initialized: buy @ 100.0, sell @ 101.0
+2025-04-25 22:36:06,534 - Validation - INFO - Strategy configured: buy @ 100.0, sell @ 101.0
+2025-04-25 22:36:06,534 - src.execution.backtest.backtest - INFO - Backtest setup complete
+2025-04-25 22:36:06,534 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_e3412d55 to initial state with cash: $10000.00
+2025-04-25 22:36:06,534 - src.risk.managers.simple - INFO - Risk manager simple_risk_manager reset
+2025-04-25 22:36:06,534 - src.execution.order_manager - INFO - Reset order manager
+2025-04-25 22:36:06,534 - Validation - INFO - Strategy reset
+2025-04-25 22:36:06,534 - src.execution.backtest.backtest - INFO - Reset all components for backtest
+2025-04-25 22:36:06,534 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['TEST']
+2025-04-25 22:36:06,534 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file validation_data/TEST_1d.csv
+2025-04-25 22:36:06,536 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 30 rows
+2025-04-25 22:36:06,537 - src.data.sources.csv_handler - INFO - Using 'date' column instead of configured 'timestamp'
+2025-04-25 22:36:06,537 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2023-01-01
+2025-04-25 22:36:06,537 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2023-01-01 00:00:00
+2025-04-25 22:36:06,537 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2023-01-01 00:00:00
+2025-04-25 22:36:06,537 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2023-01-30 00:00:00
+2025-04-25 22:36:06,539 - src.data.sources.csv_handler - INFO - CSVDataSource: Set date as index
+2025-04-25 22:36:06,539 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2023-01-01 00:00:00 to 2023-01-30 00:00:00
+2025-04-25 22:36:06,539 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume']
+2025-04-25 22:36:06,539 - src.data.historical_data_handler - INFO - Loaded 30 bars for TEST from 2023-01-01 00:00:00 to 2023-01-30 00:00:00
+2025-04-25 22:36:06,539 - src.execution.backtest.backtest - INFO - Starting backtest
+2025-04-25 22:36:06,539 - Validation - INFO - BUY signal #1 for TEST at 100.00
+2025-04-25 22:36:06,539 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,539 - src.risk.managers.simple - INFO - Created order: BUY 95 TEST @ 100.00
+2025-04-25 22:36:06,539 - src.execution.order_manager - INFO - Emitting order event: ee6e0881-2af7-49fd-ae58-e9d2c8110ab8
+2025-04-25 22:36:06,539 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,539 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,539 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,540 - Validation - INFO - SELL signal #2 for TEST at 101.00
+2025-04-25 22:36:06,540 - src.execution.order_manager - INFO - Emitting order event: 74f25f5d-ad0c-47f9-baff-c3656cf24154
+2025-04-25 22:36:06,540 - Validation - INFO - BUY signal #3 for TEST at 100.00
+2025-04-25 22:36:06,540 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,540 - src.risk.managers.simple - INFO - Created order: BUY 95 TEST @ 100.00
+2025-04-25 22:36:06,540 - src.execution.order_manager - INFO - Emitting order event: 39a58535-4d2a-49e4-b538-0292acd3653a
+2025-04-25 22:36:06,540 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,540 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,540 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,540 - Validation - INFO - SELL signal #4 for TEST at 101.00
+2025-04-25 22:36:06,540 - src.execution.order_manager - INFO - Emitting order event: 9fc6cf29-6f3b-479d-9b3f-86280e1e5ea2
+2025-04-25 22:36:06,540 - Validation - INFO - BUY signal #5 for TEST at 100.00
+2025-04-25 22:36:06,540 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,540 - src.risk.managers.simple - INFO - Created order: BUY 95 TEST @ 100.00
+2025-04-25 22:36:06,540 - src.execution.order_manager - INFO - Emitting order event: 5f5a8481-4681-443b-96f3-99159872bfd9
+2025-04-25 22:36:06,540 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,540 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,540 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,540 - Validation - INFO - SELL signal #6 for TEST at 101.00
+2025-04-25 22:36:06,540 - src.execution.order_manager - INFO - Emitting order event: 03b2457b-2a39-4dc4-9bf3-569e65db4107
+2025-04-25 22:36:06,540 - Validation - INFO - BUY signal #7 for TEST at 100.00
+2025-04-25 22:36:06,540 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,540 - src.risk.managers.simple - INFO - Created order: BUY 95 TEST @ 100.00
+2025-04-25 22:36:06,540 - src.execution.order_manager - INFO - Emitting order event: 5ce8b074-39e0-4577-9dbc-3a6ef9ed7e02
+2025-04-25 22:36:06,540 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,540 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,540 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,540 - Validation - INFO - SELL signal #8 for TEST at 101.00
+2025-04-25 22:36:06,540 - src.execution.order_manager - INFO - Emitting order event: 6dcd0bf3-f040-4b90-bdb7-d1ae2ff326df
+2025-04-25 22:36:06,540 - Validation - INFO - BUY signal #9 for TEST at 100.00
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Created order: BUY 95 TEST @ 100.00
+2025-04-25 22:36:06,541 - src.execution.order_manager - INFO - Emitting order event: fcb16c41-cb1b-43e6-8f58-8d84c8453cd7
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,541 - Validation - INFO - SELL signal #10 for TEST at 101.00
+2025-04-25 22:36:06,541 - src.execution.order_manager - INFO - Emitting order event: 26fc4bb3-c76f-4834-9ed4-b3e84430272d
+2025-04-25 22:36:06,541 - Validation - INFO - BUY signal #11 for TEST at 100.00
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Created order: BUY 95 TEST @ 100.00
+2025-04-25 22:36:06,541 - src.execution.order_manager - INFO - Emitting order event: 69b85aaf-65d8-41bf-8a12-043287a01235
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,541 - Validation - INFO - SELL signal #12 for TEST at 101.00
+2025-04-25 22:36:06,541 - src.execution.order_manager - INFO - Emitting order event: 6435a11e-2566-4d76-b0bc-07c53b933585
+2025-04-25 22:36:06,541 - Validation - INFO - BUY signal #13 for TEST at 100.00
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Created order: BUY 95 TEST @ 100.00
+2025-04-25 22:36:06,541 - src.execution.order_manager - INFO - Emitting order event: 21ad3f41-fe72-4900-8d73-6672649e0ef3
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,541 - Validation - INFO - SELL signal #14 for TEST at 101.00
+2025-04-25 22:36:06,541 - src.execution.order_manager - INFO - Emitting order event: 14d24410-5657-49fd-901b-a198c143f285
+2025-04-25 22:36:06,541 - Validation - INFO - BUY signal #15 for TEST at 100.00
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Created order: BUY 95 TEST @ 100.00
+2025-04-25 22:36:06,541 - src.execution.order_manager - INFO - Emitting order event: 692c9407-348d-402a-834f-6902db2daa92
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,541 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,542 - Validation - INFO - SELL signal #16 for TEST at 101.00
+2025-04-25 22:36:06,542 - src.execution.order_manager - INFO - Emitting order event: 55a1f4d9-aa0e-4bcb-a403-1c1c59eabd05
+2025-04-25 22:36:06,542 - Validation - INFO - BUY signal #17 for TEST at 100.00
+2025-04-25 22:36:06,542 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,542 - src.risk.managers.simple - INFO - Created order: BUY 95 TEST @ 100.00
+2025-04-25 22:36:06,542 - src.execution.order_manager - INFO - Emitting order event: 6a49cc40-6911-4319-88a8-b56d767c3784
+2025-04-25 22:36:06,542 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,542 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,542 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,542 - Validation - INFO - SELL signal #18 for TEST at 101.00
+2025-04-25 22:36:06,542 - src.execution.order_manager - INFO - Emitting order event: 6be8512f-654d-4df1-b9a2-fcafbcf259de
+2025-04-25 22:36:06,542 - Validation - INFO - BUY signal #19 for TEST at 100.00
+2025-04-25 22:36:06,542 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,542 - src.risk.managers.simple - INFO - Created order: BUY 95 TEST @ 100.00
+2025-04-25 22:36:06,542 - src.execution.order_manager - INFO - Emitting order event: 43caffc0-d5b9-4af4-af8f-01494b53a54e
+2025-04-25 22:36:06,542 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,542 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,542 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,542 - Validation - INFO - SELL signal #20 for TEST at 101.00
+2025-04-25 22:36:06,542 - src.execution.order_manager - INFO - Emitting order event: 2c275750-9544-48c9-a322-4fb87512a799
+2025-04-25 22:36:06,542 - Validation - INFO - BUY signal #21 for TEST at 100.00
+2025-04-25 22:36:06,542 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,542 - src.risk.managers.simple - INFO - Created order: BUY 95 TEST @ 100.00
+2025-04-25 22:36:06,542 - src.execution.order_manager - INFO - Emitting order event: 82773f73-34be-4c13-a723-5e2087bf0b7d
+2025-04-25 22:36:06,542 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,542 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,542 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,542 - Validation - INFO - SELL signal #22 for TEST at 101.00
+2025-04-25 22:36:06,542 - src.execution.order_manager - INFO - Emitting order event: 10cf0423-5797-42c2-aa5c-ae0056233603
+2025-04-25 22:36:06,542 - Validation - INFO - BUY signal #23 for TEST at 100.00
+2025-04-25 22:36:06,542 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,542 - src.risk.managers.simple - INFO - Created order: BUY 95 TEST @ 100.00
+2025-04-25 22:36:06,542 - src.execution.order_manager - INFO - Emitting order event: af6ee2ff-1c64-4c2a-ba01-718b699c6aa9
+2025-04-25 22:36:06,543 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,543 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,543 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,543 - Validation - INFO - SELL signal #24 for TEST at 101.00
+2025-04-25 22:36:06,543 - src.execution.order_manager - INFO - Emitting order event: 6b854cc0-14f9-48c5-ac99-db7289728e50
+2025-04-25 22:36:06,543 - Validation - INFO - BUY signal #25 for TEST at 100.00
+2025-04-25 22:36:06,543 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,543 - src.risk.managers.simple - INFO - Created order: BUY 95 TEST @ 100.00
+2025-04-25 22:36:06,543 - src.execution.order_manager - INFO - Emitting order event: d2fbfc79-3d73-484c-a893-cfaff538843a
+2025-04-25 22:36:06,543 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,543 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,543 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,543 - Validation - INFO - SELL signal #26 for TEST at 101.00
+2025-04-25 22:36:06,543 - src.execution.order_manager - INFO - Emitting order event: 912e7d59-971f-47be-89a7-56604509efdd
+2025-04-25 22:36:06,543 - Validation - INFO - BUY signal #27 for TEST at 100.00
+2025-04-25 22:36:06,543 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,543 - src.risk.managers.simple - INFO - Created order: BUY 95 TEST @ 100.00
+2025-04-25 22:36:06,543 - src.execution.order_manager - INFO - Emitting order event: be0b2966-57d5-4368-9ab3-3a502ebbe3e8
+2025-04-25 22:36:06,543 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,543 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,543 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,543 - Validation - INFO - SELL signal #28 for TEST at 101.00
+2025-04-25 22:36:06,543 - src.execution.order_manager - INFO - Emitting order event: 4efa6a5f-9f8e-4612-b63b-e0c3b9fe01a6
+2025-04-25 22:36:06,543 - Validation - INFO - BUY signal #29 for TEST at 100.00
+2025-04-25 22:36:06,543 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,543 - src.risk.managers.simple - INFO - Created order: BUY 95 TEST @ 100.00
+2025-04-25 22:36:06,543 - src.execution.order_manager - INFO - Emitting order event: 8e72ff1d-30b8-48fd-84ef-9c66ef624ac1
+2025-04-25 22:36:06,543 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,543 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,543 - src.risk.managers.simple - INFO - Cash-limited position size: 95 (original: 100)
+2025-04-25 22:36:06,544 - Validation - INFO - SELL signal #30 for TEST at 101.00
+2025-04-25 22:36:06,544 - src.execution.order_manager - INFO - Emitting order event: ba9ff3ee-3232-4d62-b796-bcaeb22fe13a
+2025-04-25 22:36:06,544 - src.execution.backtest.backtest - INFO - Backtest completed after 31 iterations
+2025-04-25 22:36:06,551 - src.execution.backtest.backtest - INFO - Backtest complete
+2025-04-25 22:36:06,551 - Validation - INFO - === VALIDATION SUCCESSFUL ===
+2025-04-25 22:36:06,551 - Validation - INFO - Expected Profit: $0.00
+2025-04-25 22:36:06,551 - Validation - INFO - Actual Profit: $0.00
+2025-04-25 22:36:06,551 - Validation - INFO - Difference: $0.00
+2025-04-25 22:36:06,551 - Validation - INFO - Trades Executed: 0
+2025-04-25 22:36:06,551 - Validation - INFO - Complete Cycles: 0
+2025-04-25 22:36:06,551 - Validation - INFO - 
+Trade Details:

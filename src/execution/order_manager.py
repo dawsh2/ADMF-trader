@@ -244,6 +244,7 @@ class OrderManager:
         self.event_bus.register(EventType.SIGNAL, self.on_signal)
         self.event_bus.register(EventType.FILL, self.on_fill)
         self.event_bus.register(EventType.PORTFOLIO, self.on_portfolio_update)
+        self.event_bus.register(EventType.ORDER, self.on_order)  # NEW: Also listen for ORDER events from other components
     
     def configure(self, config):
         """
@@ -287,6 +288,72 @@ class OrderManager:
             order_registry: Order registry instance
         """
         self.order_registry = order_registry
+    
+    def on_order(self, order_event):
+        """
+        Handle order events from other components (like risk manager).
+        This is needed to track orders created by components that don't use create_order.
+        
+        Args:
+            order_event: Order event to track
+        """
+        # Skip if already processed
+        event_id = order_event.get_id()
+        if event_id in self.processed_events:
+            return
+            
+        self.processed_events.add(event_id)
+        
+        # Extract order ID
+        order_id = None
+        if hasattr(order_event, 'data') and isinstance(order_event.data, dict):
+            order_id = order_event.data.get('order_id')
+        
+        if not order_id:
+            logger.debug("Order event has no order_id, cannot track it")
+            return
+        
+        # Check if we're already tracking this order
+        if order_id in self.orders:
+            logger.debug(f"Already tracking order {order_id}")
+            return
+        
+        # If we're using OrderRegistry, check if order exists there
+        if self.order_registry:
+            registry_order = self.order_registry.get_order(order_id)
+            if registry_order:
+                # Add to local tracking
+                self.orders[order_id] = registry_order
+                self.active_orders.add(order_id)
+                logger.debug(f"Added registry order {order_id} to local tracking")
+                return
+        
+        # If not in registry (or no registry), create a placeholder order from event data
+        try:
+            # Extract details from order event
+            symbol = order_event.get_symbol()
+            order_type = order_event.get_order_type()
+            direction = order_event.get_direction()
+            quantity = order_event.get_quantity()
+            price = order_event.get_price()
+            
+            # Create and track new order
+            order = Order(
+                symbol=symbol,
+                order_type=order_type,
+                direction=direction,
+                quantity=quantity,
+                price=price,
+                status=OrderStatus.PENDING,  # Assume it's pending since it's an order event
+                order_id=order_id
+            )
+            
+            self.orders[order_id] = order
+            self.active_orders.add(order_id)
+            logger.debug(f"Added new order {order_id} from event to tracking")
+            
+        except Exception as e:
+            logger.error(f"Error tracking order {order_id} from event: {e}")
     
     def on_signal(self, signal_event):
         """
@@ -365,7 +432,7 @@ class OrderManager:
         if self.order_registry:
             self.order_registry.register_order(order)
         
-        # Also track locally regardless
+        # Always track locally regardless
         self.orders[order_id] = order
         self.active_orders.add(order_id)
         self.stats['orders_created'] += 1
@@ -416,9 +483,17 @@ class OrderManager:
         if not order_id:
             logger.warning(f"Fill event missing order_id: {event_id}")
             return
-            
-        # If using registry, don't do anything else here - registry will handle state updates
-        # Just update local cache if we're tracking this order
+        
+        # Check if we know about this order - if not, check registry
+        if order_id not in self.orders and self.order_registry:
+            registry_order = self.order_registry.get_order(order_id)
+            if registry_order:
+                # Add to our tracking
+                self.orders[order_id] = registry_order
+                self.active_orders.add(order_id)
+                logger.debug(f"Added registry order {order_id} to local tracking during fill")
+        
+        # Now process the fill
         if order_id in self.orders:
             order = self.orders[order_id]
             
@@ -441,7 +516,9 @@ class OrderManager:
                     self.order_history.append(order)
                 self.stats['orders_filled'] += 1
                 
-            logger.debug(f"Updated local order cache for fill: {order_id}")
+            logger.info(f"Updated order with fill: {order}")
+        else:
+            logger.error(f"Order {order_id} not found in order manager")
     
     def on_portfolio_update(self, event):
         """
@@ -582,6 +659,11 @@ class OrderManager:
         if self.order_registry:
             registry_order = self.order_registry.get_order(order_id)
             if registry_order:
+                # Sync with local tracking
+                if order_id not in self.orders:
+                    self.orders[order_id] = registry_order
+                    if registry_order.is_active():
+                        self.active_orders.add(order_id)
                 return registry_order
                 
         # Fall back to local cache
@@ -600,6 +682,13 @@ class OrderManager:
         # Use registry if available
         if self.order_registry:
             active_orders = self.order_registry.get_active_orders()
+            
+            # Sync with our local tracking
+            for order in active_orders:
+                if order.order_id not in self.orders:
+                    self.orders[order.order_id] = order
+                    self.active_orders.add(order.order_id)
+                    
             if symbol:
                 return [order for order in active_orders if order.symbol == symbol]
             return active_orders
@@ -626,6 +715,16 @@ class OrderManager:
         # Use registry if available for completed orders
         if self.order_registry:
             completed = self.order_registry.get_completed_orders()
+            
+            # Sync with our local tracking
+            for order in completed:
+                if order.order_id not in self.orders:
+                    self.orders[order.order_id] = order
+                    if order.order_id in self.active_orders:
+                        self.active_orders.remove(order.order_id)
+                    if order not in self.order_history:
+                        self.order_history.append(order)
+            
             if symbol:
                 completed = [o for o in completed if o.symbol == symbol]
             
@@ -652,7 +751,7 @@ class OrderManager:
     
     def reset(self):
         """Reset order manager state."""
-        # Reset local tracking
+        # Clear local tracking
         self.orders = {}
         self.active_orders = set()
         self.order_history = []
