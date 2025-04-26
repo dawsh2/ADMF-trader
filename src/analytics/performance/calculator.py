@@ -4,15 +4,16 @@ import numpy as np
 from typing import Dict, List, Any, Optional, Callable, Union
 from collections import defaultdict
 
-# Import functional metrics
+# Import functional metrics - assuming we're importing from the improved functional.py
 from ..metrics.functional import (
     total_return, annualized_return, sharpe_ratio, sortino_ratio,
     max_drawdown, calmar_ratio, win_rate, profit_factor,
-    average_trade, drawdown_stats, calculate_all_metrics
+    average_trade, drawdown_stats, calculate_all_metrics,
+    calculate_log_returns, logarithmic_returns_statistics
 )
 
 class PerformanceCalculator:
-    """Performance calculator using functional metrics."""
+    """Performance calculator using log-based functional metrics."""
     
     def __init__(self, equity_curve=None, trades=None):
         """
@@ -32,9 +33,15 @@ class PerformanceCalculator:
             'max_drawdown': max_drawdown,
             'calmar_ratio': calmar_ratio,
             'win_rate': win_rate,
-            'profit_factor': profit_factor
+            'profit_factor': profit_factor,
+            'log_returns_stats': logarithmic_returns_statistics
         }
-        self.metric_params = {}  # Additional parameters for metrics
+        self.metric_params = {
+            # Default parameters for metrics
+            'sharpe_ratio': {'risk_free_rate': 0.0, 'annualization_factor': 252},
+            'sortino_ratio': {'risk_free_rate': 0.0, 'annualization_factor': 252, 'target_return': 0.0},
+            'calmar_ratio': {'years': 3}
+        }
     
     def set_equity_curve(self, equity_curve):
         """Set equity curve."""
@@ -103,7 +110,10 @@ class PerformanceCalculator:
                         value = metric_func(self.equity_curve, self.trades, **params)
                         
                     # Store result
-                    results[metric_name] = value
+                    if isinstance(value, dict):
+                        results.update(value)
+                    else:
+                        results[metric_name] = value
                 except Exception as e:
                     print(f"Error calculating {metric_name}: {e}")
             
@@ -120,60 +130,40 @@ class PerformanceCalculator:
 
     def calculate_all_metrics(self):
         """
-        Calculate all available metrics.
-
+        Calculate all available metrics using log returns.
+        
         Returns:
             dict: All metrics
         """
-        if self.equity_curve is None or self.equity_curve.empty:
+        if self.equity_curve is None or not isinstance(self.equity_curve, pd.DataFrame) or len(self.equity_curve) == 0:
             return {'warning': 'No equity curve data available'}
-
-        metrics = {
-            'total_return': total_return(self.equity_curve, self.trades),
-            'annualized_return': annualized_return(self.equity_curve, self.trades),
-            'sharpe_ratio': sharpe_ratio(self.equity_curve, self.trades),
-            'sortino_ratio': sortino_ratio(self.equity_curve, self.trades),
-            'max_drawdown': max_drawdown(self.equity_curve, self.trades),
-            'calmar_ratio': calmar_ratio(self.equity_curve, self.trades)
-        }
-
-        # Add trade-specific metrics if trades are provided
-        if self.trades:
-            metrics.update({
-                'win_rate': win_rate(self.trades),
-                'profit_factor': profit_factor(self.trades),
-                'trade_count': len(self.trades)
-            })
-
-            # Add average trade metrics
-            metrics.update(average_trade(self.trades))
-
-        # Add drawdown statistics
-        metrics.update(drawdown_stats(self.equity_curve))
-
-        return metrics    
-
-
-    # def calculate_all_metrics(self):
-    #     """
-    #     Calculate all available metrics.
         
-    #     Returns:
-    #         dict: All metrics
-    #     """
-    #     return calculate_all_metrics(self.equity_curve, self.trades)
+        # Use the improved calculate_all_metrics that uses log returns
+        return calculate_all_metrics(self.equity_curve, self.trades)
     
     def get_returns(self):
         """
-        Get return series.
+        Get percentage return series.
         
         Returns:
-            Series: Return series
+            Series: Percentage return series
         """
         if self.equity_curve is None or len(self.equity_curve) == 0:
             return pd.Series()
             
         return self.equity_curve['equity'].pct_change().dropna()
+    
+    def get_log_returns(self):
+        """
+        Get logarithmic return series.
+        
+        Returns:
+            Series: Logarithmic return series
+        """
+        if self.equity_curve is None or len(self.equity_curve) == 0:
+            return pd.Series()
+            
+        return calculate_log_returns(self.equity_curve)
     
     def get_drawdowns(self):
         """
@@ -189,6 +179,43 @@ class PerformanceCalculator:
         drawdown = (running_max - self.equity_curve['equity']) / running_max
         
         return drawdown
+    
+    def analyze_returns(self):
+        """
+        Analyze return characteristics using log returns.
+        
+        Returns:
+            dict: Return statistics
+        """
+        if self.equity_curve is None or len(self.equity_curve) == 0:
+            return {}
+        
+        # Calculate log returns
+        log_returns = calculate_log_returns(self.equity_curve)
+        
+        if len(log_returns) == 0:
+            return {}
+        
+        # Calculate basic statistics
+        stats = {
+            'mean_log_return': log_returns.mean(),
+            'volatility': log_returns.std(),
+            'skewness': log_returns.skew() if hasattr(log_returns, 'skew') else 0.0,
+            'kurtosis': log_returns.kurtosis() if hasattr(log_returns, 'kurtosis') else 0.0,
+            'annualized_return': annualized_return(self.equity_curve)
+        }
+        
+        # Calculate rolling metrics if enough data
+        if len(log_returns) > 20:
+            # Rolling volatility (20-day)
+            rolling_vol = log_returns.rolling(window=20).std() * np.sqrt(252)
+            stats['current_volatility'] = rolling_vol.iloc[-1] if not rolling_vol.empty else stats['volatility']
+            
+            # Rolling Sharpe (20-day)
+            rolling_sharpe = (log_returns.rolling(window=20).mean() * 252) / (log_returns.rolling(window=20).std() * np.sqrt(252))
+            stats['current_sharpe'] = rolling_sharpe.iloc[-1] if not rolling_sharpe.empty else 0.0
+        
+        return stats
     
     def analyze_trades(self):
         """

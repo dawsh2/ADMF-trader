@@ -2,7 +2,7 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Any, List, Optional
 from .components.component_base import Component
-from core.events.event_utils import create_signal_event
+from src.core.events.event_utils import create_signal_event
 
 class Strategy(Component):
     """Base class for all trading strategies."""

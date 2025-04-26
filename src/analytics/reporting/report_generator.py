@@ -1,9 +1,10 @@
 # src/core/analytics/reporting/report_generator.py
 import pandas as pd
+import numpy as np
 from typing import Dict, List, Any, Optional
 
 class ReportGenerator:
-    """Generator for performance reports."""
+    """Generator for performance reports with improved log return metrics."""
     
     def __init__(self, calculator=None):
         """
@@ -41,6 +42,17 @@ class ReportGenerator:
         report.append(f"Total Return: {metrics['total_return']:.2%}")
         report.append(f"Annualized Return: {metrics['annualized_return']:.2%}")
         
+        # Log returns section (new)
+        if 'mean_log_return' in metrics:
+            report.append("\nLog Return Analysis:")
+            report.append(f"Daily Mean Log Return: {metrics['mean_log_return']*100:.4f}%")
+            report.append(f"Annualized Volatility: {metrics['volatility']*np.sqrt(252)*100:.2f}%")
+            # Include skewness and kurtosis if available
+            if 'skewness' in metrics:
+                report.append(f"Skewness: {metrics['skewness']:.2f}")
+            if 'kurtosis' in metrics:
+                report.append(f"Excess Kurtosis: {metrics['kurtosis']:.2f}")
+        
         # Risk metrics section
         report.append("\nRisk Metrics:")
         report.append(f"Sharpe Ratio: {metrics['sharpe_ratio']:.2f}")
@@ -51,7 +63,7 @@ class ReportGenerator:
         # Trade statistics (if available)
         if 'win_rate' in metrics:
             report.append("\nTrade Statistics:")
-            report.append(f"Total Trades: {metrics.get('total_trades', 0)}")
+            report.append(f"Total Trades: {metrics.get('trade_count', 0)}")
             report.append(f"Win Rate: {metrics['win_rate']:.2%}")
             report.append(f"Profit Factor: {metrics['profit_factor']:.2f}")
             report.append(f"Average Trade: {metrics['avg_trade']:.2f}")
@@ -63,7 +75,7 @@ class ReportGenerator:
     
     def generate_detailed_report(self):
         """
-        Generate a detailed performance report.
+        Generate a detailed performance report with log return analysis.
         
         Returns:
             str: Report text
@@ -73,7 +85,7 @@ class ReportGenerator:
         if summary == "No performance data available.":
             return summary
             
-        # Add equity curve statistics
+        # Get equity curve
         equity_curve = self.calculator.equity_curve
         
         # Format detailed report
@@ -87,11 +99,39 @@ class ReportGenerator:
         report.append(f"Starting Equity: {equity_curve['equity'].iloc[0]:.2f}")
         report.append(f"Ending Equity: {equity_curve['equity'].iloc[-1]:.2f}")
         
+        # Advanced return analysis (using log returns)
+        log_returns = self.calculator.get_log_returns()
+        if len(log_returns) > 0:
+            report.append("\nDetailed Return Analysis:")
+            # Calculate compound annual growth rate (CAGR) from log returns
+            total_years = (equity_curve.index[-1] - equity_curve.index[0]).days / 365.0
+            if total_years > 0:
+                total_log_return = np.log(equity_curve['equity'].iloc[-1] / equity_curve['equity'].iloc[0])
+                cagr = np.exp(total_log_return / total_years) - 1
+                report.append(f"CAGR: {cagr:.2%}")
+            
+            # Calculate rolling metrics if enough data
+            if len(log_returns) > 60:  # Require at least 60 data points for meaningful rolling analysis
+                # Calculate 20-day rolling volatility
+                rolling_vol = log_returns.rolling(window=20).std() * np.sqrt(252)
+                recent_vol = rolling_vol.iloc[-20:].mean() if len(rolling_vol) >= 20 else rolling_vol.mean()
+                report.append(f"Recent 20-day Volatility (Annualized): {recent_vol*100:.2f}%")
+                
+                # Calculate 20-day rolling Sharpe ratio
+                rolling_ret = log_returns.rolling(window=20).mean() * 252
+                rolling_sharpe = rolling_ret / rolling_vol
+                recent_sharpe = rolling_sharpe.iloc[-20:].mean() if len(rolling_sharpe) >= 20 else rolling_sharpe.mean()
+                report.append(f"Recent 20-day Sharpe Ratio: {recent_sharpe:.2f}")
+        
         # Monthly returns if enough data
         if len(equity_curve) > 20:  # Arbitrary threshold
             report.append("\nMonthly Returns:")
-            returns = self.calculator.get_returns()
-            monthly_returns = returns.resample('M').apply(lambda x: (1 + x).prod() - 1)
+            # Use log returns for accurate monthly compounding
+            log_returns = self.calculator.get_log_returns()
+            
+            # Group by month and sum log returns, then convert back to simple returns
+            monthly_log_returns = log_returns.resample('M').sum()
+            monthly_returns = np.exp(monthly_log_returns) - 1
             
             # Format monthly returns table
             for date, ret in monthly_returns.items():
@@ -103,6 +143,46 @@ class ReportGenerator:
         report.append(f"Maximum Drawdown: {drawdown_stats['max_drawdown']:.2%}")
         report.append(f"Average Drawdown: {drawdown_stats['avg_drawdown']:.2%}")
         report.append(f"Maximum Drawdown Duration: {drawdown_stats['max_drawdown_duration']} periods")
+        
+        # Add trade analysis if trades are available
+        if self.calculator.trades:
+            report.append("\nTrade Analysis:")
+            trades = self.calculator.trades
+            
+            # Calculate trade holding times if timestamps are available
+            if len(trades) > 0 and 'timestamp' in trades[0]:
+                trade_durations = []
+                for i in range(1, len(trades)):
+                    if trades[i-1]['direction'] != trades[i]['direction']:  # Direction changed, implying open->close
+                        try:
+                            duration = (trades[i]['timestamp'] - trades[i-1]['timestamp']).total_seconds() / (60*60*24)  # Convert to days
+                            trade_durations.append(duration)
+                        except (TypeError, AttributeError):
+                            pass  # Skip if timestamps aren't proper datetime objects
+                
+                if trade_durations:
+                    avg_duration = sum(trade_durations) / len(trade_durations)
+                    report.append(f"Average Trade Duration: {avg_duration:.2f} days")
+            
+            # Trade win streaks
+            win_streak = 0
+            max_win_streak = 0
+            loss_streak = 0
+            max_loss_streak = 0
+            
+            for trade in trades:
+                pnl = trade.get('pnl', 0)
+                if pnl > 0:
+                    win_streak += 1
+                    loss_streak = 0
+                    max_win_streak = max(max_win_streak, win_streak)
+                elif pnl < 0:
+                    loss_streak += 1
+                    win_streak = 0
+                    max_loss_streak = max(max_loss_streak, loss_streak)
+            
+            report.append(f"Maximum Winning Streak: {max_win_streak}")
+            report.append(f"Maximum Losing Streak: {max_loss_streak}")
         
         return "\n".join(report)
     
@@ -116,3 +196,85 @@ class ReportGenerator:
         """
         with open(filename, 'w') as f:
             f.write(report)
+    
+    def generate_log_returns_report(self):
+        """
+        Generate a specialized report focused on log returns analysis.
+        
+        Returns:
+            str: Report text focusing on log returns
+        """
+        if not self.calculator or self.calculator.equity_curve is None:
+            return "No performance data available."
+        
+        # Get log returns
+        log_returns = self.calculator.get_log_returns()
+        
+        if len(log_returns) == 0:
+            return "No return data available for analysis."
+        
+        # Format report
+        report = []
+        report.append("Log Returns Analysis")
+        report.append("=" * 50)
+        
+        # Basic statistics
+        mean_return = log_returns.mean()
+        volatility = log_returns.std()
+        annualized_mean = mean_return * 252
+        annualized_vol = volatility * np.sqrt(252)
+        
+        report.append("\nDaily Log Returns:")
+        report.append(f"Mean: {mean_return*100:.4f}%")
+        report.append(f"Std Dev: {volatility*100:.4f}%")
+        report.append(f"Min: {log_returns.min()*100:.4f}%")
+        report.append(f"Max: {log_returns.max()*100:.4f}%")
+        
+        report.append("\nAnnualized Metrics:")
+        report.append(f"Expected Return: {annualized_mean*100:.2f}%")
+        report.append(f"Volatility: {annualized_vol*100:.2f}%")
+        report.append(f"Sharpe Ratio (0% risk-free): {annualized_mean/annualized_vol:.2f}")
+        
+        # Distribution analysis
+        if hasattr(log_returns, 'skew') and hasattr(log_returns, 'kurtosis'):
+            skewness = log_returns.skew()
+            kurtosis = log_returns.kurtosis()
+            
+            report.append("\nReturn Distribution:")
+            report.append(f"Skewness: {skewness:.4f}")
+            report.append(f"Excess Kurtosis: {kurtosis:.4f}")
+            
+            # Interpret skewness and kurtosis
+            if skewness < -0.5:
+                report.append("The returns show significant negative skew (more extreme negative returns).")
+            elif skewness > 0.5:
+                report.append("The returns show significant positive skew (more extreme positive returns).")
+            else:
+                report.append("The returns show approximately symmetric distribution.")
+                
+            if kurtosis > 3:
+                report.append("The returns show fat tails (more extreme events than a normal distribution).")
+            elif kurtosis < -0.5:
+                report.append("The returns show thin tails (fewer extreme events than a normal distribution).")
+            else:
+                report.append("The return distribution has approximately normal tails.")
+        
+        # Time-based analysis
+        if len(log_returns) > 100:  # Only if we have enough data
+            # Calculate rolling metrics
+            rolling_window = min(20, len(log_returns) // 5)  # Use 20 days or 1/5 of data, whichever is smaller
+            
+            rolling_mean = log_returns.rolling(window=rolling_window).mean()
+            rolling_vol = log_returns.rolling(window=rolling_window).std()
+            
+            # Report recent metrics
+            recent_mean = rolling_mean.iloc[-rolling_window:].mean() if len(rolling_mean) >= rolling_window else rolling_mean.mean()
+            recent_vol = rolling_vol.iloc[-rolling_window:].mean() if len(rolling_vol) >= rolling_window else rolling_vol.mean()
+            
+            report.append(f"\nRecent {rolling_window}-day Metrics:")
+            report.append(f"Mean Return: {recent_mean*100:.4f}%")
+            report.append(f"Volatility: {recent_vol*100:.4f}%")
+            report.append(f"Annualized Mean: {recent_mean*252*100:.2f}%")
+            report.append(f"Annualized Vol: {recent_vol*np.sqrt(252)*100:.2f}%")
+        
+        return "\n".join(report)
