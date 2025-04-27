@@ -1,0 +1,332 @@
+#!/usr/bin/env python3
+# Script to fetch SPY ATM calls/puts 1-minute bar data from Alpaca
+
+import os
+import pandas as pd
+import numpy as np
+from datetime import datetime, timedelta, date
+from pytz import timezone
+import pytz
+import matplotlib.pyplot as plt
+from alpaca.data.historical.option import OptionHistoricalDataClient
+from alpaca.data.requests import OptionBarsRequest, OptionChainRequest
+from alpaca.data.timeframe import TimeFrame
+from alpaca.data.enums import OptionsFeed, ContractType
+
+# Alpaca API credentials - replace with your own
+API_KEY = "YOUR_API_KEY_HERE"
+API_SECRET = "YOUR_API_SECRET_HERE"
+
+# Create an OptionHistoricalDataClient instance
+client = OptionHistoricalDataClient(API_KEY, API_SECRET)
+
+def get_atm_options(underlying_symbol='SPY', feed=OptionsFeed.OPRA):
+    """
+    Get ATM call and put options for the given underlying symbol.
+    
+    Parameters:
+    underlying_symbol (str): Underlying stock symbol
+    feed (OptionsFeed): Data feed (OPRA or INDICATIVE based on your subscription)
+    
+    Returns:
+    dict: Dictionary with 'call' and 'put' contract symbols that are closest to ATM
+    """
+    # Get today's date or the last business day if it's a weekend
+    today = datetime.now().date()
+    if today.weekday() > 4:  # Saturday or Sunday
+        today = today - timedelta(days=today.weekday() - 4)
+    
+    # Get nearest expiration date (typically 1-2 weeks out for liquid options)
+    # For this example, we'll look for options expiring in the next 7-14 days
+    min_days = 7
+    max_days = 14
+    exp_date_min = (today + timedelta(days=min_days)).isoformat()
+    exp_date_max = (today + timedelta(days=max_days)).isoformat()
+    
+    # First, we need the current price of SPY to find ATM options
+    request_params = OptionBarsRequest(
+        symbol_or_symbols=[f"SPY"],
+        timeframe=TimeFrame.Day,
+        start=datetime.now(pytz.UTC) - timedelta(days=1),
+        end=datetime.now(pytz.UTC),
+        limit=1
+    )
+    
+    try:
+        # Try to get SPY price from options data
+        bars = client.get_option_bars(request_params)
+        last_close = list(bars.data.values())[0][0].close
+        print(f"Last price for {underlying_symbol}: ${last_close:.2f}")
+    except Exception as e:
+        print(f"Error getting {underlying_symbol} price: {e}")
+        # Use a default SPY price if we can't get it (around $500 as of April 2025)
+        # Replace this with a more accurate price if needed
+        last_close = 500.0
+        print(f"Using default price of ${last_close:.2f}")
+    
+    # Round to nearest strike increment (typically $1 for SPY)
+    strike_increment = 1.0
+    base_strike = round(last_close / strike_increment) * strike_increment
+    
+    # Create a range of strikes to search for (a few above and below the current price)
+    strike_range_low = base_strike - (5 * strike_increment)
+    strike_range_high = base_strike + (5 * strike_increment)
+    
+    print(f"Searching for options with strikes between ${strike_range_low:.2f} and ${strike_range_high:.2f}")
+    print(f"Expiring between {exp_date_min} and {exp_date_max}")
+    
+    # Request option chain for calls
+    call_request_params = OptionChainRequest(
+        underlying_symbol=underlying_symbol,
+        feed=feed,
+        type=ContractType.CALL,
+        strike_price_gte=strike_range_low,
+        strike_price_lte=strike_range_high,
+        expiration_date_gte=exp_date_min,
+        expiration_date_lte=exp_date_max
+    )
+    
+    # Request option chain for puts
+    put_request_params = OptionChainRequest(
+        underlying_symbol=underlying_symbol,
+        feed=feed,
+        type=ContractType.PUT,
+        strike_price_gte=strike_range_low,
+        strike_price_lte=strike_range_high,
+        expiration_date_gte=exp_date_min,
+        expiration_date_lte=exp_date_max
+    )
+    
+    try:
+        # Get the option chains
+        call_chain = client.get_option_chain(call_request_params)
+        put_chain = client.get_option_chain(put_request_params)
+        
+        # Find the closest ATM option for calls and puts
+        closest_call = None
+        closest_put = None
+        min_call_diff = float('inf')
+        min_put_diff = float('inf')
+        
+        # Process calls
+        for symbol, data in call_chain.items():
+            strike = float(data.strike_price)
+            diff = abs(strike - last_close)
+            
+            if diff < min_call_diff:
+                min_call_diff = diff
+                closest_call = symbol
+        
+        # Process puts
+        for symbol, data in put_chain.items():
+            strike = float(data.strike_price)
+            diff = abs(strike - last_close)
+            
+            if diff < min_put_diff:
+                min_put_diff = diff
+                closest_put = symbol
+        
+        if closest_call:
+            call_data = call_chain[closest_call]
+            print(f"Selected ATM call: {closest_call}")
+            print(f"  Strike: ${float(call_data.strike_price):.2f}")
+            print(f"  Expiration: {call_data.expiration_date}")
+            print(f"  Difference from current: ${min_call_diff:.2f}")
+        else:
+            print("No suitable call options found")
+        
+        if closest_put:
+            put_data = put_chain[closest_put]
+            print(f"Selected ATM put: {closest_put}")
+            print(f"  Strike: ${float(put_data.strike_price):.2f}")
+            print(f"  Expiration: {put_data.expiration_date}")
+            print(f"  Difference from current: ${min_put_diff:.2f}")
+        else:
+            print("No suitable put options found")
+        
+        return {
+            'call': closest_call,
+            'put': closest_put
+        }
+        
+    except Exception as e:
+        print(f"Error getting option chain: {e}")
+        return {'call': None, 'put': None}
+
+def get_option_minute_bars(option_symbol, days_back=3):
+    """
+    Get 1-minute bars for a specific option contract
+    
+    Parameters:
+    option_symbol (str): Option contract symbol
+    days_back (int): Number of trading days to look back
+    
+    Returns:
+    pandas.DataFrame: DataFrame containing the option bars
+    """
+    if not option_symbol:
+        return None
+    
+    # Calculate start and end times
+    end_time = datetime.now(pytz.UTC)
+    start_time = end_time - timedelta(days=days_back)
+    
+    # Request parameters
+    request_params = OptionBarsRequest(
+        symbol_or_symbols=[option_symbol],
+        timeframe=TimeFrame.Minute,
+        start=start_time,
+        end=end_time
+    )
+    
+    try:
+        # Get the option bars
+        bars = client.get_option_bars(request_params)
+        
+        # Convert to DataFrame for easier analysis
+        if option_symbol in bars.data:
+            df = pd.DataFrame([bar.dict() for bar in bars.data[option_symbol]])
+            
+            # Convert timestamp to datetime and set as index
+            df['timestamp'] = pd.to_datetime(df['timestamp'])
+            df = df.set_index('timestamp')
+            
+            print(f"Retrieved {len(df)} minute bars for {option_symbol}")
+            return df
+        else:
+            print(f"No data found for {option_symbol}")
+            return None
+    
+    except Exception as e:
+        print(f"Error getting minute bars for {option_symbol}: {e}")
+        return None
+
+def plot_option_data(call_df, put_df, call_symbol, put_symbol):
+    """
+    Plot the option price and volume data
+    
+    Parameters:
+    call_df (pandas.DataFrame): DataFrame with call option data
+    put_df (pandas.DataFrame): DataFrame with put option data
+    call_symbol (str): Call option symbol
+    put_symbol (str): Put option symbol
+    """
+    if call_df is None and put_df is None:
+        print("No data to plot")
+        return
+    
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 10), sharex=True)
+    
+    # Plot price data
+    if call_df is not None:
+        ax1.plot(call_df.index, call_df['close'], label=f'Call ({call_symbol})', color='green')
+    
+    if put_df is not None:
+        ax1.plot(put_df.index, put_df['close'], label=f'Put ({put_symbol})', color='red')
+    
+    ax1.set_title('Option Close Prices')
+    ax1.set_ylabel('Price ($)')
+    ax1.legend()
+    ax1.grid(True)
+    
+    # Plot volume data
+    if call_df is not None:
+        ax2.bar(call_df.index, call_df['volume'], label=f'Call Volume', color='green', alpha=0.5, width=0.02)
+    
+    if put_df is not None:
+        ax2.bar(put_df.index, put_df['volume'], label=f'Put Volume', color='red', alpha=0.5, width=0.02)
+    
+    ax2.set_title('Option Volume')
+    ax2.set_ylabel('Volume')
+    ax2.set_xlabel('Time')
+    ax2.legend()
+    ax2.grid(True)
+    
+    plt.tight_layout()
+    plt.savefig('spy_options_data.png')
+    print("Plot saved as 'spy_options_data.png'")
+    plt.show()
+
+def save_data_to_csv(call_df, put_df, call_symbol, put_symbol):
+    """
+    Save the option data to CSV files
+    
+    Parameters:
+    call_df (pandas.DataFrame): DataFrame with call option data
+    put_df (pandas.DataFrame): DataFrame with put option data
+    call_symbol (str): Call option symbol
+    put_symbol (str): Put option symbol
+    """
+    if call_df is not None:
+        csv_call = f"{call_symbol}_1min.csv"
+        call_df.to_csv(csv_call)
+        print(f"Call data saved to {csv_call}")
+    
+    if put_df is not None:
+        csv_put = f"{put_symbol}_1min.csv"
+        put_df.to_csv(csv_put)
+        print(f"Put data saved to {csv_put}")
+
+def analyze_data(call_df, put_df):
+    """
+    Analyze the option data and print some statistics
+    
+    Parameters:
+    call_df (pandas.DataFrame): DataFrame with call option data
+    put_df (pandas.DataFrame): DataFrame with put option data
+    """
+    print("\n=== Data Analysis ===")
+    
+    # Function to analyze a single dataframe
+    def analyze_single_df(df, option_type):
+        if df is None or len(df) == 0:
+            print(f"No {option_type} data to analyze")
+            return
+        
+        # Basic statistics
+        print(f"\n{option_type} Option Analysis:")
+        print(f"  Number of records: {len(df)}")
+        print(f"  Date range: {df.index[0].date()} to {df.index[-1].date()}")
+        print(f"  Price range: ${df['low'].min():.2f} - ${df['high'].max():.2f}")
+        print(f"  Average price: ${df['close'].mean():.2f}")
+        print(f"  Average volume: {df['volume'].mean():.2f}")
+        print(f"  Maximum volume: {df['volume'].max()}")
+        
+        # Calculate daily volatility
+        df['returns'] = df['close'].pct_change()
+        print(f"  Daily volatility: {df['returns'].std() * 100:.2f}%")
+        
+        # Show a sample of the data
+        print("\n  Sample data:")
+        print(df.head().to_string())
+    
+    # Analyze call and put data
+    if call_df is not None:
+        analyze_single_df(call_df, "Call")
+    
+    if put_df is not None:
+        analyze_single_df(put_df, "Put")
+
+def main():
+    # Get ATM options
+    options = get_atm_options(underlying_symbol='SPY')
+    
+    if not options['call'] and not options['put']:
+        print("No options found. Please check your API credentials and connection.")
+        return
+    
+    # Get 1-minute bars for the ATM options
+    call_df = get_option_minute_bars(options['call']) if options['call'] else None
+    put_df = get_option_minute_bars(options['put']) if options['put'] else None
+    
+    # Save data to CSV
+    save_data_to_csv(call_df, put_df, options['call'], options['put'])
+    
+    # Analyze the data
+    analyze_data(call_df, put_df)
+    
+    # Plot the data
+    plot_option_data(call_df, put_df, options['call'], options['put'])
+
+if __name__ == "__main__":
+    main()

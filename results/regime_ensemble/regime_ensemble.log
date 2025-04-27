@@ -1,0 +1,476 @@
+2025-04-27 12:02:31,580 - src.core.bootstrap - INFO - Logging initialized at level INFO
+2025-04-27 12:02:31,580 - src.core.bootstrap - INFO - Log file: ./results/regime_ensemble/regime_ensemble.log
+2025-04-27 12:02:31,582 - src.core.bootstrap - INFO - Loaded configuration from config/regime_ensemble.yaml
+2025-04-27 12:02:31,582 - src.core.bootstrap - INFO - Event system initialized
+2025-04-27 12:02:31,582 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-04-27 12:02:31,583 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-04-27 12:02:31,583 - src.core.bootstrap - INFO - Data components initialized with source type: csv
+2025-04-27 12:02:31,584 - src.core.bootstrap - INFO - Order registry initialized
+2025-04-27 12:02:31,586 - src.core.bootstrap - INFO - Execution components initialized with order registry
+2025-04-27 12:02:31,588 - src.core.bootstrap - INFO - Risk manager configured with position_size=100, max_position_pct=0.1
+2025-04-27 12:02:31,588 - src.core.bootstrap - INFO - Risk components initialized
+2025-04-27 12:02:31,589 - src.core.bootstrap - INFO - Discovering strategy implementations...
+2025-04-27 12:02:31,589 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-04-27 12:02:31,589 - src.core.utils.discovery - INFO - Registered component regime_ensemble in registry
+2025-04-27 12:02:31,589 - src.core.bootstrap - INFO - Discovered strategies: ma_crossover, regime_ensemble
+2025-04-27 12:02:31,589 - src.core.bootstrap - INFO - Requested strategy: regime_ensemble
+2025-04-27 12:02:31,589 - src.core.bootstrap - INFO - Available strategies in registry: ['ma_crossover', 'regime_ensemble']
+2025-04-27 12:02:31,589 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime Ensemble strategy initialized with 0 symbols
+2025-04-27 12:02:31,590 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime Ensemble strategy configured with 3 symbols
+2025-04-27 12:02:31,590 - src.core.bootstrap - INFO - Strategy 'regime_ensemble' initialized successfully
+2025-04-27 12:02:31,590 - src.core.bootstrap - INFO - Analytics components initialized
+2025-04-27 12:02:31,590 - src.core.bootstrap - INFO - System bootstrap complete
+2025-04-27 12:02:31,590 - src.execution.backtest.backtest - INFO - Backtest setup complete
+2025-04-27 12:02:31,590 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_f69e48ef to initial state with cash: $100000.00
+2025-04-27 12:02:31,590 - src.risk.managers.simple - INFO - Risk manager risk_manager_9916dae4 reset
+2025-04-27 12:02:31,590 - src.execution.order_registry - INFO - Order registry reset
+2025-04-27 12:02:31,590 - src.execution.order_manager - INFO - Reset order manager
+2025-04-27 12:02:31,590 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime Ensemble strategy regime_ensemble reset
+2025-04-27 12:02:31,590 - src.execution.backtest.backtest - INFO - Reset all components for backtest
+2025-04-27 12:02:31,590 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['AAPL', 'MSFT', 'GOOGL']
+2025-04-27 12:02:31,590 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/AAPL_1d.csv
+2025-04-27 12:02:31,592 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 240 rows
+2025-04-27 12:02:31,592 - src.data.sources.csv_handler - INFO - Using 'date' column instead of configured 'timestamp'
+2025-04-27 12:02:31,592 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2023-01-01
+2025-04-27 12:02:31,593 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2023-01-01 00:00:00
+2025-04-27 12:02:31,593 - src.data.sources.csv_handler - INFO - CSVDataSource: Set date as index
+2025-04-27 12:02:31,595 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2023-01-01 00:00:00 to 2023-08-28 00:00:00
+2025-04-27 12:02:31,595 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume', 'regime']
+2025-04-27 12:02:31,595 - src.data.historical_data_handler - INFO - Loaded 240 bars for AAPL from 2023-01-01 00:00:00 to 2023-08-28 00:00:00
+2025-04-27 12:02:31,595 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/MSFT_1d.csv
+2025-04-27 12:02:31,596 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 240 rows
+2025-04-27 12:02:31,596 - src.data.sources.csv_handler - INFO - Using 'date' column instead of configured 'timestamp'
+2025-04-27 12:02:31,596 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2023-01-01
+2025-04-27 12:02:31,596 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2023-01-01 00:00:00
+2025-04-27 12:02:31,596 - src.data.sources.csv_handler - INFO - CSVDataSource: Set date as index
+2025-04-27 12:02:31,596 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2023-01-01 00:00:00 to 2023-08-28 00:00:00
+2025-04-27 12:02:31,596 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume', 'regime']
+2025-04-27 12:02:31,596 - src.data.historical_data_handler - INFO - Loaded 240 bars for MSFT from 2023-01-01 00:00:00 to 2023-08-28 00:00:00
+2025-04-27 12:02:31,596 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/GOOGL_1d.csv
+2025-04-27 12:02:31,597 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 240 rows
+2025-04-27 12:02:31,597 - src.data.sources.csv_handler - INFO - Using 'date' column instead of configured 'timestamp'
+2025-04-27 12:02:31,597 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2023-01-01
+2025-04-27 12:02:31,598 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2023-01-01 00:00:00
+2025-04-27 12:02:31,598 - src.data.sources.csv_handler - INFO - CSVDataSource: Set date as index
+2025-04-27 12:02:31,598 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2023-01-01 00:00:00 to 2023-08-28 00:00:00
+2025-04-27 12:02:31,598 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume', 'regime']
+2025-04-27 12:02:31,598 - src.data.historical_data_handler - INFO - Loaded 240 bars for GOOGL from 2023-01-01 00:00:00 to 2023-08-28 00:00:00
+2025-04-27 12:02:31,598 - src.execution.backtest.backtest - INFO - Starting backtest
+2025-04-27 12:02:31,601 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> mean_reversion
+2025-04-27 12:02:31,601 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: mean_reversion -> neutral
+2025-04-27 12:02:31,601 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> mean_reversion
+2025-04-27 12:02:31,601 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for GOOGL: neutral -> mean_reversion
+2025-04-27 12:02:31,602 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> mean_reversion
+2025-04-27 12:02:31,605 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: mean_reversion -> neutral
+2025-04-27 12:02:31,605 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=-0.53 -> -1
+2025-04-27 12:02:31,605 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.80, Vol=0.00
+2025-04-27 12:02:31,605 - src.execution.order_registry - INFO - Registered order: 90ff3591-3570-451b-a12b-1463c6e9f1f1
+2025-04-27 12:02:31,605 - src.execution.order_manager - INFO - Emitting order event: 90ff3591-3570-451b-a12b-1463c6e9f1f1
+2025-04-27 12:02:31,605 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=-0.53 -> -1
+2025-04-27 12:02:31,605 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.80, Vol=0.00
+2025-04-27 12:02:31,606 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> mean_reversion
+2025-04-27 12:02:31,607 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for MSFT (mean_reversion regime): Combined=0.57 -> 1
+2025-04-27 12:02:31,607 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.01, MeanRev=0.87, Vol=0.00
+2025-04-27 12:02:31,607 - src.execution.order_registry - INFO - Registered order: 77568e25-579a-4074-b85f-7835a1050432
+2025-04-27 12:02:31,607 - src.execution.order_manager - INFO - Emitting order event: 77568e25-579a-4074-b85f-7835a1050432
+2025-04-27 12:02:31,607 - src.execution.order_registry - INFO - Registered order: e5dd3a88-b3ff-4620-8ea5-ace9eefc668e
+2025-04-27 12:02:31,607 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 MSFT @ 95.11
+2025-04-27 12:02:31,607 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: e5dd3a88-b3ff-4620-8ea5-ace9eefc668e
+2025-04-27 12:02:31,607 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for MSFT after state change
+2025-04-27 12:02:31,607 - src.execution.order_manager - INFO - Updated order with fill: Order(e5dd3a88-b3ff-4620-8ea5-ace9eefc668e, MSFT, BUY, 100, FILLED)
+2025-04-27 12:02:31,607 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-27 12:02:31,607 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 MSFT @ 95.11, PnL: 0.00, Cash: 90479.04, Equity: 99990.49
+2025-04-27 12:02:31,607 - src.risk.managers.simple - INFO - Created order: BUY 100 MSFT @ 95.02
+2025-04-27 12:02:31,608 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for MSFT (mean_reversion regime): Combined=0.57 -> 1
+2025-04-27 12:02:31,608 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.01, MeanRev=0.87, Vol=0.00
+2025-04-27 12:02:31,608 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: mean_reversion -> neutral
+2025-04-27 12:02:31,609 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> mean_reversion
+2025-04-27 12:02:31,610 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: mean_reversion -> neutral
+2025-04-27 12:02:31,611 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=0.55 -> 1
+2025-04-27 12:02:31,611 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.83, Vol=0.00
+2025-04-27 12:02:31,611 - src.execution.order_registry - INFO - Registered order: c82062d1-6145-4794-9c56-4a7f8aacbbb1
+2025-04-27 12:02:31,611 - src.execution.order_manager - INFO - Emitting order event: c82062d1-6145-4794-9c56-4a7f8aacbbb1
+2025-04-27 12:02:31,611 - src.execution.order_registry - INFO - Registered order: c8d445cc-9079-4466-b753-8dd3434584f5
+2025-04-27 12:02:31,612 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 GOOGL @ 95.69
+2025-04-27 12:02:31,612 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: c8d445cc-9079-4466-b753-8dd3434584f5
+2025-04-27 12:02:31,612 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for GOOGL after state change
+2025-04-27 12:02:31,612 - src.execution.order_manager - INFO - Updated order with fill: Order(c8d445cc-9079-4466-b753-8dd3434584f5, GOOGL, BUY, 100, FILLED)
+2025-04-27 12:02:31,612 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-27 12:02:31,612 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 GOOGL @ 95.69, PnL: 0.00, Cash: 80900.06, Equity: 100208.06
+2025-04-27 12:02:31,612 - src.risk.managers.simple - INFO - Created order: BUY 100 GOOGL @ 95.60
+2025-04-27 12:02:31,612 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=0.55 -> 1
+2025-04-27 12:02:31,612 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.83, Vol=0.00
+2025-04-27 12:02:31,612 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> mean_reversion
+2025-04-27 12:02:31,612 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=0.58 -> 1
+2025-04-27 12:02:31,612 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.87, Vol=0.00
+2025-04-27 12:02:31,612 - src.execution.order_registry - INFO - Registered order: fb86baee-17a1-413d-9915-d58e35447a20
+2025-04-27 12:02:31,612 - src.execution.order_manager - INFO - Emitting order event: fb86baee-17a1-413d-9915-d58e35447a20
+2025-04-27 12:02:31,612 - src.execution.order_registry - INFO - Registered order: 208ca7ce-4c5d-4d76-b724-b48985965f15
+2025-04-27 12:02:31,613 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 GOOGL @ 95.21
+2025-04-27 12:02:31,613 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 208ca7ce-4c5d-4d76-b724-b48985965f15
+2025-04-27 12:02:31,613 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for GOOGL after state change
+2025-04-27 12:02:31,613 - src.execution.order_manager - INFO - Updated order with fill: Order(208ca7ce-4c5d-4d76-b724-b48985965f15, GOOGL, BUY, 100, FILLED)
+2025-04-27 12:02:31,613 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-27 12:02:31,613 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 GOOGL @ 95.21, PnL: 0.00, Cash: 71369.73, Equity: 100090.56
+2025-04-27 12:02:31,613 - src.risk.managers.simple - INFO - Created order: BUY 100 GOOGL @ 95.11
+2025-04-27 12:02:31,613 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=0.58 -> 1
+2025-04-27 12:02:31,613 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.87, Vol=0.00
+2025-04-27 12:02:31,615 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: mean_reversion -> volatile
+2025-04-27 12:02:31,617 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: volatile -> mean_reversion
+2025-04-27 12:02:31,617 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: mean_reversion -> neutral
+2025-04-27 12:02:31,618 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> trend
+2025-04-27 12:02:31,619 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for MSFT (mean_reversion regime): Combined=-0.56 -> -1
+2025-04-27 12:02:31,619 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=-0.84, Vol=0.00
+2025-04-27 12:02:31,619 - src.execution.order_registry - INFO - Registered order: 90210620-a018-430d-a955-8e3cfa60d2d7
+2025-04-27 12:02:31,619 - src.execution.order_manager - INFO - Emitting order event: 90210620-a018-430d-a955-8e3cfa60d2d7
+2025-04-27 12:02:31,619 - src.execution.order_registry - INFO - Registered order: d997663e-c41a-46f9-9327-3cdc7dec31ab
+2025-04-27 12:02:31,619 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 MSFT @ 99.45
+2025-04-27 12:02:31,619 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: d997663e-c41a-46f9-9327-3cdc7dec31ab
+2025-04-27 12:02:31,619 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for MSFT after state change
+2025-04-27 12:02:31,619 - src.execution.order_manager - INFO - Updated order with fill: Order(d997663e-c41a-46f9-9327-3cdc7dec31ab, MSFT, SELL, 100, FILLED)
+2025-04-27 12:02:31,619 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 433.71
+2025-04-27 12:02:31,619 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 MSFT @ 99.45, PnL: 433.71, Cash: 81304.95, Equity: 100400.78
+2025-04-27 12:02:31,619 - src.risk.managers.simple - INFO - Created order: SELL 100 MSFT @ 99.55
+2025-04-27 12:02:31,619 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for MSFT (mean_reversion regime): Combined=-0.55 -> -1
+2025-04-27 12:02:31,619 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=-0.84, Vol=0.00
+2025-04-27 12:02:31,620 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for MSFT (mean_reversion regime): Combined=-0.57 -> -1
+2025-04-27 12:02:31,620 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=-0.86, Vol=0.00
+2025-04-27 12:02:31,620 - src.execution.order_registry - INFO - Registered order: 85da3acf-e454-491f-bc88-62d3abeae582
+2025-04-27 12:02:31,620 - src.execution.order_manager - INFO - Emitting order event: 85da3acf-e454-491f-bc88-62d3abeae582
+2025-04-27 12:02:31,620 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for MSFT (mean_reversion regime): Combined=-0.57 -> -1
+2025-04-27 12:02:31,620 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=-0.86, Vol=0.00
+2025-04-27 12:02:31,620 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: mean_reversion -> neutral
+2025-04-27 12:02:31,621 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> mean_reversion
+2025-04-27 12:02:31,624 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: mean_reversion -> neutral
+2025-04-27 12:02:31,624 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> mean_reversion
+2025-04-27 12:02:31,625 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: mean_reversion -> neutral
+2025-04-27 12:02:31,625 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> mean_reversion
+2025-04-27 12:02:31,626 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: mean_reversion -> neutral
+2025-04-27 12:02:31,626 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: trend -> neutral
+2025-04-27 12:02:31,627 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> trend
+2025-04-27 12:02:31,627 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> trend
+2025-04-27 12:02:31,628 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: trend -> neutral
+2025-04-27 12:02:31,628 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: trend -> neutral
+2025-04-27 12:02:31,628 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> trend
+2025-04-27 12:02:31,629 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> mean_reversion
+2025-04-27 12:02:31,629 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: trend -> neutral
+2025-04-27 12:02:31,633 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> mean_reversion
+2025-04-27 12:02:31,634 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: mean_reversion -> neutral
+2025-04-27 12:02:31,635 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> mean_reversion
+2025-04-27 12:02:31,638 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: mean_reversion -> neutral
+2025-04-27 12:02:31,638 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> mean_reversion
+2025-04-27 12:02:31,639 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: mean_reversion -> neutral
+2025-04-27 12:02:31,639 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: mean_reversion -> neutral
+2025-04-27 12:02:31,640 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> mean_reversion
+2025-04-27 12:02:31,641 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: mean_reversion -> neutral
+2025-04-27 12:02:31,642 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> mean_reversion
+2025-04-27 12:02:31,643 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: mean_reversion -> neutral
+2025-04-27 12:02:31,644 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> mean_reversion
+2025-04-27 12:02:31,644 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> mean_reversion
+2025-04-27 12:02:31,645 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: mean_reversion -> neutral
+2025-04-27 12:02:31,645 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> mean_reversion
+2025-04-27 12:02:31,647 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for AAPL (mean_reversion regime): Combined=-0.66 -> -1
+2025-04-27 12:02:31,647 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-1.00, Vol=0.00
+2025-04-27 12:02:31,647 - src.execution.order_registry - INFO - Registered order: 823dc581-5f5d-4477-bd8e-ca1e314eb4b0
+2025-04-27 12:02:31,647 - src.execution.order_manager - INFO - Emitting order event: 823dc581-5f5d-4477-bd8e-ca1e314eb4b0
+2025-04-27 12:02:31,647 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for AAPL (mean_reversion regime): Combined=-0.66 -> -1
+2025-04-27 12:02:31,647 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-1.00, Vol=0.00
+2025-04-27 12:02:31,649 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: mean_reversion -> neutral
+2025-04-27 12:02:31,651 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> trend
+2025-04-27 12:02:31,651 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: trend -> neutral
+2025-04-27 12:02:31,651 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: mean_reversion -> neutral
+2025-04-27 12:02:31,653 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> trend
+2025-04-27 12:02:31,653 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> mean_reversion
+2025-04-27 12:02:31,653 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=-0.60 -> -1
+2025-04-27 12:02:31,653 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=-0.90, Vol=0.00
+2025-04-27 12:02:31,653 - src.execution.order_registry - INFO - Registered order: d996d449-6865-41b3-8262-79a355f4ee8d
+2025-04-27 12:02:31,653 - src.execution.order_manager - INFO - Emitting order event: d996d449-6865-41b3-8262-79a355f4ee8d
+2025-04-27 12:02:31,654 - src.execution.order_registry - INFO - Registered order: 22e41e21-2053-4d31-b9a4-f4933937ca52
+2025-04-27 12:02:31,654 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 GOOGL @ 96.36
+2025-04-27 12:02:31,654 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 22e41e21-2053-4d31-b9a4-f4933937ca52
+2025-04-27 12:02:31,654 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for GOOGL after state change
+2025-04-27 12:02:31,654 - src.execution.order_manager - INFO - Updated order with fill: Order(22e41e21-2053-4d31-b9a4-f4933937ca52, GOOGL, SELL, 100, FILLED)
+2025-04-27 12:02:31,654 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 91.07
+2025-04-27 12:02:31,654 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 GOOGL @ 96.36, PnL: 91.07, Cash: 90931.49, Equity: 100567.67
+2025-04-27 12:02:31,654 - src.risk.managers.simple - INFO - Created order: SELL 100 GOOGL @ 96.46
+2025-04-27 12:02:31,654 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=-0.59 -> -1
+2025-04-27 12:02:31,654 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=-0.90, Vol=0.00
+2025-04-27 12:02:31,654 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: trend -> neutral
+2025-04-27 12:02:31,655 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=-0.60 -> -1
+2025-04-27 12:02:31,655 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=-0.90, Vol=0.00
+2025-04-27 12:02:31,655 - src.execution.order_registry - INFO - Registered order: 60635b5a-cf55-4fdd-9798-d1f16cf529c2
+2025-04-27 12:02:31,655 - src.execution.order_manager - INFO - Emitting order event: 60635b5a-cf55-4fdd-9798-d1f16cf529c2
+2025-04-27 12:02:31,655 - src.execution.order_registry - INFO - Registered order: 6f107cfb-0df5-471a-b57b-20ca562e545d
+2025-04-27 12:02:31,655 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 GOOGL @ 96.65
+2025-04-27 12:02:31,655 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 6f107cfb-0df5-471a-b57b-20ca562e545d
+2025-04-27 12:02:31,655 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for GOOGL after state change
+2025-04-27 12:02:31,655 - src.execution.order_manager - INFO - Updated order with fill: Order(6f107cfb-0df5-471a-b57b-20ca562e545d, GOOGL, SELL, 100, FILLED)
+2025-04-27 12:02:31,655 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 120.23
+2025-04-27 12:02:31,655 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 GOOGL @ 96.65, PnL: 120.23, Cash: 100587.16, Equity: 100587.16
+2025-04-27 12:02:31,655 - src.risk.managers.simple - INFO - Created order: SELL 100 GOOGL @ 96.75
+2025-04-27 12:02:31,655 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=-0.59 -> -1
+2025-04-27 12:02:31,655 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=-0.90, Vol=0.00
+2025-04-27 12:02:31,656 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=-0.66 -> -1
+2025-04-27 12:02:31,656 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=-1.00, Vol=0.00
+2025-04-27 12:02:31,656 - src.execution.order_registry - INFO - Registered order: 83c4c3c8-c7a8-4bcf-981a-91794190fccc
+2025-04-27 12:02:31,656 - src.execution.order_manager - INFO - Emitting order event: 83c4c3c8-c7a8-4bcf-981a-91794190fccc
+2025-04-27 12:02:31,656 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=-0.66 -> -1
+2025-04-27 12:02:31,656 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=-1.00, Vol=0.00
+2025-04-27 12:02:31,657 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> mean_reversion
+2025-04-27 12:02:31,658 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for MSFT (mean_reversion regime): Combined=-0.62 -> -1
+2025-04-27 12:02:31,658 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=-0.94, Vol=0.00
+2025-04-27 12:02:31,658 - src.execution.order_registry - INFO - Registered order: ac710d20-01e4-4604-8199-c9d4d7775e88
+2025-04-27 12:02:31,658 - src.execution.order_manager - INFO - Emitting order event: ac710d20-01e4-4604-8199-c9d4d7775e88
+2025-04-27 12:02:31,658 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for MSFT (mean_reversion regime): Combined=-0.62 -> -1
+2025-04-27 12:02:31,658 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=-0.94, Vol=0.00
+2025-04-27 12:02:31,659 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for AAPL (mean_reversion regime): Combined=-0.57 -> -1
+2025-04-27 12:02:31,659 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.01, MeanRev=-0.85, Vol=0.00
+2025-04-27 12:02:31,659 - src.execution.order_registry - INFO - Registered order: f7bf095b-7f1f-4144-8a88-3290cc9e444f
+2025-04-27 12:02:31,659 - src.execution.order_manager - INFO - Emitting order event: f7bf095b-7f1f-4144-8a88-3290cc9e444f
+2025-04-27 12:02:31,659 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for AAPL (mean_reversion regime): Combined=-0.57 -> -1
+2025-04-27 12:02:31,659 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=-0.85, Vol=0.00
+2025-04-27 12:02:31,660 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=0.56 -> 1
+2025-04-27 12:02:31,660 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.85, Vol=0.00
+2025-04-27 12:02:31,660 - src.execution.order_registry - INFO - Registered order: 7ba23183-a062-443a-917b-b5bdeb3577cd
+2025-04-27 12:02:31,660 - src.execution.order_manager - INFO - Emitting order event: 7ba23183-a062-443a-917b-b5bdeb3577cd
+2025-04-27 12:02:31,660 - src.execution.order_registry - INFO - Registered order: 1bb2e2b1-22d0-4f13-a0c8-edafa6566647
+2025-04-27 12:02:31,660 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 GOOGL @ 93.18
+2025-04-27 12:02:31,660 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 1bb2e2b1-22d0-4f13-a0c8-edafa6566647
+2025-04-27 12:02:31,660 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for GOOGL after state change
+2025-04-27 12:02:31,660 - src.execution.order_manager - INFO - Updated order with fill: Order(1bb2e2b1-22d0-4f13-a0c8-edafa6566647, GOOGL, BUY, 100, FILLED)
+2025-04-27 12:02:31,660 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-27 12:02:31,660 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 GOOGL @ 93.18, PnL: 0.00, Cash: 91260.12, Equity: 100577.85
+2025-04-27 12:02:31,660 - src.risk.managers.simple - INFO - Created order: BUY 100 GOOGL @ 93.08
+2025-04-27 12:02:31,660 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=0.56 -> 1
+2025-04-27 12:02:31,660 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.01, MeanRev=0.85, Vol=0.00
+2025-04-27 12:02:31,661 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for AAPL (mean_reversion regime): Combined=-0.57 -> -1
+2025-04-27 12:02:31,661 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=-0.85, Vol=0.00
+2025-04-27 12:02:31,661 - src.execution.order_registry - INFO - Registered order: d238143c-561f-4eaf-afa0-993891633c47
+2025-04-27 12:02:31,661 - src.execution.order_manager - INFO - Emitting order event: d238143c-561f-4eaf-afa0-993891633c47
+2025-04-27 12:02:31,661 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for GOOGL: mean_reversion -> neutral
+2025-04-27 12:02:31,661 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for AAPL (mean_reversion regime): Combined=-0.54 -> -1
+2025-04-27 12:02:31,661 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.81, Vol=0.00
+2025-04-27 12:02:31,662 - src.execution.order_registry - INFO - Registered order: 4024ff26-f93a-4cee-96af-65e9e45c2c9a
+2025-04-27 12:02:31,662 - src.execution.order_manager - INFO - Emitting order event: 4024ff26-f93a-4cee-96af-65e9e45c2c9a
+2025-04-27 12:02:31,662 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for AAPL (mean_reversion regime): Combined=-0.53 -> -1
+2025-04-27 12:02:31,662 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=-0.81, Vol=0.00
+2025-04-27 12:02:31,662 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: mean_reversion -> neutral
+2025-04-27 12:02:31,662 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for GOOGL: neutral -> mean_reversion
+2025-04-27 12:02:31,663 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> trend
+2025-04-27 12:02:31,663 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for GOOGL: mean_reversion -> neutral
+2025-04-27 12:02:31,663 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: trend -> neutral
+2025-04-27 12:02:31,664 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for GOOGL: neutral -> mean_reversion
+2025-04-27 12:02:31,664 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: mean_reversion -> neutral
+2025-04-27 12:02:31,666 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> mean_reversion
+2025-04-27 12:02:31,666 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> mean_reversion
+2025-04-27 12:02:31,668 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=-0.66 -> -1
+2025-04-27 12:02:31,668 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=-1.00, Vol=0.00
+2025-04-27 12:02:31,668 - src.execution.order_registry - INFO - Registered order: 38741a43-aa83-49a6-865c-9d953d706417
+2025-04-27 12:02:31,668 - src.execution.order_manager - INFO - Emitting order event: 38741a43-aa83-49a6-865c-9d953d706417
+2025-04-27 12:02:31,668 - src.execution.order_registry - INFO - Registered order: 86122b1e-b2f9-4864-aed0-7a99b79c944e
+2025-04-27 12:02:31,668 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 GOOGL @ 95.54
+2025-04-27 12:02:31,668 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 86122b1e-b2f9-4864-aed0-7a99b79c944e
+2025-04-27 12:02:31,668 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for GOOGL after state change
+2025-04-27 12:02:31,668 - src.execution.order_manager - INFO - Updated order with fill: Order(86122b1e-b2f9-4864-aed0-7a99b79c944e, GOOGL, SELL, 100, FILLED)
+2025-04-27 12:02:31,668 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 236.07
+2025-04-27 12:02:31,668 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 GOOGL @ 95.54, PnL: 236.07, Cash: 100804.37, Equity: 100804.37
+2025-04-27 12:02:31,669 - src.risk.managers.simple - INFO - Created order: SELL 100 GOOGL @ 95.63
+2025-04-27 12:02:31,669 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=-0.66 -> -1
+2025-04-27 12:02:31,669 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=-1.00, Vol=0.00
+2025-04-27 12:02:31,669 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=-0.66 -> -1
+2025-04-27 12:02:31,669 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=-1.00, Vol=0.00
+2025-04-27 12:02:31,669 - src.execution.order_registry - INFO - Registered order: bcdca2b4-75ce-4132-abd4-a1fcc22c712a
+2025-04-27 12:02:31,669 - src.execution.order_manager - INFO - Emitting order event: bcdca2b4-75ce-4132-abd4-a1fcc22c712a
+2025-04-27 12:02:31,670 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=-0.66 -> -1
+2025-04-27 12:02:31,670 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.02, MeanRev=-1.00, Vol=0.00
+2025-04-27 12:02:31,670 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=-0.54 -> -1
+2025-04-27 12:02:31,670 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.02, MeanRev=-0.83, Vol=0.00
+2025-04-27 12:02:31,670 - src.execution.order_registry - INFO - Registered order: 055f6a8d-7e9b-4ddc-982f-422ed4713aa0
+2025-04-27 12:02:31,671 - src.execution.order_manager - INFO - Emitting order event: 055f6a8d-7e9b-4ddc-982f-422ed4713aa0
+2025-04-27 12:02:31,671 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=-0.54 -> -1
+2025-04-27 12:02:31,671 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.02, MeanRev=-0.83, Vol=0.00
+2025-04-27 12:02:31,672 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for MSFT (mean_reversion regime): Combined=0.56 -> 1
+2025-04-27 12:02:31,672 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=0.84, Vol=0.00
+2025-04-27 12:02:31,672 - src.execution.order_registry - INFO - Registered order: d00f17e6-047f-4ea4-aaa1-5802a1273afc
+2025-04-27 12:02:31,672 - src.execution.order_manager - INFO - Emitting order event: d00f17e6-047f-4ea4-aaa1-5802a1273afc
+2025-04-27 12:02:31,672 - src.execution.order_registry - INFO - Registered order: c9f2aaa2-127c-4405-9a8b-aae45351b2f4
+2025-04-27 12:02:31,672 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 MSFT @ 98.20
+2025-04-27 12:02:31,672 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: c9f2aaa2-127c-4405-9a8b-aae45351b2f4
+2025-04-27 12:02:31,672 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for MSFT after state change
+2025-04-27 12:02:31,672 - src.execution.order_manager - INFO - Updated order with fill: Order(c9f2aaa2-127c-4405-9a8b-aae45351b2f4, MSFT, BUY, 100, FILLED)
+2025-04-27 12:02:31,672 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-27 12:02:31,672 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 MSFT @ 98.20, PnL: 0.00, Cash: 90974.36, Equity: 100794.55
+2025-04-27 12:02:31,672 - src.risk.managers.simple - INFO - Created order: BUY 100 MSFT @ 98.10
+2025-04-27 12:02:31,672 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for MSFT (mean_reversion regime): Combined=0.56 -> 1
+2025-04-27 12:02:31,672 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=0.84, Vol=0.00
+2025-04-27 12:02:31,673 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: mean_reversion -> neutral
+2025-04-27 12:02:31,673 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for GOOGL: mean_reversion -> neutral
+2025-04-27 12:02:31,674 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for GOOGL: neutral -> mean_reversion
+2025-04-27 12:02:31,675 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for GOOGL: mean_reversion -> neutral
+2025-04-27 12:02:31,676 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for GOOGL: neutral -> mean_reversion
+2025-04-27 12:02:31,677 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for AAPL (mean_reversion regime): Combined=0.52 -> 1
+2025-04-27 12:02:31,677 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.01, MeanRev=0.79, Vol=0.00
+2025-04-27 12:02:31,677 - src.execution.order_registry - INFO - Registered order: 677ffb67-2dac-4d3b-990c-88bef5590838
+2025-04-27 12:02:31,677 - src.execution.order_manager - INFO - Emitting order event: 677ffb67-2dac-4d3b-990c-88bef5590838
+2025-04-27 12:02:31,677 - src.execution.order_registry - INFO - Registered order: 4e97e5df-d448-41dc-91e3-8df392c48b0c
+2025-04-27 12:02:31,677 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 AAPL @ 95.18
+2025-04-27 12:02:31,677 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 4e97e5df-d448-41dc-91e3-8df392c48b0c
+2025-04-27 12:02:31,677 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for AAPL after state change
+2025-04-27 12:02:31,677 - src.execution.order_manager - INFO - Updated order with fill: Order(4e97e5df-d448-41dc-91e3-8df392c48b0c, AAPL, BUY, 100, FILLED)
+2025-04-27 12:02:31,677 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-27 12:02:31,677 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 AAPL @ 95.18, PnL: 0.00, Cash: 81447.22, Equity: 100591.06
+2025-04-27 12:02:31,677 - src.risk.managers.simple - INFO - Created order: BUY 100 AAPL @ 95.08
+2025-04-27 12:02:31,677 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for AAPL (mean_reversion regime): Combined=0.52 -> 1
+2025-04-27 12:02:31,677 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.01, MeanRev=0.79, Vol=0.00
+2025-04-27 12:02:31,678 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: mean_reversion -> neutral
+2025-04-27 12:02:31,678 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> mean_reversion
+2025-04-27 12:02:31,679 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: mean_reversion -> neutral
+2025-04-27 12:02:31,680 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> mean_reversion
+2025-04-27 12:02:31,680 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> mean_reversion
+2025-04-27 12:02:31,681 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: mean_reversion -> neutral
+2025-04-27 12:02:31,681 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: mean_reversion -> neutral
+2025-04-27 12:02:31,681 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for GOOGL: mean_reversion -> neutral
+2025-04-27 12:02:31,681 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> mean_reversion
+2025-04-27 12:02:31,685 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> trend
+2025-04-27 12:02:31,687 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for GOOGL: neutral -> mean_reversion
+2025-04-27 12:02:31,692 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: trend -> neutral
+2025-04-27 12:02:31,693 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> mean_reversion
+2025-04-27 12:02:31,695 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: mean_reversion -> neutral
+2025-04-27 12:02:31,695 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for MSFT (mean_reversion regime): Combined=-0.58 -> -1
+2025-04-27 12:02:31,695 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.87, Vol=0.00
+2025-04-27 12:02:31,695 - src.execution.order_registry - INFO - Registered order: aa922915-ef91-40b8-9172-ad93e50f1564
+2025-04-27 12:02:31,695 - src.execution.order_manager - INFO - Emitting order event: aa922915-ef91-40b8-9172-ad93e50f1564
+2025-04-27 12:02:31,695 - src.execution.order_registry - INFO - Registered order: beb7351e-01f5-4cd7-9c70-ad8154d258d5
+2025-04-27 12:02:31,695 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 MSFT @ 92.49
+2025-04-27 12:02:31,695 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: beb7351e-01f5-4cd7-9c70-ad8154d258d5
+2025-04-27 12:02:31,695 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for MSFT after state change
+2025-04-27 12:02:31,695 - src.execution.order_manager - INFO - Updated order with fill: Order(beb7351e-01f5-4cd7-9c70-ad8154d258d5, MSFT, SELL, 100, FILLED)
+2025-04-27 12:02:31,696 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -571.34
+2025-04-27 12:02:31,696 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 MSFT @ 92.49, PnL: -571.34, Cash: 90686.82, Equity: 100687.64
+2025-04-27 12:02:31,696 - src.risk.managers.simple - INFO - Created order: SELL 100 MSFT @ 92.58
+2025-04-27 12:02:31,696 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for MSFT (mean_reversion regime): Combined=-0.57 -> -1
+2025-04-27 12:02:31,696 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=-0.87, Vol=0.00
+2025-04-27 12:02:31,697 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for MSFT (mean_reversion regime): Combined=-0.55 -> -1
+2025-04-27 12:02:31,697 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=-0.84, Vol=0.00
+2025-04-27 12:02:31,697 - src.execution.order_registry - INFO - Registered order: 4dd05f98-08db-49c6-b512-a2a097f6f978
+2025-04-27 12:02:31,697 - src.execution.order_manager - INFO - Emitting order event: 4dd05f98-08db-49c6-b512-a2a097f6f978
+2025-04-27 12:02:31,697 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for MSFT (mean_reversion regime): Combined=-0.55 -> -1
+2025-04-27 12:02:31,697 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.02, MeanRev=-0.84, Vol=0.00
+2025-04-27 12:02:31,698 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for MSFT (mean_reversion regime): Combined=-0.51 -> -1
+2025-04-27 12:02:31,698 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.02, MeanRev=-0.78, Vol=0.00
+2025-04-27 12:02:31,698 - src.execution.order_registry - INFO - Registered order: 001948ff-8647-4d2a-9834-93df4264278b
+2025-04-27 12:02:31,698 - src.execution.order_manager - INFO - Emitting order event: 001948ff-8647-4d2a-9834-93df4264278b
+2025-04-27 12:02:31,698 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for MSFT (mean_reversion regime): Combined=-0.50 -> -1
+2025-04-27 12:02:31,698 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.02, MeanRev=-0.78, Vol=0.00
+2025-04-27 12:02:31,701 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> mean_reversion
+2025-04-27 12:02:31,703 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for GOOGL: mean_reversion -> neutral
+2025-04-27 12:02:31,703 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for GOOGL: neutral -> mean_reversion
+2025-04-27 12:02:31,709 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=0.65 -> 1
+2025-04-27 12:02:31,709 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.01, MeanRev=0.98, Vol=0.00
+2025-04-27 12:02:31,709 - src.execution.order_registry - INFO - Registered order: b5571f68-d4b8-41d2-8420-3a733866ede7
+2025-04-27 12:02:31,709 - src.execution.order_manager - INFO - Emitting order event: b5571f68-d4b8-41d2-8420-3a733866ede7
+2025-04-27 12:02:31,709 - src.execution.order_registry - INFO - Registered order: a118b7ee-222c-4e7f-bd09-f2a54e8b1361
+2025-04-27 12:02:31,709 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 GOOGL @ 89.70
+2025-04-27 12:02:31,709 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: a118b7ee-222c-4e7f-bd09-f2a54e8b1361
+2025-04-27 12:02:31,709 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for GOOGL after state change
+2025-04-27 12:02:31,709 - src.execution.order_manager - INFO - Updated order with fill: Order(a118b7ee-222c-4e7f-bd09-f2a54e8b1361, GOOGL, BUY, 100, FILLED)
+2025-04-27 12:02:31,709 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-27 12:02:31,709 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 GOOGL @ 89.70, PnL: 0.00, Cash: 81708.29, Equity: 100781.63
+2025-04-27 12:02:31,709 - src.risk.managers.simple - INFO - Created order: BUY 100 GOOGL @ 89.61
+2025-04-27 12:02:31,709 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=0.65 -> 1
+2025-04-27 12:02:31,710 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.01, MeanRev=0.98, Vol=0.00
+2025-04-27 12:02:31,710 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=0.64 -> 1
+2025-04-27 12:02:31,710 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.01, MeanRev=0.97, Vol=0.00
+2025-04-27 12:02:31,710 - src.execution.order_registry - INFO - Registered order: 1f0afc94-cf8e-4f63-ad9c-b6019ce23070
+2025-04-27 12:02:31,710 - src.execution.order_manager - INFO - Emitting order event: 1f0afc94-cf8e-4f63-ad9c-b6019ce23070
+2025-04-27 12:02:31,710 - src.execution.order_registry - INFO - Registered order: e8eb92df-0c0f-4263-b3d9-846b0673054d
+2025-04-27 12:02:31,711 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 GOOGL @ 89.68
+2025-04-27 12:02:31,711 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: e8eb92df-0c0f-4263-b3d9-846b0673054d
+2025-04-27 12:02:31,711 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for GOOGL after state change
+2025-04-27 12:02:31,711 - src.execution.order_manager - INFO - Updated order with fill: Order(e8eb92df-0c0f-4263-b3d9-846b0673054d, GOOGL, BUY, 100, FILLED)
+2025-04-27 12:02:31,711 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-27 12:02:31,711 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 GOOGL @ 89.68, PnL: 0.00, Cash: 72731.53, Equity: 100778.61
+2025-04-27 12:02:31,711 - src.risk.managers.simple - INFO - Created order: BUY 100 GOOGL @ 89.59
+2025-04-27 12:02:31,711 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=0.64 -> 1
+2025-04-27 12:02:31,711 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.01, MeanRev=0.97, Vol=0.00
+2025-04-27 12:02:31,712 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=0.64 -> 1
+2025-04-27 12:02:31,712 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.01, MeanRev=0.97, Vol=0.00
+2025-04-27 12:02:31,712 - src.execution.order_registry - INFO - Registered order: 02289df5-f4be-4653-84e1-66d0e9328727
+2025-04-27 12:02:31,712 - src.execution.order_manager - INFO - Emitting order event: 02289df5-f4be-4653-84e1-66d0e9328727
+2025-04-27 12:02:31,712 - src.execution.order_registry - INFO - Registered order: d474d9b1-b82e-4bcd-b35b-91059d9e5b76
+2025-04-27 12:02:31,712 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 GOOGL @ 89.56
+2025-04-27 12:02:31,712 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: d474d9b1-b82e-4bcd-b35b-91059d9e5b76
+2025-04-27 12:02:31,712 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for GOOGL after state change
+2025-04-27 12:02:31,712 - src.execution.order_manager - INFO - Updated order with fill: Order(d474d9b1-b82e-4bcd-b35b-91059d9e5b76, GOOGL, BUY, 100, FILLED)
+2025-04-27 12:02:31,712 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-27 12:02:31,712 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 GOOGL @ 89.56, PnL: 0.00, Cash: 63766.40, Equity: 100736.30
+2025-04-27 12:02:31,712 - src.risk.managers.simple - INFO - Created order: BUY 100 GOOGL @ 89.47
+2025-04-27 12:02:31,712 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=0.64 -> 1
+2025-04-27 12:02:31,712 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.02, MeanRev=0.97, Vol=0.00
+2025-04-27 12:02:31,712 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: mean_reversion -> neutral
+2025-04-27 12:02:31,713 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> mean_reversion
+2025-04-27 12:02:31,718 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: mean_reversion -> neutral
+2025-04-27 12:02:31,719 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: mean_reversion -> neutral
+2025-04-27 12:02:31,721 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for GOOGL: mean_reversion -> neutral
+2025-04-27 12:02:31,722 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> mean_reversion
+2025-04-27 12:02:31,723 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for GOOGL: neutral -> mean_reversion
+2025-04-27 12:02:31,724 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for GOOGL: mean_reversion -> neutral
+2025-04-27 12:02:31,724 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: mean_reversion -> neutral
+2025-04-27 12:02:31,725 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> mean_reversion
+2025-04-27 12:02:31,726 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> mean_reversion
+2025-04-27 12:02:31,727 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: mean_reversion -> neutral
+2025-04-27 12:02:31,730 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for GOOGL: neutral -> mean_reversion
+2025-04-27 12:02:31,734 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=-0.52 -> -1
+2025-04-27 12:02:31,734 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=-0.77, Vol=0.00
+2025-04-27 12:02:31,734 - src.execution.order_registry - INFO - Registered order: effde714-1b8d-4979-b980-8501400be779
+2025-04-27 12:02:31,734 - src.execution.order_manager - INFO - Emitting order event: effde714-1b8d-4979-b980-8501400be779
+2025-04-27 12:02:31,734 - src.execution.order_registry - INFO - Registered order: f799fbbd-c6c3-49da-b9ae-8fc801d43a0a
+2025-04-27 12:02:31,734 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 GOOGL @ 89.11
+2025-04-27 12:02:31,734 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: f799fbbd-c6c3-49da-b9ae-8fc801d43a0a
+2025-04-27 12:02:31,734 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for GOOGL after state change
+2025-04-27 12:02:31,734 - src.execution.order_manager - INFO - Updated order with fill: Order(f799fbbd-c6c3-49da-b9ae-8fc801d43a0a, GOOGL, SELL, 100, FILLED)
+2025-04-27 12:02:31,734 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: -53.09
+2025-04-27 12:02:31,734 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 GOOGL @ 89.11, PnL: -53.09, Cash: 72668.91, Equity: 100424.75
+2025-04-27 12:02:31,734 - src.risk.managers.simple - INFO - Created order: SELL 100 GOOGL @ 89.20
+2025-04-27 12:02:31,736 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=-0.59 -> -1
+2025-04-27 12:02:31,736 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.90, Vol=0.00
+2025-04-27 12:02:31,736 - src.execution.order_registry - INFO - Registered order: dafe5d13-4eef-4726-bb5b-c4c1a003ba33
+2025-04-27 12:02:31,736 - src.execution.order_manager - INFO - Emitting order event: dafe5d13-4eef-4726-bb5b-c4c1a003ba33
+2025-04-27 12:02:31,736 - src.execution.order_registry - INFO - Registered order: 3c85c613-31b5-4f0b-8a28-41fe2919c1fe
+2025-04-27 12:02:31,736 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 GOOGL @ 89.70
+2025-04-27 12:02:31,736 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 3c85c613-31b5-4f0b-8a28-41fe2919c1fe
+2025-04-27 12:02:31,736 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for GOOGL after state change
+2025-04-27 12:02:31,736 - src.execution.order_manager - INFO - Updated order with fill: Order(3c85c613-31b5-4f0b-8a28-41fe2919c1fe, GOOGL, SELL, 100, FILLED)
+2025-04-27 12:02:31,736 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 5.99
+2025-04-27 12:02:31,736 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100 GOOGL @ 89.70, PnL: 5.99, Cash: 81630.44, Equity: 100431.11
+2025-04-27 12:02:31,736 - src.risk.managers.simple - INFO - Created order: SELL 100 GOOGL @ 89.79
+2025-04-27 12:02:31,736 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=-0.59 -> -1
+2025-04-27 12:02:31,736 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=-0.90, Vol=0.00
+2025-04-27 12:02:31,738 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for MSFT: neutral -> mean_reversion
+2025-04-27 12:02:31,749 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for GOOGL: mean_reversion -> neutral
+2025-04-27 12:02:31,752 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for GOOGL: neutral -> mean_reversion
+2025-04-27 12:02:31,757 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=0.52 -> 1
+2025-04-27 12:02:31,757 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=0.77, Vol=0.00
+2025-04-27 12:02:31,757 - src.execution.order_registry - INFO - Registered order: 9cb56c0c-dcb6-4a55-9992-5eb35202f1b9
+2025-04-27 12:02:31,757 - src.execution.order_manager - INFO - Emitting order event: 9cb56c0c-dcb6-4a55-9992-5eb35202f1b9
+2025-04-27 12:02:31,757 - src.execution.order_registry - INFO - Registered order: bdb18f9e-f298-4249-ae05-2c761333827e
+2025-04-27 12:02:31,757 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 GOOGL @ 90.40
+2025-04-27 12:02:31,757 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: bdb18f9e-f298-4249-ae05-2c761333827e
+2025-04-27 12:02:31,757 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for GOOGL after state change
+2025-04-27 12:02:31,757 - src.execution.order_manager - INFO - Updated order with fill: Order(bdb18f9e-f298-4249-ae05-2c761333827e, GOOGL, BUY, 100, FILLED)
+2025-04-27 12:02:31,757 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-27 12:02:31,757 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 GOOGL @ 90.40, PnL: 0.00, Cash: 72581.32, Equity: 100298.41
+2025-04-27 12:02:31,757 - src.risk.managers.simple - INFO - Created order: BUY 100 GOOGL @ 90.31
+2025-04-27 12:02:31,758 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for GOOGL (mean_reversion regime): Combined=0.52 -> 1
+2025-04-27 12:02:31,758 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.01, MeanRev=0.77, Vol=0.00
+2025-04-27 12:02:31,758 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: mean_reversion -> neutral
+2025-04-27 12:02:31,763 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: neutral -> mean_reversion
+2025-04-27 12:02:31,765 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for AAPL: mean_reversion -> neutral
+2025-04-27 12:02:31,767 - src.execution.backtest.backtest - INFO - Backtest completed after 241 iterations
+2025-04-27 12:02:31,769 - src.execution.backtest.backtest - INFO - Trade stats: 17 trades, 5 wins, 2 losses
+2025-04-27 12:02:31,769 - src.execution.backtest.backtest - INFO - PnL sum: 262.65
+2025-04-27 12:02:31,769 - src.execution.backtest.backtest - INFO - Min PnL: -571.34, Max PnL: 433.71
+2025-04-27 12:02:31,779 - src.execution.backtest.backtest - INFO - Backtest complete
+2025-04-27 12:02:31,785 - src.analytics.reporting.report_generator - INFO - Saved equity curve to './results/regime_ensemble/equity_curve_20250427_120231.csv'
+2025-04-27 12:02:31,785 - src.analytics.reporting.report_generator - INFO - Saved detailed report to './results/regime_ensemble/backtest_report_20250427_120231.txt'
+2025-04-27 12:02:31,786 - src.analytics.reporting.report_generator - INFO - Saved trade log to './results/regime_ensemble/trades_20250427_120231.csv'
