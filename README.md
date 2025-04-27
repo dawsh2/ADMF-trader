@@ -1,37 +1,65 @@
-# ADMF-Trader: Modular Algorithmic Trading Framework
+# ADMF-Trader (Adaptive Decision Making Framework Trader)
 
-ADMF-Trader is a component-based, event-driven framework for algorithmic trading strategy development, optimization, and backtesting.
+A modular, event-driven algorithmic trading system with a component-based architecture designed for strategy development, backtesting, and optimization.
 
-## Core Architecture
+## System Overview
 
-The system follows a hierarchical component architecture with clean separation of concerns:
+ADMF-Trader is built around a hierarchical component architecture that allows for:
+
+- Compositional strategy design (build complex strategies from simple components)
+- Parameter optimization across all levels
+- Regime-adaptive trading approaches
+- Clean separation of concerns
 
 ```
-┌───────────┐    ┌───────────┐    ┌──────────┐    ┌───────────┐
-│ Market    │    │ Technical │    │ Features │    │ Trading   │
-│ Data      │───>│ Indicators│───>│          │───>│ Rules     │
-└───────────┘    └───────────┘    └──────────┘    └───────────┘
-                                                       │
-                                                       ▼
-┌───────────┐    ┌───────────┐    ┌──────────┐    ┌───────────┐
-│ Order     │<───│ Risk      │<───│ Strategy │<───│ Signal    │
-│ Generation│    │ Management│    │          │    │ Generation│
-└───────────┘    └───────────┘    └──────────┘    └───────────┘
+Market Data --> Signal Generators --> Strategy --> Risk --> Order Execution
 ```
 
-### Key Components
+## Core Architecture Principles
 
-- **Event System**: Core event bus and event handling mechanisms
-- **Data Module**: Market data sources and transformations
-- **Strategy Module**: Multi-level strategy components
-- **Risk Module**: Portfolio tracking and position sizing
-- **Execution Module**: Order and execution management
-- **Analytics**: Performance metrics and reporting
-- **Optimization**: Strategy parameter optimization
+- **Component-Based Design**: All trading elements inherit from a common Component base class
+- **Hierarchical Structure**: Clear progression from low-level to high-level components
+- **Compositional Approach**: Complex strategies built by combining simpler components
+- **Parameter Management**: Unified interface for parameter getting/setting
+- **Optimization Support**: Design that facilitates parameter and weight optimization
+- **Event-Driven**: Clean event flow between system components
 
-## Strategy Component Hierarchy
+## System Architecture
 
-All trading elements inherit from a common `Component` base class with a hierarchical structure:
+```
+src/
+├── core/
+│   ├── events/               # Event system
+│   ├── config/               # Configuration
+│   ├── di/                   # Dependency injection
+│   └── utils/                # Common utilities
+├── data/
+│   ├── sources/              # Data sources
+│   ├── transformers/         # Data transformations
+│   └── handlers/             # Data handling
+├── strategy/
+│   ├── components/           # Strategy components
+│   │   ├── indicators/       # Technical indicators
+│   │   ├── features/         # Feature extraction
+│   │   └── rules/            # Trading rules
+│   ├── implementations/      # Concrete strategies
+│   └── optimization/         # Strategy optimization
+├── risk/
+│   ├── portfolio/            # Portfolio state
+│   │   ├── portfolio.py      # Portfolio management
+│   │   └── position.py       # Position tracking
+│   └── managers/             # Risk managers
+├── execution/
+│   ├── broker/               # Broker interfaces
+│   ├── backtest/             # Backtesting tools
+│   ├── order_registry.py     # Centralized order tracking
+│   └── order_manager.py      # Order management
+└── analytics/
+    ├── metrics/              # Performance metrics
+    └── reporting/            # Report generation
+```
+
+## Component Hierarchy
 
 ```
 Component (Base)
@@ -57,124 +85,153 @@ Component (Base)
     └── ...
 ```
 
-## Dependency Injection & Configuration
+## Key Features
 
-ADMF-Trader uses a robust DI/config system for all components:
+- **Event-driven Architecture**: Clean event flow between system components
+- **Centralized Order Registry**: Single source of truth for order state
+- **Component Discovery**: Automatic discovery and registration of components
+- **Dependency Injection**: Clean component initialization and configuration
+- **Regime-adaptive Strategies**: Support for different market regimes
+- **Integration with TA-Lib**: Comprehensive technical indicators
+- **Optimization with Optuna**: Parameter and weight optimization
 
-- **Centralized Configuration**: YAML-based with environment variable support
-- **Dependency Injection**: Automatic component creation and dependency resolution
-- **Component Registry**: Dynamic discovery and management of components
-- **Bootstrap Pattern**: Clean system initialization and setup
+## Getting Started
 
-## Event Flow
+### Installation
 
-The system follows a well-defined event flow:
-
-1. **Market Data → Bar Events**: Sourced from files, APIs, or live feeds
-2. **Bar Events → Signal Events**: Generated by strategies based on indicators and rules
-3. **Signal Events → Order Events**: Transformed by risk management rules
-4. **Order Events → Fill Events**: Handled by broker interfaces
-5. **Fill Events → Portfolio Updates**: Impact positions and equity
-
-## Centralized Order Registry
-
-Order lifecycle is managed through a centralized registry:
-
-- **Single Source of Truth**: All components reference the same order state
-- **State Machine**: Validated order state transitions
-- **Audit Trail**: Complete history of all order events
-- **Thread Safety**: Atomic operations for concurrent processing
-
-## Project Structure
-
-```
-src/
-├── core/
-│   ├── events/               # Event system
-│   ├── config/               # Configuration
-│   ├── di/                   # Dependency injection
-│   └── utils/                # Common utilities
-├── data/
-│   ├── sources/              # Data sources
-│   ├── transformers/         # Data transformations
-│   └── handlers/             # Data handling
-├── strategy/
-│   ├── components/           # Strategy components
-│   │   ├── indicators/       # Technical indicators
-│   │   ├── features/         # Feature extraction
-│   │   └── rules/            # Trading rules
-│   ├── implementations/      # Concrete strategies
-│   └── optimization/         # Strategy optimization
-├── risk/
-│   ├── portfolio/            # Portfolio state
-│   └── managers/             # Risk managers
-├── execution/
-│   ├── broker/               # Broker interfaces
-│   ├── backtest/             # Backtesting tools
-│   └── order_manager.py      # Order management
-└── analytics/
-    ├── metrics/              # Performance metrics
-    └── reporting/            # Report generation
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/admf-trader.git
+cd admf-trader
 ```
 
-## Usage Example
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+### Running the System
+
+The main entry point is `main.py` which provides a clean interface to the system:
+
+```bash
+python main.py --config config/backtest.yaml
+```
+
+### Configuration
+
+The system is configured using YAML files which define the components, parameters, and execution settings:
+
+```yaml
+# Example configuration
+strategies:
+  ma_crossover:
+    class: strategies.composite_strategy.CompositeStrategy
+    parameters:
+      combination_method: majority
+      symbols: ['AAPL', 'MSFT']
+      components:
+        rule.ma_fast:
+          class: strategies.rules.ma_crossover.MACrossoverRule
+          parameters:
+            fast_window: 10
+            slow_window: 20
+            price_key: close
+            weight: 1.0
+```
+
+## Optimization Framework
+
+The system features a modular optimization architecture that allows for sophisticated parameter tuning:
+
+- **Hierarchical Optimization**: Optimize components at different levels independently
+- **Multi-Stage Optimization**: Sequential optimization of different component types
+- **Regime-Based Optimization**: Per-regime parameter optimization
+- **Parameter Space Definition**: Each component defines its own optimization parameter space
+- **Integration with Optuna**: Leverages advanced Bayesian optimization techniques
+- **Distributed Optimization**: Support for parallel and distributed optimization runs
+- **Optimization Persistence**: Save/load optimization studies for continued experimentation
+
+This architecture supports various optimization scenarios:
+1. Parameter Optimization for any component
+2. Weight Optimization for rules in composite strategies 
+3. Regime-Specific Parameter Sets
+4. Component Selection
+5. Meta-Labeling optimization
+
+### Example: Ensemble Regime Strategy Optimization
+
+The framework makes complex optimization workflows concise and manageable. Here's an example of an ensemble regime strategy optimization:
 
 ```python
-def main():
-    # Initialize bootstrap
-    bootstrap = Bootstrap(config_files=["config.yaml"])
-    container, config = bootstrap.setup()
-    
-    # Run backtest
-    backtest = container.get("backtest")
-    result = backtest.run(
-        start_date=datetime.datetime(2020, 1, 1),
-        end_date=datetime.datetime(2020, 12, 31),
-        symbols=["AAPL", "MSFT"]
-    )
-    
-    # Generate report
-    report_generator = container.get("report_generator")
-    report = report_generator.generate_detailed_report()
-    report_generator.save_report(report, "backtest_report.txt")
+# 1. Setup regime detector and base rules
+volatility_regime = VolatilityRegimeDetector(lookback=50, threshold=0.02)
+trend_regime = TrendRegimeDetector(ma_period=100, threshold=0.01)
+
+# Define rules to use in our strategy
+rules = [
+    MACrossoverRule(name="ma_fast", parameters={"fast_window": 10, "slow_window": 30}),
+    RSIRule(name="rsi", parameters={"period": 14, "overbought": 70, "oversold": 30}),
+    BreakoutRule(name="breakout", parameters={"lookback": 20, "threshold": 1.5})
+]
+
+# 2. Create composite strategy with regime adaptation
+strategy = RegimeStrategy(event_bus, data_handler)
+strategy.set_regime_detector(volatility_regime)
+for rule in rules:
+    strategy.add_rule(rule)
+
+# 3. Optimize rule parameters independently (within each regime)
+optimizer = RegimeOptimizer(strategy, data_handler, performance_calculator, volatility_regime)
+
+# Detect regimes in historical data
+regimes = optimizer.detect_regimes(historical_data)
+
+# Create optimizers for each regime
+optimizer.create_optimizers(regimes, metric='sharpe_ratio')
+
+# Run optimization (each regime optimized independently)
+regime_params = optimizer.optimize_regimes(n_trials=100)
+
+# 4. Apply optimized parameters per regime
+optimizer.configure_regime_strategy(regime_params)
+
+# 5. Optimize rule weights per regime
+weight_optimizer = RegimeWeightOptimizer(strategy, data_handler, performance_calculator)
+weight_optimizer.optimize(n_trials=50)
+
+# 6. Final validation on out-of-sample data
+results = backtest.run(
+    strategy=strategy,
+    start_date='2022-01-01',
+    end_date='2023-01-01',
+    symbols=['AAPL', 'MSFT', 'GOOG']
+)
+
+# Results show performance with regime-specific parameters and weights
+print(f"Sharpe Ratio: {results['metrics']['sharpe_ratio']}")
+print(f"Max Drawdown: {results['metrics']['max_drawdown']}")
 ```
 
-## Running a Backtest
-
-To run a backtest:
-
-1. Create a configuration file (see `config/backtest.yaml`)
-2. Run the backtest script:
-   ```bash
-   python scripts/run_backtest.py --config config/backtest.yaml --output-dir results
-   ```
-
-## Development Status
-
-- **Core Event System**: Complete
-- **Data Handling**: Complete
-- **Strategy Framework**: Complete
-- **Risk Management**: Complete
-- **Order Registry**: Complete
-- **Backtest Engine**: Complete
-- **Performance Analytics**: Complete
-- **Optimization Framework**: In Progress
+In this example, the framework handles:
+- Automatic parameter space definition for each rule
+- Independent optimization of parameters under different market regimes
+- Optimization of rule weights to find the optimal ensemble
+- All with clean, readable code and minimal boilerplate
 
 ## Next Steps
 
-1. **Regime Detection**: Complete regime detection components
-2. **Visualization**: Implement standard performance charts
-3. **Advanced Optimization**: Implement parameter space optimization
-4. **Paper Trading Integration**: Prepare for live testing
+1. **Complete Optimization Framework**: Finish implementation of advanced optimization techniques
+2. **Options Spread Trading**: Implement options spread trading capabilities
+3. **Reinforcement Learning**: Integrate RL agents for strategy development
+4. **Live Trading**: Implement paper trading and production interfaces
+5. **Visualization System**: Build standard performance charts and reporting
+6. **Alternative Data**: Explore integration with alternative data sources
 
-## Best Practices
+## Contributing
 
-1. **Use Dependency Injection**: Let the container manage dependencies
-2. **Centralize Configuration**: All parameters should come from config
-3. **Follow Event Flow**: Respect the component responsibility chain
-4. **Component Registration Order**: Pay attention to event handler registration
-5. **Test Components in Isolation**: Use the DI container for testing
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-TBD
+This project is licensed under the MIT License - see the LICENSE file for details.
