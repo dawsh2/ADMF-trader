@@ -1,0 +1,170 @@
+# Configuration for Regime Ensemble Strategy - HEAD_1min
+# ------------------------------------------------------
+
+# Global backtest settings
+backtest:
+  initial_capital: 100000.0
+  symbols: ['SPY']
+  data_dir: "./data"
+  timeframe: "1min"
+  data_source: "csv"
+  start_date: "2023-01-01"
+  end_date: "2023-12-31"
+
+# Data handling configuration
+data:
+  source_type: "csv"
+  data_dir: "./data"
+  file_pattern: "{symbol}_{timeframe}.csv"
+  timestamp_column: "date"
+  price_columns:
+    open: "open" 
+    high: "high"
+    low: "low"
+    close: "close"
+    volume: "volume"
+  custom_data:
+    file: "HEAD_1min.csv"
+    symbol_column: "symbol"  # Set to null if single symbol
+    date_format: "%Y-%m-%d %H:%M:%S"
+
+# Strategy configuration
+strategy:
+  regime_ensemble:
+    enabled: true
+    symbols: ['SPY']
+    lookback_window: 100  # Data lookback for calculations
+    combination_method: "weighted_average"  # weighted_average, majority, unanimous
+    signal_threshold: 0.3  # Absolute threshold for signals
+    
+    # Regime detection configuration
+    regime_detector:
+      class: "strategy.components.regime.volatility_regime_detector.VolatilityRegimeDetector"
+      parameters:
+        lookback: 20
+        volatility_window: 5
+        high_vol_threshold: 0.015
+        low_vol_threshold: 0.005
+        smoothing_factor: 0.2
+    
+    # Regime strategy type and mappings
+    regime_strategy_type: "params"  # "filter", "selection", or "params"
+    
+    # Regime-specific configuration
+    regime_mappings:
+      trending:
+        components:
+          trend:
+            weight: 1.0
+            lookback: 20
+            threshold: 0.01
+          mean_rev:
+            weight: 0.2
+            lookback: 10
+            threshold: 0.02
+          vol:
+            weight: 0.5
+            lookback: 5
+            threshold: 0.01
+      
+      mean_reversion:
+        components:
+          trend:
+            weight: 0.2   # Reduced weight in mean reversion regime
+            lookback: 10
+            threshold: 0.02
+          mean_rev:
+            weight: 1.0   # Increased weight in mean reversion regime
+            lookback: 5
+            threshold: 0.01
+          vol:
+            weight: 0.7
+            lookback: 3
+            threshold: 0.005
+      
+      high_volatility:
+        components:
+          trend:
+            weight: 0.3
+            lookback: 10
+            threshold: 0.03
+          mean_rev:
+            weight: 0.3
+            lookback: 5
+            threshold: 0.02
+          vol:
+            weight: 1.0   # Increased weight in high volatility regime
+            lookback: 3
+            threshold: 0.01
+    
+    # Default component settings (used when no regime-specific params are set)
+    components:
+      trend:
+        class: "strategy.components.rules.trend_rule.TrendFollowingRule"
+        parameters:
+          lookback: 20
+          ma_type: "EMA"
+          price_key: "close"
+          threshold: 0.01
+          signal_scale: 1.0
+          weight: 0.6
+          debug: true  # Enable debugging output
+      
+      mean_rev:
+        class: "strategy.components.rules.mean_reversion_rule.MeanReversionRule"
+        parameters:
+          lookback: 10
+          price_key: "close"
+          std_dev_periods: 20
+          std_dev_mult: 2.0
+          signal_scale: 1.0
+          weight: 0.6
+          debug: true  # Enable debugging output
+      
+      vol:
+        class: "strategy.components.rules.volatility_rule.VolatilityBreakoutRule"
+        parameters:
+          lookback: 5
+          price_key: "close"
+          volatility_window: 10
+          breakout_threshold: 1.0
+          signal_scale: 1.0
+          weight: 0.4
+          debug: true  # Enable debugging output
+
+# Risk management settings
+risk_manager:
+  position_size: 100
+  max_position_pct: 0.1  # Max 10% of equity per position
+  max_risk_per_trade: 0.01  # Max 1% risk per trade
+  max_open_trades: 5
+  
+# Order handling settings
+order_manager:
+  default_order_type: "MARKET"
+
+# Broker simulation settings
+broker:
+  slippage: 0.0001  # 0.01% slippage
+  commission: 0.0005  # 0.05% commission
+  delay: 0  # No delay in order processing (instant fills)
+
+# Performance metrics settings
+performance:
+  metrics:
+    - "total_return"
+    - "sharpe_ratio"
+    - "max_drawdown"
+    - "win_rate"
+    - "profit_factor"
+  
+# Logging settings
+logging:
+  level: "INFO"
+  components:
+    - "strategy.implementations.regime_ensemble_strategy"
+    - "strategy.components.rules.trend_rule"
+    - "strategy.components.rules.mean_reversion_rule"
+    - "strategy.components.rules.volatility_rule"
+    - "execution.order_registry"
+    - "execution.order_manager"

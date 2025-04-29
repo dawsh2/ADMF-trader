@@ -1,0 +1,418 @@
+(venv) daws@Mac ADMF-trader % python main.py --config config/regime_ensemble_SPY_1min.yaml
+Initializing system with configuration: config/regime_ensemble_SPY_1min.yaml
+2025-04-27 12:49:46,562 - src.core.bootstrap - INFO - Logging initialized at level INFO
+2025-04-27 12:49:46,562 - src.core.bootstrap - INFO - Log file: ./results/regime_ensemble_SPY_1min/regime_ensemble_SPY_1min.log
+2025-04-27 12:49:46,564 - src.core.bootstrap - INFO - Loaded configuration from config/regime_ensemble_SPY_1min.yaml
+2025-04-27 12:49:46,565 - src.core.bootstrap - INFO - Event system initialized
+2025-04-27 12:49:46,565 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-04-27 12:49:46,565 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-04-27 12:49:46,565 - src.core.bootstrap - INFO - Data components initialized with source type: csv
+2025-04-27 12:49:46,567 - src.core.bootstrap - INFO - Order registry initialized
+2025-04-27 12:49:46,569 - src.core.bootstrap - INFO - Execution components initialized with order registry
+2025-04-27 12:49:46,570 - src.core.bootstrap - INFO - Risk manager configured with position_size=100, max_position_pct=0.05
+2025-04-27 12:49:46,570 - src.core.bootstrap - INFO - Risk components initialized
+2025-04-27 12:49:46,572 - src.core.bootstrap - INFO - Discovering strategy implementations...
+2025-04-27 12:49:46,572 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-04-27 12:49:46,572 - src.core.utils.discovery - INFO - Registered component regime_ensemble in registry
+2025-04-27 12:49:46,572 - src.core.bootstrap - INFO - Discovered strategies: ma_crossover, regime_ensemble
+2025-04-27 12:49:46,572 - src.core.bootstrap - INFO - Requested strategy: regime_ensemble
+2025-04-27 12:49:46,572 - src.core.bootstrap - INFO - Available strategies in registry: ['ma_crossover', 'regime_ensemble']
+2025-04-27 12:49:46,572 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime Ensemble strategy initialized with 0 symbols
+2025-04-27 12:49:46,572 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime Ensemble strategy configured with 1 symbols
+2025-04-27 12:49:46,572 - src.core.bootstrap - INFO - Strategy 'regime_ensemble' initialized successfully
+2025-04-27 12:49:46,572 - src.core.bootstrap - INFO - Analytics components initialized
+2025-04-27 12:49:46,572 - src.core.bootstrap - INFO - System bootstrap complete
+Running backtest...
+2025-04-27 12:49:46,572 - src.execution.backtest.backtest - INFO - Using timeframe from config: 1min
+2025-04-27 12:49:46,573 - src.execution.backtest.backtest - INFO - Backtest setup complete
+2025-04-27 12:49:46,573 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_a3a2db99 to initial state with cash: $100000.00
+2025-04-27 12:49:46,573 - src.risk.managers.simple - INFO - Risk manager risk_manager_eeb46048 reset
+2025-04-27 12:49:46,573 - src.execution.order_registry - INFO - Order registry reset
+2025-04-27 12:49:46,573 - src.execution.order_manager - INFO - Reset order manager
+2025-04-27 12:49:46,573 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime Ensemble strategy regime_ensemble reset
+2025-04-27 12:49:46,573 - src.execution.backtest.backtest - INFO - Reset all components for backtest
+2025-04-27 12:49:46,573 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['SPY'] with timeframe: 1min
+2025-04-27 12:49:46,573 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/SPY_1min.csv
+2025-04-27 12:49:46,576 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 1774 rows
+2025-04-27 12:49:46,577 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2025-04-24 08:00:00+00:00
+2025-04-27 12:49:46,580 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2025-04-24 08:00:00+00:00
+2025-04-27 12:49:46,580 - src.data.sources.csv_handler - INFO - CSVDataSource: Removed timezone info from timestamps
+2025-04-27 12:49:46,581 - src.data.sources.csv_handler - INFO - CSVDataSource: Set timestamp as index
+2025-04-27 12:49:46,581 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2025-04-24 08:00:00 to 2025-04-25 23:59:00
+2025-04-27 12:49:46,581 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['symbol', 'open', 'high', 'low', 'close', 'volume', 'trade_count', 'vwap']
+2025-04-27 12:49:46,581 - src.data.historical_data_handler - INFO - Loaded 1774 bars for SPY from 2025-04-24 08:00:00 to 2025-04-25 23:59:00
+2025-04-27 12:49:46,581 - src.execution.backtest.backtest - INFO - Starting backtest
+2025-04-27 12:49:46,583 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for SPY: neutral -> mean_reversion
+2025-04-27 12:49:46,594 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.57 -> -1
+2025-04-27 12:49:46,594 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.85, Vol=0.00
+2025-04-27 12:49:46,594 - src.execution.order_registry - INFO - Registered order: 1d55a9bb-e37c-4856-a6cd-2d79030dc07e
+2025-04-27 12:49:46,594 - src.execution.order_manager - INFO - Emitting order event: 1d55a9bb-e37c-4856-a6cd-2d79030dc07e
+2025-04-27 12:49:46,595 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.57 -> -1
+2025-04-27 12:49:46,595 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.85, Vol=0.00
+2025-04-27 12:49:46,595 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.55 -> -1
+2025-04-27 12:49:46,595 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.83, Vol=0.00
+2025-04-27 12:49:46,595 - src.execution.order_registry - INFO - Registered order: 74b52f81-c4d7-4f76-aa39-bb4e51159044
+2025-04-27 12:49:46,595 - src.execution.order_manager - INFO - Emitting order event: 74b52f81-c4d7-4f76-aa39-bb4e51159044
+2025-04-27 12:49:46,595 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.55 -> -1
+2025-04-27 12:49:46,595 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.83, Vol=0.00
+2025-04-27 12:49:46,595 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.56 -> -1
+2025-04-27 12:49:46,595 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.84, Vol=0.00
+2025-04-27 12:49:46,595 - src.execution.order_registry - INFO - Registered order: d4fe0f2d-36c5-4bbb-85a7-9b811034cfe0
+2025-04-27 12:49:46,595 - src.execution.order_manager - INFO - Emitting order event: d4fe0f2d-36c5-4bbb-85a7-9b811034cfe0
+2025-04-27 12:49:46,595 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.56 -> -1
+2025-04-27 12:49:46,595 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.84, Vol=0.00
+2025-04-27 12:49:46,596 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.50 -> -1
+2025-04-27 12:49:46,596 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.76, Vol=0.00
+2025-04-27 12:49:46,596 - src.execution.order_registry - INFO - Registered order: 131f3c17-92a8-4273-be26-be0021e1ebc0
+2025-04-27 12:49:46,596 - src.execution.order_manager - INFO - Emitting order event: 131f3c17-92a8-4273-be26-be0021e1ebc0
+2025-04-27 12:49:46,597 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.52 -> -1
+2025-04-27 12:49:46,597 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.77, Vol=0.00
+2025-04-27 12:49:46,597 - src.execution.order_registry - INFO - Registered order: 1a9a5c25-db46-4bbd-8018-8a073d57840f
+2025-04-27 12:49:46,597 - src.execution.order_manager - INFO - Emitting order event: 1a9a5c25-db46-4bbd-8018-8a073d57840f
+2025-04-27 12:49:46,660 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.53 -> -1
+2025-04-27 12:49:46,660 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.79, Vol=0.00
+2025-04-27 12:49:46,660 - src.execution.order_registry - INFO - Registered order: deec24fe-d8f1-4f47-9661-6a006063e8a5
+2025-04-27 12:49:46,661 - src.execution.order_manager - INFO - Emitting order event: deec24fe-d8f1-4f47-9661-6a006063e8a5
+2025-04-27 12:49:46,661 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.53 -> -1
+2025-04-27 12:49:46,661 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.79, Vol=0.00
+2025-04-27 12:49:46,661 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.51 -> -1
+2025-04-27 12:49:46,661 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.76, Vol=0.00
+2025-04-27 12:49:46,661 - src.execution.order_registry - INFO - Registered order: eec19cfa-d2f9-434a-9269-36b7e60617a5
+2025-04-27 12:49:46,661 - src.execution.order_manager - INFO - Emitting order event: eec19cfa-d2f9-434a-9269-36b7e60617a5
+2025-04-27 12:49:46,661 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.51 -> -1
+2025-04-27 12:49:46,661 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.76, Vol=0.00
+2025-04-27 12:49:46,663 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for SPY: mean_reversion -> neutral
+2025-04-27 12:49:46,663 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for SPY: neutral -> mean_reversion
+2025-04-27 12:49:46,664 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for SPY: mean_reversion -> neutral
+2025-04-27 12:49:46,665 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for SPY: neutral -> mean_reversion
+2025-04-27 12:49:46,668 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for SPY: mean_reversion -> neutral
+2025-04-27 12:49:46,669 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for SPY: neutral -> mean_reversion
+2025-04-27 12:49:46,674 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for SPY: mean_reversion -> neutral
+2025-04-27 12:49:46,674 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for SPY: neutral -> mean_reversion
+2025-04-27 12:49:46,675 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for SPY: mean_reversion -> neutral
+2025-04-27 12:49:46,684 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for SPY: neutral -> mean_reversion
+2025-04-27 12:49:46,742 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.55 -> -1
+2025-04-27 12:49:46,742 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.82, Vol=0.00
+2025-04-27 12:49:46,742 - src.execution.order_registry - INFO - Registered order: 0dfb9eb6-3aa1-4222-b24b-fee3d0d8b520
+2025-04-27 12:49:46,742 - src.execution.order_manager - INFO - Emitting order event: 0dfb9eb6-3aa1-4222-b24b-fee3d0d8b520
+2025-04-27 12:49:46,743 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.55 -> -1
+2025-04-27 12:49:46,743 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.82, Vol=0.00
+2025-04-27 12:49:46,743 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.60 -> -1
+2025-04-27 12:49:46,743 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.90, Vol=0.00
+2025-04-27 12:49:46,743 - src.execution.order_registry - INFO - Registered order: ca850924-c0e9-4115-8535-7ba4aaa887d5
+2025-04-27 12:49:46,743 - src.execution.order_manager - INFO - Emitting order event: ca850924-c0e9-4115-8535-7ba4aaa887d5
+2025-04-27 12:49:46,743 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.60 -> -1
+2025-04-27 12:49:46,743 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.90, Vol=0.00
+2025-04-27 12:49:46,861 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.52 -> 1
+2025-04-27 12:49:46,861 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.79, Vol=0.00
+2025-04-27 12:49:46,861 - src.execution.order_registry - INFO - Registered order: e24c534b-97fa-407b-b7ac-9c8088f006a5
+2025-04-27 12:49:46,861 - src.execution.order_manager - INFO - Emitting order event: e24c534b-97fa-407b-b7ac-9c8088f006a5
+2025-04-27 12:49:46,861 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,861 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,861 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,861 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,861 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.52 -> 1
+2025-04-27 12:49:46,861 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.79, Vol=0.00
+2025-04-27 12:49:46,862 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.52 -> 1
+2025-04-27 12:49:46,862 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.79, Vol=0.00
+2025-04-27 12:49:46,862 - src.execution.order_registry - INFO - Registered order: 461cb133-a696-4eee-af91-29711638ad88
+2025-04-27 12:49:46,862 - src.execution.order_manager - INFO - Emitting order event: 461cb133-a696-4eee-af91-29711638ad88
+2025-04-27 12:49:46,862 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,862 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,862 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,862 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,862 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.52 -> 1
+2025-04-27 12:49:46,862 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.79, Vol=0.00
+2025-04-27 12:49:46,863 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.56 -> 1
+2025-04-27 12:49:46,863 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.84, Vol=0.00
+2025-04-27 12:49:46,863 - src.execution.order_registry - INFO - Registered order: 769855b7-c274-4d0d-9718-aebf0d0a8189
+2025-04-27 12:49:46,863 - src.execution.order_manager - INFO - Emitting order event: 769855b7-c274-4d0d-9718-aebf0d0a8189
+2025-04-27 12:49:46,863 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,863 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,863 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,863 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,863 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.56 -> 1
+2025-04-27 12:49:46,864 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.84, Vol=0.00
+2025-04-27 12:49:46,866 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.50 -> 1
+2025-04-27 12:49:46,866 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.76, Vol=0.00
+2025-04-27 12:49:46,866 - src.execution.order_registry - INFO - Registered order: d9eb35eb-783b-45b2-8dd8-e021310e8fc7
+2025-04-27 12:49:46,866 - src.execution.order_manager - INFO - Emitting order event: d9eb35eb-783b-45b2-8dd8-e021310e8fc7
+2025-04-27 12:49:46,866 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,866 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,866 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,866 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,866 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.50 -> 1
+2025-04-27 12:49:46,866 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.76, Vol=0.00
+2025-04-27 12:49:46,868 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.51 -> 1
+2025-04-27 12:49:46,868 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.77, Vol=0.00
+2025-04-27 12:49:46,869 - src.execution.order_registry - INFO - Registered order: 0dba37fd-0dd7-4be7-afcb-0752e4450fb6
+2025-04-27 12:49:46,869 - src.execution.order_manager - INFO - Emitting order event: 0dba37fd-0dd7-4be7-afcb-0752e4450fb6
+2025-04-27 12:49:46,869 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,869 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,869 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,869 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:46,869 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.51 -> 1
+2025-04-27 12:49:46,869 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.77, Vol=0.00
+2025-04-27 12:49:46,900 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.54 -> -1
+2025-04-27 12:49:46,900 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.81, Vol=0.00
+2025-04-27 12:49:46,900 - src.execution.order_registry - INFO - Registered order: d46d88d6-01eb-4c51-be53-e423a5cd495a
+2025-04-27 12:49:46,900 - src.execution.order_manager - INFO - Emitting order event: d46d88d6-01eb-4c51-be53-e423a5cd495a
+2025-04-27 12:49:46,900 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.54 -> -1
+2025-04-27 12:49:46,900 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.81, Vol=0.00
+2025-04-27 12:49:47,034 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.50 -> 1
+2025-04-27 12:49:47,034 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.76, Vol=0.00
+2025-04-27 12:49:47,034 - src.execution.order_registry - INFO - Registered order: 414b290f-b0c2-4795-93c1-84445f86f174
+2025-04-27 12:49:47,034 - src.execution.order_manager - INFO - Emitting order event: 414b290f-b0c2-4795-93c1-84445f86f174
+2025-04-27 12:49:47,034 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:47,034 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:47,034 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:47,034 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:47,034 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.50 -> 1
+2025-04-27 12:49:47,034 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.76, Vol=0.00
+2025-04-27 12:49:47,076 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.53 -> -1
+2025-04-27 12:49:47,076 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.79, Vol=0.00
+2025-04-27 12:49:47,076 - src.execution.order_registry - INFO - Registered order: 139b115c-1906-4a64-935f-6dd32604fb62
+2025-04-27 12:49:47,076 - src.execution.order_manager - INFO - Emitting order event: 139b115c-1906-4a64-935f-6dd32604fb62
+2025-04-27 12:49:47,076 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.53 -> -1
+2025-04-27 12:49:47,077 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.79, Vol=0.00
+2025-04-27 12:49:47,258 - src.execution.backtest.backtest - INFO - Processed 1000 iterations
+2025-04-27 12:49:47,330 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.54 -> -1
+2025-04-27 12:49:47,330 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.82, Vol=0.00
+2025-04-27 12:49:47,330 - src.execution.order_registry - INFO - Registered order: 200d6bc7-6a28-4a5a-a9d3-f7e54ef9ce34
+2025-04-27 12:49:47,330 - src.execution.order_manager - INFO - Emitting order event: 200d6bc7-6a28-4a5a-a9d3-f7e54ef9ce34
+2025-04-27 12:49:47,331 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.54 -> -1
+2025-04-27 12:49:47,331 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.82, Vol=0.00
+2025-04-27 12:49:47,331 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.53 -> -1
+2025-04-27 12:49:47,331 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.80, Vol=0.00
+2025-04-27 12:49:47,331 - src.execution.order_registry - INFO - Registered order: 758a38e4-036f-49f2-becc-f304feb5b62a
+2025-04-27 12:49:47,331 - src.execution.order_manager - INFO - Emitting order event: 758a38e4-036f-49f2-becc-f304feb5b62a
+2025-04-27 12:49:47,332 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.53 -> -1
+2025-04-27 12:49:47,332 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.80, Vol=0.00
+2025-04-27 12:49:47,333 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.53 -> -1
+2025-04-27 12:49:47,333 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.80, Vol=0.00
+2025-04-27 12:49:47,333 - src.execution.order_registry - INFO - Registered order: b035eb24-6152-4aa9-bfe5-6a0af3a91ad6
+2025-04-27 12:49:47,333 - src.execution.order_manager - INFO - Emitting order event: b035eb24-6152-4aa9-bfe5-6a0af3a91ad6
+2025-04-27 12:49:47,334 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.53 -> -1
+2025-04-27 12:49:47,334 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.80, Vol=0.00
+2025-04-27 12:49:47,334 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.52 -> -1
+2025-04-27 12:49:47,335 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.78, Vol=0.00
+2025-04-27 12:49:47,335 - src.execution.order_registry - INFO - Registered order: 2af9e8aa-0405-48c3-8d10-828ae86af86d
+2025-04-27 12:49:47,335 - src.execution.order_manager - INFO - Emitting order event: 2af9e8aa-0405-48c3-8d10-828ae86af86d
+2025-04-27 12:49:47,335 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.52 -> -1
+2025-04-27 12:49:47,335 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.78, Vol=0.00
+2025-04-27 12:49:47,336 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.51 -> -1
+2025-04-27 12:49:47,336 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.76, Vol=0.00
+2025-04-27 12:49:47,336 - src.execution.order_registry - INFO - Registered order: 42d0b399-0554-479a-9d91-af715a912d9c
+2025-04-27 12:49:47,336 - src.execution.order_manager - INFO - Emitting order event: 42d0b399-0554-479a-9d91-af715a912d9c
+2025-04-27 12:49:47,337 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.51 -> -1
+2025-04-27 12:49:47,337 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.76, Vol=0.00
+2025-04-27 12:49:47,338 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.57 -> -1
+2025-04-27 12:49:47,338 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.85, Vol=0.00
+2025-04-27 12:49:47,338 - src.execution.order_registry - INFO - Registered order: 821a230b-85d5-404c-a7aa-659c3416f067
+2025-04-27 12:49:47,338 - src.execution.order_manager - INFO - Emitting order event: 821a230b-85d5-404c-a7aa-659c3416f067
+2025-04-27 12:49:47,338 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.57 -> -1
+2025-04-27 12:49:47,338 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.85, Vol=0.00
+2025-04-27 12:49:47,339 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.56 -> -1
+2025-04-27 12:49:47,339 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.84, Vol=0.00
+2025-04-27 12:49:47,339 - src.execution.order_registry - INFO - Registered order: 00df99f2-dfd1-4b5f-901f-7331fa342c00
+2025-04-27 12:49:47,339 - src.execution.order_manager - INFO - Emitting order event: 00df99f2-dfd1-4b5f-901f-7331fa342c00
+2025-04-27 12:49:47,340 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.56 -> -1
+2025-04-27 12:49:47,340 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.84, Vol=0.00
+2025-04-27 12:49:47,341 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.61 -> -1
+2025-04-27 12:49:47,341 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.92, Vol=0.00
+2025-04-27 12:49:47,341 - src.execution.order_registry - INFO - Registered order: dd47d278-342a-4c10-843b-7318eed9063c
+2025-04-27 12:49:47,341 - src.execution.order_manager - INFO - Emitting order event: dd47d278-342a-4c10-843b-7318eed9063c
+2025-04-27 12:49:47,342 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.61 -> -1
+2025-04-27 12:49:47,342 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.92, Vol=0.00
+2025-04-27 12:49:47,342 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.60 -> -1
+2025-04-27 12:49:47,342 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.90, Vol=0.00
+2025-04-27 12:49:47,342 - src.execution.order_registry - INFO - Registered order: ce62d618-0557-420e-b58c-3573a8b70b32
+2025-04-27 12:49:47,342 - src.execution.order_manager - INFO - Emitting order event: ce62d618-0557-420e-b58c-3573a8b70b32
+2025-04-27 12:49:47,343 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.60 -> -1
+2025-04-27 12:49:47,343 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.90, Vol=0.00
+2025-04-27 12:49:47,344 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.60 -> -1
+2025-04-27 12:49:47,344 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.90, Vol=0.00
+2025-04-27 12:49:47,344 - src.execution.order_registry - INFO - Registered order: 15de3198-2ebd-41c1-a14c-ce7f6033e70d
+2025-04-27 12:49:47,344 - src.execution.order_manager - INFO - Emitting order event: 15de3198-2ebd-41c1-a14c-ce7f6033e70d
+2025-04-27 12:49:47,345 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.60 -> -1
+2025-04-27 12:49:47,345 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.90, Vol=0.00
+2025-04-27 12:49:47,345 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.53 -> -1
+2025-04-27 12:49:47,345 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.79, Vol=0.00
+2025-04-27 12:49:47,345 - src.execution.order_registry - INFO - Registered order: 2b41c071-cb50-4a17-bee4-fe28a8f8d441
+2025-04-27 12:49:47,345 - src.execution.order_manager - INFO - Emitting order event: 2b41c071-cb50-4a17-bee4-fe28a8f8d441
+2025-04-27 12:49:47,346 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.53 -> -1
+2025-04-27 12:49:47,346 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.79, Vol=0.00
+2025-04-27 12:49:47,347 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.53 -> -1
+2025-04-27 12:49:47,347 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.80, Vol=0.00
+2025-04-27 12:49:47,347 - src.execution.order_registry - INFO - Registered order: 1d50aea2-ac8e-4c00-a6f1-c2dc846d8ae6
+2025-04-27 12:49:47,347 - src.execution.order_manager - INFO - Emitting order event: 1d50aea2-ac8e-4c00-a6f1-c2dc846d8ae6
+2025-04-27 12:49:47,348 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.53 -> -1
+2025-04-27 12:49:47,348 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.80, Vol=0.00
+2025-04-27 12:49:47,348 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.53 -> -1
+2025-04-27 12:49:47,348 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.80, Vol=0.00
+2025-04-27 12:49:47,349 - src.execution.order_registry - INFO - Registered order: b4fafb27-d972-4174-9dba-336dfc35b27d
+2025-04-27 12:49:47,349 - src.execution.order_manager - INFO - Emitting order event: b4fafb27-d972-4174-9dba-336dfc35b27d
+2025-04-27 12:49:47,349 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.53 -> -1
+2025-04-27 12:49:47,349 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.80, Vol=0.00
+2025-04-27 12:49:47,350 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.53 -> -1
+2025-04-27 12:49:47,350 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.79, Vol=0.00
+2025-04-27 12:49:47,350 - src.execution.order_registry - INFO - Registered order: e3375615-0728-4dea-b0cb-e809cb61b4ca
+2025-04-27 12:49:47,350 - src.execution.order_manager - INFO - Emitting order event: e3375615-0728-4dea-b0cb-e809cb61b4ca
+2025-04-27 12:49:47,351 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.53 -> -1
+2025-04-27 12:49:47,351 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.79, Vol=0.00
+2025-04-27 12:49:47,395 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for SPY: mean_reversion -> neutral
+2025-04-27 12:49:47,396 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime change for SPY: neutral -> mean_reversion
+2025-04-27 12:49:47,417 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.53 -> 1
+2025-04-27 12:49:47,417 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.10, MeanRev=0.69, Vol=0.00
+2025-04-27 12:49:47,417 - src.execution.order_registry - INFO - Registered order: cde6d50c-e542-4a63-a494-e4f863b4170e
+2025-04-27 12:49:47,417 - src.execution.order_manager - INFO - Emitting order event: cde6d50c-e542-4a63-a494-e4f863b4170e
+2025-04-27 12:49:47,417 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:47,417 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:47,417 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:47,417 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:47,504 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.55 -> -1
+2025-04-27 12:49:47,504 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.82, Vol=0.00
+2025-04-27 12:49:47,504 - src.execution.order_registry - INFO - Registered order: de79450a-2ec4-4d08-a039-7c2aa75c8c43
+2025-04-27 12:49:47,504 - src.execution.order_manager - INFO - Emitting order event: de79450a-2ec4-4d08-a039-7c2aa75c8c43
+2025-04-27 12:49:47,505 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.55 -> -1
+2025-04-27 12:49:47,505 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.82, Vol=0.00
+2025-04-27 12:49:47,505 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.55 -> -1
+2025-04-27 12:49:47,505 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.83, Vol=0.00
+2025-04-27 12:49:47,505 - src.execution.order_registry - INFO - Registered order: 77470a54-e032-4755-aa40-023afc18a167
+2025-04-27 12:49:47,505 - src.execution.order_manager - INFO - Emitting order event: 77470a54-e032-4755-aa40-023afc18a167
+2025-04-27 12:49:47,506 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.55 -> -1
+2025-04-27 12:49:47,506 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.83, Vol=0.00
+2025-04-27 12:49:47,760 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.52 -> -1
+2025-04-27 12:49:47,760 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.78, Vol=0.00
+2025-04-27 12:49:47,760 - src.execution.order_registry - INFO - Registered order: 66f9763d-77bf-4812-83e8-653e814a6e8e
+2025-04-27 12:49:47,760 - src.execution.order_manager - INFO - Emitting order event: 66f9763d-77bf-4812-83e8-653e814a6e8e
+2025-04-27 12:49:47,761 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.52 -> -1
+2025-04-27 12:49:47,761 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.78, Vol=0.00
+2025-04-27 12:49:48,018 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.52 -> -1
+2025-04-27 12:49:48,018 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.78, Vol=0.00
+2025-04-27 12:49:48,018 - src.execution.order_registry - INFO - Registered order: 6e1cf617-1054-4e62-96bc-5a2581ee9539
+2025-04-27 12:49:48,019 - src.execution.order_manager - INFO - Emitting order event: 6e1cf617-1054-4e62-96bc-5a2581ee9539
+2025-04-27 12:49:48,019 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.52 -> -1
+2025-04-27 12:49:48,019 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.78, Vol=0.00
+2025-04-27 12:49:48,048 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.52 -> -1
+2025-04-27 12:49:48,048 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.79, Vol=0.00
+2025-04-27 12:49:48,048 - src.execution.order_registry - INFO - Registered order: 585e347f-abcc-4349-a785-205033456713
+2025-04-27 12:49:48,048 - src.execution.order_manager - INFO - Emitting order event: 585e347f-abcc-4349-a785-205033456713
+2025-04-27 12:49:48,049 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.52 -> -1
+2025-04-27 12:49:48,049 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.79, Vol=0.00
+2025-04-27 12:49:48,050 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.52 -> -1
+2025-04-27 12:49:48,050 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.77, Vol=0.00
+2025-04-27 12:49:48,050 - src.execution.order_registry - INFO - Registered order: e5954e97-d90b-418c-85b1-b4a682d3270a
+2025-04-27 12:49:48,050 - src.execution.order_manager - INFO - Emitting order event: e5954e97-d90b-418c-85b1-b4a682d3270a
+2025-04-27 12:49:48,051 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.52 -> -1
+2025-04-27 12:49:48,051 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.77, Vol=0.00
+2025-04-27 12:49:48,199 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.51 -> -1
+2025-04-27 12:49:48,199 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.77, Vol=0.00
+2025-04-27 12:49:48,199 - src.execution.order_registry - INFO - Registered order: 34b33a7c-cf16-4e7e-9d7a-008356b850e0
+2025-04-27 12:49:48,199 - src.execution.order_manager - INFO - Emitting order event: 34b33a7c-cf16-4e7e-9d7a-008356b850e0
+2025-04-27 12:49:48,200 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.51 -> -1
+2025-04-27 12:49:48,200 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.77, Vol=0.00
+2025-04-27 12:49:48,201 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.52 -> -1
+2025-04-27 12:49:48,201 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.78, Vol=0.00
+2025-04-27 12:49:48,201 - src.execution.order_registry - INFO - Registered order: 72f44c4f-fce8-4372-acda-48ffd7f5f166
+2025-04-27 12:49:48,201 - src.execution.order_manager - INFO - Emitting order event: 72f44c4f-fce8-4372-acda-48ffd7f5f166
+2025-04-27 12:49:48,202 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.52 -> -1
+2025-04-27 12:49:48,202 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.78, Vol=0.00
+2025-04-27 12:49:48,437 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.55 -> 1
+2025-04-27 12:49:48,438 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.83, Vol=0.00
+2025-04-27 12:49:48,438 - src.execution.order_registry - INFO - Registered order: 544bed06-9497-4863-ae34-aaf006dcae6a
+2025-04-27 12:49:48,438 - src.execution.order_manager - INFO - Emitting order event: 544bed06-9497-4863-ae34-aaf006dcae6a
+2025-04-27 12:49:48,438 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,438 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,438 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,438 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,439 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.55 -> 1
+2025-04-27 12:49:48,439 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.83, Vol=0.00
+2025-04-27 12:49:48,440 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.59 -> 1
+2025-04-27 12:49:48,440 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.88, Vol=0.00
+2025-04-27 12:49:48,440 - src.execution.order_registry - INFO - Registered order: 27c5e048-07c4-456a-94eb-7bdf94de9d2e
+2025-04-27 12:49:48,440 - src.execution.order_manager - INFO - Emitting order event: 27c5e048-07c4-456a-94eb-7bdf94de9d2e
+2025-04-27 12:49:48,440 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,440 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,440 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,440 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,441 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.59 -> 1
+2025-04-27 12:49:48,441 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.88, Vol=0.00
+2025-04-27 12:49:48,442 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.59 -> 1
+2025-04-27 12:49:48,442 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.89, Vol=0.00
+2025-04-27 12:49:48,442 - src.execution.order_registry - INFO - Registered order: 0a2bf500-26c6-44e5-b738-b37a4425992c
+2025-04-27 12:49:48,442 - src.execution.order_manager - INFO - Emitting order event: 0a2bf500-26c6-44e5-b738-b37a4425992c
+2025-04-27 12:49:48,442 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,442 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,442 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,442 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,444 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.59 -> 1
+2025-04-27 12:49:48,444 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.89, Vol=0.00
+2025-04-27 12:49:48,445 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.57 -> 1
+2025-04-27 12:49:48,445 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.86, Vol=0.00
+2025-04-27 12:49:48,445 - src.execution.order_registry - INFO - Registered order: f8ae7b10-9718-4687-aa2f-3ada1d4d8431
+2025-04-27 12:49:48,445 - src.execution.order_manager - INFO - Emitting order event: f8ae7b10-9718-4687-aa2f-3ada1d4d8431
+2025-04-27 12:49:48,445 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,445 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,445 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,445 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,446 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.57 -> 1
+2025-04-27 12:49:48,446 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.86, Vol=0.00
+2025-04-27 12:49:48,447 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.51 -> 1
+2025-04-27 12:49:48,447 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.76, Vol=0.00
+2025-04-27 12:49:48,447 - src.execution.order_registry - INFO - Registered order: 8b8e7b22-1d1d-45a6-8482-7e75d9a0d18a
+2025-04-27 12:49:48,447 - src.execution.order_manager - INFO - Emitting order event: 8b8e7b22-1d1d-45a6-8482-7e75d9a0d18a
+2025-04-27 12:49:48,447 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,447 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,447 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,447 - src.risk.managers.simple - INFO - Reducing BUY size from 100 to 9 for SPY (value limit)
+2025-04-27 12:49:48,448 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=0.51 -> 1
+2025-04-27 12:49:48,448 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=-0.00, MeanRev=0.76, Vol=0.00
+2025-04-27 12:49:48,475 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.52 -> -1
+2025-04-27 12:49:48,475 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.77, Vol=0.00
+2025-04-27 12:49:48,475 - src.execution.order_registry - INFO - Registered order: 6cf997ac-77eb-4e46-83d1-f1f382ea13ad
+2025-04-27 12:49:48,475 - src.execution.order_manager - INFO - Emitting order event: 6cf997ac-77eb-4e46-83d1-f1f382ea13ad
+2025-04-27 12:49:48,476 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.52 -> -1
+2025-04-27 12:49:48,476 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.77, Vol=0.00
+2025-04-27 12:49:48,509 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.54 -> -1
+2025-04-27 12:49:48,509 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.81, Vol=0.00
+2025-04-27 12:49:48,509 - src.execution.order_registry - INFO - Registered order: b3e22867-57eb-41f8-8b7a-65c8059e816b
+2025-04-27 12:49:48,509 - src.execution.order_manager - INFO - Emitting order event: b3e22867-57eb-41f8-8b7a-65c8059e816b
+2025-04-27 12:49:48,510 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.54 -> -1
+2025-04-27 12:49:48,510 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.81, Vol=0.00
+2025-04-27 12:49:48,511 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.55 -> -1
+2025-04-27 12:49:48,511 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.83, Vol=0.00
+2025-04-27 12:49:48,511 - src.execution.order_registry - INFO - Registered order: 75c49d73-4b2a-4fd3-bd67-7e7563ae95f5
+2025-04-27 12:49:48,511 - src.execution.order_manager - INFO - Emitting order event: 75c49d73-4b2a-4fd3-bd67-7e7563ae95f5
+2025-04-27 12:49:48,512 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.55 -> -1
+2025-04-27 12:49:48,512 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.83, Vol=0.00
+2025-04-27 12:49:48,514 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.56 -> -1
+2025-04-27 12:49:48,514 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.84, Vol=0.00
+2025-04-27 12:49:48,514 - src.execution.order_registry - INFO - Registered order: 66779938-b90c-4032-9409-88f39284b34a
+2025-04-27 12:49:48,514 - src.execution.order_manager - INFO - Emitting order event: 66779938-b90c-4032-9409-88f39284b34a
+2025-04-27 12:49:48,515 - src.strategy.implementations.regime_ensemble_strategy - INFO - Signal for SPY (mean_reversion regime): Combined=-0.56 -> -1
+2025-04-27 12:49:48,515 - src.strategy.implementations.regime_ensemble_strategy - INFO -   Components: Trend=0.00, MeanRev=-0.84, Vol=0.00
+2025-04-27 12:49:48,599 - src.execution.backtest.backtest - INFO - Backtest completed after 1775 iterations
+/Users/daws/ADMF-trader/src/analytics/metrics/functional.py:104: RuntimeWarning: invalid value encountered in scalar divide
+  sharpe = excess_returns.mean() / excess_returns.std() * np.sqrt(annualization_factor)
+/Users/daws/ADMF-trader/src/analytics/reporting/report_generator.py:133: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+  monthly_log_returns = log_returns.resample('M').sum()
+2025-04-27 12:49:48,615 - src.execution.backtest.backtest - INFO - Backtest complete
+2025-04-27 12:49:48,629 - src.analytics.reporting.report_generator - INFO - Saved equity curve to './results/regime_ensemble_SPY_1min/equity_curve_20250427_124948.csv'
+2025-04-27 12:49:48,629 - src.analytics.reporting.report_generator - INFO - Saved detailed report to './results/regime_ensemble_SPY_1min/backtest_report_20250427_124948.txt'
+
+Backtest Results Summary:
+
+=== Backtest Results ===
+Trades executed: 0
+Total Return: 0.00%
+Sharpe Ratio: nan
+Sortino Ratio: inf
+Maximum Drawdown: 0.00%
+
+Detailed report saved to: ./results/regime_ensemble_SPY_1min/backtest_report_20250427_124948.txt
+Equity curve saved to: ./results/regime_ensemble_SPY_1min/equity_curve_20250427_124948.csv
+
+Results saved to ./results/regime_ensemble_SPY_1min
+- equity_curve_file
+- detailed_report_file

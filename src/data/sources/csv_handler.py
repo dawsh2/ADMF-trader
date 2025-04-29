@@ -189,8 +189,69 @@ class CSVDataSource(DataSourceBase):
         Returns:
             Full path to the file
         """
-        filename = self.filename_pattern.format(symbol=symbol, timeframe=timeframe)
-        return os.path.join(self.data_dir, filename)
+        # Normalize timeframe format (1m, 1min, 1M all become 1min)
+        normalized_timeframe = self._normalize_timeframe(timeframe)
+        
+        # Try different format variations if needed
+        filename = self.filename_pattern.format(symbol=symbol, timeframe=normalized_timeframe)
+        full_path = os.path.join(self.data_dir, filename)
+        
+        # If the file doesn't exist, try alternatives
+        if not os.path.exists(full_path):
+            # Try common variations
+            alternatives = [
+                # Check with original timeframe
+                self.filename_pattern.format(symbol=symbol, timeframe=timeframe),
+                # Check with common variations
+                f"{symbol}_{normalized_timeframe}.csv",
+                f"{symbol}.csv"
+            ]
+            
+            for alt_filename in alternatives:
+                alt_path = os.path.join(self.data_dir, alt_filename)
+                if os.path.exists(alt_path):
+                    logger.info(f"Using alternative filename: {alt_path} instead of {full_path}")
+                    return alt_path
+        
+        return full_path
+    
+    def _normalize_timeframe(self, timeframe: str) -> str:
+        """
+        Normalize timeframe format for consistency.
+        
+        Args:
+            timeframe: Timeframe string like '1m', '1min', '1d', etc.
+            
+        Returns:
+            Normalized timeframe string
+        """
+        # Strip any whitespace
+        timeframe = timeframe.strip()
+        
+        # Common mappings
+        mappings = {
+            # Minutes
+            '1m': '1min', 'm1': '1min', '1': '1min', '1min': '1min',
+            # Days
+            '1d': '1d', 'd1': '1d', 'day': '1d', 'daily': '1d',
+            # Add more as needed
+        }
+        
+        # Check direct mapping
+        if timeframe.lower() in mappings:
+            return mappings[timeframe.lower()]
+        
+        # Try to parse if not in mappings
+        if timeframe.endswith('m') and timeframe[:-1].isdigit():
+            return f"{timeframe[:-1]}min"
+        elif timeframe.endswith('min') and timeframe[:-3].isdigit():
+            return timeframe.lower()
+        elif timeframe.endswith('d') and timeframe[:-1].isdigit():
+            return timeframe.lower()
+        
+        # Default: return as is
+        logger.debug(f"No normalization rule for timeframe: {timeframe}, using as is")
+        return timeframe
 
     def _map_columns(self, columns: List[str]) -> Dict[str, str]:
         """

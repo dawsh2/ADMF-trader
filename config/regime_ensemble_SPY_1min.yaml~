@@ -1,0 +1,80 @@
+# Regime-Aware Ensemble Strategy Configuration
+backtest:
+  strategy: regime_ensemble
+  initial_capital: 100000.0
+  symbols: ['SPY']
+  data_dir: ./data
+  timeframe: 1min
+
+# Strategy-specific parameters
+strategies:
+  regime_ensemble:
+    # Symbols to trade
+    symbols: ['SPY']
+    
+    # Regime detection parameters - adjusted for 1-minute data
+    volatility_window: 60        # Increased window for 1-minute data
+    volatility_threshold: 0.002  # 0.2% volatility threshold for 1-minute
+    trend_ma_window: 120         # Increased for 1-minute data
+    trend_threshold: 0.01        # 1% trend threshold for 1-minute
+    
+    # Trend following parameters (MA Crossover) - adjusted for 1-minute data
+    fast_ma_window: 20 
+    slow_ma_window: 60
+    
+    # Mean reversion parameters (RSI) - adjusted for 1-minute data
+    rsi_window: 30
+    rsi_overbought: 70
+    rsi_oversold: 30
+    
+    # Volatility breakout parameters - adjusted for 1-minute data
+    breakout_window: 60
+    breakout_multiplier: 1.5
+    
+    # Rule weights for each regime
+    regime_weights:
+      trend:
+        trend_following: 1.0
+        mean_reversion: 0.2
+        volatility_breakout: 0.5
+      mean_reversion:
+        trend_following: 0.2
+        mean_reversion: 1.0
+        volatility_breakout: 0.3
+      volatile:
+        trend_following: 0.3
+        mean_reversion: 0.3
+        volatility_breakout: 1.0
+      neutral:
+        trend_following: 0.5
+        mean_reversion: 0.5
+        volatility_breakout: 0.5
+
+# Data handling configuration
+data:
+  source_type: csv
+  data_dir: ./data
+  file_pattern: "{symbol}_{timeframe}.csv"  # Add to match your filename convention
+
+# Portfolio configuration
+portfolio:
+  initial_cash: 100000.0
+
+# Risk management configuration
+risk_manager:
+  position_size: 100
+  max_position_pct: 0.05  # Reduced to 5% for higher frequency
+  max_trades_per_hour: 10  # Added to limit excessive trading
+
+# Broker configuration
+broker:
+  slippage: 0.0005  # Reduced for more accurate 1-minute simulation
+  commission: 0.0005  # Reduced for more frequent trading
+
+# Optimization configuration (for future use)
+optimization:
+  enabled: false
+  method: grid
+  metrics:
+    primary: sharpe_ratio
+    secondary: max_drawdown

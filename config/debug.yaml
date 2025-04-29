@@ -1,0 +1,20 @@
+# DEBUG version of regime ensemble config for SPY 1-min data
+backtest:
+  strategy: regime_ensemble
+  initial_capital: 100000.0
+  symbols: ['SPY']
+  data_dir: ./data
+  timeframe: "1min"
+  debug: true  # Enable extra debug output
+
+data:
+  source_type: csv
+  data_dir: ./data
+  file_pattern: "SPY_1min.csv"  # Direct filename specification
+  debug: true  # Enable extra debug output
+
+# System settings
+debug:
+  enabled: true
+  trace_config: true  # Log configuration access
+  trace_timeframe: true  # Specifically track timeframe parameter

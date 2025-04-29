@@ -182,7 +182,7 @@ class BacktestCoordinator:
             return False
     
     def run(self, symbols=None, start_date=None, end_date=None, 
-           initial_capital=100000.0, timeframe='1d'):
+           initial_capital=100000.0, timeframe=None):
         """
         Run a backtest.
         
@@ -212,7 +212,11 @@ class BacktestCoordinator:
                 start_date = start_date or backtest_config.get('start_date')
                 end_date = end_date or backtest_config.get('end_date')
                 initial_capital = initial_capital or backtest_config.get_float('initial_capital', 100000.0)
-                timeframe = timeframe or backtest_config.get('timeframe', '1d')
+                # Get timeframe with higher priority for the specified one
+                config_timeframe = backtest_config.get('timeframe')
+                if config_timeframe:
+                    logger.info(f"Using timeframe from config: {config_timeframe}")
+                timeframe = timeframe or config_timeframe or '1d'
             except Exception as e:
                 logger.warning(f"Error getting config values: {e}, using provided values")
         
@@ -248,7 +252,7 @@ class BacktestCoordinator:
             self.portfolio.equity = initial_capital
             
             # Load data
-            logger.info(f"Loading data for symbols: {symbols}")
+            logger.info(f"Loading data for symbols: {symbols} with timeframe: {timeframe}")
             self.data_handler.load_data(symbols, start_date, end_date, timeframe)
             
             # Run backtest

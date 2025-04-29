@@ -1,0 +1,50 @@
+2025-04-27 13:25:59,225 - src.core.bootstrap - INFO - Logging initialized at level INFO
+2025-04-27 13:25:59,225 - src.core.bootstrap - INFO - Log file: ./results/head_test/head_test.log
+2025-04-27 13:25:59,229 - src.core.bootstrap - INFO - Loaded configuration from config/head_test.yaml
+2025-04-27 13:25:59,229 - src.core.bootstrap - INFO - Event system initialized
+2025-04-27 13:25:59,229 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-04-27 13:25:59,230 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-04-27 13:25:59,230 - src.core.bootstrap - INFO - Data components initialized with source type: csv
+2025-04-27 13:25:59,232 - src.core.bootstrap - INFO - Order registry initialized
+2025-04-27 13:25:59,234 - src.core.bootstrap - INFO - Execution components initialized with order registry
+2025-04-27 13:25:59,236 - src.core.bootstrap - INFO - Risk manager configured with position_size=100, max_position_pct=0.1
+2025-04-27 13:25:59,236 - src.core.bootstrap - INFO - Risk components initialized
+2025-04-27 13:25:59,237 - src.core.bootstrap - INFO - Discovering strategy implementations...
+2025-04-27 13:25:59,238 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-04-27 13:25:59,238 - src.core.utils.discovery - INFO - Registered component regime_ensemble in registry
+2025-04-27 13:25:59,238 - src.core.bootstrap - INFO - Discovered strategies: ma_crossover, regime_ensemble
+2025-04-27 13:25:59,238 - src.core.bootstrap - INFO - Requested strategy: ma_crossover
+2025-04-27 13:25:59,238 - src.core.bootstrap - INFO - Available strategies in registry: ['ma_crossover', 'regime_ensemble']
+2025-04-27 13:25:59,238 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy initialized with fast_window=5, slow_window=15
+2025-04-27 13:25:59,238 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy configured with parameters: fast_window=5, slow_window=15
+2025-04-27 13:25:59,238 - src.core.bootstrap - INFO - Strategy 'ma_crossover' initialized successfully
+2025-04-27 13:25:59,238 - src.core.bootstrap - INFO - Analytics components initialized
+2025-04-27 13:25:59,238 - src.core.bootstrap - INFO - System bootstrap complete
+2025-04-27 13:25:59,238 - src.execution.backtest.backtest - INFO - Using timeframe from config: 1min
+2025-04-27 13:25:59,242 - src.execution.backtest.backtest - INFO - Backtest setup complete
+2025-04-27 13:25:59,242 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_d4e16c27 to initial state with cash: $100000.00
+2025-04-27 13:25:59,242 - src.risk.managers.simple - INFO - Risk manager risk_manager_9b737b89 reset
+2025-04-27 13:25:59,242 - src.execution.order_registry - INFO - Order registry reset
+2025-04-27 13:25:59,242 - src.execution.order_manager - INFO - Reset order manager
+2025-04-27 13:25:59,242 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy ma_crossover reset
+2025-04-27 13:25:59,242 - src.execution.backtest.backtest - INFO - Reset all components for backtest
+2025-04-27 13:25:59,242 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['SPY'] with timeframe: 1min
+2025-04-27 13:25:59,242 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/SPY_1min.csv
+2025-04-27 13:25:59,289 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 102236 rows
+2025-04-27 13:25:59,291 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2024-03-26 13:30:00
+2025-04-27 13:25:59,302 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2024-03-26 13:30:00
+2025-04-27 13:25:59,303 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2023-01-01 00:00:00
+2025-04-27 13:25:59,305 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2023-12-31 00:00:00
+2025-04-27 13:25:59,305 - src.data.sources.csv_handler - INFO - CSVDataSource: Set timestamp as index
+2025-04-27 13:25:59,306 - src.data.historical_data_handler - WARNING - No data found for SPY
+2025-04-27 13:25:59,306 - src.execution.backtest.backtest - INFO - Starting backtest
+2025-04-27 13:25:59,306 - src.execution.backtest.backtest - WARNING - No symbols available in data handler
+2025-04-27 13:25:59,306 - src.execution.backtest.backtest - ERROR - Error processing results: 'total_return'
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/backtest/backtest.py", line 367, in _process_results
+    summary_report = self.report_generator.generate_summary_report()
+  File "/Users/daws/ADMF-trader/src/analytics/reporting/report_generator.py", line 42, in generate_summary_report
+    report.append(f"Total Return: {metrics['total_return']:.2%}")
+                                   ~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'total_return'
+2025-04-27 13:25:59,307 - src.execution.backtest.backtest - INFO - Backtest complete
