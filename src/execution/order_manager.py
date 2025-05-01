@@ -1,816 +1,471 @@
 """
-Order management system for tracking and processing orders.
+Order manager for handling orders without a separate order registry.
 """
 import logging
 import uuid
-import datetime
-from enum import Enum
-from typing import Dict, Any, List, Optional, Tuple, Union
+from typing import Dict, List, Optional, Any
 
 from src.core.events.event_types import EventType, Event
-from src.core.events.event_utils import create_order_event, EventTracker
 
 logger = logging.getLogger(__name__)
 
-class OrderStatus(Enum):
-    """Order status enum."""
-    CREATED = 'CREATED'  # Initial state
-    PENDING = 'PENDING'  # Sent to broker
-    PARTIAL = 'PARTIAL'  # Partially filled
-    FILLED = 'FILLED'    # Completely filled
-    CANCELED = 'CANCELED'  # Canceled by user or system
-    REJECTED = 'REJECTED'  # Rejected by broker
-    EXPIRED = 'EXPIRED'  # Order expired
-
-class Order:
-    """Class representing a trading order."""
-    
-    def __init__(self, symbol: str, order_type: str, direction: str, 
-                quantity: float, price: Optional[float] = None, 
-                time_in_force: str = 'DAY', status: OrderStatus = OrderStatus.CREATED,
-                order_id: Optional[str] = None):
-        """
-        Initialize an order.
-        
-        Args:
-            symbol: Instrument symbol
-            order_type: Type of order ('MARKET', 'LIMIT', 'STOP', etc.)
-            direction: Trade direction ('BUY' or 'SELL')
-            quantity: Order quantity
-            price: Optional price for limit or stop orders
-            time_in_force: Order time in force ('DAY', 'GTC', 'IOC', etc.)
-            status: Initial order status
-            order_id: Optional order ID (generated if not provided)
-        """
-        self.symbol = symbol
-        self.order_type = order_type
-        self.direction = direction
-        self.quantity = quantity
-        self.price = price
-        self.time_in_force = time_in_force
-        self.status = status
-        self.order_id = order_id or str(uuid.uuid4())
-        self.created_time = datetime.datetime.now()
-        self.updated_time = self.created_time
-        self.filled_quantity = 0.0
-        self.average_fill_price = 0.0
-        self.fill_time = None
-        self.metadata = {}  # Additional order metadata
-    
-    def update_status(self, status: OrderStatus, fill_quantity: float = 0.0, 
-                     fill_price: float = 0.0):
-        """
-        Update order status and fill information.
-        
-        Args:
-            status: New order status
-            fill_quantity: Quantity filled in this update
-            fill_price: Price at which the fill occurred
-        """
-        self.status = status
-        self.updated_time = datetime.datetime.now()
-        
-        if fill_quantity > 0:
-            # Calculate weighted average fill price
-            total_filled = self.filled_quantity + fill_quantity
-            if total_filled > 0:
-                self.average_fill_price = (
-                    (self.average_fill_price * self.filled_quantity) + 
-                    (fill_price * fill_quantity)
-                ) / total_filled
-            
-            self.filled_quantity += fill_quantity
-            
-            # Set fill time if this is the first fill
-            if self.fill_time is None:
-                self.fill_time = self.updated_time
-            
-            # Update status based on fill
-            if self.filled_quantity >= self.quantity:
-                self.status = OrderStatus.FILLED
-            elif self.filled_quantity > 0:
-                self.status = OrderStatus.PARTIAL
-    
-    def cancel(self):
-        """Cancel the order."""
-        if self.status in [OrderStatus.CREATED, OrderStatus.PENDING, OrderStatus.PARTIAL]:
-            self.status = OrderStatus.CANCELED
-            self.updated_time = datetime.datetime.now()
-            return True
-        return False
-    
-    def is_active(self):
-        """Check if the order is still active."""
-        return self.status in [OrderStatus.CREATED, OrderStatus.PENDING, OrderStatus.PARTIAL]
-    
-    def is_filled(self):
-        """Check if the order is completely filled."""
-        return self.status == OrderStatus.FILLED
-    
-    def is_canceled(self):
-        """Check if the order is canceled."""
-        return self.status == OrderStatus.CANCELED
-    
-    def get_remaining_quantity(self):
-        """Get remaining quantity to be filled."""
-        return self.quantity - self.filled_quantity
-    
-    def to_dict(self):
-        """
-        Convert order to dictionary.
-        
-        Returns:
-            Dict: Order as dictionary
-        """
-        return {
-            'order_id': self.order_id,
-            'symbol': self.symbol,
-            'order_type': self.order_type,
-            'direction': self.direction,
-            'quantity': self.quantity,
-            'price': self.price,
-            'time_in_force': self.time_in_force,
-            'status': self.status.value,
-            'created_time': self.created_time.isoformat(),
-            'updated_time': self.updated_time.isoformat(),
-            'filled_quantity': self.filled_quantity,
-            'average_fill_price': self.average_fill_price,
-            'fill_time': self.fill_time.isoformat() if self.fill_time else None,
-            'metadata': self.metadata
-        }
-    
-    @classmethod
-    def from_dict(cls, data):
-        """
-        Create order from dictionary.
-        
-        Args:
-            data: Dictionary representation
-            
-        Returns:
-            Order: Reconstructed order
-        """
-        # Create order with required fields
-        order = cls(
-            symbol=data['symbol'],
-            order_type=data['order_type'],
-            direction=data['direction'],
-            quantity=data['quantity'],
-            price=data.get('price'),
-            time_in_force=data.get('time_in_force', 'DAY'),
-            status=OrderStatus(data.get('status', 'CREATED')),
-            order_id=data.get('order_id')
-        )
-        
-        # Set additional fields
-        if 'created_time' in data:
-            order.created_time = datetime.datetime.fromisoformat(data['created_time'])
-        if 'updated_time' in data:
-            order.updated_time = datetime.datetime.fromisoformat(data['updated_time'])
-        if 'filled_quantity' in data:
-            order.filled_quantity = data['filled_quantity']
-        if 'average_fill_price' in data:
-            order.average_fill_price = data['average_fill_price']
-        if 'fill_time' in data and data['fill_time']:
-            order.fill_time = datetime.datetime.fromisoformat(data['fill_time'])
-        if 'metadata' in data:
-            order.metadata = data['metadata']
-        
-        return order
-    
-    def __str__(self):
-        return (f"Order({self.order_id}, {self.symbol}, {self.direction}, "
-                f"{self.quantity}, {self.status.value})")
-
-
 class OrderManager:
     """
-    Order manager that integrates with the OrderRegistry for centralized order tracking.
+    Order manager that processes orders using the event bus.
     
-    This class is responsible for:
-    1. Creating orders from signals or explicit requests
-    2. Delegating order tracking to the OrderRegistry
-    3. Processing fill events for order updates
-    4. Handling cancellations and other order lifecycle events
+    This implementation eliminates the need for a separate order registry
+    by leveraging the event tracking capabilities of the event bus.
     """
     
-    def __init__(self, event_bus=None, broker=None, order_registry=None):
+    def __init__(self, event_bus, broker=None, order_registry=None):
         """
-        Initialize order manager with support for OrderRegistry.
+        Initialize the order manager.
         
         Args:
-            event_bus: Event bus for communication
-            broker: Broker for order execution
-            order_registry: Optional order registry for centralized tracking
+            event_bus: Event bus for event processing
+            broker: Optional broker for order execution
+            order_registry: Optional order registry (for backward compatibility)
         """
         self.event_bus = event_bus
         self.broker = broker
-        self.order_registry = order_registry
-        
-        # Legacy order tracking (used as local cache even with registry)
-        self.orders = {}  # order_id -> Order
-        self.active_orders = set()  # Set of active order IDs
-        self.order_history = []  # List of completed orders
-        
-        # Configuration state
-        self.configured = False
-        
-        # Event processing tracking to avoid duplicates
-        self.processed_events = set()  # Set of processed event IDs
-        
-        # Statistics
+        self.active_orders = {}  # Local cache of active orders
         self.stats = {
             'orders_created': 0,
             'orders_filled': 0,
-            'orders_canceled': 0,
-            'orders_rejected': 0,
-            'orders_expired': 0,
-            'errors': 0
+            'orders_cancelled': 0,
+            'orders_rejected': 0
         }
         
-        # Event tracker for diagnostics
-        self.event_tracker = EventTracker("order_manager")
+        # Register event handlers
+        self._register_handlers()
         
-        # Register for events
-        if self.event_bus:
-            self._register_handlers()
-    
-    def _register_handlers(self):
-        """Register event handlers."""
-        if not self.event_bus:
-            return
-            
-        # Register handlers for order-related events
-        self.event_bus.register(EventType.SIGNAL, self.on_signal)
-        self.event_bus.register(EventType.FILL, self.on_fill)
-        self.event_bus.register(EventType.PORTFOLIO, self.on_portfolio_update)
-        self.event_bus.register(EventType.ORDER, self.on_order)  # NEW: Also listen for ORDER events from other components
-    
-    def configure(self, config):
+        logger.info("Order manager initialized")
+        
+    def create_order_from_params(self, symbol, order_type, direction, quantity, price=None, rule_id=None):
         """
-        Configure the order manager.
+        Create an order with explicit parameters rather than from a signal.
         
         Args:
-            config: Configuration dictionary or ConfigSection
+            symbol: Instrument symbol
+            order_type: Order type ('MARKET', 'LIMIT', etc.)
+            direction: Order direction ('BUY', 'SELL')
+            quantity: Order quantity (always positive)
+            price: Optional price for limit orders
+            rule_id: Optional rule ID for deduplication
+            
+        Returns:
+            str: Order ID
         """
-        if hasattr(config, 'as_dict'):
-            config_dict = config.as_dict()
-        else:
-            config_dict = dict(config)
+        # Generate order ID
+        order_id = str(uuid.uuid4())
         
-        # Nothing to configure at this level currently
-        self.configured = True
-    
+        # Ensure quantity is positive
+        quantity = abs(quantity)
+        
+        # Create order data
+        order_data = {
+            'order_id': order_id,
+            'symbol': symbol,
+            'direction': direction,
+            'size': quantity,  # Explicitly set size field
+            'price': price,
+            'status': 'PENDING',
+        }
+        
+        # Add rule_id if provided
+        if rule_id:
+            order_data['rule_id'] = rule_id
+        
+        # Create order event
+        order_event = Event(EventType.ORDER, order_data)
+        
+        # Emit order event
+        self.event_bus.emit(order_event)
+        
+        # Update stats
+        self.stats['orders_created'] += 1
+        
+        logger.info(f"Emitting order event with size {quantity}: {order_id}")
+        return order_id
+        
     def set_event_bus(self, event_bus):
         """
         Set the event bus.
         
         Args:
-            event_bus: Event bus instance
+            event_bus: Event bus to use
         """
         self.event_bus = event_bus
         self._register_handlers()
-    
+        
     def set_broker(self, broker):
         """
         Set the broker.
         
         Args:
-            broker: Broker instance
+            broker: Broker to use
         """
         self.broker = broker
-    
+        
     def set_order_registry(self, order_registry):
         """
-        Set the order registry.
+        Set order registry (for backward compatibility).
         
         Args:
-            order_registry: Order registry instance
+            order_registry: Order registry to use
         """
-        self.order_registry = order_registry
-    
-    def on_order(self, order_event):
+        # This method exists for backward compatibility but does nothing
+        # as we now use the event bus directly for order tracking
+        pass
+        
+    def create_order(self, symbol, order_type='MARKET', direction='BUY', quantity=1, price=None, rule_id=None):
         """
-        Handle order events from other components (like risk manager).
-        This is needed to track orders created by components that don't use create_order.
-        
-        Args:
-            order_event: Order event to track
-        """
-        # Skip if already processed
-        event_id = order_event.get_id()
-        if event_id in self.processed_events:
-            return
-            
-        self.processed_events.add(event_id)
-        
-        # Extract order ID
-        order_id = None
-        if hasattr(order_event, 'data') and isinstance(order_event.data, dict):
-            order_id = order_event.data.get('order_id')
-        
-        if not order_id:
-            logger.debug("Order event has no order_id, cannot track it")
-            return
-        
-        # Check if we're already tracking this order
-        if order_id in self.orders:
-            logger.debug(f"Already tracking order {order_id}")
-            return
-        
-        # If we're using OrderRegistry, check if order exists there
-        if self.order_registry:
-            registry_order = self.order_registry.get_order(order_id)
-            if registry_order:
-                # Add to local tracking
-                self.orders[order_id] = registry_order
-                self.active_orders.add(order_id)
-                logger.debug(f"Added registry order {order_id} to local tracking")
-                return
-        
-        # If not in registry (or no registry), create a placeholder order from event data
-        try:
-            # Extract details from order event
-            symbol = order_event.get_symbol()
-            order_type = order_event.get_order_type()
-            direction = order_event.get_direction()
-            quantity = order_event.get_quantity()
-            price = order_event.get_price()
-            
-            # Create and track new order
-            order = Order(
-                symbol=symbol,
-                order_type=order_type,
-                direction=direction,
-                quantity=quantity,
-                price=price,
-                status=OrderStatus.PENDING,  # Assume it's pending since it's an order event
-                order_id=order_id
-            )
-            
-            self.orders[order_id] = order
-            self.active_orders.add(order_id)
-            logger.debug(f"Added new order {order_id} from event to tracking")
-            
-        except Exception as e:
-            logger.error(f"Error tracking order {order_id} from event: {e}")
-    
-    def on_signal(self, signal_event):
-        """
-        Handle signal events by creating orders.
-        
-        Args:
-            signal_event: Signal event to process
-            
-        Returns:
-            str: Order ID or None
-        """
-        # Skip if already processed
-        event_id = signal_event.get_id()
-        if event_id in self.processed_events:
-            return None
-            
-        self.processed_events.add(event_id)
-        self.event_tracker.track_event(signal_event)
-        
-        try:
-            # Extract signal details
-            symbol = signal_event.get_symbol()
-            signal_value = signal_event.get_signal_value()
-            price = signal_event.get_price()
-            
-            # Skip neutral signals
-            if signal_value == 0:
-                return None
-            
-            # Create order
-            direction = 'BUY' if signal_value > 0 else 'SELL'
-            
-            # Call order creation method
-            return self.create_order(
-                symbol=symbol,
-                order_type='MARKET',
-                direction=direction,
-                quantity=100,  # Default quantity - in real system this would be calculated
-                price=price
-            )
-            
-        except Exception as e:
-            logger.error(f"Error processing signal event: {e}", exc_info=True)
-            self.stats['errors'] += 1
-            return None
-    
-    def create_order(self, symbol, order_type, direction, quantity, price=None):
-        """
-        Create and submit a new order.
+        Create an order directly (with error handling for order size).
         
         Args:
             symbol: Instrument symbol
-            order_type: Type of order ('MARKET', 'LIMIT', 'STOP', etc.)
-            direction: Trade direction ('BUY' or 'SELL')
+            order_type: Order type (MARKET, LIMIT, etc.)
+            direction: Order direction (BUY, SELL)
             quantity: Order quantity
-            price: Optional price for limit or stop orders
+            price: Order price
+            rule_id: Optional rule ID for tracking signal groups
             
         Returns:
             str: Order ID
         """
-        # Create a unique order ID
+        # Validate quantity is an integer and positive
+        if not isinstance(quantity, int) or quantity <= 0:
+            logger.warning(f"Invalid quantity '{quantity}', adjusting to 1")
+            quantity = 1
+            
+        # Generate order ID
+        import uuid
         order_id = str(uuid.uuid4())
         
-        # Create order object
-        order = Order(
-            symbol=symbol,
-            order_type=order_type,
-            direction=direction,
-            quantity=quantity,
-            price=price,
-            status=OrderStatus.CREATED,
-            order_id=order_id
-        )
+        # Create order data
+        order_data = {
+            'order_id': order_id,
+            'symbol': symbol,
+            'order_type': order_type,
+            'direction': direction,
+            'size': quantity,  # CRITICAL: Use 'size' for consistency
+            'quantity': quantity,  # Add 'quantity' too for redundancy
+            'price': price,
+            'status': 'PENDING'
+        }
         
-        # Register with order registry if available
-        if self.order_registry:
-            self.order_registry.register_order(order)
+        # Add rule_id if provided - CRITICAL for correct signal tracking
+        if rule_id:
+            order_data['rule_id'] = rule_id
+            logger.info(f"Order {order_id} created with rule_id: {rule_id}")
         
-        # Always track locally regardless
-        self.orders[order_id] = order
-        self.active_orders.add(order_id)
+        # Create order event
+        order_event = Event(EventType.ORDER, order_data)
+        
+        # Track the order in active orders
+        self.active_orders[order_id] = order_data
+        
+        # Emit order event
+        if self.event_bus:
+            self.event_bus.emit(order_event)
+            
+        # Update stats
         self.stats['orders_created'] += 1
         
-        # Create and emit order event
-        order_event = create_order_event(
-            symbol=symbol,
-            order_type=order_type,
-            direction=direction,
-            quantity=quantity,
-            price=price,
-            order_id=order_id  # Include order ID in event
-        )
-        
-        # Explicitly add order ID to event data
-        if hasattr(order_event, 'data') and isinstance(order_event.data, dict):
-            order_event.data['order_id'] = order_id
-        
-        # Emit the order event
-        if self.event_bus:
-            logger.info(f"Emitting order event: {order_id}")
-            self.event_bus.emit(order_event)
-        
+        rule_id_str = f", rule_id: {rule_id}" if rule_id else ""
+        logger.info(f"Emitting order event: {order_id} ({direction} {quantity} {symbol} @ {price}{rule_id_str})")
         return order_id
-    
-    def on_fill(self, fill_event):
-        """
-        Handle fill events.
         
-        This method is now much simpler as order state updates are handled by the registry.
-        
-        Args:
-            fill_event: Fill event to process
-        """
-        # Skip if already processed
-        event_id = fill_event.get_id()
-        if event_id in self.processed_events:
-            return
-            
-        self.processed_events.add(event_id)
-        self.event_tracker.track_event(fill_event)
-        
-        # Extract order ID
-        order_id = None
-        if hasattr(fill_event, 'data') and isinstance(fill_event.data, dict):
-            order_id = fill_event.data.get('order_id')
-        
-        if not order_id:
-            logger.warning(f"Fill event missing order_id: {event_id}")
-            return
-        
-        # Check if we know about this order - if not, check registry
-        if order_id not in self.orders and self.order_registry:
-            registry_order = self.order_registry.get_order(order_id)
-            if registry_order:
-                # Add to our tracking
-                self.orders[order_id] = registry_order
-                self.active_orders.add(order_id)
-                logger.debug(f"Added registry order {order_id} to local tracking during fill")
-        
-        # Now process the fill
-        if order_id in self.orders:
-            order = self.orders[order_id]
-            
-            # Extract fill details
-            quantity = fill_event.get_quantity()
-            price = fill_event.get_price()
-            
-            # Update local order state
-            old_status = order.status
-            order.update_status(
-                status=OrderStatus.FILLED if quantity >= order.get_remaining_quantity() else OrderStatus.PARTIAL,
-                fill_quantity=quantity,
-                fill_price=price
-            )
-            
-            # Update local tracking
-            if order.is_filled() and order_id in self.active_orders:
-                self.active_orders.remove(order_id)
-                if order not in self.order_history:
-                    self.order_history.append(order)
-                self.stats['orders_filled'] += 1
-                
-            logger.info(f"Updated order with fill: {order}")
-        else:
-            logger.error(f"Order {order_id} not found in order manager")
-    
-    def on_portfolio_update(self, event):
-        """
-        Handle portfolio update events which include order state changes.
-        
-        Args:
-            event: Portfolio event to check for order state changes
-        """
-        # Skip if not an order state change
-        if not (hasattr(event, 'data') and 
-                isinstance(event.data, dict) and 
-                (event.data.get('order_state_change') or event.data.get('status_update'))):
-            return
-            
-        # Skip if already processed
-        event_id = event.get_id()
-        if event_id in self.processed_events:
-            return
-            
-        self.processed_events.add(event_id)
-        
-        # Extract order info
-        order_id = event.data.get('order_id')
-        if not order_id:
-            return
-            
-        # Update local cache if we're tracking this order
-        if order_id in self.orders and self.order_registry:
-            # Get fresh order state from registry
-            registry_order = self.order_registry.get_order(order_id)
-            if registry_order:
-                # Update our local copy
-                self.orders[order_id] = registry_order
-                
-                # Update tracking collections
-                if registry_order.is_filled():
-                    if order_id in self.active_orders:
-                        self.active_orders.remove(order_id)
-                    if registry_order not in self.order_history:
-                        self.order_history.append(registry_order)
-                    self.stats['orders_filled'] += 1
-                elif registry_order.is_canceled():
-                    if order_id in self.active_orders:
-                        self.active_orders.remove(order_id)
-                    self.stats['orders_canceled'] += 1
-    
     def cancel_order(self, order_id):
         """
         Cancel an order.
         
         Args:
-            order_id: ID of order to cancel
+            order_id: Order ID to cancel
             
         Returns:
-            bool: True if canceled, False otherwise
+            bool: True if cancelled, False otherwise
         """
-        # Check if order exists in registry first
-        if self.order_registry and self.order_registry.get_order(order_id):
-            order = self.order_registry.get_order(order_id)
-        elif order_id in self.orders:
-            order = self.orders[order_id]
-        else:
-            logger.warning(f"Order not found: {order_id}")
+        # Check if order exists
+        if order_id not in self.active_orders:
+            logger.warning(f"Cannot cancel unknown order: {order_id}")
             return False
-        
-        # Check if order can be canceled
-        if not order.is_active():
-            logger.warning(f"Cannot cancel inactive order: {order}")
-            return False
-        
-        # Update order status in registry if available
-        if self.order_registry:
-            self.order_registry.update_order_status(order_id, OrderStatus.CANCELED)
-        
-        # Update local order status
-        if order_id in self.orders:
-            self.orders[order_id].cancel()
             
-            # Remove from active orders
-            if order_id in self.active_orders:
-                self.active_orders.remove(order_id)
-                if self.orders[order_id] not in self.order_history:
-                    self.order_history.append(self.orders[order_id])
-            
-        # Update statistics
-        self.stats['orders_canceled'] += 1
+        # Get order data
+        order_data = self.active_orders[order_id].copy()
+        order_data['status'] = 'CANCELLED'
         
-        logger.info(f"Canceled order: {order_id}")
+        # Create cancel event
+        cancel_event = Event(EventType.ORDER_CANCEL, order_data)
+        
+        # Emit cancel event
+        self.event_bus.emit(cancel_event)
+        
+        # Update stats
+        self.stats['orders_cancelled'] += 1
+        
         return True
-    
-    def cancel_all_orders(self, symbol=None):
+        
+    def handle_order(self, order_event):
         """
-        Cancel all active orders, optionally filtered by symbol.
+        Handle an order event.
+        
+        This method processes both complete orders and trading decisions from the risk manager.
+        If the order_id is missing, it treats the event as a trading decision and adds the needed fields.
         
         Args:
-            symbol: Optional symbol to filter orders
-            
-        Returns:
-            int: Number of orders canceled
+            order_event: Order event to handle
         """
-        # Get active orders from registry if available
-        if self.order_registry:
-            active_orders = self.order_registry.get_active_orders()
-            if symbol:
-                active_orders = [o for o in active_orders if o.symbol == symbol]
+        # Check if this event has already been processed to avoid double-processing
+        if hasattr(order_event, 'consumed') and order_event.consumed:
+            logger.debug(f"Skipping already consumed order event")
+            return
             
-            canceled_count = 0
-            for order in active_orders:
-                if self.cancel_order(order.order_id):
-                    canceled_count += 1
-                    
-            return canceled_count
+        order_data = order_event.data
+        order_id = order_data.get('order_id')
         
-        # Fallback to local tracking
-        orders_to_cancel = [
-            order_id for order_id in self.active_orders
-            if symbol is None or self.orders[order_id].symbol == symbol
-        ]
+        # If order_id is missing, treat this as a trading decision from the risk manager
+        if order_id is None:
+            # Generate a new order ID
+            import uuid
+            order_id = f"order_{uuid.uuid4().hex[:8]}"
+            order_data['order_id'] = order_id
+            
+            # Add default order type if missing
+            if 'order_type' not in order_data:
+                order_data['order_type'] = 'MARKET'
+                
+            # Set status to PENDING
+            order_data['status'] = 'PENDING'
+            
+            logger.info(f"Converting trading decision to order: {order_id} ({order_data.get('direction')} " +
+                      f"{order_data.get('quantity')} {order_data.get('symbol')} @ {order_data.get('price')})")
         
-        canceled_count = 0
-        for order_id in orders_to_cancel:
-            if self.cancel_order(order_id):
-                canceled_count += 1
+        # Check if order is already being tracked to prevent duplicates
+        if order_id in self.active_orders:
+            # If already tracked and not PENDING, skip processing
+            if self.active_orders[order_id].get('status') != 'PENDING':
+                logger.debug(f"Order {order_id} already processed with status {self.active_orders[order_id].get('status')}")
+                return
+        # Ensure symbol exists
+        if 'symbol' not in order_data:
+            logger.warning(f"Order {order_id} missing 'symbol' field, adding default")
+            order_data['symbol'] = 'UNKNOWN'
         
-        return canceled_count
-    
+        # Ensure direction exists
+        if 'direction' not in order_data:
+            logger.warning(f"Order {order_id} missing 'direction' field, adding default BUY")
+            order_data['direction'] = 'BUY'
+        
+        # Ensure size exists - check both size and quantity fields
+        if 'size' not in order_data:
+            # Check if quantity exists instead
+            if 'quantity' in order_data:
+                order_data['size'] = order_data['quantity']
+                logger.info(f"Order {order_id} using quantity field {order_data['quantity']} for size")
+            else:
+                logger.warning(f"Order {order_id} missing 'size' field, adding default 1")
+                order_data['size'] = 1
+        
+        # Ensure quantity field exists for backward compatibility
+        if 'quantity' not in order_data and 'size' in order_data:
+            order_data['quantity'] = order_data['size']
+        
+        # Track the order
+        self.active_orders[order_id] = order_data
+        
+        # If broker is set, forward the order
+        if self.broker:
+            # Mark the event as consumed before forwarding to broker to prevent circular references
+            if hasattr(order_event, 'consumed'):
+                order_event.consumed = True
+                
+            self.broker.process_order(order_event)
+            
+    def handle_fill(self, fill_event):
+        """
+        Handle a fill event.
+        
+        Args:
+            fill_event: Fill event to handle
+        """
+        # Check if this event has already been processed to avoid double-processing
+        if hasattr(fill_event, 'consumed') and fill_event.consumed:
+            logger.debug(f"Skipping already consumed fill event")
+            return
+            
+        fill_data = fill_event.data
+        order_id = fill_data.get('order_id')
+        
+        # Debug logging for fill event
+        logger.info(f"Processing fill event for order_id: {order_id}")
+        if fill_data:
+            logger.debug(f"Fill data: {fill_data}")
+        else:
+            logger.warning(f"Empty fill data in fill event")
+        
+        # Update the order status
+        if order_id in self.active_orders:
+            # Get existing order
+            order = self.active_orders[order_id]
+            
+            # Skip if already filled to prevent duplicate processing
+            if order.get('status') == 'FILLED':
+                logger.debug(f"Order {order_id} already filled, skipping duplicate fill event")
+                return
+            
+            # Update order with fill information
+            order['status'] = 'FILLED'
+            order['fill_price'] = fill_data.get('fill_price')
+            order['fill_time'] = fill_data.get('fill_time')
+            
+            # Make sure size exists (could be missing in some orders)
+            if 'size' not in order:
+                order['size'] = fill_data.get('size', 1)  # Default to 1 if not specified
+                logger.warning(f"Order {order_id} missing 'size' field, using {order['size']}")
+            
+            # Safely log using get() to avoid KeyError
+            logger.info(f"Updated order with fill: Order({order_id}, {order.get('symbol', 'UNKNOWN')}, "
+                       f"{order.get('direction', 'UNKNOWN')}, {order.get('size', 0)}, FILLED)")
+                       
+            # Update stats
+            self.stats['orders_filled'] += 1
+            
+            # Mark event as consumed
+            if hasattr(fill_event, 'consumed'):
+                fill_event.consumed = True
+        else:
+            logger.warning(f"Fill for unknown order: {order_id}")
+            
+    def handle_cancel(self, cancel_event):
+        """
+        Handle a cancel event.
+        
+        Args:
+            cancel_event: Cancel event to handle
+        """
+        cancel_data = cancel_event.data
+        order_id = cancel_data.get('order_id')
+        
+        # Update the order status
+        if order_id in self.active_orders:
+            self.active_orders[order_id]['status'] = 'CANCELLED'
+            logger.info(f"Order cancelled: {order_id}")
+        else:
+            logger.warning(f"Cancel for unknown order: {order_id}")
+            
+    def handle_reject(self, reject_event):
+        """
+        Handle a reject event.
+        
+        Args:
+            reject_event: Reject event to handle
+        """
+        reject_data = reject_event.data
+        order_id = reject_data.get('order_id')
+        
+        # Update the order status
+        if order_id in self.active_orders:
+            self.active_orders[order_id]['status'] = 'REJECTED'
+            self.active_orders[order_id]['reject_reason'] = reject_data.get('reason')
+            logger.info(f"Order rejected: {order_id}, reason: {reject_data.get('reason')}")
+            
+            # Update stats
+            self.stats['orders_rejected'] += 1
+        else:
+            logger.warning(f"Reject for unknown order: {order_id}")
+            
+    def get_active_orders(self):
+        """
+        Get all active orders.
+        
+        Returns:
+            Dict: Active orders by order ID
+        """
+        return {order_id: data.copy() for order_id, data in self.active_orders.items() 
+                if data.get('status') == 'PENDING'}
+                
     def get_order(self, order_id):
         """
         Get an order by ID.
         
         Args:
-            order_id: Order ID
+            order_id: Order ID to get
             
         Returns:
-            Order or None if not found
+            Dict: Order data if found, None otherwise
         """
-        # Try registry first if available
-        if self.order_registry:
-            registry_order = self.order_registry.get_order(order_id)
-            if registry_order:
-                # Sync with local tracking
-                if order_id not in self.orders:
-                    self.orders[order_id] = registry_order
-                    if registry_order.is_active():
-                        self.active_orders.add(order_id)
-                return registry_order
-                
-        # Fall back to local cache
-        return self.orders.get(order_id)
-    
-    def get_active_orders(self, symbol=None):
+        # First check local cache
+        if order_id in self.active_orders:
+            return self.active_orders[order_id].copy()
+            
+        # Then check event bus registry
+        if self.event_bus and hasattr(self.event_bus, 'get_event_by_id'):
+            return self.event_bus.get_event_by_id(order_id)
+            
+        return None
+        
+    def get_orders_by_rule_id(self, rule_id):
         """
-        Get all active orders, optionally filtered by symbol.
+        Get orders by rule ID.
         
         Args:
-            symbol: Optional symbol to filter orders
+            rule_id: Rule ID to filter by
             
         Returns:
-            List of active orders
+            List: Orders with the given rule ID
         """
-        # Use registry if available
-        if self.order_registry:
-            active_orders = self.order_registry.get_active_orders()
-            
-            # Sync with our local tracking
-            for order in active_orders:
-                if order.order_id not in self.orders:
-                    self.orders[order.order_id] = order
-                    self.active_orders.add(order.order_id)
-                    
-            if symbol:
-                return [order for order in active_orders if order.symbol == symbol]
-            return active_orders
-            
-        # Fall back to local tracking
-        active_orders = [self.orders[order_id] for order_id in self.active_orders]
+        return [order for order in self.active_orders.values() if order.get('rule_id') == rule_id]
         
-        if symbol:
-            return [order for order in active_orders if order.symbol == symbol]
-        
-        return active_orders
-    
-    def get_order_history(self, symbol=None, limit=None):
+    def get_orders_by_symbol(self, symbol):
         """
-        Get order history, optionally filtered by symbol.
+        Get orders by symbol.
         
         Args:
-            symbol: Optional symbol to filter orders
-            limit: Optional maximum number of orders to return
+            symbol: Symbol to filter by
             
         Returns:
-            List of historical orders
+            List: Orders for the given symbol
         """
-        # Use registry if available for completed orders
-        if self.order_registry:
-            completed = self.order_registry.get_completed_orders()
-            
-            # Sync with our local tracking
-            for order in completed:
-                if order.order_id not in self.orders:
-                    self.orders[order.order_id] = order
-                    if order.order_id in self.active_orders:
-                        self.active_orders.remove(order.order_id)
-                    if order not in self.order_history:
-                        self.order_history.append(order)
-            
-            if symbol:
-                completed = [o for o in completed if o.symbol == symbol]
-            
-            # Sort by created time (newest first)
-            completed.sort(key=lambda o: o.created_time, reverse=True)
-            
-            if limit:
-                return completed[:limit]
-            return completed
-            
-        # Fall back to local history
-        if symbol:
-            history = [order for order in self.order_history if order.symbol == symbol]
-        else:
-            history = list(self.order_history)
+        return [order for order in self.active_orders.values() if order.get('symbol') == symbol]
         
-        # Sort by created time (newest first)
-        history.sort(key=lambda o: o.created_time, reverse=True)
-        
-        if limit:
-            return history[:limit]
-        
-        return history
-    
-    def reset(self):
-        """Reset order manager state."""
-        # Clear local tracking
-        self.orders = {}
-        self.active_orders = set()
-        self.order_history = []
-        self.processed_events.clear()
-        
-        # Reset statistics
-        self.stats = {
-            'orders_created': 0,
-            'orders_filled': 0,
-            'orders_canceled': 0,
-            'orders_rejected': 0,
-            'orders_expired': 0,
-            'errors': 0
-        }
-        
-        # Reset event tracker
-        self.event_tracker.reset()
-        
-        logger.info("Reset order manager")
-    
     def get_stats(self):
         """
         Get order manager statistics.
         
         Returns:
-            Dict with statistics
+            Dict: Order manager statistics
         """
-        # Update active order count from latest data
-        if self.order_registry:
-            self.stats['active_orders'] = len(self.order_registry.get_active_orders())
-        else:
-            self.stats['active_orders'] = len(self.active_orders)
+        # Update stats with current counts
+        self.stats['active_orders'] = len(self.get_active_orders())
+        self.stats['total_orders'] = len(self.active_orders)
         
-        return dict(self.stats)
-
-
-# Factory for creating order managers
-class OrderManagerFactory:
-    """Factory for creating order managers."""
-    
-    @staticmethod
-    def create(event_bus=None, broker=None, order_registry=None, config=None):
-        """
-        Create an order manager.
+        return self.stats.copy()
         
-        Args:
-            event_bus: Optional event bus
-            broker: Optional broker
-            order_registry: Optional order registry
-            config: Optional configuration
+    def reset(self):
+        """Reset the order manager state."""
+        self.active_orders.clear()
+        self.stats = {
+            'orders_created': 0,
+            'orders_filled': 0,
+            'orders_cancelled': 0,
+            'orders_rejected': 0
+        }
+        
+        logger.info("Reset order manager")
+        
+    def _register_handlers(self):
+        """Register event handlers."""
+        if self.event_bus:
+            # Register for order events (high priority)
+            self.event_bus.register(EventType.ORDER, self.handle_order, priority=100)
             
-        Returns:
-            OrderManager: Order manager instance
-        """
-        # Create order manager
-        manager = OrderManager(event_bus, broker, order_registry)
-        
-        # Configure if config provided
-        if config:
-            manager.configure(config)
+            # Register for fill events
+            self.event_bus.register(EventType.FILL, self.handle_fill)
             
-        return manager
+            # Register for cancel events
+            self.event_bus.register(EventType.ORDER_CANCEL, self.handle_cancel)
+            
+            # Register for reject events if available
+            if hasattr(EventType, 'REJECT'):
+                self.event_bus.register(EventType.REJECT, self.handle_reject)

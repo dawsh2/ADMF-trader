@@ -10,8 +10,8 @@ import sys
 import argparse
 import datetime
 
-# Import bootstrap for clean initialization
-from src.core.bootstrap import Bootstrap
+# Import bootstrap from the renamed module to avoid name conflicts
+from src.core.system_bootstrap import Bootstrap
 from src.data.generators import data_generator
 
 

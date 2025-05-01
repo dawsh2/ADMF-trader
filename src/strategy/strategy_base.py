@@ -3,9 +3,16 @@ from abc import ABC, abstractmethod
 from typing import Dict, Any, List, Optional
 from .components.component_base import Component
 from src.core.events.event_utils import create_signal_event
+import logging
+
+logger = logging.getLogger(__name__)
 
 class Strategy(Component):
-    """Base class for all trading strategies."""
+    """Base class for all trading strategies.
+    
+    Strategies are responsible for analyzing market data and generating directional signals.
+    Strategies should NOT track position state or handle trading decisions.
+    """
     
     def __init__(self, event_bus, data_handler, name=None, parameters=None):
         """
@@ -55,13 +62,19 @@ class Strategy(Component):
     @abstractmethod
     def on_bar(self, bar_event):
         """
-        Handle bar events.
+        Process a bar event and emit a directional signal based on market analysis.
+        
+        Strategies should focus purely on market analysis and signal generation.
+        They should NOT track current positions or make trading decisions.
         
         Args:
-            bar_event: Bar event to process
+            bar_event: Market data bar event
             
         Returns:
-            Optional signal event
+            Optional signal event with directional value (1, -1, 0)
+            - 1 for bullish (buy)
+            - -1 for bearish (sell)
+            - 0 for neutral (no action)
         """
         pass
     
@@ -110,5 +123,4 @@ class Strategy(Component):
         # Default implementation - clear internal state
         self.data = {symbol: [] for symbol in self.symbols}
         # Child classes should override this
-        import logging
-        logging.getLogger(__name__).info(f"Strategy {self.name} reset")
+        logger.info(f"Strategy {self.name} reset")

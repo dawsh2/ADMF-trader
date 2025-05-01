@@ -1,0 +1,21 @@
+Initializing system with configuration: config/mini_test.yaml
+Running backtest...
+
+Backtest Results Summary:
+
+=== Backtest Results ===
+Trades executed: 0
+Total Return: 0.00%
+Sharpe Ratio: nan
+Sortino Ratio: inf
+Maximum Drawdown: 0.00%
+Win Rate: 0.00%
+Profit Factor: 0.0000
+Average Trade: 0.0000
+
+Detailed report saved to: ./results/mini_test/backtest_report_20250430_153510.txt
+Equity curve saved to: ./results/mini_test/equity_curve_20250430_153510.csv
+
+Results saved to ./results/mini_test
+- equity_curve_file
+- detailed_report_file

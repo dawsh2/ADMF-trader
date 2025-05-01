@@ -1,0 +1,418 @@
+2025-04-30 15:35:10,631 - src.core.system_bootstrap - INFO - Logging initialized at level INFO
+2025-04-30 15:35:10,631 - src.core.system_bootstrap - INFO - Log file: ./results/mini_test/mini_test.log
+2025-04-30 15:35:10,632 - src.core.system_bootstrap - INFO - Loaded configuration from config/mini_test.yaml
+2025-04-30 15:35:10,632 - src.core.system_bootstrap - INFO - Event system initialized with native deduplication
+2025-04-30 15:35:10,632 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-04-30 15:35:10,633 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-04-30 15:35:10,633 - src.core.system_bootstrap - INFO - Data components initialized with source type: csv
+2025-04-30 15:35:10,636 - src.execution.broker.broker_simulator - INFO - Simulated broker initialized
+2025-04-30 15:35:10,636 - src.execution.order_manager - INFO - Order manager initialized
+2025-04-30 15:35:10,636 - src.core.system_bootstrap - INFO - Execution components initialized
+2025-04-30 15:35:10,637 - src.core.system_bootstrap - INFO - Risk manager configured with position_size=100, max_position_pct=0.1
+2025-04-30 15:35:10,637 - src.core.system_bootstrap - INFO - Risk components initialized
+2025-04-30 15:35:10,638 - src.core.system_bootstrap - INFO - Discovering strategy implementations...
+2025-04-30 15:35:10,639 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-04-30 15:35:10,639 - src.core.utils.discovery - INFO - Registered component regime_ensemble in registry
+2025-04-30 15:35:10,639 - src.core.system_bootstrap - INFO - Discovered strategies: ma_crossover, regime_ensemble
+2025-04-30 15:35:10,639 - src.core.system_bootstrap - INFO - Requested strategy: ma_crossover
+2025-04-30 15:35:10,639 - src.core.system_bootstrap - INFO - Available strategies in registry: ['ma_crossover', 'regime_ensemble']
+2025-04-30 15:35:10,639 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy initialized with fast_window=5, slow_window=15
+2025-04-30 15:35:10,639 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy configured with parameters: fast_window=5, slow_window=15
+2025-04-30 15:35:10,639 - src.core.system_bootstrap - INFO - Strategy 'ma_crossover' initialized successfully
+2025-04-30 15:35:10,639 - src.core.system_bootstrap - INFO - Analytics components initialized
+2025-04-30 15:35:10,639 - src.core.system_bootstrap - INFO - System bootstrap complete
+2025-04-30 15:35:10,639 - src.execution.backtest.backtest - INFO - Using timeframe from config: 1min
+2025-04-30 15:35:10,641 - src.execution.backtest.backtest - INFO - Backtest setup complete
+2025-04-30 15:35:10,641 - src.core.events.event_bus - INFO - Event bus reset complete
+2025-04-30 15:35:10,641 - src.execution.backtest.backtest - INFO - Event bus reset
+2025-04-30 15:35:10,641 - src.execution.backtest.backtest - INFO - Data handler reset
+2025-04-30 15:35:10,641 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy ma_crossover reset
+2025-04-30 15:35:10,641 - src.execution.backtest.backtest - INFO - Strategy reset
+2025-04-30 15:35:10,641 - src.risk.managers.simple - INFO - Risk manager risk_manager_6fb05499 reset
+2025-04-30 15:35:10,641 - src.execution.backtest.backtest - INFO - Risk manager reset
+2025-04-30 15:35:10,641 - src.execution.order_manager - INFO - Reset order manager
+2025-04-30 15:35:10,641 - src.execution.backtest.backtest - INFO - Order manager reset
+2025-04-30 15:35:10,641 - src.execution.broker.broker_simulator - INFO - Broker reset
+2025-04-30 15:35:10,641 - src.execution.backtest.backtest - INFO - Broker reset
+2025-04-30 15:35:10,641 - src.risk.portfolio.portfolio - INFO - Trade list reset - new empty list with ID: 4453663744
+2025-04-30 15:35:10,641 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_9bdfe616 to initial state with cash: $100000.00
+2025-04-30 15:35:10,641 - src.execution.backtest.backtest - INFO - Portfolio reset
+2025-04-30 15:35:10,641 - src.execution.backtest.backtest - INFO - Reset all components for backtest
+2025-04-30 15:35:10,641 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['MINI'] with timeframe: 1min
+2025-04-30 15:35:10,641 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/MINI_1min.csv
+2025-04-30 15:35:10,643 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 199 rows
+2025-04-30 15:35:10,644 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2024-03-26 13:30:00
+2025-04-30 15:35:10,644 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2024-03-26 13:30:00
+2025-04-30 15:35:10,644 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2024-01-01 00:00:00
+2025-04-30 15:35:10,645 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2024-12-31 00:00:00
+2025-04-30 15:35:10,645 - src.data.sources.csv_handler - INFO - CSVDataSource: Set timestamp as index
+2025-04-30 15:35:10,646 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2024-03-26 13:30:00 to 2024-03-26 16:48:00
+2025-04-30 15:35:10,646 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume', 'trade_count', 'vwap']
+2025-04-30 15:35:10,646 - src.data.historical_data_handler - INFO - Loaded 199 bars for MINI from 2024-03-26 13:30:00 to 2024-03-26 16:48:00
+2025-04-30 15:35:10,646 - src.execution.backtest.backtest - INFO - Starting backtest
+2025-04-30 15:35:10,647 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MINI: fast MA (521.08) crossed above slow MA (521.03), crossover: 0.0082%
+2025-04-30 15:35:10,647 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_1 to processed set
+2025-04-30 15:35:10,647 - src.risk.managers.simple - INFO - Limited BUY size from 100 to 19 for MINI
+2025-04-30 15:35:10,647 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.155
+2025-04-30 15:35:10,647 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 31e6083a-1607-4108-ad17-cdef4ef7bc0b
+2025-04-30 15:35:10,647 - src.execution.order_manager - INFO - Updated order with fill: Order(31e6083a-1607-4108-ad17-cdef4ef7bc0b, MINI, BUY, 19, FILLED)
+2025-04-30 15:35:10,647 - src.risk.managers.simple - INFO - Created order: BUY 19 MINI @ 521.15 with rule_id: ma_crossover_1
+2025-04-30 15:35:10,647 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_1 in processed_rule_ids: True
+2025-04-30 15:35:10,647 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_1 already processed
+2025-04-30 15:35:10,647 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_1 marked as consumed to stop propagation
+2025-04-30 15:35:10,647 - src.strategy.implementations.ma_crossover - INFO - Signal #1 emitted for MINI: 1
+2025-04-30 15:35:10,648 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MINI: fast MA (521.12) crossed below slow MA (521.13), crossover: 0.0022%
+2025-04-30 15:35:10,648 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_2 to processed set
+2025-04-30 15:35:10,648 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-04-30 15:35:10,648 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.12
+2025-04-30 15:35:10,648 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 6b1d6265-7c16-463e-942f-a5f5c8092207
+2025-04-30 15:35:10,648 - src.execution.order_manager - INFO - Updated order with fill: Order(6b1d6265-7c16-463e-942f-a5f5c8092207, MINI, SELL, 19, FILLED)
+2025-04-30 15:35:10,648 - src.risk.managers.simple - INFO - Created order: SELL 19 MINI @ 521.12 with rule_id: ma_crossover_2
+2025-04-30 15:35:10,648 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_2 in processed_rule_ids: True
+2025-04-30 15:35:10,648 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_2 already processed
+2025-04-30 15:35:10,648 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_2 marked as consumed to stop propagation
+2025-04-30 15:35:10,648 - src.strategy.implementations.ma_crossover - INFO - Signal #2 emitted for MINI: -1
+2025-04-30 15:35:10,648 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MINI: fast MA (521.10) crossed above slow MA (521.08), crossover: 0.0030%
+2025-04-30 15:35:10,648 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_3 to processed set
+2025-04-30 15:35:10,648 - src.risk.managers.simple - INFO - Limited BUY size from 100 to 19 for MINI
+2025-04-30 15:35:10,648 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.125
+2025-04-30 15:35:10,648 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: f7bf3684-7adb-48b0-a4a5-83b65e2fe514
+2025-04-30 15:35:10,648 - src.execution.order_manager - INFO - Updated order with fill: Order(f7bf3684-7adb-48b0-a4a5-83b65e2fe514, MINI, BUY, 19, FILLED)
+2025-04-30 15:35:10,648 - src.risk.managers.simple - INFO - Created order: BUY 19 MINI @ 521.12 with rule_id: ma_crossover_3
+2025-04-30 15:35:10,648 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_3 in processed_rule_ids: True
+2025-04-30 15:35:10,648 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_3 already processed
+2025-04-30 15:35:10,648 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_3 marked as consumed to stop propagation
+2025-04-30 15:35:10,648 - src.strategy.implementations.ma_crossover - INFO - Signal #3 emitted for MINI: 1
+2025-04-30 15:35:10,649 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MINI: fast MA (521.30) crossed below slow MA (521.32), crossover: 0.0031%
+2025-04-30 15:35:10,649 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_4 to processed set
+2025-04-30 15:35:10,649 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-04-30 15:35:10,649 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.14
+2025-04-30 15:35:10,649 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 8ff61ff7-3ffe-4e9e-8755-5b947137699c
+2025-04-30 15:35:10,649 - src.execution.order_manager - INFO - Updated order with fill: Order(8ff61ff7-3ffe-4e9e-8755-5b947137699c, MINI, SELL, 19, FILLED)
+2025-04-30 15:35:10,649 - src.risk.managers.simple - INFO - Created order: SELL 19 MINI @ 521.14 with rule_id: ma_crossover_4
+2025-04-30 15:35:10,649 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_4 in processed_rule_ids: True
+2025-04-30 15:35:10,649 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_4 already processed
+2025-04-30 15:35:10,649 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_4 marked as consumed to stop propagation
+2025-04-30 15:35:10,649 - src.strategy.implementations.ma_crossover - INFO - Signal #4 emitted for MINI: -1
+2025-04-30 15:35:10,650 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MINI: fast MA (521.30) crossed above slow MA (521.29), crossover: 0.0022%
+2025-04-30 15:35:10,650 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_5 to processed set
+2025-04-30 15:35:10,650 - src.risk.managers.simple - INFO - Limited BUY size from 100 to 19 for MINI
+2025-04-30 15:35:10,650 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.33
+2025-04-30 15:35:10,650 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 6ad713f4-3412-455d-bb08-0ff24b56364c
+2025-04-30 15:35:10,650 - src.execution.order_manager - INFO - Updated order with fill: Order(6ad713f4-3412-455d-bb08-0ff24b56364c, MINI, BUY, 19, FILLED)
+2025-04-30 15:35:10,650 - src.risk.managers.simple - INFO - Created order: BUY 19 MINI @ 521.33 with rule_id: ma_crossover_5
+2025-04-30 15:35:10,650 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_5 in processed_rule_ids: True
+2025-04-30 15:35:10,650 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_5 already processed
+2025-04-30 15:35:10,650 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_5 marked as consumed to stop propagation
+2025-04-30 15:35:10,650 - src.strategy.implementations.ma_crossover - INFO - Signal #5 emitted for MINI: 1
+2025-04-30 15:35:10,650 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MINI: fast MA (521.37) crossed below slow MA (521.38), crossover: 0.0029%
+2025-04-30 15:35:10,650 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_6 to processed set
+2025-04-30 15:35:10,650 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-04-30 15:35:10,650 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.35
+2025-04-30 15:35:10,650 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: c75853bc-c371-44d3-9621-bace738203b8
+2025-04-30 15:35:10,650 - src.execution.order_manager - INFO - Updated order with fill: Order(c75853bc-c371-44d3-9621-bace738203b8, MINI, SELL, 19, FILLED)
+2025-04-30 15:35:10,650 - src.risk.managers.simple - INFO - Created order: SELL 19 MINI @ 521.35 with rule_id: ma_crossover_6
+2025-04-30 15:35:10,650 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_6 in processed_rule_ids: True
+2025-04-30 15:35:10,650 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_6 already processed
+2025-04-30 15:35:10,650 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_6 marked as consumed to stop propagation
+2025-04-30 15:35:10,650 - src.strategy.implementations.ma_crossover - INFO - Signal #6 emitted for MINI: -1
+2025-04-30 15:35:10,651 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MINI: fast MA (520.96) crossed above slow MA (520.96), crossover: 0.0012%
+2025-04-30 15:35:10,651 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_7 to processed set
+2025-04-30 15:35:10,651 - src.risk.managers.simple - INFO - Limited BUY size from 100 to 19 for MINI
+2025-04-30 15:35:10,651 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 520.98
+2025-04-30 15:35:10,651 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 791fae74-e7e7-4936-a187-c45200a906a5
+2025-04-30 15:35:10,651 - src.execution.order_manager - INFO - Updated order with fill: Order(791fae74-e7e7-4936-a187-c45200a906a5, MINI, BUY, 19, FILLED)
+2025-04-30 15:35:10,651 - src.risk.managers.simple - INFO - Created order: BUY 19 MINI @ 520.98 with rule_id: ma_crossover_7
+2025-04-30 15:35:10,651 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_7 in processed_rule_ids: True
+2025-04-30 15:35:10,651 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_7 already processed
+2025-04-30 15:35:10,651 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_7 marked as consumed to stop propagation
+2025-04-30 15:35:10,651 - src.strategy.implementations.ma_crossover - INFO - Signal #7 emitted for MINI: 1
+2025-04-30 15:35:10,652 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MINI: fast MA (521.06) crossed below slow MA (521.07), crossover: 0.0027%
+2025-04-30 15:35:10,652 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_8 to processed set
+2025-04-30 15:35:10,652 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-04-30 15:35:10,652 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.0593
+2025-04-30 15:35:10,652 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 8f474c07-6ded-4edd-92d1-83d3b1f6579e
+2025-04-30 15:35:10,652 - src.execution.order_manager - INFO - Updated order with fill: Order(8f474c07-6ded-4edd-92d1-83d3b1f6579e, MINI, SELL, 19, FILLED)
+2025-04-30 15:35:10,652 - src.risk.managers.simple - INFO - Created order: SELL 19 MINI @ 521.06 with rule_id: ma_crossover_8
+2025-04-30 15:35:10,652 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_8 in processed_rule_ids: True
+2025-04-30 15:35:10,652 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_8 already processed
+2025-04-30 15:35:10,652 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_8 marked as consumed to stop propagation
+2025-04-30 15:35:10,652 - src.strategy.implementations.ma_crossover - INFO - Signal #8 emitted for MINI: -1
+2025-04-30 15:35:10,652 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MINI: fast MA (521.08) crossed above slow MA (521.08), crossover: 0.0004%
+2025-04-30 15:35:10,653 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_9 to processed set
+2025-04-30 15:35:10,653 - src.risk.managers.simple - INFO - Limited BUY size from 100 to 19 for MINI
+2025-04-30 15:35:10,653 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.14
+2025-04-30 15:35:10,653 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 627262a6-4d48-485e-89e4-0105fd19ee15
+2025-04-30 15:35:10,653 - src.execution.order_manager - INFO - Updated order with fill: Order(627262a6-4d48-485e-89e4-0105fd19ee15, MINI, BUY, 19, FILLED)
+2025-04-30 15:35:10,653 - src.risk.managers.simple - INFO - Created order: BUY 19 MINI @ 521.14 with rule_id: ma_crossover_9
+2025-04-30 15:35:10,653 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_9 in processed_rule_ids: True
+2025-04-30 15:35:10,653 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_9 already processed
+2025-04-30 15:35:10,653 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_9 marked as consumed to stop propagation
+2025-04-30 15:35:10,653 - src.strategy.implementations.ma_crossover - INFO - Signal #9 emitted for MINI: 1
+2025-04-30 15:35:10,653 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MINI: fast MA (521.07) crossed below slow MA (521.08), crossover: 0.0012%
+2025-04-30 15:35:10,653 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_10 to processed set
+2025-04-30 15:35:10,653 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-04-30 15:35:10,653 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 520.9599
+2025-04-30 15:35:10,653 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 029a7aea-0c23-413f-8204-f093209ca14d
+2025-04-30 15:35:10,653 - src.execution.order_manager - INFO - Updated order with fill: Order(029a7aea-0c23-413f-8204-f093209ca14d, MINI, SELL, 19, FILLED)
+2025-04-30 15:35:10,653 - src.risk.managers.simple - INFO - Created order: SELL 19 MINI @ 520.96 with rule_id: ma_crossover_10
+2025-04-30 15:35:10,653 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_10 in processed_rule_ids: True
+2025-04-30 15:35:10,653 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_10 already processed
+2025-04-30 15:35:10,653 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_10 marked as consumed to stop propagation
+2025-04-30 15:35:10,653 - src.strategy.implementations.ma_crossover - INFO - Signal #10 emitted for MINI: -1
+2025-04-30 15:35:10,653 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MINI: fast MA (521.06) crossed above slow MA (521.04), crossover: 0.0040%
+2025-04-30 15:35:10,653 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_11 to processed set
+2025-04-30 15:35:10,653 - src.risk.managers.simple - INFO - Limited BUY size from 100 to 19 for MINI
+2025-04-30 15:35:10,653 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.08
+2025-04-30 15:35:10,653 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 561653d8-3ccf-4a53-9a1e-19499befe526
+2025-04-30 15:35:10,653 - src.execution.order_manager - INFO - Updated order with fill: Order(561653d8-3ccf-4a53-9a1e-19499befe526, MINI, BUY, 19, FILLED)
+2025-04-30 15:35:10,653 - src.risk.managers.simple - INFO - Created order: BUY 19 MINI @ 521.08 with rule_id: ma_crossover_11
+2025-04-30 15:35:10,653 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_11 in processed_rule_ids: True
+2025-04-30 15:35:10,653 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_11 already processed
+2025-04-30 15:35:10,653 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_11 marked as consumed to stop propagation
+2025-04-30 15:35:10,653 - src.strategy.implementations.ma_crossover - INFO - Signal #11 emitted for MINI: 1
+2025-04-30 15:35:10,654 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MINI: fast MA (521.28) crossed below slow MA (521.28), crossover: 0.0003%
+2025-04-30 15:35:10,654 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_12 to processed set
+2025-04-30 15:35:10,654 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-04-30 15:35:10,654 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.25
+2025-04-30 15:35:10,654 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 9bc397d9-d7fd-4a02-8d8d-950684ea8b9c
+2025-04-30 15:35:10,654 - src.execution.order_manager - INFO - Updated order with fill: Order(9bc397d9-d7fd-4a02-8d8d-950684ea8b9c, MINI, SELL, 19, FILLED)
+2025-04-30 15:35:10,654 - src.risk.managers.simple - INFO - Created order: SELL 19 MINI @ 521.25 with rule_id: ma_crossover_12
+2025-04-30 15:35:10,654 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_12 in processed_rule_ids: True
+2025-04-30 15:35:10,654 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_12 already processed
+2025-04-30 15:35:10,654 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_12 marked as consumed to stop propagation
+2025-04-30 15:35:10,654 - src.strategy.implementations.ma_crossover - INFO - Signal #12 emitted for MINI: -1
+2025-04-30 15:35:10,655 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MINI: fast MA (521.25) crossed above slow MA (521.23), crossover: 0.0041%
+2025-04-30 15:35:10,655 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_13 to processed set
+2025-04-30 15:35:10,655 - src.risk.managers.simple - INFO - Limited BUY size from 100 to 19 for MINI
+2025-04-30 15:35:10,655 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.32
+2025-04-30 15:35:10,655 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 6e75770c-3948-4451-b560-dd6d11d32731
+2025-04-30 15:35:10,655 - src.execution.order_manager - INFO - Updated order with fill: Order(6e75770c-3948-4451-b560-dd6d11d32731, MINI, BUY, 19, FILLED)
+2025-04-30 15:35:10,655 - src.risk.managers.simple - INFO - Created order: BUY 19 MINI @ 521.32 with rule_id: ma_crossover_13
+2025-04-30 15:35:10,655 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_13 in processed_rule_ids: True
+2025-04-30 15:35:10,655 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_13 already processed
+2025-04-30 15:35:10,655 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_13 marked as consumed to stop propagation
+2025-04-30 15:35:10,655 - src.strategy.implementations.ma_crossover - INFO - Signal #13 emitted for MINI: 1
+2025-04-30 15:35:10,655 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MINI: fast MA (521.22) crossed below slow MA (521.24), crossover: 0.0026%
+2025-04-30 15:35:10,655 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_14 to processed set
+2025-04-30 15:35:10,655 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-04-30 15:35:10,655 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.2
+2025-04-30 15:35:10,655 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: d52922f8-b650-4b88-b08c-2e0c3b1b4e32
+2025-04-30 15:35:10,655 - src.execution.order_manager - INFO - Updated order with fill: Order(d52922f8-b650-4b88-b08c-2e0c3b1b4e32, MINI, SELL, 19, FILLED)
+2025-04-30 15:35:10,655 - src.risk.managers.simple - INFO - Created order: SELL 19 MINI @ 521.20 with rule_id: ma_crossover_14
+2025-04-30 15:35:10,655 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_14 in processed_rule_ids: True
+2025-04-30 15:35:10,655 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_14 already processed
+2025-04-30 15:35:10,655 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_14 marked as consumed to stop propagation
+2025-04-30 15:35:10,655 - src.strategy.implementations.ma_crossover - INFO - Signal #14 emitted for MINI: -1
+2025-04-30 15:35:10,655 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MINI: fast MA (521.21) crossed above slow MA (521.21), crossover: 0.0001%
+2025-04-30 15:35:10,656 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_15 to processed set
+2025-04-30 15:35:10,656 - src.risk.managers.simple - INFO - Limited BUY size from 100 to 19 for MINI
+2025-04-30 15:35:10,656 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.29
+2025-04-30 15:35:10,656 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: c2e3bc05-ab15-4031-a105-0284aa5108af
+2025-04-30 15:35:10,656 - src.execution.order_manager - INFO - Updated order with fill: Order(c2e3bc05-ab15-4031-a105-0284aa5108af, MINI, BUY, 19, FILLED)
+2025-04-30 15:35:10,656 - src.risk.managers.simple - INFO - Created order: BUY 19 MINI @ 521.29 with rule_id: ma_crossover_15
+2025-04-30 15:35:10,656 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_15 in processed_rule_ids: True
+2025-04-30 15:35:10,656 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_15 already processed
+2025-04-30 15:35:10,656 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_15 marked as consumed to stop propagation
+2025-04-30 15:35:10,656 - src.strategy.implementations.ma_crossover - INFO - Signal #15 emitted for MINI: 1
+2025-04-30 15:35:10,656 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MINI: fast MA (521.21) crossed below slow MA (521.22), crossover: 0.0005%
+2025-04-30 15:35:10,656 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_16 to processed set
+2025-04-30 15:35:10,656 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-04-30 15:35:10,656 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.285
+2025-04-30 15:35:10,656 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 2f8e6575-80e2-49e4-a3ae-8fccbc23fad2
+2025-04-30 15:35:10,656 - src.execution.order_manager - INFO - Updated order with fill: Order(2f8e6575-80e2-49e4-a3ae-8fccbc23fad2, MINI, SELL, 19, FILLED)
+2025-04-30 15:35:10,656 - src.risk.managers.simple - INFO - Created order: SELL 19 MINI @ 521.28 with rule_id: ma_crossover_16
+2025-04-30 15:35:10,656 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_16 in processed_rule_ids: True
+2025-04-30 15:35:10,656 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_16 already processed
+2025-04-30 15:35:10,656 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_16 marked as consumed to stop propagation
+2025-04-30 15:35:10,656 - src.strategy.implementations.ma_crossover - INFO - Signal #16 emitted for MINI: -1
+2025-04-30 15:35:10,656 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MINI: fast MA (521.23) crossed above slow MA (521.22), crossover: 0.0015%
+2025-04-30 15:35:10,656 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_17 to processed set
+2025-04-30 15:35:10,656 - src.risk.managers.simple - INFO - Limited BUY size from 100 to 19 for MINI
+2025-04-30 15:35:10,656 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.285
+2025-04-30 15:35:10,656 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 62c50531-61ed-4a31-9150-ddc6a70933e7
+2025-04-30 15:35:10,656 - src.execution.order_manager - INFO - Updated order with fill: Order(62c50531-61ed-4a31-9150-ddc6a70933e7, MINI, BUY, 19, FILLED)
+2025-04-30 15:35:10,656 - src.risk.managers.simple - INFO - Created order: BUY 19 MINI @ 521.28 with rule_id: ma_crossover_17
+2025-04-30 15:35:10,656 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_17 in processed_rule_ids: True
+2025-04-30 15:35:10,656 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_17 already processed
+2025-04-30 15:35:10,656 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_17 marked as consumed to stop propagation
+2025-04-30 15:35:10,656 - src.strategy.implementations.ma_crossover - INFO - Signal #17 emitted for MINI: 1
+2025-04-30 15:35:10,657 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MINI: fast MA (521.32) crossed below slow MA (521.33), crossover: 0.0013%
+2025-04-30 15:35:10,657 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_18 to processed set
+2025-04-30 15:35:10,657 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-04-30 15:35:10,657 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.28
+2025-04-30 15:35:10,657 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 5cc4037b-0980-4cea-bfbf-fa9511582694
+2025-04-30 15:35:10,657 - src.execution.order_manager - INFO - Updated order with fill: Order(5cc4037b-0980-4cea-bfbf-fa9511582694, MINI, SELL, 19, FILLED)
+2025-04-30 15:35:10,657 - src.risk.managers.simple - INFO - Created order: SELL 19 MINI @ 521.28 with rule_id: ma_crossover_18
+2025-04-30 15:35:10,657 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_18 in processed_rule_ids: True
+2025-04-30 15:35:10,657 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_18 already processed
+2025-04-30 15:35:10,657 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_18 marked as consumed to stop propagation
+2025-04-30 15:35:10,657 - src.strategy.implementations.ma_crossover - INFO - Signal #18 emitted for MINI: -1
+2025-04-30 15:35:10,658 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MINI: fast MA (521.20) crossed above slow MA (521.19), crossover: 0.0009%
+2025-04-30 15:35:10,658 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_19 to processed set
+2025-04-30 15:35:10,658 - src.risk.managers.simple - INFO - Limited BUY size from 100 to 19 for MINI
+2025-04-30 15:35:10,658 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.21
+2025-04-30 15:35:10,658 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 3cbf3e7c-0b6e-44a0-86a6-091ace1913e6
+2025-04-30 15:35:10,658 - src.execution.order_manager - INFO - Updated order with fill: Order(3cbf3e7c-0b6e-44a0-86a6-091ace1913e6, MINI, BUY, 19, FILLED)
+2025-04-30 15:35:10,658 - src.risk.managers.simple - INFO - Created order: BUY 19 MINI @ 521.21 with rule_id: ma_crossover_19
+2025-04-30 15:35:10,658 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_19 in processed_rule_ids: True
+2025-04-30 15:35:10,658 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_19 already processed
+2025-04-30 15:35:10,658 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_19 marked as consumed to stop propagation
+2025-04-30 15:35:10,658 - src.strategy.implementations.ma_crossover - INFO - Signal #19 emitted for MINI: 1
+2025-04-30 15:35:10,658 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MINI: fast MA (521.17) crossed below slow MA (521.17), crossover: 0.0012%
+2025-04-30 15:35:10,658 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_20 to processed set
+2025-04-30 15:35:10,658 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-04-30 15:35:10,658 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.14
+2025-04-30 15:35:10,658 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 47985a36-e052-400a-a0b2-1395144739c1
+2025-04-30 15:35:10,658 - src.execution.order_manager - INFO - Updated order with fill: Order(47985a36-e052-400a-a0b2-1395144739c1, MINI, SELL, 19, FILLED)
+2025-04-30 15:35:10,658 - src.risk.managers.simple - INFO - Created order: SELL 19 MINI @ 521.14 with rule_id: ma_crossover_20
+2025-04-30 15:35:10,658 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_20 in processed_rule_ids: True
+2025-04-30 15:35:10,658 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_20 already processed
+2025-04-30 15:35:10,658 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_20 marked as consumed to stop propagation
+2025-04-30 15:35:10,658 - src.strategy.implementations.ma_crossover - INFO - Signal #20 emitted for MINI: -1
+2025-04-30 15:35:10,659 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MINI: fast MA (521.17) crossed above slow MA (521.16), crossover: 0.0019%
+2025-04-30 15:35:10,659 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_21 to processed set
+2025-04-30 15:35:10,659 - src.risk.managers.simple - INFO - Limited BUY size from 100 to 19 for MINI
+2025-04-30 15:35:10,659 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.28
+2025-04-30 15:35:10,659 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 6254b767-872d-476f-afd6-cb8d6292fd8f
+2025-04-30 15:35:10,659 - src.execution.order_manager - INFO - Updated order with fill: Order(6254b767-872d-476f-afd6-cb8d6292fd8f, MINI, BUY, 19, FILLED)
+2025-04-30 15:35:10,659 - src.risk.managers.simple - INFO - Created order: BUY 19 MINI @ 521.28 with rule_id: ma_crossover_21
+2025-04-30 15:35:10,659 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_21 in processed_rule_ids: True
+2025-04-30 15:35:10,659 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_21 already processed
+2025-04-30 15:35:10,659 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_21 marked as consumed to stop propagation
+2025-04-30 15:35:10,659 - src.strategy.implementations.ma_crossover - INFO - Signal #21 emitted for MINI: 1
+2025-04-30 15:35:10,659 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MINI: fast MA (521.38) crossed below slow MA (521.38), crossover: 0.0002%
+2025-04-30 15:35:10,659 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_22 to processed set
+2025-04-30 15:35:10,659 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-04-30 15:35:10,659 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.3969
+2025-04-30 15:35:10,659 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 18185558-d806-4c10-a0a1-1a917fea7729
+2025-04-30 15:35:10,659 - src.execution.order_manager - INFO - Updated order with fill: Order(18185558-d806-4c10-a0a1-1a917fea7729, MINI, SELL, 19, FILLED)
+2025-04-30 15:35:10,659 - src.risk.managers.simple - INFO - Created order: SELL 19 MINI @ 521.40 with rule_id: ma_crossover_22
+2025-04-30 15:35:10,660 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_22 in processed_rule_ids: True
+2025-04-30 15:35:10,660 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_22 already processed
+2025-04-30 15:35:10,660 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_22 marked as consumed to stop propagation
+2025-04-30 15:35:10,660 - src.strategy.implementations.ma_crossover - INFO - Signal #22 emitted for MINI: -1
+2025-04-30 15:35:10,660 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MINI: fast MA (521.39) crossed above slow MA (521.38), crossover: 0.0012%
+2025-04-30 15:35:10,660 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_23 to processed set
+2025-04-30 15:35:10,660 - src.risk.managers.simple - INFO - Limited BUY size from 100 to 19 for MINI
+2025-04-30 15:35:10,660 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.3969
+2025-04-30 15:35:10,660 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 8adc5b5e-e83e-493a-8931-1b04b90f6b90
+2025-04-30 15:35:10,660 - src.execution.order_manager - INFO - Updated order with fill: Order(8adc5b5e-e83e-493a-8931-1b04b90f6b90, MINI, BUY, 19, FILLED)
+2025-04-30 15:35:10,660 - src.risk.managers.simple - INFO - Created order: BUY 19 MINI @ 521.40 with rule_id: ma_crossover_23
+2025-04-30 15:35:10,660 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_23 in processed_rule_ids: True
+2025-04-30 15:35:10,660 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_23 already processed
+2025-04-30 15:35:10,660 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_23 marked as consumed to stop propagation
+2025-04-30 15:35:10,660 - src.strategy.implementations.ma_crossover - INFO - Signal #23 emitted for MINI: 1
+2025-04-30 15:35:10,660 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MINI: fast MA (521.38) crossed below slow MA (521.39), crossover: 0.0009%
+2025-04-30 15:35:10,660 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_24 to processed set
+2025-04-30 15:35:10,660 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-04-30 15:35:10,660 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.3099
+2025-04-30 15:35:10,660 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 0f1c3c6f-2be3-4e0b-8f6b-a765e21979ec
+2025-04-30 15:35:10,660 - src.execution.order_manager - INFO - Updated order with fill: Order(0f1c3c6f-2be3-4e0b-8f6b-a765e21979ec, MINI, SELL, 19, FILLED)
+2025-04-30 15:35:10,660 - src.risk.managers.simple - INFO - Created order: SELL 19 MINI @ 521.31 with rule_id: ma_crossover_24
+2025-04-30 15:35:10,660 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_24 in processed_rule_ids: True
+2025-04-30 15:35:10,660 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_24 already processed
+2025-04-30 15:35:10,660 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_24 marked as consumed to stop propagation
+2025-04-30 15:35:10,660 - src.strategy.implementations.ma_crossover - INFO - Signal #24 emitted for MINI: -1
+2025-04-30 15:35:10,661 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MINI: fast MA (521.21) crossed above slow MA (521.21), crossover: 0.0004%
+2025-04-30 15:35:10,661 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_25 to processed set
+2025-04-30 15:35:10,661 - src.risk.managers.simple - INFO - Limited BUY size from 100 to 19 for MINI
+2025-04-30 15:35:10,661 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.23
+2025-04-30 15:35:10,661 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 9ff1a1e8-0ed4-4813-9c45-b4387cbfcb61
+2025-04-30 15:35:10,661 - src.execution.order_manager - INFO - Updated order with fill: Order(9ff1a1e8-0ed4-4813-9c45-b4387cbfcb61, MINI, BUY, 19, FILLED)
+2025-04-30 15:35:10,661 - src.risk.managers.simple - INFO - Created order: BUY 19 MINI @ 521.23 with rule_id: ma_crossover_25
+2025-04-30 15:35:10,661 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_25 in processed_rule_ids: True
+2025-04-30 15:35:10,661 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_25 already processed
+2025-04-30 15:35:10,661 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_25 marked as consumed to stop propagation
+2025-04-30 15:35:10,661 - src.strategy.implementations.ma_crossover - INFO - Signal #25 emitted for MINI: 1
+2025-04-30 15:35:10,661 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MINI: fast MA (521.20) crossed below slow MA (521.20), crossover: 0.0001%
+2025-04-30 15:35:10,661 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_26 to processed set
+2025-04-30 15:35:10,661 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-04-30 15:35:10,661 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.18
+2025-04-30 15:35:10,661 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 304a9f40-6e03-49e5-94c3-1a944fcc3634
+2025-04-30 15:35:10,661 - src.execution.order_manager - INFO - Updated order with fill: Order(304a9f40-6e03-49e5-94c3-1a944fcc3634, MINI, SELL, 19, FILLED)
+2025-04-30 15:35:10,661 - src.risk.managers.simple - INFO - Created order: SELL 19 MINI @ 521.18 with rule_id: ma_crossover_26
+2025-04-30 15:35:10,661 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_26 in processed_rule_ids: True
+2025-04-30 15:35:10,661 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_26 already processed
+2025-04-30 15:35:10,661 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_26 marked as consumed to stop propagation
+2025-04-30 15:35:10,661 - src.strategy.implementations.ma_crossover - INFO - Signal #26 emitted for MINI: -1
+2025-04-30 15:35:10,662 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MINI: fast MA (521.17) crossed above slow MA (521.16), crossover: 0.0010%
+2025-04-30 15:35:10,662 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_27 to processed set
+2025-04-30 15:35:10,662 - src.risk.managers.simple - INFO - Limited BUY size from 100 to 19 for MINI
+2025-04-30 15:35:10,662 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.115
+2025-04-30 15:35:10,662 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 63b124fb-20a4-43b3-96a7-4fbde34127da
+2025-04-30 15:35:10,662 - src.execution.order_manager - INFO - Updated order with fill: Order(63b124fb-20a4-43b3-96a7-4fbde34127da, MINI, BUY, 19, FILLED)
+2025-04-30 15:35:10,662 - src.risk.managers.simple - INFO - Created order: BUY 19 MINI @ 521.12 with rule_id: ma_crossover_27
+2025-04-30 15:35:10,662 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_27 in processed_rule_ids: True
+2025-04-30 15:35:10,662 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_27 already processed
+2025-04-30 15:35:10,662 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_27 marked as consumed to stop propagation
+2025-04-30 15:35:10,662 - src.strategy.implementations.ma_crossover - INFO - Signal #27 emitted for MINI: 1
+2025-04-30 15:35:10,662 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MINI: fast MA (521.13) crossed below slow MA (521.15), crossover: 0.0030%
+2025-04-30 15:35:10,662 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_28 to processed set
+2025-04-30 15:35:10,662 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-04-30 15:35:10,662 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.0
+2025-04-30 15:35:10,662 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: ede9259b-351f-4a78-9485-01c12bc0ac5f
+2025-04-30 15:35:10,662 - src.execution.order_manager - INFO - Updated order with fill: Order(ede9259b-351f-4a78-9485-01c12bc0ac5f, MINI, SELL, 19, FILLED)
+2025-04-30 15:35:10,662 - src.risk.managers.simple - INFO - Created order: SELL 19 MINI @ 521.00 with rule_id: ma_crossover_28
+2025-04-30 15:35:10,662 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_28 in processed_rule_ids: True
+2025-04-30 15:35:10,662 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_28 already processed
+2025-04-30 15:35:10,662 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_28 marked as consumed to stop propagation
+2025-04-30 15:35:10,662 - src.strategy.implementations.ma_crossover - INFO - Signal #28 emitted for MINI: -1
+2025-04-30 15:35:10,663 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MINI: fast MA (521.01) crossed above slow MA (521.00), crossover: 0.0023%
+2025-04-30 15:35:10,663 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_29 to processed set
+2025-04-30 15:35:10,663 - src.risk.managers.simple - INFO - Limited BUY size from 100 to 19 for MINI
+2025-04-30 15:35:10,663 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.1099
+2025-04-30 15:35:10,663 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 641f58e1-1ce1-4c65-a175-1a518fac585f
+2025-04-30 15:35:10,663 - src.execution.order_manager - INFO - Updated order with fill: Order(641f58e1-1ce1-4c65-a175-1a518fac585f, MINI, BUY, 19, FILLED)
+2025-04-30 15:35:10,663 - src.risk.managers.simple - INFO - Created order: BUY 19 MINI @ 521.11 with rule_id: ma_crossover_29
+2025-04-30 15:35:10,663 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_29 in processed_rule_ids: True
+2025-04-30 15:35:10,663 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_29 already processed
+2025-04-30 15:35:10,663 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_29 marked as consumed to stop propagation
+2025-04-30 15:35:10,663 - src.strategy.implementations.ma_crossover - INFO - Signal #29 emitted for MINI: 1
+2025-04-30 15:35:10,663 - src.strategy.implementations.ma_crossover - INFO - SELL signal for MINI: fast MA (521.04) crossed below slow MA (521.05), crossover: 0.0029%
+2025-04-30 15:35:10,663 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_30 to processed set
+2025-04-30 15:35:10,663 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-04-30 15:35:10,663 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.0199
+2025-04-30 15:35:10,663 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: b8ef8c84-d1d0-4a89-80b2-bb4f0296d3d4
+2025-04-30 15:35:10,663 - src.execution.order_manager - INFO - Updated order with fill: Order(b8ef8c84-d1d0-4a89-80b2-bb4f0296d3d4, MINI, SELL, 19, FILLED)
+2025-04-30 15:35:10,663 - src.risk.managers.simple - INFO - Created order: SELL 19 MINI @ 521.02 with rule_id: ma_crossover_30
+2025-04-30 15:35:10,663 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_30 in processed_rule_ids: True
+2025-04-30 15:35:10,663 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_30 already processed
+2025-04-30 15:35:10,663 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_30 marked as consumed to stop propagation
+2025-04-30 15:35:10,663 - src.strategy.implementations.ma_crossover - INFO - Signal #30 emitted for MINI: -1
+2025-04-30 15:35:10,664 - src.strategy.implementations.ma_crossover - INFO - BUY signal for MINI: fast MA (520.96) crossed above slow MA (520.94), crossover: 0.0032%
+2025-04-30 15:35:10,664 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_31 to processed set
+2025-04-30 15:35:10,664 - src.risk.managers.simple - INFO - Limited BUY size from 100 to 19 for MINI
+2025-04-30 15:35:10,664 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.04
+2025-04-30 15:35:10,664 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 1c21aa14-1e77-404d-be1a-1fdec09a77ae
+2025-04-30 15:35:10,664 - src.execution.order_manager - INFO - Updated order with fill: Order(1c21aa14-1e77-404d-be1a-1fdec09a77ae, MINI, BUY, 19, FILLED)
+2025-04-30 15:35:10,664 - src.risk.managers.simple - INFO - Created order: BUY 19 MINI @ 521.04 with rule_id: ma_crossover_31
+2025-04-30 15:35:10,664 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_31 in processed_rule_ids: True
+2025-04-30 15:35:10,664 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_31 already processed
+2025-04-30 15:35:10,664 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_31 marked as consumed to stop propagation
+2025-04-30 15:35:10,664 - src.strategy.implementations.ma_crossover - INFO - Signal #31 emitted for MINI: 1
+2025-04-30 15:35:10,664 - src.execution.backtest.backtest - INFO - Backtest completed after 200 iterations
+2025-04-30 15:35:10,665 - src.risk.portfolio.portfolio - INFO - get_recent_trades called, self.trades has 0 items
+2025-04-30 15:35:10,665 - src.risk.portfolio.portfolio - INFO - Trade list object ID: 4453663744
+2025-04-30 15:35:10,665 - src.risk.portfolio.portfolio - INFO - Returning 0 validated trades
+2025-04-30 15:35:10,665 - src.execution.backtest.backtest - INFO - Backtest processed 0 trades
+2025-04-30 15:35:10,665 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 0 trades and equity curve with 797 points
+2025-04-30 15:35:10,665 - src.analytics.metrics.functional - INFO - Calculating metrics for 0 trades and 797 equity points
+/Users/daws/ADMF-trader/src/analytics/metrics/functional.py:104: RuntimeWarning: invalid value encountered in scalar divide
+sharpe = excess_returns.mean() / excess_returns.std() * np.sqrt(annualization_factor)
+2025-04-30 15:35:10,667 - src.analytics.metrics.functional - WARNING - No valid trades for trade metrics calculation
+2025-04-30 15:35:10,667 - src.execution.backtest.backtest - INFO - Calculated performance metrics for 0 trades
+2025-04-30 15:35:10,667 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 0 trades and equity curve with 797 points
+2025-04-30 15:35:10,667 - src.analytics.metrics.functional - INFO - Calculating metrics for 0 trades and 797 equity points
+2025-04-30 15:35:10,668 - src.analytics.metrics.functional - WARNING - No valid trades for trade metrics calculation
+2025-04-30 15:35:10,668 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 0 trades and equity curve with 797 points
+2025-04-30 15:35:10,668 - src.analytics.metrics.functional - INFO - Calculating metrics for 0 trades and 797 equity points
+2025-04-30 15:35:10,669 - src.analytics.metrics.functional - WARNING - No valid trades for trade metrics calculation
+/Users/daws/ADMF-trader/src/analytics/reporting/report_generator.py:133: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+monthly_log_returns = log_returns.resample('M').sum()
+2025-04-30 15:35:10,673 - src.risk.portfolio.portfolio - INFO - get_recent_trades called, self.trades has 0 items
+2025-04-30 15:35:10,673 - src.risk.portfolio.portfolio - INFO - Trade list object ID: 4453663744
+2025-04-30 15:35:10,673 - src.risk.portfolio.portfolio - INFO - Returning 0 validated trades
+2025-04-30 15:35:10,673 - src.execution.backtest.backtest - INFO - Backtest complete
+2025-04-30 15:35:10,676 - src.analytics.reporting.report_generator - INFO - Saved equity curve to './results/mini_test/equity_curve_20250430_153510.csv'
+2025-04-30 15:35:10,676 - src.analytics.reporting.report_generator - INFO - Saved detailed report to './results/mini_test/backtest_report_20250430_153510.txt'

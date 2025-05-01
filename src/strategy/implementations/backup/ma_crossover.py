@@ -1,0 +1,226 @@
+"""
+Moving Average Crossover Strategy Implementation - Fixed Version.
+
+This strategy generates buy signals when a fast moving average crosses above
+a slow moving average, and sell signals when it crosses below.
+
+The implementation groups signals by direction, maintaining a single rule_id
+for each directional state (BUY/SELL) until the direction changes.
+"""
+import logging
+import pandas as pd
+import numpy as np
+from typing import Dict, Any, List, Optional
+
+from src.core.events.event_types import EventType
+from src.core.events.event_utils import create_signal_event
+from src.strategy.strategy_base import Strategy
+
+logger = logging.getLogger(__name__)
+
+class MACrossoverStrategy(Strategy):
+    """Moving Average Crossover strategy implementation with proper signal grouping."""
+    
+    # Define name as a class variable, not a property
+    name = "ma_crossover"
+    
+    def __init__(self, event_bus, data_handler, name=None, parameters=None):
+        """
+        Initialize the MA Crossover strategy.
+        
+        Args:
+            event_bus: Event bus for communication
+            data_handler: Data handler for market data
+            name: Optional strategy name override
+            parameters: Initial strategy parameters
+        """
+        # Call parent constructor with name from class or override
+        super().__init__(event_bus, data_handler, name or self.name, parameters)
+        
+        # Extract parameters with defaults - using smaller windows for more signals
+        self.fast_window = self.parameters.get('fast_window', 5)
+        self.slow_window = self.parameters.get('slow_window', 15)
+        self.price_key = self.parameters.get('price_key', 'close')
+        
+        # Internal state
+        self.data = {symbol: [] for symbol in self.symbols}
+        self.signal_count = 0
+        
+        # Signal direction tracking
+        self.signal_directions = {}  # symbol -> current signal direction (1, 0, -1)
+        self.signal_groups = {}      # symbol -> current group ID
+        
+        # Register for events
+        if self.event_bus:
+            self.event_bus.register(EventType.BAR, self.on_bar)
+            
+        logger.info(f"MA Crossover strategy initialized with fast_window={self.fast_window}, "
+                   f"slow_window={self.slow_window}")
+    
+    def configure(self, config):
+        """Configure the strategy with parameters."""
+        # Call parent configure first
+        super().configure(config)
+        
+        # Update strategy-specific parameters
+        self.fast_window = self.parameters.get('fast_window', 5)  # Changed from 10 to 5
+        self.slow_window = self.parameters.get('slow_window', 15) # Changed from 30 to 15
+        self.price_key = self.parameters.get('price_key', 'close')
+        
+        # Reset data for all configured symbols
+        self.data = {symbol: [] for symbol in self.symbols}
+        
+        # Reset signal tracking
+        self.signal_directions = {}
+        self.signal_groups = {}
+        
+        logger.info(f"MA Crossover strategy configured with parameters: "
+                   f"fast_window={self.fast_window}, slow_window={self.slow_window}")
+    
+    def on_bar(self, bar_event):
+        """
+        Process a bar event and generate signals with proper direction grouping.
+        
+        Args:
+            bar_event: Market data bar event
+            
+        Returns:
+            Optional signal event
+        """
+        # Enhanced debugging at the start of the method
+        logger.debug(f"Received bar event: {bar_event.__dict__ if hasattr(bar_event, '__dict__') else bar_event}")
+        
+        # Extract data from bar event
+        symbol = bar_event.get_symbol()
+        logger.debug(f"Bar event symbol: {symbol}")
+        
+        # Skip if not in our symbol list
+        if symbol not in self.symbols:
+            logger.debug(f"Symbol {symbol} not in strategy symbols list: {self.symbols}")
+            return None
+        
+        # Extract price data
+        price = bar_event.get_close()
+        timestamp = bar_event.get_timestamp()
+        logger.debug(f"Bar data: symbol={symbol}, price={price}, timestamp={timestamp}")
+        
+        # Store data for this symbol
+        if symbol not in self.data:
+            self.data[symbol] = []
+            logger.debug(f"Initialized data array for {symbol}")
+        
+        self.data[symbol].append({
+            'timestamp': timestamp,
+            'price': price
+        })
+        
+        # Debug log - show early data collection
+        if len(self.data[symbol]) <= self.slow_window:
+            logger.debug(f"Collecting data for {symbol}: {len(self.data[symbol])}/{self.slow_window} bars")
+            
+        # Check if we have enough data
+        if len(self.data[symbol]) <= self.slow_window:
+            return None
+        
+        # Calculate moving averages
+        prices = [bar['price'] for bar in self.data[symbol]]
+        
+        # Log raw prices for debugging
+        logger.debug(f"Last few prices for {symbol}: {prices[-min(5, len(prices)):]}")
+        
+        # Calculate fast MA - current and previous
+        fast_ma = sum(prices[-self.fast_window:]) / self.fast_window
+        fast_ma_prev = sum(prices[-(self.fast_window+1):-1]) / self.fast_window
+        
+        # Calculate slow MA - current and previous
+        slow_ma = sum(prices[-self.slow_window:]) / self.slow_window
+        slow_ma_prev = sum(prices[-(self.slow_window+1):-1]) / self.slow_window
+        
+        # Always log MA values for debugging
+        logger.debug(f"Symbol: {symbol}, Fast MA: {fast_ma:.2f}, Slow MA: {slow_ma:.2f}, " +
+                   f"Prev Fast: {fast_ma_prev:.2f}, Prev Slow: {slow_ma_prev:.2f}, " +
+                   f"Diff: {fast_ma - slow_ma:.4f}, Prev Diff: {fast_ma_prev - slow_ma_prev:.4f}")
+        
+        # Check for crossover
+        signal_value = 0
+        
+        # Buy signal: fast MA crosses above slow MA
+        if fast_ma_prev <= slow_ma_prev and fast_ma > slow_ma:
+            signal_value = 1
+            crossover_pct = (fast_ma - slow_ma) / slow_ma
+            logger.info(f"BUY crossover detected for {symbol}: fast MA ({fast_ma:.2f}) crossed above "
+                       f"slow MA ({slow_ma:.2f}), crossover: {crossover_pct:.4%}")
+        
+        # Sell signal: fast MA crosses below slow MA
+        elif fast_ma_prev >= slow_ma_prev and fast_ma < slow_ma:
+            signal_value = -1
+            crossover_pct = (slow_ma - fast_ma) / slow_ma
+            logger.info(f"SELL crossover detected for {symbol}: fast MA ({fast_ma:.2f}) crossed below "
+                       f"slow MA ({slow_ma:.2f}), crossover: {crossover_pct:.4%}")
+        
+        # Enhanced debugging for rule ID
+        logger.info(f"Signal generation: symbol={symbol}, signal_value={signal_value}, current_direction={self.signal_directions.get(symbol, 0)}")
+        if signal_value != 0 and signal_value != self.signal_directions.get(symbol, 0):
+            logger.info(f"DIRECTION CHANGE DETECTED: {self.signal_directions.get(symbol, 0)} -> {signal_value}")
+        
+        # Process signal only if it represents a direction change
+        
+        # Now check if direction has changed
+        current_direction = self.signal_directions.get(symbol, 0)
+        
+        # CRITICAL: Only process signals that represent a direction change
+        if signal_value != 0 and signal_value != current_direction:
+            # Direction has changed - create a new group
+            self.signal_count += 1
+            self.signal_groups[symbol] = self.signal_count
+            self.signal_directions[symbol] = signal_value
+            
+            # Create group-based rule ID - CRITICAL: match validation format
+            group_id = self.signal_groups[symbol]
+            
+            # CRITICAL FIX: MUST use this specific format
+            direction_name = "BUY" if signal_value == 1 else "SELL"
+            rule_id = f"{self.name}_{symbol}_{direction_name}_group_{group_id}"
+            
+            # Log rule_id with more emphasis
+            logger.info(f"RULE ID CREATED: {rule_id} for direction change {current_direction} -> {signal_value}")
+            
+            # Log the new signal group with more visibility
+            logger.info(f"NEW SIGNAL GROUP: {symbol} direction changed to {direction_name}, group={group_id}, rule_id={rule_id}")
+            
+            # Generate and emit signal event
+            signal = create_signal_event(
+                signal_value=signal_value,
+                price=price,
+                symbol=symbol,
+                rule_id=rule_id,
+                timestamp=timestamp
+            )
+            
+            # Debug the signal to verify rule_id is included
+            if hasattr(signal, 'data') and isinstance(signal.data, dict):
+                logger.info(f"DEBUG: Signal created with rule_id={signal.data.get('rule_id')}")
+            
+            # Emit signal if we have an event bus
+            if self.event_bus:
+                self.event_bus.emit(signal)
+                logger.info(f"Signal #{group_id} emitted for {symbol}: {signal_value}, rule_id={rule_id}, timestamp={timestamp}")
+            
+            return signal
+        
+        # If we have a signal but no direction change, we're still in the same group
+        elif signal_value != 0 and signal_value == current_direction:
+            # Use existing group ID but don't emit a new signal
+            logger.debug(f"Signal for {symbol}: {signal_value} - same direction, no new signal emitted")
+        
+        return None
+    
+    def reset(self):
+        """Reset the strategy state."""
+        # Reset strategy-specific state
+        self.data = {symbol: [] for symbol in self.symbols}
+        self.signal_count = 0
+        self.signal_directions = {}
+        self.signal_groups = {}
+        
+        logger.info(f"MA Crossover strategy {self.name} reset")

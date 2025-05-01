@@ -1,0 +1,76 @@
+# Configuration for Validation Test
+# ------------------------------------------------------
+
+# Global backtest settings
+backtest:
+  initial_capital: 100000.0
+  symbols: ['SYNTH']
+  data_dir: "./data"
+  timeframe: "1min"
+  data_source: "csv"
+  start_date: "2024-03-26 09:30:00"
+  end_date: "2024-03-26 11:30:00"
+  strategy: "simple_ma_crossover"
+
+# Data handling configuration
+data:
+  source_type: "csv"
+  data_dir: "./data"
+  file_pattern: "{symbol}_{timeframe}.csv"
+  timestamp_column: "timestamp"
+  price_columns:
+    open: "Open" 
+    high: "High"
+    low: "Low"
+    close: "Close"
+    volume: "Volume"
+
+# Strategy configuration
+strategies:
+  simple_ma_crossover:
+    enabled: true
+    fast_window: 5
+    slow_window: 15
+    price_key: "close"
+
+# Risk management settings - using enhanced risk manager
+risk_manager:
+  type: "enhanced"
+  position_sizing_method: "fixed"
+  position_size: 100
+  max_position_size: 1000
+  equity_percent: 5.0
+  risk_percent: 2.0
+  max_open_trades: 5
+  
+# Order handling settings
+order_manager:
+  default_order_type: "MARKET"
+
+# Broker simulation settings
+broker:
+  slippage: 0.0
+  commission: 0.0
+  delay: 0
+
+# Performance metrics settings
+performance:
+  metrics:
+    - "total_return"
+    - "sharpe_ratio"
+    - "max_drawdown"
+    - "win_rate"
+    - "profit_factor"
+  
+# Logging settings
+logging:
+  level: "INFO"
+  
+# Output settings
+output:
+  save_trades: True
+  save_equity_curve: True
+  output_dir: "./results/validation_test"
+  plot_results: True
+  plot_format: "png"
+  verbose: True

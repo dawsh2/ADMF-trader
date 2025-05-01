@@ -16,6 +16,9 @@ class EventType(Enum):
     WEBSOCKET = auto()      # WebSocket events
     LIFECYCLE = auto()      # System lifecycle events
     ERROR = auto()          # Error events
+    ORDER_STATE_CHANGE = auto()  # Order state changes
+    ORDER_CANCEL = auto()   # Order cancellation events
+    REJECT = auto()         # Order rejection events
 
 
     OPTIMIZATION = auto()   # Optimization events
@@ -30,6 +33,7 @@ class Event:
         self.data = data or {}
         self.timestamp = timestamp or datetime.datetime.now()
         self.id = str(uuid.uuid4())
+        self.consumed = False  # Track if event has been consumed
     
     def get_type(self):
         """Get the event type."""
@@ -42,6 +46,14 @@ class Event:
     def get_id(self):
         """Get the unique event ID."""
         return self.id
+        
+    def mark_consumed(self):
+        """Mark this event as consumed to prevent duplicate processing."""
+        self.consumed = True
+        
+    def is_consumed(self):
+        """Check if this event has been consumed."""
+        return self.consumed
 
     def serialize(self):
         """
@@ -180,7 +192,6 @@ class BarEvent(Event):
         return self.data['volume']
 
 
-
 class SignalEvent(Event):
     """Trading signal event."""
     
@@ -260,6 +271,24 @@ class OrderEvent(Event):
         
     def get_price(self):
         return self.data['price']
+
+
+class OrderCancelEvent(Event):
+    """Order cancellation event."""
+    
+    def __init__(self, order_id, reason=None, timestamp=None):
+        data = {
+            'order_id': order_id,
+            'reason': reason or "User requested cancellation",
+        }
+        super().__init__(EventType.ORDER_CANCEL, data, timestamp)
+    
+    # Accessor methods
+    def get_order_id(self):
+        return self.data['order_id']
+        
+    def get_reason(self):
+        return self.data['reason']
 
 
 class FillEvent(Event):

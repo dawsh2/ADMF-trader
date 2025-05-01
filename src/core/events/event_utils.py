@@ -10,7 +10,7 @@ from collections import defaultdict
 
 from .event_types import (
     Event, EventType, BarEvent, SignalEvent, OrderEvent, FillEvent,
-    WebSocketEvent, LifecycleEvent, ErrorEvent
+    WebSocketEvent, LifecycleEvent, ErrorEvent, OrderCancelEvent
 )
 
 logger = logging.getLogger(__name__)
@@ -192,6 +192,20 @@ def create_order_event(symbol, order_type, direction, quantity,
     
     return order
 
+def create_cancel_event(order_id, reason=None, timestamp=None):
+    """
+    Create a standardized order cancellation event.
+    
+    Args:
+        order_id: ID of the order to cancel
+        reason: Optional reason for cancellation
+        timestamp: Optional timestamp
+        
+    Returns:
+        OrderCancelEvent: The created cancel event
+    """
+    return OrderCancelEvent(order_id, reason, timestamp)
+
 def create_fill_event(symbol, direction, quantity, price, 
                      commission=0.0, timestamp=None, order_id=None):
     """Create a standardized fill event."""
@@ -264,6 +278,9 @@ def event_to_dict(event):
         # No additional fields needed - all in data
         pass
     elif isinstance(event, ErrorEvent):
+        # No additional fields needed - all in data
+        pass
+    elif isinstance(event, OrderCancelEvent):
         # No additional fields needed - all in data
         pass
     
@@ -362,6 +379,12 @@ def dict_to_event(event_dict):
             message=data.get('message'),
             source=data.get('source'),
             exception=data.get('exception'),
+            timestamp=timestamp
+        )
+    elif class_name == 'OrderCancelEvent':
+        return OrderCancelEvent(
+            order_id=data.get('order_id'),
+            reason=data.get('reason'),
             timestamp=timestamp
         )
     else:

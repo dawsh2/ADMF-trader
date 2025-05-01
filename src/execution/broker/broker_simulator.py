@@ -1,291 +1,382 @@
-# src/execution/broker/broker_simulator.py
+"""
+Simulated broker implementation that works with the event bus.
+"""
 import logging
 import datetime
-from typing import Dict, Any, Optional
+from typing import Dict, List, Any, Optional
 
-from src.core.events.event_types import EventType
-from src.core.events.event_utils import create_fill_event
-from src.execution.broker.broker_base import BrokerBase
-from src.execution.order_manager import OrderStatus
+from src.core.events.event_types import EventType, Event
 
 logger = logging.getLogger(__name__)
 
-class SimulatedBroker(BrokerBase):
-    """Simulated broker for executing orders in backtests with OrderRegistry integration."""
+class SimulatedBroker:
+    """
+    Simulated broker for backtesting with event bus integration.
     
-    def __init__(self, event_bus=None, order_registry=None, name="simulated_broker"):
+    This implementation relies on the event bus for deduplication
+    instead of a separate order registry.
+    """
+    
+    def __init__(self, event_bus, order_registry=None):
         """
-        Initialize simulated broker.
+        Initialize the simulated broker.
         
         Args:
-            event_bus: Event bus for communication
-            order_registry: Optional order registry for centralized tracking
-            name: Broker name
+            event_bus: Event bus for event processing
+            order_registry: Optional order registry (for backward compatibility)
         """
-        super().__init__(name)
         self.event_bus = event_bus
-        self.order_registry = order_registry
+        self.slippage = 0.0
+        self.commission = 0.0
+        self.fills = {}
+        self.positions = {}
+        self.stats = {
+            'orders_received': 0,
+            'orders_filled': 0,
+            'orders_rejected': 0
+        }
         
-        # Default parameters
-        self.slippage = 0.0  # Percentage slippage
-        self.commission = 0.0  # Percentage commission
+        # Register event handlers
+        self._register_handlers()
         
-        # Tracking for processed orders to avoid duplicates
-        self.processed_order_ids = set()
+        logger.info("Simulated broker initialized")
         
-        # Register for events if event bus provided
-        if self.event_bus:
-            self.event_bus.register(EventType.ORDER, self.on_order)
-            # Register for portfolio events to catch order state changes
-            self.event_bus.register(EventType.PORTFOLIO, self.on_portfolio_update)
-    
-    def configure(self, config):
-        """
-        Configure the broker.
-        
-        Args:
-            config: Configuration dictionary or ConfigSection
-        """
-        if hasattr(config, 'as_dict'):
-            config_dict = config.as_dict()
-        else:
-            config_dict = dict(config)
-            
-        self.slippage = config_dict.get('slippage', 0.0)
-        self.commission = config_dict.get('commission', 0.0)
-        self.initialized = True
-        
-        logger.info(f"Broker configured with slippage={self.slippage}, commission={self.commission}")
-    
     def set_event_bus(self, event_bus):
         """
         Set the event bus.
         
         Args:
-            event_bus: Event bus instance
+            event_bus: Event bus to use
         """
         self.event_bus = event_bus
-        # Register for events
-        if self.event_bus:
-            self.event_bus.register(EventType.ORDER, self.on_order)
-            self.event_bus.register(EventType.PORTFOLIO, self.on_portfolio_update)
-    
+        self._register_handlers()
+        
     def set_order_registry(self, order_registry):
         """
-        Set the order registry.
+        Set order registry (for backward compatibility).
         
         Args:
-            order_registry: Order registry instance
+            order_registry: Order registry to use
         """
-        self.order_registry = order_registry
-    
-    def on_order(self, order_event):
+        # This method exists for backward compatibility but does nothing
+        # as we now use the event bus directly for order tracking
+        pass
+        
+    def process_order(self, order_event):
         """
-        Handle order events.
+        Process an order event.
         
         Args:
             order_event: Order event to process
+            
+        Returns:
+            bool: True if processed, False otherwise
         """
-        # Extract order ID
-        order_id = None
-        if hasattr(order_event, 'data') and isinstance(order_event.data, dict):
-            order_id = order_event.data.get('order_id')
+        # Extract order data
+        order_data = order_event.data
+        order_id = order_data.get('order_id')
         
-        # Skip if no order ID
+        # Validate required fields
         if not order_id:
-            logger.warning("Order event missing order_id, cannot process")
-            return
+            logger.error("Cannot process order without order_id")
+            return False
             
-        # Skip if already processed this order
-        if order_id in self.processed_order_ids:
-            logger.debug(f"Order {order_id} already processed by broker, skipping")
-            return
+        # Update stats
+        self.stats['orders_received'] += 1
         
-        # If using OrderRegistry, check if order is registered before processing
-        if self.order_registry:
-            # Get order from registry
-            registry_order = self.order_registry.get_order(order_id)
-            if not registry_order:
-                logger.debug(f"Order {order_id} not yet in registry, will be processed after registration")
-                return
-                
-            # Order is in registry - check status
-            if registry_order.status.value == 'PENDING':
-                logger.debug(f"Processing order {order_id} from registry with PENDING status")
-                # Process the order using registry data
-                fill_event = self._process_registry_order(registry_order)
-                
-                # Emit fill event if created
-                if fill_event and self.event_bus:
-                    # Keep track of order ID to prevent duplicate processing
-                    self.processed_order_ids.add(order_id)
-                    
-                    # Emit the fill event
-                    logger.info(f"Broker emitting fill event for {fill_event.get_symbol()}")
-                    self.event_bus.emit(fill_event)
-        else:
-            # No OrderRegistry - process directly (legacy mode)
-            try:
-                # Get symbols, directions from event directly
-                symbol = order_event.get_symbol()
-                direction = order_event.get_direction()
-                quantity = order_event.get_quantity()
-                price = order_event.get_price()
-
-                # Process the order
-                fill_event = self.process_order(symbol, direction, quantity, price, order_id)
-                
-                # Emit fill event if created
-                if fill_event and self.event_bus:
-                    # Keep track of order ID to prevent duplicate processing
-                    self.processed_order_ids.add(order_id)
-                    
-                    # Emit the fill event
-                    logger.info(f"Broker emitting fill event for {fill_event.get_symbol()}")
-                    self.event_bus.emit(fill_event)
-            except Exception as e:
-                logger.error(f"Error processing order event: {e}", exc_info=True)
-                self.stats['errors'] += 1
-    
-    def on_portfolio_update(self, event):
-        """
-        Listen for order state changes from the registry.
+        # Check if this is a duplicate order (using rule_id)
+        rule_id = order_data.get('rule_id')
+        if rule_id and self._is_duplicate_order(rule_id, order_id):
+            logger.info(f"Broker blocking duplicate order with rule_id: {rule_id}")
+            return False
+            
+        # Apply simulated slippage to order price
+        direction = order_data.get('direction', 'BUY')  # Default to BUY if missing
+        price = order_data.get('price', 0.0)
+        symbol = order_data.get('symbol', 'UNKNOWN')  # Default to UNKNOWN if missing
+        size = order_data.get('size', 1)  # Default to 1 if missing
         
-        Args:
-            event: Portfolio event
+        # Log warning if any required fields were missing
+        if 'direction' not in order_data or 'price' not in order_data or 'symbol' not in order_data or 'size' not in order_data:
+            logger.warning(f"Order {order_id} missing required fields. Using defaults: direction={direction}, "
+                          f"price={price}, symbol={symbol}, size={size}")
+        
+        # Calculate fill price with slippage
+        fill_price = self._apply_slippage(price, direction)
+        
+        # Create fill data
+        fill_data = order_data.copy()
+        
+        # Ensure all required fields exist in fill data
+        fill_data['direction'] = direction
+        fill_data['symbol'] = symbol
+        fill_data['size'] = size
+        fill_data['fill_price'] = fill_price
+        fill_data['fill_time'] = datetime.datetime.now()
+        fill_data['commission'] = self._calculate_commission(fill_price, size)
+        
+        # Store fill
+        self.fills[order_id] = fill_data
+        
+        # Update position
+        self._update_position(symbol, direction, size, fill_price)
+        
+        # Create fill event
+        fill_event = Event(EventType.FILL, fill_data)
+        
+        # Set consumed flag to prevent duplicate processing
+        fill_event.consumed = False
+        
+        logger.info(f"Broker processed order: {direction} {size} {symbol} @ {price}")
+        logger.info(f"Fill event created with order_id: {order_id}")
+        
+        # Emit fill event
+        self.event_bus.emit(fill_event)
+        logger.debug(f"Fill event emitted for {symbol} with order_id: {order_id}")
+        
+        # Update stats
+        self.stats['orders_filled'] += 1
+        
+        return True
+        
+    def cancel_order(self, order_id):
         """
-        # Only interested in order state change events
-        if not (hasattr(event, 'data') and 
-                isinstance(event.data, dict) and 
-                event.data.get('order_state_change')):
-            return
-            
-        # Extract order info
-        order_id = event.data.get('order_id')
-        if not order_id:
-            return
-            
-        # Skip if already processed this order
-        if order_id in self.processed_order_ids:
-            return
-            
-        # Check if this is a PENDING order that we should process
-        status = event.data.get('status')
-        if status == 'PENDING' and order_id not in self.processed_order_ids:
-            logger.debug(f"Processing PENDING order {order_id} from state change")
-            
-            # Get order from registry
-            if self.order_registry:
-                registry_order = self.order_registry.get_order(order_id)
-                if registry_order:
-                    # Process the order using registry data
-                    fill_event = self._process_registry_order(registry_order)
-                    
-                    # Emit fill event if created
-                    if fill_event and self.event_bus:
-                        # Keep track of order ID to prevent duplicate processing
-                        self.processed_order_ids.add(order_id)
-                        
-                        # Emit the fill event
-                        logger.info(f"Broker emitting fill event for {fill_event.get_symbol()} after state change")
-                        self.event_bus.emit(fill_event)
-
-    def _process_registry_order(self, order):
-        """
-        Process an order from the registry.
+        Cancel an order.
         
         Args:
-            order: Order object from registry
-        
+            order_id: Order ID to cancel
+            
         Returns:
-            Fill event or None
+            bool: True if cancelled, False otherwise
         """
-        try:
-            # Process the order using order data
-            return self.process_order(
-                order.symbol, 
-                order.direction, 
-                order.quantity, 
-                order.price, 
-                order.order_id
-            )
-        except Exception as e:
-            logger.error(f"Error processing registry order: {e}", exc_info=True)
-            self.stats['errors'] += 1
-            return None
-
-    def process_order(self, symbol, direction, quantity, price, order_id=None):
+        # In simulated broker, we don't have pending orders
+        # The order is either filled immediately or rejected
+        logger.info(f"Cancel request for order {order_id} ignored (orders are filled immediately)")
+        return False
+        
+    def reject_order(self, order_id, reason="Unknown rejection reason"):
         """
-        Process an order.
-
+        Reject an order.
+        
         Args:
-            symbol: Instrument symbol
-            direction: Trade direction ('BUY' or 'SELL')
-            quantity: Order quantity
-            price: Order price
-            order_id: Optional order ID
-
+            order_id: Order ID to reject
+            reason: Rejection reason
+            
         Returns:
-            Fill event or None
+            bool: True if rejected, False otherwise
         """
-        self.stats['orders_processed'] += 1
-
-        try:
-            # Apply slippage to price
-            if direction == 'BUY':
-                fill_price = price * (1.0 + self.slippage)
-            else:  # SELL
-                fill_price = price * (1.0 - self.slippage)
-
-            # Calculate commission
-            commission = abs(quantity * fill_price) * self.commission
-
-            # Create fill event with explicit order_id
-            fill_event = create_fill_event(
-                symbol=symbol,
-                direction=direction,
-                quantity=quantity,
-                price=fill_price,
-                commission=commission,
-                timestamp=datetime.datetime.now(),
-                order_id=order_id
-            )
-
-            self.stats['fills_generated'] += 1
-            logger.info(f"Broker processed order: {direction} {quantity} {symbol} @ {fill_price:.2f}")
-            if order_id:
-                logger.info(f"Fill event created with order_id: {order_id}")
-
-            return fill_event
-
-        except Exception as e:
-            self.stats['errors'] += 1
-            logger.error(f"Error processing order: {e}", exc_info=True)
-            return None            
-    
-    def get_account_info(self):
+        # Check if order exists in event bus registry
+        if self.event_bus and hasattr(self.event_bus, 'get_event_by_id'):
+            order_event = self.event_bus.get_event_by_id(order_id)
+            if not order_event or order_event.get('type') != EventType.ORDER:
+                logger.warning(f"Cannot reject unknown order: {order_id}")
+                return False
+                
+            # Create rejection data
+            reject_data = order_event.get('data', {}).copy()
+            reject_data['status'] = 'REJECTED'
+            reject_data['reject_reason'] = reason
+            
+            # Create reject event
+            reject_event = Event(EventType.REJECT, reject_data)
+            
+            # Emit reject event
+            self.event_bus.emit(reject_event)
+            
+            # Update stats
+            self.stats['orders_rejected'] += 1
+            
+            return True
+            
+        return False
+        
+    def get_position(self, symbol):
         """
-        Get account information.
+        Get position for a symbol.
+        
+        Args:
+            symbol: Symbol to get position for
+            
+        Returns:
+            Dict: Position data
+        """
+        return self.positions.get(symbol, {'symbol': symbol, 'size': 0, 'avg_price': 0.0})
+        
+    def get_positions(self):
+        """
+        Get all positions.
         
         Returns:
-            Dict with account info
+            Dict: Positions by symbol
         """
-        return {
-            'broker': self.name,
-            'account_id': 'simulated',
-            'stats': self.get_stats()
-        }
-
+        return self.positions.copy()
+        
+    def get_fill(self, order_id):
+        """
+        Get fill for an order.
+        
+        Args:
+            order_id: Order ID to get fill for
+            
+        Returns:
+            Dict: Fill data if found, None otherwise
+        """
+        return self.fills.get(order_id)
+        
+    def get_stats(self):
+        """
+        Get broker statistics.
+        
+        Returns:
+            Dict: Broker statistics
+        """
+        return self.stats.copy()
+        
     def reset(self):
-        """Reset broker state."""
-        # Clear processed order IDs
-        self.processed_order_ids.clear()
-
-        # Reset statistics without calling super
+        """Reset the broker state."""
+        self.fills.clear()
+        self.positions.clear()
         self.stats = {
-            'orders_processed': 0,
-            'fills_generated': 0,
-            'errors': 0
+            'orders_received': 0,
+            'orders_filled': 0,
+            'orders_rejected': 0
         }
-
-        logger.debug(f"Reset broker {self.name}")
+        
+        logger.info("Broker reset")
+        
+    def _apply_slippage(self, price, direction):
+        """
+        Apply slippage to price.
+        
+        Args:
+            price: Base price
+            direction: Order direction (BUY/SELL)
+            
+        Returns:
+            float: Price with slippage
+        """
+        if not price:
+            return 0.0
+            
+        # For buys, slippage increases price
+        # For sells, slippage decreases price
+        slippage_factor = 1.0 + (self.slippage if direction == "BUY" else -self.slippage)
+        
+        return price * slippage_factor
+        
+    def _calculate_commission(self, price, size):
+        """
+        Calculate commission for a trade.
+        
+        Args:
+            price: Trade price
+            size: Trade size
+            
+        Returns:
+            float: Commission amount
+        """
+        return price * size * self.commission
+        
+    def _update_position(self, symbol, direction, size, price):
+        """
+        Update position for a symbol.
+        
+        Args:
+            symbol: Symbol to update
+            direction: Order direction (BUY/SELL)
+            size: Order size
+            price: Fill price
+        """
+        if not symbol:
+            return
+            
+        # Get current position
+        position = self.get_position(symbol)
+        current_size = position.get('size', 0)
+        current_avg_price = position.get('avg_price', 0.0)
+        
+        # Calculate new position
+        if direction == "BUY":
+            # Buying increases position
+            new_size = current_size + size
+            
+            # Calculate new average price (weighted average)
+            if new_size > 0:
+                new_avg_price = ((current_size * current_avg_price) + (size * price)) / new_size
+            else:
+                new_avg_price = 0.0
+                
+        else:  # SELL
+            # Selling decreases position
+            new_size = current_size - size
+            
+            # Keep average price if we still have a position
+            if new_size > 0:
+                new_avg_price = current_avg_price
+            else:
+                new_avg_price = 0.0
+                
+        # Update position
+        self.positions[symbol] = {
+            'symbol': symbol,
+            'size': new_size,
+            'avg_price': new_avg_price
+        }
+        
+    def _is_duplicate_order(self, rule_id, order_id):
+        """
+        Check if an order is a duplicate.
+        
+        Uses the event bus to check if an order with the same
+        rule ID has already been processed.
+        
+        Args:
+            rule_id: Rule ID to check
+            order_id: Order ID to check
+            
+        Returns:
+            bool: True if duplicate, False otherwise
+        """
+        # Skip check if no rule ID
+        if not rule_id:
+            return False
+            
+        # Skip check if no event bus
+        if not self.event_bus or not hasattr(self.event_bus, 'processed_events'):
+            return False
+            
+        # Check if rule ID exists in processed orders
+        if EventType.ORDER in self.event_bus.processed_events:
+            processed_orders = self.event_bus.processed_events[EventType.ORDER]
+            
+            # Check if rule ID exists and is not the current order
+            if rule_id in processed_orders:
+                processed_order = processed_orders[rule_id]
+                return processed_order.get('event_id') != order_id
+                
+        return False
+        
+    def _register_handlers(self):
+        """Register event handlers."""
+        if self.event_bus:
+            # Register for order events
+            self.event_bus.register(EventType.ORDER, self.handle_order)
+            
+    def handle_order(self, order_event):
+        """
+        Handle an order event.
+        
+        Args:
+            order_event: Order event to handle
+        """
+        # Check if this event has already been processed to avoid double-processing
+        if hasattr(order_event, 'consumed') and order_event.consumed:
+            logger.debug(f"Skipping already consumed order event: {order_event.data.get('order_id')}")
+            return
+            
+        # Process the order
+        processed = self.process_order(order_event)
+        
+        # Mark event as consumed to prevent duplicate processing
+        if processed and hasattr(order_event, 'consumed'):
+            order_event.consumed = True

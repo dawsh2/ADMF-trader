@@ -48,8 +48,14 @@ class RiskManagerBase(ABC):
         # Event tracker for analysis
         self.event_tracker = EventTracker(f"{self._name}_tracker")
         
-        # Register for events
+        # Register for events - register first to ensure we handle signals before other components
         if self.event_bus:
+            # First unregister any existing handlers to make sure we re-register
+            try:
+                self.event_bus.unregister(EventType.SIGNAL, self.on_signal)
+            except:
+                pass
+            # Register for signal events
             self.event_bus.register(EventType.SIGNAL, self.on_signal)
     
     def configure(self, config):

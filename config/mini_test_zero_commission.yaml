@@ -1,0 +1,64 @@
+# Configuration for MA Crossover with HEAD_1min data
+# ------------------------------------------------------
+
+# Global backtest settings
+backtest:
+  initial_capital: 100000.0
+  symbols: ['MINI']  # Define symbols only here
+  data_dir: "./data"
+  timeframe: "1min"
+  data_source: "csv"
+  start_date: "2024-01-01"
+  end_date: "2024-12-31"
+
+# Data handling configuration
+data:
+  source_type: "csv"
+  data_dir: "./data"
+  file_pattern: "{symbol}_{timeframe}.csv"
+  timestamp_column: "timestamp"
+  price_columns:
+    open: "Open" 
+    high: "High"
+    low: "Low"
+    close: "Close"
+    volume: "Volume"
+
+# Strategy configuration
+strategies:  
+  ma_crossover:
+    enabled: true
+    fast_window: 5    # Same as the working config
+    slow_window: 15   # Same as the working config
+    price_key: "close"  # Lowercase - matches the internal mapping
+    # Symbols will be automatically added from backtest section
+
+# Risk management settings
+risk_manager:
+  position_size: 100
+  max_position_pct: 0.1  # Max 10% of equity per position
+  max_risk_per_trade: 0.01  # Max 1% risk per trade
+  max_open_trades: 5
+  
+# Order handling settings
+order_manager:
+  default_order_type: "MARKET"
+
+# Broker simulation settings
+broker:
+  slippage: 0.000 # 0.1% slippage
+  commission: 0.0   # 0% commission - CHANGED FROM 0.001
+  delay: 0  # No delay in order processing
+
+# Performance metrics settings
+performance:
+  metrics:
+    - "total_return"
+    - "sharpe_ratio"
+    - "max_drawdown"
+    - "win_rate"
+    - "profit_factor"
+  
+# Logging settings
+logging:
+  level: "DEBUG"  # Increased for more information

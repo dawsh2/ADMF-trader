@@ -1,0 +1,47 @@
+# Configuration for pure strategy test with signal interpreter architecture
+
+# General settings
+data:
+  source_type: csv
+  data_dir: ./data
+  date_format: "%Y-%m-%d %H:%M:%S"
+  start_date: 2024-01-01
+  end_date: 2024-12-31
+
+# Backtest settings
+backtest:
+  name: pure_strategy_test
+  output_dir: ./results/pure_strategy_test
+  strategy: pure_ma_crossover
+  timeframe: 1min
+  symbols:
+    - MINI
+
+# Portfolio settings
+portfolio:
+  initial_cash: 100000.0
+
+# Broker settings
+broker:
+  slippage: 0.0001  # 1 basis point
+  commission: 0.001  # 10 basis points
+
+# Risk manager settings
+risk_manager:
+  position_size: 100
+  max_position_pct: 0.1
+  max_trades_per_day: 10
+
+# Strategy-specific settings
+strategies:
+  pure_ma_crossover:
+    fast_window: 5
+    slow_window: 15
+    price_key: close
+    
+# Reporting settings
+reporting:
+  equity_curve: true
+  trade_list: true
+  performance_metrics: true
+  drawdown_analysis: true

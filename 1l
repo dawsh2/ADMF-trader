@@ -1,0 +1,1394 @@
+2025-05-01 11:33:44,389 - src.core.system_bootstrap - INFO - Logging initialized at level INFO
+2025-05-01 11:33:44,389 - src.core.system_bootstrap - INFO - Logging initialized at level INFO
+2025-05-01 11:33:44,389 - src.core.system_bootstrap - INFO - Log file: ./results/mini_test/mini_test.log
+2025-05-01 11:33:44,389 - src.core.system_bootstrap - INFO - Log file: ./results/mini_test/mini_test.log
+2025-05-01 11:33:44,391 - src.core.system_bootstrap - INFO - Loaded configuration from config/mini_test.yaml
+2025-05-01 11:33:44,391 - src.core.system_bootstrap - INFO - Loaded configuration from config/mini_test.yaml
+2025-05-01 11:33:44,391 - src.core.system_bootstrap - INFO - Event system initialized with native deduplication
+2025-05-01 11:33:44,391 - src.core.system_bootstrap - INFO - Event system initialized with native deduplication
+2025-05-01 11:33:44,391 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-05-01 11:33:44,391 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-05-01 11:33:44,392 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-05-01 11:33:44,392 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-05-01 11:33:44,392 - src.core.system_bootstrap - INFO - Data components initialized with source type: csv
+2025-05-01 11:33:44,392 - src.core.system_bootstrap - INFO - Data components initialized with source type: csv
+2025-05-01 11:33:44,394 - src.execution.broker.broker_simulator - INFO - Simulated broker initialized
+2025-05-01 11:33:44,394 - src.execution.broker.broker_simulator - INFO - Simulated broker initialized
+2025-05-01 11:33:44,394 - src.execution.order_manager - INFO - Order manager initialized
+2025-05-01 11:33:44,394 - src.execution.order_manager - INFO - Order manager initialized
+2025-05-01 11:33:44,394 - src.core.system_bootstrap - INFO - Execution components initialized
+2025-05-01 11:33:44,394 - src.core.system_bootstrap - INFO - Execution components initialized
+2025-05-01 11:33:44,394 - src.core.system_bootstrap - INFO - Risk manager configured with position_size=100, max_position_pct=0.1
+2025-05-01 11:33:44,394 - src.core.system_bootstrap - INFO - Risk manager configured with position_size=100, max_position_pct=0.1
+2025-05-01 11:33:44,394 - src.core.system_bootstrap - INFO - Risk components initialized
+2025-05-01 11:33:44,394 - src.core.system_bootstrap - INFO - Risk components initialized
+2025-05-01 11:33:44,395 - src.core.system_bootstrap - INFO - Discovering strategy implementations...
+2025-05-01 11:33:44,395 - src.core.system_bootstrap - INFO - Discovering strategy implementations...
+2025-05-01 11:33:44,395 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-05-01 11:33:44,395 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-05-01 11:33:44,395 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-05-01 11:33:44,395 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-05-01 11:33:44,395 - src.core.utils.discovery - INFO - Registered component pure_ma_crossover in registry
+2025-05-01 11:33:44,395 - src.core.utils.discovery - INFO - Registered component pure_ma_crossover in registry
+2025-05-01 11:33:44,395 - src.core.utils.discovery - INFO - Registered component regime_ensemble in registry
+2025-05-01 11:33:44,395 - src.core.utils.discovery - INFO - Registered component regime_ensemble in registry
+2025-05-01 11:33:44,395 - src.core.system_bootstrap - INFO - Discovered strategies: ma_crossover, pure_ma_crossover, regime_ensemble
+2025-05-01 11:33:44,395 - src.core.system_bootstrap - INFO - Discovered strategies: ma_crossover, pure_ma_crossover, regime_ensemble
+2025-05-01 11:33:44,395 - src.core.system_bootstrap - INFO - Requested strategy: ma_crossover
+2025-05-01 11:33:44,395 - src.core.system_bootstrap - INFO - Requested strategy: ma_crossover
+2025-05-01 11:33:44,395 - src.core.system_bootstrap - INFO - Available strategies in registry: ['ma_crossover', 'pure_ma_crossover', 'regime_ensemble']
+2025-05-01 11:33:44,395 - src.core.system_bootstrap - INFO - Available strategies in registry: ['ma_crossover', 'pure_ma_crossover', 'regime_ensemble']
+2025-05-01 11:33:44,395 - src.strategy.implementations.ma_crossover_fixed - INFO - MA Crossover strategy initialized with fast_window=5, slow_window=15
+2025-05-01 11:33:44,395 - src.strategy.implementations.ma_crossover_fixed - INFO - MA Crossover strategy initialized with fast_window=5, slow_window=15
+2025-05-01 11:33:44,395 - src.strategy.implementations.ma_crossover_fixed - INFO - MA Crossover strategy configured with parameters: fast_window=5, slow_window=15
+2025-05-01 11:33:44,395 - src.strategy.implementations.ma_crossover_fixed - INFO - MA Crossover strategy configured with parameters: fast_window=5, slow_window=15
+2025-05-01 11:33:44,395 - src.core.system_bootstrap - INFO - Strategy 'ma_crossover' initialized successfully
+2025-05-01 11:33:44,395 - src.core.system_bootstrap - INFO - Strategy 'ma_crossover' initialized successfully
+2025-05-01 11:33:44,395 - src.core.system_bootstrap - INFO - Analytics components initialized
+2025-05-01 11:33:44,395 - src.core.system_bootstrap - INFO - Analytics components initialized
+2025-05-01 11:33:44,395 - src.core.system_bootstrap - INFO - All components registered with event manager in optimal order
+2025-05-01 11:33:44,395 - src.core.system_bootstrap - INFO - All components registered with event manager in optimal order
+2025-05-01 11:33:44,395 - src.core.system_bootstrap - INFO - Re-registered portfolio fill handler with high priority
+2025-05-01 11:33:44,395 - src.core.system_bootstrap - INFO - Re-registered portfolio fill handler with high priority
+2025-05-01 11:33:44,395 - src.core.system_bootstrap - INFO - System bootstrap complete
+2025-05-01 11:33:44,395 - src.core.system_bootstrap - INFO - System bootstrap complete
+2025-05-01 11:33:44,395 - src.execution.backtest.backtest - INFO - Using timeframe from config: 1min
+2025-05-01 11:33:44,395 - src.execution.backtest.backtest - INFO - Using timeframe from config: 1min
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Backtest setup complete
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Backtest setup complete
+2025-05-01 11:33:44,398 - src.core.events.event_bus - INFO - Event bus reset complete
+2025-05-01 11:33:44,398 - src.core.events.event_bus - INFO - Event bus reset complete
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Event bus reset
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Event bus reset
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Data handler reset
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Data handler reset
+2025-05-01 11:33:44,398 - src.strategy.implementations.ma_crossover_fixed - INFO - MA Crossover strategy ma_crossover reset
+2025-05-01 11:33:44,398 - src.strategy.implementations.ma_crossover_fixed - INFO - MA Crossover strategy ma_crossover reset
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Strategy reset
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Strategy reset
+2025-05-01 11:33:44,398 - src.risk.managers.simple - INFO - Resetting risk manager state: clearing tracking collections
+2025-05-01 11:33:44,398 - src.risk.managers.simple - INFO - Resetting risk manager state: clearing tracking collections
+2025-05-01 11:33:44,398 - src.risk.managers.simple - INFO - CLEARING 0 PROCESSED RULE IDs
+2025-05-01 11:33:44,398 - src.risk.managers.simple - INFO - CLEARING 0 PROCESSED RULE IDs
+2025-05-01 11:33:44,398 - src.risk.managers.simple - INFO - After reset, processed_rule_ids size: 0
+2025-05-01 11:33:44,398 - src.risk.managers.simple - INFO - After reset, processed_rule_ids size: 0
+2025-05-01 11:33:44,398 - src.risk.managers.simple - INFO - Risk manager risk_manager_69940cdc reset completed
+2025-05-01 11:33:44,398 - src.risk.managers.simple - INFO - Risk manager risk_manager_69940cdc reset completed
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Risk manager reset
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Risk manager reset
+2025-05-01 11:33:44,398 - src.execution.order_manager - INFO - Reset order manager
+2025-05-01 11:33:44,398 - src.execution.order_manager - INFO - Reset order manager
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Order manager reset
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Order manager reset
+2025-05-01 11:33:44,398 - src.execution.broker.broker_simulator - INFO - Broker reset
+2025-05-01 11:33:44,398 - src.execution.broker.broker_simulator - INFO - Broker reset
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Broker reset
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Broker reset
+2025-05-01 11:33:44,398 - src.risk.portfolio.portfolio - INFO - Trade list reset - new empty list with ID: 4455835264
+2025-05-01 11:33:44,398 - src.risk.portfolio.portfolio - INFO - Trade list reset - new empty list with ID: 4455835264
+2025-05-01 11:33:44,398 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_90e99eb1 to initial state with cash: $100000.00
+2025-05-01 11:33:44,398 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_90e99eb1 to initial state with cash: $100000.00
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Portfolio reset
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Portfolio reset
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Reset all components for backtest
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Reset all components for backtest
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['MINI'] with timeframe: 1min
+2025-05-01 11:33:44,398 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['MINI'] with timeframe: 1min
+2025-05-01 11:33:44,398 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/MINI_1min.csv
+2025-05-01 11:33:44,398 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/MINI_1min.csv
+2025-05-01 11:33:44,401 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 48 rows
+2025-05-01 11:33:44,401 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 48 rows
+2025-05-01 11:33:44,401 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2024-03-26 13:30:00
+2025-05-01 11:33:44,401 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2024-03-26 13:30:00
+2025-05-01 11:33:44,402 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2024-03-26 13:30:00
+2025-05-01 11:33:44,402 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2024-03-26 13:30:00
+2025-05-01 11:33:44,402 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2024-01-01 00:00:00
+2025-05-01 11:33:44,402 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2024-01-01 00:00:00
+2025-05-01 11:33:44,402 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2024-12-31 00:00:00
+2025-05-01 11:33:44,402 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2024-12-31 00:00:00
+2025-05-01 11:33:44,403 - src.data.sources.csv_handler - INFO - CSVDataSource: Set timestamp as index
+2025-05-01 11:33:44,403 - src.data.sources.csv_handler - INFO - CSVDataSource: Set timestamp as index
+2025-05-01 11:33:44,404 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2024-03-26 13:30:00 to 2024-03-26 14:17:00
+2025-05-01 11:33:44,404 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2024-03-26 13:30:00 to 2024-03-26 14:17:00
+2025-05-01 11:33:44,404 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume', 'trade_count', 'vwap']
+2025-05-01 11:33:44,404 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume', 'trade_count', 'vwap']
+2025-05-01 11:33:44,404 - src.data.historical_data_handler - INFO - Loaded 48 bars for MINI from 2024-03-26 13:30:00 to 2024-03-26 14:17:00
+2025-05-01 11:33:44,404 - src.data.historical_data_handler - INFO - Loaded 48 bars for MINI from 2024-03-26 13:30:00 to 2024-03-26 14:17:00
+2025-05-01 11:33:44,404 - src.execution.backtest.backtest - INFO - Starting backtest
+2025-05-01 11:33:44,404 - src.execution.backtest.backtest - INFO - Starting backtest
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=0
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=0
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=0
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=0
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=0
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=0
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - SELL crossover detected for MINI: fast MA (521.17) crossed below slow MA (521.22), crossover: 0.0083%
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - SELL crossover detected for MINI: fast MA (521.17) crossed below slow MA (521.22), crossover: 0.0083%
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=-1, current_direction=0
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=-1, current_direction=0
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: 0 -> -1
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: 0 -> -1
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_SELL_group_1 for direction change 0 -> -1
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_SELL_group_1 for direction change 0 -> -1
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to SELL, group=1, rule_id=ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to SELL, group=1, rule_id=ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Received signal event: 3fe6a4b4-d312-48ad-ab66-874272ad8e3b
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Received signal event: 3fe6a4b4-d312-48ad-ab66-874272ad8e3b
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=-1, rule_id=ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=-1, rule_id=ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_SELL_group_1 to processed set
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_SELL_group_1 to processed set
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_SELL_group_1 to order parameters
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_SELL_group_1 to order parameters
+2025-05-01 11:33:44,405 - src.execution.order_manager - INFO - Order ad5de50b-6a58-4516-859d-89e3180938b8 created with rule_id: ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.execution.order_manager - INFO - Order ad5de50b-6a58-4516-859d-89e3180938b8 created with rule_id: ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.12
+2025-05-01 11:33:44,405 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.12
+2025-05-01 11:33:44,405 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: ad5de50b-6a58-4516-859d-89e3180938b8
+2025-05-01 11:33:44,405 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: ad5de50b-6a58-4516-859d-89e3180938b8
+2025-05-01 11:33:44,405 - src.core.events.event_bus - INFO - Fill dedup key (order_id): ad5de50b-6a58-4516-859d-89e3180938b8
+2025-05-01 11:33:44,405 - src.core.events.event_bus - INFO - Fill dedup key (order_id): ad5de50b-6a58-4516-859d-89e3180938b8
+2025-05-01 11:33:44,405 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 0.00 to trade history. Total trades: 1
+2025-05-01 11:33:44,405 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 0.00 to trade history. Total trades: 1
+2025-05-01 11:33:44,405 - src.risk.portfolio.portfolio - INFO - Trade list now contains 1 trades
+2025-05-01 11:33:44,405 - src.risk.portfolio.portfolio - INFO - Trade list now contains 1 trades
+2025-05-01 11:33:44,405 - src.risk.portfolio.portfolio - INFO - Fill: SELL 19.0 MINI @ 520.60, PnL: 0.00, Cash: 109881.49, Equity: 99990.11
+2025-05-01 11:33:44,405 - src.risk.portfolio.portfolio - INFO - Fill: SELL 19.0 MINI @ 520.60, PnL: 0.00, Cash: 109881.49, Equity: 99990.11
+2025-05-01 11:33:44,405 - src.execution.order_manager - INFO - Processing fill event for order_id: ad5de50b-6a58-4516-859d-89e3180938b8
+2025-05-01 11:33:44,405 - src.execution.order_manager - INFO - Processing fill event for order_id: ad5de50b-6a58-4516-859d-89e3180938b8
+2025-05-01 11:33:44,405 - src.execution.order_manager - INFO - Updated order with fill: Order(ad5de50b-6a58-4516-859d-89e3180938b8, MINI, SELL, 19, FILLED)
+2025-05-01 11:33:44,405 - src.execution.order_manager - INFO - Updated order with fill: Order(ad5de50b-6a58-4516-859d-89e3180938b8, MINI, SELL, 19, FILLED)
+2025-05-01 11:33:44,405 - src.execution.order_manager - INFO - Emitting order event: ad5de50b-6a58-4516-859d-89e3180938b8 (SELL 19 MINI @ 521.12, rule_id: ma_crossover_MINI_SELL_group_1)
+2025-05-01 11:33:44,405 - src.execution.order_manager - INFO - Emitting order event: ad5de50b-6a58-4516-859d-89e3180938b8 (SELL 19 MINI @ 521.12, rule_id: ma_crossover_MINI_SELL_group_1)
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Order created with ID: ad5de50b-6a58-4516-859d-89e3180938b8 for rule_id: ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Order created with ID: ad5de50b-6a58-4516-859d-89e3180938b8 for rule_id: ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_SELL_group_1 in processed_rule_ids: True
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_SELL_group_1 in processed_rule_ids: True
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Received signal event: 3fe6a4b4-d312-48ad-ab66-874272ad8e3b
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Received signal event: 3fe6a4b4-d312-48ad-ab66-874272ad8e3b
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_1
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_SELL_group_1 already processed
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_SELL_group_1 already processed
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_SELL_group_1']
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_SELL_group_1']
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_SELL_group_1 marked as consumed to stop propagation
+2025-05-01 11:33:44,405 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_SELL_group_1 marked as consumed to stop propagation
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #1 emitted for MINI: -1, rule_id=ma_crossover_MINI_SELL_group_1, timestamp=2024-03-26 13:36:00
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #1 emitted for MINI: -1, rule_id=ma_crossover_MINI_SELL_group_1, timestamp=2024-03-26 13:36:00
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,405 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - BUY crossover detected for MINI: fast MA (521.01) crossed above slow MA (520.99), crossover: 0.0039%
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - BUY crossover detected for MINI: fast MA (521.01) crossed above slow MA (520.99), crossover: 0.0039%
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=1, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=1, current_direction=-1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: -1 -> 1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: -1 -> 1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_BUY_group_2 for direction change -1 -> 1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_BUY_group_2 for direction change -1 -> 1
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=2, rule_id=ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=2, rule_id=ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,406 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,406 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,406 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,406 - src.risk.managers.simple - INFO - Received signal event: 06decb06-34fc-4ca6-9ece-755c6106d988
+2025-05-01 11:33:44,406 - src.risk.managers.simple - INFO - Received signal event: 06decb06-34fc-4ca6-9ece-755c6106d988
+2025-05-01 11:33:44,406 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,406 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,406 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,406 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,406 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,406 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,406 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=1, rule_id=ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,406 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=1, rule_id=ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,406 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_BUY_group_2 to processed set
+2025-05-01 11:33:44,406 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_BUY_group_2 to processed set
+2025-05-01 11:33:44,406 - src.risk.managers.simple - INFO - Limited BUY size from 119.0 to 19 for MINI
+2025-05-01 11:33:44,406 - src.risk.managers.simple - INFO - Limited BUY size from 119.0 to 19 for MINI
+2025-05-01 11:33:44,406 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,406 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,406 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_BUY_group_2 to order parameters
+2025-05-01 11:33:44,406 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_BUY_group_2 to order parameters
+2025-05-01 11:33:44,406 - src.execution.order_manager - INFO - Order 498ddc48-2700-47f7-8000-a44eb042257e created with rule_id: ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,406 - src.execution.order_manager - INFO - Order 498ddc48-2700-47f7-8000-a44eb042257e created with rule_id: ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,406 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,406 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,407 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.085
+2025-05-01 11:33:44,407 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.085
+2025-05-01 11:33:44,407 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 498ddc48-2700-47f7-8000-a44eb042257e
+2025-05-01 11:33:44,407 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 498ddc48-2700-47f7-8000-a44eb042257e
+2025-05-01 11:33:44,407 - src.core.events.event_bus - INFO - Fill dedup key (order_id): 498ddc48-2700-47f7-8000-a44eb042257e
+2025-05-01 11:33:44,407 - src.core.events.event_bus - INFO - Fill dedup key (order_id): 498ddc48-2700-47f7-8000-a44eb042257e
+2025-05-01 11:33:44,407 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -19.14 to trade history. Total trades: 2
+2025-05-01 11:33:44,407 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -19.14 to trade history. Total trades: 2
+2025-05-01 11:33:44,407 - src.risk.portfolio.portfolio - INFO - Trade list now contains 2 trades
+2025-05-01 11:33:44,407 - src.risk.portfolio.portfolio - INFO - Trade list now contains 2 trades
+2025-05-01 11:33:44,407 - src.risk.portfolio.portfolio - INFO - Fill: BUY 19.0 MINI @ 521.61, PnL: -19.14, Cash: 99961.06, Equity: 99961.06
+2025-05-01 11:33:44,407 - src.risk.portfolio.portfolio - INFO - Fill: BUY 19.0 MINI @ 521.61, PnL: -19.14, Cash: 99961.06, Equity: 99961.06
+2025-05-01 11:33:44,407 - src.execution.order_manager - INFO - Processing fill event for order_id: 498ddc48-2700-47f7-8000-a44eb042257e
+2025-05-01 11:33:44,407 - src.execution.order_manager - INFO - Processing fill event for order_id: 498ddc48-2700-47f7-8000-a44eb042257e
+2025-05-01 11:33:44,407 - src.execution.order_manager - INFO - Updated order with fill: Order(498ddc48-2700-47f7-8000-a44eb042257e, MINI, BUY, 19, FILLED)
+2025-05-01 11:33:44,407 - src.execution.order_manager - INFO - Updated order with fill: Order(498ddc48-2700-47f7-8000-a44eb042257e, MINI, BUY, 19, FILLED)
+2025-05-01 11:33:44,407 - src.execution.order_manager - INFO - Emitting order event: 498ddc48-2700-47f7-8000-a44eb042257e (BUY 19 MINI @ 521.085, rule_id: ma_crossover_MINI_BUY_group_2)
+2025-05-01 11:33:44,407 - src.execution.order_manager - INFO - Emitting order event: 498ddc48-2700-47f7-8000-a44eb042257e (BUY 19 MINI @ 521.085, rule_id: ma_crossover_MINI_BUY_group_2)
+2025-05-01 11:33:44,407 - src.risk.managers.simple - INFO - Order created with ID: 498ddc48-2700-47f7-8000-a44eb042257e for rule_id: ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,407 - src.risk.managers.simple - INFO - Order created with ID: 498ddc48-2700-47f7-8000-a44eb042257e for rule_id: ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,407 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_BUY_group_2 in processed_rule_ids: True
+2025-05-01 11:33:44,407 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_BUY_group_2 in processed_rule_ids: True
+2025-05-01 11:33:44,407 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,407 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,407 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=1, rule_id=signal_group_MINI_BUY_group_1
+2025-05-01 11:33:44,407 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=1, rule_id=signal_group_MINI_BUY_group_1
+2025-05-01 11:33:44,407 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_2 already processed, skipping
+2025-05-01 11:33:44,407 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_2 already processed, skipping
+2025-05-01 11:33:44,407 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,407 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,407 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,407 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,407 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,407 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,407 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=2, rule_id=signal_group_MINI_BUY_group_2
+2025-05-01 11:33:44,407 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=2, rule_id=signal_group_MINI_BUY_group_2
+2025-05-01 11:33:44,407 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_2 already processed, skipping
+2025-05-01 11:33:44,407 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_2 already processed, skipping
+2025-05-01 11:33:44,407 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,407 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,407 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,407 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,407 - src.risk.managers.simple - INFO - Received signal event: 06decb06-34fc-4ca6-9ece-755c6106d988
+2025-05-01 11:33:44,407 - src.risk.managers.simple - INFO - Received signal event: 06decb06-34fc-4ca6-9ece-755c6106d988
+2025-05-01 11:33:44,407 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,407 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_2
+2025-05-01 11:33:44,407 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_BUY_group_2 already processed
+2025-05-01 11:33:44,407 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_BUY_group_2 already processed
+2025-05-01 11:33:44,407 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_SELL_group_1']
+2025-05-01 11:33:44,407 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_SELL_group_1']
+2025-05-01 11:33:44,407 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_BUY_group_2 marked as consumed to stop propagation
+2025-05-01 11:33:44,407 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_BUY_group_2 marked as consumed to stop propagation
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #2 emitted for MINI: 1, rule_id=ma_crossover_MINI_BUY_group_2, timestamp=2024-03-26 13:43:00
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #2 emitted for MINI: 1, rule_id=ma_crossover_MINI_BUY_group_2, timestamp=2024-03-26 13:43:00
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - SELL crossover detected for MINI: fast MA (521.10) crossed below slow MA (521.10), crossover: 0.0006%
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - SELL crossover detected for MINI: fast MA (521.10) crossed below slow MA (521.10), crossover: 0.0006%
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=-1, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=-1, current_direction=1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: 1 -> -1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: 1 -> -1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_SELL_group_3 for direction change 1 -> -1
+2025-05-01 11:33:44,407 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_SELL_group_3 for direction change 1 -> -1
+2025-05-01 11:33:44,408 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to SELL, group=3, rule_id=ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to SELL, group=3, rule_id=ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Received signal event: f6ca9ebd-ec44-409e-bc23-ee559b3ef867
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Received signal event: f6ca9ebd-ec44-409e-bc23-ee559b3ef867
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=-1, rule_id=ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=-1, rule_id=ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_SELL_group_3 to processed set
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_SELL_group_3 to processed set
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_SELL_group_3 to order parameters
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_SELL_group_3 to order parameters
+2025-05-01 11:33:44,408 - src.execution.order_manager - INFO - Order 2ee1754d-6788-43ad-b000-88932beb0768 created with rule_id: ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.execution.order_manager - INFO - Order 2ee1754d-6788-43ad-b000-88932beb0768 created with rule_id: ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.09
+2025-05-01 11:33:44,408 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.09
+2025-05-01 11:33:44,408 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 2ee1754d-6788-43ad-b000-88932beb0768
+2025-05-01 11:33:44,408 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 2ee1754d-6788-43ad-b000-88932beb0768
+2025-05-01 11:33:44,408 - src.core.events.event_bus - INFO - Fill dedup key (order_id): 2ee1754d-6788-43ad-b000-88932beb0768
+2025-05-01 11:33:44,408 - src.core.events.event_bus - INFO - Fill dedup key (order_id): 2ee1754d-6788-43ad-b000-88932beb0768
+2025-05-01 11:33:44,408 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 0.00 to trade history. Total trades: 3
+2025-05-01 11:33:44,408 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 0.00 to trade history. Total trades: 3
+2025-05-01 11:33:44,408 - src.risk.portfolio.portfolio - INFO - Trade list now contains 3 trades
+2025-05-01 11:33:44,408 - src.risk.portfolio.portfolio - INFO - Trade list now contains 3 trades
+2025-05-01 11:33:44,408 - src.risk.portfolio.portfolio - INFO - Fill: SELL 19.0 MINI @ 520.57, PnL: 0.00, Cash: 109841.98, Equity: 99951.17
+2025-05-01 11:33:44,408 - src.risk.portfolio.portfolio - INFO - Fill: SELL 19.0 MINI @ 520.57, PnL: 0.00, Cash: 109841.98, Equity: 99951.17
+2025-05-01 11:33:44,408 - src.execution.order_manager - INFO - Processing fill event for order_id: 2ee1754d-6788-43ad-b000-88932beb0768
+2025-05-01 11:33:44,408 - src.execution.order_manager - INFO - Processing fill event for order_id: 2ee1754d-6788-43ad-b000-88932beb0768
+2025-05-01 11:33:44,408 - src.execution.order_manager - INFO - Updated order with fill: Order(2ee1754d-6788-43ad-b000-88932beb0768, MINI, SELL, 19, FILLED)
+2025-05-01 11:33:44,408 - src.execution.order_manager - INFO - Updated order with fill: Order(2ee1754d-6788-43ad-b000-88932beb0768, MINI, SELL, 19, FILLED)
+2025-05-01 11:33:44,408 - src.execution.order_manager - INFO - Emitting order event: 2ee1754d-6788-43ad-b000-88932beb0768 (SELL 19 MINI @ 521.09, rule_id: ma_crossover_MINI_SELL_group_3)
+2025-05-01 11:33:44,408 - src.execution.order_manager - INFO - Emitting order event: 2ee1754d-6788-43ad-b000-88932beb0768 (SELL 19 MINI @ 521.09, rule_id: ma_crossover_MINI_SELL_group_3)
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Order created with ID: 2ee1754d-6788-43ad-b000-88932beb0768 for rule_id: ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Order created with ID: 2ee1754d-6788-43ad-b000-88932beb0768 for rule_id: ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_SELL_group_3 in processed_rule_ids: True
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_SELL_group_3 in processed_rule_ids: True
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Received signal event: f6ca9ebd-ec44-409e-bc23-ee559b3ef867
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Received signal event: f6ca9ebd-ec44-409e-bc23-ee559b3ef867
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_3
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_SELL_group_3 already processed
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_SELL_group_3 already processed
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_3']
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_3']
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_SELL_group_3 marked as consumed to stop propagation
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_SELL_group_3 marked as consumed to stop propagation
+2025-05-01 11:33:44,408 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #3 emitted for MINI: -1, rule_id=ma_crossover_MINI_SELL_group_3, timestamp=2024-03-26 13:47:00
+2025-05-01 11:33:44,408 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #3 emitted for MINI: -1, rule_id=ma_crossover_MINI_SELL_group_3, timestamp=2024-03-26 13:47:00
+2025-05-01 11:33:44,408 - src.strategy.implementations.ma_crossover_fixed - INFO - BUY crossover detected for MINI: fast MA (521.11) crossed above slow MA (521.11), crossover: 0.0006%
+2025-05-01 11:33:44,408 - src.strategy.implementations.ma_crossover_fixed - INFO - BUY crossover detected for MINI: fast MA (521.11) crossed above slow MA (521.11), crossover: 0.0006%
+2025-05-01 11:33:44,408 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=1, current_direction=-1
+2025-05-01 11:33:44,408 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=1, current_direction=-1
+2025-05-01 11:33:44,408 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: -1 -> 1
+2025-05-01 11:33:44,408 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: -1 -> 1
+2025-05-01 11:33:44,408 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_BUY_group_4 for direction change -1 -> 1
+2025-05-01 11:33:44,408 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_BUY_group_4 for direction change -1 -> 1
+2025-05-01 11:33:44,408 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=4, rule_id=ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,408 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=4, rule_id=ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,408 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,408 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,408 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,408 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Received signal event: 13ef8ac5-8744-4224-97c7-8706e161e5c9
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Received signal event: 13ef8ac5-8744-4224-97c7-8706e161e5c9
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=1, rule_id=ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=1, rule_id=ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_BUY_group_4 to processed set
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_BUY_group_4 to processed set
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Limited BUY size from 119.0 to 19 for MINI
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Limited BUY size from 119.0 to 19 for MINI
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_BUY_group_4 to order parameters
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_BUY_group_4 to order parameters
+2025-05-01 11:33:44,408 - src.execution.order_manager - INFO - Order cb213524-a52f-478f-8365-2138d39f604d created with rule_id: ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,408 - src.execution.order_manager - INFO - Order cb213524-a52f-478f-8365-2138d39f604d created with rule_id: ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,408 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,408 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,408 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.17
+2025-05-01 11:33:44,408 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.17
+2025-05-01 11:33:44,408 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: cb213524-a52f-478f-8365-2138d39f604d
+2025-05-01 11:33:44,408 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: cb213524-a52f-478f-8365-2138d39f604d
+2025-05-01 11:33:44,408 - src.core.events.event_bus - INFO - Fill dedup key (order_id): cb213524-a52f-478f-8365-2138d39f604d
+2025-05-01 11:33:44,408 - src.core.events.event_bus - INFO - Fill dedup key (order_id): cb213524-a52f-478f-8365-2138d39f604d
+2025-05-01 11:33:44,408 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -21.32 to trade history. Total trades: 4
+2025-05-01 11:33:44,408 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -21.32 to trade history. Total trades: 4
+2025-05-01 11:33:44,408 - src.risk.portfolio.portfolio - INFO - Trade list now contains 4 trades
+2025-05-01 11:33:44,408 - src.risk.portfolio.portfolio - INFO - Trade list now contains 4 trades
+2025-05-01 11:33:44,408 - src.risk.portfolio.portfolio - INFO - Fill: BUY 19.0 MINI @ 521.69, PnL: -21.32, Cash: 99919.94, Equity: 99919.94
+2025-05-01 11:33:44,408 - src.risk.portfolio.portfolio - INFO - Fill: BUY 19.0 MINI @ 521.69, PnL: -21.32, Cash: 99919.94, Equity: 99919.94
+2025-05-01 11:33:44,408 - src.execution.order_manager - INFO - Processing fill event for order_id: cb213524-a52f-478f-8365-2138d39f604d
+2025-05-01 11:33:44,408 - src.execution.order_manager - INFO - Processing fill event for order_id: cb213524-a52f-478f-8365-2138d39f604d
+2025-05-01 11:33:44,408 - src.execution.order_manager - INFO - Updated order with fill: Order(cb213524-a52f-478f-8365-2138d39f604d, MINI, BUY, 19, FILLED)
+2025-05-01 11:33:44,408 - src.execution.order_manager - INFO - Updated order with fill: Order(cb213524-a52f-478f-8365-2138d39f604d, MINI, BUY, 19, FILLED)
+2025-05-01 11:33:44,408 - src.execution.order_manager - INFO - Emitting order event: cb213524-a52f-478f-8365-2138d39f604d (BUY 19 MINI @ 521.17, rule_id: ma_crossover_MINI_BUY_group_4)
+2025-05-01 11:33:44,408 - src.execution.order_manager - INFO - Emitting order event: cb213524-a52f-478f-8365-2138d39f604d (BUY 19 MINI @ 521.17, rule_id: ma_crossover_MINI_BUY_group_4)
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Order created with ID: cb213524-a52f-478f-8365-2138d39f604d for rule_id: ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,408 - src.risk.managers.simple - INFO - Order created with ID: cb213524-a52f-478f-8365-2138d39f604d for rule_id: ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_BUY_group_4 in processed_rule_ids: True
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_BUY_group_4 in processed_rule_ids: True
+2025-05-01 11:33:44,409 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,409 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,409 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=3, rule_id=signal_group_MINI_BUY_group_3
+2025-05-01 11:33:44,409 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=3, rule_id=signal_group_MINI_BUY_group_3
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_4 already processed, skipping
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_4 already processed, skipping
+2025-05-01 11:33:44,409 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,409 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,409 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,409 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,409 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,409 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,409 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=4, rule_id=signal_group_MINI_BUY_group_4
+2025-05-01 11:33:44,409 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=4, rule_id=signal_group_MINI_BUY_group_4
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_4 already processed, skipping
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_4 already processed, skipping
+2025-05-01 11:33:44,409 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,409 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,409 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,409 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Received signal event: 13ef8ac5-8744-4224-97c7-8706e161e5c9
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Received signal event: 13ef8ac5-8744-4224-97c7-8706e161e5c9
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_4
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_BUY_group_4 already processed
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_BUY_group_4 already processed
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_BUY_group_4', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_3']
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_BUY_group_4', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_3']
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_BUY_group_4 marked as consumed to stop propagation
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_BUY_group_4 marked as consumed to stop propagation
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #4 emitted for MINI: 1, rule_id=ma_crossover_MINI_BUY_group_4, timestamp=2024-03-26 13:48:00
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #4 emitted for MINI: 1, rule_id=ma_crossover_MINI_BUY_group_4, timestamp=2024-03-26 13:48:00
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - SELL crossover detected for MINI: fast MA (521.13) crossed below slow MA (521.15), crossover: 0.0029%
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - SELL crossover detected for MINI: fast MA (521.13) crossed below slow MA (521.15), crossover: 0.0029%
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=-1, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=-1, current_direction=1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: 1 -> -1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: 1 -> -1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_SELL_group_5 for direction change 1 -> -1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_SELL_group_5 for direction change 1 -> -1
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to SELL, group=5, rule_id=ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to SELL, group=5, rule_id=ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,409 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,409 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,409 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Received signal event: 1381627c-1b98-4d7a-8f3f-14bb6eba2213
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Received signal event: 1381627c-1b98-4d7a-8f3f-14bb6eba2213
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=-1, rule_id=ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=-1, rule_id=ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_SELL_group_5 to processed set
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_SELL_group_5 to processed set
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_SELL_group_5 to order parameters
+2025-05-01 11:33:44,409 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_SELL_group_5 to order parameters
+2025-05-01 11:33:44,409 - src.execution.order_manager - INFO - Order 061a7170-7ade-4796-a192-68fae0c7f3fc created with rule_id: ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,409 - src.execution.order_manager - INFO - Order 061a7170-7ade-4796-a192-68fae0c7f3fc created with rule_id: ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,409 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,409 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,409 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.08
+2025-05-01 11:33:44,409 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.08
+2025-05-01 11:33:44,409 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 061a7170-7ade-4796-a192-68fae0c7f3fc
+2025-05-01 11:33:44,409 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 061a7170-7ade-4796-a192-68fae0c7f3fc
+2025-05-01 11:33:44,409 - src.core.events.event_bus - INFO - Fill dedup key (order_id): 061a7170-7ade-4796-a192-68fae0c7f3fc
+2025-05-01 11:33:44,409 - src.core.events.event_bus - INFO - Fill dedup key (order_id): 061a7170-7ade-4796-a192-68fae0c7f3fc
+2025-05-01 11:33:44,410 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 0.00 to trade history. Total trades: 5
+2025-05-01 11:33:44,410 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 0.00 to trade history. Total trades: 5
+2025-05-01 11:33:44,410 - src.risk.portfolio.portfolio - INFO - Trade list now contains 5 trades
+2025-05-01 11:33:44,410 - src.risk.portfolio.portfolio - INFO - Trade list now contains 5 trades
+2025-05-01 11:33:44,410 - src.risk.portfolio.portfolio - INFO - Fill: SELL 19.0 MINI @ 520.56, PnL: 0.00, Cash: 109800.66, Equity: 99910.04
+2025-05-01 11:33:44,410 - src.risk.portfolio.portfolio - INFO - Fill: SELL 19.0 MINI @ 520.56, PnL: 0.00, Cash: 109800.66, Equity: 99910.04
+2025-05-01 11:33:44,410 - src.execution.order_manager - INFO - Processing fill event for order_id: 061a7170-7ade-4796-a192-68fae0c7f3fc
+2025-05-01 11:33:44,410 - src.execution.order_manager - INFO - Processing fill event for order_id: 061a7170-7ade-4796-a192-68fae0c7f3fc
+2025-05-01 11:33:44,410 - src.execution.order_manager - INFO - Updated order with fill: Order(061a7170-7ade-4796-a192-68fae0c7f3fc, MINI, SELL, 19, FILLED)
+2025-05-01 11:33:44,410 - src.execution.order_manager - INFO - Updated order with fill: Order(061a7170-7ade-4796-a192-68fae0c7f3fc, MINI, SELL, 19, FILLED)
+2025-05-01 11:33:44,410 - src.execution.order_manager - INFO - Emitting order event: 061a7170-7ade-4796-a192-68fae0c7f3fc (SELL 19 MINI @ 521.08, rule_id: ma_crossover_MINI_SELL_group_5)
+2025-05-01 11:33:44,410 - src.execution.order_manager - INFO - Emitting order event: 061a7170-7ade-4796-a192-68fae0c7f3fc (SELL 19 MINI @ 521.08, rule_id: ma_crossover_MINI_SELL_group_5)
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - Order created with ID: 061a7170-7ade-4796-a192-68fae0c7f3fc for rule_id: ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - Order created with ID: 061a7170-7ade-4796-a192-68fae0c7f3fc for rule_id: ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_SELL_group_5 in processed_rule_ids: True
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_SELL_group_5 in processed_rule_ids: True
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - Received signal event: 1381627c-1b98-4d7a-8f3f-14bb6eba2213
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - Received signal event: 1381627c-1b98-4d7a-8f3f-14bb6eba2213
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_5
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_SELL_group_5 already processed
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_SELL_group_5 already processed
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_BUY_group_4', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_3', 'ma_crossover_MINI_SELL_group_5']
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_BUY_group_4', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_3', 'ma_crossover_MINI_SELL_group_5']
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_SELL_group_5 marked as consumed to stop propagation
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_SELL_group_5 marked as consumed to stop propagation
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #5 emitted for MINI: -1, rule_id=ma_crossover_MINI_SELL_group_5, timestamp=2024-03-26 13:51:00
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #5 emitted for MINI: -1, rule_id=ma_crossover_MINI_SELL_group_5, timestamp=2024-03-26 13:51:00
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - BUY crossover detected for MINI: fast MA (521.08) crossed above slow MA (521.05), crossover: 0.0063%
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - BUY crossover detected for MINI: fast MA (521.08) crossed above slow MA (521.05), crossover: 0.0063%
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=1, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=1, current_direction=-1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: -1 -> 1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: -1 -> 1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_BUY_group_6 for direction change -1 -> 1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_BUY_group_6 for direction change -1 -> 1
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=6, rule_id=ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=6, rule_id=ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,410 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,410 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,410 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - Received signal event: f7a1530f-e1f7-4dda-84c7-3a6c3cc8f166
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - Received signal event: f7a1530f-e1f7-4dda-84c7-3a6c3cc8f166
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,410 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=1, rule_id=ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=1, rule_id=ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_BUY_group_6 to processed set
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_BUY_group_6 to processed set
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Limited BUY size from 119.0 to 19 for MINI
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Limited BUY size from 119.0 to 19 for MINI
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_BUY_group_6 to order parameters
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_BUY_group_6 to order parameters
+2025-05-01 11:33:44,411 - src.execution.order_manager - INFO - Order e843edf6-875c-40ec-9d33-2f00793c2cfb created with rule_id: ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,411 - src.execution.order_manager - INFO - Order e843edf6-875c-40ec-9d33-2f00793c2cfb created with rule_id: ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,411 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,411 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,411 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.145
+2025-05-01 11:33:44,411 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.145
+2025-05-01 11:33:44,411 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: e843edf6-875c-40ec-9d33-2f00793c2cfb
+2025-05-01 11:33:44,411 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: e843edf6-875c-40ec-9d33-2f00793c2cfb
+2025-05-01 11:33:44,411 - src.core.events.event_bus - INFO - Fill dedup key (order_id): e843edf6-875c-40ec-9d33-2f00793c2cfb
+2025-05-01 11:33:44,411 - src.core.events.event_bus - INFO - Fill dedup key (order_id): e843edf6-875c-40ec-9d33-2f00793c2cfb
+2025-05-01 11:33:44,411 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -21.04 to trade history. Total trades: 6
+2025-05-01 11:33:44,411 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -21.04 to trade history. Total trades: 6
+2025-05-01 11:33:44,411 - src.risk.portfolio.portfolio - INFO - Trade list now contains 6 trades
+2025-05-01 11:33:44,411 - src.risk.portfolio.portfolio - INFO - Trade list now contains 6 trades
+2025-05-01 11:33:44,411 - src.risk.portfolio.portfolio - INFO - Fill: BUY 19.0 MINI @ 521.67, PnL: -21.04, Cash: 99879.10, Equity: 99879.10
+2025-05-01 11:33:44,411 - src.risk.portfolio.portfolio - INFO - Fill: BUY 19.0 MINI @ 521.67, PnL: -21.04, Cash: 99879.10, Equity: 99879.10
+2025-05-01 11:33:44,411 - src.execution.order_manager - INFO - Processing fill event for order_id: e843edf6-875c-40ec-9d33-2f00793c2cfb
+2025-05-01 11:33:44,411 - src.execution.order_manager - INFO - Processing fill event for order_id: e843edf6-875c-40ec-9d33-2f00793c2cfb
+2025-05-01 11:33:44,411 - src.execution.order_manager - INFO - Updated order with fill: Order(e843edf6-875c-40ec-9d33-2f00793c2cfb, MINI, BUY, 19, FILLED)
+2025-05-01 11:33:44,411 - src.execution.order_manager - INFO - Updated order with fill: Order(e843edf6-875c-40ec-9d33-2f00793c2cfb, MINI, BUY, 19, FILLED)
+2025-05-01 11:33:44,411 - src.execution.order_manager - INFO - Emitting order event: e843edf6-875c-40ec-9d33-2f00793c2cfb (BUY 19 MINI @ 521.145, rule_id: ma_crossover_MINI_BUY_group_6)
+2025-05-01 11:33:44,411 - src.execution.order_manager - INFO - Emitting order event: e843edf6-875c-40ec-9d33-2f00793c2cfb (BUY 19 MINI @ 521.145, rule_id: ma_crossover_MINI_BUY_group_6)
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Order created with ID: e843edf6-875c-40ec-9d33-2f00793c2cfb for rule_id: ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Order created with ID: e843edf6-875c-40ec-9d33-2f00793c2cfb for rule_id: ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_BUY_group_6 in processed_rule_ids: True
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_BUY_group_6 in processed_rule_ids: True
+2025-05-01 11:33:44,411 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,411 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,411 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=5, rule_id=signal_group_MINI_BUY_group_5
+2025-05-01 11:33:44,411 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=5, rule_id=signal_group_MINI_BUY_group_5
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_6 already processed, skipping
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_6 already processed, skipping
+2025-05-01 11:33:44,411 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,411 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,411 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,411 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,411 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,411 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,411 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=6, rule_id=signal_group_MINI_BUY_group_6
+2025-05-01 11:33:44,411 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=6, rule_id=signal_group_MINI_BUY_group_6
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_6 already processed, skipping
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_6 already processed, skipping
+2025-05-01 11:33:44,411 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,411 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,411 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,411 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Received signal event: f7a1530f-e1f7-4dda-84c7-3a6c3cc8f166
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Received signal event: f7a1530f-e1f7-4dda-84c7-3a6c3cc8f166
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_6
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_BUY_group_6 already processed
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_BUY_group_6 already processed
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_BUY_group_4', 'ma_crossover_MINI_BUY_group_6', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_3', 'ma_crossover_MINI_SELL_group_5']
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_BUY_group_4', 'ma_crossover_MINI_BUY_group_6', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_3', 'ma_crossover_MINI_SELL_group_5']
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_BUY_group_6 marked as consumed to stop propagation
+2025-05-01 11:33:44,411 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_BUY_group_6 marked as consumed to stop propagation
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #6 emitted for MINI: 1, rule_id=ma_crossover_MINI_BUY_group_6, timestamp=2024-03-26 13:56:00
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #6 emitted for MINI: 1, rule_id=ma_crossover_MINI_BUY_group_6, timestamp=2024-03-26 13:56:00
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,411 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - SELL crossover detected for MINI: fast MA (521.27) crossed below slow MA (521.28), crossover: 0.0005%
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - SELL crossover detected for MINI: fast MA (521.27) crossed below slow MA (521.28), crossover: 0.0005%
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=-1, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=-1, current_direction=1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: 1 -> -1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: 1 -> -1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_SELL_group_7 for direction change 1 -> -1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_SELL_group_7 for direction change 1 -> -1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to SELL, group=7, rule_id=ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to SELL, group=7, rule_id=ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Received signal event: 12103976-97e5-42ff-ab18-6259d85722cb
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Received signal event: 12103976-97e5-42ff-ab18-6259d85722cb
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=-1, rule_id=ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=-1, rule_id=ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_SELL_group_7 to processed set
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_SELL_group_7 to processed set
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_SELL_group_7 to order parameters
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_SELL_group_7 to order parameters
+2025-05-01 11:33:44,412 - src.execution.order_manager - INFO - Order 4cbb8a13-cdc3-4de3-8f0d-140b868b802c created with rule_id: ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.execution.order_manager - INFO - Order 4cbb8a13-cdc3-4de3-8f0d-140b868b802c created with rule_id: ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.25
+2025-05-01 11:33:44,412 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.25
+2025-05-01 11:33:44,412 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 4cbb8a13-cdc3-4de3-8f0d-140b868b802c
+2025-05-01 11:33:44,412 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 4cbb8a13-cdc3-4de3-8f0d-140b868b802c
+2025-05-01 11:33:44,412 - src.core.events.event_bus - INFO - Fill dedup key (order_id): 4cbb8a13-cdc3-4de3-8f0d-140b868b802c
+2025-05-01 11:33:44,412 - src.core.events.event_bus - INFO - Fill dedup key (order_id): 4cbb8a13-cdc3-4de3-8f0d-140b868b802c
+2025-05-01 11:33:44,412 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 0.00 to trade history. Total trades: 7
+2025-05-01 11:33:44,412 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 0.00 to trade history. Total trades: 7
+2025-05-01 11:33:44,412 - src.risk.portfolio.portfolio - INFO - Trade list now contains 7 trades
+2025-05-01 11:33:44,412 - src.risk.portfolio.portfolio - INFO - Trade list now contains 7 trades
+2025-05-01 11:33:44,412 - src.risk.portfolio.portfolio - INFO - Fill: SELL 19.0 MINI @ 520.73, PnL: 0.00, Cash: 109763.05, Equity: 99869.20
+2025-05-01 11:33:44,412 - src.risk.portfolio.portfolio - INFO - Fill: SELL 19.0 MINI @ 520.73, PnL: 0.00, Cash: 109763.05, Equity: 99869.20
+2025-05-01 11:33:44,412 - src.execution.order_manager - INFO - Processing fill event for order_id: 4cbb8a13-cdc3-4de3-8f0d-140b868b802c
+2025-05-01 11:33:44,412 - src.execution.order_manager - INFO - Processing fill event for order_id: 4cbb8a13-cdc3-4de3-8f0d-140b868b802c
+2025-05-01 11:33:44,412 - src.execution.order_manager - INFO - Updated order with fill: Order(4cbb8a13-cdc3-4de3-8f0d-140b868b802c, MINI, SELL, 19, FILLED)
+2025-05-01 11:33:44,412 - src.execution.order_manager - INFO - Updated order with fill: Order(4cbb8a13-cdc3-4de3-8f0d-140b868b802c, MINI, SELL, 19, FILLED)
+2025-05-01 11:33:44,412 - src.execution.order_manager - INFO - Emitting order event: 4cbb8a13-cdc3-4de3-8f0d-140b868b802c (SELL 19 MINI @ 521.25, rule_id: ma_crossover_MINI_SELL_group_7)
+2025-05-01 11:33:44,412 - src.execution.order_manager - INFO - Emitting order event: 4cbb8a13-cdc3-4de3-8f0d-140b868b802c (SELL 19 MINI @ 521.25, rule_id: ma_crossover_MINI_SELL_group_7)
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Order created with ID: 4cbb8a13-cdc3-4de3-8f0d-140b868b802c for rule_id: ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Order created with ID: 4cbb8a13-cdc3-4de3-8f0d-140b868b802c for rule_id: ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_SELL_group_7 in processed_rule_ids: True
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_SELL_group_7 in processed_rule_ids: True
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Received signal event: 12103976-97e5-42ff-ab18-6259d85722cb
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Received signal event: 12103976-97e5-42ff-ab18-6259d85722cb
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_7
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_SELL_group_7 already processed
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_SELL_group_7 already processed
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_BUY_group_4', 'ma_crossover_MINI_BUY_group_6', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_3', 'ma_crossover_MINI_SELL_group_5', 'ma_crossover_MINI_SELL_group_7']
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_BUY_group_4', 'ma_crossover_MINI_BUY_group_6', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_3', 'ma_crossover_MINI_SELL_group_5', 'ma_crossover_MINI_SELL_group_7']
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_SELL_group_7 marked as consumed to stop propagation
+2025-05-01 11:33:44,412 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_SELL_group_7 marked as consumed to stop propagation
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #7 emitted for MINI: -1, rule_id=ma_crossover_MINI_SELL_group_7, timestamp=2024-03-26 14:03:00
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #7 emitted for MINI: -1, rule_id=ma_crossover_MINI_SELL_group_7, timestamp=2024-03-26 14:03:00
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,412 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,413 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,413 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,413 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,413 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,413 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,413 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,413 - src.strategy.implementations.ma_crossover_fixed - INFO - BUY crossover detected for MINI: fast MA (521.31) crossed above slow MA (521.30), crossover: 0.0024%
+2025-05-01 11:33:44,413 - src.strategy.implementations.ma_crossover_fixed - INFO - BUY crossover detected for MINI: fast MA (521.31) crossed above slow MA (521.30), crossover: 0.0024%
+2025-05-01 11:33:44,413 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=1, current_direction=-1
+2025-05-01 11:33:44,413 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=1, current_direction=-1
+2025-05-01 11:33:44,413 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: -1 -> 1
+2025-05-01 11:33:44,413 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: -1 -> 1
+2025-05-01 11:33:44,413 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_BUY_group_8 for direction change -1 -> 1
+2025-05-01 11:33:44,413 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_BUY_group_8 for direction change -1 -> 1
+2025-05-01 11:33:44,413 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=8, rule_id=ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=8, rule_id=ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Received signal event: f7646285-c6c7-48de-8ea1-ef9633ba5b6b
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Received signal event: f7646285-c6c7-48de-8ea1-ef9633ba5b6b
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=1, rule_id=ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=1, rule_id=ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_BUY_group_8 to processed set
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_BUY_group_8 to processed set
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Limited BUY size from 119.0 to 19 for MINI
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Limited BUY size from 119.0 to 19 for MINI
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_BUY_group_8 to order parameters
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_BUY_group_8 to order parameters
+2025-05-01 11:33:44,413 - src.execution.order_manager - INFO - Order 6778505d-8c97-4d98-9f85-3bcb4729cdfe created with rule_id: ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.execution.order_manager - INFO - Order 6778505d-8c97-4d98-9f85-3bcb4729cdfe created with rule_id: ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.31
+2025-05-01 11:33:44,413 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.31
+2025-05-01 11:33:44,413 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 6778505d-8c97-4d98-9f85-3bcb4729cdfe
+2025-05-01 11:33:44,413 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 6778505d-8c97-4d98-9f85-3bcb4729cdfe
+2025-05-01 11:33:44,413 - src.core.events.event_bus - INFO - Fill dedup key (order_id): 6778505d-8c97-4d98-9f85-3bcb4729cdfe
+2025-05-01 11:33:44,413 - src.core.events.event_bus - INFO - Fill dedup key (order_id): 6778505d-8c97-4d98-9f85-3bcb4729cdfe
+2025-05-01 11:33:44,413 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -20.95 to trade history. Total trades: 8
+2025-05-01 11:33:44,413 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -20.95 to trade history. Total trades: 8
+2025-05-01 11:33:44,413 - src.risk.portfolio.portfolio - INFO - Trade list now contains 8 trades
+2025-05-01 11:33:44,413 - src.risk.portfolio.portfolio - INFO - Trade list now contains 8 trades
+2025-05-01 11:33:44,413 - src.risk.portfolio.portfolio - INFO - Fill: BUY 19.0 MINI @ 521.83, PnL: -20.95, Cash: 99838.34, Equity: 99838.34
+2025-05-01 11:33:44,413 - src.risk.portfolio.portfolio - INFO - Fill: BUY 19.0 MINI @ 521.83, PnL: -20.95, Cash: 99838.34, Equity: 99838.34
+2025-05-01 11:33:44,413 - src.execution.order_manager - INFO - Processing fill event for order_id: 6778505d-8c97-4d98-9f85-3bcb4729cdfe
+2025-05-01 11:33:44,413 - src.execution.order_manager - INFO - Processing fill event for order_id: 6778505d-8c97-4d98-9f85-3bcb4729cdfe
+2025-05-01 11:33:44,413 - src.execution.order_manager - INFO - Updated order with fill: Order(6778505d-8c97-4d98-9f85-3bcb4729cdfe, MINI, BUY, 19, FILLED)
+2025-05-01 11:33:44,413 - src.execution.order_manager - INFO - Updated order with fill: Order(6778505d-8c97-4d98-9f85-3bcb4729cdfe, MINI, BUY, 19, FILLED)
+2025-05-01 11:33:44,413 - src.execution.order_manager - INFO - Emitting order event: 6778505d-8c97-4d98-9f85-3bcb4729cdfe (BUY 19 MINI @ 521.31, rule_id: ma_crossover_MINI_BUY_group_8)
+2025-05-01 11:33:44,413 - src.execution.order_manager - INFO - Emitting order event: 6778505d-8c97-4d98-9f85-3bcb4729cdfe (BUY 19 MINI @ 521.31, rule_id: ma_crossover_MINI_BUY_group_8)
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Order created with ID: 6778505d-8c97-4d98-9f85-3bcb4729cdfe for rule_id: ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Order created with ID: 6778505d-8c97-4d98-9f85-3bcb4729cdfe for rule_id: ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_BUY_group_8 in processed_rule_ids: True
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_BUY_group_8 in processed_rule_ids: True
+2025-05-01 11:33:44,413 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,413 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,413 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=7, rule_id=signal_group_MINI_BUY_group_7
+2025-05-01 11:33:44,413 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=7, rule_id=signal_group_MINI_BUY_group_7
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_8 already processed, skipping
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_8 already processed, skipping
+2025-05-01 11:33:44,413 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,413 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,413 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,413 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,413 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,413 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,413 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=8, rule_id=signal_group_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=8, rule_id=signal_group_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_8 already processed, skipping
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_8 already processed, skipping
+2025-05-01 11:33:44,413 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,413 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,413 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,413 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Received signal event: f7646285-c6c7-48de-8ea1-ef9633ba5b6b
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Received signal event: f7646285-c6c7-48de-8ea1-ef9633ba5b6b
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_8
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_BUY_group_8 already processed
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_BUY_group_8 already processed
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_BUY_group_4', 'ma_crossover_MINI_BUY_group_6', 'ma_crossover_MINI_BUY_group_8', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_3', 'ma_crossover_MINI_SELL_group_5', 'ma_crossover_MINI_SELL_group_7']
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_BUY_group_4', 'ma_crossover_MINI_BUY_group_6', 'ma_crossover_MINI_BUY_group_8', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_3', 'ma_crossover_MINI_SELL_group_5', 'ma_crossover_MINI_SELL_group_7']
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_BUY_group_8 marked as consumed to stop propagation
+2025-05-01 11:33:44,413 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_BUY_group_8 marked as consumed to stop propagation
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #8 emitted for MINI: 1, rule_id=ma_crossover_MINI_BUY_group_8, timestamp=2024-03-26 14:05:00
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #8 emitted for MINI: 1, rule_id=ma_crossover_MINI_BUY_group_8, timestamp=2024-03-26 14:05:00
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - SELL crossover detected for MINI: fast MA (521.33) crossed below slow MA (521.34), crossover: 0.0023%
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - SELL crossover detected for MINI: fast MA (521.33) crossed below slow MA (521.34), crossover: 0.0023%
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=-1, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=-1, current_direction=1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: 1 -> -1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: 1 -> -1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_SELL_group_9 for direction change 1 -> -1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_SELL_group_9 for direction change 1 -> -1
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to SELL, group=9, rule_id=ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to SELL, group=9, rule_id=ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,414 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,414 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,414 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,414 - src.risk.managers.simple - INFO - Received signal event: f045b928-b672-4ecb-b0d8-ea85074cd256
+2025-05-01 11:33:44,414 - src.risk.managers.simple - INFO - Received signal event: f045b928-b672-4ecb-b0d8-ea85074cd256
+2025-05-01 11:33:44,414 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,414 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,414 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,414 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,414 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,414 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=-1, rule_id=ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=-1, rule_id=ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_SELL_group_9 to processed set
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_SELL_group_9 to processed set
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_SELL_group_9 to order parameters
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_SELL_group_9 to order parameters
+2025-05-01 11:33:44,415 - src.execution.order_manager - INFO - Order d330e94b-0c6b-4f53-9f8e-cf36dc07efb9 created with rule_id: ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,415 - src.execution.order_manager - INFO - Order d330e94b-0c6b-4f53-9f8e-cf36dc07efb9 created with rule_id: ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,415 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,415 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,415 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.3
+2025-05-01 11:33:44,415 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.3
+2025-05-01 11:33:44,415 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: d330e94b-0c6b-4f53-9f8e-cf36dc07efb9
+2025-05-01 11:33:44,415 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: d330e94b-0c6b-4f53-9f8e-cf36dc07efb9
+2025-05-01 11:33:44,415 - src.core.events.event_bus - INFO - Fill dedup key (order_id): d330e94b-0c6b-4f53-9f8e-cf36dc07efb9
+2025-05-01 11:33:44,415 - src.core.events.event_bus - INFO - Fill dedup key (order_id): d330e94b-0c6b-4f53-9f8e-cf36dc07efb9
+2025-05-01 11:33:44,415 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 0.00 to trade history. Total trades: 9
+2025-05-01 11:33:44,415 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 0.00 to trade history. Total trades: 9
+2025-05-01 11:33:44,415 - src.risk.portfolio.portfolio - INFO - Trade list now contains 9 trades
+2025-05-01 11:33:44,415 - src.risk.portfolio.portfolio - INFO - Trade list now contains 9 trades
+2025-05-01 11:33:44,415 - src.risk.portfolio.portfolio - INFO - Fill: SELL 19.0 MINI @ 520.78, PnL: 0.00, Cash: 109723.24, Equity: 99828.44
+2025-05-01 11:33:44,415 - src.risk.portfolio.portfolio - INFO - Fill: SELL 19.0 MINI @ 520.78, PnL: 0.00, Cash: 109723.24, Equity: 99828.44
+2025-05-01 11:33:44,415 - src.execution.order_manager - INFO - Processing fill event for order_id: d330e94b-0c6b-4f53-9f8e-cf36dc07efb9
+2025-05-01 11:33:44,415 - src.execution.order_manager - INFO - Processing fill event for order_id: d330e94b-0c6b-4f53-9f8e-cf36dc07efb9
+2025-05-01 11:33:44,415 - src.execution.order_manager - INFO - Updated order with fill: Order(d330e94b-0c6b-4f53-9f8e-cf36dc07efb9, MINI, SELL, 19, FILLED)
+2025-05-01 11:33:44,415 - src.execution.order_manager - INFO - Updated order with fill: Order(d330e94b-0c6b-4f53-9f8e-cf36dc07efb9, MINI, SELL, 19, FILLED)
+2025-05-01 11:33:44,415 - src.execution.order_manager - INFO - Emitting order event: d330e94b-0c6b-4f53-9f8e-cf36dc07efb9 (SELL 19 MINI @ 521.3, rule_id: ma_crossover_MINI_SELL_group_9)
+2025-05-01 11:33:44,415 - src.execution.order_manager - INFO - Emitting order event: d330e94b-0c6b-4f53-9f8e-cf36dc07efb9 (SELL 19 MINI @ 521.3, rule_id: ma_crossover_MINI_SELL_group_9)
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - Order created with ID: d330e94b-0c6b-4f53-9f8e-cf36dc07efb9 for rule_id: ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - Order created with ID: d330e94b-0c6b-4f53-9f8e-cf36dc07efb9 for rule_id: ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_SELL_group_9 in processed_rule_ids: True
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_SELL_group_9 in processed_rule_ids: True
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - Received signal event: f045b928-b672-4ecb-b0d8-ea85074cd256
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - Received signal event: f045b928-b672-4ecb-b0d8-ea85074cd256
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_9
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_SELL_group_9 already processed
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_SELL_group_9 already processed
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_BUY_group_4', 'ma_crossover_MINI_BUY_group_6', 'ma_crossover_MINI_BUY_group_8', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_3', 'ma_crossover_MINI_SELL_group_5', 'ma_crossover_MINI_SELL_group_7', 'ma_crossover_MINI_SELL_group_9']
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_BUY_group_4', 'ma_crossover_MINI_BUY_group_6', 'ma_crossover_MINI_BUY_group_8', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_3', 'ma_crossover_MINI_SELL_group_5', 'ma_crossover_MINI_SELL_group_7', 'ma_crossover_MINI_SELL_group_9']
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_SELL_group_9 marked as consumed to stop propagation
+2025-05-01 11:33:44,415 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_SELL_group_9 marked as consumed to stop propagation
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #9 emitted for MINI: -1, rule_id=ma_crossover_MINI_SELL_group_9, timestamp=2024-03-26 14:09:00
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #9 emitted for MINI: -1, rule_id=ma_crossover_MINI_SELL_group_9, timestamp=2024-03-26 14:09:00
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,415 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - BUY crossover detected for MINI: fast MA (521.27) crossed above slow MA (521.25), crossover: 0.0033%
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - BUY crossover detected for MINI: fast MA (521.27) crossed above slow MA (521.25), crossover: 0.0033%
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=1, current_direction=-1
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=1, current_direction=-1
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: -1 -> 1
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: -1 -> 1
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_BUY_group_10 for direction change -1 -> 1
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_BUY_group_10 for direction change -1 -> 1
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=10, rule_id=ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=10, rule_id=ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Received signal event: 1cb56f85-0abc-4319-b814-70ef78a41090
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Received signal event: 1cb56f85-0abc-4319-b814-70ef78a41090
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=1, rule_id=ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=1, rule_id=ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_BUY_group_10 to processed set
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_BUY_group_10 to processed set
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Limited BUY size from 119.0 to 19 for MINI
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Limited BUY size from 119.0 to 19 for MINI
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_BUY_group_10 to order parameters
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_BUY_group_10 to order parameters
+2025-05-01 11:33:44,416 - src.execution.order_manager - INFO - Order 67fe8a03-b84b-45d4-acd9-ed4339c4076f created with rule_id: ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.execution.order_manager - INFO - Order 67fe8a03-b84b-45d4-acd9-ed4339c4076f created with rule_id: ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.3001
+2025-05-01 11:33:44,416 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.3001
+2025-05-01 11:33:44,416 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 67fe8a03-b84b-45d4-acd9-ed4339c4076f
+2025-05-01 11:33:44,416 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 67fe8a03-b84b-45d4-acd9-ed4339c4076f
+2025-05-01 11:33:44,416 - src.core.events.event_bus - INFO - Fill dedup key (order_id): 67fe8a03-b84b-45d4-acd9-ed4339c4076f
+2025-05-01 11:33:44,416 - src.core.events.event_bus - INFO - Fill dedup key (order_id): 67fe8a03-b84b-45d4-acd9-ed4339c4076f
+2025-05-01 11:33:44,416 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -19.81 to trade history. Total trades: 10
+2025-05-01 11:33:44,416 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -19.81 to trade history. Total trades: 10
+2025-05-01 11:33:44,416 - src.risk.portfolio.portfolio - INFO - Trade list now contains 10 trades
+2025-05-01 11:33:44,416 - src.risk.portfolio.portfolio - INFO - Trade list now contains 10 trades
+2025-05-01 11:33:44,416 - src.risk.portfolio.portfolio - INFO - Fill: BUY 19.0 MINI @ 521.82, PnL: -19.81, Cash: 99798.72, Equity: 99798.72
+2025-05-01 11:33:44,416 - src.risk.portfolio.portfolio - INFO - Fill: BUY 19.0 MINI @ 521.82, PnL: -19.81, Cash: 99798.72, Equity: 99798.72
+2025-05-01 11:33:44,416 - src.execution.order_manager - INFO - Processing fill event for order_id: 67fe8a03-b84b-45d4-acd9-ed4339c4076f
+2025-05-01 11:33:44,416 - src.execution.order_manager - INFO - Processing fill event for order_id: 67fe8a03-b84b-45d4-acd9-ed4339c4076f
+2025-05-01 11:33:44,416 - src.execution.order_manager - INFO - Updated order with fill: Order(67fe8a03-b84b-45d4-acd9-ed4339c4076f, MINI, BUY, 19, FILLED)
+2025-05-01 11:33:44,416 - src.execution.order_manager - INFO - Updated order with fill: Order(67fe8a03-b84b-45d4-acd9-ed4339c4076f, MINI, BUY, 19, FILLED)
+2025-05-01 11:33:44,416 - src.execution.order_manager - INFO - Emitting order event: 67fe8a03-b84b-45d4-acd9-ed4339c4076f (BUY 19 MINI @ 521.3001, rule_id: ma_crossover_MINI_BUY_group_10)
+2025-05-01 11:33:44,416 - src.execution.order_manager - INFO - Emitting order event: 67fe8a03-b84b-45d4-acd9-ed4339c4076f (BUY 19 MINI @ 521.3001, rule_id: ma_crossover_MINI_BUY_group_10)
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Order created with ID: 67fe8a03-b84b-45d4-acd9-ed4339c4076f for rule_id: ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Order created with ID: 67fe8a03-b84b-45d4-acd9-ed4339c4076f for rule_id: ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_BUY_group_10 in processed_rule_ids: True
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_BUY_group_10 in processed_rule_ids: True
+2025-05-01 11:33:44,416 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,416 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,416 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=9, rule_id=signal_group_MINI_BUY_group_9
+2025-05-01 11:33:44,416 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=9, rule_id=signal_group_MINI_BUY_group_9
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_10 already processed, skipping
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_10 already processed, skipping
+2025-05-01 11:33:44,416 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,416 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,416 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,416 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,416 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,416 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,416 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=10, rule_id=signal_group_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=10, rule_id=signal_group_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_10 already processed, skipping
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_10 already processed, skipping
+2025-05-01 11:33:44,416 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,416 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,416 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,416 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Received signal event: 1cb56f85-0abc-4319-b814-70ef78a41090
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Received signal event: 1cb56f85-0abc-4319-b814-70ef78a41090
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_10
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_BUY_group_10 already processed
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_BUY_group_10 already processed
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_10', 'ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_BUY_group_4', 'ma_crossover_MINI_BUY_group_6', 'ma_crossover_MINI_BUY_group_8', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_3', 'ma_crossover_MINI_SELL_group_5', 'ma_crossover_MINI_SELL_group_7', 'ma_crossover_MINI_SELL_group_9']
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_10', 'ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_BUY_group_4', 'ma_crossover_MINI_BUY_group_6', 'ma_crossover_MINI_BUY_group_8', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_3', 'ma_crossover_MINI_SELL_group_5', 'ma_crossover_MINI_SELL_group_7', 'ma_crossover_MINI_SELL_group_9']
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_BUY_group_10 marked as consumed to stop propagation
+2025-05-01 11:33:44,416 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_BUY_group_10 marked as consumed to stop propagation
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #10 emitted for MINI: 1, rule_id=ma_crossover_MINI_BUY_group_10, timestamp=2024-03-26 14:13:00
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #10 emitted for MINI: 1, rule_id=ma_crossover_MINI_BUY_group_10, timestamp=2024-03-26 14:13:00
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,416 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - SELL crossover detected for MINI: fast MA (521.29) crossed below slow MA (521.29), crossover: 0.0001%
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - SELL crossover detected for MINI: fast MA (521.29) crossed below slow MA (521.29), crossover: 0.0001%
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=-1, current_direction=1
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=-1, current_direction=1
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: 1 -> -1
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: 1 -> -1
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_SELL_group_11 for direction change 1 -> -1
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_SELL_group_11 for direction change 1 -> -1
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to SELL, group=11, rule_id=ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to SELL, group=11, rule_id=ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Received signal event: d6f334c1-5947-4095-9c9f-416171a71fc8
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Received signal event: d6f334c1-5947-4095-9c9f-416171a71fc8
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=-1, rule_id=ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=-1, rule_id=ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_SELL_group_11 to processed set
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_SELL_group_11 to processed set
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Limited SELL size from 100 to 19 for MINI
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_SELL_group_11 to order parameters
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_SELL_group_11 to order parameters
+2025-05-01 11:33:44,417 - src.execution.order_manager - INFO - Order 0dd648bb-745f-4117-b057-d99a0f27402f created with rule_id: ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.execution.order_manager - INFO - Order 0dd648bb-745f-4117-b057-d99a0f27402f created with rule_id: ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.32
+2025-05-01 11:33:44,417 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 19 MINI @ 521.32
+2025-05-01 11:33:44,417 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 0dd648bb-745f-4117-b057-d99a0f27402f
+2025-05-01 11:33:44,417 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 0dd648bb-745f-4117-b057-d99a0f27402f
+2025-05-01 11:33:44,417 - src.core.events.event_bus - INFO - Fill dedup key (order_id): 0dd648bb-745f-4117-b057-d99a0f27402f
+2025-05-01 11:33:44,417 - src.core.events.event_bus - INFO - Fill dedup key (order_id): 0dd648bb-745f-4117-b057-d99a0f27402f
+2025-05-01 11:33:44,417 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 0.00 to trade history. Total trades: 11
+2025-05-01 11:33:44,417 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 0.00 to trade history. Total trades: 11
+2025-05-01 11:33:44,417 - src.risk.portfolio.portfolio - INFO - Trade list now contains 11 trades
+2025-05-01 11:33:44,417 - src.risk.portfolio.portfolio - INFO - Trade list now contains 11 trades
+2025-05-01 11:33:44,417 - src.risk.portfolio.portfolio - INFO - Fill: SELL 19.0 MINI @ 520.80, PnL: 0.00, Cash: 109684.00, Equity: 99788.82
+2025-05-01 11:33:44,417 - src.risk.portfolio.portfolio - INFO - Fill: SELL 19.0 MINI @ 520.80, PnL: 0.00, Cash: 109684.00, Equity: 99788.82
+2025-05-01 11:33:44,417 - src.execution.order_manager - INFO - Processing fill event for order_id: 0dd648bb-745f-4117-b057-d99a0f27402f
+2025-05-01 11:33:44,417 - src.execution.order_manager - INFO - Processing fill event for order_id: 0dd648bb-745f-4117-b057-d99a0f27402f
+2025-05-01 11:33:44,417 - src.execution.order_manager - INFO - Updated order with fill: Order(0dd648bb-745f-4117-b057-d99a0f27402f, MINI, SELL, 19, FILLED)
+2025-05-01 11:33:44,417 - src.execution.order_manager - INFO - Updated order with fill: Order(0dd648bb-745f-4117-b057-d99a0f27402f, MINI, SELL, 19, FILLED)
+2025-05-01 11:33:44,417 - src.execution.order_manager - INFO - Emitting order event: 0dd648bb-745f-4117-b057-d99a0f27402f (SELL 19 MINI @ 521.32, rule_id: ma_crossover_MINI_SELL_group_11)
+2025-05-01 11:33:44,417 - src.execution.order_manager - INFO - Emitting order event: 0dd648bb-745f-4117-b057-d99a0f27402f (SELL 19 MINI @ 521.32, rule_id: ma_crossover_MINI_SELL_group_11)
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Order created with ID: 0dd648bb-745f-4117-b057-d99a0f27402f for rule_id: ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Order created with ID: 0dd648bb-745f-4117-b057-d99a0f27402f for rule_id: ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_SELL_group_11 in processed_rule_ids: True
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_SELL_group_11 in processed_rule_ids: True
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Received signal event: d6f334c1-5947-4095-9c9f-416171a71fc8
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Received signal event: d6f334c1-5947-4095-9c9f-416171a71fc8
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_SELL_group_11
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_SELL_group_11 already processed
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_SELL_group_11 already processed
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_10', 'ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_BUY_group_4', 'ma_crossover_MINI_BUY_group_6', 'ma_crossover_MINI_BUY_group_8', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_11', 'ma_crossover_MINI_SELL_group_3', 'ma_crossover_MINI_SELL_group_5', 'ma_crossover_MINI_SELL_group_7', 'ma_crossover_MINI_SELL_group_9']
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_10', 'ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_BUY_group_4', 'ma_crossover_MINI_BUY_group_6', 'ma_crossover_MINI_BUY_group_8', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_11', 'ma_crossover_MINI_SELL_group_3', 'ma_crossover_MINI_SELL_group_5', 'ma_crossover_MINI_SELL_group_7', 'ma_crossover_MINI_SELL_group_9']
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_SELL_group_11 marked as consumed to stop propagation
+2025-05-01 11:33:44,417 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_SELL_group_11 marked as consumed to stop propagation
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #11 emitted for MINI: -1, rule_id=ma_crossover_MINI_SELL_group_11, timestamp=2024-03-26 14:16:00
+2025-05-01 11:33:44,417 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #11 emitted for MINI: -1, rule_id=ma_crossover_MINI_SELL_group_11, timestamp=2024-03-26 14:16:00
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=-1
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - BUY crossover detected for MINI: fast MA (521.32) crossed above slow MA (521.31), crossover: 0.0027%
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - BUY crossover detected for MINI: fast MA (521.32) crossed above slow MA (521.31), crossover: 0.0027%
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=1, current_direction=-1
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=1, current_direction=-1
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: -1 -> 1
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - DIRECTION CHANGE DETECTED: -1 -> 1
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_BUY_group_12 for direction change -1 -> 1
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - RULE ID CREATED: ma_crossover_MINI_BUY_group_12 for direction change -1 -> 1
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=12, rule_id=ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=12, rule_id=ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - DEBUG: Signal created with rule_id=ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.core.events.event_bus - INFO - Signal dedup key (rule_id): ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Received signal event: dc8eb989-3bfb-4897-87ac-6bee2077153a
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Received signal event: dc8eb989-3bfb-4897-87ac-6bee2077153a
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - PROCESSING NEW SIGNAL with rule_id: ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - CONFIRMED: Signal has proper group-based rule_id format
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=1, rule_id=ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Signal details: symbol=MINI, value=1, rule_id=ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_BUY_group_12 to processed set
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id ma_crossover_MINI_BUY_group_12 to processed set
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Limited BUY size from 119.0 to 19 for MINI
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Limited BUY size from 119.0 to 19 for MINI
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_BUY_group_12 to order parameters
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Attaching rule_id ma_crossover_MINI_BUY_group_12 to order parameters
+2025-05-01 11:33:44,418 - src.execution.order_manager - INFO - Order ae492790-8484-46f2-a321-7e87ef8487be created with rule_id: ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.execution.order_manager - INFO - Order ae492790-8484-46f2-a321-7e87ef8487be created with rule_id: ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.core.events.event_bus - INFO - Order dedup key: ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.38
+2025-05-01 11:33:44,418 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 19 MINI @ 521.38
+2025-05-01 11:33:44,418 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: ae492790-8484-46f2-a321-7e87ef8487be
+2025-05-01 11:33:44,418 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: ae492790-8484-46f2-a321-7e87ef8487be
+2025-05-01 11:33:44,418 - src.core.events.event_bus - INFO - Fill dedup key (order_id): ae492790-8484-46f2-a321-7e87ef8487be
+2025-05-01 11:33:44,418 - src.core.events.event_bus - INFO - Fill dedup key (order_id): ae492790-8484-46f2-a321-7e87ef8487be
+2025-05-01 11:33:44,418 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -20.95 to trade history. Total trades: 12
+2025-05-01 11:33:44,418 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -20.95 to trade history. Total trades: 12
+2025-05-01 11:33:44,418 - src.risk.portfolio.portfolio - INFO - Trade list now contains 12 trades
+2025-05-01 11:33:44,418 - src.risk.portfolio.portfolio - INFO - Trade list now contains 12 trades
+2025-05-01 11:33:44,418 - src.risk.portfolio.portfolio - INFO - Fill: BUY 19.0 MINI @ 521.90, PnL: -20.95, Cash: 99757.96, Equity: 99757.96
+2025-05-01 11:33:44,418 - src.risk.portfolio.portfolio - INFO - Fill: BUY 19.0 MINI @ 521.90, PnL: -20.95, Cash: 99757.96, Equity: 99757.96
+2025-05-01 11:33:44,418 - src.execution.order_manager - INFO - Processing fill event for order_id: ae492790-8484-46f2-a321-7e87ef8487be
+2025-05-01 11:33:44,418 - src.execution.order_manager - INFO - Processing fill event for order_id: ae492790-8484-46f2-a321-7e87ef8487be
+2025-05-01 11:33:44,418 - src.execution.order_manager - INFO - Updated order with fill: Order(ae492790-8484-46f2-a321-7e87ef8487be, MINI, BUY, 19, FILLED)
+2025-05-01 11:33:44,418 - src.execution.order_manager - INFO - Updated order with fill: Order(ae492790-8484-46f2-a321-7e87ef8487be, MINI, BUY, 19, FILLED)
+2025-05-01 11:33:44,418 - src.execution.order_manager - INFO - Emitting order event: ae492790-8484-46f2-a321-7e87ef8487be (BUY 19 MINI @ 521.38, rule_id: ma_crossover_MINI_BUY_group_12)
+2025-05-01 11:33:44,418 - src.execution.order_manager - INFO - Emitting order event: ae492790-8484-46f2-a321-7e87ef8487be (BUY 19 MINI @ 521.38, rule_id: ma_crossover_MINI_BUY_group_12)
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Order created with ID: ae492790-8484-46f2-a321-7e87ef8487be for rule_id: ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Order created with ID: ae492790-8484-46f2-a321-7e87ef8487be for rule_id: ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_BUY_group_12 in processed_rule_ids: True
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - After processing, rule_id: ma_crossover_MINI_BUY_group_12 in processed_rule_ids: True
+2025-05-01 11:33:44,418 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,418 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,418 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=11, rule_id=signal_group_MINI_BUY_group_11
+2025-05-01 11:33:44,418 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=11, rule_id=signal_group_MINI_BUY_group_11
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_12 already processed, skipping
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_12 already processed, skipping
+2025-05-01 11:33:44,418 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,418 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,418 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,418 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,418 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,418 - src.execution.signal_interpreter.standard_interpreter - INFO - DIRECTION CHANGE: MINI position 0 -> signal 1
+2025-05-01 11:33:44,418 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=12, rule_id=signal_group_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.execution.signal_interpreter.standard_interpreter - INFO - NEW SIGNAL GROUP: MINI direction changed to BUY, group=12, rule_id=signal_group_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_12 already processed, skipping
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Signal for MINI with rule_id ma_crossover_MINI_BUY_group_12 already processed, skipping
+2025-05-01 11:33:44,418 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,418 - src.execution.signal_interpreter.standard_interpreter - INFO - Using risk manager for position sizing: 0
+2025-05-01 11:33:44,418 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,418 - src.execution.signal_interpreter.standard_interpreter - INFO - Signal for MINI resulted in zero size, skipping
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Received signal event: dc8eb989-3bfb-4897-87ac-6bee2077153a
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Received signal event: dc8eb989-3bfb-4897-87ac-6bee2077153a
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Extracted rule_id from signal: ma_crossover_MINI_BUY_group_12
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_BUY_group_12 already processed
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id ma_crossover_MINI_BUY_group_12 already processed
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_10', 'ma_crossover_MINI_BUY_group_12', 'ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_BUY_group_4', 'ma_crossover_MINI_BUY_group_6', 'ma_crossover_MINI_BUY_group_8', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_11', 'ma_crossover_MINI_SELL_group_3', 'ma_crossover_MINI_SELL_group_5', 'ma_crossover_MINI_SELL_group_7', 'ma_crossover_MINI_SELL_group_9']
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - All processed rule_ids: ['ma_crossover_MINI_BUY_group_10', 'ma_crossover_MINI_BUY_group_12', 'ma_crossover_MINI_BUY_group_2', 'ma_crossover_MINI_BUY_group_4', 'ma_crossover_MINI_BUY_group_6', 'ma_crossover_MINI_BUY_group_8', 'ma_crossover_MINI_SELL_group_1', 'ma_crossover_MINI_SELL_group_11', 'ma_crossover_MINI_SELL_group_3', 'ma_crossover_MINI_SELL_group_5', 'ma_crossover_MINI_SELL_group_7', 'ma_crossover_MINI_SELL_group_9']
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_BUY_group_12 marked as consumed to stop propagation
+2025-05-01 11:33:44,418 - src.risk.managers.simple - INFO - Signal with rule_id ma_crossover_MINI_BUY_group_12 marked as consumed to stop propagation
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #12 emitted for MINI: 1, rule_id=ma_crossover_MINI_BUY_group_12, timestamp=2024-03-26 14:17:00
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal #12 emitted for MINI: 1, rule_id=ma_crossover_MINI_BUY_group_12, timestamp=2024-03-26 14:17:00
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,418 - src.strategy.implementations.ma_crossover_fixed - INFO - Signal generation: symbol=MINI, signal_value=0, current_direction=1
+2025-05-01 11:33:44,418 - src.execution.backtest.backtest - INFO - Backtest completed after 49 iterations
+2025-05-01 11:33:44,418 - src.execution.backtest.backtest - INFO - Backtest completed after 49 iterations
+2025-05-01 11:33:44,419 - src.risk.portfolio.portfolio - INFO - get_recent_trades called, self.trades has 12 items
+2025-05-01 11:33:44,419 - src.risk.portfolio.portfolio - INFO - get_recent_trades called, self.trades has 12 items
+2025-05-01 11:33:44,419 - src.risk.portfolio.portfolio - INFO - Trade list object ID: 4455835264
+2025-05-01 11:33:44,419 - src.risk.portfolio.portfolio - INFO - Trade list object ID: 4455835264
+2025-05-01 11:33:44,419 - src.risk.portfolio.portfolio - INFO - First trade in list: {'id': '7c00d76a-0de7-419e-a4cb-d583a4176926', 'timestamp': datetime.datetime(2025, 5, 1, 11, 33, 44, 405458), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 19.0, 'size': 19.0, 'price': 520.59888, 'fill_price': 520.59888, 'commission': 9.89137872, 'pnl': 0.0, 'realized_pnl': 0.0}
+2025-05-01 11:33:44,419 - src.risk.portfolio.portfolio - INFO - First trade in list: {'id': '7c00d76a-0de7-419e-a4cb-d583a4176926', 'timestamp': datetime.datetime(2025, 5, 1, 11, 33, 44, 405458), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 19.0, 'size': 19.0, 'price': 520.59888, 'fill_price': 520.59888, 'commission': 9.89137872, 'pnl': 0.0, 'realized_pnl': 0.0}
+2025-05-01 11:33:44,419 - src.risk.portfolio.portfolio - INFO - Returning 12 validated trades
+2025-05-01 11:33:44,419 - src.risk.portfolio.portfolio - INFO - Returning 12 validated trades
+2025-05-01 11:33:44,419 - src.execution.backtest.backtest - INFO - Backtest processed 12 trades
+2025-05-01 11:33:44,419 - src.execution.backtest.backtest - INFO - Backtest processed 12 trades
+2025-05-01 11:33:44,419 - src.execution.backtest.backtest - INFO - Trade stats: 12 trades, 0 wins, 6 losses
+2025-05-01 11:33:44,419 - src.execution.backtest.backtest - INFO - Trade stats: 12 trades, 0 wins, 6 losses
+2025-05-01 11:33:44,419 - src.execution.backtest.backtest - INFO - PnL sum: -123.21
+2025-05-01 11:33:44,419 - src.execution.backtest.backtest - INFO - PnL sum: -123.21
+2025-05-01 11:33:44,419 - src.execution.backtest.backtest - INFO - Min PnL: -21.32, Max PnL: 0.00
+2025-05-01 11:33:44,419 - src.execution.backtest.backtest - INFO - Min PnL: -21.32, Max PnL: 0.00
+2025-05-01 11:33:44,419 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 12 trades and equity curve with 289 points
+2025-05-01 11:33:44,419 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 12 trades and equity curve with 289 points
+2025-05-01 11:33:44,419 - src.analytics.performance.calculator - INFO - Sample trade: {'id': '7c00d76a-0de7-419e-a4cb-d583a4176926', 'timestamp': datetime.datetime(2025, 5, 1, 11, 33, 44, 405458), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 19.0, 'size': 19.0, 'price': 520.59888, 'fill_price': 520.59888, 'commission': 9.89137872, 'pnl': 0.0, 'realized_pnl': 0.0}
+2025-05-01 11:33:44,419 - src.analytics.performance.calculator - INFO - Sample trade: {'id': '7c00d76a-0de7-419e-a4cb-d583a4176926', 'timestamp': datetime.datetime(2025, 5, 1, 11, 33, 44, 405458), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 19.0, 'size': 19.0, 'price': 520.59888, 'fill_price': 520.59888, 'commission': 9.89137872, 'pnl': 0.0, 'realized_pnl': 0.0}
+2025-05-01 11:33:44,419 - src.analytics.performance.calculator - INFO - Total PnL from trades: -123.21
+2025-05-01 11:33:44,419 - src.analytics.performance.calculator - INFO - Total PnL from trades: -123.21
+2025-05-01 11:33:44,419 - src.analytics.performance.calculator - INFO - Trades with PnL field: 12 out of 12
+2025-05-01 11:33:44,419 - src.analytics.performance.calculator - INFO - Trades with PnL field: 12 out of 12
+2025-05-01 11:33:44,419 - src.analytics.metrics.functional - INFO - Calculating metrics for 12 trades and 289 equity points
+2025-05-01 11:33:44,419 - src.analytics.metrics.functional - INFO - Calculating metrics for 12 trades and 289 equity points
+2025-05-01 11:33:44,421 - src.analytics.metrics.functional - INFO - Win rate calculation: 0 wins out of 12 valid trades
+2025-05-01 11:33:44,421 - src.analytics.metrics.functional - INFO - Win rate calculation: 0 wins out of 12 valid trades
+2025-05-01 11:33:44,421 - src.analytics.metrics.functional - INFO - Profit factor calculation: gross profit=0.00, gross loss=123.21
+2025-05-01 11:33:44,421 - src.analytics.metrics.functional - INFO - Profit factor calculation: gross profit=0.00, gross loss=123.21
+2025-05-01 11:33:44,421 - src.execution.backtest.backtest - INFO - Calculated performance metrics for 12 trades
+2025-05-01 11:33:44,421 - src.execution.backtest.backtest - INFO - Calculated performance metrics for 12 trades
+2025-05-01 11:33:44,421 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 12 trades and equity curve with 289 points
+2025-05-01 11:33:44,421 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 12 trades and equity curve with 289 points
+2025-05-01 11:33:44,421 - src.analytics.performance.calculator - INFO - Sample trade: {'id': '7c00d76a-0de7-419e-a4cb-d583a4176926', 'timestamp': datetime.datetime(2025, 5, 1, 11, 33, 44, 405458), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 19.0, 'size': 19.0, 'price': 520.59888, 'fill_price': 520.59888, 'commission': 9.89137872, 'pnl': 0.0, 'realized_pnl': 0.0}
+2025-05-01 11:33:44,421 - src.analytics.performance.calculator - INFO - Sample trade: {'id': '7c00d76a-0de7-419e-a4cb-d583a4176926', 'timestamp': datetime.datetime(2025, 5, 1, 11, 33, 44, 405458), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 19.0, 'size': 19.0, 'price': 520.59888, 'fill_price': 520.59888, 'commission': 9.89137872, 'pnl': 0.0, 'realized_pnl': 0.0}
+2025-05-01 11:33:44,421 - src.analytics.performance.calculator - INFO - Total PnL from trades: -123.21
+2025-05-01 11:33:44,421 - src.analytics.performance.calculator - INFO - Total PnL from trades: -123.21
+2025-05-01 11:33:44,421 - src.analytics.performance.calculator - INFO - Trades with PnL field: 12 out of 12
+2025-05-01 11:33:44,421 - src.analytics.performance.calculator - INFO - Trades with PnL field: 12 out of 12
+2025-05-01 11:33:44,421 - src.analytics.metrics.functional - INFO - Calculating metrics for 12 trades and 289 equity points
+2025-05-01 11:33:44,421 - src.analytics.metrics.functional - INFO - Calculating metrics for 12 trades and 289 equity points
+2025-05-01 11:33:44,422 - src.analytics.metrics.functional - INFO - Win rate calculation: 0 wins out of 12 valid trades
+2025-05-01 11:33:44,422 - src.analytics.metrics.functional - INFO - Win rate calculation: 0 wins out of 12 valid trades
+2025-05-01 11:33:44,422 - src.analytics.metrics.functional - INFO - Profit factor calculation: gross profit=0.00, gross loss=123.21
+2025-05-01 11:33:44,422 - src.analytics.metrics.functional - INFO - Profit factor calculation: gross profit=0.00, gross loss=123.21
+2025-05-01 11:33:44,422 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 12 trades and equity curve with 289 points
+2025-05-01 11:33:44,422 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 12 trades and equity curve with 289 points
+2025-05-01 11:33:44,422 - src.analytics.performance.calculator - INFO - Sample trade: {'id': '7c00d76a-0de7-419e-a4cb-d583a4176926', 'timestamp': datetime.datetime(2025, 5, 1, 11, 33, 44, 405458), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 19.0, 'size': 19.0, 'price': 520.59888, 'fill_price': 520.59888, 'commission': 9.89137872, 'pnl': 0.0, 'realized_pnl': 0.0}
+2025-05-01 11:33:44,422 - src.analytics.performance.calculator - INFO - Sample trade: {'id': '7c00d76a-0de7-419e-a4cb-d583a4176926', 'timestamp': datetime.datetime(2025, 5, 1, 11, 33, 44, 405458), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 19.0, 'size': 19.0, 'price': 520.59888, 'fill_price': 520.59888, 'commission': 9.89137872, 'pnl': 0.0, 'realized_pnl': 0.0}
+2025-05-01 11:33:44,422 - src.analytics.performance.calculator - INFO - Total PnL from trades: -123.21
+2025-05-01 11:33:44,422 - src.analytics.performance.calculator - INFO - Total PnL from trades: -123.21
+2025-05-01 11:33:44,422 - src.analytics.performance.calculator - INFO - Trades with PnL field: 12 out of 12
+2025-05-01 11:33:44,422 - src.analytics.performance.calculator - INFO - Trades with PnL field: 12 out of 12
+2025-05-01 11:33:44,422 - src.analytics.metrics.functional - INFO - Calculating metrics for 12 trades and 289 equity points
+2025-05-01 11:33:44,422 - src.analytics.metrics.functional - INFO - Calculating metrics for 12 trades and 289 equity points
+2025-05-01 11:33:44,423 - src.analytics.metrics.functional - INFO - Win rate calculation: 0 wins out of 12 valid trades
+2025-05-01 11:33:44,423 - src.analytics.metrics.functional - INFO - Win rate calculation: 0 wins out of 12 valid trades
+2025-05-01 11:33:44,423 - src.analytics.metrics.functional - INFO - Profit factor calculation: gross profit=0.00, gross loss=123.21
+2025-05-01 11:33:44,423 - src.analytics.metrics.functional - INFO - Profit factor calculation: gross profit=0.00, gross loss=123.21
+/Users/daws/ADMF-trader/src/analytics/reporting/report_generator.py:133: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+  monthly_log_returns = log_returns.resample('M').sum()
+/Users/daws/ADMF-trader/src/analytics/reporting/report_generator.py:133: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+  monthly_log_returns = log_returns.resample('M').sum()
+2025-05-01 11:33:44,427 - src.risk.portfolio.portfolio - INFO - get_recent_trades called, self.trades has 12 items
+2025-05-01 11:33:44,427 - src.risk.portfolio.portfolio - INFO - get_recent_trades called, self.trades has 12 items
+2025-05-01 11:33:44,427 - src.risk.portfolio.portfolio - INFO - Trade list object ID: 4455835264
+2025-05-01 11:33:44,427 - src.risk.portfolio.portfolio - INFO - Trade list object ID: 4455835264
+2025-05-01 11:33:44,427 - src.risk.portfolio.portfolio - INFO - First trade in list: {'id': '7c00d76a-0de7-419e-a4cb-d583a4176926', 'timestamp': datetime.datetime(2025, 5, 1, 11, 33, 44, 405458), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 19.0, 'size': 19.0, 'price': 520.59888, 'fill_price': 520.59888, 'commission': 9.89137872, 'pnl': 0.0, 'realized_pnl': 0.0}
+2025-05-01 11:33:44,427 - src.risk.portfolio.portfolio - INFO - First trade in list: {'id': '7c00d76a-0de7-419e-a4cb-d583a4176926', 'timestamp': datetime.datetime(2025, 5, 1, 11, 33, 44, 405458), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 19.0, 'size': 19.0, 'price': 520.59888, 'fill_price': 520.59888, 'commission': 9.89137872, 'pnl': 0.0, 'realized_pnl': 0.0}
+2025-05-01 11:33:44,427 - src.risk.portfolio.portfolio - INFO - Returning 12 validated trades
+2025-05-01 11:33:44,427 - src.risk.portfolio.portfolio - INFO - Returning 12 validated trades
+2025-05-01 11:33:44,427 - src.execution.backtest.backtest - INFO - Backtest complete
+2025-05-01 11:33:44,427 - src.execution.backtest.backtest - INFO - Backtest complete
+2025-05-01 11:33:44,429 - src.analytics.reporting.report_generator - INFO - Saved equity curve to './results/mini_test/equity_curve_20250501_113344.csv'
+2025-05-01 11:33:44,429 - src.analytics.reporting.report_generator - INFO - Saved equity curve to './results/mini_test/equity_curve_20250501_113344.csv'
+2025-05-01 11:33:44,429 - src.analytics.reporting.report_generator - INFO - Saved detailed report to './results/mini_test/backtest_report_20250501_113344.txt'
+2025-05-01 11:33:44,429 - src.analytics.reporting.report_generator - INFO - Saved detailed report to './results/mini_test/backtest_report_20250501_113344.txt'
+2025-05-01 11:33:44,430 - src.analytics.reporting.report_generator - INFO - Saved trade log to './results/mini_test/trades_20250501_113344.csv'
+2025-05-01 11:33:44,430 - src.analytics.reporting.report_generator - INFO - Saved trade log to './results/mini_test/trades_20250501_113344.csv'

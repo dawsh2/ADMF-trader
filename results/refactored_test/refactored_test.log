@@ -1,0 +1,289 @@
+2025-05-01 12:51:37,656 - src.core.system_bootstrap - INFO - Logging initialized at level INFO
+2025-05-01 12:51:37,656 - src.core.system_bootstrap - INFO - Log file: ./results/refactored_test/refactored_test.log
+2025-05-01 12:51:37,658 - src.core.system_bootstrap - INFO - Loaded configuration from config/refactored_test.yaml
+2025-05-01 12:51:37,658 - src.core.system_bootstrap - INFO - Event system initialized with native deduplication
+2025-05-01 12:51:37,658 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-05-01 12:51:37,658 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-05-01 12:51:37,658 - src.core.system_bootstrap - INFO - Data components initialized with source type: csv
+2025-05-01 12:51:37,664 - src.execution.broker.broker_simulator - INFO - Simulated broker initialized
+2025-05-01 12:51:37,664 - src.execution.order_manager - INFO - Order manager initialized
+2025-05-01 12:51:37,664 - src.core.system_bootstrap - INFO - Execution components initialized
+2025-05-01 12:51:37,666 - src.core.system_bootstrap - INFO - Using Enhanced Risk Manager (refactored architecture)
+2025-05-01 12:51:37,666 - src.risk.managers.enhanced_risk_manager - INFO - Enhanced risk manager risk_manager_e68a6d41 initialized
+2025-05-01 12:51:37,666 - src.core.system_bootstrap - INFO - Enhanced risk manager configured with position_sizing_method=fixed, position_size=100, max_position_size=1000
+2025-05-01 12:51:37,666 - src.core.system_bootstrap - INFO - Risk components initialized
+2025-05-01 12:51:37,666 - src.core.system_bootstrap - INFO - Discovering strategy implementations...
+2025-05-01 12:51:37,667 - src.core.utils.discovery - INFO - Registered component ensemble_strategy in registry
+2025-05-01 12:51:37,667 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-05-01 12:51:37,667 - src.core.utils.discovery - INFO - Registered component regime_ensemble in registry
+2025-05-01 12:51:37,667 - src.core.utils.discovery - INFO - Registered component simple_ma_crossover in registry
+2025-05-01 12:51:37,667 - src.core.system_bootstrap - INFO - Discovered strategies: ensemble_strategy, ma_crossover, regime_ensemble, simple_ma_crossover
+2025-05-01 12:51:37,667 - src.core.system_bootstrap - INFO - Requested strategy: simple_ma_crossover
+2025-05-01 12:51:37,667 - src.core.system_bootstrap - INFO - Available strategies in registry: ['ensemble_strategy', 'ma_crossover', 'regime_ensemble', 'simple_ma_crossover']
+2025-05-01 12:51:37,667 - src.strategy.implementations.simple_ma_crossover - INFO - MA Crossover strategy initialized with fast_window=5, slow_window=15
+2025-05-01 12:51:37,667 - src.strategy.implementations.simple_ma_crossover - INFO - MA Crossover strategy configured with parameters: fast_window=5, slow_window=15
+2025-05-01 12:51:37,667 - src.core.system_bootstrap - INFO - Strategy 'simple_ma_crossover' initialized successfully
+2025-05-01 12:51:37,667 - src.core.system_bootstrap - INFO - Analytics components initialized
+2025-05-01 12:51:37,667 - src.core.system_bootstrap - INFO - Registered enhanced risk manager with high signal priority
+2025-05-01 12:51:37,667 - src.core.system_bootstrap - INFO - All components registered with event manager in optimal order
+2025-05-01 12:51:37,667 - src.core.system_bootstrap - INFO - Re-registered portfolio fill handler with high priority
+2025-05-01 12:51:37,667 - src.core.system_bootstrap - INFO - System bootstrap complete
+2025-05-01 12:51:37,667 - src.execution.backtest.backtest - INFO - Using timeframe from config: 1min
+2025-05-01 12:51:37,669 - src.execution.backtest.backtest - INFO - Backtest setup complete
+2025-05-01 12:51:37,669 - src.core.events.event_bus - INFO - Event bus reset complete
+2025-05-01 12:51:37,669 - src.execution.backtest.backtest - INFO - Event bus reset
+2025-05-01 12:51:37,669 - src.execution.backtest.backtest - INFO - Data handler reset
+2025-05-01 12:51:37,669 - src.strategy.implementations.simple_ma_crossover - INFO - Simple MA Crossover strategy simple_ma_crossover reset
+2025-05-01 12:51:37,669 - src.execution.backtest.backtest - INFO - Strategy reset
+2025-05-01 12:51:37,669 - src.execution.backtest.backtest - INFO - Risk manager reset
+2025-05-01 12:51:37,669 - src.execution.order_manager - INFO - Reset order manager
+2025-05-01 12:51:37,669 - src.execution.backtest.backtest - INFO - Order manager reset
+2025-05-01 12:51:37,669 - src.execution.broker.broker_simulator - INFO - Broker reset
+2025-05-01 12:51:37,669 - src.execution.backtest.backtest - INFO - Broker reset
+2025-05-01 12:51:37,669 - src.risk.portfolio.portfolio - INFO - Trade list reset - new empty list with ID: 4391442240
+2025-05-01 12:51:37,669 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_b8e4cdc5 to initial state with cash: $100000.00
+2025-05-01 12:51:37,669 - src.execution.backtest.backtest - INFO - Portfolio reset
+2025-05-01 12:51:37,669 - src.execution.backtest.backtest - INFO - Reset all components for backtest
+2025-05-01 12:51:37,669 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['MINI'] with timeframe: 1min
+2025-05-01 12:51:37,669 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/MINI_1min.csv
+2025-05-01 12:51:37,673 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 48 rows
+2025-05-01 12:51:37,674 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2024-03-26 13:30:00
+2025-05-01 12:51:37,674 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2024-03-26 13:30:00
+2025-05-01 12:51:37,675 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2024-01-01 00:00:00
+2025-05-01 12:51:37,675 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2024-12-31 00:00:00
+2025-05-01 12:51:37,676 - src.data.sources.csv_handler - INFO - CSVDataSource: Set timestamp as index
+2025-05-01 12:51:37,677 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2024-03-26 13:30:00 to 2024-03-26 14:17:00
+2025-05-01 12:51:37,677 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume', 'trade_count', 'vwap']
+2025-05-01 12:51:37,677 - src.data.historical_data_handler - INFO - Loaded 48 bars for MINI from 2024-03-26 13:30:00 to 2024-03-26 14:17:00
+2025-05-01 12:51:37,677 - src.execution.backtest.backtest - INFO - Starting backtest
+2025-05-01 12:51:37,678 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-01 12:51:37,678 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.12
+2025-05-01 12:51:37,678 - src.risk.managers.enhanced_risk_manager - INFO - Direction change for MINI: 0 -> -1, rule_id=MINI_SELL_group_1
+2025-05-01 12:51:37,678 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100 MINI @ 521.12, rule_id=MINI_SELL_group_1
+2025-05-01 12:51:37,678 - src.core.events.event_bus - INFO - Order dedup key: MINI_SELL_group_1
+2025-05-01 12:51:37,678 - src.execution.order_manager - INFO - Converting trading decision to order: order_f6def285 (SELL 100 MINI @ 521.12)
+2025-05-01 12:51:37,678 - src.execution.order_manager - INFO - Order order_f6def285 using quantity field 100 for size
+2025-05-01 12:51:37,678 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100 MINI @ 521.12
+2025-05-01 12:51:37,678 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_f6def285
+2025-05-01 12:51:37,678 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_f6def285
+2025-05-01 12:51:37,678 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 0.00 to trade history. Total trades: 1
+2025-05-01 12:51:37,678 - src.risk.portfolio.portfolio - INFO - Trade list now contains 1 trades
+2025-05-01 12:51:37,678 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100.0 MINI @ 520.60, PnL: 0.00, Cash: 152007.83, Equity: 99947.94
+2025-05-01 12:51:37,678 - src.execution.order_manager - INFO - Processing fill event for order_id: order_f6def285
+2025-05-01 12:51:37,678 - src.execution.order_manager - INFO - Updated order with fill: Order(order_f6def285, MINI, SELL, 100, FILLED)
+2025-05-01 12:51:37,678 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 13:36:00
+2025-05-01 12:51:37,678 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-01 12:51:37,679 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.085
+2025-05-01 12:51:37,679 - src.risk.managers.enhanced_risk_manager - INFO - Direction change for MINI: -1 -> 1, rule_id=MINI_BUY_group_2
+2025-05-01 12:51:37,679 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 200.0 MINI @ 521.085, rule_id=MINI_BUY_group_2
+2025-05-01 12:51:37,679 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_group_2
+2025-05-01 12:51:37,679 - src.execution.order_manager - INFO - Converting trading decision to order: order_221a2b87 (BUY 200.0 MINI @ 521.085)
+2025-05-01 12:51:37,679 - src.execution.order_manager - INFO - Order order_221a2b87 using quantity field 200.0 for size
+2025-05-01 12:51:37,679 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 200.0 MINI @ 521.085
+2025-05-01 12:51:37,679 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_221a2b87
+2025-05-01 12:51:37,679 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_221a2b87
+2025-05-01 12:51:37,679 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -100.72 to trade history. Total trades: 2
+2025-05-01 12:51:37,679 - src.risk.portfolio.portfolio - INFO - Trade list now contains 2 trades
+2025-05-01 12:51:37,679 - src.risk.portfolio.portfolio - INFO - Fill: BUY 200.0 MINI @ 521.61, PnL: -100.72, Cash: 47582.29, Equity: 99742.90
+2025-05-01 12:51:37,679 - src.execution.order_manager - INFO - Processing fill event for order_id: order_221a2b87
+2025-05-01 12:51:37,679 - src.execution.order_manager - INFO - Updated order with fill: Order(order_221a2b87, MINI, BUY, 200.0, FILLED)
+2025-05-01 12:51:37,679 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 13:43:00
+2025-05-01 12:51:37,679 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-01 12:51:37,679 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.09
+2025-05-01 12:51:37,679 - src.risk.managers.enhanced_risk_manager - INFO - Direction change for MINI: 1 -> -1, rule_id=MINI_SELL_group_3
+2025-05-01 12:51:37,679 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 200.0 MINI @ 521.09, rule_id=MINI_SELL_group_3
+2025-05-01 12:51:37,679 - src.core.events.event_bus - INFO - Order dedup key: MINI_SELL_group_3
+2025-05-01 12:51:37,679 - src.execution.order_manager - INFO - Converting trading decision to order: order_86802e1e (SELL 200.0 MINI @ 521.09)
+2025-05-01 12:51:37,679 - src.execution.order_manager - INFO - Order order_86802e1e using quantity field 200.0 for size
+2025-05-01 12:51:37,679 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 200.0 MINI @ 521.09
+2025-05-01 12:51:37,679 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_86802e1e
+2025-05-01 12:51:37,679 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_86802e1e
+2025-05-01 12:51:37,679 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -103.72 to trade history. Total trades: 3
+2025-05-01 12:51:37,679 - src.risk.portfolio.portfolio - INFO - Trade list now contains 3 trades
+2025-05-01 12:51:37,679 - src.risk.portfolio.portfolio - INFO - Fill: SELL 200.0 MINI @ 520.57, PnL: -103.72, Cash: 151591.96, Equity: 99535.07
+2025-05-01 12:51:37,679 - src.execution.order_manager - INFO - Processing fill event for order_id: order_86802e1e
+2025-05-01 12:51:37,679 - src.execution.order_manager - INFO - Updated order with fill: Order(order_86802e1e, MINI, SELL, 200.0, FILLED)
+2025-05-01 12:51:37,679 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 13:47:00
+2025-05-01 12:51:37,679 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-01 12:51:37,679 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.17
+2025-05-01 12:51:37,679 - src.risk.managers.enhanced_risk_manager - INFO - Direction change for MINI: -1 -> 1, rule_id=MINI_BUY_group_4
+2025-05-01 12:51:37,680 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 200.0 MINI @ 521.17, rule_id=MINI_BUY_group_4
+2025-05-01 12:51:37,680 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_group_4
+2025-05-01 12:51:37,680 - src.execution.order_manager - INFO - Converting trading decision to order: order_4e1f1fb7 (BUY 200.0 MINI @ 521.17)
+2025-05-01 12:51:37,680 - src.execution.order_manager - INFO - Order order_4e1f1fb7 using quantity field 200.0 for size
+2025-05-01 12:51:37,680 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 200.0 MINI @ 521.17
+2025-05-01 12:51:37,680 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_4e1f1fb7
+2025-05-01 12:51:37,680 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_4e1f1fb7
+2025-05-01 12:51:37,680 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -112.23 to trade history. Total trades: 4
+2025-05-01 12:51:37,680 - src.risk.portfolio.portfolio - INFO - Trade list now contains 4 trades
+2025-05-01 12:51:37,680 - src.risk.portfolio.portfolio - INFO - Fill: BUY 200.0 MINI @ 521.69, PnL: -112.23, Cash: 47149.39, Equity: 99318.50
+2025-05-01 12:51:37,680 - src.execution.order_manager - INFO - Processing fill event for order_id: order_4e1f1fb7
+2025-05-01 12:51:37,680 - src.execution.order_manager - INFO - Updated order with fill: Order(order_4e1f1fb7, MINI, BUY, 200.0, FILLED)
+2025-05-01 12:51:37,680 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 13:48:00
+2025-05-01 12:51:37,680 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-01 12:51:37,680 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.08
+2025-05-01 12:51:37,680 - src.risk.managers.enhanced_risk_manager - INFO - Direction change for MINI: 1 -> -1, rule_id=MINI_SELL_group_5
+2025-05-01 12:51:37,680 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 200.0 MINI @ 521.08, rule_id=MINI_SELL_group_5
+2025-05-01 12:51:37,680 - src.core.events.event_bus - INFO - Order dedup key: MINI_SELL_group_5
+2025-05-01 12:51:37,680 - src.execution.order_manager - INFO - Converting trading decision to order: order_e2279375 (SELL 200.0 MINI @ 521.08)
+2025-05-01 12:51:37,680 - src.execution.order_manager - INFO - Order order_e2279375 using quantity field 200.0 for size
+2025-05-01 12:51:37,680 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 200.0 MINI @ 521.08
+2025-05-01 12:51:37,680 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_e2279375
+2025-05-01 12:51:37,680 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_e2279375
+2025-05-01 12:51:37,680 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -113.22 to trade history. Total trades: 5
+2025-05-01 12:51:37,680 - src.risk.portfolio.portfolio - INFO - Trade list now contains 5 trades
+2025-05-01 12:51:37,680 - src.risk.portfolio.portfolio - INFO - Fill: SELL 200.0 MINI @ 520.56, PnL: -113.22, Cash: 151157.06, Equity: 99101.17
+2025-05-01 12:51:37,680 - src.execution.order_manager - INFO - Processing fill event for order_id: order_e2279375
+2025-05-01 12:51:37,680 - src.execution.order_manager - INFO - Updated order with fill: Order(order_e2279375, MINI, SELL, 200.0, FILLED)
+2025-05-01 12:51:37,680 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 13:51:00
+2025-05-01 12:51:37,681 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-01 12:51:37,681 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.145
+2025-05-01 12:51:37,681 - src.risk.managers.enhanced_risk_manager - INFO - Direction change for MINI: -1 -> 1, rule_id=MINI_BUY_group_6
+2025-05-01 12:51:37,681 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 200.0 MINI @ 521.145, rule_id=MINI_BUY_group_6
+2025-05-01 12:51:37,681 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_group_6
+2025-05-01 12:51:37,681 - src.execution.order_manager - INFO - Converting trading decision to order: order_44f4fa10 (BUY 200.0 MINI @ 521.145)
+2025-05-01 12:51:37,681 - src.execution.order_manager - INFO - Order order_44f4fa10 using quantity field 200.0 for size
+2025-05-01 12:51:37,681 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 200.0 MINI @ 521.145
+2025-05-01 12:51:37,681 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_44f4fa10
+2025-05-01 12:51:37,681 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_44f4fa10
+2025-05-01 12:51:37,681 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -110.72 to trade history. Total trades: 6
+2025-05-01 12:51:37,681 - src.risk.portfolio.portfolio - INFO - Trade list now contains 6 trades
+2025-05-01 12:51:37,681 - src.risk.portfolio.portfolio - INFO - Fill: BUY 200.0 MINI @ 521.67, PnL: -110.72, Cash: 46719.50, Equity: 98886.11
+2025-05-01 12:51:37,681 - src.execution.order_manager - INFO - Processing fill event for order_id: order_44f4fa10
+2025-05-01 12:51:37,681 - src.execution.order_manager - INFO - Updated order with fill: Order(order_44f4fa10, MINI, BUY, 200.0, FILLED)
+2025-05-01 12:51:37,681 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 13:56:00
+2025-05-01 12:51:37,681 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-01 12:51:37,681 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.25
+2025-05-01 12:51:37,681 - src.risk.managers.enhanced_risk_manager - INFO - Direction change for MINI: 1 -> -1, rule_id=MINI_SELL_group_7
+2025-05-01 12:51:37,681 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 200.0 MINI @ 521.25, rule_id=MINI_SELL_group_7
+2025-05-01 12:51:37,681 - src.core.events.event_bus - INFO - Order dedup key: MINI_SELL_group_7
+2025-05-01 12:51:37,681 - src.execution.order_manager - INFO - Converting trading decision to order: order_db562b45 (SELL 200.0 MINI @ 521.25)
+2025-05-01 12:51:37,681 - src.execution.order_manager - INFO - Order order_db562b45 using quantity field 200.0 for size
+2025-05-01 12:51:37,681 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 200.0 MINI @ 521.25
+2025-05-01 12:51:37,681 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_db562b45
+2025-05-01 12:51:37,681 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_db562b45
+2025-05-01 12:51:37,681 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -93.74 to trade history. Total trades: 7
+2025-05-01 12:51:37,681 - src.risk.portfolio.portfolio - INFO - Trade list now contains 7 trades
+2025-05-01 12:51:37,681 - src.risk.portfolio.portfolio - INFO - Fill: SELL 200.0 MINI @ 520.73, PnL: -93.74, Cash: 150761.10, Equity: 98688.23
+2025-05-01 12:51:37,681 - src.execution.order_manager - INFO - Processing fill event for order_id: order_db562b45
+2025-05-01 12:51:37,681 - src.execution.order_manager - INFO - Updated order with fill: Order(order_db562b45, MINI, SELL, 200.0, FILLED)
+2025-05-01 12:51:37,682 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 14:03:00
+2025-05-01 12:51:37,682 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-01 12:51:37,682 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.31
+2025-05-01 12:51:37,682 - src.risk.managers.enhanced_risk_manager - INFO - Direction change for MINI: -1 -> 1, rule_id=MINI_BUY_group_8
+2025-05-01 12:51:37,682 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 200.0 MINI @ 521.31, rule_id=MINI_BUY_group_8
+2025-05-01 12:51:37,682 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_group_8
+2025-05-01 12:51:37,682 - src.execution.order_manager - INFO - Converting trading decision to order: order_655ea589 (BUY 200.0 MINI @ 521.31)
+2025-05-01 12:51:37,682 - src.execution.order_manager - INFO - Order order_655ea589 using quantity field 200.0 for size
+2025-05-01 12:51:37,682 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 200.0 MINI @ 521.31
+2025-05-01 12:51:37,682 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_655ea589
+2025-05-01 12:51:37,682 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_655ea589
+2025-05-01 12:51:37,682 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -110.26 to trade history. Total trades: 8
+2025-05-01 12:51:37,682 - src.risk.portfolio.portfolio - INFO - Trade list now contains 8 trades
+2025-05-01 12:51:37,682 - src.risk.portfolio.portfolio - INFO - Fill: BUY 200.0 MINI @ 521.83, PnL: -110.26, Cash: 46290.47, Equity: 98473.60
+2025-05-01 12:51:37,682 - src.execution.order_manager - INFO - Processing fill event for order_id: order_655ea589
+2025-05-01 12:51:37,682 - src.execution.order_manager - INFO - Updated order with fill: Order(order_655ea589, MINI, BUY, 200.0, FILLED)
+2025-05-01 12:51:37,682 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 14:05:00
+2025-05-01 12:51:37,682 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-01 12:51:37,682 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.3
+2025-05-01 12:51:37,682 - src.risk.managers.enhanced_risk_manager - INFO - Direction change for MINI: 1 -> -1, rule_id=MINI_SELL_group_9
+2025-05-01 12:51:37,682 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 200.0 MINI @ 521.3, rule_id=MINI_SELL_group_9
+2025-05-01 12:51:37,682 - src.core.events.event_bus - INFO - Order dedup key: MINI_SELL_group_9
+2025-05-01 12:51:37,682 - src.execution.order_manager - INFO - Converting trading decision to order: order_b371fe35 (SELL 200.0 MINI @ 521.3)
+2025-05-01 12:51:37,682 - src.execution.order_manager - INFO - Order order_b371fe35 using quantity field 200.0 for size
+2025-05-01 12:51:37,682 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 200.0 MINI @ 521.3
+2025-05-01 12:51:37,683 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_b371fe35
+2025-05-01 12:51:37,683 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_b371fe35
+2025-05-01 12:51:37,683 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -105.26 to trade history. Total trades: 9
+2025-05-01 12:51:37,683 - src.risk.portfolio.portfolio - INFO - Trade list now contains 9 trades
+2025-05-01 12:51:37,683 - src.risk.portfolio.portfolio - INFO - Fill: SELL 200.0 MINI @ 520.78, PnL: -105.26, Cash: 150342.06, Equity: 98264.19
+2025-05-01 12:51:37,683 - src.execution.order_manager - INFO - Processing fill event for order_id: order_b371fe35
+2025-05-01 12:51:37,683 - src.execution.order_manager - INFO - Updated order with fill: Order(order_b371fe35, MINI, SELL, 200.0, FILLED)
+2025-05-01 12:51:37,683 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 14:09:00
+2025-05-01 12:51:37,683 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-01 12:51:37,683 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.3001
+2025-05-01 12:51:37,683 - src.risk.managers.enhanced_risk_manager - INFO - Direction change for MINI: -1 -> 1, rule_id=MINI_BUY_group_10
+2025-05-01 12:51:37,683 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 200.0 MINI @ 521.3001, rule_id=MINI_BUY_group_10
+2025-05-01 12:51:37,683 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_group_10
+2025-05-01 12:51:37,683 - src.execution.order_manager - INFO - Converting trading decision to order: order_e7b40b05 (BUY 200.0 MINI @ 521.3001)
+2025-05-01 12:51:37,683 - src.execution.order_manager - INFO - Order order_e7b40b05 using quantity field 200.0 for size
+2025-05-01 12:51:37,683 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 200.0 MINI @ 521.3001
+2025-05-01 12:51:37,683 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_e7b40b05
+2025-05-01 12:51:37,683 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_e7b40b05
+2025-05-01 12:51:37,683 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -104.27 to trade history. Total trades: 10
+2025-05-01 12:51:37,683 - src.risk.portfolio.portfolio - INFO - Trade list now contains 10 trades
+2025-05-01 12:51:37,683 - src.risk.portfolio.portfolio - INFO - Fill: BUY 200.0 MINI @ 521.82, PnL: -104.27, Cash: 45873.41, Equity: 98055.55
+2025-05-01 12:51:37,683 - src.execution.order_manager - INFO - Processing fill event for order_id: order_e7b40b05
+2025-05-01 12:51:37,683 - src.execution.order_manager - INFO - Updated order with fill: Order(order_e7b40b05, MINI, BUY, 200.0, FILLED)
+2025-05-01 12:51:37,683 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 14:13:00
+2025-05-01 12:51:37,683 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-01 12:51:37,683 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.32
+2025-05-01 12:51:37,683 - src.risk.managers.enhanced_risk_manager - INFO - Direction change for MINI: 1 -> -1, rule_id=MINI_SELL_group_11
+2025-05-01 12:51:37,683 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 200.0 MINI @ 521.32, rule_id=MINI_SELL_group_11
+2025-05-01 12:51:37,683 - src.core.events.event_bus - INFO - Order dedup key: MINI_SELL_group_11
+2025-05-01 12:51:37,684 - src.execution.order_manager - INFO - Converting trading decision to order: order_4ec1a211 (SELL 200.0 MINI @ 521.32)
+2025-05-01 12:51:37,684 - src.execution.order_manager - INFO - Order order_4ec1a211 using quantity field 200.0 for size
+2025-05-01 12:51:37,684 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 200.0 MINI @ 521.32
+2025-05-01 12:51:37,684 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_4ec1a211
+2025-05-01 12:51:37,684 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_4ec1a211
+2025-05-01 12:51:37,684 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -102.27 to trade history. Total trades: 11
+2025-05-01 12:51:37,684 - src.risk.portfolio.portfolio - INFO - Trade list now contains 11 trades
+2025-05-01 12:51:37,684 - src.risk.portfolio.portfolio - INFO - Fill: SELL 200.0 MINI @ 520.80, PnL: -102.27, Cash: 149928.99, Equity: 97849.12
+2025-05-01 12:51:37,684 - src.execution.order_manager - INFO - Processing fill event for order_id: order_4ec1a211
+2025-05-01 12:51:37,684 - src.execution.order_manager - INFO - Updated order with fill: Order(order_4ec1a211, MINI, SELL, 200.0, FILLED)
+2025-05-01 12:51:37,684 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 14:16:00
+2025-05-01 12:51:37,684 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-01 12:51:37,684 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.38
+2025-05-01 12:51:37,684 - src.risk.managers.enhanced_risk_manager - INFO - Direction change for MINI: -1 -> 1, rule_id=MINI_BUY_group_12
+2025-05-01 12:51:37,684 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 200.0 MINI @ 521.38, rule_id=MINI_BUY_group_12
+2025-05-01 12:51:37,684 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_group_12
+2025-05-01 12:51:37,684 - src.execution.order_manager - INFO - Converting trading decision to order: order_0968586c (BUY 200.0 MINI @ 521.38)
+2025-05-01 12:51:37,684 - src.execution.order_manager - INFO - Order order_0968586c using quantity field 200.0 for size
+2025-05-01 12:51:37,684 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 200.0 MINI @ 521.38
+2025-05-01 12:51:37,684 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_0968586c
+2025-05-01 12:51:37,684 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_0968586c
+2025-05-01 12:51:37,684 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: -110.27 to trade history. Total trades: 12
+2025-05-01 12:51:37,684 - src.risk.portfolio.portfolio - INFO - Trade list now contains 12 trades
+2025-05-01 12:51:37,684 - src.risk.portfolio.portfolio - INFO - Fill: BUY 200.0 MINI @ 521.90, PnL: -110.27, Cash: 45444.33, Equity: 97634.47
+2025-05-01 12:51:37,684 - src.execution.order_manager - INFO - Processing fill event for order_id: order_0968586c
+2025-05-01 12:51:37,684 - src.execution.order_manager - INFO - Updated order with fill: Order(order_0968586c, MINI, BUY, 200.0, FILLED)
+2025-05-01 12:51:37,684 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 14:17:00
+2025-05-01 12:51:37,684 - src.execution.backtest.backtest - INFO - Backtest completed after 49 iterations
+2025-05-01 12:51:37,685 - src.risk.portfolio.portfolio - INFO - get_recent_trades called, self.trades has 12 items
+2025-05-01 12:51:37,685 - src.risk.portfolio.portfolio - INFO - Trade list object ID: 4391442240
+2025-05-01 12:51:37,685 - src.risk.portfolio.portfolio - INFO - First trade in list: {'id': '6028a049-935a-44f3-aab7-8e54717cab1b', 'timestamp': datetime.datetime(2025, 5, 1, 12, 51, 37, 678385), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 100.0, 'size': 100.0, 'price': 520.59888, 'fill_price': 520.59888, 'commission': 52.059888, 'pnl': 0.0, 'realized_pnl': 0.0}
+2025-05-01 12:51:37,685 - src.risk.portfolio.portfolio - INFO - Returning 12 validated trades
+2025-05-01 12:51:37,685 - src.execution.backtest.backtest - INFO - Backtest processed 12 trades
+2025-05-01 12:51:37,685 - src.execution.backtest.backtest - INFO - Trade stats: 12 trades, 0 wins, 11 losses
+2025-05-01 12:51:37,685 - src.execution.backtest.backtest - INFO - PnL sum: -1166.68
+2025-05-01 12:51:37,685 - src.execution.backtest.backtest - INFO - Min PnL: -113.22, Max PnL: 0.00
+2025-05-01 12:51:37,685 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 12 trades and equity curve with 289 points
+2025-05-01 12:51:37,685 - src.analytics.performance.calculator - INFO - Sample trade: {'id': '6028a049-935a-44f3-aab7-8e54717cab1b', 'timestamp': datetime.datetime(2025, 5, 1, 12, 51, 37, 678385), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 100.0, 'size': 100.0, 'price': 520.59888, 'fill_price': 520.59888, 'commission': 52.059888, 'pnl': 0.0, 'realized_pnl': 0.0}
+2025-05-01 12:51:37,685 - src.analytics.performance.calculator - INFO - Total PnL from trades: -1166.68
+2025-05-01 12:51:37,685 - src.analytics.performance.calculator - INFO - Trades with PnL field: 12 out of 12
+2025-05-01 12:51:37,685 - src.analytics.metrics.functional - INFO - Calculating metrics for 12 trades and 289 equity points
+2025-05-01 12:51:37,686 - src.analytics.metrics.functional - INFO - Win rate calculation: 0 wins out of 12 valid trades
+2025-05-01 12:51:37,686 - src.analytics.metrics.functional - INFO - Profit factor calculation: gross profit=0.00, gross loss=1166.68
+2025-05-01 12:51:37,687 - src.execution.backtest.backtest - INFO - Calculated performance metrics for 12 trades
+2025-05-01 12:51:37,687 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 12 trades and equity curve with 289 points
+2025-05-01 12:51:37,687 - src.analytics.performance.calculator - INFO - Sample trade: {'id': '6028a049-935a-44f3-aab7-8e54717cab1b', 'timestamp': datetime.datetime(2025, 5, 1, 12, 51, 37, 678385), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 100.0, 'size': 100.0, 'price': 520.59888, 'fill_price': 520.59888, 'commission': 52.059888, 'pnl': 0.0, 'realized_pnl': 0.0}
+2025-05-01 12:51:37,687 - src.analytics.performance.calculator - INFO - Total PnL from trades: -1166.68
+2025-05-01 12:51:37,687 - src.analytics.performance.calculator - INFO - Trades with PnL field: 12 out of 12
+2025-05-01 12:51:37,687 - src.analytics.metrics.functional - INFO - Calculating metrics for 12 trades and 289 equity points
+2025-05-01 12:51:37,687 - src.analytics.metrics.functional - INFO - Win rate calculation: 0 wins out of 12 valid trades
+2025-05-01 12:51:37,688 - src.analytics.metrics.functional - INFO - Profit factor calculation: gross profit=0.00, gross loss=1166.68
+2025-05-01 12:51:37,688 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 12 trades and equity curve with 289 points
+2025-05-01 12:51:37,688 - src.analytics.performance.calculator - INFO - Sample trade: {'id': '6028a049-935a-44f3-aab7-8e54717cab1b', 'timestamp': datetime.datetime(2025, 5, 1, 12, 51, 37, 678385), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 100.0, 'size': 100.0, 'price': 520.59888, 'fill_price': 520.59888, 'commission': 52.059888, 'pnl': 0.0, 'realized_pnl': 0.0}
+2025-05-01 12:51:37,688 - src.analytics.performance.calculator - INFO - Total PnL from trades: -1166.68
+2025-05-01 12:51:37,688 - src.analytics.performance.calculator - INFO - Trades with PnL field: 12 out of 12
+2025-05-01 12:51:37,688 - src.analytics.metrics.functional - INFO - Calculating metrics for 12 trades and 289 equity points
+2025-05-01 12:51:37,689 - src.analytics.metrics.functional - INFO - Win rate calculation: 0 wins out of 12 valid trades
+2025-05-01 12:51:37,689 - src.analytics.metrics.functional - INFO - Profit factor calculation: gross profit=0.00, gross loss=1166.68
+2025-05-01 12:51:37,694 - src.risk.portfolio.portfolio - INFO - get_recent_trades called, self.trades has 12 items
+2025-05-01 12:51:37,694 - src.risk.portfolio.portfolio - INFO - Trade list object ID: 4391442240
+2025-05-01 12:51:37,694 - src.risk.portfolio.portfolio - INFO - First trade in list: {'id': '6028a049-935a-44f3-aab7-8e54717cab1b', 'timestamp': datetime.datetime(2025, 5, 1, 12, 51, 37, 678385), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 100.0, 'size': 100.0, 'price': 520.59888, 'fill_price': 520.59888, 'commission': 52.059888, 'pnl': 0.0, 'realized_pnl': 0.0}
+2025-05-01 12:51:37,694 - src.risk.portfolio.portfolio - INFO - Returning 12 validated trades
+2025-05-01 12:51:37,694 - src.execution.backtest.backtest - INFO - Backtest complete
+2025-05-01 12:51:37,697 - src.analytics.reporting.report_generator - INFO - Saved equity curve to './results/refactored_test/equity_curve_20250501_125137.csv'
+2025-05-01 12:51:37,697 - src.analytics.reporting.report_generator - INFO - Saved detailed report to './results/refactored_test/backtest_report_20250501_125137.txt'
+2025-05-01 12:51:37,698 - src.analytics.reporting.report_generator - INFO - Saved trade log to './results/refactored_test/trades_20250501_125137.csv'

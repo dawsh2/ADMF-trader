@@ -1,0 +1,50 @@
+2025-04-29 15:03:59,119 - src.core.bootstrap - INFO - Logging initialized at level DEBUG
+2025-04-29 15:03:59,119 - src.core.bootstrap - INFO - Log file: ./results/head_test/head_test_debug.log
+2025-04-29 15:03:59,120 - src.core.bootstrap - INFO - Loaded configuration from config/head_test.yaml
+2025-04-29 15:03:59,120 - src.core.bootstrap - INFO - Event system initialized
+2025-04-29 15:03:59,123 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-04-29 15:03:59,123 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-04-29 15:03:59,123 - src.core.bootstrap - INFO - Data components initialized with source type: csv
+2025-04-29 15:03:59,124 - src.core.events.event_bus - DEBUG - Registered handler for ORDER
+2025-04-29 15:03:59,124 - src.core.events.event_bus - DEBUG - Registered handler for FILL
+2025-04-29 15:03:59,124 - src.core.bootstrap - INFO - Order registry initialized
+2025-04-29 15:03:59,126 - src.core.events.event_bus - DEBUG - Registered handler for SIGNAL
+2025-04-29 15:03:59,126 - src.core.events.event_bus - DEBUG - Registered handler for FILL
+2025-04-29 15:03:59,126 - src.core.events.event_bus - DEBUG - Registered handler for PORTFOLIO
+2025-04-29 15:03:59,126 - src.core.events.event_bus - DEBUG - Registered handler for ORDER
+2025-04-29 15:03:59,126 - src.core.events.event_bus - DEBUG - Registered handler for ORDER
+2025-04-29 15:03:59,126 - src.core.events.event_bus - DEBUG - Registered handler for PORTFOLIO
+2025-04-29 15:03:59,126 - src.core.bootstrap - INFO - Execution components initialized with order registry
+2025-04-29 15:03:59,128 - src.core.events.event_bus - DEBUG - Registered handler for FILL
+2025-04-29 15:03:59,128 - src.core.events.event_bus - DEBUG - Registered handler for BAR
+2025-04-29 15:03:59,128 - src.core.events.event_bus - DEBUG - Registered handler for SIGNAL
+2025-04-29 15:03:59,128 - src.core.bootstrap - INFO - Risk manager configured with position_size=100, max_position_pct=0.1
+2025-04-29 15:03:59,128 - src.core.bootstrap - INFO - Risk components initialized
+2025-04-29 15:03:59,130 - src.core.bootstrap - INFO - Discovering strategy implementations...
+2025-04-29 15:03:59,130 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-04-29 15:03:59,131 - src.core.utils.discovery - INFO - Registered component regime_ensemble in registry
+2025-04-29 15:03:59,131 - src.core.bootstrap - INFO - Discovered strategies: ma_crossover, regime_ensemble
+2025-04-29 15:03:59,131 - src.core.bootstrap - INFO - Requested strategy: ma_crossover
+2025-04-29 15:03:59,131 - src.core.bootstrap - INFO - Available strategies in registry: ['ma_crossover', 'regime_ensemble']
+2025-04-29 15:03:59,131 - src.core.events.event_bus - DEBUG - Registered handler for BAR
+2025-04-29 15:03:59,131 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy initialized with fast_window=5, slow_window=15
+2025-04-29 15:03:59,131 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy configured with parameters: fast_window=5, slow_window=15
+2025-04-29 15:03:59,131 - src.core.bootstrap - INFO - Strategy 'ma_crossover' initialized successfully
+2025-04-29 15:03:59,131 - src.core.bootstrap - INFO - Analytics components initialized
+2025-04-29 15:03:59,131 - src.core.bootstrap - INFO - System bootstrap complete
+2025-04-29 15:03:59,131 - root - ERROR - Debug backtest failed with error
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/debug_events.py", line 154, in <module>
+    success = main()
+  File "/Users/daws/ADMF-trader/debug_events.py", line 83, in main
+    event_debugger = EventDebugger(event_bus)
+  File "/Users/daws/ADMF-trader/debug_events.py", line 26, in __init__
+    self.register_handlers()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/daws/ADMF-trader/debug_events.py", line 32, in register_handlers
+    self.event_bus.register(event_type, self.on_event)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daws/ADMF-trader/src/core/events/event_bus.py", line 102, in register
+    logger.debug(f"Registered handler for {event_type.name}")
+                                           ^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'name'

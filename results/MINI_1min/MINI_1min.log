@@ -1,0 +1,27 @@
+2025-05-01 10:42:36,391 - src.core.system_bootstrap - INFO - Logging initialized at level INFO
+2025-05-01 10:42:36,391 - src.core.system_bootstrap - INFO - Log file: ./results/MINI_1min/MINI_1min.log
+2025-05-01 10:42:36,391 - src.core.system_bootstrap - ERROR - Error loading configuration from config/MINI_1min.csv: Configuration file not found: config/MINI_1min.csv
+2025-05-01 10:42:36,391 - src.core.system_bootstrap - INFO - Event system initialized with native deduplication
+2025-05-01 10:42:36,391 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-05-01 10:42:36,391 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-05-01 10:42:36,391 - src.core.system_bootstrap - INFO - Data components initialized with source type: csv
+2025-05-01 10:42:36,392 - src.execution.broker.broker_simulator - INFO - Simulated broker initialized
+2025-05-01 10:42:36,392 - src.execution.order_manager - INFO - Order manager initialized
+2025-05-01 10:42:36,392 - src.core.system_bootstrap - INFO - Execution components initialized
+2025-05-01 10:42:36,393 - src.core.system_bootstrap - INFO - Risk manager configured with position_size=100, max_position_pct=0.1
+2025-05-01 10:42:36,393 - src.core.system_bootstrap - INFO - Risk components initialized
+2025-05-01 10:42:36,394 - src.core.system_bootstrap - INFO - Discovering strategy implementations...
+2025-05-01 10:42:36,394 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-05-01 10:42:36,394 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-05-01 10:42:36,394 - src.core.utils.discovery - INFO - Registered component regime_ensemble in registry
+2025-05-01 10:42:36,394 - src.core.system_bootstrap - INFO - Discovered strategies: ma_crossover, regime_ensemble
+2025-05-01 10:42:36,394 - src.core.system_bootstrap - INFO - Requested strategy: ma_crossover
+2025-05-01 10:42:36,394 - src.core.system_bootstrap - INFO - Available strategies in registry: ['ma_crossover', 'regime_ensemble']
+2025-05-01 10:42:36,394 - src.strategy.implementations.ma_crossover_fixed - INFO - MA Crossover strategy initialized with fast_window=5, slow_window=15
+2025-05-01 10:42:36,394 - src.strategy.implementations.ma_crossover_fixed - INFO - MA Crossover strategy configured with parameters: fast_window=5, slow_window=15
+2025-05-01 10:42:36,394 - src.core.system_bootstrap - INFO - Strategy 'ma_crossover' initialized successfully
+2025-05-01 10:42:36,394 - src.core.system_bootstrap - INFO - Analytics components initialized
+2025-05-01 10:42:36,394 - src.core.system_bootstrap - INFO - All components registered with event manager in optimal order
+2025-05-01 10:42:36,394 - src.core.system_bootstrap - INFO - Re-registered portfolio fill handler with high priority
+2025-05-01 10:42:36,394 - src.core.system_bootstrap - INFO - System bootstrap complete
+2025-05-01 10:42:36,394 - src.execution.backtest.backtest - ERROR - No symbols provided for backtest

@@ -204,7 +204,7 @@ def calmar_ratio(equity_curve: pd.DataFrame, trades: List[Dict] = None,
 
 def win_rate(trades: List[Dict]) -> float:
     """
-    Calculate win rate.
+    Calculate win rate with improved robustness.
     
     Args:
         trades: List of trade records with 'pnl' field
@@ -214,13 +214,37 @@ def win_rate(trades: List[Dict]) -> float:
     """
     if not trades:
         return 0.0
+    
+    # Import logging for debugging
+    import logging
+    logger = logging.getLogger(__name__)
+    
+    # Count valid trades (those with PnL field)
+    valid_trades = [t for t in trades if 'pnl' in t and t['pnl'] is not None]
+    
+    # If no valid trades found, try alternate fields
+    if not valid_trades:
+        # Try alternate field names like 'realized_pnl'
+        valid_trades = [t for t in trades if 'realized_pnl' in t and t['realized_pnl'] is not None]
+        # Use the first field we can find
+        if valid_trades:
+            logger.info(f"Using 'realized_pnl' instead of 'pnl' for win rate calculation")
+            wins = sum(1 for trade in valid_trades if trade.get('realized_pnl', 0) > 0)
+            return wins / len(valid_trades)
+            
+    # If we still have no valid trades
+    if not valid_trades:
+        logger.warning(f"No valid trades with PnL found for win rate calculation")
+        return 0.0
         
-    wins = sum(1 for trade in trades if trade.get('pnl', 0) > 0)
-    return wins / len(trades)
+    # Standard calculation with valid trades
+    wins = sum(1 for trade in valid_trades if trade.get('pnl', 0) > 0)
+    logger.info(f"Win rate calculation: {wins} wins out of {len(valid_trades)} valid trades")
+    return wins / len(valid_trades)
 
 def profit_factor(trades: List[Dict]) -> float:
     """
-    Calculate profit factor.
+    Calculate profit factor with improved robustness.
     
     Args:
         trades: List of trade records with 'pnl' field
@@ -231,8 +255,37 @@ def profit_factor(trades: List[Dict]) -> float:
     if not trades:
         return 0.0
         
-    gross_profit = sum(trade.get('pnl', 0) for trade in trades if trade.get('pnl', 0) > 0)
-    gross_loss = abs(sum(trade.get('pnl', 0) for trade in trades if trade.get('pnl', 0) < 0))
+    # Import logging for debugging
+    import logging
+    logger = logging.getLogger(__name__)
+    
+    # Get valid trades (those with PnL field)
+    valid_trades = [t for t in trades if 'pnl' in t and t['pnl'] is not None]
+    
+    # If no valid trades found, try alternate fields
+    if not valid_trades:
+        # Try alternate field names like 'realized_pnl'
+        valid_trades = [t for t in trades if 'realized_pnl' in t and t['realized_pnl'] is not None]
+        # Use the first field we can find
+        if valid_trades:
+            logger.info(f"Using 'realized_pnl' instead of 'pnl' for profit factor calculation")
+            gross_profit = sum(trade.get('realized_pnl', 0) for trade in valid_trades if trade.get('realized_pnl', 0) > 0)
+            gross_loss = abs(sum(trade.get('realized_pnl', 0) for trade in valid_trades if trade.get('realized_pnl', 0) < 0))
+            
+            if gross_loss == 0:
+                return float('inf') if gross_profit > 0 else 0.0
+            return gross_profit / gross_loss
+    
+    # If we still have no valid trades
+    if not valid_trades:
+        logger.warning(f"No valid trades with PnL found for profit factor calculation")
+        return 0.0
+        
+    # Standard calculation with valid trades
+    gross_profit = sum(trade.get('pnl', 0) for trade in valid_trades if trade.get('pnl', 0) > 0)
+    gross_loss = abs(sum(trade.get('pnl', 0) for trade in valid_trades if trade.get('pnl', 0) < 0))
+    
+    logger.info(f"Profit factor calculation: gross profit={gross_profit:.2f}, gross loss={gross_loss:.2f}")
     
     if gross_loss == 0:
         return float('inf') if gross_profit > 0 else 0.0
@@ -374,33 +427,95 @@ def calculate_all_metrics(equity_curve: pd.DataFrame, trades: List[Dict] = None)
     Returns:
         Dict with all metrics
     """
+    # Import logging for debugging
+    import logging
+    logger = logging.getLogger(__name__)
+    
     if equity_curve is None or not isinstance(equity_curve, pd.DataFrame) or equity_curve.empty:
+        logger.warning("No equity curve data available for metrics calculation")
         return {'warning': 'No equity curve data available'}
 
-    metrics = {
-        'total_return': total_return(equity_curve, trades),
-        'annualized_return': annualized_return(equity_curve, trades),
-        'sharpe_ratio': sharpe_ratio(equity_curve, trades),
-        'sortino_ratio': sortino_ratio(equity_curve, trades),
-        'max_drawdown': max_drawdown(equity_curve, trades),
-        'calmar_ratio': calmar_ratio(equity_curve, trades)
-    }
+    # Ensure trades is a list, not None
+    if trades is None:
+        trades = []
+        logger.warning("No trades provided for metrics calculation")
+
+    # Log trade info for debugging
+    logger.info(f"Calculating metrics for {len(trades)} trades and {len(equity_curve)} equity points")
     
-    # Add log return statistics
-    metrics.update(logarithmic_returns_statistics(equity_curve))
+    # Calculate primary metrics
+    try:
+        metrics = {
+            'total_return': total_return(equity_curve, trades),
+            'annualized_return': annualized_return(equity_curve, trades),
+            'sharpe_ratio': sharpe_ratio(equity_curve, trades),
+            'sortino_ratio': sortino_ratio(equity_curve, trades),
+            'max_drawdown': max_drawdown(equity_curve, trades),
+            'calmar_ratio': calmar_ratio(equity_curve, trades)
+        }
+    except Exception as e:
+        logger.error(f"Error calculating primary metrics: {e}")
+        metrics = {
+            'total_return': 0.0,
+            'annualized_return': 0.0,
+            'sharpe_ratio': 0.0,
+            'sortino_ratio': 0.0,
+            'max_drawdown': 0.0,
+            'calmar_ratio': 0.0
+        }
     
-    # Add trade-specific metrics if trades are provided
-    if trades:
+    # Add log return statistics with error handling
+    try:
+        metrics.update(logarithmic_returns_statistics(equity_curve))
+    except Exception as e:
+        logger.error(f"Error calculating log returns statistics: {e}")
+    
+    # Add trade-specific metrics if trades are provided and non-empty
+    if trades and len(trades) > 0:
+        try:
+            # Add trade counts regardless of errors elsewhere
+            metrics['trade_count'] = len(trades)
+            
+            # Validate trade data - do we have PnL fields?
+            pnl_count = sum(1 for t in trades if 'pnl' in t and t['pnl'] is not None)
+            if pnl_count > 0:
+                # Calculate win rate and profit factor
+                metrics.update({
+                    'win_rate': win_rate(trades),
+                    'profit_factor': profit_factor(trades)
+                })
+                
+                # Add average trade metrics
+                metrics.update(average_trade(trades))
+            else:
+                logger.warning(f"No valid PnL fields found in trades, using zero for trade metrics")
+                metrics.update({
+                    'win_rate': 0.0,
+                    'profit_factor': 0.0,
+                    'avg_trade': 0.0,
+                    'avg_win': 0.0,
+                    'avg_loss': 0.0,
+                    'win_loss_ratio': 0.0
+                })
+        except Exception as e:
+            logger.error(f"Error calculating trade metrics: {e}")
+    else:
+        logger.warning("No valid trades for trade metrics calculation")
+        # Add placeholders for trade metrics
         metrics.update({
-            'win_rate': win_rate(trades),
-            'profit_factor': profit_factor(trades),
-            'trade_count': len(trades)
+            'trade_count': 0,
+            'win_rate': 0.0,
+            'profit_factor': 0.0,
+            'avg_trade': 0.0,
+            'avg_win': 0.0,
+            'avg_loss': 0.0,
+            'win_loss_ratio': 0.0
         })
-        
-        # Add average trade metrics
-        metrics.update(average_trade(trades))
     
-    # Add drawdown statistics
-    metrics.update(drawdown_stats(equity_curve))
+    # Add drawdown statistics with error handling
+    try:
+        metrics.update(drawdown_stats(equity_curve))
+    except Exception as e:
+        logger.error(f"Error calculating drawdown statistics: {e}")
     
     return metrics

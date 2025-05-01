@@ -1,0 +1,33 @@
+2025-04-30 13:32:42,004 - DirectTest - INFO - === Test: Direct Risk Manager Deduplication ===
+2025-04-30 13:32:42,004 - DirectTest - INFO - Risk manager instance: <src.risk.managers.simple.SimpleRiskManager object at 0x105e9e7b0>
+2025-04-30 13:32:42,004 - DirectTest - INFO - Cleared processed_rule_ids: set()
+2025-04-30 13:32:42,004 - DirectTest - INFO - Initial order count: 0
+2025-04-30 13:32:42,004 - DirectTest - INFO - Generated unique rule_id: test_rule_bc637cd8-bfd8-4384-bfb8-63b829daa45c
+2025-04-30 13:32:42,109 - DirectTest - INFO - Signal 1 event ID: 8a1d06e0-7ca9-46b0-b5ad-5d1bc3ad1e79
+2025-04-30 13:32:42,109 - DirectTest - INFO - Signal 2 event ID: fdb7c73a-0fc6-482b-bebf-77feea90c4fb
+2025-04-30 13:32:42,109 - DirectTest - INFO - Both signals have the same rule_id: test_rule_bc637cd8-bfd8-4384-bfb8-63b829daa45c
+2025-04-30 13:32:42,109 - DirectTest - INFO - Processing first signal with rule_id: test_rule_bc637cd8-bfd8-4384-bfb8-63b829daa45c directly through risk manager
+2025-04-30 13:32:42,109 - src.risk.managers.simple - INFO - PROCESSING: Adding rule_id test_rule_bc637cd8-bfd8-4384-bfb8-63b829daa45c to processed set
+2025-04-30 13:32:42,109 - src.risk.managers.simple - INFO - Using order_manager to create order directly
+2025-04-30 13:32:42,109 - src.execution.order_registry - INFO - Order 0b078d7f-23c3-46f6-bdd1-c81b494ce841 REGISTERED
+2025-04-30 13:32:42,110 - src.execution.order_registry - INFO - Registered order: 0b078d7f-23c3-46f6-bdd1-c81b494ce841
+2025-04-30 13:32:42,110 - src.execution.order_manager - INFO - Emitting order event: 0b078d7f-23c3-46f6-bdd1-c81b494ce841
+2025-04-30 13:32:42,110 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100 TEST @ 100.00
+2025-04-30 13:32:42,110 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: 0b078d7f-23c3-46f6-bdd1-c81b494ce841
+2025-04-30 13:32:42,110 - src.execution.broker.broker_simulator - INFO - Broker emitting fill event for TEST after state change
+2025-04-30 13:32:42,110 - src.risk.portfolio.portfolio - INFO - Trade recorded with PnL: 0.00
+2025-04-30 13:32:42,110 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100 TEST @ 100.00, PnL: 0.00, Cash: 90000.00, Equity: 100000.00
+2025-04-30 13:32:42,110 - src.execution.order_registry - INFO - Order 0b078d7f-23c3-46f6-bdd1-c81b494ce841 filled: 100.0 @ 100.00
+2025-04-30 13:32:42,110 - src.execution.order_registry - INFO - Order 0b078d7f-23c3-46f6-bdd1-c81b494ce841 PENDING -> FILLED
+2025-04-30 13:32:42,110 - src.execution.order_manager - INFO - Updated order with fill: Order(0b078d7f-23c3-46f6-bdd1-c81b494ce841, TEST, BUY, 100, FILLED)
+2025-04-30 13:32:42,110 - src.risk.managers.simple - INFO - Order created with ID: 0b078d7f-23c3-46f6-bdd1-c81b494ce841
+2025-04-30 13:32:42,110 - src.risk.managers.simple - INFO - After processing, rule_id: test_rule_bc637cd8-bfd8-4384-bfb8-63b829daa45c in processed_rule_ids: True
+2025-04-30 13:32:42,110 - DirectTest - INFO - First signal result: 0b078d7f-23c3-46f6-bdd1-c81b494ce841
+2025-04-30 13:32:42,110 - DirectTest - INFO - rule_id in processed_rule_ids: True
+2025-04-30 13:32:43,115 - DirectTest - INFO - Order count after first signal: 1
+2025-04-30 13:32:43,116 - DirectTest - INFO - Processing second signal with same rule_id: test_rule_bc637cd8-bfd8-4384-bfb8-63b829daa45c directly through risk manager
+2025-04-30 13:32:43,116 - src.risk.managers.simple - INFO - REJECTING: Signal with rule_id test_rule_bc637cd8-bfd8-4384-bfb8-63b829daa45c already processed
+2025-04-30 13:32:43,116 - src.risk.managers.simple - INFO - Signal with rule_id test_rule_bc637cd8-bfd8-4384-bfb8-63b829daa45c marked as consumed to stop propagation
+2025-04-30 13:32:43,116 - DirectTest - INFO - Second signal result: None
+2025-04-30 13:32:44,121 - DirectTest - INFO - Order count after second signal: 1
+2025-04-30 13:32:44,122 - DirectTest - INFO - ✓ Risk manager correctly deduplicated the signal

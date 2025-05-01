@@ -138,8 +138,30 @@ class PerformanceCalculator:
         if self.equity_curve is None or not isinstance(self.equity_curve, pd.DataFrame) or len(self.equity_curve) == 0:
             return {'warning': 'No equity curve data available'}
         
+        # Add debug information
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.info(f"Performance calculator: Processing {len(self.trades)} trades and equity curve with {len(self.equity_curve)} points")
+        
+        # Log sample trade for debugging
+        if self.trades and len(self.trades) > 0:
+            logger.info(f"Sample trade: {self.trades[0]}")
+            
+            # Calculate total PnL for debugging
+            total_pnl = sum(trade.get('pnl', 0) for trade in self.trades)
+            logger.info(f"Total PnL from trades: {total_pnl:.2f}")
+            
+            # Count trades with PnL
+            trades_with_pnl = sum(1 for trade in self.trades if 'pnl' in trade)
+            logger.info(f"Trades with PnL field: {trades_with_pnl} out of {len(self.trades)}")
+            
         # Use the improved calculate_all_metrics that uses log returns
-        return calculate_all_metrics(self.equity_curve, self.trades)
+        metrics = calculate_all_metrics(self.equity_curve, self.trades)
+        
+        # Ensure trade_count is accurate
+        metrics['trade_count'] = len(self.trades)
+        
+        return metrics
     
     def get_returns(self):
         """

@@ -1,0 +1,254 @@
+# Using Registry and Discovery in ADMF-Trader
+
+## Component Registry and Discovery System
+
+The Registry and Discovery utilities provide a powerful mechanism for managing components in your trading system. These features enable:
+
+1. **Dynamic component loading** - discover components at runtime
+2. **Reduced coupling** - code doesn't need to know about specific implementations 
+3. **Configuration-driven behavior** - switch components via configuration
+4. **Plugin architecture** - easily extend the system with new components
+
+## The Registry Pattern
+
+The Registry pattern provides a central place to store and retrieve components by name.
+
+### Key Benefits
+
+- **Late binding** - Components can be created when needed
+- **Name-based lookup** - Get components by string names (from config)
+- **Central management** - Single place to find all available components
+- **Reduced imports** - No need to import all component classes everywhere
+
+### Registry Implementation
+
+The `Registry` class in `src/core/utils/registry.py` provides these key methods:
+
+```python
+# Register a component
+registry.register(name, component)
+
+# Get a component by name
+component = registry.get(name)
+
+# List all registered components
+available_components = registry.list()
+
+# Check if a component exists
+if name in registry:
+    # do something
+```
+
+### Registry Usage Examples
+
+#### Strategy Registry
+
+```python
+from src.core.utils.registry import Registry
+from src.strategy.strategy_base import Strategy
+
+# Create a registry for strategies
+strategy_registry = Registry()
+
+# Register strategies manually
+strategy_registry.register("ma_crossover", MACrossoverStrategy)
+strategy_registry.register("rsi", RSIStrategy)
+strategy_registry.register("momentum", MomentumStrategy)
+
+# Use registry to create strategies from config
+strategy_name = config.get_section("backtest").get("strategy")
+strategy_class = strategy_registry.get(strategy_name)
+if strategy_class:
+    strategy = strategy_class(event_bus, data_handler)
+```
+
+#### Data Source Registry
+
+```python
+# Create a registry for data sources
+data_source_registry = Registry()
+
+# Register data sources
+data_source_registry.register("csv", CSVDataSource)
+data_source_registry.register("api", APIDataSource)
+data_source_registry.register("database", DatabaseSource)
+
+# Create data source from config
+source_type = config.get_section("data").get("source")
+source_class = data_source_registry.get(source_type)
+data_source = source_class(**source_params)
+```
+
+## Component Discovery
+
+The discovery mechanism builds on the registry by automatically finding and registering components.
+
+### Key Benefits
+
+- **Automatic registration** - No need to manually register components
+- **Simplified architecture** - Just add a new file and it's discovered
+- **Configuration control** - Enable/disable components via config
+- **Reduced maintenance** - Don't need to update registration code
+
+### Discovery Implementation
+
+The `discover_components` function in `src/core/utils/discovery.py` scans packages for classes:
+
+```python
+discover_components(
+    package_name,    # Package to scan
+    base_class,      # Base class components must inherit from
+    registry=None,   # Optional registry to register with
+    enabled_only=True,  # Only discover enabled components
+    config=None      # Config to check for enabled status
+)
+```
+
+### Discovery Usage Examples
+
+#### Discovering Strategies
+
+```python
+from src.core.utils.discovery import discover_components
+from src.strategy.strategy_base import Strategy
+
+# Create registry
+strategy_registry = Registry()
+
+# Discover all strategy implementations
+strategies = discover_components(
+    package_name="src.strategy.implementations", 
+    base_class=Strategy,
+    registry=strategy_registry,
+    config=config
+)
+
+print(f"Discovered {len(strategies)} strategies:")
+for name in strategy_registry.list():
+    print(f"- {name}")
+```
+
+#### Discovering Indicators
+
+```python
+from src.core.utils.discovery import discover_components
+from src.strategy.components.indicators.indicator_base import Indicator
+
+# Create registry  
+indicator_registry = Registry()
+
+# Discover all indicators
+indicators = discover_components(
+    package_name="src.strategy.components.indicators",
+    base_class=Indicator,
+    registry=indicator_registry
+)
+
+# Now indicator_registry contains all indicators
+```
+
+## Integration with Configuration System
+
+The registry and discovery mechanisms work well with the configuration system:
+
+```yaml
+# config.yaml
+strategies:
+  # Enable/disable specific strategies
+  ma_crossover:
+    enabled: true
+    fast_window: 10
+    slow_window: 30
+  
+  rsi_strategy:
+    enabled: false
+    
+  momentum:
+    enabled: true
+    lookback: 20
+```
+
+```python
+# Only enabled strategies will be discovered
+discovered = discover_components(
+    package_name="src.strategy.implementations",
+    base_class=Strategy,
+    registry=strategy_registry,
+    enabled_only=True,
+    config=config
+)
+```
+
+## Integration with Dependency Injection
+
+The registry and container work together seamlessly:
+
+```python
+# Discover components
+strategy_registry = Registry()
+discover_components("src.strategy.implementations", Strategy, strategy_registry)
+
+# Register with container factory
+def create_strategy(container):
+    strategy_name = container.config.get_section("backtest").get("strategy")
+    strategy_class = strategy_registry.get(strategy_name)
+    strategy = strategy_class(
+        container.get("event_bus"),
+        container.get("data_handler")
+    )
+    return strategy
+
+container.register_factory("strategy", create_strategy)
+```
+
+## Implementing a Pluggable Component System
+
+With registry, discovery, and DI, you can create a fully pluggable system:
+
+1. **Define component interfaces** - Create base classes for all component types
+2. **Organize by package** - Put implementations in well-structured packages
+3. **Discover automatically** - Use discovery to find all implementations
+4. **Configure at runtime** - Select components via configuration
+5. **Create via container** - Let the DI container handle instantiation
+
+### Component Organization Example
+
+```
+src/
+├── strategy/
+│   ├── components/
+│   │   ├── indicators/
+│   │   │   ├── __init__.py
+│   │   │   ├── indicator_base.py    # Base interface
+│   │   │   ├── moving_average.py    # Implementation
+│   │   │   ├── rsi.py               # Implementation
+│   │   │   └── macd.py              # Implementation
+│   │   │
+│   │   ├── features/
+│   │   │   ├── feature_base.py      # Base interface
+│   │   │   └── ...
+│   │   │
+│   │   └── rules/
+│   │       ├── rule_base.py         # Base interface
+│   │       └── ...
+│   │
+│   └── implementations/
+│       ├── __init__.py
+│       ├── strategy_base.py         # Base interface
+│       ├── ma_crossover.py          # Implementation
+│       └── ...
+```
+
+## Best Practices
+
+1. **Consistent Base Classes** - Ensure all components inherit from a proper base class
+2. **Clear Package Structure** - Organize code so discovery can find components
+3. **Unique Names** - Components should have unique names in their registry
+4. **Config Integration** - Use configuration to control which components are enabled
+5. **Lazy Loading** - Only create components when needed
+6. **Documentation** - Document available components for users
+7. **Testing** - Test discovery to ensure all components are found
+
+## Conclusion
+
+The Registry and Discovery utilities provide powerful mechanisms for building a flexible, extensible trading system. By leveraging these patterns, you can create a system that's easily configurable and maintainable, while reducing coupling between components.

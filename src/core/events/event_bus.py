@@ -1,460 +1,372 @@
+"""
+Event bus with native deduplication for ADMF-Trader.
+
+This implementation handles both signal deduplication and order tracking
+as an integral part of the event bus, eliminating the need for separate
+deduplication components.
+"""
 import logging
 import weakref
-import inspect
-import asyncio
-from typing import Dict, List, Callable, Any, Set, Union, Optional, Coroutine
+import uuid
+from typing import Dict, List, Set, Tuple, Callable, Any, Optional, Union
 
-from .event_types import Event, EventType
+from src.core.events.event_types import EventType, Event
 
 logger = logging.getLogger(__name__)
 
 class EventBus:
-    """Enhanced event bus with DI system integration."""
+    """
+    Event bus with built-in deduplication and event tracking.
     
-    def __init__(self, container=None):
-        """
-        Initialize the event bus.
-        
-        Args:
-            container: Optional DI container
-        """
-        self.handlers = {}  # EventType -> list of handlers
-        self.async_handlers = {}  # EventType -> list of async handlers
-        self.container = container
-        self.event_counts = {}  # For tracking event statistics
-        self.use_weak_refs = True
-        self.strong_refs = set()  # Keep strong references when needed
+    Features:
+    - Native deduplication of events by rule_id and order_id
+    - Priority-based handler registration
+    - Handler cleanup for dead references
+    - Event consumption tracking
+    - Detailed event statistics
+    """
     
-    def set_container(self, container):
-        """Set the DI container."""
-        self.container = container
-    
-    def register_component(self, component_name, event_types=None):
+    def __init__(self):
+        """Initialize the event bus."""
+        self.handlers: Dict[EventType, List[Tuple[int, Any]]] = {}
+        self.processed_events: Dict[EventType, Dict[str, Any]] = {}
+        self.event_counts: Dict[EventType, int] = {}
+        self.event_registry: Dict[str, Any] = {}
+        
+    def emit(self, event: Event) -> int:
         """
-        Register a component from the DI container.
+        Emit an event to registered handlers with built-in deduplication.
         
-        Args:
-            component_name: Component name in DI container
-            event_types: Optional list of event types to register for
-        """
-        if not self.container:
-            raise ValueError("No container available")
-        
-        component = self.container.get(component_name)
-        
-        if hasattr(component, 'handle'):
-            # Register for specified event types
-            types_to_register = event_types or []
-            
-            # If component has event_types property, use that too
-            if hasattr(component, 'event_types'):
-                types_to_register.extend(component.event_types)
-            
-            # Register for all specified types
-            for event_type in types_to_register:
-                self.register(event_type, component.handle)
-        
-        return component
-    
-    def register(self, event_type, handler, weak_ref=None):
-        """
-        Register a handler for an event type.
-        
-        Args:
-            event_type: EventType to register for
-            handler: Callable to handle event
-            weak_ref: Override default weak_ref behavior (True/False)
-        """
-        if not callable(handler):
-            logger.error(f"Cannot register non-callable handler: {handler}")
-            return
-        
-        # Check if this is an async handler
-        if inspect.iscoroutinefunction(handler) or (
-            hasattr(handler, '__call__') and 
-            inspect.iscoroutinefunction(handler.__call__)
-        ):
-            return self.register_async(event_type, handler, weak_ref)
-            
-        if event_type not in self.handlers:
-            self.handlers[event_type] = []
-            self.event_counts[event_type] = 0
-        
-        # Determine if we should use weak reference
-        use_weak = self.use_weak_refs if weak_ref is None else weak_ref
-        
-        if use_weak:
-            # Check if it's a bound method (has __self__ attribute)
-            if hasattr(handler, '__self__') and not isinstance(handler.__self__, type):
-                # Create a weakref that automatically unregisters when garbage collected
-                weak_handler = weakref.WeakMethod(handler, self._create_cleanup(event_type, handler))
-                self.handlers[event_type].append(weak_handler)
-            else:
-                # Regular function or class method
-                weak_handler = weakref.ref(handler, self._create_cleanup(event_type, handler))
-                self.handlers[event_type].append(weak_handler)
-        else:
-            # Store strong reference
-            self.handlers[event_type].append(handler)
-            # Keep a strong reference to prevent garbage collection
-            self.strong_refs.add(handler)
-            
-        logger.debug(f"Registered handler for {event_type.name}")
-    
-    def register_async(self, event_type, handler, weak_ref=None):
-        """
-        Register an async handler for an event type.
-        
-        Args:
-            event_type: EventType to register for
-            handler: Async callable to handle event
-            weak_ref: Override default weak_ref behavior (True/False)
-        """
-        if not inspect.iscoroutinefunction(handler) and not (
-            hasattr(handler, '__call__') and 
-            inspect.iscoroutinefunction(handler.__call__)
-        ):
-            logger.error(f"Cannot register non-async handler as async: {handler}")
-            return
-            
-        if event_type not in self.async_handlers:
-            self.async_handlers[event_type] = []
-            if event_type not in self.event_counts:
-                self.event_counts[event_type] = 0
-        
-        # Determine if we should use weak reference
-        use_weak = self.use_weak_refs if weak_ref is None else weak_ref
-        
-        if use_weak:
-            # Check if it's a bound method (has __self__ attribute)
-            if hasattr(handler, '__self__') and not isinstance(handler.__self__, type):
-                # Create a weakref that automatically unregisters when garbage collected
-                weak_handler = weakref.WeakMethod(
-                    handler, 
-                    self._create_cleanup(event_type, handler, is_async=True)
-                )
-                self.async_handlers[event_type].append(weak_handler)
-            else:
-                # Regular function or class method
-                weak_handler = weakref.ref(
-                    handler, 
-                    self._create_cleanup(event_type, handler, is_async=True)
-                )
-                self.async_handlers[event_type].append(weak_handler)
-        else:
-            # Store strong reference
-            self.async_handlers[event_type].append(handler)
-            # Keep a strong reference to prevent garbage collection
-            self.strong_refs.add(handler)
-            
-        logger.debug(f"Registered async handler for {event_type.name}")
-    
-    def _create_cleanup(self, event_type, handler, is_async=False):
-        """Create a cleanup function for when weakref is garbage collected."""
-        def cleanup(weak_ref):
-            handlers_dict = self.async_handlers if is_async else self.handlers
-            logger.debug(f"Handler for {event_type.name} garbage collected, cleaning up")
-            try:
-                handlers = handlers_dict.get(event_type, [])
-                # Find and remove any dead weakrefs
-                handlers_dict[event_type] = [h for h in handlers if not 
-                    (isinstance(h, weakref.ref) and h() is None)]
-            except Exception as e:
-                logger.error(f"Error in weakref cleanup: {e}")
-                
-        return cleanup
-    
-    def unregister(self, event_type, handler, is_async=False):
-        """Unregister a handler for an event type."""
-        handlers_dict = self.async_handlers if is_async else self.handlers
-        
-        if event_type not in handlers_dict:
-            return
-            
-        # Check if we're using weak references
-        if self.use_weak_refs:
-            # Remove matching weakrefs
-            new_handlers = []
-            for existing_handler in handlers_dict[event_type]:
-                if isinstance(existing_handler, weakref.ref):
-                    # Get the actual handler from weakref
-                    actual_handler = existing_handler()
-                    if actual_handler is not None and actual_handler != handler:
-                        new_handlers.append(existing_handler)
-                elif existing_handler != handler:
-                    new_handlers.append(existing_handler)
-            handlers_dict[event_type] = new_handlers
-        else:
-            # Direct removal for strong references
-            if handler in handlers_dict[event_type]:
-                handlers_dict[event_type].remove(handler)
-                # Also remove from strong_refs set
-                if handler in self.strong_refs:
-                    self.strong_refs.remove(handler)
-                    
-        logger.debug(f"Unregistered {'async ' if is_async else ''}handler for {event_type.name}")
-    
-    def unregister_async(self, event_type, handler):
-        """Unregister an async handler for an event type."""
-        return self.unregister(event_type, handler, is_async=True)
-
-    # Fix for event bus in src/core/events/event_bus.py
-
-    def emit(self, event):
-        """
-        Emit an event to registered handlers.
-
         Args:
             event: Event to emit
-
+            
         Returns:
             int: Number of handlers that processed the event
         """
-        # Track processed events to detect duplicates
-        if not hasattr(self, '_processed_event_types'):
-            self._processed_event_types = {}
-
+        # Process event tracking and consumption handling
+        event_id = event.get_id() 
+        
+        # Check if event is already consumed
+        if event.is_consumed():
+            logger.debug(f"Skipping already consumed event with ID: {event_id}")
+            return 0
+            
         try:
             event_type = event.get_type()
         except Exception as e:
             logger.error(f"Invalid event object, missing get_type() method: {e}")
             return 0
-
-        # Create a unique signature for this event for deduplication
-        # Usually based on event type and relevant properties
-        if hasattr(event, 'data') and isinstance(event.data, dict):
-            # For signals: combine symbol, direction, timestamp
-            if event_type == EventType.SIGNAL:
-                symbol = event.data.get('symbol', '')
-                signal = event.data.get('signal_value', 0)
-                direction = 'BUY' if signal > 0 else 'SELL' if signal < 0 else 'NEUTRAL'
-                timestamp = event.get_timestamp().isoformat() if hasattr(event, 'get_timestamp') else ''
-                event_signature = f"{symbol}_{direction}_{timestamp}"
-
-                # Skip duplicate signals
-                if event_type in self._processed_event_types and event_signature in self._processed_event_types[event_type]:
-                    logger.debug(f"Duplicate signal event detected: {event_signature}")
-                    return 0
-
-                # Store signature for future reference
-                if event_type not in self._processed_event_types:
-                    self._processed_event_types[event_type] = set()
-                self._processed_event_types[event_type].add(event_signature)
-
-        handlers_called = 0
-
-        # Track event count
-        if event_type in self.event_counts:
-            self.event_counts[event_type] += 1
+            
+        # Get deduplication key if available
+        dedup_key = self._get_dedup_key(event)
+        
+        # Check for duplicate if we have a key
+        if dedup_key and self._is_duplicate(event_type, dedup_key):
+            logger.info(f"BLOCKED: Duplicate event {event_type.name} with key: {dedup_key}")
+            # Print all dedup keys for this event type
+            if event_type in self.processed_events:
+                keys = sorted(list(self.processed_events[event_type].keys()))
+                logger.info(f"All dedup keys for {event_type.name}: {keys}")
+            return 0
+            
+        # Track the event
+        self._track_event(event)
+            
+        # Process the event
+        handlers_called = self._process_event(event)
+        
+        # Record as processed if we have a dedup key
+        if dedup_key:
+            self._record_processed(event_type, dedup_key, event)
+            
+        return handlers_called
+        
+    def register(self, event_type: EventType, handler: Callable, priority: int = 0) -> None:
+        """
+        Register a handler for an event type with priority.
+        
+        Args:
+            event_type: Event type to handle
+            handler: Handler function or method
+            priority: Handler priority (higher is called first, default=0)
+        """
+        if event_type not in self.handlers:
+            self.handlers[event_type] = []
+            
+        # Use weak reference for method objects to prevent memory leaks
+        if hasattr(handler, '__self__') and hasattr(handler, '__func__'):
+            handler_ref = weakref.WeakMethod(handler)
+        elif not hasattr(handler, '__call__'):
+            logger.warning(f"Handler {handler} is not callable, ignoring")
+            return
         else:
-            self.event_counts[event_type] = 1
-
-        logger.debug(f"Emitting {event_type.name} event (ID: {event.get_id()})")
-
-        # Process handlers with improved error handling
-        if event_type in self.handlers:
-            # Make a copy to avoid modification during iteration
-            handlers_copy = list(self.handlers[event_type])
-            dead_refs = []
-
-            for handler_ref in handlers_copy:
-                try:
-                    # Get actual handler from weakref if needed
-                    if isinstance(handler_ref, weakref.ref):
-                        handler = handler_ref()
-                        if handler is None:
-                            # Reference is dead, mark for cleanup
-                            dead_refs.append(handler_ref)
-                            continue
-                    else:
-                        handler = handler_ref
-
-                    # Call the handler with exception handling
-                    try:
-                        handler(event)
-                        handlers_called += 1
-                    except Exception as handler_error:
-                        logger.error(f"Error in handler {getattr(handler, '__name__', str(handler))}: {handler_error}", exc_info=True)
-                        # Continue processing other handlers instead of failing
-                except Exception as ref_error:
-                    logger.error(f"Error resolving handler reference: {ref_error}")
-
-            # Clean up any dead references
-            if dead_refs and event_type in self.handlers:
-                self.handlers[event_type] = [
-                    h for h in self.handlers[event_type] 
-                    if h not in dead_refs
-                ]
-                logger.debug(f"Cleaned up {len(dead_refs)} dead handler references for {event_type.name}")
-
-        return handlers_called    
-
-
-    async def emit_async(self, event):
+            handler_ref = handler
+            
+        # Add handler with priority
+        self.handlers[event_type].append((priority, handler_ref))
+        
+        # Sort handlers by priority (descending)
+        self.handlers[event_type].sort(key=lambda x: x[0], reverse=True)
+        
+    def unregister(self, event_type: EventType, handler: Callable) -> bool:
         """
-        Emit an event to registered handlers, both sync and async.
-
-        This will call sync handlers immediately and wait for all async
-        handlers to complete.
-
-        Args:
-            event: Event to emit
-
-        Returns:
-            tuple: (sync_handlers_called, async_handlers_called)
-        """
-        try:
-            event_type = event.get_type()
-        except Exception as e:
-            logger.error(f"Invalid event object for async emit, missing get_type() method: {e}")
-            return (0, 0)
-
-        sync_handlers_called = 0
-        async_handlers_called = 0
-
-        # First, call synchronous handlers
-        sync_handlers_called = self.emit(event)
-
-        # Process async handlers with improved error handling
-        if event_type in self.async_handlers:
-            # Make a copy to avoid modification during iteration
-            handlers_copy = list(self.async_handlers[event_type])
-            dead_refs = []
-            tasks = []
-
-            for handler_ref in handlers_copy:
-                try:
-                    # Get actual handler from weakref if needed
-                    if isinstance(handler_ref, weakref.ref):
-                        handler = handler_ref()
-                        if handler is None:
-                            # Reference is dead, mark for cleanup
-                            dead_refs.append(handler_ref)
-                            continue
-                    else:
-                        handler = handler_ref
-
-                    # Schedule the handler
-                    task = asyncio.create_task(handler(event))
-                    tasks.append(task)
-                except Exception as e:
-                    logger.error(f"Error scheduling async handler: {e}", exc_info=True)
-
-            # Wait for all tasks to complete
-            if tasks:
-                results = await asyncio.gather(*tasks, return_exceptions=True)
-                for result in results:
-                    if isinstance(result, Exception):
-                        logger.error(f"Error in async handler: {result}")
-                    else:
-                        async_handlers_called += 1
-
-            # Clean up any dead references
-            if dead_refs and event_type in self.async_handlers:
-                self.async_handlers[event_type] = [
-                    h for h in self.async_handlers[event_type] 
-                    if h not in dead_refs
-                ]
-                logger.debug(f"Cleaned up {len(dead_refs)} dead async handler references for {event_type.name}")
-
-        return (sync_handlers_called, async_handlers_called)    
-    
-
-    
-    def emit_for(self, event_type, data=None, timestamp=None):
-        """
-        Create and emit an event of the specified type.
+        Unregister a handler for an event type.
         
         Args:
-            event_type: Type of event to emit
-            data: Event data
-            timestamp: Event timestamp
+            event_type: Event type to unregister from
+            handler: Handler to unregister
             
         Returns:
-            Event: The created and emitted event
+            bool: True if handler was unregistered, False otherwise
         """
-        event = Event(event_type, data, timestamp)
-        self.emit(event)
-        return event
-    
-    async def emit_for_async(self, event_type, data=None, timestamp=None):
+        if event_type not in self.handlers:
+            return False
+            
+        # Find and remove the handler
+        for i, (_, h) in enumerate(self.handlers[event_type]):
+            # Compare the handler or resolve weak reference
+            if h == handler or (hasattr(h, '__call__') and h() == handler):
+                del self.handlers[event_type][i]
+                return True
+                
+        return False
+        
+    def reset(self) -> None:
+        """Reset the event bus state for a new backtest."""
+        self.processed_events.clear()
+        self.event_counts.clear()
+        self.event_registry.clear()
+        
+        # Clean up dead references in handlers
+        self._clean_handlers()
+        
+        logger.info("Event bus reset complete")
+        
+    def get_event_counts(self) -> Dict[EventType, int]:
         """
-        Create and emit an event of the specified type asynchronously.
+        Get event counts by type.
+        
+        Returns:
+            Dict: Event counts by event type
+        """
+        return self.event_counts.copy()
+        
+    def get_event_by_id(self, event_id: str) -> Optional[Any]:
+        """
+        Get an event by its ID.
         
         Args:
-            event_type: Type of event to emit
-            data: Event data
-            timestamp: Event timestamp
+            event_id: Event ID to retrieve
             
         Returns:
-            Event: The created and emitted event
+            Optional[Any]: Event if found, None otherwise
         """
-        event = Event(event_type, data, timestamp)
-        await self.emit_async(event)
-        return event
-    
-    def reset(self):
-        """Reset event counts."""
-        self.event_counts = {
-            event_type: 0 
-            for event_type in set(
-                list(self.handlers.keys()) + list(self.async_handlers.keys())
-            )
+        return self.event_registry.get(event_id)
+        
+    def get_stats(self) -> Dict[str, Any]:
+        """
+        Get event bus statistics.
+        
+        Returns:
+            Dict: Event bus statistics
+        """
+        stats = {
+            'event_counts': {event_type.name: count for event_type, count in self.event_counts.items()},
+            'handler_counts': {event_type.name: len(handlers) for event_type, handlers in self.handlers.items()},
+            'processed_events': {event_type.name: len(events) for event_type, events in self.processed_events.items()},
+            'registry_size': len(self.event_registry)
         }
-
-    def get_stats(self):
-        """Get event statistics."""
-        # Count active handlers
-        active_handlers = {}
-        for event_type, handlers in self.handlers.items():
-            # Count non-dead weak references
-            active_count = 0
-            for handler in handlers:
-                if isinstance(handler, weakref.ref):
-                    if handler() is not None:
-                        active_count += 1
-                else:
-                    active_count += 1
-            active_handlers[event_type.name] = active_count
+        return stats
         
-        # Count active async handlers
-        active_async_handlers = {}
-        for event_type, handlers in self.async_handlers.items():
-            # Count non-dead weak references
-            active_count = 0
-            for handler in handlers:
-                if isinstance(handler, weakref.ref):
-                    if handler() is not None:
-                        active_count += 1
-                else:
-                    active_count += 1
-            active_async_handlers[event_type.name] = active_count
+    def _get_dedup_key(self, event: Event) -> Optional[str]:
+        """
+        Extract deduplication key from event.
+        
+        Args:
+            event: Event to extract key from
             
-        return {
-            'total_events': sum(self.event_counts.values()),
-            'events_by_type': {
-                event_type.name: count 
-                for event_type, count in self.event_counts.items()
-            },
-            'active_handlers': active_handlers,
-            'active_async_handlers': active_async_handlers,
-            'strong_refs_count': len(self.strong_refs)
+        Returns:
+            Optional[str]: Deduplication key if available, None otherwise
+        """
+        # Extract data if available
+        data = getattr(event, 'data', None)
+        if not data or not isinstance(data, dict):
+            return None
+            
+        event_type = event.get_type()
+        
+        # Handle specific event types
+        if event_type == EventType.SIGNAL:
+            # Use rule_id for signal deduplication
+            rule_id = data.get('rule_id')
+            if rule_id:
+                logger.info(f"Signal dedup key (rule_id): {rule_id}")
+            return rule_id
+        elif event_type == EventType.ORDER:
+            # Use rule_id or order_id for order deduplication
+            rule_id = data.get('rule_id')
+            order_id = data.get('order_id')
+            
+            dedup_key = rule_id or order_id
+            if dedup_key:
+                logger.info(f"Order dedup key: {dedup_key}")
+            return dedup_key
+        elif event_type == EventType.FILL:
+            # Use order_id for fill deduplication
+            order_id = data.get('order_id')
+            if order_id:
+                logger.info(f"Fill dedup key (order_id): {order_id}")
+            return order_id
+            
+        # Default case - use event ID if available
+        event_id = getattr(event, 'id', None)
+        if event_id:
+            logger.debug(f"Default dedup key (event_id): {event_id}")
+        return event_id
+        
+    def _is_duplicate(self, event_type: EventType, dedup_key: str) -> bool:
+        """
+        Check if an event is a duplicate.
+        
+        Args:
+            event_type: Event type to check
+            dedup_key: Deduplication key to check
+            
+        Returns:
+            bool: True if event is a duplicate, False otherwise
+        """
+        if event_type not in self.processed_events:
+            return False
+            
+        # Check if key exists in processed events
+        return dedup_key in self.processed_events[event_type]
+        
+    def _record_processed(self, event_type: EventType, dedup_key: str, event: Event) -> None:
+        """
+        Record an event as processed.
+        
+        Args:
+            event_type: Event type
+            dedup_key: Deduplication key
+            event: Event to record
+        """
+        if event_type not in self.processed_events:
+            self.processed_events[event_type] = {}
+            
+        # Store the event with its key
+        self.processed_events[event_type][dedup_key] = {
+            'event_id': getattr(event, 'id', str(uuid.uuid4())),
+            'timestamp': getattr(event, 'timestamp', None),
+            'data': getattr(event, 'data', {}).copy() if hasattr(event, 'data') else {}
         }
         
-    def cleanup(self):
-        """Clean up dead weak references."""
-        # Clean up sync handlers
+    def _track_event(self, event: Event) -> None:
+        """
+        Track an event in the registry.
+        
+        Args:
+            event: Event to track
+        """
+        # Get or create event ID
+        event_id = getattr(event, 'id', None)
+        if not event_id:
+            event_id = str(uuid.uuid4())
+            event.id = event_id
+            
+        # Store in registry with timestamp and consumption state
+        self.event_registry[event_id] = {
+            'type': event.get_type(),
+            'timestamp': getattr(event, 'timestamp', None),
+            'data': getattr(event, 'data', {}).copy() if hasattr(event, 'data') else {},
+            'consumed': event.is_consumed()
+        }
+        
+    def _process_event(self, event: Event) -> int:
+        """
+        Process an event with registered handlers.
+        
+        Args:
+            event: Event to process
+            
+        Returns:
+            int: Number of handlers called
+        """
+        event_type = event.get_type()
+        handlers_called = 0
+        
+        # Track event count
+        self.event_counts[event_type] = self.event_counts.get(event_type, 0) + 1
+        
+        # If we have no handlers, we're done
+        if event_type not in self.handlers:
+            return handlers_called
+            
+        # Make a copy to avoid modification during iteration
+        handlers_copy = list(self.handlers[event_type])
+        dead_refs = []
+        
+        logger.debug(f"Processing {event_type.name} event (ID: {getattr(event, 'id', 'unknown')})")
+        
+        # Process each handler
+        for _, handler_ref in handlers_copy:
+            # Check if event is consumed
+            if event.is_consumed():
+                logger.debug(f"Event {event_type.name} consumed, skipping remaining handlers")
+                break
+                
+            try:
+                # Resolve weak reference if needed
+                handler = None
+                if isinstance(handler_ref, weakref.WeakMethod):
+                    handler = handler_ref()
+                    if handler is None:
+                        dead_refs.append(handler_ref)
+                        continue
+                elif isinstance(handler_ref, weakref.ReferenceType):
+                    handler = handler_ref()
+                    if handler is None:
+                        dead_refs.append(handler_ref)
+                        continue
+                else:
+                    handler = handler_ref
+                    
+                # Call the handler
+                handler(event)
+                handlers_called += 1
+                
+            except Exception as e:
+                handler_name = getattr(handler, '__name__', str(handler))
+                logger.error(f"Error in handler {handler_name}: {e}", exc_info=True)
+                
+        # Clean up dead references
+        if dead_refs and event_type in self.handlers:
+            self.handlers[event_type] = [
+                h for h in self.handlers[event_type]
+                if h[1] not in dead_refs
+            ]
+            
+        return handlers_called
+        
+    def _clean_handlers(self) -> None:
+        """Clean up dead handler references."""
         for event_type in list(self.handlers.keys()):
-            if event_type in self.handlers:
+            dead_refs = []
+            
+            # Check each handler
+            for priority, handler_ref in self.handlers[event_type]:
+                if isinstance(handler_ref, weakref.WeakMethod) or isinstance(handler_ref, weakref.ReferenceType):
+                    # Try to resolve the reference
+                    handler = handler_ref()
+                    if handler is None:
+                        dead_refs.append(handler_ref)
+                        
+            # Remove dead references
+            if dead_refs:
                 self.handlers[event_type] = [
                     h for h in self.handlers[event_type]
-                    if not (isinstance(h, weakref.ref) and h() is None)
+                    if h[1] not in dead_refs
                 ]
-        
-        # Clean up async handlers
-        for event_type in list(self.async_handlers.keys()):
-            if event_type in self.async_handlers:
-                self.async_handlers[event_type] = [
-                    h for h in self.async_handlers[event_type]
-                    if not (isinstance(h, weakref.ref) and h() is None)
-                ]
+                
+            # Remove empty handler lists
+            if not self.handlers[event_type]:
+                del self.handlers[event_type]

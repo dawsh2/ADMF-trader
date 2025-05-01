@@ -1,0 +1,146 @@
+2025-04-29 15:06:29,365 - src.core.bootstrap - INFO - Logging initialized at level INFO
+2025-04-29 15:06:29,365 - src.core.bootstrap - INFO - Log file: ./results/debug/debug.log
+2025-04-29 15:06:29,366 - src.core.bootstrap - INFO - Loaded configuration from config/debug.yaml
+2025-04-29 15:06:29,366 - src.core.bootstrap - INFO - Event system initialized
+2025-04-29 15:06:29,366 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-04-29 15:06:29,367 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-04-29 15:06:29,367 - src.core.bootstrap - INFO - Data components initialized with source type: csv
+2025-04-29 15:06:29,368 - src.core.bootstrap - INFO - Order registry initialized
+2025-04-29 15:06:29,370 - src.core.bootstrap - INFO - Execution components initialized with order registry
+2025-04-29 15:06:29,371 - src.core.bootstrap - INFO - Risk manager configured with position_size=100, max_position_pct=0.1
+2025-04-29 15:06:29,371 - src.core.bootstrap - INFO - Risk components initialized
+2025-04-29 15:06:29,372 - src.core.bootstrap - INFO - Discovering strategy implementations...
+2025-04-29 15:06:29,372 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-04-29 15:06:29,373 - src.core.utils.discovery - INFO - Registered component regime_ensemble in registry
+2025-04-29 15:06:29,373 - src.core.bootstrap - INFO - Discovered strategies: ma_crossover, regime_ensemble
+2025-04-29 15:06:29,373 - src.core.bootstrap - INFO - Requested strategy: regime_ensemble
+2025-04-29 15:06:29,373 - src.core.bootstrap - INFO - Available strategies in registry: ['ma_crossover', 'regime_ensemble']
+2025-04-29 15:06:29,373 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime Ensemble strategy initialized with 0 symbols
+2025-04-29 15:06:29,373 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime Ensemble strategy configured with 0 symbols
+2025-04-29 15:06:29,373 - src.core.bootstrap - INFO - Strategy 'regime_ensemble' initialized successfully
+2025-04-29 15:06:29,373 - src.core.bootstrap - INFO - Analytics components initialized
+2025-04-29 15:06:29,373 - src.core.bootstrap - INFO - System bootstrap complete
+2025-04-29 15:06:29,373 - src.execution.backtest.backtest - INFO - Using timeframe from config: 1min
+2025-04-29 15:06:29,373 - src.execution.backtest.backtest - INFO - Backtest setup complete
+2025-04-29 15:06:29,373 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_3d811391 to initial state with cash: $100000.00
+2025-04-29 15:06:29,373 - src.risk.managers.simple - INFO - Risk manager risk_manager_5668e7ac reset
+2025-04-29 15:06:29,373 - src.execution.order_registry - INFO - Order registry reset
+2025-04-29 15:06:29,373 - src.execution.order_manager - INFO - Reset order manager
+2025-04-29 15:06:29,373 - src.strategy.implementations.regime_ensemble_strategy - INFO - Regime Ensemble strategy regime_ensemble reset
+2025-04-29 15:06:29,373 - src.execution.backtest.backtest - INFO - Reset all components for backtest
+2025-04-29 15:06:29,373 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['SPY'] with timeframe: 1min
+2025-04-29 15:06:29,373 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/SPY_1min.csv
+2025-04-29 15:06:29,426 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 102236 rows
+2025-04-29 15:06:29,427 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2024-03-26 13:30:00
+2025-04-29 15:06:29,440 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2024-03-26 13:30:00
+2025-04-29 15:06:29,442 - src.data.sources.csv_handler - INFO - CSVDataSource: Set timestamp as index
+2025-04-29 15:06:29,445 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2024-03-26 13:30:00 to 2025-04-02 19:23:00
+2025-04-29 15:06:29,445 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume', 'trade_count', 'vwap']
+2025-04-29 15:06:29,445 - src.data.historical_data_handler - INFO - Loaded 102236 bars for SPY from 2024-03-26 13:30:00 to 2025-04-02 19:23:00
+2025-04-29 15:06:29,445 - src.execution.backtest.backtest - INFO - Starting backtest
+2025-04-29 15:06:29,470 - src.execution.backtest.backtest - INFO - Processed 1000 iterations
+2025-04-29 15:06:29,495 - src.execution.backtest.backtest - INFO - Processed 2000 iterations
+2025-04-29 15:06:29,520 - src.execution.backtest.backtest - INFO - Processed 3000 iterations
+2025-04-29 15:06:29,545 - src.execution.backtest.backtest - INFO - Processed 4000 iterations
+2025-04-29 15:06:29,570 - src.execution.backtest.backtest - INFO - Processed 5000 iterations
+2025-04-29 15:06:29,594 - src.execution.backtest.backtest - INFO - Processed 6000 iterations
+2025-04-29 15:06:29,619 - src.execution.backtest.backtest - INFO - Processed 7000 iterations
+2025-04-29 15:06:29,644 - src.execution.backtest.backtest - INFO - Processed 8000 iterations
+2025-04-29 15:06:29,669 - src.execution.backtest.backtest - INFO - Processed 9000 iterations
+2025-04-29 15:06:29,694 - src.execution.backtest.backtest - INFO - Processed 10000 iterations
+2025-04-29 15:06:29,719 - src.execution.backtest.backtest - INFO - Processed 11000 iterations
+2025-04-29 15:06:29,743 - src.execution.backtest.backtest - INFO - Processed 12000 iterations
+2025-04-29 15:06:29,769 - src.execution.backtest.backtest - INFO - Processed 13000 iterations
+2025-04-29 15:06:29,794 - src.execution.backtest.backtest - INFO - Processed 14000 iterations
+2025-04-29 15:06:29,819 - src.execution.backtest.backtest - INFO - Processed 15000 iterations
+2025-04-29 15:06:29,843 - src.execution.backtest.backtest - INFO - Processed 16000 iterations
+2025-04-29 15:06:29,868 - src.execution.backtest.backtest - INFO - Processed 17000 iterations
+2025-04-29 15:06:29,913 - src.execution.backtest.backtest - INFO - Processed 18000 iterations
+2025-04-29 15:06:29,937 - src.execution.backtest.backtest - INFO - Processed 19000 iterations
+2025-04-29 15:06:29,962 - src.execution.backtest.backtest - INFO - Processed 20000 iterations
+2025-04-29 15:06:29,987 - src.execution.backtest.backtest - INFO - Processed 21000 iterations
+2025-04-29 15:06:30,012 - src.execution.backtest.backtest - INFO - Processed 22000 iterations
+2025-04-29 15:06:30,037 - src.execution.backtest.backtest - INFO - Processed 23000 iterations
+2025-04-29 15:06:30,062 - src.execution.backtest.backtest - INFO - Processed 24000 iterations
+2025-04-29 15:06:30,087 - src.execution.backtest.backtest - INFO - Processed 25000 iterations
+2025-04-29 15:06:30,111 - src.execution.backtest.backtest - INFO - Processed 26000 iterations
+2025-04-29 15:06:30,136 - src.execution.backtest.backtest - INFO - Processed 27000 iterations
+2025-04-29 15:06:30,162 - src.execution.backtest.backtest - INFO - Processed 28000 iterations
+2025-04-29 15:06:30,186 - src.execution.backtest.backtest - INFO - Processed 29000 iterations
+2025-04-29 15:06:30,211 - src.execution.backtest.backtest - INFO - Processed 30000 iterations
+2025-04-29 15:06:30,235 - src.execution.backtest.backtest - INFO - Processed 31000 iterations
+2025-04-29 15:06:30,261 - src.execution.backtest.backtest - INFO - Processed 32000 iterations
+2025-04-29 15:06:30,286 - src.execution.backtest.backtest - INFO - Processed 33000 iterations
+2025-04-29 15:06:30,312 - src.execution.backtest.backtest - INFO - Processed 34000 iterations
+2025-04-29 15:06:30,337 - src.execution.backtest.backtest - INFO - Processed 35000 iterations
+2025-04-29 15:06:30,362 - src.execution.backtest.backtest - INFO - Processed 36000 iterations
+2025-04-29 15:06:30,388 - src.execution.backtest.backtest - INFO - Processed 37000 iterations
+2025-04-29 15:06:30,413 - src.execution.backtest.backtest - INFO - Processed 38000 iterations
+2025-04-29 15:06:30,438 - src.execution.backtest.backtest - INFO - Processed 39000 iterations
+2025-04-29 15:06:30,463 - src.execution.backtest.backtest - INFO - Processed 40000 iterations
+2025-04-29 15:06:30,488 - src.execution.backtest.backtest - INFO - Processed 41000 iterations
+2025-04-29 15:06:30,514 - src.execution.backtest.backtest - INFO - Processed 42000 iterations
+2025-04-29 15:06:30,539 - src.execution.backtest.backtest - INFO - Processed 43000 iterations
+2025-04-29 15:06:30,564 - src.execution.backtest.backtest - INFO - Processed 44000 iterations
+2025-04-29 15:06:30,588 - src.execution.backtest.backtest - INFO - Processed 45000 iterations
+2025-04-29 15:06:30,613 - src.execution.backtest.backtest - INFO - Processed 46000 iterations
+2025-04-29 15:06:30,639 - src.execution.backtest.backtest - INFO - Processed 47000 iterations
+2025-04-29 15:06:30,664 - src.execution.backtest.backtest - INFO - Processed 48000 iterations
+2025-04-29 15:06:30,688 - src.execution.backtest.backtest - INFO - Processed 49000 iterations
+2025-04-29 15:06:30,713 - src.execution.backtest.backtest - INFO - Processed 50000 iterations
+2025-04-29 15:06:30,738 - src.execution.backtest.backtest - INFO - Processed 51000 iterations
+2025-04-29 15:06:30,764 - src.execution.backtest.backtest - INFO - Processed 52000 iterations
+2025-04-29 15:06:30,788 - src.execution.backtest.backtest - INFO - Processed 53000 iterations
+2025-04-29 15:06:30,813 - src.execution.backtest.backtest - INFO - Processed 54000 iterations
+2025-04-29 15:06:30,838 - src.execution.backtest.backtest - INFO - Processed 55000 iterations
+2025-04-29 15:06:30,863 - src.execution.backtest.backtest - INFO - Processed 56000 iterations
+2025-04-29 15:06:30,888 - src.execution.backtest.backtest - INFO - Processed 57000 iterations
+2025-04-29 15:06:30,913 - src.execution.backtest.backtest - INFO - Processed 58000 iterations
+2025-04-29 15:06:30,938 - src.execution.backtest.backtest - INFO - Processed 59000 iterations
+2025-04-29 15:06:30,963 - src.execution.backtest.backtest - INFO - Processed 60000 iterations
+2025-04-29 15:06:30,988 - src.execution.backtest.backtest - INFO - Processed 61000 iterations
+2025-04-29 15:06:31,013 - src.execution.backtest.backtest - INFO - Processed 62000 iterations
+2025-04-29 15:06:31,037 - src.execution.backtest.backtest - INFO - Processed 63000 iterations
+2025-04-29 15:06:31,062 - src.execution.backtest.backtest - INFO - Processed 64000 iterations
+2025-04-29 15:06:31,087 - src.execution.backtest.backtest - INFO - Processed 65000 iterations
+2025-04-29 15:06:31,112 - src.execution.backtest.backtest - INFO - Processed 66000 iterations
+2025-04-29 15:06:31,137 - src.execution.backtest.backtest - INFO - Processed 67000 iterations
+2025-04-29 15:06:31,162 - src.execution.backtest.backtest - INFO - Processed 68000 iterations
+2025-04-29 15:06:31,187 - src.execution.backtest.backtest - INFO - Processed 69000 iterations
+2025-04-29 15:06:31,212 - src.execution.backtest.backtest - INFO - Processed 70000 iterations
+2025-04-29 15:06:31,284 - src.execution.backtest.backtest - INFO - Processed 71000 iterations
+2025-04-29 15:06:31,310 - src.execution.backtest.backtest - INFO - Processed 72000 iterations
+2025-04-29 15:06:31,336 - src.execution.backtest.backtest - INFO - Processed 73000 iterations
+2025-04-29 15:06:31,362 - src.execution.backtest.backtest - INFO - Processed 74000 iterations
+2025-04-29 15:06:31,389 - src.execution.backtest.backtest - INFO - Processed 75000 iterations
+2025-04-29 15:06:31,416 - src.execution.backtest.backtest - INFO - Processed 76000 iterations
+2025-04-29 15:06:31,443 - src.execution.backtest.backtest - INFO - Processed 77000 iterations
+2025-04-29 15:06:31,469 - src.execution.backtest.backtest - INFO - Processed 78000 iterations
+2025-04-29 15:06:31,503 - src.execution.backtest.backtest - INFO - Processed 79000 iterations
+2025-04-29 15:06:31,528 - src.execution.backtest.backtest - INFO - Processed 80000 iterations
+2025-04-29 15:06:31,554 - src.execution.backtest.backtest - INFO - Processed 81000 iterations
+2025-04-29 15:06:31,578 - src.execution.backtest.backtest - INFO - Processed 82000 iterations
+2025-04-29 15:06:31,603 - src.execution.backtest.backtest - INFO - Processed 83000 iterations
+2025-04-29 15:06:31,628 - src.execution.backtest.backtest - INFO - Processed 84000 iterations
+2025-04-29 15:06:31,653 - src.execution.backtest.backtest - INFO - Processed 85000 iterations
+2025-04-29 15:06:31,678 - src.execution.backtest.backtest - INFO - Processed 86000 iterations
+2025-04-29 15:06:31,703 - src.execution.backtest.backtest - INFO - Processed 87000 iterations
+2025-04-29 15:06:31,728 - src.execution.backtest.backtest - INFO - Processed 88000 iterations
+2025-04-29 15:06:31,752 - src.execution.backtest.backtest - INFO - Processed 89000 iterations
+2025-04-29 15:06:31,778 - src.execution.backtest.backtest - INFO - Processed 90000 iterations
+2025-04-29 15:06:31,803 - src.execution.backtest.backtest - INFO - Processed 91000 iterations
+2025-04-29 15:06:31,827 - src.execution.backtest.backtest - INFO - Processed 92000 iterations
+2025-04-29 15:06:31,852 - src.execution.backtest.backtest - INFO - Processed 93000 iterations
+2025-04-29 15:06:31,877 - src.execution.backtest.backtest - INFO - Processed 94000 iterations
+2025-04-29 15:06:31,903 - src.execution.backtest.backtest - INFO - Processed 95000 iterations
+2025-04-29 15:06:31,927 - src.execution.backtest.backtest - INFO - Processed 96000 iterations
+2025-04-29 15:06:31,952 - src.execution.backtest.backtest - INFO - Processed 97000 iterations
+2025-04-29 15:06:31,977 - src.execution.backtest.backtest - INFO - Processed 98000 iterations
+2025-04-29 15:06:32,002 - src.execution.backtest.backtest - INFO - Processed 99000 iterations
+2025-04-29 15:06:32,027 - src.execution.backtest.backtest - INFO - Processed 100000 iterations
+2025-04-29 15:06:32,052 - src.execution.backtest.backtest - INFO - Processed 101000 iterations
+2025-04-29 15:06:32,076 - src.execution.backtest.backtest - INFO - Processed 102000 iterations
+2025-04-29 15:06:32,082 - src.execution.backtest.backtest - INFO - Backtest completed after 102237 iterations
+2025-04-29 15:06:32,547 - src.execution.backtest.backtest - INFO - Backtest complete
+2025-04-29 15:06:33,234 - src.analytics.reporting.report_generator - INFO - Saved equity curve to './results/debug/equity_curve_20250429_150632.csv'
+2025-04-29 15:06:33,235 - src.analytics.reporting.report_generator - INFO - Saved detailed report to './results/debug/backtest_report_20250429_150632.txt'
