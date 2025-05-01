@@ -1,0 +1,60 @@
+Performance Summary
+==================================================
+
+Returns:
+Total Return: -88.61%
+Annualized Return: 0.00%
+
+Log Return Analysis:
+Daily Mean Log Return: -0.0005%
+Annualized Volatility: 0.05%
+Skewness: -5.93
+Excess Kurtosis: 66.55
+
+Risk Metrics:
+Sharpe Ratio: -2.66
+Sortino Ratio: -1.02
+Maximum Drawdown: 88.61%
+Calmar Ratio: 0.00
+
+Trade Statistics:
+Total Trades: 26504
+Win Rate: 1.08%
+Profit Factor: 0.02
+Average Trade: -1.67
+Average Win: 2.57
+Average Loss: 3.47
+Win/Loss Ratio: 0.74
+
+Equity Curve Statistics:
+Start Date: 2025-05-01 14:27:05.631402
+End Date: 2024-12-30 21:00:00
+Duration: -122 days
+Starting Equity: 100000.00
+Ending Equity: 11386.11
+
+Detailed Return Analysis:
+Recent 20-day Volatility (Annualized): 0.00%
+Recent 20-day Sharpe Ratio: nan
+
+Monthly Returns:
+2024-03: -5.30%
+2024-04: -30.68%
+2024-05: -29.05%
+2024-06: -26.01%
+2024-07: -27.41%
+2024-08: -24.82%
+2024-09: -22.25%
+2024-10: -22.05%
+2024-11: -0.12%
+2024-12: 0.00%
+
+Drawdown Analysis:
+Maximum Drawdown: 88.61%
+Average Drawdown: 67.79%
+Maximum Drawdown Duration: 451858 periods
+
+Trade Analysis:
+Average Trade Duration: 0.00 days
+Maximum Winning Streak: 3
+Maximum Losing Streak: 595

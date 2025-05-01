@@ -1,0 +1,4 @@
+2025-05-01 15:10:54,464 - test_runner - INFO - Starting ADMF-Trader test runner
+2025-05-01 15:10:54,469 - test_runner - INFO - PYTHONPATH: /Users/daws/ADMF-trader
+2025-05-01 15:10:54,469 - test_runner - INFO - Command: python -m pytest tests
+2025-05-01 15:11:25,001 - test_runner - ERROR - Tests timed out after 30.53s

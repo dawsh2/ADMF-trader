@@ -1,0 +1,158 @@
+# Configuration for Composite Regime Strategy
+# ------------------------------------------------------
+
+# Global backtest settings
+backtest:
+  initial_capital: 100000.0
+  symbols: ["SPY"]  # Or any symbol with sufficient data
+  data_dir: "./data"
+  timeframe: "1min"
+  data_source: "csv"
+  start_date: "2024-01-01"
+  end_date: "2024-12-31"
+
+# Data handling configuration
+data:
+  source_type: "csv"
+  data_dir: "./data"
+  file_pattern: "{symbol}_{timeframe}.csv"
+  timestamp_column: "timestamp"
+  price_columns:
+    open: "Open" 
+    high: "High"
+    low: "Low"
+    close: "Close"
+    volume: "Volume"
+
+# Strategy configuration
+strategies:  
+  composite_regime:
+    enabled: true
+    # Sub-strategies to include
+    sub_strategies:
+      ma_crossover:
+        enabled: true
+        fast_window: 5
+        slow_window: 15
+        price_key: "close"
+      mean_reversion:
+        enabled: true
+        window: 20
+        std_dev_multiplier: 2.0
+        use_atr: true
+        atr_period: 14
+        atr_multiplier: 1.5
+    
+    # Regime detector configuration
+    regime_detector:
+      type: "multi_factor"  # Options: trend_strength, volatility, multi_factor
+      trend_detector:
+        period: 14
+        trending_threshold: 25
+        mean_reverting_threshold: 15
+      volatility_detector:
+        window: 20
+        volatile_threshold: 1.5
+        trend_threshold: 0.8
+      weights:
+        trend: 0.6
+        volatility: 0.4
+    
+    # Regime-to-strategy mapping
+    regime_map:
+      trending: ["ma_crossover"]
+      mean_reverting: ["mean_reversion"]
+      volatile: ["ma_crossover", "mean_reversion"]
+      neutral: ["ma_crossover", "mean_reversion"]
+    
+    # Strategy weights by regime
+    strategy_weights:
+      ma_crossover: 1.0
+      mean_reversion: 1.0
+    
+    # General parameters
+    signal_threshold: 0.5
+    lookback_window: 50
+
+# Risk management settings
+# Choose between "simple", "enhanced", or "adaptive" risk managers
+risk_manager:
+  type: "enhanced"  # Change this to switch risk managers
+  
+  # Enhanced risk manager settings (used when type = "enhanced")
+  position_sizing_method: "percent_equity"  # Options: fixed, percent_equity, percent_risk, volatility
+  position_size: 100
+  equity_percent: 5.0
+  risk_percent: 1.0
+  stop_percent: 2.0
+  max_position_size: 1000
+  drawdown_control_enabled: true
+  drawdown_threshold: 0.05
+  drawdown_reduction: 0.5
+  max_drawdown_cutoff: 0.2
+  
+  # Simple risk manager settings (used when type = "simple")
+  simple:
+    position_size: 100  # Fixed position size
+    max_position_pct: 0.1  # Max 10% of equity per position
+  
+  # Adaptive risk manager settings (used when type = "adaptive")
+  adaptive:
+    position_sizing_method: "fixed"
+    regimes:
+      normal:
+        position_sizing:
+          method: "fixed"
+          position_size: 100
+        drawdown_control:
+          enabled: false
+          threshold: 0.05
+      bullish:
+        position_sizing:
+          method: "percent_equity"
+          equity_percent: 10.0
+        drawdown_control:
+          enabled: true
+          threshold: 0.10
+      bearish:
+        position_sizing:
+          method: "percent_risk"
+          risk_percent: 1.0
+          stop_percent: 3.0
+        drawdown_control:
+          enabled: true
+          threshold: 0.03
+      volatile:
+        position_sizing:
+          method: "volatility"
+          atr_multiple: 1.0
+          risk_percent: 1.5
+        drawdown_control:
+          enabled: true
+          threshold: 0.05
+
+# Order handling settings
+order_manager:
+  default_order_type: "MARKET"
+
+# Broker simulation settings
+broker:
+  slippage: 0.001  # 0.1% slippage
+  commission: 0.001  # 0.1% commission
+  delay: 0  # No delay in order processing
+
+# Performance metrics settings
+performance:
+  metrics:
+    - "total_return"
+    - "sharpe_ratio"
+    - "max_drawdown"
+    - "win_rate"
+    - "profit_factor"
+  
+# Logging settings
+logging:
+  level: "DEBUG"  # Detailed logging for development
+  console: true
+  file: true
+  file_name: "composite_regime_backtest.log"

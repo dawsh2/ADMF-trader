@@ -1,0 +1,59 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.2, pytest-8.3.5, pluggy-1.5.0 -- /Users/daws/mmbt/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/daws/ADMF-trader/tests
+configfile: pytest.ini
+plugins: cov-6.1.1
+collecting ... collected 62 items
+
+tests/integration/test_strategy_risk_order_flow.py::TestStrategyRiskOrderFlow::test_end_to_end_flow ================================================================================
+ADMF-Trader Test Runner
+================================================================================
+Running all tests
+Coverage reporting enabled (configured in pytest.ini)
+Debug mode enabled (more verbose output)
+--------------------------------------------------------------------------------
+Checking test adapters...
+All adapters applied successfully.
+  ✓ tests.unit.core.test_event_types_adapter
+  ✓ tests.unit.core.test_event_bus_adapter
+  ✓ tests.unit.execution.broker_adapter
+  ✓ tests.unit.strategy.strategy_adapter
+  ✓ tests.integration.integration_adapters
+All test adapters loaded successfully.
+--------------------------------------------------------------------------------
+Running: python -m pytest -vv --showlocals tests
+--------------------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/subprocess.py", line 1276, in wait
+    return self._wait(timeout=timeout)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/subprocess.py", line 2068, in _wait
+    (pid, sts) = self._try_wait(0)
+                 ~~~~~~~~~~~~~~^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/subprocess.py", line 2026, in _try_wait
+    (pid, sts) = os.waitpid(self.pid, wait_flags)
+                 ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/run_tests.py", line 286, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/daws/ADMF-trader/run_tests.py", line 279, in main
+    result = subprocess.run(cmd)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/subprocess.py", line 558, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/subprocess.py", line 1213, in communicate
+    self.wait()
+    ~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/subprocess.py", line 1289, in wait
+    self._wait(timeout=sigint_timeout)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/subprocess.py", line 2062, in _wait
+    time.sleep(delay)
+    ~~~~~~~~~~^^^^^^^
+KeyboardInterrupt
