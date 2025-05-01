@@ -1,451 +1,530 @@
-# event_debugger.py
 #!/usr/bin/env python
 """
-Event System Debugger - A tool to diagnose event flow issues in the ADMF-Trader system.
-"""
+Debug script for ADMF-Trader to track order flow and execution.
 
+This script runs a simplified version of your trading system with enhanced
+debug logging to track the complete lifecycle of orders from signal to fill.
+"""
+import os
 import logging
-import sys
-import time
+import datetime
+import pandas as pd
+import numpy as np
 import uuid
-from enum import Enum
 from typing import Dict, List, Any, Optional
+import time
 
 # Configure detailed logging
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.DEBUG,  # Set to DEBUG for maximum verbosity
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.StreamHandler(sys.stdout),
-        logging.FileHandler('event_debug.log', mode='w')
+        logging.StreamHandler(),
+        logging.FileHandler('debug_order_flow.log', mode='w')
     ]
 )
 
-# Create specialized logger
-logger = logging.getLogger("EventDebugger")
+# Set up component-specific loggers
+logger = logging.getLogger("OrderFlowDebugger")
+order_logger = logging.getLogger("OrderFlow")
+event_logger = logging.getLogger("EventSystem")
+broker_logger = logging.getLogger("BrokerDebug")
+registry_logger = logging.getLogger("RegistryDebug")
 
-# Import core components
-try:
-    from src.core.events.event_bus import EventBus
-    from src.core.events.event_types import EventType, Event
-    from src.core.events.event_utils import create_order_event, create_fill_event
-    from src.execution.order_manager import OrderManager, OrderStatus
-    from src.execution.broker.broker_simulator import SimulatedBroker
-    from src.risk.portfolio.portfolio import PortfolioManager
-except ImportError as e:
-    logger.error(f"Import error: {e}")
-    sys.exit(1)
+# Import system components - adjust these imports based on your actual structure
+from src.core.events.event_bus import EventBus
+from src.core.events.event_types import EventType
+from src.core.events.event_utils import create_order_event, create_fill_event, create_signal_event
+from src.execution.order_registry import OrderRegistry
+from src.execution.order_manager import OrderManager
+from src.execution.broker.broker_simulator import SimulatedBroker
+from src.risk.portfolio.portfolio import PortfolioManager
 
-# Event tracing wrapper for event bus
-class TracingEventBus:
-    """Wrapper around EventBus to trace all events."""
+class EventDebugger:
+    """Debugger to monitor all events in the system."""
     
     def __init__(self, event_bus):
         self.event_bus = event_bus
-        self.event_log = []
+        self.event_counts = {}
+        self.tracked_orders = {}  # order_id -> status tracking
         
-        # Monkey patch the emit method
-        self._original_emit = event_bus.emit
-        event_bus.emit = self._traced_emit
+        # Register for all event types
+        for event_type_name in dir(EventType):
+            if not event_type_name.startswith('_'):
+                try:
+                    event_type_value = getattr(EventType, event_type_name)
+                    if isinstance(event_type_value, str):  # Only register string event types
+                        self.event_counts[event_type_value] = 0
+                        self.event_bus.register(event_type_value, self._on_event)
+                except (AttributeError, TypeError):
+                    pass
     
-    def _traced_emit(self, event):
-        """Traced version of emit that logs events."""
-        event_type = event.get_type().name
-        timestamp = event.get_timestamp()
+    def _on_event(self, event):
+        """Track all events passing through the system."""
+        event_type = event.type
+        self.event_counts[event_type] = self.event_counts.get(event_type, 0) + 1
         
-        # Log the event
-        logger.debug(f"EVENT EMITTED: {event_type} at {timestamp}")
+        # Track order-related events
+        if event_type == EventType.ORDER:
+            order_id = event.data.get('order_id')
+            if order_id:
+                self.tracked_orders[order_id] = {
+                    'status': 'CREATED',
+                    'symbol': event.data.get('symbol'),
+                    'direction': event.data.get('direction'),
+                    'quantity': event.data.get('quantity'),
+                    'price': event.data.get('price'),
+                    'created_at': datetime.datetime.now(),
+                    'events': [('ORDER', datetime.datetime.now(), event.data)]
+                }
+                event_logger.debug(f"ORDER created: {order_id} - {event.data.get('symbol')} {event.data.get('direction')} {event.data.get('quantity')} @ {event.data.get('price')}")
+                
+        elif event_type == EventType.FILL:
+            order_id = event.data.get('order_id')
+            if order_id in self.tracked_orders:
+                self.tracked_orders[order_id]['status'] = 'FILLED'
+                self.tracked_orders[order_id]['filled_at'] = datetime.datetime.now()
+                self.tracked_orders[order_id]['fill_price'] = event.data.get('price')
+                self.tracked_orders[order_id]['events'].append(('FILL', datetime.datetime.now(), event.data))
+                event_logger.debug(f"FILL for order: {order_id} - Price: {event.data.get('price')}")
+            else:
+                event_logger.warning(f"FILL for unknown order: {order_id}")
         
-        # Store event details
-        event_details = {
-            'type': event_type,
-            'timestamp': timestamp,
-            'data': event.data,
-            'id': event.get_id()
-        }
-        self.event_log.append(event_details)
-        
-        # Special handling for specific event types
-        if event_type == 'ORDER':
-            logger.debug(f"  Order: {event.data.get('direction')} {event.data.get('quantity')} {event.data.get('symbol')} @ {event.data.get('price')}")
-            logger.debug(f"  Order ID: {event.data.get('order_id')}")
-        elif event_type == 'FILL':
-            logger.debug(f"  Fill: {event.data.get('direction')} {event.data.get('quantity')} {event.data.get('symbol')} @ {event.data.get('price')}")
-            logger.debug(f"  Order ID: {event.data.get('order_id')}")
-        
-        # Forward to actual emit method
-        return self._original_emit(event)
+        elif event_type == EventType.ORDER_STATE_CHANGE:
+            order_id = event.data.get('order_id')
+            if order_id in self.tracked_orders:
+                self.tracked_orders[order_id]['status'] = event.data.get('status')
+                self.tracked_orders[order_id]['events'].append(('STATE_CHANGE', datetime.datetime.now(), event.data))
+                event_logger.debug(f"STATE CHANGE for order {order_id}: {event.data.get('status')}")
+            else:
+                event_logger.warning(f"STATE CHANGE for unknown order: {order_id}")
     
-    def get_event_log(self):
-        """Get the recorded event log."""
-        return self.event_log
-    
-    def print_event_summary(self):
-        """Print a summary of emitted events."""
-        event_counts = {}
-        for event in self.event_log:
-            event_type = event['type']
-            if event_type not in event_counts:
-                event_counts[event_type] = 0
-            event_counts[event_type] += 1
+    def report(self):
+        """Generate a report of all tracked events."""
+        logger.info("=== Event System Debug Report ===")
+        logger.info("Event counts by type:")
+        for event_type, count in self.event_counts.items():
+            if count > 0:
+                logger.info(f"  {event_type}: {count}")
         
-        logger.info("=== Event Summary ===")
-        for event_type, count in event_counts.items():
-            logger.info(f"{event_type}: {count} events")
+        logger.info("\nOrder lifecycle tracking:")
+        complete_orders = 0
+        incomplete_orders = 0
+        
+        for order_id, data in self.tracked_orders.items():
+            if data['status'] == 'FILLED':
+                complete_orders += 1
+                creation_time = data.get('created_at')
+                fill_time = data.get('filled_at')
+                if creation_time and fill_time:
+                    duration = (fill_time - creation_time).total_seconds()
+                    logger.info(f"  Order {order_id} - COMPLETE - {data['symbol']} {data['direction']} {data['quantity']} @ {data['price']} -> {data['fill_price']} (Duration: {duration:.3f}s)")
+            else:
+                incomplete_orders += 1
+                logger.info(f"  Order {order_id} - INCOMPLETE - Status: {data['status']} - {data['symbol']} {data['direction']} {data['quantity']} @ {data['price']}")
+                # Print event history for incomplete orders
+                logger.info(f"    Event history:")
+                for event_type, timestamp, event_data in data['events']:
+                    logger.info(f"      {timestamp.strftime('%H:%M:%S.%f')[:-3]} - {event_type}")
+        
+        logger.info(f"\nSummary: {complete_orders} complete orders, {incomplete_orders} incomplete orders")
 
-# Debugging helpers
-def inspect_object(obj, name="Object"):
-    """Inspect an object's attributes and methods."""
-    logger.debug(f"=== Inspecting {name} ===")
-    
-    # Get non-callable attributes
-    logger.debug("Attributes:")
-    for attr in dir(obj):
-        if not attr.startswith('_') and not callable(getattr(obj, attr)):
-            try:
-                value = getattr(obj, attr)
-                logger.debug(f"  {attr}: {value}")
-            except Exception as e:
-                logger.debug(f"  {attr}: Error accessing - {e}")
-    
-    # Get methods
-    logger.debug("Methods:")
-    for attr in dir(obj):
-        if not attr.startswith('_') and callable(getattr(obj, attr)):
-            logger.debug(f"  {attr}()")
 
-def run_basic_order_flow_test():
-    """Run a basic test of the order-fill flow."""
-    logger.info("=== Starting Basic Order Flow Test ===")
+class BrokerDebugWrapper:
+    """Wrapper to add detailed logging to the SimulatedBroker."""
     
-    # Create event bus with tracing
+    def __init__(self, broker):
+        self.broker = broker
+        
+        # Store original methods
+        self.original_on_order = broker.on_order
+        if hasattr(broker, 'process_order'):
+            self.original_process_order = broker.process_order
+        
+        # Replace methods with debug versions
+        broker.on_order = self._debug_on_order
+        if hasattr(broker, 'process_order'):
+            broker.process_order = self._debug_process_order
+        
+        # Check for other order handling methods
+        if hasattr(broker, 'on_order_state_change'):
+            self.original_on_order_state_change = broker.on_order_state_change
+            broker.on_order_state_change = self._debug_on_order_state_change
+    
+    def _debug_on_order(self, order_event):
+        """Debug wrapper for on_order method."""
+        broker_logger.debug(f"BROKER on_order CALLED with order_id: {order_event.data.get('order_id')}")
+        
+        # Call original method
+        result = self.original_on_order(order_event)
+        
+        broker_logger.debug(f"BROKER on_order COMPLETED for order_id: {order_event.data.get('order_id')}")
+        return result
+    
+    def _debug_process_order(self, order):
+        """Debug wrapper for process_order method."""
+        broker_logger.debug(f"BROKER process_order CALLED for order_id: {order.order_id}, symbol: {order.symbol}, direction: {order.direction}, quantity: {order.quantity}, price: {order.price}")
+        
+        # Call original method
+        result = self.original_process_order(order)
+        
+        broker_logger.debug(f"BROKER process_order COMPLETED for order_id: {order.order_id}")
+        if hasattr(self.broker, 'last_fill_event'):
+            broker_logger.debug(f"BROKER generated fill event: {self.broker.last_fill_event}")
+        return result
+    
+    def _debug_on_order_state_change(self, event):
+        """Debug wrapper for on_order_state_change method."""
+        order_id = event.data.get('order_id')
+        status = event.data.get('status')
+        broker_logger.debug(f"BROKER on_order_state_change CALLED with order_id: {order_id}, status: {status}")
+        
+        # Call original method
+        result = self.original_on_order_state_change(event)
+        
+        broker_logger.debug(f"BROKER on_order_state_change COMPLETED for order_id: {order_id}")
+        return result
+
+
+class RegistryDebugWrapper:
+    """Wrapper to add detailed logging to the OrderRegistry."""
+    
+    def __init__(self, registry):
+        self.registry = registry
+        
+        # Store original methods
+        if hasattr(registry, 'update_order_status'):
+            self.original_update_order_status = registry.update_order_status
+            # Replace method with debug version
+            registry.update_order_status = self._debug_update_order_status
+        
+        self.original_register_order = registry.register_order
+        registry.register_order = self._debug_register_order
+        
+        self.original_on_order = registry.on_order
+        registry.on_order = self._debug_on_order
+        
+        self.original_on_fill = registry.on_fill
+        registry.on_fill = self._debug_on_fill
+    
+    def _debug_register_order(self, order):
+        """Debug wrapper for register_order method."""
+        registry_logger.debug(f"REGISTRY register_order CALLED for order_id: {order.order_id}")
+        
+        # Call original method
+        result = self.original_register_order(order)
+        
+        registry_logger.debug(f"REGISTRY register_order COMPLETED with result: {result}")
+        return result
+    
+    def _debug_update_order_status(self, order_id, new_status, **details):
+        """Debug wrapper for update_order_status method."""
+        registry_logger.debug(f"REGISTRY update_order_status CALLED for order_id: {order_id}, new_status: {new_status}")
+        
+        # Call original method
+        result = self.original_update_order_status(order_id, new_status, **details)
+        
+        registry_logger.debug(f"REGISTRY update_order_status COMPLETED with result: {result}")
+        return result
+    
+    def _debug_on_order(self, order_event):
+        """Debug wrapper for on_order method."""
+        registry_logger.debug(f"REGISTRY on_order CALLED with order_id: {order_event.data.get('order_id')}")
+        
+        # Call original method
+        result = self.original_on_order(order_event)
+        
+        registry_logger.debug(f"REGISTRY on_order COMPLETED for order_id: {order_event.data.get('order_id')}")
+        return result
+    
+    def _debug_on_fill(self, fill_event):
+        """Debug wrapper for on_fill method."""
+        registry_logger.debug(f"REGISTRY on_fill CALLED with order_id: {fill_event.data.get('order_id')}")
+        
+        # Call original method
+        result = self.original_on_fill(fill_event)
+        
+        registry_logger.debug(f"REGISTRY on_fill COMPLETED for order_id: {fill_event.data.get('order_id')}")
+        return result
+
+
+def create_test_data(symbol, num_bars=100):
+    """Create simple test data for debugging."""
+    logger.info(f"Creating test data for {symbol}")
+    
+    # Create date range
+    now = datetime.datetime.now()
+    dates = [now - datetime.timedelta(minutes=i) for i in range(num_bars, 0, -1)]
+    
+    np.random.seed(42)  # For reproducibility
+    
+    # Generate simple price data
+    base_price = 100.0
+    price_data = []
+    
+    for i in range(num_bars):
+        # Create a few clear crossover points
+        if i % 20 == 0:  # Every 20 bars, create a potential signal
+            # Add sine wave pattern for predictable crossovers
+            sine_component = 5 * np.sin(i/10 * np.pi)
+        else:
+            sine_component = 0
+            
+        # Random walk with slight upward trend
+        price = base_price + i * 0.01 + sine_component + np.random.normal(0, 0.1)
+        price_data.append(price)
+    
+    # Create OHLCV data
+    data = []
+    for i, date in enumerate(dates):
+        close = price_data[i]
+        high = close * (1 + abs(np.random.normal(0, 0.005)))
+        low = close * (1 - abs(np.random.normal(0, 0.005)))
+        open_price = low + (high - low) * np.random.random()
+        volume = int(np.random.exponential(10000))
+        
+        data.append({
+            'timestamp': date,
+            'open': open_price,
+            'high': high,
+            'low': low,
+            'close': close,
+            'volume': volume
+        })
+    
+    # Create DataFrame
+    return pd.DataFrame(data)
+
+
+def debug_order_flow(test_data_symbol='DEBUG'):
+    """Run a simplified version of the system to debug order flow."""
+    logger.info("=== Starting Order Flow Debug Test ===")
+    
+    # Create test data
+    df = create_test_data(test_data_symbol)
+    
+    # Create core components
     event_bus = EventBus()
-    tracing_bus = TracingEventBus(event_bus)
+    
+    # Create order registry with debug wrapper
+    order_registry = OrderRegistry(event_bus)
+    registry_wrapper = RegistryDebugWrapper(order_registry)
+    
+    # Create portfolio manager
+    portfolio = PortfolioManager(event_bus, initial_cash=100000.0)
+    
+    # Create broker with debug wrapper
+    broker = SimulatedBroker(event_bus, order_registry)
+    broker_wrapper = BrokerDebugWrapper(broker)
+    
+    # Create order manager
+    order_manager = OrderManager(event_bus, broker, order_registry)
+    
+    # Create event debugger to track all events
+    event_debugger = EventDebugger(event_bus)
+    
+    # Register components with event bus - ensure correct registration order
+    for event_type_name in dir(EventType):
+        if not event_type_name.startswith('_'):
+            try:
+                event_type_value = getattr(EventType, event_type_name)
+                if isinstance(event_type_value, str):  # Only register string event types
+                    # Registry should receive events first
+                    if hasattr(order_registry, f"on_{event_type_name.lower()}"):
+                        handler = getattr(order_registry, f"on_{event_type_name.lower()}")
+                        event_bus.register(event_type_value, handler)
+                        logger.info(f"Registered registry handler for event type: {event_type_value}")
+                    
+                    # Order manager should receive events next
+                    if hasattr(order_manager, f"on_{event_type_name.lower()}"):
+                        handler = getattr(order_manager, f"on_{event_type_name.lower()}")
+                        event_bus.register(event_type_value, handler)
+                        logger.info(f"Registered order manager handler for event type: {event_type_value}")
+                    
+                    # Broker should receive events next
+                    if hasattr(broker, f"on_{event_type_name.lower()}"):
+                        handler = getattr(broker, f"on_{event_type_name.lower()}")
+                        event_bus.register(event_type_value, handler)
+                        logger.info(f"Registered broker handler for event type: {event_type_value}")
+                    
+                    # Portfolio should receive events last
+                    if hasattr(portfolio, f"on_{event_type_name.lower()}"):
+                        handler = getattr(portfolio, f"on_{event_type_name.lower()}")
+                        event_bus.register(event_type_value, handler)
+                        logger.info(f"Registered portfolio handler for event type: {event_type_value}")
+            except (AttributeError, TypeError):
+                pass
+    
+    # Special handling for order state change event if used in your system
+    if hasattr(EventType, "ORDER_STATE_CHANGE") and hasattr(broker, "on_order_state_change"):
+        event_bus.register(EventType.ORDER_STATE_CHANGE, broker.on_order_state_change)
+        logger.info(f"Registered broker handler for ORDER_STATE_CHANGE event")
+        
+    logger.info("System components created and events registered")
+    
+    # Test 1: Create a few manual orders and track their lifecycle
+    logger.info("\n=== Test 1: Manual Order Creation ===")
+    
+    # Create and emit a few signal events which should lead to orders
+    for i in range(5):
+        # Generate random BUY or SELL signal
+        direction = 1 if np.random.random() > 0.5 else -1
+        signal_type = "BUY" if direction > 0 else "SELL"
+        
+        # Get price from test data
+        price_idx = min(i * 10, len(df) - 1)
+        price = df.iloc[price_idx]['close']
+        
+        # Create signal event
+        logger.info(f"Creating {signal_type} signal at price {price:.2f}")
+        signal = create_signal_event(
+            signal_value=direction,
+            price=price,
+            symbol=test_data_symbol,
+            timestamp=df.iloc[price_idx]['timestamp']
+        )
+        
+        # Instead of emitting signal, manually create order
+        order_id = str(uuid.uuid4())
+        order_event = create_order_event(
+            symbol=test_data_symbol,
+            order_type='MARKET',
+            direction=signal_type,
+            quantity=100,
+            price=price,
+            order_id=order_id
+        )
+        
+        # Emit order event (will be captured by registry and broker)
+        logger.info(f"Emitting order event with ID: {order_id}")
+        event_bus.emit(order_event)
+        
+        # Pause slightly between orders
+        time.sleep(0.1)
+    
+    # Generate report of all event activity
+    event_debugger.report()
+    
+    # Verify portfolio state
+    logger.info("\n=== Portfolio State After Test ===")
+    logger.info(f"Cash: ${portfolio.cash:.2f}")
+    logger.info(f"Positions: {portfolio.positions}")
+    logger.info(f"Trades: {portfolio.trades}")
+    
+    # Examine registry state
+    logger.info("\n=== Order Registry State After Test ===")
+    logger.info(f"Total orders registered: {len(order_registry.orders)}")
+    for order_id, order in order_registry.orders.items():
+        logger.info(f"  Order {order_id}: Status={order.status}, Symbol={order.symbol}, Direction={order.direction}, Quantity={order.quantity}, Price={order.price}")
+    
+    # Check for any order state transitions
+    logger.info("\n=== Order State Transitions ===")
+    logger.info(f"Total state changes: {len(order_registry.state_changes)}")
+    for order_id, transition, timestamp in order_registry.state_changes:
+        logger.info(f"  {timestamp.strftime('%H:%M:%S.%f')[:-3]} - Order {order_id}: {transition}")
+    
+    return {
+        'event_debugger': event_debugger,
+        'order_registry': order_registry,
+        'broker': broker,
+        'portfolio': portfolio,
+        'event_bus': event_bus
+    }
+
+
+def trace_order_from_signal(test_data_symbol='TRACE'):
+    """Trace the complete lifecycle of an order from signal to fill."""
+    logger.info("\n=== Detailed Order Lifecycle Tracing ===")
     
     # Create components
-    broker = SimulatedBroker(event_bus)
-    order_manager = OrderManager(event_bus, broker)
-    portfolio = PortfolioManager(event_bus)
+    event_bus = EventBus()
     
-    # Set up correct event flow
-    logger.info("Setting up event handlers...")
-    event_bus.register(EventType.ORDER, order_manager.on_order)
-    event_bus.register(EventType.ORDER, broker.on_order)
-    event_bus.register(EventType.FILL, order_manager.on_fill)
-    event_bus.register(EventType.FILL, portfolio.on_fill)
+    # Extend the EventBus to trace all event emissions
+    original_emit = event_bus.emit
     
-    # Test 1: Create an order and let it flow through the system
-    logger.info("Test 1: Normal order flow")
-    order_id = str(uuid.uuid4())
+    def traced_emit(event):
+        logger.info(f"EVENT EMITTED: {event.type} - {event.data.get('order_id', 'N/A')}")
+        return original_emit(event)
     
-    # Create order event with explicit ID
-    order_event = create_order_event(
-        symbol="AAPL",
-        order_type="MARKET",
-        direction="BUY",
-        quantity=100,
-        price=150.0
+    event_bus.emit = traced_emit
+    
+    # Create components in proper order
+    order_registry = OrderRegistry(event_bus)
+    broker = SimulatedBroker(event_bus, order_registry)
+    order_manager = OrderManager(event_bus, broker, order_registry)
+    portfolio = PortfolioManager(event_bus, initial_cash=100000.0)
+    
+    # Register event handlers in proper order
+    # Order lifecycle: Signal → Order → Registry → Broker → Fill → Portfolio
+    
+    # 1. Signal → Order (usually handled by strategy)
+    if hasattr(order_manager, "on_signal"):
+        event_bus.register(EventType.SIGNAL, order_manager.on_signal)
+    
+    # 2. Order → Registry
+    if hasattr(order_registry, "on_order"):
+        event_bus.register(EventType.ORDER, order_registry.on_order)
+    
+    # 3. Registry → Order State Change
+    if hasattr(EventType, "ORDER_STATE_CHANGE") and hasattr(broker, "on_order_state_change"):
+        event_bus.register(EventType.ORDER_STATE_CHANGE, broker.on_order_state_change)
+    
+    # 4. Order → Manager (after registry)
+    if hasattr(order_manager, "on_order"):
+        event_bus.register(EventType.ORDER, order_manager.on_order)
+    
+    # 5. Order → Broker
+    if hasattr(broker, "on_order"):
+        event_bus.register(EventType.ORDER, broker.on_order)
+    
+    # 6. Fill → Registry
+    if hasattr(order_registry, "on_fill"):
+        event_bus.register(EventType.FILL, order_registry.on_fill)
+    
+    # 7. Fill → Portfolio (after registry)
+    if hasattr(portfolio, "on_fill"):
+        event_bus.register(EventType.FILL, portfolio.on_fill)
+    
+    # Create a sample signal
+    price = 100.0
+    
+    logger.info(f"Step 1: Emitting BUY signal for {test_data_symbol} at {price}")
+    signal = create_signal_event(
+        signal_value=1,  # BUY
+        price=price,
+        symbol=test_data_symbol,
+        timestamp=datetime.datetime.now()
     )
-    order_event.data['order_id'] = order_id
     
-    logger.info(f"Created order with ID: {order_id}")
+    # Emit the signal
+    event_bus.emit(signal)
     
-    # Emit the order event
-    logger.info("Emitting order event...")
-    try:
-        event_bus.emit(order_event)
-        logger.info("Order event emitted successfully")
-    except Exception as e:
-        logger.error(f"Error emitting order: {e}", exc_info=True)
+    # Check results
+    logger.info("\nTracing Results:")
+    logger.info(f"Orders in registry: {len(order_registry.orders)}")
+    for order_id, order in order_registry.orders.items():
+        logger.info(f"  Order {order_id}: Status={order.status}, Symbol={order.symbol}, Direction={order.direction}, Quantity={order.quantity}, Price={order.price}")
     
-    # Wait for processing
-    time.sleep(0.5)
+    logger.info(f"Trades in portfolio: {len(portfolio.trades)}")
+    for trade in portfolio.trades:
+        logger.info(f"  Trade: {trade}")
     
-    # Test 2: Create fill event directly to test orphaned fills
-    logger.info("Test 2: Orphaned fill event")
-    
-    # Create a fill event with no corresponding order
-    fill_event = create_fill_event(
-        symbol="TSLA",
-        direction="BUY",
-        quantity=10,
-        price=800.0,
-        commission=8.0
-    )
-    
-    # Emit the fill event
-    logger.info("Emitting orphaned fill event...")
-    try:
-        event_bus.emit(fill_event)
-        logger.info("Fill event emitted successfully")
-    except Exception as e:
-        logger.error(f"Error emitting fill: {e}", exc_info=True)
-    
-    # Wait for processing
-    time.sleep(0.5)
-    
-    # Test 3: Two orders then fills for same symbol to test matching logic
-    logger.info("Test 3: Multiple orders for same symbol")
-    
-    # Create two orders for same symbol
-    order_id1 = str(uuid.uuid4())
-    order_id2 = str(uuid.uuid4())
-    
-    order_event1 = create_order_event(
-        symbol="MSFT",
-        order_type="MARKET",
-        direction="BUY",
-        quantity=50,
-        price=300.0
-    )
-    order_event1.data['order_id'] = order_id1
-    
-    order_event2 = create_order_event(
-        symbol="MSFT",
-        order_type="MARKET",
-        direction="BUY",
-        quantity=25,
-        price=305.0
-    )
-    order_event2.data['order_id'] = order_id2
-    
-    # Emit the orders
-    logger.info(f"Emitting first MSFT order with ID: {order_id1}")
-    event_bus.emit(order_event1)
-    
-    logger.info(f"Emitting second MSFT order with ID: {order_id2}")
-    event_bus.emit(order_event2)
-    
-    # Wait for processing
-    time.sleep(0.5)
-    
-    # Event summary
-    tracing_bus.print_event_summary()
-    
-    # Verify order_manager state
-    logger.info("=== OrderManager State ===")
-    logger.info(f"Total orders: {len(order_manager.orders)}")
-    logger.info(f"Active orders: {len(order_manager.active_orders)}")
-    
-    # Inspect OrderStatus to verify it's accessible
-    try:
-        logger.info("OrderStatus values: " + str([status.name for status in OrderStatus]))
-    except Exception as e:
-        logger.error(f"Error accessing OrderStatus: {e}", exc_info=True)
-    
-    # Inspect specific problem areas
-    inspect_object(order_manager, "OrderManager")
-    inspect_object(broker, "SimulatedBroker")
-    
-    logger.info("Test completed")
-    return tracing_bus.get_event_log()
+    return {
+        'event_bus': event_bus,
+        'order_registry': order_registry,
+        'broker': broker,
+        'order_manager': order_manager,
+        'portfolio': portfolio
+    }
 
-def patch_order_manager():
-    """Apply runtime patches to fix OrderManager issues."""
-    logger.info("Patching OrderManager.on_fill method")
-    
-    # Store the original method
-    original_on_fill = OrderManager.on_fill
-    
-    # Create a fixed version
-    def patched_on_fill(self, fill_event):
-        """Patched fill handler with proper imports."""
-        logger.debug("Executing patched on_fill method")
-        try:
-            # Import here to ensure OrderStatus is available
-            from src.execution.order_manager import OrderStatus
-            
-            # Extract fill details
-            symbol = fill_event.get_symbol()
-            direction = fill_event.get_direction()
-            quantity = fill_event.get_quantity()
-            price = fill_event.get_price()
-            order_id = fill_event.data.get('order_id')
-            
-            logger.debug(f"Processing fill: {direction} {quantity} {symbol} @ {price:.2f}")
-            logger.debug(f"Fill has order_id: {order_id}")
-            
-            # Find the order
-            order = None
-            if order_id and order_id in self.orders:
-                order = self.orders[order_id]
-                logger.debug(f"Found matching order by ID: {order_id}")
-            else:
-                # Try to match by symbol and direction
-                matching_orders = [
-                    o for o in [self.orders[oid] for oid in self.active_orders]
-                    if o.symbol == symbol and o.direction == direction
-                ]
-                
-                if matching_orders:
-                    # Use the oldest matching order
-                    order = min(matching_orders, key=lambda o: o.created_time)
-                    order_id = order.order_id
-                    logger.debug(f"Found matching order by symbol/direction: {order_id}")
-                
-            # If no order found, create a synthetic one
-            if order is None:
-                logger.warning(f"Creating synthetic order for orphaned fill: {symbol} {direction}")
-                
-                # Use Order class directly
-                from src.execution.order_manager import Order
-                
-                # Create an order ID if needed
-                if not order_id:
-                    order_id = str(uuid.uuid4())
-                
-                # Create synthetic order
-                order = Order(
-                    symbol=symbol,
-                    order_type='MARKET',
-                    direction=direction,
-                    quantity=quantity,
-                    price=price
-                )
-                
-                # Register the order
-                self.orders[order_id] = order
-                self.active_orders.add(order_id)
-                self.stats['orders_created'] += 1
-                
-                logger.info(f"Created order: {order}")
-            
-            # Update the order
-            status_name = 'FILLED' if quantity >= order.get_remaining_quantity() else 'PARTIAL'
-            order.update_status(status_name, fill_quantity=quantity, fill_price=price)
-            
-            # Handle completed orders
-            if order.is_filled():
-                if order_id in self.active_orders:
-                    self.active_orders.remove(order_id)
-                self.order_history.append(order)
-                self.stats['orders_filled'] += 1
-            
-            # Emit order status event
-            self._emit_order_status_event(order)
-            
-            logger.info(f"Updated order with fill: {order}")
-            return True
-            
-        except Exception as e:
-            logger.error(f"Error in patched on_fill: {e}", exc_info=True)
-            return False
-    
-    # Apply the patch
-    OrderManager.on_fill = patched_on_fill
-    logger.info("Patch applied to OrderManager.on_fill")
-
-def patch_broker():
-    """Apply runtime patches to fix SimulatedBroker issues."""
-    logger.info("Patching SimulatedBroker.process_order method")
-    
-    # Store the original method
-    original_process_order = SimulatedBroker.process_order
-    
-    # Create a fixed version
-    def patched_process_order(self, order_event):
-        """Patched process_order that properly preserves order_id."""
-        logger.debug("Executing patched process_order method")
-        self.stats['orders_processed'] += 1
-        
-        try:
-            symbol = order_event.get_symbol()
-            direction = order_event.get_direction()
-            quantity = order_event.get_quantity()
-            price = order_event.get_price()
-            
-            # Extract order_id from event data
-            order_id = order_event.data.get('order_id')
-            logger.debug(f"Processing order with ID: {order_id}")
-            
-            # Apply slippage to price
-            if direction == 'BUY':
-                fill_price = price * (1.0 + self.slippage)
-            else:  # SELL
-                fill_price = price * (1.0 - self.slippage)
-            
-            # Calculate commission
-            commission = abs(quantity * fill_price) * self.commission
-            
-            # Create fill event
-            from src.core.events.event_utils import create_fill_event
-            
-            fill_event = create_fill_event(
-                symbol=symbol,
-                direction=direction,
-                quantity=quantity,
-                price=fill_price,
-                commission=commission,
-                timestamp=order_event.get_timestamp()
-            )
-            
-            # Make sure order_id is transferred to fill event
-            if order_id:
-                fill_event.data['order_id'] = order_id
-                logger.debug(f"Added order_id {order_id} to fill event")
-            
-            self.stats['fills_generated'] += 1
-            logger.info(f"Broker emitted fill event for {symbol}")
-            
-            return fill_event
-            
-        except Exception as e:
-            self.stats['errors'] += 1
-            logger.error(f"Error processing order: {e}", exc_info=True)
-            return None
-    
-    # Apply the patch
-    SimulatedBroker.process_order = patched_process_order
-    logger.info("Patch applied to SimulatedBroker.process_order")
-    
-    # Now patch the on_order method
-    logger.info("Patching SimulatedBroker.on_order method")
-    
-    original_on_order = SimulatedBroker.on_order
-    
-    def patched_on_order(self, order_event):
-        """Patched on_order with better error handling."""
-        logger.debug("Executing patched on_order method")
-        try:
-            # Process the order
-            fill_event = self.process_order(order_event)
-            
-            # If a fill was generated, emit it
-            if fill_event and self.event_bus:
-                # Small delay to ensure order is processed first
-                time.sleep(0.01)
-                
-                # Verify order_id is in fill event
-                if 'order_id' in order_event.data and 'order_id' not in fill_event.data:
-                    fill_event.data['order_id'] = order_event.data['order_id']
-                    logger.debug(f"Ensured order_id is in fill event: {fill_event.data['order_id']}")
-                
-                # Emit the fill event
-                self.event_bus.emit(fill_event)
-                logger.debug(f"Emitted fill event for {fill_event.get_symbol()}")
-        except Exception as e:
-            logger.error(f"Error in patched on_order: {e}", exc_info=True)
-    
-    # Apply the patch
-    SimulatedBroker.on_order = patched_on_order
-    logger.info("Patch applied to SimulatedBroker.on_order")
 
 if __name__ == "__main__":
-    logger.info("Starting ADMF-Trader Event System Debugger")
+    logger.info("Starting order flow debugging")
     
-    # Apply patches
-    patch_order_manager()
-    patch_broker()
+    # Run simple debug test
+    results = debug_order_flow()
     
-    # Run the test
-    event_log = run_basic_order_flow_test()
+    # Run detailed trace
+    trace_results = trace_order_from_signal()
     
-    logger.info("Event debugging completed!")
-    logger.info(f"Total events logged: {len(event_log)}")
-    
-    # Save event log to file for analysis
-    import json
-    with open('event_log.json', 'w') as f:
-        json.dump(event_log, f, indent=2, default=str)
-    
-    logger.info("Event log saved to event_log.json")
+    logger.info("Order flow debugging complete")
