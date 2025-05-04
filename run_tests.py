@@ -1,286 +1,196 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
-Test runner script for ADMF-Trader.
-Provides a command-line interface for running tests with different options.
-"""
+Run tests for ADMF-Trader with safety measures.
 
-import argparse
-import subprocess
-import sys
+This script runs pytest with the adapters applied to prevent hanging tests.
+"""
 import os
-import importlib.util
+import sys
+import subprocess
+import argparse
+import logging
+import importlib
 
+# Set up logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+)
+logger = logging.getLogger("test_runner")
 
 def check_dependencies():
-    """Check if required dependencies are installed."""
-    missing_deps = []
-    
-    # List of required dependencies for testing
-    required_deps = [
-        "pytest",
-        "pytest_cov",
-        "jsonschema",
-        "pandas",
-        "numpy"
+    """Check and install dependencies if needed."""
+    required_packages = [
+        'pytest', 
+        'pytest-cov', 
+        'pytest-timeout', 
+        'jsonschema'  # Required for config schema tests
     ]
-    
-    for dep in required_deps:
-        if importlib.util.find_spec(dep) is None:
-            missing_deps.append(dep.replace("_", "-"))
-    
-    if missing_deps:
-        print("Missing required dependencies:")
-        for dep in missing_deps:
-            print(f"  - {dep}")
-        print("\nPlease install the missing dependencies:")
-        print(f"pip install {' '.join(missing_deps)}")
-        print("\nOr install all test dependencies with:")
-        print("pip install -r requirements-test.txt")
-        return False
-    
+    missing = []
+
+    for package in required_packages:
+        try:
+            importlib.import_module(package.replace('-', '_'))
+            logger.info(f"Found {package}")
+        except ImportError:
+            missing.append(package)
+            logger.warning(f"Package {package} not found")
+
+    if missing:
+        logger.info(f"Installing missing packages: {missing}")
+        try:
+            subprocess.check_call([sys.executable, '-m', 'pip', 'install'] + missing)
+            logger.info("Packages installed successfully")
+        except Exception as e:
+            logger.error(f"Failed to install packages: {e}")
+            logger.info("Please install packages manually:")
+            logger.info(f"pip install {' '.join(missing)}")
+            return False
+
     return True
 
+def run_debug_integration():
+    """Run the debug integration test."""
+    logger.info("Running debug integration test...")
+    
+    integration_script = os.path.join('tests', 'integration', 'fixed_debug_integration.py')
+    
+    # Make sure the script exists
+    if not os.path.exists(integration_script):
+        logger.error(f"Integration script not found: {integration_script}")
+        return False
+    
+    # Make script executable
+    try:
+        os.chmod(integration_script, 0o755)
+    except Exception as e:
+        logger.warning(f"Failed to make script executable: {e}")
+    
+    try:
+        result = subprocess.run(
+            [sys.executable, integration_script],
+            check=False,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            universal_newlines=True
+        )
+        
+        print(result.stdout)
+        
+        if result.returncode == 0:
+            logger.info("Debug integration test passed")
+            return True
+        else:
+            logger.error(f"Debug integration test failed with exit code {result.returncode}")
+            return False
+    except Exception as e:
+        logger.error(f"Error running debug integration test: {e}")
+        return False
+
+def run_tests(args):
+    """Run tests with pytest."""
+    logger.info(f"Running tests: {args.test_paths}")
+    
+    cmd = [
+        sys.executable, "-m", "pytest"
+    ]
+    
+    # Add verbosity
+    if args.verbose:
+        cmd.append("-v")
+    
+    # Add coverage if requested
+    if args.with_coverage:
+        cmd.extend(["--cov=src", "--cov-report=term"])
+    
+    # Add timeout protection
+    cmd.extend(["--timeout", str(args.timeout)])
+    
+    # Add test paths
+    cmd.extend(args.test_paths)
+    
+    # Run pytest
+    try:
+        result = subprocess.run(
+            cmd,
+            check=False,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            universal_newlines=True
+        )
+        
+        print(result.stdout)
+        
+        if result.returncode == 0:
+            logger.info("Tests passed")
+            return True
+        else:
+            logger.error(f"Tests failed with exit code {result.returncode}")
+            return False
+    except Exception as e:
+        logger.error(f"Error running tests: {e}")
+        return False
 
 def parse_args():
-    """Parse command-line arguments."""
-    parser = argparse.ArgumentParser(description="Run tests for ADMF-Trader")
+    """Parse command line arguments."""
+    parser = argparse.ArgumentParser(description="Run tests with safety measures")
     
-    # Test type selection
     parser.add_argument(
-        "--unit", action="store_true",
-        help="Run unit tests only"
-    )
-    parser.add_argument(
-        "--integration", action="store_true",
-        help="Run integration tests only"
-    )
-    parser.add_argument(
-        "--all", action="store_true",
-        help="Run all tests (default)"
+        "test_paths",
+        nargs="*",
+        default=["tests"],
+        help="Test paths to run (default: tests)"
     )
     
-    # Module selection
     parser.add_argument(
-        "--module", type=str, default=None,
-        help="Run tests for a specific module (core, data, strategy, risk, execution, analytics)"
+        "--debug-integration",
+        action="store_true",
+        help="Run debug integration test"
     )
     
-    # Test file selection
     parser.add_argument(
-        "--file", type=str, default=None,
-        help="Run a specific test file"
+        "-v", "--verbose",
+        action="store_true",
+        help="Enable verbose output"
     )
     
-    # Coverage options - disabled, now configured in pytest.ini
     parser.add_argument(
-        "--no-coverage", action="store_true",
-        help="Disable coverage reporting (enabled by default in pytest.ini)"
+        "--with-coverage",
+        action="store_true",
+        help="Enable coverage reporting"
     )
     
-    # Output options
     parser.add_argument(
-        "--verbose", "-v", action="count", default=0,
-        help="Increase verbosity (can be used multiple times)"
-    )
-    parser.add_argument(
-        "--quiet", "-q", action="store_true",
-        help="Show minimal output"
-    )
-    
-    # Other options
-    parser.add_argument(
-        "--xvs", action="store_true",
-        help="Exit on first failure (short for --exitfirst)"
-    )
-    parser.add_argument(
-        "--no-header", action="store_true",
-        help="Don't show header"
-    )
-    
-    # Development install
-    parser.add_argument(
-        "--install-dev", action="store_true",
-        help="Install the package in development mode before running tests"
-    )
-    
-    # Debug mode
-    parser.add_argument(
-        "--debug", action="store_true",
-        help="Run tests in debug mode with more detailed output"
+        "--timeout",
+        type=int,
+        default=60,
+        help="Test timeout in seconds (default: 60)"
     )
     
     return parser.parse_args()
 
-
-def build_command(args):
-    """Build pytest command based on arguments."""
-    cmd = ["python", "-m", "pytest"]
-    
-    # Debug mode
-    if args.debug:
-        cmd.extend(["-vv", "--showlocals"])
-    
-    # Test selection
-    if args.unit:
-        cmd.extend(["-m", "unit"])
-    elif args.integration:
-        cmd.extend(["-m", "integration"])
-    # Otherwise all tests are run
-    
-    # Module selection
-    if args.module:
-        valid_modules = ["core", "data", "strategy", "risk", "execution", "analytics"]
-        if args.module not in valid_modules:
-            print(f"Error: Invalid module '{args.module}'. Choose from: {', '.join(valid_modules)}")
-            sys.exit(1)
-        cmd.extend(["-m", args.module])
-    
-    # File selection
-    if args.file:
-        if not os.path.exists(args.file):
-            print(f"Error: Test file '{args.file}' not found")
-            sys.exit(1)
-        cmd.append(args.file)
-    else:
-        cmd.append("tests")  # Default test directory
-    
-    # Disable coverage if requested (it's enabled by default in pytest.ini)
-    if args.no_coverage:
-        cmd.append("--no-cov")
-    
-    # Verbosity
-    if args.verbose > 0:
-        cmd.append("-" + "v" * args.verbose)
-    
-    if args.quiet:
-        cmd.append("-q")
-    
-    # Other options
-    if args.xvs:
-        cmd.append("--exitfirst")
-    
-    return cmd
-
-
-def print_header(args):
-    """Print header with information about the test run."""
-    if args.no_header:
-        return
-    
-    print("=" * 80)
-    print("ADMF-Trader Test Runner")
-    print("=" * 80)
-    
-    # Test type
-    if args.unit:
-        print("Running unit tests only")
-    elif args.integration:
-        print("Running integration tests only")
-    else:
-        print("Running all tests")
-    
-    # Module
-    if args.module:
-        print(f"Module: {args.module}")
-    
-    # File
-    if args.file:
-        print(f"File: {args.file}")
-    
-    # Coverage
-    if args.no_coverage:
-        print("Coverage reporting disabled")
-    else:
-        print("Coverage reporting enabled (configured in pytest.ini)")
-    
-    # Debug mode
-    if args.debug:
-        print("Debug mode enabled (more verbose output)")
-    
-    print("-" * 80)
-
-
-def install_dev_mode():
-    """Install the package in development mode."""
-    print("Installing package in development mode...")
-    result = subprocess.run([sys.executable, "-m", "pip", "install", "-e", "."], 
-                           capture_output=True, text=True)
-    
-    if result.returncode != 0:
-        print("Error installing in development mode:")
-        print(result.stderr)
-        return False
-    
-    print("Development install successful")
-    return True
-
-
-def check_test_adapters():
-    """Check that test adapters are properly loaded."""
-    print("Checking test adapters...")
-    
-    # List of adapter modules
-    adapter_modules = [
-        "tests.unit.core.test_event_types_adapter",
-        "tests.unit.core.test_event_bus_adapter",
-        "tests.unit.execution.broker_adapter",
-        "tests.unit.strategy.strategy_adapter",
-        "tests.integration.integration_adapters"
-    ]
-    
-    missing_adapters = []
-    for module_name in adapter_modules:
-        try:
-            module = importlib.import_module(module_name)
-            print(f"  ✓ {module_name}")
-        except ImportError as e:
-            missing_adapters.append((module_name, str(e)))
-            print(f"  ✗ {module_name} - {e}")
-    
-    if missing_adapters:
-        print("\nWarning: Some test adapters could not be loaded:")
-        for name, error in missing_adapters:
-            print(f"  - {name}: {error}")
-        print("\nThis may cause some tests to fail.")
-    else:
-        print("All test adapters loaded successfully.")
-    
-    print("-" * 80)
-    return len(missing_adapters) == 0
-
-
 def main():
-    """Main function."""
+    """Main entry point."""
+    # Parse arguments
     args = parse_args()
     
     # Check dependencies
     if not check_dependencies():
-        return 1
+        logger.error("Missing required dependencies")
+        return False
     
-    # Install in development mode if requested
-    if args.install_dev:
-        if not install_dev_mode():
-            return 1
+    # Add project root to path
+    project_root = os.path.dirname(os.path.abspath(__file__))
+    if project_root not in sys.path:
+        sys.path.insert(0, project_root)
     
-    # Print header
-    print_header(args)
+    # Run debug integration test if requested
+    if args.debug_integration:
+        return run_debug_integration()
     
-    # Check test adapters in debug mode
-    if args.debug:
-        check_test_adapters()
-    
-    # Build command
-    cmd = build_command(args)
-    if not args.no_header:
-        print(f"Running: {' '.join(cmd)}")
-        print("-" * 80)
-    
-    # Run command
-    result = subprocess.run(cmd)
-    
-    # Return exit code
-    return result.returncode
-
+    # Run tests
+    return run_tests(args)
 
 if __name__ == "__main__":
-    sys.exit(main())
+    success = main()
+    sys.exit(0 if success else 1)

@@ -1,0 +1,545 @@
+2025-04-30 21:42:27,860 - debug - INFO - Starting debug script
+2025-04-30 21:42:27,860 - debug - INFO - Loading data from: ./data/HEAD_1min.csv
+2025-04-30 21:42:27,861 - debug - INFO - Loaded 999 rows from ./data/HEAD_1min.csv
+2025-04-30 21:42:27,861 - debug - INFO - Columns: ['timestamp', 'Open', 'High', 'Low', 'Close', 'Volume', 'trade_count', 'vwap']
+2025-04-30 21:42:27,862 - debug - INFO - Converted timestamp to datetime
+2025-04-30 21:42:27,863 - debug - INFO - Set timestamp as index
+2025-04-30 21:42:27,863 - debug - INFO - Data range: 2024-03-26 13:30:00 to 2024-03-28 17:06:00
+2025-04-30 21:42:27,867 - debug - INFO - Data sample: 
+                       Open    High     Low     Close  Volume  trade_count  vwap
+timestamp                                                                       
+2024-03-26 13:30:00  521.23  521.26  520.92  521.0100  342898          NaN   NaN
+2024-03-26 13:31:00  521.03  521.11  520.88  521.0700  186082          NaN   NaN
+2024-03-26 13:32:00  521.05  521.32  521.04  521.2200  144430          NaN   NaN
+2024-03-26 13:33:00  521.23  521.36  521.15  521.2896  120104          NaN   NaN
+2024-03-26 13:34:00  521.30  521.44  521.27  521.3600   95387          NaN   NaN
+2025-04-30 21:42:27,867 - debug - INFO - 
+
+===== Testing MA windows: fast=5, slow=15 =====
+2025-04-30 21:42:27,868 - debug - INFO - Running MA Crossover simulation with fast=5, slow=15
+2025-04-30 21:42:27,868 - debug - INFO - Price column 'Close' not found, using 'Close' instead
+2025-04-30 21:42:27,869 - debug - INFO - Generated 40 buy signals and 39 sell signals
+2025-04-30 21:42:27,870 - debug - INFO - Signals generated:
+2025-04-30 21:42:27,870 - debug - INFO - 2024-03-26 13:48:00: BUY at price 521.17, fast_ma=521.12, slow_ma=521.09, diff=0.0240
+2025-04-30 21:42:27,870 - debug - INFO - 2024-03-26 13:55:00: SELL at price 521.04, fast_ma=521.04, slow_ma=521.07, diff=-0.0283
+2025-04-30 21:42:27,870 - debug - INFO - 2024-03-26 13:59:00: BUY at price 521.25, fast_ma=521.14, slow_ma=521.11, diff=0.0265
+2025-04-30 21:42:27,870 - debug - INFO - 2024-03-26 14:12:00: SELL at price 521.29, fast_ma=521.26, slow_ma=521.28, diff=-0.0240
+2025-04-30 21:42:27,870 - debug - INFO - 2024-03-26 14:16:00: BUY at price 521.32, fast_ma=521.30, slow_ma=521.29, diff=0.0083
+2025-04-30 21:42:27,870 - debug - INFO - 2024-03-26 14:27:00: SELL at price 521.20, fast_ma=521.33, slow_ma=521.35, diff=-0.0230
+2025-04-30 21:42:27,870 - debug - INFO - 2024-03-26 14:41:00: BUY at price 521.06, fast_ma=521.05, slow_ma=521.01, diff=0.0428
+2025-04-30 21:42:27,870 - debug - INFO - 2024-03-26 14:49:00: SELL at price 520.96, fast_ma=521.02, slow_ma=521.04, diff=-0.0134
+2025-04-30 21:42:27,870 - debug - INFO - 2024-03-26 14:54:00: BUY at price 521.17, fast_ma=521.10, slow_ma=521.07, diff=0.0304
+2025-04-30 21:42:27,870 - debug - INFO - 2024-03-26 15:07:00: SELL at price 521.20, fast_ma=521.22, slow_ma=521.24, diff=-0.0173
+2025-04-30 21:42:27,870 - debug - INFO - 2024-03-26 15:21:00: BUY at price 521.28, fast_ma=521.24, slow_ma=521.23, diff=0.0077
+2025-04-30 21:42:27,870 - debug - INFO - 2024-03-26 15:32:00: SELL at price 521.24, fast_ma=521.27, slow_ma=521.29, diff=-0.0135
+2025-04-30 21:42:27,870 - debug - INFO - 2024-03-26 15:51:00: BUY at price 521.36, fast_ma=521.21, slow_ma=521.19, diff=0.0250
+2025-04-30 21:42:27,870 - debug - INFO - 2024-03-26 16:04:00: SELL at price 521.23, fast_ma=521.32, slow_ma=521.36, diff=-0.0311
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-26 16:30:00: BUY at price 521.09, fast_ma=521.06, slow_ma=521.06, diff=0.0050
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-26 16:36:00: SELL at price 520.99, fast_ma=521.01, slow_ma=521.03, diff=-0.0165
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-26 16:50:00: BUY at price 521.02, fast_ma=520.98, slow_ma=520.96, diff=0.0190
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-26 16:53:00: SELL at price 520.88, fast_ma=520.94, slow_ma=520.95, diff=-0.0056
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-26 17:06:00: BUY at price 520.99, fast_ma=520.89, slow_ma=520.87, diff=0.0233
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-26 17:18:00: SELL at price 520.83, fast_ma=520.90, slow_ma=520.92, diff=-0.0158
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-26 17:30:00: BUY at price 520.92, fast_ma=520.83, slow_ma=520.82, diff=0.0107
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-26 17:40:00: SELL at price 520.81, fast_ma=520.85, slow_ma=520.87, diff=-0.0258
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-26 17:56:00: BUY at price 520.76, fast_ma=520.68, slow_ma=520.67, diff=0.0128
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-26 18:13:00: SELL at price 520.81, fast_ma=520.79, slow_ma=520.81, diff=-0.0252
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-26 18:17:00: BUY at price 520.90, fast_ma=520.88, slow_ma=520.85, diff=0.0267
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-26 18:39:00: SELL at price 520.80, fast_ma=520.93, slow_ma=520.95, diff=-0.0208
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-26 18:53:00: BUY at price 520.84, fast_ma=520.77, slow_ma=520.75, diff=0.0207
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-26 19:03:00: SELL at price 520.77, fast_ma=520.79, slow_ma=520.81, diff=-0.0210
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-26 19:12:00: BUY at price 520.71, fast_ma=520.79, slow_ma=520.78, diff=0.0080
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-26 19:14:00: SELL at price 520.70, fast_ma=520.75, slow_ma=520.76, diff=-0.0107
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-27 13:30:00: BUY at price 521.52, fast_ma=519.28, slow_ma=519.12, diff=0.1621
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-27 13:44:00: SELL at price 521.44, fast_ma=521.42, slow_ma=521.45, diff=-0.0354
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-27 13:46:00: BUY at price 521.56, fast_ma=521.46, slow_ma=521.45, diff=0.0128
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-27 13:54:00: SELL at price 521.03, fast_ma=521.39, slow_ma=521.46, diff=-0.0749
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-27 14:16:00: BUY at price 520.32, fast_ma=520.13, slow_ma=520.11, diff=0.0272
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-27 14:22:00: SELL at price 519.89, fast_ma=520.14, slow_ma=520.15, diff=-0.0101
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-27 14:33:00: BUY at price 520.20, fast_ma=520.06, slow_ma=520.00, diff=0.0641
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-27 14:44:00: SELL at price 519.93, fast_ma=520.13, slow_ma=520.15, diff=-0.0232
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-27 14:58:00: BUY at price 519.93, fast_ma=519.87, slow_ma=519.85, diff=0.0166
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-27 15:05:00: SELL at price 519.84, fast_ma=519.83, slow_ma=519.83, diff=-0.0013
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-27 15:08:00: BUY at price 519.94, fast_ma=519.87, slow_ma=519.86, diff=0.0055
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-27 15:24:00: SELL at price 519.88, fast_ma=519.95, slow_ma=519.96, diff=-0.0037
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-27 15:38:00: BUY at price 519.90, fast_ma=519.81, slow_ma=519.79, diff=0.0160
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-27 15:52:00: SELL at price 519.82, fast_ma=519.89, slow_ma=519.91, diff=-0.0165
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-27 16:09:00: BUY at price 519.68, fast_ma=519.69, slow_ma=519.69, diff=0.0000
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-27 16:14:00: SELL at price 519.66, fast_ma=519.66, slow_ma=519.66, diff=-0.0034
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-27 16:18:00: BUY at price 519.82, fast_ma=519.68, slow_ma=519.67, diff=0.0035
+2025-04-30 21:42:27,871 - debug - INFO - 2024-03-27 16:59:00: SELL at price 520.31, fast_ma=520.34, slow_ma=520.35, diff=-0.0097
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-27 17:17:00: BUY at price 520.20, fast_ma=520.09, slow_ma=520.06, diff=0.0286
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-27 17:37:00: SELL at price 520.34, fast_ma=520.32, slow_ma=520.33, diff=-0.0065
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-27 17:48:00: BUY at price 520.31, fast_ma=520.29, slow_ma=520.29, diff=0.0024
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-27 17:50:00: SELL at price 520.23, fast_ma=520.28, slow_ma=520.29, diff=-0.0029
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-27 18:13:00: BUY at price 520.25, fast_ma=520.16, slow_ma=520.13, diff=0.0225
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-27 18:35:00: SELL at price 520.54, fast_ma=520.72, slow_ma=520.77, diff=-0.0519
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-27 19:02:00: BUY at price 520.35, fast_ma=520.33, slow_ma=520.32, diff=0.0123
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-27 19:11:00: SELL at price 519.98, fast_ma=520.28, slow_ma=520.35, diff=-0.0686
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-27 19:23:00: BUY at price 520.38, fast_ma=520.14, slow_ma=520.09, diff=0.0507
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 13:37:00: SELL at price 522.84, fast_ma=522.91, slow_ma=522.91, diff=-0.0013
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 13:38:00: BUY at price 523.04, fast_ma=522.94, slow_ma=522.93, diff=0.0097
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 13:39:00: SELL at price 522.93, fast_ma=522.92, slow_ma=522.95, diff=-0.0237
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 13:41:00: BUY at price 523.17, fast_ma=523.02, slow_ma=523.00, diff=0.0197
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 13:57:00: SELL at price 523.28, fast_ma=523.37, slow_ma=523.39, diff=-0.0205
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 14:02:00: BUY at price 523.63, fast_ma=523.40, slow_ma=523.39, diff=0.0063
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 14:09:00: SELL at price 523.25, fast_ma=523.39, slow_ma=523.42, diff=-0.0263
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 14:27:00: BUY at price 523.19, fast_ma=523.11, slow_ma=523.10, diff=0.0158
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 14:48:00: SELL at price 523.30, fast_ma=523.35, slow_ma=523.35, diff=-0.0021
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 14:51:00: BUY at price 523.42, fast_ma=523.37, slow_ma=523.36, diff=0.0016
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 15:03:00: SELL at price 523.31, fast_ma=523.40, slow_ma=523.42, diff=-0.0180
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 15:16:00: BUY at price 523.50, fast_ma=523.39, slow_ma=523.34, diff=0.0463
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 15:36:00: SELL at price 523.41, fast_ma=523.53, slow_ma=523.55, diff=-0.0290
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 15:50:00: BUY at price 523.48, fast_ma=523.44, slow_ma=523.41, diff=0.0283
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 16:02:00: SELL at price 523.49, fast_ma=523.54, slow_ma=523.54, diff=-0.0024
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 16:17:00: BUY at price 523.39, fast_ma=523.37, slow_ma=523.36, diff=0.0107
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 16:18:00: SELL at price 523.27, fast_ma=523.34, slow_ma=523.35, diff=-0.0056
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 16:29:00: BUY at price 523.47, fast_ma=523.35, slow_ma=523.31, diff=0.0422
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 16:33:00: SELL at price 523.21, fast_ma=523.26, slow_ma=523.27, diff=-0.0169
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 16:44:00: BUY at price 523.20, fast_ma=523.22, slow_ma=523.21, diff=0.0083
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 17:00:00: SELL at price 523.21, fast_ma=523.25, slow_ma=523.26, diff=-0.0083
+2025-04-30 21:42:27,872 - debug - INFO - 2024-03-28 17:05:00: BUY at price 523.44, fast_ma=523.27, slow_ma=523.26, diff=0.0105
+2025-04-30 21:42:27,872 - debug - WARNING - Found 4 NaN values in fast MA - this is normal for the first 4 rows
+2025-04-30 21:42:27,873 - debug - WARNING - Found 14 NaN values in slow MA - this is normal for the first 14 rows
+2025-04-30 21:42:27,873 - debug - INFO - 
+
+===== Testing MA windows: fast=3, slow=10 =====
+2025-04-30 21:42:27,873 - debug - INFO - Running MA Crossover simulation with fast=3, slow=10
+2025-04-30 21:42:27,873 - debug - INFO - Price column 'Close' not found, using 'Close' instead
+2025-04-30 21:42:27,874 - debug - INFO - Generated 65 buy signals and 64 sell signals
+2025-04-30 21:42:27,874 - debug - INFO - Signals generated:
+2025-04-30 21:42:27,874 - debug - INFO - 2024-03-26 13:45:00: BUY at price 521.07, fast_ma=521.10, slow_ma=521.06, diff=0.0467
+2025-04-30 21:42:27,874 - debug - INFO - 2024-03-26 13:53:00: SELL at price 521.01, fast_ma=521.07, slow_ma=521.12, diff=-0.0513
+2025-04-30 21:42:27,874 - debug - INFO - 2024-03-26 13:58:00: BUY at price 521.14, fast_ma=521.14, slow_ma=521.10, diff=0.0350
+2025-04-30 21:42:27,874 - debug - INFO - 2024-03-26 14:10:00: SELL at price 521.14, fast_ma=521.27, slow_ma=521.30, diff=-0.0277
+2025-04-30 21:42:27,874 - debug - INFO - 2024-03-26 14:14:00: BUY at price 521.33, fast_ma=521.31, slow_ma=521.30, diff=0.0112
+2025-04-30 21:42:27,874 - debug - INFO - 2024-03-26 14:23:00: SELL at price 521.38, fast_ma=521.36, slow_ma=521.37, diff=-0.0093
+2025-04-30 21:42:27,874 - debug - INFO - 2024-03-26 14:24:00: BUY at price 521.43, fast_ma=521.38, slow_ma=521.38, diff=0.0040
+2025-04-30 21:42:27,874 - debug - INFO - 2024-03-26 14:25:00: SELL at price 521.30, fast_ma=521.37, slow_ma=521.38, diff=-0.0152
+2025-04-30 21:42:27,874 - debug - INFO - 2024-03-26 14:38:00: BUY at price 521.08, fast_ma=520.99, slow_ma=520.96, diff=0.0367
+2025-04-30 21:42:27,874 - debug - INFO - 2024-03-26 14:46:00: SELL at price 521.06, fast_ma=521.06, slow_ma=521.07, diff=-0.0095
+2025-04-30 21:42:27,874 - debug - INFO - 2024-03-26 14:52:00: BUY at price 521.08, fast_ma=521.06, slow_ma=521.06, diff=0.0021
+2025-04-30 21:42:27,874 - debug - INFO - 2024-03-26 15:04:00: SELL at price 521.20, fast_ma=521.25, slow_ma=521.26, diff=-0.0142
+2025-04-30 21:42:27,874 - debug - INFO - 2024-03-26 15:10:00: BUY at price 521.32, fast_ma=521.26, slow_ma=521.25, diff=0.0140
+2025-04-30 21:42:27,874 - debug - INFO - 2024-03-26 15:13:00: SELL at price 521.20, fast_ma=521.22, slow_ma=521.23, diff=-0.0099
+2025-04-30 21:42:27,874 - debug - INFO - 2024-03-26 15:19:00: BUY at price 521.21, fast_ma=521.24, slow_ma=521.23, diff=0.0092
+2025-04-30 21:42:27,874 - debug - INFO - 2024-03-26 15:30:00: SELL at price 521.30, fast_ma=521.31, slow_ma=521.32, diff=-0.0073
+2025-04-30 21:42:27,874 - debug - INFO - 2024-03-26 15:43:00: BUY at price 521.15, fast_ma=521.20, slow_ma=521.20, diff=0.0002
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 15:44:00: SELL at price 521.19, fast_ma=521.18, slow_ma=521.19, diff=-0.0072
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 15:50:00: BUY at price 521.28, fast_ma=521.19, slow_ma=521.18, diff=0.0105
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 16:02:00: SELL at price 521.31, fast_ma=521.37, slow_ma=521.38, diff=-0.0097
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 16:28:00: BUY at price 521.11, fast_ma=521.03, slow_ma=521.02, diff=0.0112
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 16:33:00: SELL at price 521.02, fast_ma=521.04, slow_ma=521.04, diff=-0.0038
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 16:48:00: BUY at price 521.04, fast_ma=520.97, slow_ma=520.95, diff=0.0211
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 16:53:00: SELL at price 520.88, fast_ma=520.91, slow_ma=520.94, diff=-0.0334
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 17:04:00: BUY at price 520.85, fast_ma=520.85, slow_ma=520.85, diff=0.0012
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 17:11:00: SELL at price 520.90, fast_ma=520.91, slow_ma=520.91, diff=-0.0036
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 17:14:00: BUY at price 521.00, fast_ma=520.96, slow_ma=520.94, diff=0.0159
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 17:17:00: SELL at price 520.83, fast_ma=520.90, slow_ma=520.92, diff=-0.0256
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 17:29:00: BUY at price 520.86, fast_ma=520.81, slow_ma=520.80, diff=0.0103
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 17:38:00: SELL at price 520.86, fast_ma=520.88, slow_ma=520.91, diff=-0.0358
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 17:54:00: BUY at price 520.72, fast_ma=520.62, slow_ma=520.62, diff=0.0055
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 18:10:00: SELL at price 520.76, fast_ma=520.84, slow_ma=520.85, diff=-0.0092
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 18:15:00: BUY at price 520.91, fast_ma=520.86, slow_ma=520.84, diff=0.0199
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 18:21:00: SELL at price 520.83, fast_ma=520.87, slow_ma=520.87, diff=-0.0003
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 18:24:00: BUY at price 520.92, fast_ma=520.89, slow_ma=520.89, diff=0.0011
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 18:38:00: SELL at price 520.92, fast_ma=520.96, slow_ma=520.98, diff=-0.0159
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 18:48:00: BUY at price 520.73, fast_ma=520.75, slow_ma=520.74, diff=0.0023
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 18:49:00: SELL at price 520.70, fast_ma=520.73, slow_ma=520.73, diff=-0.0072
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 18:51:00: BUY at price 520.80, fast_ma=520.74, slow_ma=520.73, diff=0.0079
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 19:00:00: SELL at price 520.75, fast_ma=520.82, slow_ma=520.84, diff=-0.0207
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 19:09:00: BUY at price 520.83, fast_ma=520.78, slow_ma=520.77, diff=0.0076
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 19:13:00: SELL at price 520.72, fast_ma=520.73, slow_ma=520.76, diff=-0.0385
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 19:27:00: BUY at price 520.66, fast_ma=520.63, slow_ma=520.61, diff=0.0203
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 19:29:00: SELL at price 520.21, fast_ma=520.47, slow_ma=520.55, diff=-0.0775
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 19:41:00: BUY at price 519.80, fast_ma=519.77, slow_ma=519.74, diff=0.0286
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-26 19:43:00: SELL at price 519.55, fast_ma=519.67, slow_ma=519.71, diff=-0.0381
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-27 13:30:00: BUY at price 521.52, fast_ma=519.77, slow_ma=519.11, diff=0.6615
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-27 13:41:00: SELL at price 521.46, fast_ma=521.44, slow_ma=521.44, diff=-0.0075
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-27 13:45:00: BUY at price 521.48, fast_ma=521.44, slow_ma=521.44, diff=0.0034
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-27 13:52:00: SELL at price 521.42, fast_ma=521.53, slow_ma=521.53, diff=-0.0037
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-27 14:10:00: BUY at price 520.14, fast_ma=520.20, slow_ma=520.15, diff=0.0519
+2025-04-30 21:42:27,875 - debug - INFO - 2024-03-27 14:12:00: SELL at price 519.79, fast_ma=519.96, slow_ma=520.07, diff=-0.1036
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 14:15:00: BUY at price 520.35, fast_ma=520.19, slow_ma=520.12, diff=0.0711
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 14:21:00: SELL at price 519.92, fast_ma=520.17, slow_ma=520.18, diff=-0.0060
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 14:30:00: BUY at price 520.08, fast_ma=519.96, slow_ma=519.91, diff=0.0573
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 14:43:00: SELL at price 519.93, fast_ma=520.15, slow_ma=520.20, diff=-0.0555
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 14:55:00: BUY at price 519.81, fast_ma=519.83, slow_ma=519.81, diff=0.0142
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 15:03:00: SELL at price 519.82, fast_ma=519.83, slow_ma=519.86, diff=-0.0305
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 15:08:00: BUY at price 519.94, fast_ma=519.88, slow_ma=519.86, diff=0.0241
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 15:12:00: SELL at price 519.80, fast_ma=519.85, slow_ma=519.87, diff=-0.0199
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 15:14:00: BUY at price 520.00, fast_ma=519.91, slow_ma=519.90, diff=0.0141
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 15:21:00: SELL at price 519.88, fast_ma=519.96, slow_ma=519.97, diff=-0.0032
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 15:36:00: BUY at price 519.78, fast_ma=519.75, slow_ma=519.73, diff=0.0154
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 15:46:00: SELL at price 519.83, fast_ma=519.90, slow_ma=519.91, diff=-0.0063
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 15:49:00: BUY at price 519.87, fast_ma=519.93, slow_ma=519.92, diff=0.0117
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 15:50:00: SELL at price 519.92, fast_ma=519.92, slow_ma=519.93, diff=-0.0093
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 16:06:00: BUY at price 519.75, fast_ma=519.68, slow_ma=519.65, diff=0.0274
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 16:12:00: SELL at price 519.60, fast_ma=519.67, slow_ma=519.67, diff=-0.0005
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 16:18:00: BUY at price 519.82, fast_ma=519.70, slow_ma=519.67, diff=0.0327
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 16:39:00: SELL at price 520.20, fast_ma=520.22, slow_ma=520.24, diff=-0.0139
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 16:42:00: BUY at price 520.35, fast_ma=520.28, slow_ma=520.26, diff=0.0221
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 16:46:00: SELL at price 520.27, fast_ma=520.26, slow_ma=520.26, diff=-0.0012
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 16:47:00: BUY at price 520.28, fast_ma=520.28, slow_ma=520.26, diff=0.0190
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 16:56:00: SELL at price 520.38, fast_ma=520.37, slow_ma=520.37, diff=-0.0057
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 17:03:00: BUY at price 520.34, fast_ma=520.39, slow_ma=520.35, diff=0.0454
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 17:05:00: SELL at price 520.18, fast_ma=520.26, slow_ma=520.32, diff=-0.0576
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 17:14:00: BUY at price 520.08, fast_ma=520.03, slow_ma=520.00, diff=0.0275
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 17:27:00: SELL at price 520.28, fast_ma=520.32, slow_ma=520.32, diff=-0.0003
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 17:31:00: BUY at price 520.43, fast_ma=520.36, slow_ma=520.33, diff=0.0318
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 17:35:00: SELL at price 520.26, fast_ma=520.31, slow_ma=520.33, diff=-0.0174
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 17:46:00: BUY at price 520.29, fast_ma=520.29, slow_ma=520.28, diff=0.0023
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 17:50:00: SELL at price 520.23, fast_ma=520.28, slow_ma=520.28, diff=-0.0022
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 18:11:00: BUY at price 520.16, fast_ma=520.14, slow_ma=520.11, diff=0.0234
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 18:34:00: SELL at price 520.61, fast_ma=520.72, slow_ma=520.81, diff=-0.0820
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 18:43:00: BUY at price 520.50, fast_ma=520.54, slow_ma=520.53, diff=0.0081
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 18:45:00: SELL at price 520.52, fast_ma=520.52, slow_ma=520.52, diff=-0.0006
+2025-04-30 21:42:27,876 - debug - INFO - 2024-03-27 18:46:00: BUY at price 520.57, fast_ma=520.55, slow_ma=520.52, diff=0.0218
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-27 18:49:00: SELL at price 520.37, fast_ma=520.46, slow_ma=520.52, diff=-0.0564
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-27 19:00:00: BUY at price 520.33, fast_ma=520.30, slow_ma=520.29, diff=0.0148
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-27 19:10:00: SELL at price 520.01, fast_ma=520.28, slow_ma=520.40, diff=-0.1219
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-27 19:22:00: BUY at price 520.19, fast_ma=520.11, slow_ma=520.06, diff=0.0538
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 13:34:00: SELL at price 523.01, fast_ma=522.95, slow_ma=522.96, diff=-0.0079
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 13:40:00: BUY at price 523.12, fast_ma=523.03, slow_ma=522.95, diff=0.0765
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 13:54:00: SELL at price 523.37, fast_ma=523.41, slow_ma=523.44, diff=-0.0319
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 14:01:00: BUY at price 523.49, fast_ma=523.37, slow_ma=523.37, diff=0.0067
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 14:08:00: SELL at price 523.30, fast_ma=523.41, slow_ma=523.47, diff=-0.0585
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 14:25:00: BUY at price 523.16, fast_ma=523.08, slow_ma=523.07, diff=0.0109
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 14:33:00: SELL at price 523.22, fast_ma=523.17, slow_ma=523.17, diff=-0.0010
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 14:34:00: BUY at price 523.25, fast_ma=523.19, slow_ma=523.19, diff=0.0018
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 14:42:00: SELL at price 523.31, fast_ma=523.31, slow_ma=523.33, diff=-0.0252
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 14:44:00: BUY at price 523.42, fast_ma=523.38, slow_ma=523.37, diff=0.0082
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 14:47:00: SELL at price 523.27, fast_ma=523.34, slow_ma=523.35, diff=-0.0060
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 14:50:00: BUY at price 523.48, fast_ma=523.38, slow_ma=523.36, diff=0.0197
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 14:59:00: SELL at price 523.43, fast_ma=523.43, slow_ma=523.44, diff=-0.0099
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 15:00:00: BUY at price 523.48, fast_ma=523.45, slow_ma=523.44, diff=0.0135
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 15:02:00: SELL at price 523.36, fast_ma=523.42, slow_ma=523.43, diff=-0.0082
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 15:05:00: BUY at price 523.58, fast_ma=523.44, slow_ma=523.43, diff=0.0078
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 15:07:00: SELL at price 523.25, fast_ma=523.41, slow_ma=523.41, diff=-0.0033
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 15:14:00: BUY at price 523.40, fast_ma=523.33, slow_ma=523.31, diff=0.0180
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 15:28:00: SELL at price 523.56, fast_ma=523.53, slow_ma=523.54, diff=-0.0030
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 15:30:00: BUY at price 523.62, fast_ma=523.58, slow_ma=523.55, diff=0.0353
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 15:35:00: SELL at price 523.48, fast_ma=523.53, slow_ma=523.57, diff=-0.0406
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 15:48:00: BUY at price 523.50, fast_ma=523.39, slow_ma=523.38, diff=0.0047
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 15:57:00: SELL at price 523.54, fast_ma=523.54, slow_ma=523.54, diff=-0.0052
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 15:59:00: BUY at price 523.59, fast_ma=523.58, slow_ma=523.56, diff=0.0231
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 16:01:00: SELL at price 523.48, fast_ma=523.53, slow_ma=523.56, diff=-0.0232
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 16:13:00: BUY at price 523.41, fast_ma=523.37, slow_ma=523.35, diff=0.0203
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 16:18:00: SELL at price 523.27, fast_ma=523.34, slow_ma=523.35, diff=-0.0088
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 16:27:00: BUY at price 523.34, fast_ma=523.31, slow_ma=523.27, diff=0.0375
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 16:32:00: SELL at price 523.19, fast_ma=523.20, slow_ma=523.28, diff=-0.0784
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 16:39:00: BUY at price 523.22, fast_ma=523.23, slow_ma=523.20, diff=0.0282
+2025-04-30 21:42:27,877 - debug - INFO - 2024-03-28 16:41:00: SELL at price 523.20, fast_ma=523.19, slow_ma=523.20, diff=-0.0063
+2025-04-30 21:42:27,878 - debug - INFO - 2024-03-28 16:42:00: BUY at price 523.30, fast_ma=523.22, slow_ma=523.21, diff=0.0093
+2025-04-30 21:42:27,878 - debug - INFO - 2024-03-28 16:45:00: SELL at price 523.15, fast_ma=523.19, slow_ma=523.21, diff=-0.0178
+2025-04-30 21:42:27,878 - debug - INFO - 2024-03-28 16:47:00: BUY at price 523.27, fast_ma=523.23, slow_ma=523.22, diff=0.0118
+2025-04-30 21:42:27,878 - debug - INFO - 2024-03-28 16:54:00: SELL at price 523.31, fast_ma=523.25, slow_ma=523.25, diff=-0.0017
+2025-04-30 21:42:27,878 - debug - INFO - 2024-03-28 16:55:00: BUY at price 523.28, fast_ma=523.27, slow_ma=523.26, diff=0.0153
+2025-04-30 21:42:27,878 - debug - INFO - 2024-03-28 16:58:00: SELL at price 523.19, fast_ma=523.23, slow_ma=523.25, diff=-0.0219
+2025-04-30 21:42:27,878 - debug - INFO - 2024-03-28 17:04:00: BUY at price 523.24, fast_ma=523.25, slow_ma=523.24, diff=0.0122
+2025-04-30 21:42:27,878 - debug - WARNING - Found 2 NaN values in fast MA - this is normal for the first 2 rows
+2025-04-30 21:42:27,878 - debug - WARNING - Found 9 NaN values in slow MA - this is normal for the first 9 rows
+2025-04-30 21:42:27,878 - debug - INFO - 
+
+===== Testing MA windows: fast=10, slow=30 =====
+2025-04-30 21:42:27,878 - debug - INFO - Running MA Crossover simulation with fast=10, slow=30
+2025-04-30 21:42:27,878 - debug - INFO - Price column 'Close' not found, using 'Close' instead
+2025-04-30 21:42:27,879 - debug - INFO - Generated 22 buy signals and 21 sell signals
+2025-04-30 21:42:27,879 - debug - INFO - Signals generated:
+2025-04-30 21:42:27,879 - debug - INFO - 2024-03-26 14:00:00: BUY at price 521.35, fast_ma=521.12, slow_ma=521.12, diff=0.0009
+2025-04-30 21:42:27,879 - debug - INFO - 2024-03-26 14:29:00: SELL at price 521.07, fast_ma=521.30, slow_ma=521.31, diff=-0.0092
+2025-04-30 21:42:27,879 - debug - INFO - 2024-03-26 14:54:00: BUY at price 521.17, fast_ma=521.06, slow_ma=521.06, diff=0.0037
+2025-04-30 21:42:27,879 - debug - INFO - 2024-03-26 15:20:00: SELL at price 521.18, fast_ma=521.21, slow_ma=521.22, diff=-0.0083
+2025-04-30 21:42:27,879 - debug - INFO - 2024-03-26 15:25:00: BUY at price 521.38, fast_ma=521.26, slow_ma=521.25, diff=0.0122
+2025-04-30 21:42:27,879 - debug - INFO - 2024-03-26 15:38:00: SELL at price 521.13, fast_ma=521.24, slow_ma=521.26, diff=-0.0179
+2025-04-30 21:42:27,879 - debug - INFO - 2024-03-26 15:54:00: BUY at price 521.40, fast_ma=521.25, slow_ma=521.25, diff=0.0044
+2025-04-30 21:42:27,879 - debug - INFO - 2024-03-26 16:09:00: SELL at price 521.20, fast_ma=521.26, slow_ma=521.27, diff=-0.0012
+2025-04-30 21:42:27,879 - debug - INFO - 2024-03-26 17:11:00: BUY at price 520.90, fast_ma=520.91, slow_ma=520.91, diff=0.0027
+2025-04-30 21:42:27,879 - debug - INFO - 2024-03-26 17:22:00: SELL at price 520.82, fast_ma=520.88, slow_ma=520.88, diff=-0.0082
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-26 17:35:00: BUY at price 520.97, fast_ma=520.89, slow_ma=520.88, diff=0.0029
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-26 17:44:00: SELL at price 520.69, fast_ma=520.84, slow_ma=520.85, diff=-0.0100
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-26 18:03:00: BUY at price 520.85, fast_ma=520.76, slow_ma=520.75, diff=0.0097
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-26 18:42:00: SELL at price 520.72, fast_ma=520.89, slow_ma=520.91, diff=-0.0119
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-26 19:00:00: BUY at price 520.75, fast_ma=520.84, slow_ma=520.84, diff=0.0057
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-26 19:07:00: SELL at price 520.72, fast_ma=520.78, slow_ma=520.78, diff=-0.0048
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-27 13:32:00: BUY at price 521.45, fast_ma=519.59, slow_ma=519.49, diff=0.1006
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-27 13:58:00: SELL at price 521.01, fast_ma=521.24, slow_ma=521.32, diff=-0.0783
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-27 14:37:00: BUY at price 520.27, fast_ma=520.10, slow_ma=520.08, diff=0.0114
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-27 14:49:00: SELL at price 519.67, fast_ma=520.01, slow_ma=520.03, diff=-0.0189
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-27 15:11:00: BUY at price 519.81, fast_ma=519.87, slow_ma=519.87, diff=0.0011
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-27 15:30:00: SELL at price 519.74, fast_ma=519.90, slow_ma=519.91, diff=-0.0142
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-27 15:44:00: BUY at price 519.99, fast_ma=519.89, slow_ma=519.88, diff=0.0118
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-27 15:58:00: SELL at price 519.65, fast_ma=519.82, slow_ma=519.82, diff=-0.0006
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-27 16:22:00: BUY at price 519.93, fast_ma=519.74, slow_ma=519.71, diff=0.0280
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-27 17:06:00: SELL at price 520.17, fast_ma=520.30, slow_ma=520.31, diff=-0.0102
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-27 17:22:00: BUY at price 520.39, fast_ma=520.20, slow_ma=520.20, diff=0.0033
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-27 17:44:00: SELL at price 520.27, fast_ma=520.28, slow_ma=520.29, diff=-0.0086
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-27 18:16:00: BUY at price 520.43, fast_ma=520.21, slow_ma=520.19, diff=0.0161
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-27 18:41:00: SELL at price 520.57, fast_ma=520.58, slow_ma=520.62, diff=-0.0390
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-27 19:08:00: BUY at price 520.50, fast_ma=520.43, slow_ma=520.42, diff=0.0096
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-27 19:11:00: SELL at price 519.98, fast_ma=520.36, slow_ma=520.38, diff=-0.0182
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-27 19:28:00: BUY at price 520.89, fast_ma=520.36, slow_ma=520.28, diff=0.0747
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-28 14:12:00: SELL at price 523.05, fast_ma=523.37, slow_ma=523.38, diff=-0.0176
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-28 14:34:00: BUY at price 523.25, fast_ma=523.19, slow_ma=523.18, diff=0.0139
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-28 15:09:00: SELL at price 523.27, fast_ma=523.37, slow_ma=523.38, diff=-0.0099
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-28 15:20:00: BUY at price 523.53, fast_ma=523.42, slow_ma=523.40, diff=0.0208
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-28 15:41:00: SELL at price 523.44, fast_ma=523.47, slow_ma=523.50, diff=-0.0257
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-28 15:55:00: BUY at price 523.57, fast_ma=523.51, slow_ma=523.49, diff=0.0152
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-28 16:08:00: SELL at price 523.32, fast_ma=523.43, slow_ma=523.46, diff=-0.0246
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-28 16:51:00: BUY at price 523.29, fast_ma=523.25, slow_ma=523.24, diff=0.0053
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-28 16:52:00: SELL at price 523.19, fast_ma=523.23, slow_ma=523.24, diff=-0.0060
+2025-04-30 21:42:27,880 - debug - INFO - 2024-03-28 16:54:00: BUY at price 523.31, fast_ma=523.25, slow_ma=523.24, diff=0.0018
+2025-04-30 21:42:27,880 - debug - WARNING - Found 9 NaN values in fast MA - this is normal for the first 9 rows
+2025-04-30 21:42:27,881 - debug - WARNING - Found 29 NaN values in slow MA - this is normal for the first 29 rows
+2025-04-30 21:42:27,881 - debug - INFO - 
+
+===== Testing MA windows: fast=2, slow=5 =====
+2025-04-30 21:42:27,881 - debug - INFO - Running MA Crossover simulation with fast=2, slow=5
+2025-04-30 21:42:27,881 - debug - INFO - Price column 'Close' not found, using 'Close' instead
+2025-04-30 21:42:27,882 - debug - INFO - Generated 117 buy signals and 118 sell signals
+2025-04-30 21:42:27,882 - debug - INFO - Signals generated:
+2025-04-30 21:42:27,882 - debug - INFO - 2024-03-26 13:36:00: SELL at price 521.12, fast_ma=521.12, slow_ma=521.22, diff=-0.0990
+2025-04-30 21:42:27,882 - debug - INFO - 2024-03-26 13:43:00: BUY at price 521.09, fast_ma=520.99, slow_ma=520.99, diff=0.0016
+2025-04-30 21:42:27,882 - debug - INFO - 2024-03-26 13:47:00: SELL at price 521.09, fast_ma=521.10, slow_ma=521.10, diff=-0.0012
+2025-04-30 21:42:27,882 - debug - INFO - 2024-03-26 13:48:00: BUY at price 521.17, fast_ma=521.13, slow_ma=521.12, diff=0.0118
+2025-04-30 21:42:27,882 - debug - INFO - 2024-03-26 13:51:00: SELL at price 521.08, fast_ma=521.15, slow_ma=521.15, diff=-0.0015
+2025-04-30 21:42:27,882 - debug - INFO - 2024-03-26 13:56:00: BUY at price 521.14, fast_ma=521.09, slow_ma=521.05, diff=0.0391
+2025-04-30 21:42:27,882 - debug - INFO - 2024-03-26 14:03:00: SELL at price 521.25, fast_ma=521.27, slow_ma=521.28, diff=-0.0140
+2025-04-30 21:42:27,882 - debug - INFO - 2024-03-26 14:05:00: BUY at price 521.31, fast_ma=521.32, slow_ma=521.29, diff=0.0280
+2025-04-30 21:42:27,882 - debug - INFO - 2024-03-26 14:09:00: SELL at price 521.30, fast_ma=521.34, slow_ma=521.34, diff=-0.0040
+2025-04-30 21:42:27,882 - debug - INFO - 2024-03-26 14:13:00: BUY at price 521.30, fast_ma=521.30, slow_ma=521.24, diff=0.0540
+2025-04-30 21:42:27,882 - debug - INFO - 2024-03-26 14:16:00: SELL at price 521.32, fast_ma=521.30, slow_ma=521.30, diff=-0.0055
+2025-04-30 21:42:27,882 - debug - INFO - 2024-03-26 14:17:00: BUY at price 521.38, fast_ma=521.35, slow_ma=521.32, diff=0.0290
+2025-04-30 21:42:27,882 - debug - INFO - 2024-03-26 14:21:00: SELL at price 521.36, fast_ma=521.39, slow_ma=521.41, diff=-0.0245
+2025-04-30 21:42:27,882 - debug - INFO - 2024-03-26 14:24:00: BUY at price 521.43, fast_ma=521.40, slow_ma=521.39, diff=0.0165
+2025-04-30 21:42:27,882 - debug - INFO - 2024-03-26 14:26:00: SELL at price 521.34, fast_ma=521.32, slow_ma=521.36, diff=-0.0390
+2025-04-30 21:42:27,882 - debug - INFO - 2024-03-26 14:34:00: BUY at price 520.99, fast_ma=520.94, slow_ma=520.91, diff=0.0280
+2025-04-30 21:42:27,882 - debug - INFO - 2024-03-26 14:41:00: SELL at price 521.06, fast_ma=521.02, slow_ma=521.05, diff=-0.0285
+2025-04-30 21:42:27,882 - debug - INFO - 2024-03-26 14:42:00: BUY at price 521.06, fast_ma=521.06, slow_ma=521.06, diff=0.0030
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 14:45:00: SELL at price 521.01, fast_ma=521.06, slow_ma=521.08, diff=-0.0260
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 14:47:00: BUY at price 521.14, fast_ma=521.10, slow_ma=521.10, diff=0.0028
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 14:48:00: SELL at price 520.96, fast_ma=521.05, slow_ma=521.05, diff=-0.0039
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 14:51:00: BUY at price 521.09, fast_ma=521.05, slow_ma=521.03, diff=0.0190
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 15:02:00: SELL at price 521.29, fast_ma=521.30, slow_ma=521.30, diff=-0.0029
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 15:09:00: BUY at price 521.26, fast_ma=521.24, slow_ma=521.22, diff=0.0111
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 15:12:00: SELL at price 521.19, fast_ma=521.23, slow_ma=521.25, diff=-0.0200
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 15:18:00: BUY at price 521.29, fast_ma=521.25, slow_ma=521.22, diff=0.0330
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 15:20:00: SELL at price 521.18, fast_ma=521.20, slow_ma=521.21, diff=-0.0190
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 15:22:00: BUY at price 521.30, fast_ma=521.29, slow_ma=521.25, diff=0.0395
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 15:29:00: SELL at price 521.28, fast_ma=521.32, slow_ma=521.34, diff=-0.0225
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 15:33:00: BUY at price 521.28, fast_ma=521.26, slow_ma=521.26, diff=0.0035
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 15:36:00: SELL at price 521.23, fast_ma=521.25, slow_ma=521.25, diff=-0.0080
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 15:42:00: BUY at price 521.21, fast_ma=521.22, slow_ma=521.17, diff=0.0490
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 15:44:00: SELL at price 521.19, fast_ma=521.17, slow_ma=521.18, diff=-0.0060
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 15:50:00: BUY at price 521.28, fast_ma=521.19, slow_ma=521.17, diff=0.0280
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 15:58:00: SELL at price 521.40, fast_ma=521.38, slow_ma=521.39, diff=-0.0127
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 15:59:00: BUY at price 521.40, fast_ma=521.40, slow_ma=521.39, diff=0.0089
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 16:02:00: SELL at price 521.31, fast_ma=521.34, slow_ma=521.38, diff=-0.0363
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 16:08:00: BUY at price 521.21, fast_ma=521.23, slow_ma=521.21, diff=0.0176
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 16:09:00: SELL at price 521.20, fast_ma=521.20, slow_ma=521.20, diff=-0.0029
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 16:12:00: BUY at price 521.18, fast_ma=521.20, slow_ma=521.20, diff=0.0023
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 16:13:00: SELL at price 521.15, fast_ma=521.17, slow_ma=521.19, diff=-0.0245
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 16:18:00: BUY at price 521.21, fast_ma=521.18, slow_ma=521.16, diff=0.0161
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 16:20:00: SELL at price 521.00, fast_ma=521.06, slow_ma=521.12, diff=-0.0596
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 16:24:00: BUY at price 521.02, fast_ma=521.01, slow_ma=521.00, diff=0.0150
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 16:25:00: SELL at price 520.96, fast_ma=520.99, slow_ma=520.99, diff=-0.0020
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 16:28:00: BUY at price 521.11, fast_ma=521.05, slow_ma=521.01, diff=0.0380
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 16:32:00: SELL at price 521.01, fast_ma=521.04, slow_ma=521.09, diff=-0.0416
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 16:36:00: BUY at price 520.99, fast_ma=521.02, slow_ma=521.01, diff=0.0150
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 16:37:00: SELL at price 520.98, fast_ma=520.99, slow_ma=521.00, diff=-0.0190
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 16:43:00: BUY at price 520.95, fast_ma=520.96, slow_ma=520.95, diff=0.0053
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 16:44:00: SELL at price 520.92, fast_ma=520.93, slow_ma=520.94, diff=-0.0057
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 16:47:00: BUY at price 520.96, fast_ma=520.93, slow_ma=520.92, diff=0.0100
+2025-04-30 21:42:27,883 - debug - INFO - 2024-03-26 16:52:00: SELL at price 520.88, fast_ma=520.92, slow_ma=520.97, diff=-0.0514
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 16:56:00: BUY at price 520.87, fast_ma=520.88, slow_ma=520.88, diff=0.0030
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 16:58:00: SELL at price 520.84, fast_ma=520.87, slow_ma=520.87, diff=-0.0015
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 17:03:00: BUY at price 520.90, fast_ma=520.86, slow_ma=520.83, diff=0.0240
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 17:09:00: SELL at price 520.93, fast_ma=520.94, slow_ma=520.95, diff=-0.0170
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 17:12:00: BUY at price 520.94, fast_ma=520.92, slow_ma=520.92, diff=0.0017
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 17:16:00: SELL at price 520.89, fast_ma=520.93, slow_ma=520.95, diff=-0.0150
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 17:27:00: BUY at price 520.76, fast_ma=520.78, slow_ma=520.78, diff=0.0030
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 17:37:00: SELL at price 520.85, fast_ma=520.88, slow_ma=520.93, diff=-0.0450
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 17:42:00: BUY at price 520.83, fast_ma=520.83, slow_ma=520.83, diff=0.0032
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 17:44:00: SELL at price 520.69, fast_ma=520.75, slow_ma=520.79, diff=-0.0444
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 17:49:00: BUY at price 520.63, fast_ma=520.61, slow_ma=520.61, diff=0.0005
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 17:52:00: SELL at price 520.57, fast_ma=520.61, slow_ma=520.61, diff=-0.0060
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 17:54:00: BUY at price 520.72, fast_ma=520.65, slow_ma=520.63, diff=0.0255
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 17:58:00: SELL at price 520.73, fast_ma=520.73, slow_ma=520.74, diff=-0.0180
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 18:01:00: BUY at price 520.79, fast_ma=520.75, slow_ma=520.72, diff=0.0312
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 18:09:00: SELL at price 520.83, fast_ma=520.87, slow_ma=520.87, diff=-0.0003
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 18:14:00: BUY at price 520.85, fast_ma=520.83, slow_ma=520.79, diff=0.0412
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 18:20:00: SELL at price 520.84, fast_ma=520.88, slow_ma=520.90, diff=-0.0203
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 18:23:00: BUY at price 520.91, fast_ma=520.88, slow_ma=520.87, diff=0.0105
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 18:30:00: SELL at price 520.93, fast_ma=520.95, slow_ma=520.96, diff=-0.0087
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 18:32:00: BUY at price 520.98, fast_ma=520.99, slow_ma=520.97, diff=0.0200
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 18:36:00: SELL at price 520.96, fast_ma=520.97, slow_ma=520.99, diff=-0.0126
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 18:46:00: BUY at price 520.75, fast_ma=520.72, slow_ma=520.72, diff=0.0013
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 18:49:00: SELL at price 520.70, fast_ma=520.71, slow_ma=520.72, diff=-0.0147
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 18:51:00: BUY at price 520.80, fast_ma=520.76, slow_ma=520.74, diff=0.0203
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 18:59:00: SELL at price 520.85, fast_ma=520.86, slow_ma=520.88, diff=-0.0200
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 19:08:00: BUY at price 520.78, fast_ma=520.75, slow_ma=520.75, diff=0.0020
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 19:12:00: SELL at price 520.71, fast_ma=520.73, slow_ma=520.79, diff=-0.0620
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 19:16:00: BUY at price 520.74, fast_ma=520.72, slow_ma=520.71, diff=0.0065
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 19:18:00: SELL at price 520.67, fast_ma=520.71, slow_ma=520.71, diff=-0.0025
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 19:23:00: BUY at price 520.59, fast_ma=520.59, slow_ma=520.59, diff=0.0060
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 19:29:00: SELL at price 520.21, fast_ma=520.38, slow_ma=520.53, diff=-0.1480
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 19:40:00: BUY at price 519.88, fast_ma=519.76, slow_ma=519.72, diff=0.0413
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 19:43:00: SELL at price 519.55, fast_ma=519.61, slow_ma=519.71, diff=-0.0974
+2025-04-30 21:42:27,884 - debug - INFO - 2024-03-26 19:51:00: BUY at price 519.09, fast_ma=519.15, slow_ma=519.15, diff=0.0095
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-26 19:52:00: SELL at price 519.08, fast_ma=519.08, slow_ma=519.11, diff=-0.0320
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-26 19:54:00: BUY at price 519.14, fast_ma=519.13, slow_ma=519.13, diff=0.0010
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-26 19:55:00: SELL at price 518.87, fast_ma=519.00, slow_ma=519.06, diff=-0.0555
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-26 20:00:00: BUY at price 519.13, fast_ma=518.89, slow_ma=518.67, diff=0.2221
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 13:34:00: SELL at price 521.45, fast_ma=521.45, slow_ma=521.49, diff=-0.0385
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 13:38:00: BUY at price 521.52, fast_ma=521.49, slow_ma=521.44, diff=0.0446
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 13:40:00: SELL at price 521.36, fast_ma=521.42, slow_ma=521.43, diff=-0.0087
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 13:44:00: BUY at price 521.44, fast_ma=521.42, slow_ma=521.42, diff=0.0038
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 13:51:00: SELL at price 521.53, fast_ma=521.58, slow_ma=521.60, diff=-0.0205
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 13:59:00: BUY at price 520.89, fast_ma=520.95, slow_ma=520.94, diff=0.0088
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 14:00:00: SELL at price 520.90, fast_ma=520.89, slow_ma=520.92, diff=-0.0272
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 14:06:00: BUY at price 520.11, fast_ma=520.12, slow_ma=520.05, diff=0.0680
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 14:10:00: SELL at price 520.14, fast_ma=520.16, slow_ma=520.17, diff=-0.0078
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 14:14:00: BUY at price 520.15, fast_ma=520.11, slow_ma=520.02, diff=0.0875
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 14:20:00: SELL at price 520.22, fast_ma=520.30, slow_ma=520.30, diff=-0.0020
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 14:27:00: BUY at price 519.92, fast_ma=519.92, slow_ma=519.87, diff=0.0480
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 14:42:00: SELL at price 520.09, fast_ma=520.26, slow_ma=520.26, diff=-0.0057
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 14:46:00: BUY at price 520.00, fast_ma=520.02, slow_ma=520.00, diff=0.0238
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 14:47:00: SELL at price 519.89, fast_ma=519.95, slow_ma=519.96, diff=-0.0145
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 14:53:00: BUY at price 519.78, fast_ma=519.75, slow_ma=519.73, diff=0.0205
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 15:02:00: SELL at price 519.80, fast_ma=519.83, slow_ma=519.87, diff=-0.0394
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 15:05:00: BUY at price 519.84, fast_ma=519.84, slow_ma=519.83, diff=0.0098
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 15:06:00: SELL at price 519.77, fast_ma=519.81, slow_ma=519.82, diff=-0.0107
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 15:07:00: BUY at price 519.92, fast_ma=519.85, slow_ma=519.84, diff=0.0090
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 15:11:00: SELL at price 519.81, fast_ma=519.88, slow_ma=519.93, diff=-0.0512
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 15:14:00: BUY at price 520.00, fast_ma=519.96, slow_ma=519.90, diff=0.0680
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 15:20:00: SELL at price 519.96, fast_ma=520.00, slow_ma=520.03, diff=-0.0270
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 15:23:00: BUY at price 520.01, fast_ma=520.02, slow_ma=519.99, diff=0.0340
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 15:24:00: SELL at price 519.88, fast_ma=519.94, slow_ma=519.95, diff=-0.0070
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 15:27:00: BUY at price 519.99, fast_ma=519.99, slow_ma=519.95, diff=0.0310
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 15:28:00: SELL at price 519.86, fast_ma=519.92, slow_ma=519.92, diff=-0.0005
+2025-04-30 21:42:27,885 - debug - INFO - 2024-03-27 15:34:00: BUY at price 519.68, fast_ma=519.67, slow_ma=519.65, diff=0.0241
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 15:40:00: SELL at price 519.81, fast_ma=519.83, slow_ma=519.85, diff=-0.0169
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 15:42:00: BUY at price 519.97, fast_ma=519.94, slow_ma=519.89, diff=0.0515
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 15:45:00: SELL at price 519.89, fast_ma=519.94, slow_ma=519.96, diff=-0.0175
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 15:48:00: BUY at price 519.98, fast_ma=519.97, slow_ma=519.93, diff=0.0380
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 15:50:00: SELL at price 519.92, fast_ma=519.90, slow_ma=519.91, diff=-0.0132
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 15:56:00: BUY at price 519.93, fast_ma=519.89, slow_ma=519.84, diff=0.0505
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 15:58:00: SELL at price 519.65, fast_ma=519.70, slow_ma=519.79, diff=-0.0860
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:02:00: BUY at price 519.66, fast_ma=519.64, slow_ma=519.63, diff=0.0183
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:04:00: SELL at price 519.65, fast_ma=519.62, slow_ma=519.63, diff=-0.0172
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:05:00: BUY at price 519.63, fast_ma=519.64, slow_ma=519.63, diff=0.0093
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:09:00: SELL at price 519.68, fast_ma=519.68, slow_ma=519.69, diff=-0.0079
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:11:00: BUY at price 519.70, fast_ma=519.70, slow_ma=519.69, diff=0.0088
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:12:00: SELL at price 519.60, fast_ma=519.65, slow_ma=519.67, diff=-0.0262
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:15:00: BUY at price 519.62, fast_ma=519.64, slow_ma=519.64, diff=0.0020
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:16:00: SELL at price 519.58, fast_ma=519.60, slow_ma=519.62, diff=-0.0175
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:17:00: BUY at price 519.71, fast_ma=519.64, slow_ma=519.64, diff=0.0080
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:36:00: SELL at price 520.27, fast_ma=520.26, slow_ma=520.27, diff=-0.0065
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:37:00: BUY at price 520.27, fast_ma=520.27, slow_ma=520.27, diff=0.0030
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:38:00: SELL at price 520.21, fast_ma=520.24, slow_ma=520.26, diff=-0.0205
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:41:00: BUY at price 520.23, fast_ma=520.25, slow_ma=520.23, diff=0.0123
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:44:00: SELL at price 520.22, fast_ma=520.26, slow_ma=520.27, diff=-0.0135
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:47:00: BUY at price 520.28, fast_ma=520.28, slow_ma=520.27, diff=0.0075
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:52:00: SELL at price 520.31, fast_ma=520.35, slow_ma=520.39, diff=-0.0468
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:54:00: BUY at price 520.41, fast_ma=520.39, slow_ma=520.37, diff=0.0152
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:56:00: SELL at price 520.38, fast_ma=520.35, slow_ma=520.36, diff=-0.0118
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:57:00: BUY at price 520.42, fast_ma=520.40, slow_ma=520.38, diff=0.0220
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 16:58:00: SELL at price 520.30, fast_ma=520.36, slow_ma=520.36, diff=-0.0042
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 17:02:00: BUY at price 520.41, fast_ma=520.42, slow_ma=520.32, diff=0.0962
+2025-04-30 21:42:27,886 - debug - INFO - 2024-03-27 17:04:00: SELL at price 520.27, fast_ma=520.31, slow_ma=520.32, diff=-0.0190
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 17:13:00: BUY at price 520.04, fast_ma=520.00, slow_ma=519.91, diff=0.0895
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 17:24:00: SELL at price 520.33, fast_ma=520.32, slow_ma=520.34, diff=-0.0250
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 17:30:00: BUY at price 520.34, fast_ma=520.33, slow_ma=520.31, diff=0.0220
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 17:34:00: SELL at price 520.34, fast_ma=520.34, slow_ma=520.37, diff=-0.0275
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 17:37:00: BUY at price 520.34, fast_ma=520.34, slow_ma=520.32, diff=0.0128
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 17:39:00: SELL at price 520.25, fast_ma=520.29, slow_ma=520.30, diff=-0.0097
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 17:42:00: BUY at price 520.34, fast_ma=520.30, slow_ma=520.29, diff=0.0090
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 17:44:00: SELL at price 520.27, fast_ma=520.24, slow_ma=520.27, diff=-0.0249
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 17:45:00: BUY at price 520.30, fast_ma=520.29, slow_ma=520.27, diff=0.0111
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 17:50:00: SELL at price 520.23, fast_ma=520.26, slow_ma=520.28, diff=-0.0237
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 17:55:00: BUY at price 520.24, fast_ma=520.18, slow_ma=520.18, diff=0.0020
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 17:58:00: SELL at price 520.18, fast_ma=520.17, slow_ma=520.19, diff=-0.0150
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 18:02:00: BUY at price 520.12, fast_ma=520.18, slow_ma=520.16, diff=0.0197
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 18:03:00: SELL at price 520.13, fast_ma=520.13, slow_ma=520.15, diff=-0.0253
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 18:09:00: BUY at price 520.16, fast_ma=520.13, slow_ma=520.11, diff=0.0253
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 18:25:00: SELL at price 520.82, fast_ma=520.76, slow_ma=520.76, diff=-0.0016
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 18:26:00: BUY at price 520.81, fast_ma=520.81, slow_ma=520.77, diff=0.0394
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 18:33:00: SELL at price 520.72, fast_ma=520.78, slow_ma=520.84, diff=-0.0550
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 18:41:00: BUY at price 520.57, fast_ma=520.55, slow_ma=520.51, diff=0.0352
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 18:44:00: SELL at price 520.54, fast_ma=520.52, slow_ma=520.54, diff=-0.0153
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 18:46:00: BUY at price 520.57, fast_ma=520.55, slow_ma=520.54, diff=0.0095
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 18:48:00: SELL at price 520.45, fast_ma=520.50, slow_ma=520.53, diff=-0.0250
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 18:58:00: BUY at price 520.31, fast_ma=520.30, slow_ma=520.25, diff=0.0530
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 19:09:00: SELL at price 520.33, fast_ma=520.41, slow_ma=520.47, diff=-0.0592
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 19:14:00: BUY at price 520.14, fast_ma=520.13, slow_ma=520.05, diff=0.0800
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 19:16:00: SELL at price 520.00, fast_ma=520.05, slow_ma=520.08, diff=-0.0285
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 19:20:00: BUY at price 520.01, fast_ma=519.99, slow_ma=519.98, diff=0.0100
+2025-04-30 21:42:27,887 - debug - INFO - 2024-03-27 19:47:00: SELL at price 522.17, fast_ma=522.20, slow_ma=522.26, diff=-0.0665
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-27 19:50:00: BUY at price 522.65, fast_ma=522.40, slow_ma=522.30, diff=0.0977
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 13:31:00: SELL at price 522.94, fast_ma=523.00, slow_ma=523.05, diff=-0.0480
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 13:35:00: BUY at price 522.91, fast_ma=522.96, slow_ma=522.94, diff=0.0190
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 13:36:00: SELL at price 522.90, fast_ma=522.90, slow_ma=522.93, diff=-0.0280
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 13:38:00: BUY at price 523.04, fast_ma=522.94, slow_ma=522.94, diff=0.0000
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 13:49:00: SELL at price 523.35, fast_ma=523.37, slow_ma=523.47, diff=-0.0976
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 13:52:00: BUY at price 523.44, fast_ma=523.43, slow_ma=523.40, diff=0.0310
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 13:54:00: SELL at price 523.37, fast_ma=523.39, slow_ma=523.41, diff=-0.0205
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 14:00:00: BUY at price 523.39, fast_ma=523.32, slow_ma=523.31, diff=0.0090
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 14:05:00: SELL at price 523.47, fast_ma=523.55, slow_ma=523.56, diff=-0.0150
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 14:15:00: BUY at price 523.20, fast_ma=523.18, slow_ma=523.14, diff=0.0410
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 14:17:00: SELL at price 523.09, fast_ma=523.10, slow_ma=523.13, diff=-0.0280
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 14:24:00: BUY at price 523.04, fast_ma=523.04, slow_ma=523.03, diff=0.0117
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 14:30:00: SELL at price 523.23, fast_ma=523.19, slow_ma=523.20, diff=-0.0090
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 14:34:00: BUY at price 523.25, fast_ma=523.24, slow_ma=523.20, diff=0.0370
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 14:39:00: SELL at price 523.35, fast_ma=523.35, slow_ma=523.39, diff=-0.0380
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 14:43:00: BUY at price 523.40, fast_ma=523.36, slow_ma=523.33, diff=0.0200
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 14:46:00: SELL at price 523.36, fast_ma=523.38, slow_ma=523.38, diff=-0.0010
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 14:50:00: BUY at price 523.48, fast_ma=523.42, slow_ma=523.35, diff=0.0641
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 14:53:00: SELL at price 523.39, fast_ma=523.40, slow_ma=523.41, diff=-0.0080
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 14:55:00: BUY at price 523.49, fast_ma=523.47, slow_ma=523.43, diff=0.0345
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 14:57:00: SELL at price 523.41, fast_ma=523.42, slow_ma=523.44, diff=-0.0100
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 15:00:00: BUY at price 523.48, fast_ma=523.45, slow_ma=523.44, diff=0.0150
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 15:02:00: SELL at price 523.36, fast_ma=523.39, slow_ma=523.43, diff=-0.0330
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 15:05:00: BUY at price 523.58, fast_ma=523.50, slow_ma=523.42, diff=0.0815
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 15:07:00: SELL at price 523.25, fast_ma=523.32, slow_ma=523.39, diff=-0.0695
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 15:13:00: BUY at price 523.34, fast_ma=523.29, slow_ma=523.24, diff=0.0440
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 15:21:00: SELL at price 523.47, fast_ma=523.50, slow_ma=523.51, diff=-0.0170
+2025-04-30 21:42:27,888 - debug - INFO - 2024-03-28 15:23:00: BUY at price 523.53, fast_ma=523.54, slow_ma=523.53, diff=0.0130
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 15:27:00: SELL at price 523.49, fast_ma=523.52, slow_ma=523.54, diff=-0.0205
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 15:29:00: BUY at price 523.57, fast_ma=523.57, slow_ma=523.55, diff=0.0140
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 15:33:00: SELL at price 523.59, fast_ma=523.61, slow_ma=523.62, diff=-0.0080
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 15:41:00: BUY at price 523.44, fast_ma=523.43, slow_ma=523.42, diff=0.0170
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 15:44:00: SELL at price 523.30, fast_ma=523.36, slow_ma=523.40, diff=-0.0450
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 15:48:00: BUY at price 523.50, fast_ma=523.41, slow_ma=523.36, diff=0.0590
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 15:56:00: SELL at price 523.50, fast_ma=523.54, slow_ma=523.56, diff=-0.0271
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 15:58:00: BUY at price 523.61, fast_ma=523.58, slow_ma=523.56, diff=0.0164
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 16:01:00: SELL at price 523.48, fast_ma=523.50, slow_ma=523.55, diff=-0.0460
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 16:10:00: BUY at price 523.30, fast_ma=523.31, slow_ma=523.30, diff=0.0137
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 16:15:00: SELL at price 523.37, fast_ma=523.35, slow_ma=523.36, diff=-0.0115
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 16:21:00: BUY at price 523.34, fast_ma=523.34, slow_ma=523.32, diff=0.0195
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 16:22:00: SELL at price 523.18, fast_ma=523.26, slow_ma=523.27, diff=-0.0175
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 16:26:00: BUY at price 523.38, fast_ma=523.30, slow_ma=523.24, diff=0.0570
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 16:31:00: SELL at price 523.15, fast_ma=523.20, slow_ma=523.32, diff=-0.1118
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 16:35:00: SELL at price 523.17, fast_ma=523.18, slow_ma=523.18, diff=-0.0020
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 16:37:00: BUY at price 523.26, fast_ma=523.21, slow_ma=523.20, diff=0.0150
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 16:40:00: SELL at price 523.16, fast_ma=523.19, slow_ma=523.21, diff=-0.0150
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 16:42:00: BUY at price 523.30, fast_ma=523.25, slow_ma=523.22, diff=0.0295
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 16:44:00: SELL at price 523.20, fast_ma=523.21, slow_ma=523.22, diff=-0.0035
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 16:47:00: BUY at price 523.27, fast_ma=523.27, slow_ma=523.23, diff=0.0500
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 16:49:00: SELL at price 523.20, fast_ma=523.23, slow_ma=523.23, diff=-0.0050
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 16:51:00: BUY at price 523.29, fast_ma=523.29, slow_ma=523.26, diff=0.0305
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 16:52:00: SELL at price 523.19, fast_ma=523.24, slow_ma=523.24, diff=-0.0043
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 16:54:00: BUY at price 523.31, fast_ma=523.27, slow_ma=523.26, diff=0.0092
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 16:57:00: SELL at price 523.24, fast_ma=523.24, slow_ma=523.26, diff=-0.0195
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 16:59:00: BUY at price 523.35, fast_ma=523.27, slow_ma=523.26, diff=0.0093
+2025-04-30 21:42:27,889 - debug - INFO - 2024-03-28 17:01:00: SELL at price 523.14, fast_ma=523.18, slow_ma=523.23, diff=-0.0487
+2025-04-30 21:42:27,890 - debug - INFO - 2024-03-28 17:03:00: BUY at price 523.30, fast_ma=523.26, slow_ma=523.25, diff=0.0150
+2025-04-30 21:42:27,890 - debug - WARNING - Found 1 NaN values in fast MA - this is normal for the first 1 rows
+2025-04-30 21:42:27,890 - debug - WARNING - Found 4 NaN values in slow MA - this is normal for the first 4 rows
+2025-04-30 21:42:27,890 - debug - INFO - 
+===== SUMMARY =====
+2025-04-30 21:42:27,890 - debug - INFO - Windows 5/15: 79 signals
+2025-04-30 21:42:27,890 - debug - INFO - Windows 3/10: 129 signals
+2025-04-30 21:42:27,890 - debug - INFO - Windows 10/30: 43 signals
+2025-04-30 21:42:27,890 - debug - INFO - Windows 2/5: 235 signals
+2025-04-30 21:42:27,890 - debug - INFO - Best windows for signal generation: fast=2, slow=5 with 235 signals
+2025-04-30 21:42:27,890 - debug - INFO - Debug script completed

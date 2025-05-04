@@ -160,16 +160,16 @@ def create_signal_event(signal_value, price, symbol, rule_id=None,
                        confidence, metadata, timestamp)
 
 
-def create_order_event(symbol, order_type, direction, quantity, 
+def create_order_event(direction, quantity, symbol, order_type, 
                      price=None, timestamp=None, order_id=None):
     """
     Create a standardized order event.
     
     Args:
-        symbol: Instrument symbol
-        order_type: Type of order ('MARKET', 'LIMIT', etc.)
         direction: Trade direction ('BUY' or 'SELL')
         quantity: Order quantity
+        symbol: Instrument symbol
+        order_type: Type of order ('MARKET', 'LIMIT', etc.)
         price: Optional price for limit/stop orders
         timestamp: Optional timestamp
         order_id: Optional order ID (will generate if None)
@@ -183,7 +183,7 @@ def create_order_event(symbol, order_type, direction, quantity,
     if order_id is None:
         order_id = str(uuid.uuid4())
     
-    # Create the order event
+    # Create the order event with correctly ordered parameters
     order = OrderEvent(symbol, order_type, direction, quantity, 
                       price, timestamp)
     

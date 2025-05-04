@@ -417,6 +417,15 @@ class PortfolioManager:
         """
         return self.positions.get(symbol)
     
+    def get_positions(self):
+        """
+        Get all positions.
+        
+        Returns:
+            Dictionary of all positions
+        """
+        return self.positions
+        
     def get_positions_summary(self):
         """
         Get summary of all positions.
@@ -468,6 +477,15 @@ class PortfolioManager:
             
         return df
     
+    def get_equity_curve(self):
+        """
+        Get the equity curve data.
+        
+        Returns:
+            Equity curve data
+        """
+        return self.equity_curve
+        
     def get_recent_trades(self, n=None):
         """
         Get recent trades with enhanced debugging and diagnostics.

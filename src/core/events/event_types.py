@@ -1,5 +1,6 @@
 import uuid
 import datetime
+import json
 from enum import Enum, auto
 from typing import Dict, Any, Optional
 
@@ -28,11 +29,11 @@ class EventType(Enum):
 class Event:
     """Base class for all events in the system."""
     
-    def __init__(self, event_type, data=None, timestamp=None):
+    def __init__(self, event_type, data=None, timestamp=None, event_id=None):
         self.event_type = event_type
         self.data = data or {}
         self.timestamp = timestamp or datetime.datetime.now()
-        self.id = str(uuid.uuid4())
+        self.id = event_id or str(uuid.uuid4())
         self.consumed = False  # Track if event has been consumed
     
     def get_type(self):
@@ -54,6 +55,12 @@ class Event:
     def is_consumed(self):
         """Check if this event has been consumed."""
         return self.consumed
+        
+    def __eq__(self, other):
+        """Compare events based on their ID."""
+        if not isinstance(other, Event):
+            return False
+        return self.id == other.id
 
     def serialize(self):
         """
@@ -89,9 +96,9 @@ class Event:
         elif isinstance(data, list):
             return [self._prepare_data_for_serialization(item) for item in data]
         elif isinstance(data, datetime.datetime):
-            return {"__datetime__": value.isoformat()}
+            return {"__datetime__": data.isoformat()}
         elif isinstance(data, Enum):
-            return {"__enum__": {"class": value.__class__.__name__, "name": value.name}}
+            return {"__enum__": {"class": data.__class__.__name__, "name": data.name}}
         elif hasattr(data, "to_dict") and callable(data.to_dict):
             # Handle custom objects with to_dict method
             dict_data = data.to_dict()

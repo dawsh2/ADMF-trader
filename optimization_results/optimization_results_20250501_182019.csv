@@ -1,0 +1,21 @@
+params,score,evaluation,timestamp
+"{'fast_window': 2, 'slow_window': 10, 'price_key': 'open'}",0.0,1,1746148819.711026
+"{'fast_window': 2, 'slow_window': 10, 'price_key': 'high'}",0.0,2,1746148819.715939
+"{'fast_window': 2, 'slow_window': 10, 'price_key': 'low'}",0.0,3,1746148819.720206
+"{'fast_window': 2, 'slow_window': 10, 'price_key': 'close'}",0.0,4,1746148819.72448
+"{'fast_window': 2, 'slow_window': 15, 'price_key': 'open'}",0.0,5,1746148819.728868
+"{'fast_window': 2, 'slow_window': 15, 'price_key': 'high'}",0.0,6,1746148819.7350762
+"{'fast_window': 2, 'slow_window': 15, 'price_key': 'low'}",0.0,7,1746148819.739691
+"{'fast_window': 2, 'slow_window': 15, 'price_key': 'close'}",0.0,8,1746148819.7441401
+"{'fast_window': 2, 'slow_window': 20, 'price_key': 'open'}",0.0,9,1746148819.74854
+"{'fast_window': 2, 'slow_window': 20, 'price_key': 'high'}",0.0,10,1746148819.7530172
+"{'fast_window': 2, 'slow_window': 20, 'price_key': 'low'}",0.0,11,1746148819.7576268
+"{'fast_window': 2, 'slow_window': 20, 'price_key': 'close'}",0.0,12,1746148819.762055
+"{'fast_window': 2, 'slow_window': 25, 'price_key': 'open'}",0.0,13,1746148819.766649
+"{'fast_window': 2, 'slow_window': 25, 'price_key': 'high'}",0.0,14,1746148819.771932
+"{'fast_window': 2, 'slow_window': 25, 'price_key': 'low'}",0.0,15,1746148819.776948
+"{'fast_window': 2, 'slow_window': 25, 'price_key': 'close'}",0.0,16,1746148819.781543
+"{'fast_window': 2, 'slow_window': 30, 'price_key': 'open'}",0.0,17,1746148819.78588
+"{'fast_window': 2, 'slow_window': 30, 'price_key': 'high'}",0.0,18,1746148819.790348
+"{'fast_window': 2, 'slow_window': 30, 'price_key': 'low'}",0.0,19,1746148819.7948549
+"{'fast_window': 2, 'slow_window': 30, 'price_key': 'close'}",0.0,20,1746148819.799265

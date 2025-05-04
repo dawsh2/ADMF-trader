@@ -1,0 +1,54 @@
+Starting debugging at Wed Apr 30 21:36:27 PDT 2025
+===== RUNNING STRATEGY DEBUGGER =====
+2025-04-30 21:36:27,504 - debug - INFO - Starting debug script
+2025-04-30 21:36:27,504 - debug - ERROR - Data file not found: ./data/HEAD_1min.csv
+
+===== RUNNING EVENT SYSTEM DEBUGGER =====
+2025-04-30 21:36:27,561 - debug - INFO - Starting event system debugger
+2025-04-30 21:36:27,598 - debug - ERROR - Error running event debugger: cannot import name 'bootstrap_system' from 'src.core.bootstrap' (/Users/daws/ADMF-trader/src/core/bootstrap.py)
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/debug_output/../debug_events.py", line 213, in main
+    from src.core.bootstrap import bootstrap_system
+ImportError: cannot import name 'bootstrap_system' from 'src.core.bootstrap' (/Users/daws/ADMF-trader/src/core/bootstrap.py)
+2025-04-30 21:36:27,598 - debug - INFO - Event system debugger completed
+
+===== RUNNING CONFIGURATION TESTING =====
+2025-04-30 21:36:27,643 - config_debug - INFO - Starting configuration debugger
+2025-04-30 21:36:27,643 - config_debug - INFO - 
+===== TESTING MA COMBINATIONS =====
+2025-04-30 21:36:27,643 - config_debug - INFO - Testing different MA window combinations
+2025-04-30 21:36:27,643 - config_debug - INFO - Loading configuration from: config/head_test.yaml
+2025-04-30 21:36:27,643 - config_debug - ERROR - Error loading configuration: [Errno 2] No such file or directory: 'config/head_test.yaml'
+2025-04-30 21:36:27,643 - config_debug - INFO - 
+===== TESTING OTHER PARAMETERS =====
+2025-04-30 21:36:27,643 - config_debug - INFO - Testing variations of position sizing and risk parameters
+2025-04-30 21:36:27,644 - config_debug - INFO - Loading configuration from: config/head_test.yaml
+2025-04-30 21:36:27,644 - config_debug - ERROR - Error loading configuration: [Errno 2] No such file or directory: 'config/head_test.yaml'
+2025-04-30 21:36:27,644 - config_debug - INFO - 
+===== FINAL REPORT =====
+2025-04-30 21:36:27,644 - config_debug - WARNING - No working MA combinations found
+2025-04-30 21:36:27,644 - config_debug - WARNING - No working parameter combinations found
+2025-04-30 21:36:27,644 - config_debug - INFO - Configuration debugging completed
+
+===== RUNNING WITH RECOMMENDED CONFIGURATION =====
+No working configuration found, trying custom settings
+Running with manual working configuration
+Initializing system with configuration: ../config/debug_working.yaml
+Running backtest...
+Backtest did not produce any results: No data available to process
+
+Backtest Results Summary:
+
+=== Backtest Failed! ===
+No results were produced: No data available to process
+
+Results saved to ./results/debug_working
+
+===== DEBUG SUMMARY =====
+SIGNALS: NO - No buy/sell signals were generated
+ORDERS: NO - No orders were created
+FILLS: NO - No orders were filled
+TRADES: NO - No trades were executed
+
+Debugging completed at Wed Apr 30 21:36:28 PDT 2025
+See debug_run_20250430_213627.log for complete log output

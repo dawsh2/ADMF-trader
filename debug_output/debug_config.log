@@ -1,0 +1,16 @@
+2025-04-30 21:36:27,643 - config_debug - INFO - Starting configuration debugger
+2025-04-30 21:36:27,643 - config_debug - INFO - 
+===== TESTING MA COMBINATIONS =====
+2025-04-30 21:36:27,643 - config_debug - INFO - Testing different MA window combinations
+2025-04-30 21:36:27,643 - config_debug - INFO - Loading configuration from: config/head_test.yaml
+2025-04-30 21:36:27,643 - config_debug - ERROR - Error loading configuration: [Errno 2] No such file or directory: 'config/head_test.yaml'
+2025-04-30 21:36:27,643 - config_debug - INFO - 
+===== TESTING OTHER PARAMETERS =====
+2025-04-30 21:36:27,643 - config_debug - INFO - Testing variations of position sizing and risk parameters
+2025-04-30 21:36:27,644 - config_debug - INFO - Loading configuration from: config/head_test.yaml
+2025-04-30 21:36:27,644 - config_debug - ERROR - Error loading configuration: [Errno 2] No such file or directory: 'config/head_test.yaml'
+2025-04-30 21:36:27,644 - config_debug - INFO - 
+===== FINAL REPORT =====
+2025-04-30 21:36:27,644 - config_debug - WARNING - No working MA combinations found
+2025-04-30 21:36:27,644 - config_debug - WARNING - No working parameter combinations found
+2025-04-30 21:36:27,644 - config_debug - INFO - Configuration debugging completed

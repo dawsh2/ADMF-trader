@@ -1,0 +1,55 @@
+# config/optimization_test.yaml
+backtest:
+  initial_capital: 100000.0
+  symbols: ['SPY']
+  timeframe: "1d"
+  data_source: "csv"
+  data_dir: "./data"
+  start_date: "2023-01-01"
+  end_date: "2024-01-01"
+
+strategies:
+  ma_crossover:
+    enabled: true
+    price_key: "close"
+    symbols: ['SPY']
+    # These default parameters will be overridden by the optimizer
+    fast_window: 10
+    slow_window: 30
+
+risk_manager:
+  position_size: 100
+  max_position_pct: 0.1
+  
+optimization:
+  enabled: true
+  method: "grid_search"  # Options: "grid_search", "random_search"
+  max_evaluations: 50    # Maximum number of evaluations to perform
+  max_time: 600          # Maximum time in seconds (10 minutes)
+  objective: "sharpe_ratio"  # Options: "sharpe_ratio", "total_return", "max_drawdown"
+  maximize: true         # true for metrics like returns and Sharpe, false for drawdown
+  
+  parameter_space:
+    ma_crossover:
+      fast_window:
+        type: "integer"
+        min: 2
+        max: 20
+        step: 1
+      slow_window:
+        type: "integer"
+        min: 10
+        max: 50
+        step: 5
+      price_key:
+        type: "categorical"
+        options: ["open", "high", "low", "close"]
+
+  random_search:
+    seed: 42
+    num_samples: 30
+
+  output:
+    save_results: true
+    results_dir: "./optimization_results"
+    plot_top_n: 5  # Plot performance of top N parameter sets

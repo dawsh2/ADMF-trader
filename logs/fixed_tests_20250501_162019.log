@@ -1,0 +1,8 @@
+2025-05-01 16:20:20,165 - test_runner - INFO - Project root: /Users/daws/ADMF-trader
+2025-05-01 16:20:20,165 - test_runner - INFO - Output directory: /Users/daws/ADMF-trader/test_results
+2025-05-01 16:20:20,228 - test_runner - INFO - Safety adapters found
+2025-05-01 16:20:20,228 - test_runner - INFO - Running command: python -m pytest tests/integration/test_safe_integration.py --verbose --log-cli-level=INFO --timeout 60 --cov=src --cov-report=term --cov-report=html:test_results/coverage_html --junitxml=test_results/junit.xml --apply-adapters
+2025-05-01 16:20:20,255 - test_runner - ERROR - Test tests/integration/test_safe_integration.py failed after 0 retries
+2025-05-01 16:20:20,255 - test_runner - INFO - All tests completed
+Fixed Event class: Added 'type' property
+/Users/daws/kraken/claudeTrader/venv/bin/python: No module named pytest

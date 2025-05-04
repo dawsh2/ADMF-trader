@@ -45,6 +45,11 @@ class TestStrategyPortfolioFlow:
                 if self.event_bus:
                     self.event_bus.emit(signal)
                 return signal
+                
+            def on_bar(self, bar_event):
+                """Implementation of required abstract method."""
+                # No-op implementation for tests
+                return None
         
         strategy = TestStrategy(event_bus)
         

@@ -88,10 +88,16 @@ class EventBus:
         Args:
             event_type: Event type to handle
             handler: Handler function or method
-            priority: Handler priority (higher is called first, default=0)
+            priority: Handler priority (lower number = higher priority, default=0)
         """
         if event_type not in self.handlers:
             self.handlers[event_type] = []
+            
+        # Check if handler is already registered to prevent duplicates
+        for _, existing_handler in self.handlers[event_type]:
+            if existing_handler == handler:
+                # Skip if already registered
+                return
             
         # Use weak reference for method objects to prevent memory leaks
         if hasattr(handler, '__self__') and hasattr(handler, '__func__'):
@@ -105,8 +111,8 @@ class EventBus:
         # Add handler with priority
         self.handlers[event_type].append((priority, handler_ref))
         
-        # Sort handlers by priority (descending)
-        self.handlers[event_type].sort(key=lambda x: x[0], reverse=True)
+        # Sort handlers by priority (lower number = higher priority)
+        self.handlers[event_type].sort(key=lambda x: x[0])
         
     def unregister(self, event_type: EventType, handler: Callable) -> bool:
         """
@@ -121,15 +127,39 @@ class EventBus:
         """
         if event_type not in self.handlers:
             return False
+
+        # Create a new list without the handler to avoid modifying during iteration
+        original_handlers = self.handlers[event_type]
+        filtered_handlers = []
+        handler_removed = False
+        
+        for priority, h in original_handlers:
+            # Check direct equality or resolve weak reference
+            keep = True
             
-        # Find and remove the handler
-        for i, (_, h) in enumerate(self.handlers[event_type]):
-            # Compare the handler or resolve weak reference
-            if h == handler or (hasattr(h, '__call__') and h() == handler):
-                del self.handlers[event_type][i]
-                return True
+            if h == handler:
+                keep = False
+                handler_removed = True
+            elif hasattr(h, '__call__') and h() is not None:
+                try:
+                    if h() == handler:
+                        keep = False
+                        handler_removed = True
+                except Exception:
+                    # If we can't resolve the reference, keep it
+                    pass
+            
+            if keep:
+                filtered_handlers.append((priority, h))
+        
+        # Update handlers list
+        self.handlers[event_type] = filtered_handlers
+        
+        # If all handlers are removed, delete the event type entry
+        if not self.handlers[event_type]:
+            del self.handlers[event_type]
                 
-        return False
+        return handler_removed
         
     def reset(self) -> None:
         """Reset the event bus state for a new backtest."""
@@ -162,6 +192,18 @@ class EventBus:
             Optional[Any]: Event if found, None otherwise
         """
         return self.event_registry.get(event_id)
+        
+    def has_handlers(self, event_type: EventType) -> bool:
+        """
+        Check if there are handlers registered for an event type.
+        
+        Args:
+            event_type: Event type to check
+            
+        Returns:
+            bool: True if handlers exist, False otherwise
+        """
+        return event_type in self.handlers and len(self.handlers[event_type]) > 0
         
     def get_stats(self) -> Dict[str, Any]:
         """
@@ -330,9 +372,17 @@ class EventBus:
                 else:
                     handler = handler_ref
                     
-                # Call the handler
-                handler(event)
-                handlers_called += 1
+                # Call the handler and only count it once
+                try:
+                    handler(event)
+                    handlers_called += 1
+                except TypeError as te:
+                    if "missing 1 required positional argument" in str(te):
+                        # Log and skip handler with wrong signature
+                        logger.error(f"Handler {handler.__name__ if hasattr(handler, '__name__') else handler} has incorrect signature: {te}")
+                    else:
+                        # Re-raise other TypeError exceptions
+                        raise
                 
             except Exception as e:
                 handler_name = getattr(handler, '__name__', str(handler))

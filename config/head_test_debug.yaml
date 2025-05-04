@@ -1,0 +1,77 @@
+# Configuration for MA Crossover Strategy with enhanced debugging
+# ------------------------------------------------------
+
+# Global backtest settings
+backtest:
+  initial_capital: 100000.0
+  symbols: ['SPY']
+  data_dir: "./data"
+  timeframe: "1min"
+  data_source: "csv"
+  start_date: "2024-01-01"
+  end_date: "2024-12-31"
+
+# Data handling configuration
+data:
+  source_type: "csv"
+  data_dir: "./data"
+  file_pattern: "{symbol}_{timeframe}.csv"
+  timestamp_column: "date"
+  price_columns:
+    open: "open" 
+    high: "high"
+    low: "low"
+    close: "close"
+    volume: "volume"
+  custom_data:
+    file: "HEAD_1min.csv"
+    symbol_column: null  # Set to null if single symbol
+    date_format: "%Y-%m-%d %H:%M:%S"
+
+# Strategy configuration
+strategy:
+  type: "ma_crossover"  # Change to MA Crossover strategy
+  parameters:
+    fast_window: 2  # Extremely short window to increase signal frequency
+    slow_window: 5  # Extremely short window to increase signal frequency
+    price_key: "close"
+
+# Risk management settings
+risk:
+  position_size: 500   # Larger position size
+  max_position_pct: 1.0  # Allow 100% of equity for maximum flexibility
+  max_risk_per_trade: 0.05  # Increased risk per trade
+  max_open_trades: 5
+  
+# Order handling settings
+order_manager:
+  default_order_type: "MARKET"
+
+# Broker simulation settings
+broker:
+  slippage: 0.0001  # 0.01% slippage
+  commission: 0.0005  # 0.05% commission
+  delay: 0  # No delay in order processing (instant fills)
+
+# Performance metrics settings
+performance:
+  metrics:
+    - "total_return"
+    - "sharpe_ratio"
+    - "max_drawdown"
+    - "win_rate"
+    - "profit_factor"
+  
+# Logging settings
+logging:
+  level: "DEBUG"  # Set to DEBUG for maximum detail
+  console: true
+  file: true
+  components:
+    - "strategy.implementations.ma_crossover"
+    - "execution.order_registry"
+    - "execution.order_manager"
+    - "execution.backtest.backtest"
+    - "risk.managers.simple"
+    - "src.core.events.event_bus"
+    - "src.core.events.event_manager"

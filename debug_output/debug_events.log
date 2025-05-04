@@ -1,0 +1,7 @@
+2025-04-30 21:36:27,561 - debug - INFO - Starting event system debugger
+2025-04-30 21:36:27,598 - debug - ERROR - Error running event debugger: cannot import name 'bootstrap_system' from 'src.core.bootstrap' (/Users/daws/ADMF-trader/src/core/bootstrap.py)
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/debug_output/../debug_events.py", line 213, in main
+    from src.core.bootstrap import bootstrap_system
+ImportError: cannot import name 'bootstrap_system' from 'src.core.bootstrap' (/Users/daws/ADMF-trader/src/core/bootstrap.py)
+2025-04-30 21:36:27,598 - debug - INFO - Event system debugger completed

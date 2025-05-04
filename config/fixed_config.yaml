@@ -1,0 +1,35 @@
+backtest:
+  initial_capital: 100000.0
+  symbols: ['SPY']
+  timeframe: "1min"
+  start_date: "2024-01-01"
+  end_date: "2024-12-31"
+  data_dir: "./data"
+
+data:
+  source_type: "csv"
+  data_dir: "./data"
+  timestamp_column: "timestamp"
+  custom_data:
+    file: "SPY_1min.csv"
+    symbol_column: null
+
+strategy:
+  type: "ma_crossover"
+  parameters:
+    fast_window: 2
+    slow_window: 5
+    price_key: "Close"
+
+risk_manager:
+  position_size: 500
+  max_position_pct: 1.0
+
+logging:
+  level: "DEBUG"
+  components:
+    - "strategy.implementations.ma_crossover"
+    - "execution.order_registry"
+    - "execution.order_manager"
+    - "execution.backtest.backtest"
+    - "risk.managers.simple"

@@ -12,6 +12,14 @@ import time
 import traceback
 import threading
 import os
+import logging
+
+# Set up logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 def setup_python_path():
     """Add project root to Python path."""
@@ -32,12 +40,13 @@ def fix_event_class():
                 """Bridge property to access event_type as type."""
                 return self.event_type
             
+            # Add the type property
             Event.type = type_property
-            print("Fixed Event class: Added 'type' property")
+            # The type property has been added
     except ImportError as e:
-        print(f"Could not import Event class: {e}")
+        logger.warning(f"Could not import Event class: {e}")
     except Exception as e:
-        print(f"Error fixing Event class: {e}")
+        logger.warning(f"Error fixing Event class: {e}")
 
 def import_module_from_path(file_path):
     """Import a module from a file path."""
@@ -115,7 +124,7 @@ def run_test_method_with_timeout(test_class, method_name, timeout_seconds=10):
 def main():
     # Setup Python path
     project_root = setup_python_path()
-    print(f"Added project root to Python path: {project_root}")
+    logger.info(f"Added project root to Python path: {project_root}")
     
     # Fix Event class
     fix_event_class()
@@ -131,7 +140,7 @@ def main():
     
     try:
         # Import module
-        print(f"Importing test file: {args.file}")
+        logger.info(f"Importing test file: {args.file}")
         module = import_module_from_path(args.file)
         
         # Find test classes
@@ -141,7 +150,7 @@ def main():
             # Filter to specified class
             test_classes = [cls for cls in test_classes if cls.__name__ == args.class_name]
             if not test_classes:
-                print(f"Error: Class '{args.class_name}' not found in {args.file}")
+                logger.error(f"Class '{args.class_name}' not found in {args.file}")
                 return 1
         
         if args.list:
@@ -158,7 +167,7 @@ def main():
         results = []
         
         for cls in test_classes:
-            print(f"\nRunning tests from class: {cls.__name__}")
+            logger.info(f"Running tests from class: {cls.__name__}")
             methods = find_test_methods(cls)
             
             if args.method:
@@ -166,7 +175,7 @@ def main():
                 if args.method in methods:
                     methods = [args.method]
                 else:
-                    print(f"  Warning: Method '{args.method}' not found in class {cls.__name__}")
+                    logger.warning(f"Method '{args.method}' not found in class {cls.__name__}")
                     continue
             
             for method in methods:
@@ -191,7 +200,7 @@ def main():
         return 0 if passed == total else 1
     
     except Exception as e:
-        print(f"Error running tests: {e}")
+        logger.error(f"Error running tests: {e}")
         traceback.print_exc()
         return 1
 

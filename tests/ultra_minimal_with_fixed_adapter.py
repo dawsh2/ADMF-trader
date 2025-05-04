@@ -20,10 +20,12 @@ def fix_event_class():
             """Bridge property to access event_type as type."""
             return self.event_type
         
+        # Add the type property
         Event.type = type_property
-        print("Fixed Event class: Added 'type' property")
+        # Property added successfully
     else:
-        print("Event class already has 'type' property")
+        # Property already exists
+        pass
 
 # Simple direct test
 def test_event_with_fixed_adapter():

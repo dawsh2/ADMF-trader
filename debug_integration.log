@@ -1,0 +1,189 @@
+2025-05-01 16:23:18,872 - debug_integration - INFO - Starting debug integration test
+2025-05-01 16:23:18,872 - debug_integration - INFO - Creating enhanced event bus...
+2025-05-01 16:23:18,944 - debug_integration - INFO - Successfully imported EventBus
+2025-05-01 16:23:18,944 - debug_integration - INFO - Successfully imported Event and EventType
+2025-05-01 16:23:19,308 - debug_integration - INFO - Successfully imported PortfolioManager
+2025-05-01 16:23:19,311 - debug_integration - INFO - Successfully imported SimpleRiskManager
+2025-05-01 16:23:19,313 - debug_integration - INFO - Successfully imported SimulatedBroker
+2025-05-01 16:23:19,315 - debug_integration - INFO - Successfully imported OrderManager
+2025-05-01 16:23:19,325 - debug_integration - INFO - Successfully imported MACrossoverStrategy
+2025-05-01 16:23:19,326 - debug_integration - INFO - Successfully imported adapter modules
+2025-05-01 16:23:19,326 - tests.adapters - DEBUG - Applied safety enhancements to EventBus
+2025-05-01 16:23:19,327 - debug_integration - INFO - Setting up event tracking...
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported EventBus
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported Event and EventType
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported PortfolioManager
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported SimpleRiskManager
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported SimulatedBroker
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported OrderManager
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported MACrossoverStrategy
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported adapter modules
+2025-05-01 16:23:19,327 - debug_integration - INFO - Event tracking set up
+2025-05-01 16:23:19,327 - debug_integration - INFO - Creating test components...
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported EventBus
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported Event and EventType
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported PortfolioManager
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported SimpleRiskManager
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported SimulatedBroker
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported OrderManager
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported MACrossoverStrategy
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported adapter modules
+2025-05-01 16:23:19,327 - debug_integration - INFO - Created portfolio
+2025-05-01 16:23:19,327 - debug_integration - INFO - Created risk manager
+2025-05-01 16:23:19,327 - src.execution.broker.broker_simulator - INFO - Simulated broker initialized
+2025-05-01 16:23:19,327 - debug_integration - INFO - Created broker
+2025-05-01 16:23:19,327 - src.execution.order_manager - INFO - Order manager initialized
+2025-05-01 16:23:19,327 - debug_integration - INFO - Created order manager
+2025-05-01 16:23:19,327 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy initialized with fast_window=2, slow_window=5
+2025-05-01 16:23:19,327 - debug_integration - INFO - Created strategy
+2025-05-01 16:23:19,327 - debug_integration - INFO - Creating and emitting bar event...
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported EventBus
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported Event and EventType
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported PortfolioManager
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported SimpleRiskManager
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported SimulatedBroker
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported OrderManager
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported MACrossoverStrategy
+2025-05-01 16:23:19,327 - debug_integration - INFO - Successfully imported adapter modules
+2025-05-01 16:23:19,327 - debug_integration - INFO - Emitting bar event...
+2025-05-01 16:23:19,328 - tests.adapters - DEBUG - Processing event ID: 4dba72bc-8b2f-4b1d-a8ab-612ef98bd2fc, type: EventType.BAR
+2025-05-01 16:23:19,328 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 4dba72bc-8b2f-4b1d-a8ab-612ef98bd2fc
+2025-05-01 16:23:19,328 - debug_integration - INFO - Tracked event: EventType.BAR
+2025-05-01 16:23:19,328 - tests.adapters - ERROR - Error in handler on_bar: 'Event' object has no attribute 'get_symbol'
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/tests/adapters.py", line 148, in safe_process_event
+    handler(event)
+    ~~~~~~~^^^^^^^
+  File "/Users/daws/ADMF-trader/src/strategy/implementations/ma_crossover.py", line 87, in on_bar
+    symbol = bar_event.get_symbol()
+             ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Event' object has no attribute 'get_symbol'
+2025-05-01 16:23:19,328 - debug_integration - INFO - Bar event emitted, 2 handlers called
+2025-05-01 16:23:19,328 - debug_integration - INFO - Waiting for event processing...
+2025-05-01 16:23:20,333 - debug_integration - INFO - Tracked 1 events
+2025-05-01 16:23:20,334 - debug_integration - INFO - Event 1: EventType.BAR
+2025-05-01 16:23:20,334 - debug_integration - ERROR - Debug integration test failed: 'PortfolioManager' object has no attribute 'get_positions'
+2025-05-01 16:23:20,336 - debug_integration - ERROR - Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/tests/integration/fixed_debug_integration.py", line 263, in main
+    positions = portfolio.get_positions()
+                ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'PortfolioManager' object has no attribute 'get_positions'. Did you mean: 'get_position'?
+
+2025-05-01 16:26:43,932 - debug_integration - INFO - Starting debug integration test
+2025-05-01 16:26:43,932 - debug_integration - INFO - Creating enhanced event bus...
+2025-05-01 16:26:43,963 - debug_integration - INFO - Successfully imported EventBus
+2025-05-01 16:26:43,964 - debug_integration - INFO - Successfully imported Event, EventType, and BarEvent
+2025-05-01 16:26:44,242 - debug_integration - INFO - Successfully imported PortfolioManager
+2025-05-01 16:26:44,243 - debug_integration - INFO - Successfully imported SimpleRiskManager
+2025-05-01 16:26:44,243 - debug_integration - INFO - Successfully imported SimulatedBroker
+2025-05-01 16:26:44,243 - debug_integration - INFO - Successfully imported OrderManager
+2025-05-01 16:26:44,246 - debug_integration - INFO - Successfully imported MACrossoverStrategy
+2025-05-01 16:26:44,246 - debug_integration - INFO - Successfully imported adapter modules
+2025-05-01 16:26:44,246 - tests.adapters - DEBUG - Applied safety enhancements to EventBus
+2025-05-01 16:26:44,247 - debug_integration - INFO - Setting up event tracking...
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported EventBus
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported Event, EventType, and BarEvent
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported PortfolioManager
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported SimpleRiskManager
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported SimulatedBroker
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported OrderManager
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported MACrossoverStrategy
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported adapter modules
+2025-05-01 16:26:44,247 - debug_integration - INFO - Event tracking set up
+2025-05-01 16:26:44,247 - debug_integration - INFO - Creating test components...
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported EventBus
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported Event, EventType, and BarEvent
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported PortfolioManager
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported SimpleRiskManager
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported SimulatedBroker
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported OrderManager
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported MACrossoverStrategy
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported adapter modules
+2025-05-01 16:26:44,247 - debug_integration - INFO - Created portfolio
+2025-05-01 16:26:44,247 - debug_integration - INFO - Created risk manager
+2025-05-01 16:26:44,247 - src.execution.broker.broker_simulator - INFO - Simulated broker initialized
+2025-05-01 16:26:44,247 - debug_integration - INFO - Created broker
+2025-05-01 16:26:44,247 - src.execution.order_manager - INFO - Order manager initialized
+2025-05-01 16:26:44,247 - debug_integration - INFO - Created order manager
+2025-05-01 16:26:44,247 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy initialized with fast_window=2, slow_window=5
+2025-05-01 16:26:44,247 - debug_integration - INFO - Created strategy
+2025-05-01 16:26:44,247 - debug_integration - INFO - Creating and emitting bar event...
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported EventBus
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported Event, EventType, and BarEvent
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported PortfolioManager
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported SimpleRiskManager
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported SimulatedBroker
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported OrderManager
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported MACrossoverStrategy
+2025-05-01 16:26:44,247 - debug_integration - INFO - Successfully imported adapter modules
+2025-05-01 16:26:44,247 - debug_integration - INFO - Created BarEvent successfully
+2025-05-01 16:26:44,247 - debug_integration - INFO - Emitting bar event...
+2025-05-01 16:26:44,247 - tests.adapters - DEBUG - Processing event ID: 65f4c9da-37f1-4587-9185-7061dcb8472b, type: EventType.BAR
+2025-05-01 16:26:44,247 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 65f4c9da-37f1-4587-9185-7061dcb8472b
+2025-05-01 16:26:44,248 - debug_integration - INFO - Tracked event: EventType.BAR
+2025-05-01 16:26:44,248 - debug_integration - INFO - Bar event emitted, 3 handlers called
+2025-05-01 16:26:44,248 - debug_integration - INFO - Waiting for event processing...
+2025-05-01 16:26:45,253 - debug_integration - INFO - Tracked 1 events
+2025-05-01 16:26:45,253 - debug_integration - INFO - Event 1: EventType.BAR
+2025-05-01 16:26:45,254 - debug_integration - INFO - Portfolio positions (from property): {}
+2025-05-01 16:26:45,254 - debug_integration - INFO - Portfolio cash: 100000.0
+2025-05-01 16:26:45,254 - debug_integration - INFO - Debug integration test completed successfully
+2025-05-01 16:37:59,282 - debug_integration - INFO - Starting debug integration test
+2025-05-01 16:37:59,282 - debug_integration - INFO - Creating enhanced event bus...
+2025-05-01 16:37:59,315 - debug_integration - INFO - Successfully imported EventBus
+2025-05-01 16:37:59,315 - debug_integration - INFO - Successfully imported Event, EventType, and BarEvent
+2025-05-01 16:37:59,594 - debug_integration - INFO - Successfully imported PortfolioManager
+2025-05-01 16:37:59,595 - debug_integration - INFO - Successfully imported SimpleRiskManager
+2025-05-01 16:37:59,595 - debug_integration - INFO - Successfully imported SimulatedBroker
+2025-05-01 16:37:59,595 - debug_integration - INFO - Successfully imported OrderManager
+2025-05-01 16:37:59,598 - debug_integration - INFO - Successfully imported MACrossoverStrategy
+2025-05-01 16:37:59,599 - debug_integration - INFO - Successfully imported adapter modules
+2025-05-01 16:37:59,599 - tests.adapters - DEBUG - Applied safety enhancements to EventBus
+2025-05-01 16:37:59,599 - debug_integration - INFO - Setting up event tracking...
+2025-05-01 16:37:59,599 - debug_integration - INFO - Successfully imported EventBus
+2025-05-01 16:37:59,599 - debug_integration - INFO - Successfully imported Event, EventType, and BarEvent
+2025-05-01 16:37:59,599 - debug_integration - INFO - Successfully imported PortfolioManager
+2025-05-01 16:37:59,599 - debug_integration - INFO - Successfully imported SimpleRiskManager
+2025-05-01 16:37:59,599 - debug_integration - INFO - Successfully imported SimulatedBroker
+2025-05-01 16:37:59,599 - debug_integration - INFO - Successfully imported OrderManager
+2025-05-01 16:37:59,599 - debug_integration - INFO - Successfully imported MACrossoverStrategy
+2025-05-01 16:37:59,599 - debug_integration - INFO - Successfully imported adapter modules
+2025-05-01 16:37:59,599 - debug_integration - INFO - Event tracking set up
+2025-05-01 16:37:59,599 - debug_integration - INFO - Creating test components...
+2025-05-01 16:37:59,599 - debug_integration - INFO - Successfully imported EventBus
+2025-05-01 16:37:59,599 - debug_integration - INFO - Successfully imported Event, EventType, and BarEvent
+2025-05-01 16:37:59,599 - debug_integration - INFO - Successfully imported PortfolioManager
+2025-05-01 16:37:59,599 - debug_integration - INFO - Successfully imported SimpleRiskManager
+2025-05-01 16:37:59,599 - debug_integration - INFO - Successfully imported SimulatedBroker
+2025-05-01 16:37:59,599 - debug_integration - INFO - Successfully imported OrderManager
+2025-05-01 16:37:59,599 - debug_integration - INFO - Successfully imported MACrossoverStrategy
+2025-05-01 16:37:59,599 - debug_integration - INFO - Successfully imported adapter modules
+2025-05-01 16:37:59,600 - debug_integration - INFO - Created portfolio
+2025-05-01 16:37:59,600 - debug_integration - INFO - Created risk manager
+2025-05-01 16:37:59,600 - src.execution.broker.broker_simulator - INFO - Simulated broker initialized
+2025-05-01 16:37:59,600 - debug_integration - INFO - Created broker
+2025-05-01 16:37:59,600 - src.execution.order_manager - INFO - Order manager initialized
+2025-05-01 16:37:59,600 - debug_integration - INFO - Created order manager
+2025-05-01 16:37:59,600 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy initialized with fast_window=2, slow_window=5
+2025-05-01 16:37:59,600 - debug_integration - INFO - Created strategy
+2025-05-01 16:37:59,600 - debug_integration - INFO - Creating and emitting bar event...
+2025-05-01 16:37:59,600 - debug_integration - INFO - Successfully imported EventBus
+2025-05-01 16:37:59,600 - debug_integration - INFO - Successfully imported Event, EventType, and BarEvent
+2025-05-01 16:37:59,600 - debug_integration - INFO - Successfully imported PortfolioManager
+2025-05-01 16:37:59,600 - debug_integration - INFO - Successfully imported SimpleRiskManager
+2025-05-01 16:37:59,600 - debug_integration - INFO - Successfully imported SimulatedBroker
+2025-05-01 16:37:59,600 - debug_integration - INFO - Successfully imported OrderManager
+2025-05-01 16:37:59,600 - debug_integration - INFO - Successfully imported MACrossoverStrategy
+2025-05-01 16:37:59,600 - debug_integration - INFO - Successfully imported adapter modules
+2025-05-01 16:37:59,600 - debug_integration - INFO - Created BarEvent successfully
+2025-05-01 16:37:59,600 - debug_integration - INFO - Emitting bar event...
+2025-05-01 16:37:59,600 - tests.adapters - DEBUG - Processing event ID: c767fac5-3735-4d09-8930-5015e6dcf380, type: EventType.BAR
+2025-05-01 16:37:59,600 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): c767fac5-3735-4d09-8930-5015e6dcf380
+2025-05-01 16:37:59,600 - debug_integration - INFO - Tracked event: EventType.BAR
+2025-05-01 16:37:59,600 - debug_integration - INFO - Bar event emitted, 3 handlers called
+2025-05-01 16:37:59,600 - debug_integration - INFO - Waiting for event processing...
+2025-05-01 16:38:00,605 - debug_integration - INFO - Tracked 1 events
+2025-05-01 16:38:00,606 - debug_integration - INFO - Event 1: EventType.BAR
+2025-05-01 16:38:00,606 - debug_integration - INFO - Portfolio positions (from property): {}
+2025-05-01 16:38:00,606 - debug_integration - INFO - Portfolio cash: 100000.0
+2025-05-01 16:38:00,606 - debug_integration - INFO - Debug integration test completed successfully

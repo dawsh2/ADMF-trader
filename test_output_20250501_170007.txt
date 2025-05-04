@@ -1,0 +1,32 @@
+Return code: 1
+
+=== STDOUT ===
+No output
+
+=== STDERR ===
+2025-05-01 17:00:07,520 - __main__ - INFO - Running tests for our fixes...
+2025-05-01 17:00:07,520 - __main__ - INFO - Running test: Event Bus
+2025-05-01 17:00:07,568 - __main__ - INFO - Handler registration works!
+2025-05-01 17:00:07,568 - __main__ - INFO - Received event: BAR
+2025-05-01 17:00:07,568 - __main__ - INFO - Event emission works!
+2025-05-01 17:00:07,568 - __main__ - INFO - Test Event Bus PASSED in 0.0487 seconds
+2025-05-01 17:00:07,568 - __main__ - INFO - Running test: Order Creation
+2025-05-01 17:00:07,568 - __main__ - INFO - Order creation works with the new parameter order!
+2025-05-01 17:00:07,568 - __main__ - INFO - Test Order Creation PASSED in 0.0000 seconds
+2025-05-01 17:00:07,568 - __main__ - INFO - Running test: MA Strategy
+2025-05-01 17:00:07,901 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy initialized with fast_window=2, slow_window=5
+2025-05-01 17:00:07,901 - __main__ - INFO - Strategy fields are properly initialized!
+2025-05-01 17:00:07,901 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy ma_crossover reset
+2025-05-01 17:00:07,901 - __main__ - ERROR - Error in test MA Strategy: 
+2025-05-01 17:00:07,901 - __main__ - INFO - Test MA Strategy FAILED in 0.3327 seconds
+2025-05-01 17:00:07,901 - __main__ - INFO - Running test: Portfolio Manager
+2025-05-01 17:00:07,905 - __main__ - INFO - Portfolio get_positions method works!
+2025-05-01 17:00:07,905 - __main__ - INFO - Portfolio get_equity_curve method works!
+2025-05-01 17:00:07,905 - __main__ - INFO - Test Portfolio Manager PASSED in 0.0042 seconds
+2025-05-01 17:00:07,905 - __main__ - INFO - ===== Test Results =====
+2025-05-01 17:00:07,905 - __main__ - INFO - Event Bus: ✅ PASSED
+2025-05-01 17:00:07,905 - __main__ - INFO - Order Creation: ✅ PASSED
+2025-05-01 17:00:07,905 - __main__ - INFO - MA Strategy: ❌ FAILED
+2025-05-01 17:00:07,905 - __main__ - INFO - Portfolio Manager: ✅ PASSED
+2025-05-01 17:00:07,905 - __main__ - INFO - ========================
+2025-05-01 17:00:07,905 - __main__ - ERROR - Some tests failed. The fixes need more work.

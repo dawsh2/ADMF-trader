@@ -3,6 +3,10 @@
 # Add the project root to Python path to make src imports work
 import os
 import sys
+import logging
+
+# Set up logging
+logger = logging.getLogger(__name__)
 
 # Add the project root directory to Python path to allow 'src' imports
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -22,21 +26,22 @@ def fix_event_class():
                 """Bridge property to access event_type as type."""
                 return self.event_type
             
+            # Add the type property
             Event.type = type_property
-            print("Fixed Event class: Added 'type' property")
+            # The type property has been added
     except ImportError as e:
-        print(f"Could not import Event class: {e}")
+        logger.warning(f"Could not import Event class: {e}")
     except Exception as e:
-        print(f"Error fixing Event class: {e}")
+        logger.warning(f"Error fixing Event class: {e}")
 
 # Apply the Event class fix
 try:
     fix_event_class()
 except Exception as e:
-    print(f"Warning: Failed to fix Event class: {e}")
+    logger.warning(f"Failed to fix Event class: {e}")
 
 # Import all adapters
 try:
     import tests.adapters
 except ImportError as e:
-    print(f"Warning: Failed to import adapters: {e}")
+    logger.warning(f"Failed to import adapters: {e}")

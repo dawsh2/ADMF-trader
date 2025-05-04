@@ -1,0 +1,18 @@
+strategy:
+  type: ma_crossover
+  parameters:
+    fast_window: 2
+    slow_window: 5
+    price_key: close
+risk:
+  position_size: 500
+  max_position_pct: 1.0
+data:
+  source_type: csv
+  custom_file: HEAD_1min.csv
+backtest:
+  initial_capital: 100000
+  start_date: "2024-01-01"
+  end_date: "2024-12-31"
+  symbols: ["SPY"]
+  timeframe: "1min"

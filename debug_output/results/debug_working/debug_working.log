@@ -1,0 +1,39 @@
+2025-04-30 21:36:28,044 - src.core.bootstrap - INFO - Logging initialized at level INFO
+2025-04-30 21:36:28,044 - src.core.bootstrap - INFO - Log file: ./results/debug_working/debug_working.log
+2025-04-30 21:36:28,045 - src.core.bootstrap - INFO - Loaded configuration from ../config/debug_working.yaml
+2025-04-30 21:36:28,045 - src.core.bootstrap - INFO - Event system initialized
+2025-04-30 21:36:28,045 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-04-30 21:36:28,045 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-04-30 21:36:28,045 - src.core.bootstrap - INFO - Data components initialized with source type: csv
+2025-04-30 21:36:28,046 - src.core.bootstrap - INFO - Order registry initialized
+2025-04-30 21:36:28,051 - src.core.bootstrap - INFO - Execution components initialized with order registry
+2025-04-30 21:36:28,052 - src.core.bootstrap - INFO - Risk manager configured with position_size=100, max_position_pct=0.1
+2025-04-30 21:36:28,052 - src.core.bootstrap - INFO - Risk components initialized
+2025-04-30 21:36:28,053 - src.core.bootstrap - INFO - Discovering strategy implementations...
+2025-04-30 21:36:28,054 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-04-30 21:36:28,054 - src.core.utils.discovery - INFO - Registered component regime_ensemble in registry
+2025-04-30 21:36:28,054 - src.core.bootstrap - INFO - Discovered strategies: ma_crossover, regime_ensemble
+2025-04-30 21:36:28,054 - src.core.bootstrap - INFO - Requested strategy: ma_crossover
+2025-04-30 21:36:28,054 - src.core.bootstrap - INFO - Available strategies in registry: ['ma_crossover', 'regime_ensemble']
+2025-04-30 21:36:28,054 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy initialized with fast_window=5, slow_window=15
+2025-04-30 21:36:28,054 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy configured with parameters: fast_window=5, slow_window=15
+2025-04-30 21:36:28,054 - src.core.bootstrap - INFO - Strategy 'ma_crossover' initialized successfully
+2025-04-30 21:36:28,054 - src.core.bootstrap - INFO - Analytics components initialized
+2025-04-30 21:36:28,054 - src.core.bootstrap - INFO - System bootstrap complete
+2025-04-30 21:36:28,054 - src.execution.backtest.backtest - INFO - Using timeframe from config: 1min
+2025-04-30 21:36:28,058 - src.execution.backtest.backtest - INFO - Backtest setup complete
+2025-04-30 21:36:28,058 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_3a0f4dd7 to initial state with cash: $100000.00
+2025-04-30 21:36:28,058 - src.risk.managers.simple - INFO - Risk manager risk_manager_85bdba9d reset
+2025-04-30 21:36:28,058 - src.execution.order_registry - INFO - Order registry reset
+2025-04-30 21:36:28,058 - src.execution.order_manager - INFO - Reset order manager
+2025-04-30 21:36:28,058 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy ma_crossover reset
+2025-04-30 21:36:28,058 - src.execution.backtest.backtest - INFO - Reset all components for backtest
+2025-04-30 21:36:28,058 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['SPY'] with timeframe: 1min
+2025-04-30 21:36:28,058 - src.data.sources.csv_handler - WARNING - Error checking for custom data file: argument of type 'ConfigSection' is not iterable
+2025-04-30 21:36:28,058 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/SPY_1min.csv
+2025-04-30 21:36:28,058 - src.data.sources.csv_handler - WARNING - File not found: ./data/SPY_1min.csv
+2025-04-30 21:36:28,059 - src.data.historical_data_handler - WARNING - No data found for SPY
+2025-04-30 21:36:28,059 - src.execution.backtest.backtest - INFO - Starting backtest
+2025-04-30 21:36:28,059 - src.execution.backtest.backtest - WARNING - No symbols available in data handler
+2025-04-30 21:36:28,059 - src.execution.backtest.backtest - WARNING - No symbols available in data handler
+2025-04-30 21:36:28,059 - src.execution.backtest.backtest - WARNING - Backtest did not produce results: No data available to process

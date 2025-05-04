@@ -1,0 +1,1566 @@
+2025-04-30 21:36:00,687 - src.core.bootstrap - INFO - Logging initialized at level INFO
+2025-04-30 21:36:00,687 - src.core.bootstrap - INFO - Log file: ./results/debug_working/debug_working.log
+2025-04-30 21:36:00,688 - src.core.bootstrap - INFO - Loaded configuration from config/debug_working.yaml
+2025-04-30 21:36:00,688 - src.core.bootstrap - INFO - Event system initialized
+2025-04-30 21:36:00,688 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-04-30 21:36:00,688 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-04-30 21:36:00,689 - src.core.bootstrap - INFO - Data components initialized with source type: csv
+2025-04-30 21:36:00,690 - src.core.bootstrap - INFO - Order registry initialized
+2025-04-30 21:36:00,695 - src.core.bootstrap - INFO - Execution components initialized with order registry
+2025-04-30 21:36:00,697 - src.core.bootstrap - INFO - Risk manager configured with position_size=100, max_position_pct=0.1
+2025-04-30 21:36:00,697 - src.core.bootstrap - INFO - Risk components initialized
+2025-04-30 21:36:00,700 - src.core.bootstrap - INFO - Discovering strategy implementations...
+2025-04-30 21:36:00,701 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-04-30 21:36:00,701 - src.core.utils.discovery - INFO - Registered component regime_ensemble in registry
+2025-04-30 21:36:00,701 - src.core.bootstrap - INFO - Discovered strategies: ma_crossover, regime_ensemble
+2025-04-30 21:36:00,701 - src.core.bootstrap - INFO - Requested strategy: ma_crossover
+2025-04-30 21:36:00,701 - src.core.bootstrap - INFO - Available strategies in registry: ['ma_crossover', 'regime_ensemble']
+2025-04-30 21:36:00,701 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy initialized with fast_window=5, slow_window=15
+2025-04-30 21:36:00,701 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy configured with parameters: fast_window=5, slow_window=15
+2025-04-30 21:36:00,701 - src.core.bootstrap - INFO - Strategy 'ma_crossover' initialized successfully
+2025-04-30 21:36:00,701 - src.core.bootstrap - INFO - Analytics components initialized
+2025-04-30 21:36:00,701 - src.core.bootstrap - INFO - System bootstrap complete
+2025-04-30 21:36:00,701 - src.execution.backtest.backtest - INFO - Using timeframe from config: 1min
+2025-04-30 21:36:00,705 - src.execution.backtest.backtest - INFO - Backtest setup complete
+2025-04-30 21:36:00,705 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_8c19ce46 to initial state with cash: $100000.00
+2025-04-30 21:36:00,705 - src.risk.managers.simple - INFO - Risk manager risk_manager_631a4e3d reset
+2025-04-30 21:36:00,705 - src.execution.order_registry - INFO - Order registry reset
+2025-04-30 21:36:00,705 - src.execution.order_manager - INFO - Reset order manager
+2025-04-30 21:36:00,705 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy ma_crossover reset
+2025-04-30 21:36:00,705 - src.execution.backtest.backtest - INFO - Reset all components for backtest
+2025-04-30 21:36:00,705 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['SPY'] with timeframe: 1min
+2025-04-30 21:36:00,705 - src.data.sources.csv_handler - WARNING - Error checking for custom data file: argument of type 'ConfigSection' is not iterable
+2025-04-30 21:36:00,705 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/SPY_1min.csv
+2025-04-30 21:36:00,754 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 102236 rows
+2025-04-30 21:36:00,756 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2024-03-26 13:30:00
+2025-04-30 21:36:00,767 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2024-03-26 13:30:00
+2025-04-30 21:36:00,769 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2024-01-01 00:00:00
+2025-04-30 21:36:00,771 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2024-12-31 00:00:00
+2025-04-30 21:36:00,771 - src.data.sources.csv_handler - INFO - CSVDataSource: Set timestamp as index
+2025-04-30 21:36:00,774 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2024-03-26 13:30:00 to 2024-12-30 21:00:00
+2025-04-30 21:36:00,774 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume', 'trade_count', 'vwap']
+2025-04-30 21:36:00,774 - src.data.historical_data_handler - INFO - Loaded 75316 bars for SPY from 2024-03-26 13:30:00 to 2024-12-30 21:00:00
+2025-04-30 21:36:00,774 - src.execution.backtest.backtest - INFO - Starting backtest
+2025-04-30 21:36:00,774 - src.execution.backtest.backtest - INFO - Starting backtest iteration for symbols: ['SPY']
+2025-04-30 21:36:00,777 - src.execution.backtest.backtest - INFO - Processed 100 iterations
+2025-04-30 21:36:00,777 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 100
+2025-04-30 21:36:00,780 - src.execution.backtest.backtest - INFO - Processed 200 iterations
+2025-04-30 21:36:00,780 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 200
+2025-04-30 21:36:00,782 - src.execution.backtest.backtest - INFO - Processed 300 iterations
+2025-04-30 21:36:00,782 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 300
+2025-04-30 21:36:00,785 - src.execution.backtest.backtest - INFO - Processed 400 iterations
+2025-04-30 21:36:00,785 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 400
+2025-04-30 21:36:00,788 - src.execution.backtest.backtest - INFO - Processed 500 iterations
+2025-04-30 21:36:00,788 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 500
+2025-04-30 21:36:00,790 - src.execution.backtest.backtest - INFO - Processed 600 iterations
+2025-04-30 21:36:00,790 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 600
+2025-04-30 21:36:00,793 - src.execution.backtest.backtest - INFO - Processed 700 iterations
+2025-04-30 21:36:00,793 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 700
+2025-04-30 21:36:00,795 - src.execution.backtest.backtest - INFO - Processed 800 iterations
+2025-04-30 21:36:00,795 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 800
+2025-04-30 21:36:00,798 - src.execution.backtest.backtest - INFO - Processed 900 iterations
+2025-04-30 21:36:00,798 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 900
+2025-04-30 21:36:00,801 - src.execution.backtest.backtest - INFO - Processed 1000 iterations
+2025-04-30 21:36:00,801 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 1000
+2025-04-30 21:36:00,803 - src.execution.backtest.backtest - INFO - Processed 1100 iterations
+2025-04-30 21:36:00,803 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 1100
+2025-04-30 21:36:00,806 - src.execution.backtest.backtest - INFO - Processed 1200 iterations
+2025-04-30 21:36:00,806 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 1200
+2025-04-30 21:36:00,809 - src.execution.backtest.backtest - INFO - Processed 1300 iterations
+2025-04-30 21:36:00,809 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 1300
+2025-04-30 21:36:00,811 - src.execution.backtest.backtest - INFO - Processed 1400 iterations
+2025-04-30 21:36:00,811 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 1400
+2025-04-30 21:36:00,814 - src.execution.backtest.backtest - INFO - Processed 1500 iterations
+2025-04-30 21:36:00,814 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 1500
+2025-04-30 21:36:00,817 - src.execution.backtest.backtest - INFO - Processed 1600 iterations
+2025-04-30 21:36:00,817 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 1600
+2025-04-30 21:36:00,819 - src.execution.backtest.backtest - INFO - Processed 1700 iterations
+2025-04-30 21:36:00,819 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 1700
+2025-04-30 21:36:00,822 - src.execution.backtest.backtest - INFO - Processed 1800 iterations
+2025-04-30 21:36:00,822 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 1800
+2025-04-30 21:36:00,825 - src.execution.backtest.backtest - INFO - Processed 1900 iterations
+2025-04-30 21:36:00,825 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 1900
+2025-04-30 21:36:00,827 - src.execution.backtest.backtest - INFO - Processed 2000 iterations
+2025-04-30 21:36:00,827 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 2000
+2025-04-30 21:36:00,830 - src.execution.backtest.backtest - INFO - Processed 2100 iterations
+2025-04-30 21:36:00,830 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 2100
+2025-04-30 21:36:00,833 - src.execution.backtest.backtest - INFO - Processed 2200 iterations
+2025-04-30 21:36:00,833 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 2200
+2025-04-30 21:36:00,835 - src.execution.backtest.backtest - INFO - Processed 2300 iterations
+2025-04-30 21:36:00,835 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 2300
+2025-04-30 21:36:00,838 - src.execution.backtest.backtest - INFO - Processed 2400 iterations
+2025-04-30 21:36:00,838 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 2400
+2025-04-30 21:36:00,841 - src.execution.backtest.backtest - INFO - Processed 2500 iterations
+2025-04-30 21:36:00,841 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 2500
+2025-04-30 21:36:00,843 - src.execution.backtest.backtest - INFO - Processed 2600 iterations
+2025-04-30 21:36:00,843 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 2600
+2025-04-30 21:36:00,846 - src.execution.backtest.backtest - INFO - Processed 2700 iterations
+2025-04-30 21:36:00,846 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 2700
+2025-04-30 21:36:00,848 - src.execution.backtest.backtest - INFO - Processed 2800 iterations
+2025-04-30 21:36:00,848 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 2800
+2025-04-30 21:36:00,852 - src.execution.backtest.backtest - INFO - Processed 2900 iterations
+2025-04-30 21:36:00,852 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 2900
+2025-04-30 21:36:00,855 - src.execution.backtest.backtest - INFO - Processed 3000 iterations
+2025-04-30 21:36:00,855 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 3000
+2025-04-30 21:36:00,857 - src.execution.backtest.backtest - INFO - Processed 3100 iterations
+2025-04-30 21:36:00,857 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 3100
+2025-04-30 21:36:00,860 - src.execution.backtest.backtest - INFO - Processed 3200 iterations
+2025-04-30 21:36:00,860 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 3200
+2025-04-30 21:36:00,863 - src.execution.backtest.backtest - INFO - Processed 3300 iterations
+2025-04-30 21:36:00,863 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 3300
+2025-04-30 21:36:00,865 - src.execution.backtest.backtest - INFO - Processed 3400 iterations
+2025-04-30 21:36:00,865 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 3400
+2025-04-30 21:36:00,868 - src.execution.backtest.backtest - INFO - Processed 3500 iterations
+2025-04-30 21:36:00,868 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 3500
+2025-04-30 21:36:00,871 - src.execution.backtest.backtest - INFO - Processed 3600 iterations
+2025-04-30 21:36:00,871 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 3600
+2025-04-30 21:36:00,873 - src.execution.backtest.backtest - INFO - Processed 3700 iterations
+2025-04-30 21:36:00,873 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 3700
+2025-04-30 21:36:00,876 - src.execution.backtest.backtest - INFO - Processed 3800 iterations
+2025-04-30 21:36:00,876 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 3800
+2025-04-30 21:36:00,878 - src.execution.backtest.backtest - INFO - Processed 3900 iterations
+2025-04-30 21:36:00,879 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 3900
+2025-04-30 21:36:00,881 - src.execution.backtest.backtest - INFO - Processed 4000 iterations
+2025-04-30 21:36:00,881 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 4000
+2025-04-30 21:36:00,884 - src.execution.backtest.backtest - INFO - Processed 4100 iterations
+2025-04-30 21:36:00,884 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 4100
+2025-04-30 21:36:00,886 - src.execution.backtest.backtest - INFO - Processed 4200 iterations
+2025-04-30 21:36:00,886 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 4200
+2025-04-30 21:36:00,889 - src.execution.backtest.backtest - INFO - Processed 4300 iterations
+2025-04-30 21:36:00,889 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 4300
+2025-04-30 21:36:00,892 - src.execution.backtest.backtest - INFO - Processed 4400 iterations
+2025-04-30 21:36:00,892 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 4400
+2025-04-30 21:36:00,894 - src.execution.backtest.backtest - INFO - Processed 4500 iterations
+2025-04-30 21:36:00,894 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 4500
+2025-04-30 21:36:00,897 - src.execution.backtest.backtest - INFO - Processed 4600 iterations
+2025-04-30 21:36:00,897 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 4600
+2025-04-30 21:36:00,900 - src.execution.backtest.backtest - INFO - Processed 4700 iterations
+2025-04-30 21:36:00,900 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 4700
+2025-04-30 21:36:00,902 - src.execution.backtest.backtest - INFO - Processed 4800 iterations
+2025-04-30 21:36:00,902 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 4800
+2025-04-30 21:36:00,905 - src.execution.backtest.backtest - INFO - Processed 4900 iterations
+2025-04-30 21:36:00,905 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 4900
+2025-04-30 21:36:00,907 - src.execution.backtest.backtest - INFO - Processed 5000 iterations
+2025-04-30 21:36:00,907 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 5000
+2025-04-30 21:36:00,910 - src.execution.backtest.backtest - INFO - Processed 5100 iterations
+2025-04-30 21:36:00,910 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 5100
+2025-04-30 21:36:00,913 - src.execution.backtest.backtest - INFO - Processed 5200 iterations
+2025-04-30 21:36:00,913 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 5200
+2025-04-30 21:36:00,915 - src.execution.backtest.backtest - INFO - Processed 5300 iterations
+2025-04-30 21:36:00,915 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 5300
+2025-04-30 21:36:00,918 - src.execution.backtest.backtest - INFO - Processed 5400 iterations
+2025-04-30 21:36:00,918 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 5400
+2025-04-30 21:36:00,921 - src.execution.backtest.backtest - INFO - Processed 5500 iterations
+2025-04-30 21:36:00,921 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 5500
+2025-04-30 21:36:00,923 - src.execution.backtest.backtest - INFO - Processed 5600 iterations
+2025-04-30 21:36:00,923 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 5600
+2025-04-30 21:36:00,926 - src.execution.backtest.backtest - INFO - Processed 5700 iterations
+2025-04-30 21:36:00,926 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 5700
+2025-04-30 21:36:00,928 - src.execution.backtest.backtest - INFO - Processed 5800 iterations
+2025-04-30 21:36:00,928 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 5800
+2025-04-30 21:36:00,931 - src.execution.backtest.backtest - INFO - Processed 5900 iterations
+2025-04-30 21:36:00,931 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 5900
+2025-04-30 21:36:00,934 - src.execution.backtest.backtest - INFO - Processed 6000 iterations
+2025-04-30 21:36:00,934 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 6000
+2025-04-30 21:36:00,937 - src.execution.backtest.backtest - INFO - Processed 6100 iterations
+2025-04-30 21:36:00,937 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 6100
+2025-04-30 21:36:00,939 - src.execution.backtest.backtest - INFO - Processed 6200 iterations
+2025-04-30 21:36:00,939 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 6200
+2025-04-30 21:36:00,942 - src.execution.backtest.backtest - INFO - Processed 6300 iterations
+2025-04-30 21:36:00,942 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 6300
+2025-04-30 21:36:00,944 - src.execution.backtest.backtest - INFO - Processed 6400 iterations
+2025-04-30 21:36:00,944 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 6400
+2025-04-30 21:36:00,947 - src.execution.backtest.backtest - INFO - Processed 6500 iterations
+2025-04-30 21:36:00,947 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 6500
+2025-04-30 21:36:00,950 - src.execution.backtest.backtest - INFO - Processed 6600 iterations
+2025-04-30 21:36:00,950 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 6600
+2025-04-30 21:36:00,952 - src.execution.backtest.backtest - INFO - Processed 6700 iterations
+2025-04-30 21:36:00,952 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 6700
+2025-04-30 21:36:00,955 - src.execution.backtest.backtest - INFO - Processed 6800 iterations
+2025-04-30 21:36:00,955 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 6800
+2025-04-30 21:36:00,958 - src.execution.backtest.backtest - INFO - Processed 6900 iterations
+2025-04-30 21:36:00,958 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 6900
+2025-04-30 21:36:00,960 - src.execution.backtest.backtest - INFO - Processed 7000 iterations
+2025-04-30 21:36:00,960 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 7000
+2025-04-30 21:36:00,963 - src.execution.backtest.backtest - INFO - Processed 7100 iterations
+2025-04-30 21:36:00,963 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 7100
+2025-04-30 21:36:00,966 - src.execution.backtest.backtest - INFO - Processed 7200 iterations
+2025-04-30 21:36:00,966 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 7200
+2025-04-30 21:36:00,968 - src.execution.backtest.backtest - INFO - Processed 7300 iterations
+2025-04-30 21:36:00,968 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 7300
+2025-04-30 21:36:00,971 - src.execution.backtest.backtest - INFO - Processed 7400 iterations
+2025-04-30 21:36:00,971 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 7400
+2025-04-30 21:36:00,974 - src.execution.backtest.backtest - INFO - Processed 7500 iterations
+2025-04-30 21:36:00,974 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 7500
+2025-04-30 21:36:00,976 - src.execution.backtest.backtest - INFO - Processed 7600 iterations
+2025-04-30 21:36:00,976 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 7600
+2025-04-30 21:36:00,980 - src.execution.backtest.backtest - INFO - Processed 7700 iterations
+2025-04-30 21:36:00,980 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 7700
+2025-04-30 21:36:00,983 - src.execution.backtest.backtest - INFO - Processed 7800 iterations
+2025-04-30 21:36:00,983 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 7800
+2025-04-30 21:36:00,985 - src.execution.backtest.backtest - INFO - Processed 7900 iterations
+2025-04-30 21:36:00,985 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 7900
+2025-04-30 21:36:00,988 - src.execution.backtest.backtest - INFO - Processed 8000 iterations
+2025-04-30 21:36:00,988 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 8000
+2025-04-30 21:36:00,991 - src.execution.backtest.backtest - INFO - Processed 8100 iterations
+2025-04-30 21:36:00,991 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 8100
+2025-04-30 21:36:00,993 - src.execution.backtest.backtest - INFO - Processed 8200 iterations
+2025-04-30 21:36:00,993 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 8200
+2025-04-30 21:36:00,996 - src.execution.backtest.backtest - INFO - Processed 8300 iterations
+2025-04-30 21:36:00,996 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 8300
+2025-04-30 21:36:00,999 - src.execution.backtest.backtest - INFO - Processed 8400 iterations
+2025-04-30 21:36:00,999 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 8400
+2025-04-30 21:36:01,001 - src.execution.backtest.backtest - INFO - Processed 8500 iterations
+2025-04-30 21:36:01,001 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 8500
+2025-04-30 21:36:01,004 - src.execution.backtest.backtest - INFO - Processed 8600 iterations
+2025-04-30 21:36:01,004 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 8600
+2025-04-30 21:36:01,007 - src.execution.backtest.backtest - INFO - Processed 8700 iterations
+2025-04-30 21:36:01,007 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 8700
+2025-04-30 21:36:01,009 - src.execution.backtest.backtest - INFO - Processed 8800 iterations
+2025-04-30 21:36:01,009 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 8800
+2025-04-30 21:36:01,012 - src.execution.backtest.backtest - INFO - Processed 8900 iterations
+2025-04-30 21:36:01,012 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 8900
+2025-04-30 21:36:01,015 - src.execution.backtest.backtest - INFO - Processed 9000 iterations
+2025-04-30 21:36:01,015 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 9000
+2025-04-30 21:36:01,017 - src.execution.backtest.backtest - INFO - Processed 9100 iterations
+2025-04-30 21:36:01,017 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 9100
+2025-04-30 21:36:01,020 - src.execution.backtest.backtest - INFO - Processed 9200 iterations
+2025-04-30 21:36:01,020 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 9200
+2025-04-30 21:36:01,023 - src.execution.backtest.backtest - INFO - Processed 9300 iterations
+2025-04-30 21:36:01,023 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 9300
+2025-04-30 21:36:01,025 - src.execution.backtest.backtest - INFO - Processed 9400 iterations
+2025-04-30 21:36:01,025 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 9400
+2025-04-30 21:36:01,028 - src.execution.backtest.backtest - INFO - Processed 9500 iterations
+2025-04-30 21:36:01,028 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 9500
+2025-04-30 21:36:01,031 - src.execution.backtest.backtest - INFO - Processed 9600 iterations
+2025-04-30 21:36:01,031 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 9600
+2025-04-30 21:36:01,033 - src.execution.backtest.backtest - INFO - Processed 9700 iterations
+2025-04-30 21:36:01,033 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 9700
+2025-04-30 21:36:01,036 - src.execution.backtest.backtest - INFO - Processed 9800 iterations
+2025-04-30 21:36:01,036 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 9800
+2025-04-30 21:36:01,039 - src.execution.backtest.backtest - INFO - Processed 9900 iterations
+2025-04-30 21:36:01,039 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 9900
+2025-04-30 21:36:01,041 - src.execution.backtest.backtest - INFO - Processed 10000 iterations
+2025-04-30 21:36:01,041 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 10000
+2025-04-30 21:36:01,044 - src.execution.backtest.backtest - INFO - Processed 10100 iterations
+2025-04-30 21:36:01,044 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 10100
+2025-04-30 21:36:01,047 - src.execution.backtest.backtest - INFO - Processed 10200 iterations
+2025-04-30 21:36:01,047 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 10200
+2025-04-30 21:36:01,049 - src.execution.backtest.backtest - INFO - Processed 10300 iterations
+2025-04-30 21:36:01,049 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 10300
+2025-04-30 21:36:01,052 - src.execution.backtest.backtest - INFO - Processed 10400 iterations
+2025-04-30 21:36:01,052 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 10400
+2025-04-30 21:36:01,055 - src.execution.backtest.backtest - INFO - Processed 10500 iterations
+2025-04-30 21:36:01,055 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 10500
+2025-04-30 21:36:01,057 - src.execution.backtest.backtest - INFO - Processed 10600 iterations
+2025-04-30 21:36:01,057 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 10600
+2025-04-30 21:36:01,060 - src.execution.backtest.backtest - INFO - Processed 10700 iterations
+2025-04-30 21:36:01,060 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 10700
+2025-04-30 21:36:01,062 - src.execution.backtest.backtest - INFO - Processed 10800 iterations
+2025-04-30 21:36:01,062 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 10800
+2025-04-30 21:36:01,065 - src.execution.backtest.backtest - INFO - Processed 10900 iterations
+2025-04-30 21:36:01,065 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 10900
+2025-04-30 21:36:01,068 - src.execution.backtest.backtest - INFO - Processed 11000 iterations
+2025-04-30 21:36:01,068 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 11000
+2025-04-30 21:36:01,071 - src.execution.backtest.backtest - INFO - Processed 11100 iterations
+2025-04-30 21:36:01,071 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 11100
+2025-04-30 21:36:01,073 - src.execution.backtest.backtest - INFO - Processed 11200 iterations
+2025-04-30 21:36:01,073 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 11200
+2025-04-30 21:36:01,076 - src.execution.backtest.backtest - INFO - Processed 11300 iterations
+2025-04-30 21:36:01,076 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 11300
+2025-04-30 21:36:01,079 - src.execution.backtest.backtest - INFO - Processed 11400 iterations
+2025-04-30 21:36:01,079 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 11400
+2025-04-30 21:36:01,081 - src.execution.backtest.backtest - INFO - Processed 11500 iterations
+2025-04-30 21:36:01,081 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 11500
+2025-04-30 21:36:01,084 - src.execution.backtest.backtest - INFO - Processed 11600 iterations
+2025-04-30 21:36:01,084 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 11600
+2025-04-30 21:36:01,087 - src.execution.backtest.backtest - INFO - Processed 11700 iterations
+2025-04-30 21:36:01,087 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 11700
+2025-04-30 21:36:01,089 - src.execution.backtest.backtest - INFO - Processed 11800 iterations
+2025-04-30 21:36:01,089 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 11800
+2025-04-30 21:36:01,092 - src.execution.backtest.backtest - INFO - Processed 11900 iterations
+2025-04-30 21:36:01,092 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 11900
+2025-04-30 21:36:01,095 - src.execution.backtest.backtest - INFO - Processed 12000 iterations
+2025-04-30 21:36:01,095 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 12000
+2025-04-30 21:36:01,097 - src.execution.backtest.backtest - INFO - Processed 12100 iterations
+2025-04-30 21:36:01,097 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 12100
+2025-04-30 21:36:01,100 - src.execution.backtest.backtest - INFO - Processed 12200 iterations
+2025-04-30 21:36:01,100 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 12200
+2025-04-30 21:36:01,103 - src.execution.backtest.backtest - INFO - Processed 12300 iterations
+2025-04-30 21:36:01,103 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 12300
+2025-04-30 21:36:01,105 - src.execution.backtest.backtest - INFO - Processed 12400 iterations
+2025-04-30 21:36:01,105 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 12400
+2025-04-30 21:36:01,109 - src.execution.backtest.backtest - INFO - Processed 12500 iterations
+2025-04-30 21:36:01,109 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 12500
+2025-04-30 21:36:01,111 - src.execution.backtest.backtest - INFO - Processed 12600 iterations
+2025-04-30 21:36:01,111 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 12600
+2025-04-30 21:36:01,114 - src.execution.backtest.backtest - INFO - Processed 12700 iterations
+2025-04-30 21:36:01,114 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 12700
+2025-04-30 21:36:01,117 - src.execution.backtest.backtest - INFO - Processed 12800 iterations
+2025-04-30 21:36:01,117 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 12800
+2025-04-30 21:36:01,120 - src.execution.backtest.backtest - INFO - Processed 12900 iterations
+2025-04-30 21:36:01,120 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 12900
+2025-04-30 21:36:01,122 - src.execution.backtest.backtest - INFO - Processed 13000 iterations
+2025-04-30 21:36:01,122 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 13000
+2025-04-30 21:36:01,125 - src.execution.backtest.backtest - INFO - Processed 13100 iterations
+2025-04-30 21:36:01,125 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 13100
+2025-04-30 21:36:01,127 - src.execution.backtest.backtest - INFO - Processed 13200 iterations
+2025-04-30 21:36:01,127 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 13200
+2025-04-30 21:36:01,130 - src.execution.backtest.backtest - INFO - Processed 13300 iterations
+2025-04-30 21:36:01,130 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 13300
+2025-04-30 21:36:01,133 - src.execution.backtest.backtest - INFO - Processed 13400 iterations
+2025-04-30 21:36:01,133 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 13400
+2025-04-30 21:36:01,135 - src.execution.backtest.backtest - INFO - Processed 13500 iterations
+2025-04-30 21:36:01,135 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 13500
+2025-04-30 21:36:01,138 - src.execution.backtest.backtest - INFO - Processed 13600 iterations
+2025-04-30 21:36:01,138 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 13600
+2025-04-30 21:36:01,141 - src.execution.backtest.backtest - INFO - Processed 13700 iterations
+2025-04-30 21:36:01,141 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 13700
+2025-04-30 21:36:01,143 - src.execution.backtest.backtest - INFO - Processed 13800 iterations
+2025-04-30 21:36:01,143 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 13800
+2025-04-30 21:36:01,146 - src.execution.backtest.backtest - INFO - Processed 13900 iterations
+2025-04-30 21:36:01,146 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 13900
+2025-04-30 21:36:01,149 - src.execution.backtest.backtest - INFO - Processed 14000 iterations
+2025-04-30 21:36:01,149 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 14000
+2025-04-30 21:36:01,151 - src.execution.backtest.backtest - INFO - Processed 14100 iterations
+2025-04-30 21:36:01,151 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 14100
+2025-04-30 21:36:01,154 - src.execution.backtest.backtest - INFO - Processed 14200 iterations
+2025-04-30 21:36:01,154 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 14200
+2025-04-30 21:36:01,157 - src.execution.backtest.backtest - INFO - Processed 14300 iterations
+2025-04-30 21:36:01,157 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 14300
+2025-04-30 21:36:01,159 - src.execution.backtest.backtest - INFO - Processed 14400 iterations
+2025-04-30 21:36:01,159 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 14400
+2025-04-30 21:36:01,162 - src.execution.backtest.backtest - INFO - Processed 14500 iterations
+2025-04-30 21:36:01,162 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 14500
+2025-04-30 21:36:01,165 - src.execution.backtest.backtest - INFO - Processed 14600 iterations
+2025-04-30 21:36:01,165 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 14600
+2025-04-30 21:36:01,167 - src.execution.backtest.backtest - INFO - Processed 14700 iterations
+2025-04-30 21:36:01,167 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 14700
+2025-04-30 21:36:01,170 - src.execution.backtest.backtest - INFO - Processed 14800 iterations
+2025-04-30 21:36:01,170 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 14800
+2025-04-30 21:36:01,173 - src.execution.backtest.backtest - INFO - Processed 14900 iterations
+2025-04-30 21:36:01,173 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 14900
+2025-04-30 21:36:01,175 - src.execution.backtest.backtest - INFO - Processed 15000 iterations
+2025-04-30 21:36:01,175 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 15000
+2025-04-30 21:36:01,178 - src.execution.backtest.backtest - INFO - Processed 15100 iterations
+2025-04-30 21:36:01,178 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 15100
+2025-04-30 21:36:01,180 - src.execution.backtest.backtest - INFO - Processed 15200 iterations
+2025-04-30 21:36:01,180 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 15200
+2025-04-30 21:36:01,183 - src.execution.backtest.backtest - INFO - Processed 15300 iterations
+2025-04-30 21:36:01,183 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 15300
+2025-04-30 21:36:01,186 - src.execution.backtest.backtest - INFO - Processed 15400 iterations
+2025-04-30 21:36:01,186 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 15400
+2025-04-30 21:36:01,188 - src.execution.backtest.backtest - INFO - Processed 15500 iterations
+2025-04-30 21:36:01,188 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 15500
+2025-04-30 21:36:01,191 - src.execution.backtest.backtest - INFO - Processed 15600 iterations
+2025-04-30 21:36:01,191 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 15600
+2025-04-30 21:36:01,194 - src.execution.backtest.backtest - INFO - Processed 15700 iterations
+2025-04-30 21:36:01,194 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 15700
+2025-04-30 21:36:01,196 - src.execution.backtest.backtest - INFO - Processed 15800 iterations
+2025-04-30 21:36:01,196 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 15800
+2025-04-30 21:36:01,199 - src.execution.backtest.backtest - INFO - Processed 15900 iterations
+2025-04-30 21:36:01,199 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 15900
+2025-04-30 21:36:01,201 - src.execution.backtest.backtest - INFO - Processed 16000 iterations
+2025-04-30 21:36:01,201 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 16000
+2025-04-30 21:36:01,204 - src.execution.backtest.backtest - INFO - Processed 16100 iterations
+2025-04-30 21:36:01,204 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 16100
+2025-04-30 21:36:01,207 - src.execution.backtest.backtest - INFO - Processed 16200 iterations
+2025-04-30 21:36:01,207 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 16200
+2025-04-30 21:36:01,209 - src.execution.backtest.backtest - INFO - Processed 16300 iterations
+2025-04-30 21:36:01,209 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 16300
+2025-04-30 21:36:01,212 - src.execution.backtest.backtest - INFO - Processed 16400 iterations
+2025-04-30 21:36:01,212 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 16400
+2025-04-30 21:36:01,215 - src.execution.backtest.backtest - INFO - Processed 16500 iterations
+2025-04-30 21:36:01,215 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 16500
+2025-04-30 21:36:01,218 - src.execution.backtest.backtest - INFO - Processed 16600 iterations
+2025-04-30 21:36:01,218 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 16600
+2025-04-30 21:36:01,220 - src.execution.backtest.backtest - INFO - Processed 16700 iterations
+2025-04-30 21:36:01,220 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 16700
+2025-04-30 21:36:01,223 - src.execution.backtest.backtest - INFO - Processed 16800 iterations
+2025-04-30 21:36:01,223 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 16800
+2025-04-30 21:36:01,226 - src.execution.backtest.backtest - INFO - Processed 16900 iterations
+2025-04-30 21:36:01,226 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 16900
+2025-04-30 21:36:01,228 - src.execution.backtest.backtest - INFO - Processed 17000 iterations
+2025-04-30 21:36:01,228 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 17000
+2025-04-30 21:36:01,231 - src.execution.backtest.backtest - INFO - Processed 17100 iterations
+2025-04-30 21:36:01,231 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 17100
+2025-04-30 21:36:01,234 - src.execution.backtest.backtest - INFO - Processed 17200 iterations
+2025-04-30 21:36:01,234 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 17200
+2025-04-30 21:36:01,237 - src.execution.backtest.backtest - INFO - Processed 17300 iterations
+2025-04-30 21:36:01,237 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 17300
+2025-04-30 21:36:01,240 - src.execution.backtest.backtest - INFO - Processed 17400 iterations
+2025-04-30 21:36:01,240 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 17400
+2025-04-30 21:36:01,243 - src.execution.backtest.backtest - INFO - Processed 17500 iterations
+2025-04-30 21:36:01,243 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 17500
+2025-04-30 21:36:01,245 - src.execution.backtest.backtest - INFO - Processed 17600 iterations
+2025-04-30 21:36:01,245 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 17600
+2025-04-30 21:36:01,269 - src.execution.backtest.backtest - INFO - Processed 17700 iterations
+2025-04-30 21:36:01,269 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 17700
+2025-04-30 21:36:01,272 - src.execution.backtest.backtest - INFO - Processed 17800 iterations
+2025-04-30 21:36:01,272 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 17800
+2025-04-30 21:36:01,274 - src.execution.backtest.backtest - INFO - Processed 17900 iterations
+2025-04-30 21:36:01,274 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 17900
+2025-04-30 21:36:01,277 - src.execution.backtest.backtest - INFO - Processed 18000 iterations
+2025-04-30 21:36:01,277 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 18000
+2025-04-30 21:36:01,280 - src.execution.backtest.backtest - INFO - Processed 18100 iterations
+2025-04-30 21:36:01,280 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 18100
+2025-04-30 21:36:01,282 - src.execution.backtest.backtest - INFO - Processed 18200 iterations
+2025-04-30 21:36:01,282 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 18200
+2025-04-30 21:36:01,285 - src.execution.backtest.backtest - INFO - Processed 18300 iterations
+2025-04-30 21:36:01,285 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 18300
+2025-04-30 21:36:01,288 - src.execution.backtest.backtest - INFO - Processed 18400 iterations
+2025-04-30 21:36:01,288 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 18400
+2025-04-30 21:36:01,290 - src.execution.backtest.backtest - INFO - Processed 18500 iterations
+2025-04-30 21:36:01,290 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 18500
+2025-04-30 21:36:01,293 - src.execution.backtest.backtest - INFO - Processed 18600 iterations
+2025-04-30 21:36:01,293 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 18600
+2025-04-30 21:36:01,296 - src.execution.backtest.backtest - INFO - Processed 18700 iterations
+2025-04-30 21:36:01,296 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 18700
+2025-04-30 21:36:01,298 - src.execution.backtest.backtest - INFO - Processed 18800 iterations
+2025-04-30 21:36:01,298 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 18800
+2025-04-30 21:36:01,301 - src.execution.backtest.backtest - INFO - Processed 18900 iterations
+2025-04-30 21:36:01,301 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 18900
+2025-04-30 21:36:01,304 - src.execution.backtest.backtest - INFO - Processed 19000 iterations
+2025-04-30 21:36:01,304 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 19000
+2025-04-30 21:36:01,306 - src.execution.backtest.backtest - INFO - Processed 19100 iterations
+2025-04-30 21:36:01,306 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 19100
+2025-04-30 21:36:01,309 - src.execution.backtest.backtest - INFO - Processed 19200 iterations
+2025-04-30 21:36:01,309 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 19200
+2025-04-30 21:36:01,312 - src.execution.backtest.backtest - INFO - Processed 19300 iterations
+2025-04-30 21:36:01,312 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 19300
+2025-04-30 21:36:01,314 - src.execution.backtest.backtest - INFO - Processed 19400 iterations
+2025-04-30 21:36:01,314 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 19400
+2025-04-30 21:36:01,317 - src.execution.backtest.backtest - INFO - Processed 19500 iterations
+2025-04-30 21:36:01,317 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 19500
+2025-04-30 21:36:01,320 - src.execution.backtest.backtest - INFO - Processed 19600 iterations
+2025-04-30 21:36:01,320 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 19600
+2025-04-30 21:36:01,323 - src.execution.backtest.backtest - INFO - Processed 19700 iterations
+2025-04-30 21:36:01,323 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 19700
+2025-04-30 21:36:01,325 - src.execution.backtest.backtest - INFO - Processed 19800 iterations
+2025-04-30 21:36:01,325 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 19800
+2025-04-30 21:36:01,328 - src.execution.backtest.backtest - INFO - Processed 19900 iterations
+2025-04-30 21:36:01,328 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 19900
+2025-04-30 21:36:01,331 - src.execution.backtest.backtest - INFO - Processed 20000 iterations
+2025-04-30 21:36:01,331 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 20000
+2025-04-30 21:36:01,333 - src.execution.backtest.backtest - INFO - Processed 20100 iterations
+2025-04-30 21:36:01,333 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 20100
+2025-04-30 21:36:01,336 - src.execution.backtest.backtest - INFO - Processed 20200 iterations
+2025-04-30 21:36:01,336 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 20200
+2025-04-30 21:36:01,339 - src.execution.backtest.backtest - INFO - Processed 20300 iterations
+2025-04-30 21:36:01,339 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 20300
+2025-04-30 21:36:01,341 - src.execution.backtest.backtest - INFO - Processed 20400 iterations
+2025-04-30 21:36:01,341 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 20400
+2025-04-30 21:36:01,344 - src.execution.backtest.backtest - INFO - Processed 20500 iterations
+2025-04-30 21:36:01,344 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 20500
+2025-04-30 21:36:01,347 - src.execution.backtest.backtest - INFO - Processed 20600 iterations
+2025-04-30 21:36:01,347 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 20600
+2025-04-30 21:36:01,349 - src.execution.backtest.backtest - INFO - Processed 20700 iterations
+2025-04-30 21:36:01,349 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 20700
+2025-04-30 21:36:01,352 - src.execution.backtest.backtest - INFO - Processed 20800 iterations
+2025-04-30 21:36:01,352 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 20800
+2025-04-30 21:36:01,355 - src.execution.backtest.backtest - INFO - Processed 20900 iterations
+2025-04-30 21:36:01,355 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 20900
+2025-04-30 21:36:01,357 - src.execution.backtest.backtest - INFO - Processed 21000 iterations
+2025-04-30 21:36:01,357 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 21000
+2025-04-30 21:36:01,360 - src.execution.backtest.backtest - INFO - Processed 21100 iterations
+2025-04-30 21:36:01,360 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 21100
+2025-04-30 21:36:01,363 - src.execution.backtest.backtest - INFO - Processed 21200 iterations
+2025-04-30 21:36:01,363 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 21200
+2025-04-30 21:36:01,365 - src.execution.backtest.backtest - INFO - Processed 21300 iterations
+2025-04-30 21:36:01,365 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 21300
+2025-04-30 21:36:01,368 - src.execution.backtest.backtest - INFO - Processed 21400 iterations
+2025-04-30 21:36:01,368 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 21400
+2025-04-30 21:36:01,371 - src.execution.backtest.backtest - INFO - Processed 21500 iterations
+2025-04-30 21:36:01,371 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 21500
+2025-04-30 21:36:01,373 - src.execution.backtest.backtest - INFO - Processed 21600 iterations
+2025-04-30 21:36:01,373 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 21600
+2025-04-30 21:36:01,376 - src.execution.backtest.backtest - INFO - Processed 21700 iterations
+2025-04-30 21:36:01,376 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 21700
+2025-04-30 21:36:01,379 - src.execution.backtest.backtest - INFO - Processed 21800 iterations
+2025-04-30 21:36:01,379 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 21800
+2025-04-30 21:36:01,381 - src.execution.backtest.backtest - INFO - Processed 21900 iterations
+2025-04-30 21:36:01,381 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 21900
+2025-04-30 21:36:01,384 - src.execution.backtest.backtest - INFO - Processed 22000 iterations
+2025-04-30 21:36:01,384 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 22000
+2025-04-30 21:36:01,387 - src.execution.backtest.backtest - INFO - Processed 22100 iterations
+2025-04-30 21:36:01,387 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 22100
+2025-04-30 21:36:01,389 - src.execution.backtest.backtest - INFO - Processed 22200 iterations
+2025-04-30 21:36:01,390 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 22200
+2025-04-30 21:36:01,392 - src.execution.backtest.backtest - INFO - Processed 22300 iterations
+2025-04-30 21:36:01,392 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 22300
+2025-04-30 21:36:01,396 - src.execution.backtest.backtest - INFO - Processed 22400 iterations
+2025-04-30 21:36:01,396 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 22400
+2025-04-30 21:36:01,398 - src.execution.backtest.backtest - INFO - Processed 22500 iterations
+2025-04-30 21:36:01,398 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 22500
+2025-04-30 21:36:01,401 - src.execution.backtest.backtest - INFO - Processed 22600 iterations
+2025-04-30 21:36:01,401 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 22600
+2025-04-30 21:36:01,404 - src.execution.backtest.backtest - INFO - Processed 22700 iterations
+2025-04-30 21:36:01,404 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 22700
+2025-04-30 21:36:01,406 - src.execution.backtest.backtest - INFO - Processed 22800 iterations
+2025-04-30 21:36:01,406 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 22800
+2025-04-30 21:36:01,409 - src.execution.backtest.backtest - INFO - Processed 22900 iterations
+2025-04-30 21:36:01,409 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 22900
+2025-04-30 21:36:01,412 - src.execution.backtest.backtest - INFO - Processed 23000 iterations
+2025-04-30 21:36:01,412 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 23000
+2025-04-30 21:36:01,414 - src.execution.backtest.backtest - INFO - Processed 23100 iterations
+2025-04-30 21:36:01,414 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 23100
+2025-04-30 21:36:01,417 - src.execution.backtest.backtest - INFO - Processed 23200 iterations
+2025-04-30 21:36:01,417 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 23200
+2025-04-30 21:36:01,420 - src.execution.backtest.backtest - INFO - Processed 23300 iterations
+2025-04-30 21:36:01,420 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 23300
+2025-04-30 21:36:01,422 - src.execution.backtest.backtest - INFO - Processed 23400 iterations
+2025-04-30 21:36:01,422 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 23400
+2025-04-30 21:36:01,425 - src.execution.backtest.backtest - INFO - Processed 23500 iterations
+2025-04-30 21:36:01,425 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 23500
+2025-04-30 21:36:01,428 - src.execution.backtest.backtest - INFO - Processed 23600 iterations
+2025-04-30 21:36:01,428 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 23600
+2025-04-30 21:36:01,430 - src.execution.backtest.backtest - INFO - Processed 23700 iterations
+2025-04-30 21:36:01,430 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 23700
+2025-04-30 21:36:01,433 - src.execution.backtest.backtest - INFO - Processed 23800 iterations
+2025-04-30 21:36:01,433 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 23800
+2025-04-30 21:36:01,436 - src.execution.backtest.backtest - INFO - Processed 23900 iterations
+2025-04-30 21:36:01,436 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 23900
+2025-04-30 21:36:01,438 - src.execution.backtest.backtest - INFO - Processed 24000 iterations
+2025-04-30 21:36:01,438 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 24000
+2025-04-30 21:36:01,441 - src.execution.backtest.backtest - INFO - Processed 24100 iterations
+2025-04-30 21:36:01,441 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 24100
+2025-04-30 21:36:01,444 - src.execution.backtest.backtest - INFO - Processed 24200 iterations
+2025-04-30 21:36:01,444 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 24200
+2025-04-30 21:36:01,446 - src.execution.backtest.backtest - INFO - Processed 24300 iterations
+2025-04-30 21:36:01,446 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 24300
+2025-04-30 21:36:01,449 - src.execution.backtest.backtest - INFO - Processed 24400 iterations
+2025-04-30 21:36:01,449 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 24400
+2025-04-30 21:36:01,452 - src.execution.backtest.backtest - INFO - Processed 24500 iterations
+2025-04-30 21:36:01,452 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 24500
+2025-04-30 21:36:01,454 - src.execution.backtest.backtest - INFO - Processed 24600 iterations
+2025-04-30 21:36:01,454 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 24600
+2025-04-30 21:36:01,457 - src.execution.backtest.backtest - INFO - Processed 24700 iterations
+2025-04-30 21:36:01,457 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 24700
+2025-04-30 21:36:01,460 - src.execution.backtest.backtest - INFO - Processed 24800 iterations
+2025-04-30 21:36:01,460 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 24800
+2025-04-30 21:36:01,462 - src.execution.backtest.backtest - INFO - Processed 24900 iterations
+2025-04-30 21:36:01,462 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 24900
+2025-04-30 21:36:01,465 - src.execution.backtest.backtest - INFO - Processed 25000 iterations
+2025-04-30 21:36:01,465 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 25000
+2025-04-30 21:36:01,468 - src.execution.backtest.backtest - INFO - Processed 25100 iterations
+2025-04-30 21:36:01,468 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 25100
+2025-04-30 21:36:01,470 - src.execution.backtest.backtest - INFO - Processed 25200 iterations
+2025-04-30 21:36:01,470 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 25200
+2025-04-30 21:36:01,473 - src.execution.backtest.backtest - INFO - Processed 25300 iterations
+2025-04-30 21:36:01,473 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 25300
+2025-04-30 21:36:01,476 - src.execution.backtest.backtest - INFO - Processed 25400 iterations
+2025-04-30 21:36:01,476 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 25400
+2025-04-30 21:36:01,478 - src.execution.backtest.backtest - INFO - Processed 25500 iterations
+2025-04-30 21:36:01,478 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 25500
+2025-04-30 21:36:01,481 - src.execution.backtest.backtest - INFO - Processed 25600 iterations
+2025-04-30 21:36:01,481 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 25600
+2025-04-30 21:36:01,484 - src.execution.backtest.backtest - INFO - Processed 25700 iterations
+2025-04-30 21:36:01,484 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 25700
+2025-04-30 21:36:01,486 - src.execution.backtest.backtest - INFO - Processed 25800 iterations
+2025-04-30 21:36:01,487 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 25800
+2025-04-30 21:36:01,489 - src.execution.backtest.backtest - INFO - Processed 25900 iterations
+2025-04-30 21:36:01,489 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 25900
+2025-04-30 21:36:01,492 - src.execution.backtest.backtest - INFO - Processed 26000 iterations
+2025-04-30 21:36:01,492 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 26000
+2025-04-30 21:36:01,495 - src.execution.backtest.backtest - INFO - Processed 26100 iterations
+2025-04-30 21:36:01,495 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 26100
+2025-04-30 21:36:01,497 - src.execution.backtest.backtest - INFO - Processed 26200 iterations
+2025-04-30 21:36:01,497 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 26200
+2025-04-30 21:36:01,500 - src.execution.backtest.backtest - INFO - Processed 26300 iterations
+2025-04-30 21:36:01,500 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 26300
+2025-04-30 21:36:01,502 - src.execution.backtest.backtest - INFO - Processed 26400 iterations
+2025-04-30 21:36:01,503 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 26400
+2025-04-30 21:36:01,505 - src.execution.backtest.backtest - INFO - Processed 26500 iterations
+2025-04-30 21:36:01,505 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 26500
+2025-04-30 21:36:01,508 - src.execution.backtest.backtest - INFO - Processed 26600 iterations
+2025-04-30 21:36:01,508 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 26600
+2025-04-30 21:36:01,510 - src.execution.backtest.backtest - INFO - Processed 26700 iterations
+2025-04-30 21:36:01,510 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 26700
+2025-04-30 21:36:01,513 - src.execution.backtest.backtest - INFO - Processed 26800 iterations
+2025-04-30 21:36:01,513 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 26800
+2025-04-30 21:36:01,516 - src.execution.backtest.backtest - INFO - Processed 26900 iterations
+2025-04-30 21:36:01,516 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 26900
+2025-04-30 21:36:01,518 - src.execution.backtest.backtest - INFO - Processed 27000 iterations
+2025-04-30 21:36:01,519 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 27000
+2025-04-30 21:36:01,521 - src.execution.backtest.backtest - INFO - Processed 27100 iterations
+2025-04-30 21:36:01,521 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 27100
+2025-04-30 21:36:01,525 - src.execution.backtest.backtest - INFO - Processed 27200 iterations
+2025-04-30 21:36:01,525 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 27200
+2025-04-30 21:36:01,527 - src.execution.backtest.backtest - INFO - Processed 27300 iterations
+2025-04-30 21:36:01,527 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 27300
+2025-04-30 21:36:01,530 - src.execution.backtest.backtest - INFO - Processed 27400 iterations
+2025-04-30 21:36:01,530 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 27400
+2025-04-30 21:36:01,532 - src.execution.backtest.backtest - INFO - Processed 27500 iterations
+2025-04-30 21:36:01,532 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 27500
+2025-04-30 21:36:01,535 - src.execution.backtest.backtest - INFO - Processed 27600 iterations
+2025-04-30 21:36:01,535 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 27600
+2025-04-30 21:36:01,538 - src.execution.backtest.backtest - INFO - Processed 27700 iterations
+2025-04-30 21:36:01,538 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 27700
+2025-04-30 21:36:01,540 - src.execution.backtest.backtest - INFO - Processed 27800 iterations
+2025-04-30 21:36:01,540 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 27800
+2025-04-30 21:36:01,543 - src.execution.backtest.backtest - INFO - Processed 27900 iterations
+2025-04-30 21:36:01,543 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 27900
+2025-04-30 21:36:01,545 - src.execution.backtest.backtest - INFO - Processed 28000 iterations
+2025-04-30 21:36:01,545 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 28000
+2025-04-30 21:36:01,548 - src.execution.backtest.backtest - INFO - Processed 28100 iterations
+2025-04-30 21:36:01,548 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 28100
+2025-04-30 21:36:01,551 - src.execution.backtest.backtest - INFO - Processed 28200 iterations
+2025-04-30 21:36:01,551 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 28200
+2025-04-30 21:36:01,553 - src.execution.backtest.backtest - INFO - Processed 28300 iterations
+2025-04-30 21:36:01,553 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 28300
+2025-04-30 21:36:01,556 - src.execution.backtest.backtest - INFO - Processed 28400 iterations
+2025-04-30 21:36:01,556 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 28400
+2025-04-30 21:36:01,559 - src.execution.backtest.backtest - INFO - Processed 28500 iterations
+2025-04-30 21:36:01,559 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 28500
+2025-04-30 21:36:01,561 - src.execution.backtest.backtest - INFO - Processed 28600 iterations
+2025-04-30 21:36:01,561 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 28600
+2025-04-30 21:36:01,564 - src.execution.backtest.backtest - INFO - Processed 28700 iterations
+2025-04-30 21:36:01,564 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 28700
+2025-04-30 21:36:01,567 - src.execution.backtest.backtest - INFO - Processed 28800 iterations
+2025-04-30 21:36:01,567 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 28800
+2025-04-30 21:36:01,569 - src.execution.backtest.backtest - INFO - Processed 28900 iterations
+2025-04-30 21:36:01,569 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 28900
+2025-04-30 21:36:01,572 - src.execution.backtest.backtest - INFO - Processed 29000 iterations
+2025-04-30 21:36:01,572 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 29000
+2025-04-30 21:36:01,574 - src.execution.backtest.backtest - INFO - Processed 29100 iterations
+2025-04-30 21:36:01,574 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 29100
+2025-04-30 21:36:01,577 - src.execution.backtest.backtest - INFO - Processed 29200 iterations
+2025-04-30 21:36:01,577 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 29200
+2025-04-30 21:36:01,580 - src.execution.backtest.backtest - INFO - Processed 29300 iterations
+2025-04-30 21:36:01,580 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 29300
+2025-04-30 21:36:01,582 - src.execution.backtest.backtest - INFO - Processed 29400 iterations
+2025-04-30 21:36:01,582 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 29400
+2025-04-30 21:36:01,585 - src.execution.backtest.backtest - INFO - Processed 29500 iterations
+2025-04-30 21:36:01,585 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 29500
+2025-04-30 21:36:01,588 - src.execution.backtest.backtest - INFO - Processed 29600 iterations
+2025-04-30 21:36:01,588 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 29600
+2025-04-30 21:36:01,590 - src.execution.backtest.backtest - INFO - Processed 29700 iterations
+2025-04-30 21:36:01,590 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 29700
+2025-04-30 21:36:01,593 - src.execution.backtest.backtest - INFO - Processed 29800 iterations
+2025-04-30 21:36:01,593 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 29800
+2025-04-30 21:36:01,596 - src.execution.backtest.backtest - INFO - Processed 29900 iterations
+2025-04-30 21:36:01,596 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 29900
+2025-04-30 21:36:01,598 - src.execution.backtest.backtest - INFO - Processed 30000 iterations
+2025-04-30 21:36:01,598 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 30000
+2025-04-30 21:36:01,601 - src.execution.backtest.backtest - INFO - Processed 30100 iterations
+2025-04-30 21:36:01,601 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 30100
+2025-04-30 21:36:01,604 - src.execution.backtest.backtest - INFO - Processed 30200 iterations
+2025-04-30 21:36:01,604 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 30200
+2025-04-30 21:36:01,606 - src.execution.backtest.backtest - INFO - Processed 30300 iterations
+2025-04-30 21:36:01,606 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 30300
+2025-04-30 21:36:01,609 - src.execution.backtest.backtest - INFO - Processed 30400 iterations
+2025-04-30 21:36:01,609 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 30400
+2025-04-30 21:36:01,611 - src.execution.backtest.backtest - INFO - Processed 30500 iterations
+2025-04-30 21:36:01,611 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 30500
+2025-04-30 21:36:01,614 - src.execution.backtest.backtest - INFO - Processed 30600 iterations
+2025-04-30 21:36:01,614 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 30600
+2025-04-30 21:36:01,617 - src.execution.backtest.backtest - INFO - Processed 30700 iterations
+2025-04-30 21:36:01,617 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 30700
+2025-04-30 21:36:01,619 - src.execution.backtest.backtest - INFO - Processed 30800 iterations
+2025-04-30 21:36:01,619 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 30800
+2025-04-30 21:36:01,622 - src.execution.backtest.backtest - INFO - Processed 30900 iterations
+2025-04-30 21:36:01,622 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 30900
+2025-04-30 21:36:01,625 - src.execution.backtest.backtest - INFO - Processed 31000 iterations
+2025-04-30 21:36:01,625 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 31000
+2025-04-30 21:36:01,627 - src.execution.backtest.backtest - INFO - Processed 31100 iterations
+2025-04-30 21:36:01,627 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 31100
+2025-04-30 21:36:01,630 - src.execution.backtest.backtest - INFO - Processed 31200 iterations
+2025-04-30 21:36:01,630 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 31200
+2025-04-30 21:36:01,633 - src.execution.backtest.backtest - INFO - Processed 31300 iterations
+2025-04-30 21:36:01,633 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 31300
+2025-04-30 21:36:01,635 - src.execution.backtest.backtest - INFO - Processed 31400 iterations
+2025-04-30 21:36:01,635 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 31400
+2025-04-30 21:36:01,638 - src.execution.backtest.backtest - INFO - Processed 31500 iterations
+2025-04-30 21:36:01,638 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 31500
+2025-04-30 21:36:01,641 - src.execution.backtest.backtest - INFO - Processed 31600 iterations
+2025-04-30 21:36:01,641 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 31600
+2025-04-30 21:36:01,643 - src.execution.backtest.backtest - INFO - Processed 31700 iterations
+2025-04-30 21:36:01,643 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 31700
+2025-04-30 21:36:01,646 - src.execution.backtest.backtest - INFO - Processed 31800 iterations
+2025-04-30 21:36:01,646 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 31800
+2025-04-30 21:36:01,649 - src.execution.backtest.backtest - INFO - Processed 31900 iterations
+2025-04-30 21:36:01,649 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 31900
+2025-04-30 21:36:01,652 - src.execution.backtest.backtest - INFO - Processed 32000 iterations
+2025-04-30 21:36:01,652 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 32000
+2025-04-30 21:36:01,655 - src.execution.backtest.backtest - INFO - Processed 32100 iterations
+2025-04-30 21:36:01,655 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 32100
+2025-04-30 21:36:01,657 - src.execution.backtest.backtest - INFO - Processed 32200 iterations
+2025-04-30 21:36:01,657 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 32200
+2025-04-30 21:36:01,660 - src.execution.backtest.backtest - INFO - Processed 32300 iterations
+2025-04-30 21:36:01,660 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 32300
+2025-04-30 21:36:01,663 - src.execution.backtest.backtest - INFO - Processed 32400 iterations
+2025-04-30 21:36:01,663 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 32400
+2025-04-30 21:36:01,665 - src.execution.backtest.backtest - INFO - Processed 32500 iterations
+2025-04-30 21:36:01,665 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 32500
+2025-04-30 21:36:01,668 - src.execution.backtest.backtest - INFO - Processed 32600 iterations
+2025-04-30 21:36:01,668 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 32600
+2025-04-30 21:36:01,671 - src.execution.backtest.backtest - INFO - Processed 32700 iterations
+2025-04-30 21:36:01,671 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 32700
+2025-04-30 21:36:01,673 - src.execution.backtest.backtest - INFO - Processed 32800 iterations
+2025-04-30 21:36:01,673 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 32800
+2025-04-30 21:36:01,676 - src.execution.backtest.backtest - INFO - Processed 32900 iterations
+2025-04-30 21:36:01,676 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 32900
+2025-04-30 21:36:01,678 - src.execution.backtest.backtest - INFO - Processed 33000 iterations
+2025-04-30 21:36:01,678 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 33000
+2025-04-30 21:36:01,681 - src.execution.backtest.backtest - INFO - Processed 33100 iterations
+2025-04-30 21:36:01,681 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 33100
+2025-04-30 21:36:01,684 - src.execution.backtest.backtest - INFO - Processed 33200 iterations
+2025-04-30 21:36:01,684 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 33200
+2025-04-30 21:36:01,686 - src.execution.backtest.backtest - INFO - Processed 33300 iterations
+2025-04-30 21:36:01,686 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 33300
+2025-04-30 21:36:01,689 - src.execution.backtest.backtest - INFO - Processed 33400 iterations
+2025-04-30 21:36:01,689 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 33400
+2025-04-30 21:36:01,691 - src.execution.backtest.backtest - INFO - Processed 33500 iterations
+2025-04-30 21:36:01,691 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 33500
+2025-04-30 21:36:01,694 - src.execution.backtest.backtest - INFO - Processed 33600 iterations
+2025-04-30 21:36:01,694 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 33600
+2025-04-30 21:36:01,697 - src.execution.backtest.backtest - INFO - Processed 33700 iterations
+2025-04-30 21:36:01,697 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 33700
+2025-04-30 21:36:01,700 - src.execution.backtest.backtest - INFO - Processed 33800 iterations
+2025-04-30 21:36:01,700 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 33800
+2025-04-30 21:36:01,702 - src.execution.backtest.backtest - INFO - Processed 33900 iterations
+2025-04-30 21:36:01,702 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 33900
+2025-04-30 21:36:01,705 - src.execution.backtest.backtest - INFO - Processed 34000 iterations
+2025-04-30 21:36:01,705 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 34000
+2025-04-30 21:36:01,708 - src.execution.backtest.backtest - INFO - Processed 34100 iterations
+2025-04-30 21:36:01,708 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 34100
+2025-04-30 21:36:01,710 - src.execution.backtest.backtest - INFO - Processed 34200 iterations
+2025-04-30 21:36:01,710 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 34200
+2025-04-30 21:36:01,713 - src.execution.backtest.backtest - INFO - Processed 34300 iterations
+2025-04-30 21:36:01,713 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 34300
+2025-04-30 21:36:01,716 - src.execution.backtest.backtest - INFO - Processed 34400 iterations
+2025-04-30 21:36:01,716 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 34400
+2025-04-30 21:36:01,718 - src.execution.backtest.backtest - INFO - Processed 34500 iterations
+2025-04-30 21:36:01,718 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 34500
+2025-04-30 21:36:01,721 - src.execution.backtest.backtest - INFO - Processed 34600 iterations
+2025-04-30 21:36:01,721 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 34600
+2025-04-30 21:36:01,724 - src.execution.backtest.backtest - INFO - Processed 34700 iterations
+2025-04-30 21:36:01,724 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 34700
+2025-04-30 21:36:01,726 - src.execution.backtest.backtest - INFO - Processed 34800 iterations
+2025-04-30 21:36:01,726 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 34800
+2025-04-30 21:36:01,729 - src.execution.backtest.backtest - INFO - Processed 34900 iterations
+2025-04-30 21:36:01,729 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 34900
+2025-04-30 21:36:01,731 - src.execution.backtest.backtest - INFO - Processed 35000 iterations
+2025-04-30 21:36:01,731 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 35000
+2025-04-30 21:36:01,734 - src.execution.backtest.backtest - INFO - Processed 35100 iterations
+2025-04-30 21:36:01,734 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 35100
+2025-04-30 21:36:01,737 - src.execution.backtest.backtest - INFO - Processed 35200 iterations
+2025-04-30 21:36:01,737 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 35200
+2025-04-30 21:36:01,739 - src.execution.backtest.backtest - INFO - Processed 35300 iterations
+2025-04-30 21:36:01,740 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 35300
+2025-04-30 21:36:01,742 - src.execution.backtest.backtest - INFO - Processed 35400 iterations
+2025-04-30 21:36:01,742 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 35400
+2025-04-30 21:36:01,745 - src.execution.backtest.backtest - INFO - Processed 35500 iterations
+2025-04-30 21:36:01,745 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 35500
+2025-04-30 21:36:01,747 - src.execution.backtest.backtest - INFO - Processed 35600 iterations
+2025-04-30 21:36:01,747 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 35600
+2025-04-30 21:36:01,750 - src.execution.backtest.backtest - INFO - Processed 35700 iterations
+2025-04-30 21:36:01,750 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 35700
+2025-04-30 21:36:01,753 - src.execution.backtest.backtest - INFO - Processed 35800 iterations
+2025-04-30 21:36:01,753 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 35800
+2025-04-30 21:36:01,755 - src.execution.backtest.backtest - INFO - Processed 35900 iterations
+2025-04-30 21:36:01,755 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 35900
+2025-04-30 21:36:01,758 - src.execution.backtest.backtest - INFO - Processed 36000 iterations
+2025-04-30 21:36:01,758 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 36000
+2025-04-30 21:36:01,760 - src.execution.backtest.backtest - INFO - Processed 36100 iterations
+2025-04-30 21:36:01,760 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 36100
+2025-04-30 21:36:01,763 - src.execution.backtest.backtest - INFO - Processed 36200 iterations
+2025-04-30 21:36:01,763 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 36200
+2025-04-30 21:36:01,766 - src.execution.backtest.backtest - INFO - Processed 36300 iterations
+2025-04-30 21:36:01,766 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 36300
+2025-04-30 21:36:01,768 - src.execution.backtest.backtest - INFO - Processed 36400 iterations
+2025-04-30 21:36:01,768 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 36400
+2025-04-30 21:36:01,771 - src.execution.backtest.backtest - INFO - Processed 36500 iterations
+2025-04-30 21:36:01,771 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 36500
+2025-04-30 21:36:01,774 - src.execution.backtest.backtest - INFO - Processed 36600 iterations
+2025-04-30 21:36:01,774 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 36600
+2025-04-30 21:36:01,777 - src.execution.backtest.backtest - INFO - Processed 36700 iterations
+2025-04-30 21:36:01,777 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 36700
+2025-04-30 21:36:01,780 - src.execution.backtest.backtest - INFO - Processed 36800 iterations
+2025-04-30 21:36:01,780 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 36800
+2025-04-30 21:36:01,782 - src.execution.backtest.backtest - INFO - Processed 36900 iterations
+2025-04-30 21:36:01,782 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 36900
+2025-04-30 21:36:01,785 - src.execution.backtest.backtest - INFO - Processed 37000 iterations
+2025-04-30 21:36:01,785 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 37000
+2025-04-30 21:36:01,788 - src.execution.backtest.backtest - INFO - Processed 37100 iterations
+2025-04-30 21:36:01,788 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 37100
+2025-04-30 21:36:01,790 - src.execution.backtest.backtest - INFO - Processed 37200 iterations
+2025-04-30 21:36:01,790 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 37200
+2025-04-30 21:36:01,793 - src.execution.backtest.backtest - INFO - Processed 37300 iterations
+2025-04-30 21:36:01,793 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 37300
+2025-04-30 21:36:01,796 - src.execution.backtest.backtest - INFO - Processed 37400 iterations
+2025-04-30 21:36:01,796 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 37400
+2025-04-30 21:36:01,798 - src.execution.backtest.backtest - INFO - Processed 37500 iterations
+2025-04-30 21:36:01,798 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 37500
+2025-04-30 21:36:01,801 - src.execution.backtest.backtest - INFO - Processed 37600 iterations
+2025-04-30 21:36:01,801 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 37600
+2025-04-30 21:36:01,804 - src.execution.backtest.backtest - INFO - Processed 37700 iterations
+2025-04-30 21:36:01,804 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 37700
+2025-04-30 21:36:01,806 - src.execution.backtest.backtest - INFO - Processed 37800 iterations
+2025-04-30 21:36:01,806 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 37800
+2025-04-30 21:36:01,809 - src.execution.backtest.backtest - INFO - Processed 37900 iterations
+2025-04-30 21:36:01,809 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 37900
+2025-04-30 21:36:01,812 - src.execution.backtest.backtest - INFO - Processed 38000 iterations
+2025-04-30 21:36:01,812 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 38000
+2025-04-30 21:36:01,814 - src.execution.backtest.backtest - INFO - Processed 38100 iterations
+2025-04-30 21:36:01,814 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 38100
+2025-04-30 21:36:01,817 - src.execution.backtest.backtest - INFO - Processed 38200 iterations
+2025-04-30 21:36:01,817 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 38200
+2025-04-30 21:36:01,820 - src.execution.backtest.backtest - INFO - Processed 38300 iterations
+2025-04-30 21:36:01,820 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 38300
+2025-04-30 21:36:01,822 - src.execution.backtest.backtest - INFO - Processed 38400 iterations
+2025-04-30 21:36:01,822 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 38400
+2025-04-30 21:36:01,825 - src.execution.backtest.backtest - INFO - Processed 38500 iterations
+2025-04-30 21:36:01,825 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 38500
+2025-04-30 21:36:01,828 - src.execution.backtest.backtest - INFO - Processed 38600 iterations
+2025-04-30 21:36:01,828 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 38600
+2025-04-30 21:36:01,830 - src.execution.backtest.backtest - INFO - Processed 38700 iterations
+2025-04-30 21:36:01,830 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 38700
+2025-04-30 21:36:01,833 - src.execution.backtest.backtest - INFO - Processed 38800 iterations
+2025-04-30 21:36:01,833 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 38800
+2025-04-30 21:36:01,836 - src.execution.backtest.backtest - INFO - Processed 38900 iterations
+2025-04-30 21:36:01,836 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 38900
+2025-04-30 21:36:01,838 - src.execution.backtest.backtest - INFO - Processed 39000 iterations
+2025-04-30 21:36:01,838 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 39000
+2025-04-30 21:36:01,841 - src.execution.backtest.backtest - INFO - Processed 39100 iterations
+2025-04-30 21:36:01,841 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 39100
+2025-04-30 21:36:01,844 - src.execution.backtest.backtest - INFO - Processed 39200 iterations
+2025-04-30 21:36:01,844 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 39200
+2025-04-30 21:36:01,846 - src.execution.backtest.backtest - INFO - Processed 39300 iterations
+2025-04-30 21:36:01,846 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 39300
+2025-04-30 21:36:01,849 - src.execution.backtest.backtest - INFO - Processed 39400 iterations
+2025-04-30 21:36:01,849 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 39400
+2025-04-30 21:36:01,852 - src.execution.backtest.backtest - INFO - Processed 39500 iterations
+2025-04-30 21:36:01,852 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 39500
+2025-04-30 21:36:01,854 - src.execution.backtest.backtest - INFO - Processed 39600 iterations
+2025-04-30 21:36:01,854 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 39600
+2025-04-30 21:36:01,857 - src.execution.backtest.backtest - INFO - Processed 39700 iterations
+2025-04-30 21:36:01,857 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 39700
+2025-04-30 21:36:01,860 - src.execution.backtest.backtest - INFO - Processed 39800 iterations
+2025-04-30 21:36:01,860 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 39800
+2025-04-30 21:36:01,862 - src.execution.backtest.backtest - INFO - Processed 39900 iterations
+2025-04-30 21:36:01,862 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 39900
+2025-04-30 21:36:01,865 - src.execution.backtest.backtest - INFO - Processed 40000 iterations
+2025-04-30 21:36:01,865 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 40000
+2025-04-30 21:36:01,867 - src.execution.backtest.backtest - INFO - Processed 40100 iterations
+2025-04-30 21:36:01,867 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 40100
+2025-04-30 21:36:01,870 - src.execution.backtest.backtest - INFO - Processed 40200 iterations
+2025-04-30 21:36:01,870 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 40200
+2025-04-30 21:36:01,873 - src.execution.backtest.backtest - INFO - Processed 40300 iterations
+2025-04-30 21:36:01,873 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 40300
+2025-04-30 21:36:01,875 - src.execution.backtest.backtest - INFO - Processed 40400 iterations
+2025-04-30 21:36:01,876 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 40400
+2025-04-30 21:36:01,878 - src.execution.backtest.backtest - INFO - Processed 40500 iterations
+2025-04-30 21:36:01,878 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 40500
+2025-04-30 21:36:01,881 - src.execution.backtest.backtest - INFO - Processed 40600 iterations
+2025-04-30 21:36:01,881 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 40600
+2025-04-30 21:36:01,883 - src.execution.backtest.backtest - INFO - Processed 40700 iterations
+2025-04-30 21:36:01,883 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 40700
+2025-04-30 21:36:01,886 - src.execution.backtest.backtest - INFO - Processed 40800 iterations
+2025-04-30 21:36:01,886 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 40800
+2025-04-30 21:36:01,889 - src.execution.backtest.backtest - INFO - Processed 40900 iterations
+2025-04-30 21:36:01,889 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 40900
+2025-04-30 21:36:01,891 - src.execution.backtest.backtest - INFO - Processed 41000 iterations
+2025-04-30 21:36:01,891 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 41000
+2025-04-30 21:36:01,894 - src.execution.backtest.backtest - INFO - Processed 41100 iterations
+2025-04-30 21:36:01,894 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 41100
+2025-04-30 21:36:01,897 - src.execution.backtest.backtest - INFO - Processed 41200 iterations
+2025-04-30 21:36:01,897 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 41200
+2025-04-30 21:36:01,899 - src.execution.backtest.backtest - INFO - Processed 41300 iterations
+2025-04-30 21:36:01,899 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 41300
+2025-04-30 21:36:01,902 - src.execution.backtest.backtest - INFO - Processed 41400 iterations
+2025-04-30 21:36:01,902 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 41400
+2025-04-30 21:36:01,905 - src.execution.backtest.backtest - INFO - Processed 41500 iterations
+2025-04-30 21:36:01,905 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 41500
+2025-04-30 21:36:01,908 - src.execution.backtest.backtest - INFO - Processed 41600 iterations
+2025-04-30 21:36:01,908 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 41600
+2025-04-30 21:36:01,911 - src.execution.backtest.backtest - INFO - Processed 41700 iterations
+2025-04-30 21:36:01,911 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 41700
+2025-04-30 21:36:01,913 - src.execution.backtest.backtest - INFO - Processed 41800 iterations
+2025-04-30 21:36:01,913 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 41800
+2025-04-30 21:36:01,916 - src.execution.backtest.backtest - INFO - Processed 41900 iterations
+2025-04-30 21:36:01,916 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 41900
+2025-04-30 21:36:01,919 - src.execution.backtest.backtest - INFO - Processed 42000 iterations
+2025-04-30 21:36:01,919 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 42000
+2025-04-30 21:36:01,921 - src.execution.backtest.backtest - INFO - Processed 42100 iterations
+2025-04-30 21:36:01,921 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 42100
+2025-04-30 21:36:01,924 - src.execution.backtest.backtest - INFO - Processed 42200 iterations
+2025-04-30 21:36:01,924 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 42200
+2025-04-30 21:36:01,927 - src.execution.backtest.backtest - INFO - Processed 42300 iterations
+2025-04-30 21:36:01,927 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 42300
+2025-04-30 21:36:01,929 - src.execution.backtest.backtest - INFO - Processed 42400 iterations
+2025-04-30 21:36:01,929 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 42400
+2025-04-30 21:36:01,932 - src.execution.backtest.backtest - INFO - Processed 42500 iterations
+2025-04-30 21:36:01,932 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 42500
+2025-04-30 21:36:01,935 - src.execution.backtest.backtest - INFO - Processed 42600 iterations
+2025-04-30 21:36:01,935 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 42600
+2025-04-30 21:36:01,937 - src.execution.backtest.backtest - INFO - Processed 42700 iterations
+2025-04-30 21:36:01,937 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 42700
+2025-04-30 21:36:01,940 - src.execution.backtest.backtest - INFO - Processed 42800 iterations
+2025-04-30 21:36:01,940 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 42800
+2025-04-30 21:36:01,942 - src.execution.backtest.backtest - INFO - Processed 42900 iterations
+2025-04-30 21:36:01,943 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 42900
+2025-04-30 21:36:01,945 - src.execution.backtest.backtest - INFO - Processed 43000 iterations
+2025-04-30 21:36:01,945 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 43000
+2025-04-30 21:36:01,948 - src.execution.backtest.backtest - INFO - Processed 43100 iterations
+2025-04-30 21:36:01,948 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 43100
+2025-04-30 21:36:01,951 - src.execution.backtest.backtest - INFO - Processed 43200 iterations
+2025-04-30 21:36:01,951 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 43200
+2025-04-30 21:36:01,953 - src.execution.backtest.backtest - INFO - Processed 43300 iterations
+2025-04-30 21:36:01,953 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 43300
+2025-04-30 21:36:01,956 - src.execution.backtest.backtest - INFO - Processed 43400 iterations
+2025-04-30 21:36:01,956 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 43400
+2025-04-30 21:36:01,958 - src.execution.backtest.backtest - INFO - Processed 43500 iterations
+2025-04-30 21:36:01,958 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 43500
+2025-04-30 21:36:01,961 - src.execution.backtest.backtest - INFO - Processed 43600 iterations
+2025-04-30 21:36:01,961 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 43600
+2025-04-30 21:36:01,964 - src.execution.backtest.backtest - INFO - Processed 43700 iterations
+2025-04-30 21:36:01,964 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 43700
+2025-04-30 21:36:01,966 - src.execution.backtest.backtest - INFO - Processed 43800 iterations
+2025-04-30 21:36:01,966 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 43800
+2025-04-30 21:36:01,969 - src.execution.backtest.backtest - INFO - Processed 43900 iterations
+2025-04-30 21:36:01,969 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 43900
+2025-04-30 21:36:01,972 - src.execution.backtest.backtest - INFO - Processed 44000 iterations
+2025-04-30 21:36:01,972 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 44000
+2025-04-30 21:36:01,974 - src.execution.backtest.backtest - INFO - Processed 44100 iterations
+2025-04-30 21:36:01,974 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 44100
+2025-04-30 21:36:01,977 - src.execution.backtest.backtest - INFO - Processed 44200 iterations
+2025-04-30 21:36:01,977 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 44200
+2025-04-30 21:36:01,980 - src.execution.backtest.backtest - INFO - Processed 44300 iterations
+2025-04-30 21:36:01,980 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 44300
+2025-04-30 21:36:01,982 - src.execution.backtest.backtest - INFO - Processed 44400 iterations
+2025-04-30 21:36:01,982 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 44400
+2025-04-30 21:36:01,985 - src.execution.backtest.backtest - INFO - Processed 44500 iterations
+2025-04-30 21:36:01,985 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 44500
+2025-04-30 21:36:01,988 - src.execution.backtest.backtest - INFO - Processed 44600 iterations
+2025-04-30 21:36:01,988 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 44600
+2025-04-30 21:36:01,990 - src.execution.backtest.backtest - INFO - Processed 44700 iterations
+2025-04-30 21:36:01,990 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 44700
+2025-04-30 21:36:01,993 - src.execution.backtest.backtest - INFO - Processed 44800 iterations
+2025-04-30 21:36:01,993 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 44800
+2025-04-30 21:36:01,996 - src.execution.backtest.backtest - INFO - Processed 44900 iterations
+2025-04-30 21:36:01,996 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 44900
+2025-04-30 21:36:01,998 - src.execution.backtest.backtest - INFO - Processed 45000 iterations
+2025-04-30 21:36:01,998 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 45000
+2025-04-30 21:36:02,001 - src.execution.backtest.backtest - INFO - Processed 45100 iterations
+2025-04-30 21:36:02,001 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 45100
+2025-04-30 21:36:02,004 - src.execution.backtest.backtest - INFO - Processed 45200 iterations
+2025-04-30 21:36:02,004 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 45200
+2025-04-30 21:36:02,006 - src.execution.backtest.backtest - INFO - Processed 45300 iterations
+2025-04-30 21:36:02,006 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 45300
+2025-04-30 21:36:02,009 - src.execution.backtest.backtest - INFO - Processed 45400 iterations
+2025-04-30 21:36:02,009 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 45400
+2025-04-30 21:36:02,012 - src.execution.backtest.backtest - INFO - Processed 45500 iterations
+2025-04-30 21:36:02,012 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 45500
+2025-04-30 21:36:02,014 - src.execution.backtest.backtest - INFO - Processed 45600 iterations
+2025-04-30 21:36:02,014 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 45600
+2025-04-30 21:36:02,017 - src.execution.backtest.backtest - INFO - Processed 45700 iterations
+2025-04-30 21:36:02,017 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 45700
+2025-04-30 21:36:02,020 - src.execution.backtest.backtest - INFO - Processed 45800 iterations
+2025-04-30 21:36:02,020 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 45800
+2025-04-30 21:36:02,022 - src.execution.backtest.backtest - INFO - Processed 45900 iterations
+2025-04-30 21:36:02,022 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 45900
+2025-04-30 21:36:02,025 - src.execution.backtest.backtest - INFO - Processed 46000 iterations
+2025-04-30 21:36:02,025 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 46000
+2025-04-30 21:36:02,028 - src.execution.backtest.backtest - INFO - Processed 46100 iterations
+2025-04-30 21:36:02,028 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 46100
+2025-04-30 21:36:02,030 - src.execution.backtest.backtest - INFO - Processed 46200 iterations
+2025-04-30 21:36:02,030 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 46200
+2025-04-30 21:36:02,034 - src.execution.backtest.backtest - INFO - Processed 46300 iterations
+2025-04-30 21:36:02,034 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 46300
+2025-04-30 21:36:02,036 - src.execution.backtest.backtest - INFO - Processed 46400 iterations
+2025-04-30 21:36:02,036 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 46400
+2025-04-30 21:36:02,039 - src.execution.backtest.backtest - INFO - Processed 46500 iterations
+2025-04-30 21:36:02,039 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 46500
+2025-04-30 21:36:02,042 - src.execution.backtest.backtest - INFO - Processed 46600 iterations
+2025-04-30 21:36:02,042 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 46600
+2025-04-30 21:36:02,044 - src.execution.backtest.backtest - INFO - Processed 46700 iterations
+2025-04-30 21:36:02,044 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 46700
+2025-04-30 21:36:02,047 - src.execution.backtest.backtest - INFO - Processed 46800 iterations
+2025-04-30 21:36:02,047 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 46800
+2025-04-30 21:36:02,050 - src.execution.backtest.backtest - INFO - Processed 46900 iterations
+2025-04-30 21:36:02,050 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 46900
+2025-04-30 21:36:02,052 - src.execution.backtest.backtest - INFO - Processed 47000 iterations
+2025-04-30 21:36:02,052 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 47000
+2025-04-30 21:36:02,055 - src.execution.backtest.backtest - INFO - Processed 47100 iterations
+2025-04-30 21:36:02,055 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 47100
+2025-04-30 21:36:02,058 - src.execution.backtest.backtest - INFO - Processed 47200 iterations
+2025-04-30 21:36:02,058 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 47200
+2025-04-30 21:36:02,060 - src.execution.backtest.backtest - INFO - Processed 47300 iterations
+2025-04-30 21:36:02,060 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 47300
+2025-04-30 21:36:02,063 - src.execution.backtest.backtest - INFO - Processed 47400 iterations
+2025-04-30 21:36:02,063 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 47400
+2025-04-30 21:36:02,066 - src.execution.backtest.backtest - INFO - Processed 47500 iterations
+2025-04-30 21:36:02,066 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 47500
+2025-04-30 21:36:02,068 - src.execution.backtest.backtest - INFO - Processed 47600 iterations
+2025-04-30 21:36:02,068 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 47600
+2025-04-30 21:36:02,071 - src.execution.backtest.backtest - INFO - Processed 47700 iterations
+2025-04-30 21:36:02,071 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 47700
+2025-04-30 21:36:02,074 - src.execution.backtest.backtest - INFO - Processed 47800 iterations
+2025-04-30 21:36:02,074 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 47800
+2025-04-30 21:36:02,076 - src.execution.backtest.backtest - INFO - Processed 47900 iterations
+2025-04-30 21:36:02,076 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 47900
+2025-04-30 21:36:02,079 - src.execution.backtest.backtest - INFO - Processed 48000 iterations
+2025-04-30 21:36:02,079 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 48000
+2025-04-30 21:36:02,081 - src.execution.backtest.backtest - INFO - Processed 48100 iterations
+2025-04-30 21:36:02,082 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 48100
+2025-04-30 21:36:02,084 - src.execution.backtest.backtest - INFO - Processed 48200 iterations
+2025-04-30 21:36:02,084 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 48200
+2025-04-30 21:36:02,087 - src.execution.backtest.backtest - INFO - Processed 48300 iterations
+2025-04-30 21:36:02,087 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 48300
+2025-04-30 21:36:02,090 - src.execution.backtest.backtest - INFO - Processed 48400 iterations
+2025-04-30 21:36:02,090 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 48400
+2025-04-30 21:36:02,092 - src.execution.backtest.backtest - INFO - Processed 48500 iterations
+2025-04-30 21:36:02,092 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 48500
+2025-04-30 21:36:02,095 - src.execution.backtest.backtest - INFO - Processed 48600 iterations
+2025-04-30 21:36:02,095 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 48600
+2025-04-30 21:36:02,098 - src.execution.backtest.backtest - INFO - Processed 48700 iterations
+2025-04-30 21:36:02,098 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 48700
+2025-04-30 21:36:02,100 - src.execution.backtest.backtest - INFO - Processed 48800 iterations
+2025-04-30 21:36:02,100 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 48800
+2025-04-30 21:36:02,103 - src.execution.backtest.backtest - INFO - Processed 48900 iterations
+2025-04-30 21:36:02,103 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 48900
+2025-04-30 21:36:02,106 - src.execution.backtest.backtest - INFO - Processed 49000 iterations
+2025-04-30 21:36:02,106 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 49000
+2025-04-30 21:36:02,108 - src.execution.backtest.backtest - INFO - Processed 49100 iterations
+2025-04-30 21:36:02,108 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 49100
+2025-04-30 21:36:02,111 - src.execution.backtest.backtest - INFO - Processed 49200 iterations
+2025-04-30 21:36:02,111 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 49200
+2025-04-30 21:36:02,113 - src.execution.backtest.backtest - INFO - Processed 49300 iterations
+2025-04-30 21:36:02,114 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 49300
+2025-04-30 21:36:02,116 - src.execution.backtest.backtest - INFO - Processed 49400 iterations
+2025-04-30 21:36:02,116 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 49400
+2025-04-30 21:36:02,119 - src.execution.backtest.backtest - INFO - Processed 49500 iterations
+2025-04-30 21:36:02,119 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 49500
+2025-04-30 21:36:02,121 - src.execution.backtest.backtest - INFO - Processed 49600 iterations
+2025-04-30 21:36:02,121 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 49600
+2025-04-30 21:36:02,124 - src.execution.backtest.backtest - INFO - Processed 49700 iterations
+2025-04-30 21:36:02,124 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 49700
+2025-04-30 21:36:02,127 - src.execution.backtest.backtest - INFO - Processed 49800 iterations
+2025-04-30 21:36:02,127 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 49800
+2025-04-30 21:36:02,130 - src.execution.backtest.backtest - INFO - Processed 49900 iterations
+2025-04-30 21:36:02,130 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 49900
+2025-04-30 21:36:02,132 - src.execution.backtest.backtest - INFO - Processed 50000 iterations
+2025-04-30 21:36:02,132 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 50000
+2025-04-30 21:36:02,135 - src.execution.backtest.backtest - INFO - Processed 50100 iterations
+2025-04-30 21:36:02,135 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 50100
+2025-04-30 21:36:02,137 - src.execution.backtest.backtest - INFO - Processed 50200 iterations
+2025-04-30 21:36:02,137 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 50200
+2025-04-30 21:36:02,140 - src.execution.backtest.backtest - INFO - Processed 50300 iterations
+2025-04-30 21:36:02,140 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 50300
+2025-04-30 21:36:02,143 - src.execution.backtest.backtest - INFO - Processed 50400 iterations
+2025-04-30 21:36:02,143 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 50400
+2025-04-30 21:36:02,145 - src.execution.backtest.backtest - INFO - Processed 50500 iterations
+2025-04-30 21:36:02,145 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 50500
+2025-04-30 21:36:02,148 - src.execution.backtest.backtest - INFO - Processed 50600 iterations
+2025-04-30 21:36:02,148 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 50600
+2025-04-30 21:36:02,151 - src.execution.backtest.backtest - INFO - Processed 50700 iterations
+2025-04-30 21:36:02,151 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 50700
+2025-04-30 21:36:02,153 - src.execution.backtest.backtest - INFO - Processed 50800 iterations
+2025-04-30 21:36:02,153 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 50800
+2025-04-30 21:36:02,156 - src.execution.backtest.backtest - INFO - Processed 50900 iterations
+2025-04-30 21:36:02,156 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 50900
+2025-04-30 21:36:02,159 - src.execution.backtest.backtest - INFO - Processed 51000 iterations
+2025-04-30 21:36:02,159 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 51000
+2025-04-30 21:36:02,162 - src.execution.backtest.backtest - INFO - Processed 51100 iterations
+2025-04-30 21:36:02,162 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 51100
+2025-04-30 21:36:02,165 - src.execution.backtest.backtest - INFO - Processed 51200 iterations
+2025-04-30 21:36:02,165 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 51200
+2025-04-30 21:36:02,167 - src.execution.backtest.backtest - INFO - Processed 51300 iterations
+2025-04-30 21:36:02,167 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 51300
+2025-04-30 21:36:02,170 - src.execution.backtest.backtest - INFO - Processed 51400 iterations
+2025-04-30 21:36:02,170 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 51400
+2025-04-30 21:36:02,173 - src.execution.backtest.backtest - INFO - Processed 51500 iterations
+2025-04-30 21:36:02,173 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 51500
+2025-04-30 21:36:02,175 - src.execution.backtest.backtest - INFO - Processed 51600 iterations
+2025-04-30 21:36:02,175 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 51600
+2025-04-30 21:36:02,178 - src.execution.backtest.backtest - INFO - Processed 51700 iterations
+2025-04-30 21:36:02,178 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 51700
+2025-04-30 21:36:02,180 - src.execution.backtest.backtest - INFO - Processed 51800 iterations
+2025-04-30 21:36:02,180 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 51800
+2025-04-30 21:36:02,183 - src.execution.backtest.backtest - INFO - Processed 51900 iterations
+2025-04-30 21:36:02,183 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 51900
+2025-04-30 21:36:02,185 - src.execution.backtest.backtest - INFO - Processed 52000 iterations
+2025-04-30 21:36:02,186 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 52000
+2025-04-30 21:36:02,188 - src.execution.backtest.backtest - INFO - Processed 52100 iterations
+2025-04-30 21:36:02,188 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 52100
+2025-04-30 21:36:02,191 - src.execution.backtest.backtest - INFO - Processed 52200 iterations
+2025-04-30 21:36:02,191 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 52200
+2025-04-30 21:36:02,193 - src.execution.backtest.backtest - INFO - Processed 52300 iterations
+2025-04-30 21:36:02,193 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 52300
+2025-04-30 21:36:02,196 - src.execution.backtest.backtest - INFO - Processed 52400 iterations
+2025-04-30 21:36:02,196 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 52400
+2025-04-30 21:36:02,199 - src.execution.backtest.backtest - INFO - Processed 52500 iterations
+2025-04-30 21:36:02,199 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 52500
+2025-04-30 21:36:02,202 - src.execution.backtest.backtest - INFO - Processed 52600 iterations
+2025-04-30 21:36:02,202 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 52600
+2025-04-30 21:36:02,204 - src.execution.backtest.backtest - INFO - Processed 52700 iterations
+2025-04-30 21:36:02,204 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 52700
+2025-04-30 21:36:02,207 - src.execution.backtest.backtest - INFO - Processed 52800 iterations
+2025-04-30 21:36:02,207 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 52800
+2025-04-30 21:36:02,210 - src.execution.backtest.backtest - INFO - Processed 52900 iterations
+2025-04-30 21:36:02,210 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 52900
+2025-04-30 21:36:02,212 - src.execution.backtest.backtest - INFO - Processed 53000 iterations
+2025-04-30 21:36:02,212 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 53000
+2025-04-30 21:36:02,215 - src.execution.backtest.backtest - INFO - Processed 53100 iterations
+2025-04-30 21:36:02,215 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 53100
+2025-04-30 21:36:02,218 - src.execution.backtest.backtest - INFO - Processed 53200 iterations
+2025-04-30 21:36:02,218 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 53200
+2025-04-30 21:36:02,220 - src.execution.backtest.backtest - INFO - Processed 53300 iterations
+2025-04-30 21:36:02,220 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 53300
+2025-04-30 21:36:02,223 - src.execution.backtest.backtest - INFO - Processed 53400 iterations
+2025-04-30 21:36:02,223 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 53400
+2025-04-30 21:36:02,226 - src.execution.backtest.backtest - INFO - Processed 53500 iterations
+2025-04-30 21:36:02,226 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 53500
+2025-04-30 21:36:02,228 - src.execution.backtest.backtest - INFO - Processed 53600 iterations
+2025-04-30 21:36:02,228 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 53600
+2025-04-30 21:36:02,231 - src.execution.backtest.backtest - INFO - Processed 53700 iterations
+2025-04-30 21:36:02,231 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 53700
+2025-04-30 21:36:02,234 - src.execution.backtest.backtest - INFO - Processed 53800 iterations
+2025-04-30 21:36:02,234 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 53800
+2025-04-30 21:36:02,236 - src.execution.backtest.backtest - INFO - Processed 53900 iterations
+2025-04-30 21:36:02,236 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 53900
+2025-04-30 21:36:02,239 - src.execution.backtest.backtest - INFO - Processed 54000 iterations
+2025-04-30 21:36:02,239 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 54000
+2025-04-30 21:36:02,241 - src.execution.backtest.backtest - INFO - Processed 54100 iterations
+2025-04-30 21:36:02,242 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 54100
+2025-04-30 21:36:02,244 - src.execution.backtest.backtest - INFO - Processed 54200 iterations
+2025-04-30 21:36:02,244 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 54200
+2025-04-30 21:36:02,247 - src.execution.backtest.backtest - INFO - Processed 54300 iterations
+2025-04-30 21:36:02,247 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 54300
+2025-04-30 21:36:02,249 - src.execution.backtest.backtest - INFO - Processed 54400 iterations
+2025-04-30 21:36:02,249 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 54400
+2025-04-30 21:36:02,252 - src.execution.backtest.backtest - INFO - Processed 54500 iterations
+2025-04-30 21:36:02,252 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 54500
+2025-04-30 21:36:02,255 - src.execution.backtest.backtest - INFO - Processed 54600 iterations
+2025-04-30 21:36:02,255 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 54600
+2025-04-30 21:36:02,257 - src.execution.backtest.backtest - INFO - Processed 54700 iterations
+2025-04-30 21:36:02,257 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 54700
+2025-04-30 21:36:02,260 - src.execution.backtest.backtest - INFO - Processed 54800 iterations
+2025-04-30 21:36:02,260 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 54800
+2025-04-30 21:36:02,263 - src.execution.backtest.backtest - INFO - Processed 54900 iterations
+2025-04-30 21:36:02,263 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 54900
+2025-04-30 21:36:02,265 - src.execution.backtest.backtest - INFO - Processed 55000 iterations
+2025-04-30 21:36:02,265 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 55000
+2025-04-30 21:36:02,268 - src.execution.backtest.backtest - INFO - Processed 55100 iterations
+2025-04-30 21:36:02,268 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 55100
+2025-04-30 21:36:02,271 - src.execution.backtest.backtest - INFO - Processed 55200 iterations
+2025-04-30 21:36:02,271 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 55200
+2025-04-30 21:36:02,273 - src.execution.backtest.backtest - INFO - Processed 55300 iterations
+2025-04-30 21:36:02,273 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 55300
+2025-04-30 21:36:02,276 - src.execution.backtest.backtest - INFO - Processed 55400 iterations
+2025-04-30 21:36:02,276 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 55400
+2025-04-30 21:36:02,279 - src.execution.backtest.backtest - INFO - Processed 55500 iterations
+2025-04-30 21:36:02,279 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 55500
+2025-04-30 21:36:02,281 - src.execution.backtest.backtest - INFO - Processed 55600 iterations
+2025-04-30 21:36:02,281 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 55600
+2025-04-30 21:36:02,284 - src.execution.backtest.backtest - INFO - Processed 55700 iterations
+2025-04-30 21:36:02,284 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 55700
+2025-04-30 21:36:02,287 - src.execution.backtest.backtest - INFO - Processed 55800 iterations
+2025-04-30 21:36:02,287 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 55800
+2025-04-30 21:36:02,290 - src.execution.backtest.backtest - INFO - Processed 55900 iterations
+2025-04-30 21:36:02,290 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 55900
+2025-04-30 21:36:02,293 - src.execution.backtest.backtest - INFO - Processed 56000 iterations
+2025-04-30 21:36:02,293 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 56000
+2025-04-30 21:36:02,295 - src.execution.backtest.backtest - INFO - Processed 56100 iterations
+2025-04-30 21:36:02,295 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 56100
+2025-04-30 21:36:02,298 - src.execution.backtest.backtest - INFO - Processed 56200 iterations
+2025-04-30 21:36:02,298 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 56200
+2025-04-30 21:36:02,300 - src.execution.backtest.backtest - INFO - Processed 56300 iterations
+2025-04-30 21:36:02,300 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 56300
+2025-04-30 21:36:02,303 - src.execution.backtest.backtest - INFO - Processed 56400 iterations
+2025-04-30 21:36:02,303 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 56400
+2025-04-30 21:36:02,306 - src.execution.backtest.backtest - INFO - Processed 56500 iterations
+2025-04-30 21:36:02,306 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 56500
+2025-04-30 21:36:02,309 - src.execution.backtest.backtest - INFO - Processed 56600 iterations
+2025-04-30 21:36:02,309 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 56600
+2025-04-30 21:36:02,311 - src.execution.backtest.backtest - INFO - Processed 56700 iterations
+2025-04-30 21:36:02,311 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 56700
+2025-04-30 21:36:02,314 - src.execution.backtest.backtest - INFO - Processed 56800 iterations
+2025-04-30 21:36:02,314 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 56800
+2025-04-30 21:36:02,316 - src.execution.backtest.backtest - INFO - Processed 56900 iterations
+2025-04-30 21:36:02,316 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 56900
+2025-04-30 21:36:02,319 - src.execution.backtest.backtest - INFO - Processed 57000 iterations
+2025-04-30 21:36:02,319 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 57000
+2025-04-30 21:36:02,322 - src.execution.backtest.backtest - INFO - Processed 57100 iterations
+2025-04-30 21:36:02,322 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 57100
+2025-04-30 21:36:02,324 - src.execution.backtest.backtest - INFO - Processed 57200 iterations
+2025-04-30 21:36:02,324 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 57200
+2025-04-30 21:36:02,327 - src.execution.backtest.backtest - INFO - Processed 57300 iterations
+2025-04-30 21:36:02,327 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 57300
+2025-04-30 21:36:02,329 - src.execution.backtest.backtest - INFO - Processed 57400 iterations
+2025-04-30 21:36:02,330 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 57400
+2025-04-30 21:36:02,332 - src.execution.backtest.backtest - INFO - Processed 57500 iterations
+2025-04-30 21:36:02,332 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 57500
+2025-04-30 21:36:02,335 - src.execution.backtest.backtest - INFO - Processed 57600 iterations
+2025-04-30 21:36:02,335 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 57600
+2025-04-30 21:36:02,337 - src.execution.backtest.backtest - INFO - Processed 57700 iterations
+2025-04-30 21:36:02,337 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 57700
+2025-04-30 21:36:02,340 - src.execution.backtest.backtest - INFO - Processed 57800 iterations
+2025-04-30 21:36:02,340 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 57800
+2025-04-30 21:36:02,343 - src.execution.backtest.backtest - INFO - Processed 57900 iterations
+2025-04-30 21:36:02,343 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 57900
+2025-04-30 21:36:02,346 - src.execution.backtest.backtest - INFO - Processed 58000 iterations
+2025-04-30 21:36:02,346 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 58000
+2025-04-30 21:36:02,348 - src.execution.backtest.backtest - INFO - Processed 58100 iterations
+2025-04-30 21:36:02,348 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 58100
+2025-04-30 21:36:02,351 - src.execution.backtest.backtest - INFO - Processed 58200 iterations
+2025-04-30 21:36:02,351 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 58200
+2025-04-30 21:36:02,354 - src.execution.backtest.backtest - INFO - Processed 58300 iterations
+2025-04-30 21:36:02,354 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 58300
+2025-04-30 21:36:02,356 - src.execution.backtest.backtest - INFO - Processed 58400 iterations
+2025-04-30 21:36:02,356 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 58400
+2025-04-30 21:36:02,359 - src.execution.backtest.backtest - INFO - Processed 58500 iterations
+2025-04-30 21:36:02,359 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 58500
+2025-04-30 21:36:02,362 - src.execution.backtest.backtest - INFO - Processed 58600 iterations
+2025-04-30 21:36:02,362 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 58600
+2025-04-30 21:36:02,364 - src.execution.backtest.backtest - INFO - Processed 58700 iterations
+2025-04-30 21:36:02,364 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 58700
+2025-04-30 21:36:02,367 - src.execution.backtest.backtest - INFO - Processed 58800 iterations
+2025-04-30 21:36:02,367 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 58800
+2025-04-30 21:36:02,369 - src.execution.backtest.backtest - INFO - Processed 58900 iterations
+2025-04-30 21:36:02,370 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 58900
+2025-04-30 21:36:02,372 - src.execution.backtest.backtest - INFO - Processed 59000 iterations
+2025-04-30 21:36:02,372 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 59000
+2025-04-30 21:36:02,375 - src.execution.backtest.backtest - INFO - Processed 59100 iterations
+2025-04-30 21:36:02,375 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 59100
+2025-04-30 21:36:02,378 - src.execution.backtest.backtest - INFO - Processed 59200 iterations
+2025-04-30 21:36:02,378 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 59200
+2025-04-30 21:36:02,380 - src.execution.backtest.backtest - INFO - Processed 59300 iterations
+2025-04-30 21:36:02,380 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 59300
+2025-04-30 21:36:02,383 - src.execution.backtest.backtest - INFO - Processed 59400 iterations
+2025-04-30 21:36:02,383 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 59400
+2025-04-30 21:36:02,386 - src.execution.backtest.backtest - INFO - Processed 59500 iterations
+2025-04-30 21:36:02,386 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 59500
+2025-04-30 21:36:02,388 - src.execution.backtest.backtest - INFO - Processed 59600 iterations
+2025-04-30 21:36:02,388 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 59600
+2025-04-30 21:36:02,391 - src.execution.backtest.backtest - INFO - Processed 59700 iterations
+2025-04-30 21:36:02,391 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 59700
+2025-04-30 21:36:02,394 - src.execution.backtest.backtest - INFO - Processed 59800 iterations
+2025-04-30 21:36:02,394 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 59800
+2025-04-30 21:36:02,396 - src.execution.backtest.backtest - INFO - Processed 59900 iterations
+2025-04-30 21:36:02,396 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 59900
+2025-04-30 21:36:02,399 - src.execution.backtest.backtest - INFO - Processed 60000 iterations
+2025-04-30 21:36:02,399 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 60000
+2025-04-30 21:36:02,402 - src.execution.backtest.backtest - INFO - Processed 60100 iterations
+2025-04-30 21:36:02,402 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 60100
+2025-04-30 21:36:02,404 - src.execution.backtest.backtest - INFO - Processed 60200 iterations
+2025-04-30 21:36:02,404 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 60200
+2025-04-30 21:36:02,407 - src.execution.backtest.backtest - INFO - Processed 60300 iterations
+2025-04-30 21:36:02,407 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 60300
+2025-04-30 21:36:02,410 - src.execution.backtest.backtest - INFO - Processed 60400 iterations
+2025-04-30 21:36:02,410 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 60400
+2025-04-30 21:36:02,412 - src.execution.backtest.backtest - INFO - Processed 60500 iterations
+2025-04-30 21:36:02,412 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 60500
+2025-04-30 21:36:02,416 - src.execution.backtest.backtest - INFO - Processed 60600 iterations
+2025-04-30 21:36:02,416 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 60600
+2025-04-30 21:36:02,418 - src.execution.backtest.backtest - INFO - Processed 60700 iterations
+2025-04-30 21:36:02,418 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 60700
+2025-04-30 21:36:02,421 - src.execution.backtest.backtest - INFO - Processed 60800 iterations
+2025-04-30 21:36:02,421 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 60800
+2025-04-30 21:36:02,423 - src.execution.backtest.backtest - INFO - Processed 60900 iterations
+2025-04-30 21:36:02,423 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 60900
+2025-04-30 21:36:02,426 - src.execution.backtest.backtest - INFO - Processed 61000 iterations
+2025-04-30 21:36:02,426 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 61000
+2025-04-30 21:36:02,429 - src.execution.backtest.backtest - INFO - Processed 61100 iterations
+2025-04-30 21:36:02,429 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 61100
+2025-04-30 21:36:02,431 - src.execution.backtest.backtest - INFO - Processed 61200 iterations
+2025-04-30 21:36:02,431 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 61200
+2025-04-30 21:36:02,434 - src.execution.backtest.backtest - INFO - Processed 61300 iterations
+2025-04-30 21:36:02,434 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 61300
+2025-04-30 21:36:02,437 - src.execution.backtest.backtest - INFO - Processed 61400 iterations
+2025-04-30 21:36:02,437 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 61400
+2025-04-30 21:36:02,439 - src.execution.backtest.backtest - INFO - Processed 61500 iterations
+2025-04-30 21:36:02,439 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 61500
+2025-04-30 21:36:02,442 - src.execution.backtest.backtest - INFO - Processed 61600 iterations
+2025-04-30 21:36:02,442 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 61600
+2025-04-30 21:36:02,445 - src.execution.backtest.backtest - INFO - Processed 61700 iterations
+2025-04-30 21:36:02,445 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 61700
+2025-04-30 21:36:02,447 - src.execution.backtest.backtest - INFO - Processed 61800 iterations
+2025-04-30 21:36:02,447 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 61800
+2025-04-30 21:36:02,450 - src.execution.backtest.backtest - INFO - Processed 61900 iterations
+2025-04-30 21:36:02,450 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 61900
+2025-04-30 21:36:02,453 - src.execution.backtest.backtest - INFO - Processed 62000 iterations
+2025-04-30 21:36:02,453 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 62000
+2025-04-30 21:36:02,455 - src.execution.backtest.backtest - INFO - Processed 62100 iterations
+2025-04-30 21:36:02,455 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 62100
+2025-04-30 21:36:02,458 - src.execution.backtest.backtest - INFO - Processed 62200 iterations
+2025-04-30 21:36:02,458 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 62200
+2025-04-30 21:36:02,461 - src.execution.backtest.backtest - INFO - Processed 62300 iterations
+2025-04-30 21:36:02,461 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 62300
+2025-04-30 21:36:02,463 - src.execution.backtest.backtest - INFO - Processed 62400 iterations
+2025-04-30 21:36:02,463 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 62400
+2025-04-30 21:36:02,466 - src.execution.backtest.backtest - INFO - Processed 62500 iterations
+2025-04-30 21:36:02,466 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 62500
+2025-04-30 21:36:02,469 - src.execution.backtest.backtest - INFO - Processed 62600 iterations
+2025-04-30 21:36:02,469 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 62600
+2025-04-30 21:36:02,471 - src.execution.backtest.backtest - INFO - Processed 62700 iterations
+2025-04-30 21:36:02,471 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 62700
+2025-04-30 21:36:02,474 - src.execution.backtest.backtest - INFO - Processed 62800 iterations
+2025-04-30 21:36:02,474 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 62800
+2025-04-30 21:36:02,477 - src.execution.backtest.backtest - INFO - Processed 62900 iterations
+2025-04-30 21:36:02,477 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 62900
+2025-04-30 21:36:02,479 - src.execution.backtest.backtest - INFO - Processed 63000 iterations
+2025-04-30 21:36:02,479 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 63000
+2025-04-30 21:36:02,482 - src.execution.backtest.backtest - INFO - Processed 63100 iterations
+2025-04-30 21:36:02,482 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 63100
+2025-04-30 21:36:02,485 - src.execution.backtest.backtest - INFO - Processed 63200 iterations
+2025-04-30 21:36:02,485 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 63200
+2025-04-30 21:36:02,487 - src.execution.backtest.backtest - INFO - Processed 63300 iterations
+2025-04-30 21:36:02,487 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 63300
+2025-04-30 21:36:02,490 - src.execution.backtest.backtest - INFO - Processed 63400 iterations
+2025-04-30 21:36:02,490 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 63400
+2025-04-30 21:36:02,493 - src.execution.backtest.backtest - INFO - Processed 63500 iterations
+2025-04-30 21:36:02,493 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 63500
+2025-04-30 21:36:02,495 - src.execution.backtest.backtest - INFO - Processed 63600 iterations
+2025-04-30 21:36:02,495 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 63600
+2025-04-30 21:36:02,498 - src.execution.backtest.backtest - INFO - Processed 63700 iterations
+2025-04-30 21:36:02,498 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 63700
+2025-04-30 21:36:02,501 - src.execution.backtest.backtest - INFO - Processed 63800 iterations
+2025-04-30 21:36:02,501 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 63800
+2025-04-30 21:36:02,503 - src.execution.backtest.backtest - INFO - Processed 63900 iterations
+2025-04-30 21:36:02,503 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 63900
+2025-04-30 21:36:02,506 - src.execution.backtest.backtest - INFO - Processed 64000 iterations
+2025-04-30 21:36:02,506 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 64000
+2025-04-30 21:36:02,508 - src.execution.backtest.backtest - INFO - Processed 64100 iterations
+2025-04-30 21:36:02,509 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 64100
+2025-04-30 21:36:02,511 - src.execution.backtest.backtest - INFO - Processed 64200 iterations
+2025-04-30 21:36:02,511 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 64200
+2025-04-30 21:36:02,514 - src.execution.backtest.backtest - INFO - Processed 64300 iterations
+2025-04-30 21:36:02,514 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 64300
+2025-04-30 21:36:02,516 - src.execution.backtest.backtest - INFO - Processed 64400 iterations
+2025-04-30 21:36:02,516 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 64400
+2025-04-30 21:36:02,519 - src.execution.backtest.backtest - INFO - Processed 64500 iterations
+2025-04-30 21:36:02,519 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 64500
+2025-04-30 21:36:02,522 - src.execution.backtest.backtest - INFO - Processed 64600 iterations
+2025-04-30 21:36:02,522 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 64600
+2025-04-30 21:36:02,524 - src.execution.backtest.backtest - INFO - Processed 64700 iterations
+2025-04-30 21:36:02,525 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 64700
+2025-04-30 21:36:02,527 - src.execution.backtest.backtest - INFO - Processed 64800 iterations
+2025-04-30 21:36:02,527 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 64800
+2025-04-30 21:36:02,530 - src.execution.backtest.backtest - INFO - Processed 64900 iterations
+2025-04-30 21:36:02,530 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 64900
+2025-04-30 21:36:02,532 - src.execution.backtest.backtest - INFO - Processed 65000 iterations
+2025-04-30 21:36:02,532 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 65000
+2025-04-30 21:36:02,535 - src.execution.backtest.backtest - INFO - Processed 65100 iterations
+2025-04-30 21:36:02,535 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 65100
+2025-04-30 21:36:02,538 - src.execution.backtest.backtest - INFO - Processed 65200 iterations
+2025-04-30 21:36:02,538 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 65200
+2025-04-30 21:36:02,540 - src.execution.backtest.backtest - INFO - Processed 65300 iterations
+2025-04-30 21:36:02,540 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 65300
+2025-04-30 21:36:02,544 - src.execution.backtest.backtest - INFO - Processed 65400 iterations
+2025-04-30 21:36:02,544 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 65400
+2025-04-30 21:36:02,547 - src.execution.backtest.backtest - INFO - Processed 65500 iterations
+2025-04-30 21:36:02,547 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 65500
+2025-04-30 21:36:02,549 - src.execution.backtest.backtest - INFO - Processed 65600 iterations
+2025-04-30 21:36:02,549 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 65600
+2025-04-30 21:36:02,552 - src.execution.backtest.backtest - INFO - Processed 65700 iterations
+2025-04-30 21:36:02,552 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 65700
+2025-04-30 21:36:02,555 - src.execution.backtest.backtest - INFO - Processed 65800 iterations
+2025-04-30 21:36:02,555 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 65800
+2025-04-30 21:36:02,557 - src.execution.backtest.backtest - INFO - Processed 65900 iterations
+2025-04-30 21:36:02,557 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 65900
+2025-04-30 21:36:02,560 - src.execution.backtest.backtest - INFO - Processed 66000 iterations
+2025-04-30 21:36:02,560 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 66000
+2025-04-30 21:36:02,563 - src.execution.backtest.backtest - INFO - Processed 66100 iterations
+2025-04-30 21:36:02,563 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 66100
+2025-04-30 21:36:02,565 - src.execution.backtest.backtest - INFO - Processed 66200 iterations
+2025-04-30 21:36:02,565 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 66200
+2025-04-30 21:36:02,568 - src.execution.backtest.backtest - INFO - Processed 66300 iterations
+2025-04-30 21:36:02,568 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 66300
+2025-04-30 21:36:02,571 - src.execution.backtest.backtest - INFO - Processed 66400 iterations
+2025-04-30 21:36:02,571 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 66400
+2025-04-30 21:36:02,573 - src.execution.backtest.backtest - INFO - Processed 66500 iterations
+2025-04-30 21:36:02,573 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 66500
+2025-04-30 21:36:02,576 - src.execution.backtest.backtest - INFO - Processed 66600 iterations
+2025-04-30 21:36:02,576 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 66600
+2025-04-30 21:36:02,579 - src.execution.backtest.backtest - INFO - Processed 66700 iterations
+2025-04-30 21:36:02,579 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 66700
+2025-04-30 21:36:02,581 - src.execution.backtest.backtest - INFO - Processed 66800 iterations
+2025-04-30 21:36:02,581 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 66800
+2025-04-30 21:36:02,584 - src.execution.backtest.backtest - INFO - Processed 66900 iterations
+2025-04-30 21:36:02,584 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 66900
+2025-04-30 21:36:02,586 - src.execution.backtest.backtest - INFO - Processed 67000 iterations
+2025-04-30 21:36:02,586 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 67000
+2025-04-30 21:36:02,589 - src.execution.backtest.backtest - INFO - Processed 67100 iterations
+2025-04-30 21:36:02,589 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 67100
+2025-04-30 21:36:02,592 - src.execution.backtest.backtest - INFO - Processed 67200 iterations
+2025-04-30 21:36:02,592 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 67200
+2025-04-30 21:36:02,594 - src.execution.backtest.backtest - INFO - Processed 67300 iterations
+2025-04-30 21:36:02,595 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 67300
+2025-04-30 21:36:02,597 - src.execution.backtest.backtest - INFO - Processed 67400 iterations
+2025-04-30 21:36:02,597 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 67400
+2025-04-30 21:36:02,600 - src.execution.backtest.backtest - INFO - Processed 67500 iterations
+2025-04-30 21:36:02,600 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 67500
+2025-04-30 21:36:02,602 - src.execution.backtest.backtest - INFO - Processed 67600 iterations
+2025-04-30 21:36:02,602 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 67600
+2025-04-30 21:36:02,605 - src.execution.backtest.backtest - INFO - Processed 67700 iterations
+2025-04-30 21:36:02,605 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 67700
+2025-04-30 21:36:02,608 - src.execution.backtest.backtest - INFO - Processed 67800 iterations
+2025-04-30 21:36:02,608 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 67800
+2025-04-30 21:36:02,611 - src.execution.backtest.backtest - INFO - Processed 67900 iterations
+2025-04-30 21:36:02,611 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 67900
+2025-04-30 21:36:02,613 - src.execution.backtest.backtest - INFO - Processed 68000 iterations
+2025-04-30 21:36:02,613 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 68000
+2025-04-30 21:36:02,616 - src.execution.backtest.backtest - INFO - Processed 68100 iterations
+2025-04-30 21:36:02,616 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 68100
+2025-04-30 21:36:02,618 - src.execution.backtest.backtest - INFO - Processed 68200 iterations
+2025-04-30 21:36:02,618 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 68200
+2025-04-30 21:36:02,621 - src.execution.backtest.backtest - INFO - Processed 68300 iterations
+2025-04-30 21:36:02,621 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 68300
+2025-04-30 21:36:02,624 - src.execution.backtest.backtest - INFO - Processed 68400 iterations
+2025-04-30 21:36:02,624 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 68400
+2025-04-30 21:36:02,626 - src.execution.backtest.backtest - INFO - Processed 68500 iterations
+2025-04-30 21:36:02,626 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 68500
+2025-04-30 21:36:02,629 - src.execution.backtest.backtest - INFO - Processed 68600 iterations
+2025-04-30 21:36:02,629 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 68600
+2025-04-30 21:36:02,632 - src.execution.backtest.backtest - INFO - Processed 68700 iterations
+2025-04-30 21:36:02,632 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 68700
+2025-04-30 21:36:02,634 - src.execution.backtest.backtest - INFO - Processed 68800 iterations
+2025-04-30 21:36:02,634 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 68800
+2025-04-30 21:36:02,637 - src.execution.backtest.backtest - INFO - Processed 68900 iterations
+2025-04-30 21:36:02,637 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 68900
+2025-04-30 21:36:02,640 - src.execution.backtest.backtest - INFO - Processed 69000 iterations
+2025-04-30 21:36:02,640 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 69000
+2025-04-30 21:36:02,642 - src.execution.backtest.backtest - INFO - Processed 69100 iterations
+2025-04-30 21:36:02,642 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 69100
+2025-04-30 21:36:02,645 - src.execution.backtest.backtest - INFO - Processed 69200 iterations
+2025-04-30 21:36:02,645 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 69200
+2025-04-30 21:36:02,648 - src.execution.backtest.backtest - INFO - Processed 69300 iterations
+2025-04-30 21:36:02,648 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 69300
+2025-04-30 21:36:02,650 - src.execution.backtest.backtest - INFO - Processed 69400 iterations
+2025-04-30 21:36:02,650 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 69400
+2025-04-30 21:36:02,653 - src.execution.backtest.backtest - INFO - Processed 69500 iterations
+2025-04-30 21:36:02,653 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 69500
+2025-04-30 21:36:02,656 - src.execution.backtest.backtest - INFO - Processed 69600 iterations
+2025-04-30 21:36:02,656 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 69600
+2025-04-30 21:36:02,658 - src.execution.backtest.backtest - INFO - Processed 69700 iterations
+2025-04-30 21:36:02,658 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 69700
+2025-04-30 21:36:02,661 - src.execution.backtest.backtest - INFO - Processed 69800 iterations
+2025-04-30 21:36:02,661 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 69800
+2025-04-30 21:36:02,664 - src.execution.backtest.backtest - INFO - Processed 69900 iterations
+2025-04-30 21:36:02,664 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 69900
+2025-04-30 21:36:02,666 - src.execution.backtest.backtest - INFO - Processed 70000 iterations
+2025-04-30 21:36:02,666 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 70000
+2025-04-30 21:36:02,669 - src.execution.backtest.backtest - INFO - Processed 70100 iterations
+2025-04-30 21:36:02,669 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 70100
+2025-04-30 21:36:02,673 - src.execution.backtest.backtest - INFO - Processed 70200 iterations
+2025-04-30 21:36:02,673 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 70200
+2025-04-30 21:36:02,675 - src.execution.backtest.backtest - INFO - Processed 70300 iterations
+2025-04-30 21:36:02,675 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 70300
+2025-04-30 21:36:02,678 - src.execution.backtest.backtest - INFO - Processed 70400 iterations
+2025-04-30 21:36:02,678 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 70400
+2025-04-30 21:36:02,681 - src.execution.backtest.backtest - INFO - Processed 70500 iterations
+2025-04-30 21:36:02,681 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 70500
+2025-04-30 21:36:02,729 - src.execution.backtest.backtest - INFO - Processed 70600 iterations
+2025-04-30 21:36:02,730 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 70600
+2025-04-30 21:36:02,732 - src.execution.backtest.backtest - INFO - Processed 70700 iterations
+2025-04-30 21:36:02,732 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 70700
+2025-04-30 21:36:02,735 - src.execution.backtest.backtest - INFO - Processed 70800 iterations
+2025-04-30 21:36:02,735 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 70800
+2025-04-30 21:36:02,737 - src.execution.backtest.backtest - INFO - Processed 70900 iterations
+2025-04-30 21:36:02,737 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 70900
+2025-04-30 21:36:02,740 - src.execution.backtest.backtest - INFO - Processed 71000 iterations
+2025-04-30 21:36:02,740 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 71000
+2025-04-30 21:36:02,743 - src.execution.backtest.backtest - INFO - Processed 71100 iterations
+2025-04-30 21:36:02,743 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 71100
+2025-04-30 21:36:02,745 - src.execution.backtest.backtest - INFO - Processed 71200 iterations
+2025-04-30 21:36:02,745 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 71200
+2025-04-30 21:36:02,748 - src.execution.backtest.backtest - INFO - Processed 71300 iterations
+2025-04-30 21:36:02,748 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 71300
+2025-04-30 21:36:02,751 - src.execution.backtest.backtest - INFO - Processed 71400 iterations
+2025-04-30 21:36:02,751 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 71400
+2025-04-30 21:36:02,753 - src.execution.backtest.backtest - INFO - Processed 71500 iterations
+2025-04-30 21:36:02,753 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 71500
+2025-04-30 21:36:02,756 - src.execution.backtest.backtest - INFO - Processed 71600 iterations
+2025-04-30 21:36:02,756 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 71600
+2025-04-30 21:36:02,759 - src.execution.backtest.backtest - INFO - Processed 71700 iterations
+2025-04-30 21:36:02,759 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 71700
+2025-04-30 21:36:02,761 - src.execution.backtest.backtest - INFO - Processed 71800 iterations
+2025-04-30 21:36:02,761 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 71800
+2025-04-30 21:36:02,764 - src.execution.backtest.backtest - INFO - Processed 71900 iterations
+2025-04-30 21:36:02,764 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 71900
+2025-04-30 21:36:02,767 - src.execution.backtest.backtest - INFO - Processed 72000 iterations
+2025-04-30 21:36:02,767 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 72000
+2025-04-30 21:36:02,769 - src.execution.backtest.backtest - INFO - Processed 72100 iterations
+2025-04-30 21:36:02,769 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 72100
+2025-04-30 21:36:02,772 - src.execution.backtest.backtest - INFO - Processed 72200 iterations
+2025-04-30 21:36:02,772 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 72200
+2025-04-30 21:36:02,775 - src.execution.backtest.backtest - INFO - Processed 72300 iterations
+2025-04-30 21:36:02,775 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 72300
+2025-04-30 21:36:02,777 - src.execution.backtest.backtest - INFO - Processed 72400 iterations
+2025-04-30 21:36:02,777 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 72400
+2025-04-30 21:36:02,780 - src.execution.backtest.backtest - INFO - Processed 72500 iterations
+2025-04-30 21:36:02,780 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 72500
+2025-04-30 21:36:02,783 - src.execution.backtest.backtest - INFO - Processed 72600 iterations
+2025-04-30 21:36:02,783 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 72600
+2025-04-30 21:36:02,785 - src.execution.backtest.backtest - INFO - Processed 72700 iterations
+2025-04-30 21:36:02,785 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 72700
+2025-04-30 21:36:02,788 - src.execution.backtest.backtest - INFO - Processed 72800 iterations
+2025-04-30 21:36:02,788 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 72800
+2025-04-30 21:36:02,791 - src.execution.backtest.backtest - INFO - Processed 72900 iterations
+2025-04-30 21:36:02,791 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 72900
+2025-04-30 21:36:02,793 - src.execution.backtest.backtest - INFO - Processed 73000 iterations
+2025-04-30 21:36:02,793 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 73000
+2025-04-30 21:36:02,796 - src.execution.backtest.backtest - INFO - Processed 73100 iterations
+2025-04-30 21:36:02,796 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 73100
+2025-04-30 21:36:02,798 - src.execution.backtest.backtest - INFO - Processed 73200 iterations
+2025-04-30 21:36:02,798 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 73200
+2025-04-30 21:36:02,801 - src.execution.backtest.backtest - INFO - Processed 73300 iterations
+2025-04-30 21:36:02,801 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 73300
+2025-04-30 21:36:02,804 - src.execution.backtest.backtest - INFO - Processed 73400 iterations
+2025-04-30 21:36:02,804 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 73400
+2025-04-30 21:36:02,807 - src.execution.backtest.backtest - INFO - Processed 73500 iterations
+2025-04-30 21:36:02,807 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 73500
+2025-04-30 21:36:02,809 - src.execution.backtest.backtest - INFO - Processed 73600 iterations
+2025-04-30 21:36:02,809 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 73600
+2025-04-30 21:36:02,812 - src.execution.backtest.backtest - INFO - Processed 73700 iterations
+2025-04-30 21:36:02,812 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 73700
+2025-04-30 21:36:02,815 - src.execution.backtest.backtest - INFO - Processed 73800 iterations
+2025-04-30 21:36:02,815 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 73800
+2025-04-30 21:36:02,817 - src.execution.backtest.backtest - INFO - Processed 73900 iterations
+2025-04-30 21:36:02,817 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 73900
+2025-04-30 21:36:02,820 - src.execution.backtest.backtest - INFO - Processed 74000 iterations
+2025-04-30 21:36:02,820 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 74000
+2025-04-30 21:36:02,823 - src.execution.backtest.backtest - INFO - Processed 74100 iterations
+2025-04-30 21:36:02,823 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 74100
+2025-04-30 21:36:02,825 - src.execution.backtest.backtest - INFO - Processed 74200 iterations
+2025-04-30 21:36:02,825 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 74200
+2025-04-30 21:36:02,828 - src.execution.backtest.backtest - INFO - Processed 74300 iterations
+2025-04-30 21:36:02,828 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 74300
+2025-04-30 21:36:02,830 - src.execution.backtest.backtest - INFO - Processed 74400 iterations
+2025-04-30 21:36:02,830 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 74400
+2025-04-30 21:36:02,833 - src.execution.backtest.backtest - INFO - Processed 74500 iterations
+2025-04-30 21:36:02,833 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 74500
+2025-04-30 21:36:02,836 - src.execution.backtest.backtest - INFO - Processed 74600 iterations
+2025-04-30 21:36:02,836 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 74600
+2025-04-30 21:36:02,839 - src.execution.backtest.backtest - INFO - Processed 74700 iterations
+2025-04-30 21:36:02,839 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 74700
+2025-04-30 21:36:02,841 - src.execution.backtest.backtest - INFO - Processed 74800 iterations
+2025-04-30 21:36:02,841 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 74800
+2025-04-30 21:36:02,844 - src.execution.backtest.backtest - INFO - Processed 74900 iterations
+2025-04-30 21:36:02,844 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 74900
+2025-04-30 21:36:02,846 - src.execution.backtest.backtest - INFO - Processed 75000 iterations
+2025-04-30 21:36:02,847 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 75000
+2025-04-30 21:36:02,849 - src.execution.backtest.backtest - INFO - Processed 75100 iterations
+2025-04-30 21:36:02,849 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 75100
+2025-04-30 21:36:02,852 - src.execution.backtest.backtest - INFO - Processed 75200 iterations
+2025-04-30 21:36:02,852 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 75200
+2025-04-30 21:36:02,855 - src.execution.backtest.backtest - INFO - Processed 75300 iterations
+2025-04-30 21:36:02,855 - src.execution.backtest.backtest - INFO - Event counts: EventType.BAR: 75300
+2025-04-30 21:36:02,856 - src.execution.backtest.backtest - INFO - Backtest completed after 75317 iterations
+2025-04-30 21:36:02,856 - src.execution.backtest.backtest - INFO - ======= DETAILED DEBUG REPORT =======
+2025-04-30 21:36:02,856 - src.execution.backtest.backtest - INFO - Strategy debug info: {'strategy_name': 'ma_crossover', 'fast_window': 5, 'slow_window': 15, 'signal_count': 0, 'signals_history': [], 'data_points_by_symbol': {}, 'current_price_by_symbol': {}, 'current_fast_ma_by_symbol': {}, 'current_slow_ma_by_symbol': {}, 'last_crossover': None}
+2025-04-30 21:36:02,856 - src.execution.backtest.backtest - INFO - Total signals generated: 0
+2025-04-30 21:36:02,856 - src.execution.backtest.backtest - ERROR - Error running backtest: 'OrderRegistry' object has no attribute 'get_all_orders'
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/backtest/backtest.py", line 260, in run
+    self._run_backtest()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "/Users/daws/ADMF-trader/src/execution/backtest/backtest.py", line 372, in _run_backtest
+    self._generate_debug_report()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/daws/ADMF-trader/src/execution/backtest/backtest.py", line 485, in _generate_debug_report
+    orders = self.order_registry.get_all_orders()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'OrderRegistry' object has no attribute 'get_all_orders'. Did you mean: 'get_active_orders'?

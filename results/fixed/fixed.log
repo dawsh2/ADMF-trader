@@ -1,0 +1,25 @@
+2025-04-30 21:40:09,524 - src.core.bootstrap - INFO - Logging initialized at level INFO
+2025-04-30 21:40:09,524 - src.core.bootstrap - INFO - Log file: ./results/fixed/fixed.log
+2025-04-30 21:40:09,525 - src.core.bootstrap - INFO - Loaded configuration from config/fixed.yaml
+2025-04-30 21:40:09,525 - src.core.bootstrap - INFO - Event system initialized
+2025-04-30 21:40:09,525 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-04-30 21:40:09,526 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-04-30 21:40:09,526 - src.core.bootstrap - INFO - Custom data file configured: HEAD_1min.csv
+2025-04-30 21:40:09,526 - src.core.bootstrap - INFO - Data components initialized with source type: csv
+2025-04-30 21:40:09,527 - src.core.bootstrap - INFO - Order registry initialized
+2025-04-30 21:40:09,530 - root - ERROR - Backtest failed with error
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/main.py", line 116, in <module>
+    success = main()
+  File "/Users/daws/ADMF-trader/main.py", line 79, in main
+    container, config = bootstrap.setup()
+                        ~~~~~~~~~~~~~~~^^
+  File "/Users/daws/ADMF-trader/src/core/bootstrap.py", line 75, in setup
+    self._setup_execution_components(container, config)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/daws/ADMF-trader/src/core/bootstrap.py", line 192, in _setup_execution_components
+    from src.execution.backtest.backtest import BacktestCoordinator
+  File "/Users/daws/ADMF-trader/src/execution/backtest/backtest.py", line 495
+    elif hasattr(self.order_registry, 'get_active_orders'):
+    ^^^^
+SyntaxError: invalid syntax

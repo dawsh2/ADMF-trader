@@ -1,0 +1,2 @@
+2025-04-30 21:36:27,504 - debug - INFO - Starting debug script
+2025-04-30 21:36:27,504 - debug - ERROR - Data file not found: ./data/HEAD_1min.csv

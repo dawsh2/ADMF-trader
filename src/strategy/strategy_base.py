@@ -29,6 +29,7 @@ class Strategy(Component):
         self.data_handler = data_handler
         self.symbols = []
         self.components = {}  # Dict of component name -> component
+        self.data = {}  # Initialize empty data dictionary
     
     def configure(self, config):
         """Configure the strategy with parameters."""

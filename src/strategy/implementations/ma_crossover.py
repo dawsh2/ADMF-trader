@@ -47,8 +47,11 @@ class MACrossoverStrategy(Strategy):
         self.slow_window = self.parameters.get('slow_window', 15)
         self.price_key = self.parameters.get('price_key', 'close')
         
-        # Internal state for data storage only
+        # Internal state for data storage
         self.data = {symbol: [] for symbol in self.symbols}
+        self.fast_ma = {symbol: [] for symbol in self.symbols}
+        self.slow_ma = {symbol: [] for symbol in self.symbols}
+        self.current_position = {symbol: 0 for symbol in self.symbols}
         
         # Register for events
         if self.event_bus:
@@ -68,7 +71,7 @@ class MACrossoverStrategy(Strategy):
         self.price_key = self.parameters.get('price_key', 'close')
         
         # Reset data for all configured symbols
-        self.data = {symbol: [] for symbol in self.symbols}
+        self.reset()
         
         logger.info(f"MA Crossover strategy configured with parameters: "
                    f"fast_window={self.fast_window}, slow_window={self.slow_window}")
@@ -156,7 +159,12 @@ class MACrossoverStrategy(Strategy):
     
     def reset(self):
         """Reset the strategy state."""
-        # Reset strategy-specific state
-        self.data = {symbol: [] for symbol in self.symbols}
+        # First call the parent reset which resets self.data
+        super().reset()
+        
+        # Then explicitly reset strategy-specific state
+        self.fast_ma = {symbol: [] for symbol in self.symbols}
+        self.slow_ma = {symbol: [] for symbol in self.symbols}
+        self.current_position = {symbol: 0 for symbol in self.symbols}
         
         logger.info(f"MA Crossover strategy {self.name} reset")
