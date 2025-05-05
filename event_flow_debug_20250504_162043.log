@@ -1,0 +1,4 @@
+2025-05-04 16:20:43,991 - event_debug - INFO - Running backtest with config config/head_test.yaml and debugger attached
+2025-05-04 16:20:43,991 - event_debug - INFO - Starting backtest with config: config/head_test.yaml
+2025-05-04 16:20:43,991 - event_debug - ERROR - Error loading configuration: 'Config' object has no attribute 'load_from_file'
+2025-05-04 16:20:43,991 - event_debug - ERROR - Failed to run backtest with debugger

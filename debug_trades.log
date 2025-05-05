@@ -1,0 +1,1307 @@
+2025-05-04 14:56:06,927 - src.core.system_bootstrap - DEBUG - Debug mode enabled
+2025-05-04 14:56:06,927 - src.core.system_bootstrap - INFO - Logging initialized at level DEBUG
+2025-05-04 14:56:06,927 - src.core.system_bootstrap - INFO - Log file: debug_trades.log
+2025-05-04 14:56:06,929 - src.core.system_bootstrap - INFO - Loaded configuration from config/mini_test.yaml
+2025-05-04 14:56:06,929 - src.core.system_bootstrap - INFO - Event system initialized with native deduplication
+2025-05-04 14:56:07,219 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-05-04 14:56:07,220 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-05-04 14:56:07,220 - src.core.system_bootstrap - INFO - Data components initialized with source type: csv
+2025-05-04 14:56:07,222 - src.execution.broker.broker_simulator - INFO - Simulated broker initialized
+2025-05-04 14:56:07,222 - src.execution.order_manager - INFO - Order manager initialized
+2025-05-04 14:56:07,222 - src.core.system_bootstrap - INFO - Execution components initialized
+2025-05-04 14:56:07,225 - src.core.system_bootstrap - INFO - Using Enhanced Risk Manager (refactored architecture)
+2025-05-04 14:56:07,225 - src.risk.managers.enhanced_risk_manager - INFO - Enhanced risk manager risk_manager_0f548340 initialized
+2025-05-04 14:56:07,225 - src.core.system_bootstrap - INFO - Enhanced risk manager configured with position_sizing_method=fixed, position_size=100, max_position_size=1000
+2025-05-04 14:56:07,225 - src.core.system_bootstrap - INFO - No signal interpreter needed with enhanced risk manager
+2025-05-04 14:56:07,225 - src.core.system_bootstrap - INFO - Risk components initialized
+2025-05-04 14:56:07,227 - src.core.system_bootstrap - INFO - Discovering strategy implementations...
+2025-05-04 14:56:07,228 - src.core.utils.discovery - INFO - Registered component composite_regime in registry
+2025-05-04 14:56:07,228 - src.core.utils.discovery - INFO - Registered component ensemble_strategy in registry
+2025-05-04 14:56:07,228 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-05-04 14:56:07,228 - src.core.utils.discovery - INFO - Registered component mean_reversion in registry
+2025-05-04 14:56:07,228 - src.core.utils.discovery - INFO - Registered component regime_ensemble in registry
+2025-05-04 14:56:07,228 - src.core.utils.discovery - INFO - Registered component simple_ma_crossover in registry
+2025-05-04 14:56:07,228 - src.core.system_bootstrap - INFO - Discovered strategies: composite_regime, ensemble_strategy, ma_crossover, mean_reversion, regime_ensemble, simple_ma_crossover
+2025-05-04 14:56:07,228 - src.core.system_bootstrap - INFO - Requested strategy: simple_ma_crossover
+2025-05-04 14:56:07,228 - src.core.system_bootstrap - INFO - Available strategies in registry: ['composite_regime', 'ensemble_strategy', 'ma_crossover', 'mean_reversion', 'regime_ensemble', 'simple_ma_crossover']
+2025-05-04 14:56:07,228 - src.strategy.implementations.simple_ma_crossover - INFO - MA Crossover strategy initialized with fast_window=5, slow_window=15
+2025-05-04 14:56:07,228 - src.core.system_bootstrap - DEBUG - Added symbols from backtest config: ['MINI']
+2025-05-04 14:56:07,228 - src.strategy.implementations.simple_ma_crossover - INFO - MA Crossover strategy configured with parameters: fast_window=5, slow_window=15
+2025-05-04 14:56:07,228 - src.core.system_bootstrap - INFO - Strategy 'simple_ma_crossover' initialized successfully
+2025-05-04 14:56:07,228 - src.core.system_bootstrap - INFO - Analytics components initialized
+2025-05-04 14:56:07,228 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): bacbb89b-4b93-4388-9d72-8a9de6016060
+2025-05-04 14:56:07,228 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 806a6c88-1640-4658-b068-5e90ad6ce44f
+2025-05-04 14:56:07,228 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): f46e51bd-640d-4c1c-84a1-fb6a49ab81c3
+2025-05-04 14:56:07,229 - src.core.system_bootstrap - INFO - Registered enhanced risk manager with high signal priority
+2025-05-04 14:56:07,229 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): ba632cb9-d838-48c6-a828-839537367ff6
+2025-05-04 14:56:07,229 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): ab7b2972-deac-4900-9f81-0044bf6cd405
+2025-05-04 14:56:07,229 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 1fd71a0d-89c0-4b60-acd1-7769ad2ba9e0
+2025-05-04 14:56:07,229 - src.core.system_bootstrap - INFO - All components registered with event manager in optimal order
+2025-05-04 14:56:07,229 - src.core.system_bootstrap - INFO - Re-registered portfolio fill handler with high priority
+2025-05-04 14:56:07,229 - src.core.system_bootstrap - INFO - System bootstrap complete
+2025-05-04 14:56:07,229 - src.execution.backtest.backtest - INFO - Using timeframe from config: 1min
+2025-05-04 14:56:07,233 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 13706b63-3128-491c-b9eb-bc690cba590b
+2025-05-04 14:56:07,233 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 5e72e81b-690e-4b12-b86a-b32391132405
+2025-05-04 14:56:07,234 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 51348f39-3f0a-4f81-8d50-7236ec1d8ffc
+2025-05-04 14:56:07,234 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 66c04226-328f-4596-8939-7a4e3cbdb8f0
+2025-05-04 14:56:07,234 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): dbc80c33-96b4-4d3a-886c-8cb930442d9c
+2025-05-04 14:56:07,234 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): f54b1f9e-15b8-4208-945a-fb78acc71db3
+2025-05-04 14:56:07,234 - src.execution.backtest.backtest - INFO - Backtest setup complete
+2025-05-04 14:56:07,234 - src.core.events.event_bus - INFO - Event bus reset complete
+2025-05-04 14:56:07,234 - src.execution.backtest.backtest - INFO - Event bus reset
+2025-05-04 14:56:07,234 - src.execution.backtest.backtest - INFO - Data handler reset
+2025-05-04 14:56:07,234 - src.strategy.implementations.simple_ma_crossover - INFO - Simple MA Crossover strategy simple_ma_crossover reset
+2025-05-04 14:56:07,234 - src.execution.backtest.backtest - INFO - Strategy reset
+2025-05-04 14:56:07,234 - src.risk.managers.enhanced_risk_manager - INFO - CLEARING 0 PROCESSED RULE IDs
+2025-05-04 14:56:07,234 - src.risk.managers.enhanced_risk_manager - INFO - After reset, processed_rule_ids size: 0
+2025-05-04 14:56:07,234 - src.risk.managers.enhanced_risk_manager - INFO - Risk manager risk_manager_0f548340 reset completed
+2025-05-04 14:56:07,234 - src.execution.backtest.backtest - INFO - Risk manager reset
+2025-05-04 14:56:07,234 - src.execution.order_manager - INFO - Reset order manager
+2025-05-04 14:56:07,234 - src.execution.backtest.backtest - INFO - Order manager reset
+2025-05-04 14:56:07,234 - src.execution.broker.broker_simulator - INFO - Broker reset
+2025-05-04 14:56:07,234 - src.execution.backtest.backtest - INFO - Broker reset
+2025-05-04 14:56:07,234 - src.risk.portfolio.portfolio - INFO - Trade list reset - new empty list with ID: 4388025664
+2025-05-04 14:56:07,234 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_fb41d240 to initial state with cash: $100000.00
+2025-05-04 14:56:07,234 - src.execution.backtest.backtest - INFO - Portfolio reset
+2025-05-04 14:56:07,234 - src.execution.backtest.backtest - INFO - Reset all components for backtest
+2025-05-04 14:56:07,234 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['MINI'] with timeframe: 1min
+2025-05-04 14:56:07,234 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/MINI_1min.csv
+2025-05-04 14:56:07,237 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 48 rows
+2025-05-04 14:56:07,238 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2024-03-26 13:30:00
+2025-05-04 14:56:07,239 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2024-03-26 13:30:00
+2025-05-04 14:56:07,239 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2024-01-01 00:00:00
+2025-05-04 14:56:07,239 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2024-12-31 00:00:00
+2025-05-04 14:56:07,241 - src.data.sources.csv_handler - INFO - CSVDataSource: Set timestamp as index
+2025-05-04 14:56:07,241 - src.data.sources.csv_handler - DEBUG - Column mapping result: {'Open': 'open', 'High': 'high', 'Low': 'low', 'Close': 'close', 'Volume': 'volume'}
+2025-05-04 14:56:07,242 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2024-03-26 13:30:00 to 2024-03-26 14:17:00
+2025-05-04 14:56:07,242 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume', 'trade_count', 'vwap']
+2025-05-04 14:56:07,242 - src.data.historical_data_handler - INFO - Loaded 48 bars for MINI from 2024-03-26 13:30:00 to 2024-03-26 14:17:00
+2025-05-04 14:56:07,242 - src.execution.backtest.backtest - INFO - Starting backtest
+2025-05-04 14:56:07,242 - src.data.historical_data_handler - DEBUG - Processing bar for MINI at index 0: timestamp=2024-03-26 13:30:00, type=<class 'pandas._libs.tslibs.timestamps.Timestamp'>
+2025-05-04 14:56:07,242 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): b8aec972-1880-4f10-ae3f-8951d1e1fd62
+2025-05-04 14:56:07,242 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: b8aec972-1880-4f10-ae3f-8951d1e1fd62)
+2025-05-04 14:56:07,242 - src.strategy.implementations.simple_ma_crossover - DEBUG - Not enough data for MINI: have 1, need 16
+2025-05-04 14:56:07,242 - src.strategy.implementations.simple_ma_crossover - DEBUG - Not enough data for MINI: have 2, need 16
+2025-05-04 14:56:07,242 - src.strategy.implementations.simple_ma_crossover - DEBUG - Not enough data for MINI: have 3, need 16
+2025-05-04 14:56:07,242 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 9efe8532-dfa0-41d1-9480-1b5061a93361
+2025-05-04 14:56:07,242 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 9efe8532-dfa0-41d1-9480-1b5061a93361)
+2025-05-04 14:56:07,242 - src.strategy.implementations.simple_ma_crossover - DEBUG - Not enough data for MINI: have 4, need 16
+2025-05-04 14:56:07,242 - src.strategy.implementations.simple_ma_crossover - DEBUG - Not enough data for MINI: have 5, need 16
+2025-05-04 14:56:07,242 - src.strategy.implementations.simple_ma_crossover - DEBUG - Not enough data for MINI: have 6, need 16
+2025-05-04 14:56:07,242 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): b46f1483-4a6f-47e3-88fa-84f033d28c5b
+2025-05-04 14:56:07,242 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: b46f1483-4a6f-47e3-88fa-84f033d28c5b)
+2025-05-04 14:56:07,242 - src.strategy.implementations.simple_ma_crossover - DEBUG - Not enough data for MINI: have 7, need 16
+2025-05-04 14:56:07,242 - src.strategy.implementations.simple_ma_crossover - DEBUG - Not enough data for MINI: have 8, need 16
+2025-05-04 14:56:07,242 - src.strategy.implementations.simple_ma_crossover - DEBUG - Not enough data for MINI: have 9, need 16
+2025-05-04 14:56:07,242 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 7364f57d-37af-4ceb-93d2-fc7bd0ce0272
+2025-05-04 14:56:07,242 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 7364f57d-37af-4ceb-93d2-fc7bd0ce0272)
+2025-05-04 14:56:07,242 - src.strategy.implementations.simple_ma_crossover - DEBUG - Not enough data for MINI: have 10, need 16
+2025-05-04 14:56:07,242 - src.strategy.implementations.simple_ma_crossover - DEBUG - Not enough data for MINI: have 11, need 16
+2025-05-04 14:56:07,242 - src.strategy.implementations.simple_ma_crossover - DEBUG - Not enough data for MINI: have 12, need 16
+2025-05-04 14:56:07,242 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 0a981889-9670-4db9-9709-211e36bc9dbc
+2025-05-04 14:56:07,242 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 0a981889-9670-4db9-9709-211e36bc9dbc)
+2025-05-04 14:56:07,242 - src.strategy.implementations.simple_ma_crossover - DEBUG - Not enough data for MINI: have 13, need 16
+2025-05-04 14:56:07,243 - src.strategy.implementations.simple_ma_crossover - DEBUG - Not enough data for MINI: have 14, need 16
+2025-05-04 14:56:07,243 - src.strategy.implementations.simple_ma_crossover - DEBUG - Not enough data for MINI: have 15, need 16
+2025-05-04 14:56:07,243 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): aaa35ba4-50e7-4818-9da0-f95c33aff635
+2025-05-04 14:56:07,243 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: aaa35ba4-50e7-4818-9da0-f95c33aff635)
+2025-05-04 14:56:07,243 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.30, Slow MA: 521.20, Prev Fast: 521.33, Prev Slow: 521.19
+2025-05-04 14:56:07,243 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.27, Slow MA: 521.21, Prev Fast: 521.30, Prev Slow: 521.20
+2025-05-04 14:56:07,243 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.22, Slow MA: 521.21, Prev Fast: 521.27, Prev Slow: 521.21
+2025-05-04 14:56:07,243 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 298f887a-b1ce-488a-bcf8-d8423da7dd62
+2025-05-04 14:56:07,243 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 298f887a-b1ce-488a-bcf8-d8423da7dd62)
+2025-05-04 14:56:07,243 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.17, Slow MA: 521.22, Prev Fast: 521.22, Prev Slow: 521.21
+2025-05-04 14:56:07,243 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-04 14:56:07,243 - src.core.events.event_bus - DEBUG - Processing SIGNAL event (ID: 73f79272-0e62-4829-ac49-417c6a00e9c7)
+2025-05-04 14:56:07,243 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.12
+2025-05-04 14:56:07,243 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 MINI @ 521.12, rule_id=MINI_SELL_OPEN_20240326133600, timestamp=2024-03-26 13:36:00, action=OPEN
+2025-05-04 14:56:07,243 - src.core.events.event_bus - INFO - Order dedup key: MINI_SELL_OPEN_20240326133600
+2025-05-04 14:56:07,243 - src.core.events.event_bus - DEBUG - Processing ORDER event (ID: 2753fb68-2fa7-473d-8920-b79c4005e3ce)
+2025-05-04 14:56:07,243 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,243 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,243 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,243 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,243 - src.execution.order_manager - INFO - Converting trading decision to order: order_9d34afa2 (SELL 100.0 MINI @ 521.12)
+2025-05-04 14:56:07,243 - src.execution.order_manager - INFO - Order order_9d34afa2 using quantity field 100.0 for size
+2025-05-04 14:56:07,243 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100.0 MINI @ 521.12
+2025-05-04 14:56:07,243 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_9d34afa2
+2025-05-04 14:56:07,243 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_9d34afa2
+2025-05-04 14:56:07,243 - src.core.events.event_bus - DEBUG - Processing FILL event (ID: 4de094cd-64e4-419b-b592-4aab818694ae)
+2025-05-04 14:56:07,243 - src.execution.order_manager - INFO - Processing fill event for order_id: order_9d34afa2
+2025-05-04 14:56:07,243 - src.execution.order_manager - DEBUG - Fill data: {'symbol': 'MINI', 'direction': 'SELL', 'quantity': 100.0, 'price': 521.12, 'timestamp': Timestamp('2024-03-26 13:36:00'), 'rule_id': 'MINI_SELL_OPEN_20240326133600', 'action_type': 'OPEN', 'order_id': 'order_9d34afa2', 'order_type': 'MARKET', 'status': 'PENDING', 'size': 100.0, 'fill_price': 520.59888, 'fill_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 243524), 'commission': 52.059888}
+2025-05-04 14:56:07,243 - src.execution.order_manager - INFO - Updated order with fill: Order(order_9d34afa2, MINI, SELL, 100.0, FILLED)
+2025-05-04 14:56:07,243 - src.execution.order_manager - INFO - Emitting TRADE_OPEN event for MINI: SELL 100.0 @ 521.12
+2025-05-04 14:56:07,243 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 691dcd8f-ef9d-4887-ad68-a8210984c491
+2025-05-04 14:56:07,243 - src.core.events.event_bus - DEBUG - Processing TRADE_OPEN event (ID: 691dcd8f-ef9d-4887-ad68-a8210984c491)
+2025-05-04 14:56:07,243 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.12
+2025-05-04 14:56:07,243 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=0, change=-100.0, cost_basis=0.0
+2025-05-04 14:56:07,243 - src.risk.portfolio.position - DEBUG - Opening new position: quantity=-100.0, cost_basis=521.12
+2025-05-04 14:56:07,243 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-100.0, cost_basis=521.12, realized_pnl=0.0
+2025-05-04 14:56:07,243 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.12
+2025-05-04 14:56:07,243 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.12
+2025-05-04 14:56:07,243 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-100.0, change=-100.0, cost_basis=521.12
+2025-05-04 14:56:07,243 - src.risk.portfolio.position - DEBUG - Adding to position: new quantity=-200.0, new cost_basis=521.12
+2025-05-04 14:56:07,243 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-200.0, cost_basis=521.12, realized_pnl=0.0
+2025-05-04 14:56:07,243 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -104224.0 -> -100000
+2025-05-04 14:56:07,243 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.12
+2025-05-04 14:56:07,243 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.12
+2025-05-04 14:56:07,243 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-200.0, change=-100.0, cost_basis=521.12
+2025-05-04 14:56:07,243 - src.risk.portfolio.position - DEBUG - Adding to position: new quantity=-300.0, new cost_basis=521.12
+2025-05-04 14:56:07,243 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-300.0, cost_basis=521.12, realized_pnl=0.0
+2025-05-04 14:56:07,243 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -156336.0 -> -100000
+2025-05-04 14:56:07,243 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.12
+2025-05-04 14:56:07,243 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.12
+2025-05-04 14:56:07,243 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-300.0, change=-100.0, cost_basis=521.12
+2025-05-04 14:56:07,243 - src.risk.portfolio.position - DEBUG - Adding to position: new quantity=-400.0, new cost_basis=521.12
+2025-05-04 14:56:07,244 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-400.0, cost_basis=521.12, realized_pnl=0.0
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208448.0 -> -100000
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.12
+2025-05-04 14:56:07,244 - src.core.events.event_bus - DEBUG - Event FILL consumed, skipping remaining handlers
+2025-05-04 14:56:07,244 - src.execution.broker.broker_simulator - DEBUG - Fill event emitted for MINI with order_id: order_9d34afa2
+2025-05-04 14:56:07,244 - src.core.events.event_bus - DEBUG - Event ORDER consumed, skipping remaining handlers
+2025-05-04 14:56:07,244 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 MINI @ 521.12, rule_id=MINI_SELL_OPEN_20240326133600
+2025-05-04 14:56:07,244 - src.core.events.event_bus - DEBUG - Event SIGNAL consumed, skipping remaining handlers
+2025-05-04 14:56:07,244 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 13:36:00
+2025-05-04 14:56:07,244 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.13, Slow MA: 521.22, Prev Fast: 521.17, Prev Slow: 521.22
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208448.0 -> -100000
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208448.0 -> -100000
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208448.0 -> -100000
+2025-05-04 14:56:07,244 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.12, Slow MA: 521.22, Prev Fast: 521.13, Prev Slow: 521.22
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208448.0 -> -100000
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208448.0 -> -100000
+2025-05-04 14:56:07,244 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 3e1c5b42-8fd7-4043-ba7a-99621c9ff85e
+2025-05-04 14:56:07,244 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 3e1c5b42-8fd7-4043-ba7a-99621c9ff85e)
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208500.0 -> -100000
+2025-05-04 14:56:07,244 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.15, Slow MA: 521.23, Prev Fast: 521.12, Prev Slow: 521.22
+2025-05-04 14:56:07,244 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.17, Slow MA: 521.23, Prev Fast: 521.15, Prev Slow: 521.23
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208500.0 -> -100000
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208500.0 -> -100000
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208500.0 -> -100000
+2025-05-04 14:56:07,244 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.20, Slow MA: 521.23, Prev Fast: 521.17, Prev Slow: 521.23
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208500.0 -> -100000
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208500.0 -> -100000
+2025-05-04 14:56:07,244 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 6a12f219-012c-4032-aee6-ddbb8478d4b5
+2025-05-04 14:56:07,244 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 6a12f219-012c-4032-aee6-ddbb8478d4b5)
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208408.0 -> -100000
+2025-05-04 14:56:07,244 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.18, Slow MA: 521.21, Prev Fast: 521.20, Prev Slow: 521.23
+2025-05-04 14:56:07,244 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.16, Slow MA: 521.19, Prev Fast: 521.18, Prev Slow: 521.21
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208408.0 -> -100000
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208408.0 -> -100000
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208408.0 -> -100000
+2025-05-04 14:56:07,244 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.11, Slow MA: 521.18, Prev Fast: 521.16, Prev Slow: 521.19
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208408.0 -> -100000
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208408.0 -> -100000
+2025-05-04 14:56:07,244 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): ffd34d4b-2cbb-45cf-bb5a-bb6668995de0
+2025-05-04 14:56:07,244 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: ffd34d4b-2cbb-45cf-bb5a-bb6668995de0)
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208436.0 -> -100000
+2025-05-04 14:56:07,244 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.08, Slow MA: 521.16, Prev Fast: 521.11, Prev Slow: 521.18
+2025-05-04 14:56:07,244 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.05, Slow MA: 521.14, Prev Fast: 521.08, Prev Slow: 521.16
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208436.0 -> -100000
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208436.0 -> -100000
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208436.0 -> -100000
+2025-05-04 14:56:07,244 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.06, Slow MA: 521.12, Prev Fast: 521.05, Prev Slow: 521.14
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208436.0 -> -100000
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208436.0 -> -100000
+2025-05-04 14:56:07,244 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): f5819d20-1779-48a4-8a4d-b48dc66aeae9
+2025-05-04 14:56:07,244 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: f5819d20-1779-48a4-8a4d-b48dc66aeae9)
+2025-05-04 14:56:07,244 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208408.0 -> -100000
+2025-05-04 14:56:07,245 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.06, Slow MA: 521.11, Prev Fast: 521.06, Prev Slow: 521.12
+2025-05-04 14:56:07,245 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.06, Slow MA: 521.11, Prev Fast: 521.06, Prev Slow: 521.11
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208408.0 -> -100000
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208408.0 -> -100000
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208408.0 -> -100000
+2025-05-04 14:56:07,245 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.05, Slow MA: 521.10, Prev Fast: 521.06, Prev Slow: 521.11
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208408.0 -> -100000
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208408.0 -> -100000
+2025-05-04 14:56:07,245 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 39632ef0-e24f-4fa4-8693-3e74b816ca0d
+2025-05-04 14:56:07,245 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 39632ef0-e24f-4fa4-8693-3e74b816ca0d)
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208340.88 -> -100000
+2025-05-04 14:56:07,245 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.00, Slow MA: 521.08, Prev Fast: 521.05, Prev Slow: 521.10
+2025-05-04 14:56:07,245 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 520.95, Slow MA: 521.06, Prev Fast: 521.00, Prev Slow: 521.08
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208340.88 -> -100000
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208340.88 -> -100000
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208340.88 -> -100000
+2025-05-04 14:56:07,245 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 520.92, Slow MA: 521.05, Prev Fast: 520.95, Prev Slow: 521.06
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208340.88 -> -100000
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208340.88 -> -100000
+2025-05-04 14:56:07,245 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): e70dea56-ccfa-458a-a1b2-cf6529c495e5
+2025-05-04 14:56:07,245 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: e70dea56-ccfa-458a-a1b2-cf6529c495e5)
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208358.0 -> -100000
+2025-05-04 14:56:07,245 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 520.89, Slow MA: 521.02, Prev Fast: 520.92, Prev Slow: 521.05
+2025-05-04 14:56:07,245 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 520.87, Slow MA: 521.00, Prev Fast: 520.89, Prev Slow: 521.02
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208358.0 -> -100000
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208358.0 -> -100000
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208358.0 -> -100000
+2025-05-04 14:56:07,245 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 520.88, Slow MA: 520.98, Prev Fast: 520.87, Prev Slow: 521.00
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208358.0 -> -100000
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208358.0 -> -100000
+2025-05-04 14:56:07,245 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 6889cc04-c4bf-4d9c-aeb3-285889dd211b
+2025-05-04 14:56:07,245 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 6889cc04-c4bf-4d9c-aeb3-285889dd211b)
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208434.0 -> -100000
+2025-05-04 14:56:07,245 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 520.92, Slow MA: 520.98, Prev Fast: 520.88, Prev Slow: 520.98
+2025-05-04 14:56:07,245 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 520.97, Slow MA: 520.98, Prev Fast: 520.92, Prev Slow: 520.98
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208434.0 -> -100000
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208434.0 -> -100000
+2025-05-04 14:56:07,245 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208434.0 -> -100000
+2025-05-04 14:56:07,245 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.01, Slow MA: 520.99, Prev Fast: 520.97, Prev Slow: 520.98
+2025-05-04 14:56:07,245 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-04 14:56:07,245 - src.core.events.event_bus - DEBUG - Processing SIGNAL event (ID: 80206857-b7da-4531-9e84-d7fb9dfd77c9)
+2025-05-04 14:56:07,245 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.085
+2025-05-04 14:56:07,245 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 400.0 MINI @ 521.085, rule_id=MINI_BUY_CLOSE_20240326134300, timestamp=2024-03-26 13:43:00, action=CLOSE
+2025-05-04 14:56:07,245 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_CLOSE_20240326134300
+2025-05-04 14:56:07,245 - src.core.events.event_bus - DEBUG - Processing ORDER event (ID: 7d9e88a6-bc63-479f-aa79-8a6471a3dc23)
+2025-05-04 14:56:07,245 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,245 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,245 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,245 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,245 - src.execution.order_manager - INFO - Converting trading decision to order: order_a53b3682 (BUY 400.0 MINI @ 521.085)
+2025-05-04 14:56:07,245 - src.execution.order_manager - INFO - Order order_a53b3682 using quantity field 400.0 for size
+2025-05-04 14:56:07,245 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 400.0 MINI @ 521.085
+2025-05-04 14:56:07,245 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_a53b3682
+2025-05-04 14:56:07,245 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_a53b3682
+2025-05-04 14:56:07,245 - src.core.events.event_bus - DEBUG - Processing FILL event (ID: b8c01925-10c9-4596-8cc7-17fbeddf5610)
+2025-05-04 14:56:07,246 - src.execution.order_manager - INFO - Processing fill event for order_id: order_a53b3682
+2025-05-04 14:56:07,246 - src.execution.order_manager - DEBUG - Fill data: {'symbol': 'MINI', 'direction': 'BUY', 'quantity': 400.0, 'price': 521.085, 'timestamp': Timestamp('2024-03-26 13:43:00'), 'rule_id': 'MINI_BUY_CLOSE_20240326134300', 'action_type': 'CLOSE', 'order_id': 'order_a53b3682', 'order_type': 'MARKET', 'status': 'PENDING', 'size': 400.0, 'fill_price': 521.606085, 'fill_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 245939), 'commission': 208.642434}
+2025-05-04 14:56:07,246 - src.execution.order_manager - INFO - Updated order with fill: Order(order_a53b3682, MINI, BUY, 400.0, FILLED)
+2025-05-04 14:56:07,246 - src.execution.order_manager - INFO - Emitting simplified TRADE_CLOSE event for MINI: BUY 400.0 @ 521.09
+2025-05-04 14:56:07,246 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 54e619d1-a567-464c-9c5e-5f177827a644
+2025-05-04 14:56:07,246 - src.core.events.event_bus - DEBUG - Processing TRADE_CLOSE event (ID: 54e619d1-a567-464c-9c5e-5f177827a644)
+2025-05-04 14:56:07,246 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.09, PnL: 10421.70
+2025-05-04 14:56:07,246 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.09
+2025-05-04 14:56:07,246 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.09, PnL: 10421.70
+2025-05-04 14:56:07,246 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.09
+2025-05-04 14:56:07,246 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.09, PnL: 10421.70
+2025-05-04 14:56:07,246 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.09
+2025-05-04 14:56:07,246 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.09, PnL: 10421.70
+2025-05-04 14:56:07,246 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.09
+2025-05-04 14:56:07,246 - src.core.events.event_bus - DEBUG - Event FILL consumed, skipping remaining handlers
+2025-05-04 14:56:07,246 - src.execution.broker.broker_simulator - DEBUG - Fill event emitted for MINI with order_id: order_a53b3682
+2025-05-04 14:56:07,246 - src.core.events.event_bus - DEBUG - Event ORDER consumed, skipping remaining handlers
+2025-05-04 14:56:07,246 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: BUY 400.0 MINI @ 521.085, rule_id=MINI_BUY_CLOSE_20240326134300
+2025-05-04 14:56:07,246 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 MINI @ 521.085, rule_id=MINI_BUY_OPEN_20240326134300, timestamp=2024-03-26 13:43:00, action=OPEN
+2025-05-04 14:56:07,246 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_OPEN_20240326134300
+2025-05-04 14:56:07,246 - src.core.events.event_bus - DEBUG - Processing ORDER event (ID: b5c6f63e-dd54-449a-b199-f2793bb70332)
+2025-05-04 14:56:07,246 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,246 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,246 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,246 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,246 - src.execution.order_manager - INFO - Converting trading decision to order: order_2b55b6d8 (BUY 100.0 MINI @ 521.085)
+2025-05-04 14:56:07,246 - src.execution.order_manager - INFO - Order order_2b55b6d8 using quantity field 100.0 for size
+2025-05-04 14:56:07,246 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100.0 MINI @ 521.085
+2025-05-04 14:56:07,246 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_2b55b6d8
+2025-05-04 14:56:07,246 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_2b55b6d8
+2025-05-04 14:56:07,246 - src.core.events.event_bus - DEBUG - Processing FILL event (ID: a901481c-4236-44a3-b1ac-88dfea0de9a9)
+2025-05-04 14:56:07,246 - src.execution.order_manager - INFO - Processing fill event for order_id: order_2b55b6d8
+2025-05-04 14:56:07,246 - src.execution.order_manager - DEBUG - Fill data: {'symbol': 'MINI', 'direction': 'BUY', 'quantity': 100.0, 'price': 521.085, 'timestamp': Timestamp('2024-03-26 13:43:00'), 'rule_id': 'MINI_BUY_OPEN_20240326134300', 'action_type': 'OPEN', 'order_id': 'order_2b55b6d8', 'order_type': 'MARKET', 'status': 'PENDING', 'size': 100.0, 'fill_price': 521.606085, 'fill_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 246452), 'commission': 52.1606085}
+2025-05-04 14:56:07,246 - src.execution.order_manager - INFO - Updated order with fill: Order(order_2b55b6d8, MINI, BUY, 100.0, FILLED)
+2025-05-04 14:56:07,246 - src.execution.order_manager - INFO - Emitting TRADE_OPEN event for MINI: BUY 100.0 @ 521.09
+2025-05-04 14:56:07,246 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 1c03f884-cefc-48ff-8adf-962ac12228dd
+2025-05-04 14:56:07,246 - src.core.events.event_bus - DEBUG - Processing TRADE_OPEN event (ID: 1c03f884-cefc-48ff-8adf-962ac12228dd)
+2025-05-04 14:56:07,246 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.09
+2025-05-04 14:56:07,246 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-400.0, change=100.0, cost_basis=521.12
+2025-05-04 14:56:07,246 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=3.4999999999968168
+2025-05-04 14:56:07,246 - src.risk.portfolio.position - DEBUG - Position partially closed: new quantity=-300.0, cost=156336.0
+2025-05-04 14:56:07,246 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-300.0, cost_basis=521.12, realized_pnl=3.4999999999968168
+2025-05-04 14:56:07,246 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -156325.5 -> -100000
+2025-05-04 14:56:07,246 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.09
+2025-05-04 14:56:07,246 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.09
+2025-05-04 14:56:07,246 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-300.0, change=100.0, cost_basis=521.12
+2025-05-04 14:56:07,246 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=3.4999999999968168
+2025-05-04 14:56:07,246 - src.risk.portfolio.position - DEBUG - Position partially closed: new quantity=-200.0, cost=104224.00000000001
+2025-05-04 14:56:07,246 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-200.0, cost_basis=521.12, realized_pnl=3.4999999999968168
+2025-05-04 14:56:07,246 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -104217.0 -> -100000
+2025-05-04 14:56:07,246 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.09
+2025-05-04 14:56:07,246 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.09
+2025-05-04 14:56:07,246 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-200.0, change=100.0, cost_basis=521.12
+2025-05-04 14:56:07,246 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=3.4999999999968168
+2025-05-04 14:56:07,246 - src.risk.portfolio.position - DEBUG - Position partially closed: new quantity=-100.0, cost=52112.00000000001
+2025-05-04 14:56:07,246 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-100.0, cost_basis=521.12, realized_pnl=3.4999999999968168
+2025-05-04 14:56:07,246 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.09
+2025-05-04 14:56:07,246 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.09
+2025-05-04 14:56:07,246 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-100.0, change=100.0, cost_basis=521.12
+2025-05-04 14:56:07,246 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=3.4999999999968168
+2025-05-04 14:56:07,246 - src.risk.portfolio.position - DEBUG - Position fully closed, pnl=3.4999999999968168
+2025-05-04 14:56:07,246 - src.risk.portfolio.position - DEBUG - Update complete: quantity=0, cost_basis=521.12, realized_pnl=3.4999999999968168
+2025-05-04 14:56:07,246 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.09
+2025-05-04 14:56:07,246 - src.core.events.event_bus - DEBUG - Event FILL consumed, skipping remaining handlers
+2025-05-04 14:56:07,247 - src.execution.broker.broker_simulator - DEBUG - Fill event emitted for MINI with order_id: order_2b55b6d8
+2025-05-04 14:56:07,247 - src.core.events.event_bus - DEBUG - Event ORDER consumed, skipping remaining handlers
+2025-05-04 14:56:07,247 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 MINI @ 521.085, rule_id=MINI_BUY_OPEN_20240326134300
+2025-05-04 14:56:07,247 - src.core.events.event_bus - DEBUG - Event SIGNAL consumed, skipping remaining handlers
+2025-05-04 14:56:07,247 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 13:43:00
+2025-05-04 14:56:07,247 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 2df36ddb-f58a-43cf-a936-b0770626ddc6
+2025-05-04 14:56:07,247 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 2df36ddb-f58a-43cf-a936-b0770626ddc6)
+2025-05-04 14:56:07,247 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.06, Slow MA: 520.99, Prev Fast: 521.01, Prev Slow: 520.99
+2025-05-04 14:56:07,247 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.11, Slow MA: 521.00, Prev Fast: 521.06, Prev Slow: 520.99
+2025-05-04 14:56:07,247 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.13, Slow MA: 521.00, Prev Fast: 521.11, Prev Slow: 521.00
+2025-05-04 14:56:07,247 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): dc7e6105-ce51-42e4-96fa-2666a91c092f
+2025-05-04 14:56:07,247 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: dc7e6105-ce51-42e4-96fa-2666a91c092f)
+2025-05-04 14:56:07,247 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.12, Slow MA: 521.00, Prev Fast: 521.13, Prev Slow: 521.00
+2025-05-04 14:56:07,247 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.12, Slow MA: 521.01, Prev Fast: 521.12, Prev Slow: 521.00
+2025-05-04 14:56:07,247 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.10, Slow MA: 521.01, Prev Fast: 521.12, Prev Slow: 521.01
+2025-05-04 14:56:07,247 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 2402fb5d-1971-4824-9fa0-788ad4378449
+2025-05-04 14:56:07,247 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 2402fb5d-1971-4824-9fa0-788ad4378449)
+2025-05-04 14:56:07,247 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.09, Slow MA: 521.03, Prev Fast: 521.10, Prev Slow: 521.01
+2025-05-04 14:56:07,247 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.08, Slow MA: 521.05, Prev Fast: 521.09, Prev Slow: 521.03
+2025-05-04 14:56:07,247 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.09, Slow MA: 521.06, Prev Fast: 521.08, Prev Slow: 521.05
+2025-05-04 14:56:07,247 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): f4d01c4d-43d1-4243-8529-a4f40a62f3e4
+2025-05-04 14:56:07,247 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: f4d01c4d-43d1-4243-8529-a4f40a62f3e4)
+2025-05-04 14:56:07,247 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.10, Slow MA: 521.08, Prev Fast: 521.09, Prev Slow: 521.06
+2025-05-04 14:56:07,247 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.10, Slow MA: 521.09, Prev Fast: 521.10, Prev Slow: 521.08
+2025-05-04 14:56:07,247 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.10, Slow MA: 521.10, Prev Fast: 521.10, Prev Slow: 521.09
+2025-05-04 14:56:07,247 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-04 14:56:07,247 - src.core.events.event_bus - DEBUG - Processing SIGNAL event (ID: 95bddf63-36a7-48f4-9fc2-cd8b0b95dcab)
+2025-05-04 14:56:07,247 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.09
+2025-05-04 14:56:07,247 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 MINI @ 521.09, rule_id=MINI_SELL_OPEN_20240326134700, timestamp=2024-03-26 13:47:00, action=OPEN
+2025-05-04 14:56:07,247 - src.core.events.event_bus - INFO - Order dedup key: MINI_SELL_OPEN_20240326134700
+2025-05-04 14:56:07,247 - src.core.events.event_bus - DEBUG - Processing ORDER event (ID: ecfac23b-8de9-42c0-bf15-7d261ae8e1af)
+2025-05-04 14:56:07,247 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,247 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,247 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,247 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,247 - src.execution.order_manager - INFO - Converting trading decision to order: order_cbcd6ba6 (SELL 100.0 MINI @ 521.09)
+2025-05-04 14:56:07,247 - src.execution.order_manager - INFO - Order order_cbcd6ba6 using quantity field 100.0 for size
+2025-05-04 14:56:07,247 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100.0 MINI @ 521.09
+2025-05-04 14:56:07,247 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_cbcd6ba6
+2025-05-04 14:56:07,247 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_cbcd6ba6
+2025-05-04 14:56:07,247 - src.core.events.event_bus - DEBUG - Processing FILL event (ID: adf78c29-47f0-4a1e-a936-8e4201f282c3)
+2025-05-04 14:56:07,247 - src.execution.order_manager - INFO - Processing fill event for order_id: order_cbcd6ba6
+2025-05-04 14:56:07,247 - src.execution.order_manager - DEBUG - Fill data: {'symbol': 'MINI', 'direction': 'SELL', 'quantity': 100.0, 'price': 521.09, 'timestamp': Timestamp('2024-03-26 13:47:00'), 'rule_id': 'MINI_SELL_OPEN_20240326134700', 'action_type': 'OPEN', 'order_id': 'order_cbcd6ba6', 'order_type': 'MARKET', 'status': 'PENDING', 'size': 100.0, 'fill_price': 520.5689100000001, 'fill_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 247790), 'commission': 52.056891000000014}
+2025-05-04 14:56:07,247 - src.execution.order_manager - INFO - Updated order with fill: Order(order_cbcd6ba6, MINI, SELL, 100.0, FILLED)
+2025-05-04 14:56:07,247 - src.execution.order_manager - INFO - Emitting TRADE_OPEN event for MINI: SELL 100.0 @ 521.09
+2025-05-04 14:56:07,247 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): b820c241-3ba7-432e-8dad-ed974fa5aa80
+2025-05-04 14:56:07,247 - src.core.events.event_bus - DEBUG - Processing TRADE_OPEN event (ID: b820c241-3ba7-432e-8dad-ed974fa5aa80)
+2025-05-04 14:56:07,247 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.09
+2025-05-04 14:56:07,247 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=0, change=-100.0, cost_basis=521.12
+2025-05-04 14:56:07,247 - src.risk.portfolio.position - DEBUG - Opening new position: quantity=-100.0, cost_basis=521.09
+2025-05-04 14:56:07,247 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-100.0, cost_basis=521.09, realized_pnl=0.0
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.09
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.09
+2025-05-04 14:56:07,248 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-100.0, change=-100.0, cost_basis=521.09
+2025-05-04 14:56:07,248 - src.risk.portfolio.position - DEBUG - Adding to position: new quantity=-200.0, new cost_basis=521.09
+2025-05-04 14:56:07,248 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-200.0, cost_basis=521.09, realized_pnl=0.0
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -104218.0 -> -100000
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.09
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.09
+2025-05-04 14:56:07,248 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-200.0, change=-100.0, cost_basis=521.09
+2025-05-04 14:56:07,248 - src.risk.portfolio.position - DEBUG - Adding to position: new quantity=-300.0, new cost_basis=521.09
+2025-05-04 14:56:07,248 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-300.0, cost_basis=521.09, realized_pnl=0.0
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -156327.0 -> -100000
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.09
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.09
+2025-05-04 14:56:07,248 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-300.0, change=-100.0, cost_basis=521.09
+2025-05-04 14:56:07,248 - src.risk.portfolio.position - DEBUG - Adding to position: new quantity=-400.0, new cost_basis=521.09
+2025-05-04 14:56:07,248 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-400.0, cost_basis=521.09, realized_pnl=0.0
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208436.0 -> -100000
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.09
+2025-05-04 14:56:07,248 - src.core.events.event_bus - DEBUG - Event FILL consumed, skipping remaining handlers
+2025-05-04 14:56:07,248 - src.execution.broker.broker_simulator - DEBUG - Fill event emitted for MINI with order_id: order_cbcd6ba6
+2025-05-04 14:56:07,248 - src.core.events.event_bus - DEBUG - Event ORDER consumed, skipping remaining handlers
+2025-05-04 14:56:07,248 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 MINI @ 521.09, rule_id=MINI_SELL_OPEN_20240326134700
+2025-05-04 14:56:07,248 - src.core.events.event_bus - DEBUG - Event SIGNAL consumed, skipping remaining handlers
+2025-05-04 14:56:07,248 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 13:47:00
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208436.0 -> -100000
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208436.0 -> -100000
+2025-05-04 14:56:07,248 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 2158bf71-5580-42be-8870-3f88337633c4
+2025-05-04 14:56:07,248 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 2158bf71-5580-42be-8870-3f88337633c4)
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208467.99999999997 -> -100000
+2025-05-04 14:56:07,248 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.11, Slow MA: 521.11, Prev Fast: 521.10, Prev Slow: 521.10
+2025-05-04 14:56:07,248 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-04 14:56:07,248 - src.core.events.event_bus - DEBUG - Processing SIGNAL event (ID: d3fc1d46-6223-4ce0-8b7d-8ad52720d8e7)
+2025-05-04 14:56:07,248 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.17
+2025-05-04 14:56:07,248 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 400.0 MINI @ 521.17, rule_id=MINI_BUY_CLOSE_20240326134800, timestamp=2024-03-26 13:48:00, action=CLOSE
+2025-05-04 14:56:07,248 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_CLOSE_20240326134800
+2025-05-04 14:56:07,248 - src.core.events.event_bus - DEBUG - Processing ORDER event (ID: 3647f208-8640-408c-9bab-7a6faa171840)
+2025-05-04 14:56:07,248 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,248 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,248 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,248 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,248 - src.execution.order_manager - INFO - Converting trading decision to order: order_26316dfa (BUY 400.0 MINI @ 521.17)
+2025-05-04 14:56:07,248 - src.execution.order_manager - INFO - Order order_26316dfa using quantity field 400.0 for size
+2025-05-04 14:56:07,248 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 400.0 MINI @ 521.17
+2025-05-04 14:56:07,248 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_26316dfa
+2025-05-04 14:56:07,248 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_26316dfa
+2025-05-04 14:56:07,248 - src.core.events.event_bus - DEBUG - Processing FILL event (ID: a48f3e64-7f78-4dd2-a119-021e8d5cd479)
+2025-05-04 14:56:07,248 - src.execution.order_manager - INFO - Processing fill event for order_id: order_26316dfa
+2025-05-04 14:56:07,248 - src.execution.order_manager - DEBUG - Fill data: {'symbol': 'MINI', 'direction': 'BUY', 'quantity': 400.0, 'price': 521.17, 'timestamp': Timestamp('2024-03-26 13:48:00'), 'rule_id': 'MINI_BUY_CLOSE_20240326134800', 'action_type': 'CLOSE', 'order_id': 'order_26316dfa', 'order_type': 'MARKET', 'status': 'PENDING', 'size': 400.0, 'fill_price': 521.6911699999999, 'fill_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 248697), 'commission': 208.67646799999997}
+2025-05-04 14:56:07,248 - src.execution.order_manager - INFO - Updated order with fill: Order(order_26316dfa, MINI, BUY, 400.0, FILLED)
+2025-05-04 14:56:07,248 - src.execution.order_manager - INFO - Emitting simplified TRADE_CLOSE event for MINI: BUY 400.0 @ 521.17
+2025-05-04 14:56:07,248 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 58ad9846-fa34-43c7-b754-65eddc656c7d
+2025-05-04 14:56:07,248 - src.core.events.event_bus - DEBUG - Processing TRADE_CLOSE event (ID: 58ad9846-fa34-43c7-b754-65eddc656c7d)
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.17, PnL: 10423.40
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.17
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.17, PnL: 10423.40
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.17
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.17, PnL: 10423.40
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.17
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.17, PnL: 10423.40
+2025-05-04 14:56:07,248 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.17
+2025-05-04 14:56:07,248 - src.core.events.event_bus - DEBUG - Event FILL consumed, skipping remaining handlers
+2025-05-04 14:56:07,249 - src.execution.broker.broker_simulator - DEBUG - Fill event emitted for MINI with order_id: order_26316dfa
+2025-05-04 14:56:07,249 - src.core.events.event_bus - DEBUG - Event ORDER consumed, skipping remaining handlers
+2025-05-04 14:56:07,249 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: BUY 400.0 MINI @ 521.17, rule_id=MINI_BUY_CLOSE_20240326134800
+2025-05-04 14:56:07,249 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 MINI @ 521.17, rule_id=MINI_BUY_OPEN_20240326134800, timestamp=2024-03-26 13:48:00, action=OPEN
+2025-05-04 14:56:07,249 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_OPEN_20240326134800
+2025-05-04 14:56:07,249 - src.core.events.event_bus - DEBUG - Processing ORDER event (ID: 1adb2da3-eca9-41d2-a868-751f618474f6)
+2025-05-04 14:56:07,249 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,249 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,249 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,249 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,249 - src.execution.order_manager - INFO - Converting trading decision to order: order_09d59e20 (BUY 100.0 MINI @ 521.17)
+2025-05-04 14:56:07,249 - src.execution.order_manager - INFO - Order order_09d59e20 using quantity field 100.0 for size
+2025-05-04 14:56:07,249 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100.0 MINI @ 521.17
+2025-05-04 14:56:07,249 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_09d59e20
+2025-05-04 14:56:07,249 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_09d59e20
+2025-05-04 14:56:07,249 - src.core.events.event_bus - DEBUG - Processing FILL event (ID: 2fb72c77-c4ff-4657-bef0-3310259e9586)
+2025-05-04 14:56:07,249 - src.execution.order_manager - INFO - Processing fill event for order_id: order_09d59e20
+2025-05-04 14:56:07,249 - src.execution.order_manager - DEBUG - Fill data: {'symbol': 'MINI', 'direction': 'BUY', 'quantity': 100.0, 'price': 521.17, 'timestamp': Timestamp('2024-03-26 13:48:00'), 'rule_id': 'MINI_BUY_OPEN_20240326134800', 'action_type': 'OPEN', 'order_id': 'order_09d59e20', 'order_type': 'MARKET', 'status': 'PENDING', 'size': 100.0, 'fill_price': 521.6911699999999, 'fill_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 249176), 'commission': 52.16911699999999}
+2025-05-04 14:56:07,249 - src.execution.order_manager - INFO - Updated order with fill: Order(order_09d59e20, MINI, BUY, 100.0, FILLED)
+2025-05-04 14:56:07,249 - src.execution.order_manager - INFO - Emitting TRADE_OPEN event for MINI: BUY 100.0 @ 521.17
+2025-05-04 14:56:07,249 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 2ba2fcd5-414c-44e4-8a31-3b96356d8dfa
+2025-05-04 14:56:07,249 - src.core.events.event_bus - DEBUG - Processing TRADE_OPEN event (ID: 2ba2fcd5-414c-44e4-8a31-3b96356d8dfa)
+2025-05-04 14:56:07,249 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.17
+2025-05-04 14:56:07,249 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-400.0, change=100.0, cost_basis=521.09
+2025-05-04 14:56:07,249 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-7.999999999992724
+2025-05-04 14:56:07,249 - src.risk.portfolio.position - DEBUG - Position partially closed: new quantity=-300.0, cost=156327.0
+2025-05-04 14:56:07,249 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-300.0, cost_basis=521.09, realized_pnl=-7.999999999992724
+2025-05-04 14:56:07,249 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -156351.0 -> -100000
+2025-05-04 14:56:07,249 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.17
+2025-05-04 14:56:07,249 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.17
+2025-05-04 14:56:07,249 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-300.0, change=100.0, cost_basis=521.09
+2025-05-04 14:56:07,249 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-7.999999999992724
+2025-05-04 14:56:07,249 - src.risk.portfolio.position - DEBUG - Position partially closed: new quantity=-200.0, cost=104218.00000000001
+2025-05-04 14:56:07,249 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-200.0, cost_basis=521.09, realized_pnl=-7.999999999992724
+2025-05-04 14:56:07,249 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -104233.99999999999 -> -100000
+2025-05-04 14:56:07,249 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.17
+2025-05-04 14:56:07,249 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.17
+2025-05-04 14:56:07,249 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-200.0, change=100.0, cost_basis=521.09
+2025-05-04 14:56:07,249 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-7.999999999992724
+2025-05-04 14:56:07,249 - src.risk.portfolio.position - DEBUG - Position partially closed: new quantity=-100.0, cost=52109.00000000001
+2025-05-04 14:56:07,249 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-100.0, cost_basis=521.09, realized_pnl=-7.999999999992724
+2025-05-04 14:56:07,249 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.17
+2025-05-04 14:56:07,249 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.17
+2025-05-04 14:56:07,249 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-100.0, change=100.0, cost_basis=521.09
+2025-05-04 14:56:07,249 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-7.999999999992724
+2025-05-04 14:56:07,249 - src.risk.portfolio.position - DEBUG - Position fully closed, pnl=-7.999999999992724
+2025-05-04 14:56:07,249 - src.risk.portfolio.position - DEBUG - Update complete: quantity=0, cost_basis=521.09, realized_pnl=-7.999999999992724
+2025-05-04 14:56:07,249 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.17
+2025-05-04 14:56:07,249 - src.core.events.event_bus - DEBUG - Event FILL consumed, skipping remaining handlers
+2025-05-04 14:56:07,249 - src.execution.broker.broker_simulator - DEBUG - Fill event emitted for MINI with order_id: order_09d59e20
+2025-05-04 14:56:07,249 - src.core.events.event_bus - DEBUG - Event ORDER consumed, skipping remaining handlers
+2025-05-04 14:56:07,249 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 MINI @ 521.17, rule_id=MINI_BUY_OPEN_20240326134800
+2025-05-04 14:56:07,249 - src.core.events.event_bus - DEBUG - Event SIGNAL consumed, skipping remaining handlers
+2025-05-04 14:56:07,249 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 13:48:00
+2025-05-04 14:56:07,249 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.12, Slow MA: 521.11, Prev Fast: 521.11, Prev Slow: 521.11
+2025-05-04 14:56:07,249 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.14, Slow MA: 521.12, Prev Fast: 521.12, Prev Slow: 521.11
+2025-05-04 14:56:07,249 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): e4e02bb8-7f9a-436e-a579-f6d595856f76
+2025-05-04 14:56:07,249 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: e4e02bb8-7f9a-436e-a579-f6d595856f76)
+2025-05-04 14:56:07,249 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.16, Slow MA: 521.12, Prev Fast: 521.14, Prev Slow: 521.12
+2025-05-04 14:56:07,249 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.18, Slow MA: 521.12, Prev Fast: 521.16, Prev Slow: 521.12
+2025-05-04 14:56:07,249 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.18, Slow MA: 521.13, Prev Fast: 521.18, Prev Slow: 521.12
+2025-05-04 14:56:07,250 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): f502c53f-2a74-4680-b82b-3af48e285860
+2025-05-04 14:56:07,250 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: f502c53f-2a74-4680-b82b-3af48e285860)
+2025-05-04 14:56:07,250 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.19, Slow MA: 521.14, Prev Fast: 521.18, Prev Slow: 521.13
+2025-05-04 14:56:07,250 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.20, Slow MA: 521.15, Prev Fast: 521.19, Prev Slow: 521.14
+2025-05-04 14:56:07,250 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.21, Slow MA: 521.16, Prev Fast: 521.20, Prev Slow: 521.15
+2025-05-04 14:56:07,250 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): f3b97a11-62af-4043-886d-3b5c5c18e070
+2025-05-04 14:56:07,250 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: f3b97a11-62af-4043-886d-3b5c5c18e070)
+2025-05-04 14:56:07,250 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.18, Slow MA: 521.15, Prev Fast: 521.21, Prev Slow: 521.16
+2025-05-04 14:56:07,250 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.16, Slow MA: 521.15, Prev Fast: 521.18, Prev Slow: 521.15
+2025-05-04 14:56:07,250 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.13, Slow MA: 521.15, Prev Fast: 521.16, Prev Slow: 521.15
+2025-05-04 14:56:07,250 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-04 14:56:07,250 - src.core.events.event_bus - DEBUG - Processing SIGNAL event (ID: fcbf93ad-b463-4cc0-9ae4-97004a642067)
+2025-05-04 14:56:07,250 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.08
+2025-05-04 14:56:07,250 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 MINI @ 521.08, rule_id=MINI_SELL_OPEN_20240326135100, timestamp=2024-03-26 13:51:00, action=OPEN
+2025-05-04 14:56:07,250 - src.core.events.event_bus - INFO - Order dedup key: MINI_SELL_OPEN_20240326135100
+2025-05-04 14:56:07,250 - src.core.events.event_bus - DEBUG - Processing ORDER event (ID: 1faf18ed-d3c4-4d7d-83c2-a4ddf6b42f39)
+2025-05-04 14:56:07,250 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,250 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,250 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,250 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,250 - src.execution.order_manager - INFO - Converting trading decision to order: order_5111014c (SELL 100.0 MINI @ 521.08)
+2025-05-04 14:56:07,250 - src.execution.order_manager - INFO - Order order_5111014c using quantity field 100.0 for size
+2025-05-04 14:56:07,250 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100.0 MINI @ 521.08
+2025-05-04 14:56:07,250 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_5111014c
+2025-05-04 14:56:07,250 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_5111014c
+2025-05-04 14:56:07,250 - src.core.events.event_bus - DEBUG - Processing FILL event (ID: 29587e29-68e6-4cbe-b0cc-cd89d87e8548)
+2025-05-04 14:56:07,250 - src.execution.order_manager - INFO - Processing fill event for order_id: order_5111014c
+2025-05-04 14:56:07,250 - src.execution.order_manager - DEBUG - Fill data: {'symbol': 'MINI', 'direction': 'SELL', 'quantity': 100.0, 'price': 521.08, 'timestamp': Timestamp('2024-03-26 13:51:00'), 'rule_id': 'MINI_SELL_OPEN_20240326135100', 'action_type': 'OPEN', 'order_id': 'order_5111014c', 'order_type': 'MARKET', 'status': 'PENDING', 'size': 100.0, 'fill_price': 520.5589200000001, 'fill_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 250418), 'commission': 52.05589200000001}
+2025-05-04 14:56:07,250 - src.execution.order_manager - INFO - Updated order with fill: Order(order_5111014c, MINI, SELL, 100.0, FILLED)
+2025-05-04 14:56:07,250 - src.execution.order_manager - INFO - Emitting TRADE_OPEN event for MINI: SELL 100.0 @ 521.08
+2025-05-04 14:56:07,250 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 3e9011dd-3be8-4ddb-a75c-a63c85892fef
+2025-05-04 14:56:07,250 - src.core.events.event_bus - DEBUG - Processing TRADE_OPEN event (ID: 3e9011dd-3be8-4ddb-a75c-a63c85892fef)
+2025-05-04 14:56:07,250 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.08
+2025-05-04 14:56:07,250 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=0, change=-100.0, cost_basis=521.09
+2025-05-04 14:56:07,250 - src.risk.portfolio.position - DEBUG - Opening new position: quantity=-100.0, cost_basis=521.08
+2025-05-04 14:56:07,250 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-100.0, cost_basis=521.08, realized_pnl=0.0
+2025-05-04 14:56:07,250 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.08
+2025-05-04 14:56:07,250 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.08
+2025-05-04 14:56:07,250 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-100.0, change=-100.0, cost_basis=521.08
+2025-05-04 14:56:07,250 - src.risk.portfolio.position - DEBUG - Adding to position: new quantity=-200.0, new cost_basis=521.08
+2025-05-04 14:56:07,250 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-200.0, cost_basis=521.08, realized_pnl=0.0
+2025-05-04 14:56:07,250 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -104216.00000000001 -> -100000
+2025-05-04 14:56:07,250 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.08
+2025-05-04 14:56:07,250 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.08
+2025-05-04 14:56:07,250 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-200.0, change=-100.0, cost_basis=521.08
+2025-05-04 14:56:07,250 - src.risk.portfolio.position - DEBUG - Adding to position: new quantity=-300.0, new cost_basis=521.08
+2025-05-04 14:56:07,250 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-300.0, cost_basis=521.08, realized_pnl=0.0
+2025-05-04 14:56:07,250 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -156324.0 -> -100000
+2025-05-04 14:56:07,250 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.08
+2025-05-04 14:56:07,250 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.08
+2025-05-04 14:56:07,250 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-300.0, change=-100.0, cost_basis=521.08
+2025-05-04 14:56:07,250 - src.risk.portfolio.position - DEBUG - Adding to position: new quantity=-400.0, new cost_basis=521.08
+2025-05-04 14:56:07,250 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-400.0, cost_basis=521.08, realized_pnl=0.0
+2025-05-04 14:56:07,250 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208432.00000000003 -> -100000
+2025-05-04 14:56:07,250 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.08
+2025-05-04 14:56:07,250 - src.core.events.event_bus - DEBUG - Event FILL consumed, skipping remaining handlers
+2025-05-04 14:56:07,250 - src.execution.broker.broker_simulator - DEBUG - Fill event emitted for MINI with order_id: order_5111014c
+2025-05-04 14:56:07,250 - src.core.events.event_bus - DEBUG - Event ORDER consumed, skipping remaining handlers
+2025-05-04 14:56:07,250 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 MINI @ 521.08, rule_id=MINI_SELL_OPEN_20240326135100
+2025-05-04 14:56:07,250 - src.core.events.event_bus - DEBUG - Event SIGNAL consumed, skipping remaining handlers
+2025-05-04 14:56:07,250 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 13:51:00
+2025-05-04 14:56:07,250 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208432.00000000003 -> -100000
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208432.00000000003 -> -100000
+2025-05-04 14:56:07,251 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 672d47f1-72a7-439a-a547-525a51d250b9
+2025-05-04 14:56:07,251 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 672d47f1-72a7-439a-a547-525a51d250b9)
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208448.0 -> -100000
+2025-05-04 14:56:07,251 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.12, Slow MA: 521.15, Prev Fast: 521.13, Prev Slow: 521.15
+2025-05-04 14:56:07,251 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.10, Slow MA: 521.15, Prev Fast: 521.12, Prev Slow: 521.15
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208448.0 -> -100000
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208448.0 -> -100000
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208448.0 -> -100000
+2025-05-04 14:56:07,251 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.10, Slow MA: 521.16, Prev Fast: 521.10, Prev Slow: 521.15
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208448.0 -> -100000
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208448.0 -> -100000
+2025-05-04 14:56:07,251 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 3a774004-a1bb-4b11-97f2-65edc587c67a
+2025-05-04 14:56:07,251 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 3a774004-a1bb-4b11-97f2-65edc587c67a)
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208402.75999999998 -> -100000
+2025-05-04 14:56:07,251 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.09, Slow MA: 521.14, Prev Fast: 521.10, Prev Slow: 521.16
+2025-05-04 14:56:07,251 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.07, Slow MA: 521.13, Prev Fast: 521.09, Prev Slow: 521.14
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208402.75999999998 -> -100000
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208402.75999999998 -> -100000
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208402.75999999998 -> -100000
+2025-05-04 14:56:07,251 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.05, Slow MA: 521.12, Prev Fast: 521.07, Prev Slow: 521.13
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208402.75999999998 -> -100000
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208402.75999999998 -> -100000
+2025-05-04 14:56:07,251 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): d3318183-e67d-4285-be32-3c82171b8105
+2025-05-04 14:56:07,251 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: d3318183-e67d-4285-be32-3c82171b8105)
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208382.00000000003 -> -100000
+2025-05-04 14:56:07,251 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.02, Slow MA: 521.11, Prev Fast: 521.05, Prev Slow: 521.12
+2025-05-04 14:56:07,251 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 520.99, Slow MA: 521.09, Prev Fast: 521.02, Prev Slow: 521.11
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208382.00000000003 -> -100000
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208382.00000000003 -> -100000
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208382.00000000003 -> -100000
+2025-05-04 14:56:07,251 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 520.98, Slow MA: 521.08, Prev Fast: 520.99, Prev Slow: 521.09
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208382.00000000003 -> -100000
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208382.00000000003 -> -100000
+2025-05-04 14:56:07,251 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): e480213b-7a4b-4dd2-ba89-28e5c41d1396
+2025-05-04 14:56:07,251 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: e480213b-7a4b-4dd2-ba89-28e5c41d1396)
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208416.0 -> -100000
+2025-05-04 14:56:07,251 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 520.98, Slow MA: 521.06, Prev Fast: 520.98, Prev Slow: 521.08
+2025-05-04 14:56:07,251 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 520.99, Slow MA: 521.05, Prev Fast: 520.98, Prev Slow: 521.06
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208416.0 -> -100000
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208416.0 -> -100000
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208416.0 -> -100000
+2025-05-04 14:56:07,251 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.01, Slow MA: 521.04, Prev Fast: 520.99, Prev Slow: 521.05
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208416.0 -> -100000
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208416.0 -> -100000
+2025-05-04 14:56:07,251 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 15416bdc-76e3-464a-b48c-2f85c7bcf293
+2025-05-04 14:56:07,251 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 15416bdc-76e3-464a-b48c-2f85c7bcf293)
+2025-05-04 14:56:07,251 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208458.0 -> -100000
+2025-05-04 14:56:07,251 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.04, Slow MA: 521.04, Prev Fast: 521.01, Prev Slow: 521.04
+2025-05-04 14:56:07,251 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.08, Slow MA: 521.05, Prev Fast: 521.04, Prev Slow: 521.04
+2025-05-04 14:56:07,252 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-04 14:56:07,252 - src.core.events.event_bus - DEBUG - Processing SIGNAL event (ID: f78f7470-3186-47db-862b-78329c0f7c87)
+2025-05-04 14:56:07,252 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.145
+2025-05-04 14:56:07,252 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 400.0 MINI @ 521.145, rule_id=MINI_BUY_CLOSE_20240326135600, timestamp=2024-03-26 13:56:00, action=CLOSE
+2025-05-04 14:56:07,252 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_CLOSE_20240326135600
+2025-05-04 14:56:07,252 - src.core.events.event_bus - DEBUG - Processing ORDER event (ID: f788d2fc-c37d-4600-877c-a10b21489612)
+2025-05-04 14:56:07,252 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,252 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,252 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,252 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,252 - src.execution.order_manager - INFO - Converting trading decision to order: order_2949eb5b (BUY 400.0 MINI @ 521.145)
+2025-05-04 14:56:07,252 - src.execution.order_manager - INFO - Order order_2949eb5b using quantity field 400.0 for size
+2025-05-04 14:56:07,252 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 400.0 MINI @ 521.145
+2025-05-04 14:56:07,252 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_2949eb5b
+2025-05-04 14:56:07,252 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_2949eb5b
+2025-05-04 14:56:07,252 - src.core.events.event_bus - DEBUG - Processing FILL event (ID: e65b7c0c-4c9b-494b-b876-3d8e31739804)
+2025-05-04 14:56:07,252 - src.execution.order_manager - INFO - Processing fill event for order_id: order_2949eb5b
+2025-05-04 14:56:07,252 - src.execution.order_manager - DEBUG - Fill data: {'symbol': 'MINI', 'direction': 'BUY', 'quantity': 400.0, 'price': 521.145, 'timestamp': Timestamp('2024-03-26 13:56:00'), 'rule_id': 'MINI_BUY_CLOSE_20240326135600', 'action_type': 'CLOSE', 'order_id': 'order_2949eb5b', 'order_type': 'MARKET', 'status': 'PENDING', 'size': 400.0, 'fill_price': 521.6661449999999, 'fill_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 252193), 'commission': 208.66645799999995}
+2025-05-04 14:56:07,252 - src.execution.order_manager - INFO - Updated order with fill: Order(order_2949eb5b, MINI, BUY, 400.0, FILLED)
+2025-05-04 14:56:07,252 - src.execution.order_manager - INFO - Emitting simplified TRADE_CLOSE event for MINI: BUY 400.0 @ 521.14
+2025-05-04 14:56:07,252 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 4105690e-c621-4f9d-be10-817a647c4390
+2025-05-04 14:56:07,252 - src.core.events.event_bus - DEBUG - Processing TRADE_CLOSE event (ID: 4105690e-c621-4f9d-be10-817a647c4390)
+2025-05-04 14:56:07,252 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.14, PnL: 10422.90
+2025-05-04 14:56:07,252 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.14
+2025-05-04 14:56:07,252 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.14, PnL: 10422.90
+2025-05-04 14:56:07,252 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.14
+2025-05-04 14:56:07,252 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.14, PnL: 10422.90
+2025-05-04 14:56:07,252 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.14
+2025-05-04 14:56:07,252 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.14, PnL: 10422.90
+2025-05-04 14:56:07,252 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.14
+2025-05-04 14:56:07,252 - src.core.events.event_bus - DEBUG - Event FILL consumed, skipping remaining handlers
+2025-05-04 14:56:07,252 - src.execution.broker.broker_simulator - DEBUG - Fill event emitted for MINI with order_id: order_2949eb5b
+2025-05-04 14:56:07,252 - src.core.events.event_bus - DEBUG - Event ORDER consumed, skipping remaining handlers
+2025-05-04 14:56:07,252 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: BUY 400.0 MINI @ 521.145, rule_id=MINI_BUY_CLOSE_20240326135600
+2025-05-04 14:56:07,252 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 MINI @ 521.145, rule_id=MINI_BUY_OPEN_20240326135600, timestamp=2024-03-26 13:56:00, action=OPEN
+2025-05-04 14:56:07,252 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_OPEN_20240326135600
+2025-05-04 14:56:07,252 - src.core.events.event_bus - DEBUG - Processing ORDER event (ID: abca9e93-4666-4cc4-a1cd-2800803142ef)
+2025-05-04 14:56:07,252 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,252 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,252 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,252 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,252 - src.execution.order_manager - INFO - Converting trading decision to order: order_a2606b2f (BUY 100.0 MINI @ 521.145)
+2025-05-04 14:56:07,252 - src.execution.order_manager - INFO - Order order_a2606b2f using quantity field 100.0 for size
+2025-05-04 14:56:07,252 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100.0 MINI @ 521.145
+2025-05-04 14:56:07,252 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_a2606b2f
+2025-05-04 14:56:07,252 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_a2606b2f
+2025-05-04 14:56:07,252 - src.core.events.event_bus - DEBUG - Processing FILL event (ID: 970ab4cc-615d-45c6-b6a6-eabcff88284b)
+2025-05-04 14:56:07,252 - src.execution.order_manager - INFO - Processing fill event for order_id: order_a2606b2f
+2025-05-04 14:56:07,252 - src.execution.order_manager - DEBUG - Fill data: {'symbol': 'MINI', 'direction': 'BUY', 'quantity': 100.0, 'price': 521.145, 'timestamp': Timestamp('2024-03-26 13:56:00'), 'rule_id': 'MINI_BUY_OPEN_20240326135600', 'action_type': 'OPEN', 'order_id': 'order_a2606b2f', 'order_type': 'MARKET', 'status': 'PENDING', 'size': 100.0, 'fill_price': 521.6661449999999, 'fill_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 252674), 'commission': 52.16661449999999}
+2025-05-04 14:56:07,252 - src.execution.order_manager - INFO - Updated order with fill: Order(order_a2606b2f, MINI, BUY, 100.0, FILLED)
+2025-05-04 14:56:07,252 - src.execution.order_manager - INFO - Emitting TRADE_OPEN event for MINI: BUY 100.0 @ 521.14
+2025-05-04 14:56:07,252 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 6766b3ca-f23f-4eae-b177-eaf8d9b2ea25
+2025-05-04 14:56:07,252 - src.core.events.event_bus - DEBUG - Processing TRADE_OPEN event (ID: 6766b3ca-f23f-4eae-b177-eaf8d9b2ea25)
+2025-05-04 14:56:07,252 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.14
+2025-05-04 14:56:07,252 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-400.0, change=100.0, cost_basis=521.08
+2025-05-04 14:56:07,252 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-6.499999999994088
+2025-05-04 14:56:07,252 - src.risk.portfolio.position - DEBUG - Position partially closed: new quantity=-300.0, cost=156324.00000000003
+2025-05-04 14:56:07,252 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-300.0, cost_basis=521.08, realized_pnl=-6.499999999994088
+2025-05-04 14:56:07,252 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -156343.5 -> -100000
+2025-05-04 14:56:07,252 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.14
+2025-05-04 14:56:07,252 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.14
+2025-05-04 14:56:07,252 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-300.0, change=100.0, cost_basis=521.08
+2025-05-04 14:56:07,252 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-6.499999999994088
+2025-05-04 14:56:07,252 - src.risk.portfolio.position - DEBUG - Position partially closed: new quantity=-200.0, cost=104216.00000000003
+2025-05-04 14:56:07,252 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-200.0, cost_basis=521.08, realized_pnl=-6.499999999994088
+2025-05-04 14:56:07,252 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -104229.0 -> -100000
+2025-05-04 14:56:07,253 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.14
+2025-05-04 14:56:07,253 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.14
+2025-05-04 14:56:07,253 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-200.0, change=100.0, cost_basis=521.08
+2025-05-04 14:56:07,253 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-6.499999999994088
+2025-05-04 14:56:07,253 - src.risk.portfolio.position - DEBUG - Position partially closed: new quantity=-100.0, cost=52108.000000000015
+2025-05-04 14:56:07,253 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-100.0, cost_basis=521.08, realized_pnl=-6.499999999994088
+2025-05-04 14:56:07,253 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.14
+2025-05-04 14:56:07,253 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.14
+2025-05-04 14:56:07,253 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-100.0, change=100.0, cost_basis=521.08
+2025-05-04 14:56:07,253 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-6.499999999994088
+2025-05-04 14:56:07,253 - src.risk.portfolio.position - DEBUG - Position fully closed, pnl=-6.499999999994088
+2025-05-04 14:56:07,253 - src.risk.portfolio.position - DEBUG - Update complete: quantity=0, cost_basis=521.08, realized_pnl=-6.499999999994088
+2025-05-04 14:56:07,253 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.14
+2025-05-04 14:56:07,253 - src.core.events.event_bus - DEBUG - Event FILL consumed, skipping remaining handlers
+2025-05-04 14:56:07,253 - src.execution.broker.broker_simulator - DEBUG - Fill event emitted for MINI with order_id: order_a2606b2f
+2025-05-04 14:56:07,253 - src.core.events.event_bus - DEBUG - Event ORDER consumed, skipping remaining handlers
+2025-05-04 14:56:07,253 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 MINI @ 521.145, rule_id=MINI_BUY_OPEN_20240326135600
+2025-05-04 14:56:07,253 - src.core.events.event_bus - DEBUG - Event SIGNAL consumed, skipping remaining handlers
+2025-05-04 14:56:07,253 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 13:56:00
+2025-05-04 14:56:07,253 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.10, Slow MA: 521.05, Prev Fast: 521.08, Prev Slow: 521.05
+2025-05-04 14:56:07,253 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 98ef3ca4-debe-4926-a682-1ebbeebfa580
+2025-05-04 14:56:07,253 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 98ef3ca4-debe-4926-a682-1ebbeebfa580)
+2025-05-04 14:56:07,253 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.12, Slow MA: 521.05, Prev Fast: 521.10, Prev Slow: 521.05
+2025-05-04 14:56:07,253 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.14, Slow MA: 521.05, Prev Fast: 521.12, Prev Slow: 521.05
+2025-05-04 14:56:07,253 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.13, Slow MA: 521.05, Prev Fast: 521.14, Prev Slow: 521.05
+2025-05-04 14:56:07,253 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 1a90d0e1-dd84-48fc-8df6-3a52ecebf52b
+2025-05-04 14:56:07,253 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 1a90d0e1-dd84-48fc-8df6-3a52ecebf52b)
+2025-05-04 14:56:07,253 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.13, Slow MA: 521.06, Prev Fast: 521.13, Prev Slow: 521.05
+2025-05-04 14:56:07,253 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.13, Slow MA: 521.07, Prev Fast: 521.13, Prev Slow: 521.06
+2025-05-04 14:56:07,253 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.13, Slow MA: 521.08, Prev Fast: 521.13, Prev Slow: 521.07
+2025-05-04 14:56:07,253 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): d83eb463-11cf-4761-be61-61308342d7a6
+2025-05-04 14:56:07,253 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: d83eb463-11cf-4761-be61-61308342d7a6)
+2025-05-04 14:56:07,253 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.16, Slow MA: 521.10, Prev Fast: 521.13, Prev Slow: 521.08
+2025-05-04 14:56:07,253 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.18, Slow MA: 521.12, Prev Fast: 521.16, Prev Slow: 521.10
+2025-05-04 14:56:07,253 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.21, Slow MA: 521.14, Prev Fast: 521.18, Prev Slow: 521.12
+2025-05-04 14:56:07,253 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): b32b35d8-db54-4121-8d8c-4b2fcdfd72e4
+2025-05-04 14:56:07,253 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: b32b35d8-db54-4121-8d8c-4b2fcdfd72e4)
+2025-05-04 14:56:07,253 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.25, Slow MA: 521.16, Prev Fast: 521.21, Prev Slow: 521.14
+2025-05-04 14:56:07,253 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.29, Slow MA: 521.18, Prev Fast: 521.25, Prev Slow: 521.16
+2025-05-04 14:56:07,253 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.31, Slow MA: 521.20, Prev Fast: 521.29, Prev Slow: 521.18
+2025-05-04 14:56:07,253 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 37e73553-dc9f-4972-bb38-1820a51aa939
+2025-05-04 14:56:07,253 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 37e73553-dc9f-4972-bb38-1820a51aa939)
+2025-05-04 14:56:07,253 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.32, Slow MA: 521.21, Prev Fast: 521.31, Prev Slow: 521.20
+2025-05-04 14:56:07,253 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.32, Slow MA: 521.22, Prev Fast: 521.32, Prev Slow: 521.21
+2025-05-04 14:56:07,253 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.31, Slow MA: 521.23, Prev Fast: 521.32, Prev Slow: 521.22
+2025-05-04 14:56:07,254 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): c675cb79-48b7-4cb5-990b-0d622f1660a6
+2025-05-04 14:56:07,254 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: c675cb79-48b7-4cb5-990b-0d622f1660a6)
+2025-05-04 14:56:07,254 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.30, Slow MA: 521.24, Prev Fast: 521.31, Prev Slow: 521.23
+2025-05-04 14:56:07,254 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.28, Slow MA: 521.25, Prev Fast: 521.30, Prev Slow: 521.24
+2025-05-04 14:56:07,254 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.29, Slow MA: 521.26, Prev Fast: 521.28, Prev Slow: 521.25
+2025-05-04 14:56:07,254 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 96b44836-69e0-48b7-8d3b-b85e76359458
+2025-05-04 14:56:07,254 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 96b44836-69e0-48b7-8d3b-b85e76359458)
+2025-05-04 14:56:07,254 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.28, Slow MA: 521.27, Prev Fast: 521.29, Prev Slow: 521.26
+2025-05-04 14:56:07,254 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.27, Slow MA: 521.28, Prev Fast: 521.28, Prev Slow: 521.27
+2025-05-04 14:56:07,254 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-04 14:56:07,254 - src.core.events.event_bus - DEBUG - Processing SIGNAL event (ID: 201797e7-4560-4388-a3ed-dff1231d6cab)
+2025-05-04 14:56:07,254 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.25
+2025-05-04 14:56:07,254 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 MINI @ 521.25, rule_id=MINI_SELL_OPEN_20240326140300, timestamp=2024-03-26 14:03:00, action=OPEN
+2025-05-04 14:56:07,254 - src.core.events.event_bus - INFO - Order dedup key: MINI_SELL_OPEN_20240326140300
+2025-05-04 14:56:07,254 - src.core.events.event_bus - DEBUG - Processing ORDER event (ID: 51befb1f-fefe-4469-a216-06e4f589c86c)
+2025-05-04 14:56:07,254 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,254 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,254 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,254 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,254 - src.execution.order_manager - INFO - Converting trading decision to order: order_ded6bd4c (SELL 100.0 MINI @ 521.25)
+2025-05-04 14:56:07,254 - src.execution.order_manager - INFO - Order order_ded6bd4c using quantity field 100.0 for size
+2025-05-04 14:56:07,254 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100.0 MINI @ 521.25
+2025-05-04 14:56:07,254 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_ded6bd4c
+2025-05-04 14:56:07,254 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_ded6bd4c
+2025-05-04 14:56:07,254 - src.core.events.event_bus - DEBUG - Processing FILL event (ID: 72176206-0e05-472f-a02d-fee502d1294e)
+2025-05-04 14:56:07,254 - src.execution.order_manager - INFO - Processing fill event for order_id: order_ded6bd4c
+2025-05-04 14:56:07,254 - src.execution.order_manager - DEBUG - Fill data: {'symbol': 'MINI', 'direction': 'SELL', 'quantity': 100.0, 'price': 521.25, 'timestamp': Timestamp('2024-03-26 14:03:00'), 'rule_id': 'MINI_SELL_OPEN_20240326140300', 'action_type': 'OPEN', 'order_id': 'order_ded6bd4c', 'order_type': 'MARKET', 'status': 'PENDING', 'size': 100.0, 'fill_price': 520.72875, 'fill_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 254382), 'commission': 52.072875}
+2025-05-04 14:56:07,254 - src.execution.order_manager - INFO - Updated order with fill: Order(order_ded6bd4c, MINI, SELL, 100.0, FILLED)
+2025-05-04 14:56:07,254 - src.execution.order_manager - INFO - Emitting TRADE_OPEN event for MINI: SELL 100.0 @ 521.25
+2025-05-04 14:56:07,254 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): ecb84491-0ffd-4b20-b62a-df678f2fdd5e
+2025-05-04 14:56:07,254 - src.core.events.event_bus - DEBUG - Processing TRADE_OPEN event (ID: ecb84491-0ffd-4b20-b62a-df678f2fdd5e)
+2025-05-04 14:56:07,254 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.25
+2025-05-04 14:56:07,254 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=0, change=-100.0, cost_basis=521.08
+2025-05-04 14:56:07,254 - src.risk.portfolio.position - DEBUG - Opening new position: quantity=-100.0, cost_basis=521.25
+2025-05-04 14:56:07,254 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-100.0, cost_basis=521.25, realized_pnl=0.0
+2025-05-04 14:56:07,254 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.25
+2025-05-04 14:56:07,254 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.25
+2025-05-04 14:56:07,254 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-100.0, change=-100.0, cost_basis=521.25
+2025-05-04 14:56:07,254 - src.risk.portfolio.position - DEBUG - Adding to position: new quantity=-200.0, new cost_basis=521.25
+2025-05-04 14:56:07,254 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-200.0, cost_basis=521.25, realized_pnl=0.0
+2025-05-04 14:56:07,254 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -104250.0 -> -100000
+2025-05-04 14:56:07,254 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.25
+2025-05-04 14:56:07,254 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.25
+2025-05-04 14:56:07,254 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-200.0, change=-100.0, cost_basis=521.25
+2025-05-04 14:56:07,254 - src.risk.portfolio.position - DEBUG - Adding to position: new quantity=-300.0, new cost_basis=521.25
+2025-05-04 14:56:07,254 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-300.0, cost_basis=521.25, realized_pnl=0.0
+2025-05-04 14:56:07,254 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -156375.0 -> -100000
+2025-05-04 14:56:07,254 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.25
+2025-05-04 14:56:07,254 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.25
+2025-05-04 14:56:07,254 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-300.0, change=-100.0, cost_basis=521.25
+2025-05-04 14:56:07,254 - src.risk.portfolio.position - DEBUG - Adding to position: new quantity=-400.0, new cost_basis=521.25
+2025-05-04 14:56:07,254 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-400.0, cost_basis=521.25, realized_pnl=0.0
+2025-05-04 14:56:07,254 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208500.0 -> -100000
+2025-05-04 14:56:07,254 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.25
+2025-05-04 14:56:07,254 - src.core.events.event_bus - DEBUG - Event FILL consumed, skipping remaining handlers
+2025-05-04 14:56:07,254 - src.execution.broker.broker_simulator - DEBUG - Fill event emitted for MINI with order_id: order_ded6bd4c
+2025-05-04 14:56:07,254 - src.core.events.event_bus - DEBUG - Event ORDER consumed, skipping remaining handlers
+2025-05-04 14:56:07,254 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 MINI @ 521.25, rule_id=MINI_SELL_OPEN_20240326140300
+2025-05-04 14:56:07,254 - src.core.events.event_bus - DEBUG - Event SIGNAL consumed, skipping remaining handlers
+2025-05-04 14:56:07,254 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 14:03:00
+2025-05-04 14:56:07,254 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208500.0 -> -100000
+2025-05-04 14:56:07,254 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208500.0 -> -100000
+2025-05-04 14:56:07,254 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208500.0 -> -100000
+2025-05-04 14:56:07,254 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.27, Slow MA: 521.28, Prev Fast: 521.27, Prev Slow: 521.28
+2025-05-04 14:56:07,255 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208500.0 -> -100000
+2025-05-04 14:56:07,255 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208500.0 -> -100000
+2025-05-04 14:56:07,255 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 10b8d483-5817-4e2c-9258-11f5422a9c2d
+2025-05-04 14:56:07,255 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 10b8d483-5817-4e2c-9258-11f5422a9c2d)
+2025-05-04 14:56:07,255 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208532.00000000003 -> -100000
+2025-05-04 14:56:07,255 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.27, Slow MA: 521.29, Prev Fast: 521.27, Prev Slow: 521.28
+2025-05-04 14:56:07,255 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.28, Slow MA: 521.29, Prev Fast: 521.27, Prev Slow: 521.29
+2025-05-04 14:56:07,255 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208532.00000000003 -> -100000
+2025-05-04 14:56:07,255 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208532.00000000003 -> -100000
+2025-05-04 14:56:07,255 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208532.00000000003 -> -100000
+2025-05-04 14:56:07,255 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.30, Slow MA: 521.30, Prev Fast: 521.28, Prev Slow: 521.29
+2025-05-04 14:56:07,255 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208532.00000000003 -> -100000
+2025-05-04 14:56:07,255 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208532.00000000003 -> -100000
+2025-05-04 14:56:07,255 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 5a2f91b8-1ae4-494b-899a-80a6a421b0c6
+2025-05-04 14:56:07,255 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 5a2f91b8-1ae4-494b-899a-80a6a421b0c6)
+2025-05-04 14:56:07,255 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208523.99999999997 -> -100000
+2025-05-04 14:56:07,255 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.31, Slow MA: 521.30, Prev Fast: 521.30, Prev Slow: 521.30
+2025-05-04 14:56:07,255 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-04 14:56:07,255 - src.core.events.event_bus - DEBUG - Processing SIGNAL event (ID: 13e90b4e-9841-427d-999c-44058692cc70)
+2025-05-04 14:56:07,255 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.31
+2025-05-04 14:56:07,255 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 400.0 MINI @ 521.31, rule_id=MINI_BUY_CLOSE_20240326140500, timestamp=2024-03-26 14:05:00, action=CLOSE
+2025-05-04 14:56:07,255 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_CLOSE_20240326140500
+2025-05-04 14:56:07,255 - src.core.events.event_bus - DEBUG - Processing ORDER event (ID: bead2ff8-994a-40d0-b0e1-70152bd71c86)
+2025-05-04 14:56:07,255 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,255 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,255 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,255 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,255 - src.execution.order_manager - INFO - Converting trading decision to order: order_faf02ce0 (BUY 400.0 MINI @ 521.31)
+2025-05-04 14:56:07,255 - src.execution.order_manager - INFO - Order order_faf02ce0 using quantity field 400.0 for size
+2025-05-04 14:56:07,255 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 400.0 MINI @ 521.31
+2025-05-04 14:56:07,255 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_faf02ce0
+2025-05-04 14:56:07,255 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_faf02ce0
+2025-05-04 14:56:07,255 - src.core.events.event_bus - DEBUG - Processing FILL event (ID: e11dca48-c455-48fc-af9d-24fb0d9f9dd5)
+2025-05-04 14:56:07,255 - src.execution.order_manager - INFO - Processing fill event for order_id: order_faf02ce0
+2025-05-04 14:56:07,255 - src.execution.order_manager - DEBUG - Fill data: {'symbol': 'MINI', 'direction': 'BUY', 'quantity': 400.0, 'price': 521.31, 'timestamp': Timestamp('2024-03-26 14:05:00'), 'rule_id': 'MINI_BUY_CLOSE_20240326140500', 'action_type': 'CLOSE', 'order_id': 'order_faf02ce0', 'order_type': 'MARKET', 'status': 'PENDING', 'size': 400.0, 'fill_price': 521.8313099999999, 'fill_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 255546), 'commission': 208.73252399999998}
+2025-05-04 14:56:07,255 - src.execution.order_manager - INFO - Updated order with fill: Order(order_faf02ce0, MINI, BUY, 400.0, FILLED)
+2025-05-04 14:56:07,255 - src.execution.order_manager - INFO - Emitting simplified TRADE_CLOSE event for MINI: BUY 400.0 @ 521.31
+2025-05-04 14:56:07,255 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 90abc0c7-610e-42ab-9fad-2a4d1729bc7b
+2025-05-04 14:56:07,255 - src.core.events.event_bus - DEBUG - Processing TRADE_CLOSE event (ID: 90abc0c7-610e-42ab-9fad-2a4d1729bc7b)
+2025-05-04 14:56:07,255 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.31, PnL: 10426.20
+2025-05-04 14:56:07,255 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.31
+2025-05-04 14:56:07,255 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.31, PnL: 10426.20
+2025-05-04 14:56:07,255 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.31
+2025-05-04 14:56:07,255 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.31, PnL: 10426.20
+2025-05-04 14:56:07,255 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.31
+2025-05-04 14:56:07,255 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.31, PnL: 10426.20
+2025-05-04 14:56:07,255 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.31
+2025-05-04 14:56:07,255 - src.core.events.event_bus - DEBUG - Event FILL consumed, skipping remaining handlers
+2025-05-04 14:56:07,255 - src.execution.broker.broker_simulator - DEBUG - Fill event emitted for MINI with order_id: order_faf02ce0
+2025-05-04 14:56:07,255 - src.core.events.event_bus - DEBUG - Event ORDER consumed, skipping remaining handlers
+2025-05-04 14:56:07,255 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: BUY 400.0 MINI @ 521.31, rule_id=MINI_BUY_CLOSE_20240326140500
+2025-05-04 14:56:07,255 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 MINI @ 521.31, rule_id=MINI_BUY_OPEN_20240326140500, timestamp=2024-03-26 14:05:00, action=OPEN
+2025-05-04 14:56:07,255 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_OPEN_20240326140500
+2025-05-04 14:56:07,255 - src.core.events.event_bus - DEBUG - Processing ORDER event (ID: be504617-33a1-46fd-b1cd-f6e25597a7ad)
+2025-05-04 14:56:07,256 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,256 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,256 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,256 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,256 - src.execution.order_manager - INFO - Converting trading decision to order: order_53ac1de4 (BUY 100.0 MINI @ 521.31)
+2025-05-04 14:56:07,256 - src.execution.order_manager - INFO - Order order_53ac1de4 using quantity field 100.0 for size
+2025-05-04 14:56:07,256 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100.0 MINI @ 521.31
+2025-05-04 14:56:07,256 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_53ac1de4
+2025-05-04 14:56:07,256 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_53ac1de4
+2025-05-04 14:56:07,256 - src.core.events.event_bus - DEBUG - Processing FILL event (ID: 46de4f8c-2768-46dc-b749-88ef729a767f)
+2025-05-04 14:56:07,256 - src.execution.order_manager - INFO - Processing fill event for order_id: order_53ac1de4
+2025-05-04 14:56:07,256 - src.execution.order_manager - DEBUG - Fill data: {'symbol': 'MINI', 'direction': 'BUY', 'quantity': 100.0, 'price': 521.31, 'timestamp': Timestamp('2024-03-26 14:05:00'), 'rule_id': 'MINI_BUY_OPEN_20240326140500', 'action_type': 'OPEN', 'order_id': 'order_53ac1de4', 'order_type': 'MARKET', 'status': 'PENDING', 'size': 100.0, 'fill_price': 521.8313099999999, 'fill_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 256122), 'commission': 52.183130999999996}
+2025-05-04 14:56:07,256 - src.execution.order_manager - INFO - Updated order with fill: Order(order_53ac1de4, MINI, BUY, 100.0, FILLED)
+2025-05-04 14:56:07,256 - src.execution.order_manager - INFO - Emitting TRADE_OPEN event for MINI: BUY 100.0 @ 521.31
+2025-05-04 14:56:07,256 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 8f6d5a93-3f44-4743-a457-07de7982e318
+2025-05-04 14:56:07,256 - src.core.events.event_bus - DEBUG - Processing TRADE_OPEN event (ID: 8f6d5a93-3f44-4743-a457-07de7982e318)
+2025-05-04 14:56:07,256 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.31
+2025-05-04 14:56:07,256 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-400.0, change=100.0, cost_basis=521.25
+2025-05-04 14:56:07,256 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-5.999999999994543
+2025-05-04 14:56:07,256 - src.risk.portfolio.position - DEBUG - Position partially closed: new quantity=-300.0, cost=156375.0
+2025-05-04 14:56:07,256 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-300.0, cost_basis=521.25, realized_pnl=-5.999999999994543
+2025-05-04 14:56:07,256 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -156392.99999999997 -> -100000
+2025-05-04 14:56:07,256 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.31
+2025-05-04 14:56:07,256 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.31
+2025-05-04 14:56:07,256 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-300.0, change=100.0, cost_basis=521.25
+2025-05-04 14:56:07,256 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-5.999999999994543
+2025-05-04 14:56:07,256 - src.risk.portfolio.position - DEBUG - Position partially closed: new quantity=-200.0, cost=104250.00000000001
+2025-05-04 14:56:07,256 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-200.0, cost_basis=521.25, realized_pnl=-5.999999999994543
+2025-05-04 14:56:07,256 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -104261.99999999999 -> -100000
+2025-05-04 14:56:07,256 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.31
+2025-05-04 14:56:07,256 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.31
+2025-05-04 14:56:07,256 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-200.0, change=100.0, cost_basis=521.25
+2025-05-04 14:56:07,256 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-5.999999999994543
+2025-05-04 14:56:07,256 - src.risk.portfolio.position - DEBUG - Position partially closed: new quantity=-100.0, cost=52125.00000000001
+2025-05-04 14:56:07,256 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-100.0, cost_basis=521.25, realized_pnl=-5.999999999994543
+2025-05-04 14:56:07,256 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.31
+2025-05-04 14:56:07,256 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.31
+2025-05-04 14:56:07,256 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-100.0, change=100.0, cost_basis=521.25
+2025-05-04 14:56:07,256 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-5.999999999994543
+2025-05-04 14:56:07,256 - src.risk.portfolio.position - DEBUG - Position fully closed, pnl=-5.999999999994543
+2025-05-04 14:56:07,256 - src.risk.portfolio.position - DEBUG - Update complete: quantity=0, cost_basis=521.25, realized_pnl=-5.999999999994543
+2025-05-04 14:56:07,256 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.31
+2025-05-04 14:56:07,256 - src.core.events.event_bus - DEBUG - Event FILL consumed, skipping remaining handlers
+2025-05-04 14:56:07,256 - src.execution.broker.broker_simulator - DEBUG - Fill event emitted for MINI with order_id: order_53ac1de4
+2025-05-04 14:56:07,256 - src.core.events.event_bus - DEBUG - Event ORDER consumed, skipping remaining handlers
+2025-05-04 14:56:07,256 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 MINI @ 521.31, rule_id=MINI_BUY_OPEN_20240326140500
+2025-05-04 14:56:07,256 - src.core.events.event_bus - DEBUG - Event SIGNAL consumed, skipping remaining handlers
+2025-05-04 14:56:07,256 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 14:05:00
+2025-05-04 14:56:07,256 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.32, Slow MA: 521.29, Prev Fast: 521.31, Prev Slow: 521.30
+2025-05-04 14:56:07,256 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.32, Slow MA: 521.29, Prev Fast: 521.32, Prev Slow: 521.29
+2025-05-04 14:56:07,257 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): d8805bc2-df39-4bfc-aa7b-10a33face434
+2025-05-04 14:56:07,257 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: d8805bc2-df39-4bfc-aa7b-10a33face434)
+2025-05-04 14:56:07,257 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.31, Slow MA: 521.29, Prev Fast: 521.32, Prev Slow: 521.29
+2025-05-04 14:56:07,257 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.31, Slow MA: 521.29, Prev Fast: 521.31, Prev Slow: 521.29
+2025-05-04 14:56:07,257 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.30, Slow MA: 521.30, Prev Fast: 521.31, Prev Slow: 521.29
+2025-05-04 14:56:07,257 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 29717ec4-e6c4-4676-9cfd-10ff7aa31e38
+2025-05-04 14:56:07,257 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 29717ec4-e6c4-4676-9cfd-10ff7aa31e38)
+2025-05-04 14:56:07,257 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.33, Slow MA: 521.31, Prev Fast: 521.30, Prev Slow: 521.30
+2025-05-04 14:56:07,257 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.35, Slow MA: 521.31, Prev Fast: 521.33, Prev Slow: 521.31
+2025-05-04 14:56:07,257 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.38, Slow MA: 521.32, Prev Fast: 521.35, Prev Slow: 521.31
+2025-05-04 14:56:07,257 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): d6a5c1e6-26e2-4eff-b4d0-92087d8796f8
+2025-05-04 14:56:07,257 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: d6a5c1e6-26e2-4eff-b4d0-92087d8796f8)
+2025-05-04 14:56:07,257 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.39, Slow MA: 521.33, Prev Fast: 521.38, Prev Slow: 521.32
+2025-05-04 14:56:07,257 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.41, Slow MA: 521.34, Prev Fast: 521.39, Prev Slow: 521.33
+2025-05-04 14:56:07,257 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.40, Slow MA: 521.35, Prev Fast: 521.41, Prev Slow: 521.34
+2025-05-04 14:56:07,257 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 52f02478-5a7b-4ee6-a022-4a25ec847a45
+2025-05-04 14:56:07,257 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 52f02478-5a7b-4ee6-a022-4a25ec847a45)
+2025-05-04 14:56:07,257 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.37, Slow MA: 521.35, Prev Fast: 521.40, Prev Slow: 521.35
+2025-05-04 14:56:07,257 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.35, Slow MA: 521.35, Prev Fast: 521.37, Prev Slow: 521.35
+2025-05-04 14:56:07,257 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.33, Slow MA: 521.34, Prev Fast: 521.35, Prev Slow: 521.35
+2025-05-04 14:56:07,257 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-04 14:56:07,257 - src.core.events.event_bus - DEBUG - Processing SIGNAL event (ID: a9e4e7ca-6045-4742-ba80-696f79086ca8)
+2025-05-04 14:56:07,257 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.3
+2025-05-04 14:56:07,257 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 MINI @ 521.3, rule_id=MINI_SELL_OPEN_20240326140900, timestamp=2024-03-26 14:09:00, action=OPEN
+2025-05-04 14:56:07,257 - src.core.events.event_bus - INFO - Order dedup key: MINI_SELL_OPEN_20240326140900
+2025-05-04 14:56:07,257 - src.core.events.event_bus - DEBUG - Processing ORDER event (ID: 5d8d2341-5438-4e8d-af10-2c4069a37da0)
+2025-05-04 14:56:07,257 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,257 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,257 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,257 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,257 - src.execution.order_manager - INFO - Converting trading decision to order: order_73ac2867 (SELL 100.0 MINI @ 521.3)
+2025-05-04 14:56:07,257 - src.execution.order_manager - INFO - Order order_73ac2867 using quantity field 100.0 for size
+2025-05-04 14:56:07,257 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100.0 MINI @ 521.3
+2025-05-04 14:56:07,257 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_73ac2867
+2025-05-04 14:56:07,257 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_73ac2867
+2025-05-04 14:56:07,257 - src.core.events.event_bus - DEBUG - Processing FILL event (ID: e2456b5b-0cb7-4840-a262-71d8651e4985)
+2025-05-04 14:56:07,257 - src.execution.order_manager - INFO - Processing fill event for order_id: order_73ac2867
+2025-05-04 14:56:07,257 - src.execution.order_manager - DEBUG - Fill data: {'symbol': 'MINI', 'direction': 'SELL', 'quantity': 100.0, 'price': 521.3, 'timestamp': Timestamp('2024-03-26 14:09:00'), 'rule_id': 'MINI_SELL_OPEN_20240326140900', 'action_type': 'OPEN', 'order_id': 'order_73ac2867', 'order_type': 'MARKET', 'status': 'PENDING', 'size': 100.0, 'fill_price': 520.7787, 'fill_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 257889), 'commission': 52.07787}
+2025-05-04 14:56:07,258 - src.execution.order_manager - INFO - Updated order with fill: Order(order_73ac2867, MINI, SELL, 100.0, FILLED)
+2025-05-04 14:56:07,258 - src.execution.order_manager - INFO - Emitting TRADE_OPEN event for MINI: SELL 100.0 @ 521.30
+2025-05-04 14:56:07,258 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 8588dad7-ae91-458a-bcbe-69cc6bbe0018
+2025-05-04 14:56:07,258 - src.core.events.event_bus - DEBUG - Processing TRADE_OPEN event (ID: 8588dad7-ae91-458a-bcbe-69cc6bbe0018)
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.30
+2025-05-04 14:56:07,258 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=0, change=-100.0, cost_basis=521.25
+2025-05-04 14:56:07,258 - src.risk.portfolio.position - DEBUG - Opening new position: quantity=-100.0, cost_basis=521.3
+2025-05-04 14:56:07,258 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-100.0, cost_basis=521.3, realized_pnl=0.0
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.30
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.30
+2025-05-04 14:56:07,258 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-100.0, change=-100.0, cost_basis=521.3
+2025-05-04 14:56:07,258 - src.risk.portfolio.position - DEBUG - Adding to position: new quantity=-200.0, new cost_basis=521.3
+2025-05-04 14:56:07,258 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-200.0, cost_basis=521.3, realized_pnl=0.0
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -104259.99999999999 -> -100000
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.30
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.30
+2025-05-04 14:56:07,258 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-200.0, change=-100.0, cost_basis=521.3
+2025-05-04 14:56:07,258 - src.risk.portfolio.position - DEBUG - Adding to position: new quantity=-300.0, new cost_basis=521.3
+2025-05-04 14:56:07,258 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-300.0, cost_basis=521.3, realized_pnl=0.0
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -156390.0 -> -100000
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.30
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.30
+2025-05-04 14:56:07,258 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-300.0, change=-100.0, cost_basis=521.3
+2025-05-04 14:56:07,258 - src.risk.portfolio.position - DEBUG - Adding to position: new quantity=-400.0, new cost_basis=521.3
+2025-05-04 14:56:07,258 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-400.0, cost_basis=521.3, realized_pnl=0.0
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208519.99999999997 -> -100000
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.30
+2025-05-04 14:56:07,258 - src.core.events.event_bus - DEBUG - Event FILL consumed, skipping remaining handlers
+2025-05-04 14:56:07,258 - src.execution.broker.broker_simulator - DEBUG - Fill event emitted for MINI with order_id: order_73ac2867
+2025-05-04 14:56:07,258 - src.core.events.event_bus - DEBUG - Event ORDER consumed, skipping remaining handlers
+2025-05-04 14:56:07,258 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 MINI @ 521.3, rule_id=MINI_SELL_OPEN_20240326140900
+2025-05-04 14:56:07,258 - src.core.events.event_bus - DEBUG - Event SIGNAL consumed, skipping remaining handlers
+2025-05-04 14:56:07,258 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 14:09:00
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208519.99999999997 -> -100000
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208519.99999999997 -> -100000
+2025-05-04 14:56:07,258 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 8c026f5b-b9a9-4a77-a61c-055cccb14a05
+2025-05-04 14:56:07,258 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 8c026f5b-b9a9-4a77-a61c-055cccb14a05)
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208456.0 -> -100000
+2025-05-04 14:56:07,258 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.28, Slow MA: 521.33, Prev Fast: 521.33, Prev Slow: 521.34
+2025-05-04 14:56:07,258 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.24, Slow MA: 521.32, Prev Fast: 521.28, Prev Slow: 521.33
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208456.0 -> -100000
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208456.0 -> -100000
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208456.0 -> -100000
+2025-05-04 14:56:07,258 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.20, Slow MA: 521.31, Prev Fast: 521.24, Prev Slow: 521.32
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208456.0 -> -100000
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208456.0 -> -100000
+2025-05-04 14:56:07,258 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): b216907f-03b9-4b24-a4e0-b0fedd8684d1
+2025-05-04 14:56:07,258 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: b216907f-03b9-4b24-a4e0-b0fedd8684d1)
+2025-05-04 14:56:07,258 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208469.99999999997 -> -100000
+2025-05-04 14:56:07,259 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.18, Slow MA: 521.30, Prev Fast: 521.20, Prev Slow: 521.31
+2025-05-04 14:56:07,259 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.15, Slow MA: 521.29, Prev Fast: 521.18, Prev Slow: 521.30
+2025-05-04 14:56:07,259 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208469.99999999997 -> -100000
+2025-05-04 14:56:07,259 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208469.99999999997 -> -100000
+2025-05-04 14:56:07,259 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208469.99999999997 -> -100000
+2025-05-04 14:56:07,259 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.16, Slow MA: 521.28, Prev Fast: 521.15, Prev Slow: 521.29
+2025-05-04 14:56:07,259 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208469.99999999997 -> -100000
+2025-05-04 14:56:07,259 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208469.99999999997 -> -100000
+2025-05-04 14:56:07,259 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 952979cd-9d33-4455-9333-c2f82d4f6ca5
+2025-05-04 14:56:07,259 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 952979cd-9d33-4455-9333-c2f82d4f6ca5)
+2025-05-04 14:56:07,259 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208516.0 -> -100000
+2025-05-04 14:56:07,259 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.19, Slow MA: 521.28, Prev Fast: 521.16, Prev Slow: 521.28
+2025-05-04 14:56:07,259 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.22, Slow MA: 521.27, Prev Fast: 521.19, Prev Slow: 521.28
+2025-05-04 14:56:07,259 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208516.0 -> -100000
+2025-05-04 14:56:07,259 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208516.0 -> -100000
+2025-05-04 14:56:07,259 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208516.0 -> -100000
+2025-05-04 14:56:07,259 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.24, Slow MA: 521.26, Prev Fast: 521.22, Prev Slow: 521.27
+2025-05-04 14:56:07,259 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208516.0 -> -100000
+2025-05-04 14:56:07,259 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208516.0 -> -100000
+2025-05-04 14:56:07,259 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 3642d9f4-075c-4926-a965-4ac4152a692d
+2025-05-04 14:56:07,259 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 3642d9f4-075c-4926-a965-4ac4152a692d)
+2025-05-04 14:56:07,259 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208520.04 -> -100000
+2025-05-04 14:56:07,259 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.27, Slow MA: 521.25, Prev Fast: 521.24, Prev Slow: 521.26
+2025-05-04 14:56:07,259 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-04 14:56:07,259 - src.core.events.event_bus - DEBUG - Processing SIGNAL event (ID: 0e15a0b9-3c88-400e-88f7-cbf4291359df)
+2025-05-04 14:56:07,259 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.3001
+2025-05-04 14:56:07,259 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 400.0 MINI @ 521.3001, rule_id=MINI_BUY_CLOSE_20240326141300, timestamp=2024-03-26 14:13:00, action=CLOSE
+2025-05-04 14:56:07,259 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_CLOSE_20240326141300
+2025-05-04 14:56:07,259 - src.core.events.event_bus - DEBUG - Processing ORDER event (ID: 4f1c374a-4152-4a26-90a1-d77c9f56d223)
+2025-05-04 14:56:07,259 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,259 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,259 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,259 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,259 - src.execution.order_manager - INFO - Converting trading decision to order: order_f0bb1697 (BUY 400.0 MINI @ 521.3001)
+2025-05-04 14:56:07,259 - src.execution.order_manager - INFO - Order order_f0bb1697 using quantity field 400.0 for size
+2025-05-04 14:56:07,259 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 400.0 MINI @ 521.3001
+2025-05-04 14:56:07,259 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_f0bb1697
+2025-05-04 14:56:07,259 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_f0bb1697
+2025-05-04 14:56:07,259 - src.core.events.event_bus - DEBUG - Processing FILL event (ID: cc42fd35-1572-4a37-a4c0-9354fe54eea9)
+2025-05-04 14:56:07,259 - src.execution.order_manager - INFO - Processing fill event for order_id: order_f0bb1697
+2025-05-04 14:56:07,259 - src.execution.order_manager - DEBUG - Fill data: {'symbol': 'MINI', 'direction': 'BUY', 'quantity': 400.0, 'price': 521.3001, 'timestamp': Timestamp('2024-03-26 14:13:00'), 'rule_id': 'MINI_BUY_CLOSE_20240326141300', 'action_type': 'CLOSE', 'order_id': 'order_f0bb1697', 'order_type': 'MARKET', 'status': 'PENDING', 'size': 400.0, 'fill_price': 521.8214001, 'fill_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 259797), 'commission': 208.72856004000002}
+2025-05-04 14:56:07,259 - src.execution.order_manager - INFO - Updated order with fill: Order(order_f0bb1697, MINI, BUY, 400.0, FILLED)
+2025-05-04 14:56:07,259 - src.execution.order_manager - INFO - Emitting simplified TRADE_CLOSE event for MINI: BUY 400.0 @ 521.30
+2025-05-04 14:56:07,259 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 93d11003-8198-43ca-863f-0e504a0b74bf
+2025-05-04 14:56:07,259 - src.core.events.event_bus - DEBUG - Processing TRADE_CLOSE event (ID: 93d11003-8198-43ca-863f-0e504a0b74bf)
+2025-05-04 14:56:07,260 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.30, PnL: 10426.00
+2025-05-04 14:56:07,260 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.30
+2025-05-04 14:56:07,260 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.30, PnL: 10426.00
+2025-05-04 14:56:07,260 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.30
+2025-05-04 14:56:07,260 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.30, PnL: 10426.00
+2025-05-04 14:56:07,260 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.30
+2025-05-04 14:56:07,260 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.30, PnL: 10426.00
+2025-05-04 14:56:07,260 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.30
+2025-05-04 14:56:07,260 - src.core.events.event_bus - DEBUG - Event FILL consumed, skipping remaining handlers
+2025-05-04 14:56:07,260 - src.execution.broker.broker_simulator - DEBUG - Fill event emitted for MINI with order_id: order_f0bb1697
+2025-05-04 14:56:07,260 - src.core.events.event_bus - DEBUG - Event ORDER consumed, skipping remaining handlers
+2025-05-04 14:56:07,260 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: BUY 400.0 MINI @ 521.3001, rule_id=MINI_BUY_CLOSE_20240326141300
+2025-05-04 14:56:07,260 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 MINI @ 521.3001, rule_id=MINI_BUY_OPEN_20240326141300, timestamp=2024-03-26 14:13:00, action=OPEN
+2025-05-04 14:56:07,260 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_OPEN_20240326141300
+2025-05-04 14:56:07,260 - src.core.events.event_bus - DEBUG - Processing ORDER event (ID: c023b18a-6804-49c0-938b-71584e9e8313)
+2025-05-04 14:56:07,260 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,260 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,260 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,260 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,260 - src.execution.order_manager - INFO - Converting trading decision to order: order_6dd77d3f (BUY 100.0 MINI @ 521.3001)
+2025-05-04 14:56:07,260 - src.execution.order_manager - INFO - Order order_6dd77d3f using quantity field 100.0 for size
+2025-05-04 14:56:07,260 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100.0 MINI @ 521.3001
+2025-05-04 14:56:07,260 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_6dd77d3f
+2025-05-04 14:56:07,260 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_6dd77d3f
+2025-05-04 14:56:07,260 - src.core.events.event_bus - DEBUG - Processing FILL event (ID: 4c0da2ca-6790-4578-b98a-015dc639fa52)
+2025-05-04 14:56:07,260 - src.execution.order_manager - INFO - Processing fill event for order_id: order_6dd77d3f
+2025-05-04 14:56:07,260 - src.execution.order_manager - DEBUG - Fill data: {'symbol': 'MINI', 'direction': 'BUY', 'quantity': 100.0, 'price': 521.3001, 'timestamp': Timestamp('2024-03-26 14:13:00'), 'rule_id': 'MINI_BUY_OPEN_20240326141300', 'action_type': 'OPEN', 'order_id': 'order_6dd77d3f', 'order_type': 'MARKET', 'status': 'PENDING', 'size': 100.0, 'fill_price': 521.8214001, 'fill_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 260412), 'commission': 52.182140010000005}
+2025-05-04 14:56:07,260 - src.execution.order_manager - INFO - Updated order with fill: Order(order_6dd77d3f, MINI, BUY, 100.0, FILLED)
+2025-05-04 14:56:07,260 - src.execution.order_manager - INFO - Emitting TRADE_OPEN event for MINI: BUY 100.0 @ 521.30
+2025-05-04 14:56:07,260 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 688315dd-938f-4cc3-96b3-b09a3b29027d
+2025-05-04 14:56:07,260 - src.core.events.event_bus - DEBUG - Processing TRADE_OPEN event (ID: 688315dd-938f-4cc3-96b3-b09a3b29027d)
+2025-05-04 14:56:07,260 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.30
+2025-05-04 14:56:07,260 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-400.0, change=100.0, cost_basis=521.3
+2025-05-04 14:56:07,260 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-0.010000000008858478
+2025-05-04 14:56:07,260 - src.risk.portfolio.position - DEBUG - Position partially closed: new quantity=-300.0, cost=156389.99999999997
+2025-05-04 14:56:07,260 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-300.0, cost_basis=521.3, realized_pnl=-0.010000000008858478
+2025-05-04 14:56:07,260 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -156390.03 -> -100000
+2025-05-04 14:56:07,260 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.30
+2025-05-04 14:56:07,260 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.30
+2025-05-04 14:56:07,260 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-300.0, change=100.0, cost_basis=521.3
+2025-05-04 14:56:07,260 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-0.010000000008858478
+2025-05-04 14:56:07,260 - src.risk.portfolio.position - DEBUG - Position partially closed: new quantity=-200.0, cost=104259.99999999999
+2025-05-04 14:56:07,260 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-200.0, cost_basis=521.3, realized_pnl=-0.010000000008858478
+2025-05-04 14:56:07,260 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -104260.02 -> -100000
+2025-05-04 14:56:07,260 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.30
+2025-05-04 14:56:07,260 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.30
+2025-05-04 14:56:07,260 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-200.0, change=100.0, cost_basis=521.3
+2025-05-04 14:56:07,260 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-0.010000000008858478
+2025-05-04 14:56:07,260 - src.risk.portfolio.position - DEBUG - Position partially closed: new quantity=-100.0, cost=52129.99999999999
+2025-05-04 14:56:07,260 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-100.0, cost_basis=521.3, realized_pnl=-0.010000000008858478
+2025-05-04 14:56:07,260 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.30
+2025-05-04 14:56:07,260 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.30
+2025-05-04 14:56:07,260 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-100.0, change=100.0, cost_basis=521.3
+2025-05-04 14:56:07,260 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-0.010000000008858478
+2025-05-04 14:56:07,260 - src.risk.portfolio.position - DEBUG - Position fully closed, pnl=-0.010000000008858478
+2025-05-04 14:56:07,261 - src.risk.portfolio.position - DEBUG - Update complete: quantity=0, cost_basis=521.3, realized_pnl=-0.010000000008858478
+2025-05-04 14:56:07,261 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.30
+2025-05-04 14:56:07,261 - src.core.events.event_bus - DEBUG - Event FILL consumed, skipping remaining handlers
+2025-05-04 14:56:07,261 - src.execution.broker.broker_simulator - DEBUG - Fill event emitted for MINI with order_id: order_6dd77d3f
+2025-05-04 14:56:07,261 - src.core.events.event_bus - DEBUG - Event ORDER consumed, skipping remaining handlers
+2025-05-04 14:56:07,261 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 MINI @ 521.3001, rule_id=MINI_BUY_OPEN_20240326141300
+2025-05-04 14:56:07,261 - src.core.events.event_bus - DEBUG - Event SIGNAL consumed, skipping remaining handlers
+2025-05-04 14:56:07,261 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 14:13:00
+2025-05-04 14:56:07,261 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.29, Slow MA: 521.25, Prev Fast: 521.27, Prev Slow: 521.25
+2025-05-04 14:56:07,261 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.30, Slow MA: 521.24, Prev Fast: 521.29, Prev Slow: 521.25
+2025-05-04 14:56:07,261 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): aee63316-e877-4ddd-a1c2-3c8138621329
+2025-05-04 14:56:07,261 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: aee63316-e877-4ddd-a1c2-3c8138621329)
+2025-05-04 14:56:07,261 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.30, Slow MA: 521.24, Prev Fast: 521.30, Prev Slow: 521.24
+2025-05-04 14:56:07,261 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.31, Slow MA: 521.25, Prev Fast: 521.30, Prev Slow: 521.24
+2025-05-04 14:56:07,261 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.32, Slow MA: 521.25, Prev Fast: 521.31, Prev Slow: 521.25
+2025-05-04 14:56:07,261 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 156fb7be-6596-45d5-8290-0a31e65cdcff
+2025-05-04 14:56:07,261 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 156fb7be-6596-45d5-8290-0a31e65cdcff)
+2025-05-04 14:56:07,261 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.31, Slow MA: 521.26, Prev Fast: 521.32, Prev Slow: 521.25
+2025-05-04 14:56:07,261 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.31, Slow MA: 521.27, Prev Fast: 521.31, Prev Slow: 521.26
+2025-05-04 14:56:07,261 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.30, Slow MA: 521.27, Prev Fast: 521.31, Prev Slow: 521.27
+2025-05-04 14:56:07,261 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 836739da-bb97-4894-85a6-b1721365dd94
+2025-05-04 14:56:07,261 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: 836739da-bb97-4894-85a6-b1721365dd94)
+2025-05-04 14:56:07,261 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.29, Slow MA: 521.28, Prev Fast: 521.30, Prev Slow: 521.27
+2025-05-04 14:56:07,261 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.29, Slow MA: 521.29, Prev Fast: 521.29, Prev Slow: 521.28
+2025-05-04 14:56:07,261 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-04 14:56:07,261 - src.core.events.event_bus - DEBUG - Processing SIGNAL event (ID: a6c08c73-e9d5-4a75-858c-b618ad804586)
+2025-05-04 14:56:07,261 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.32
+2025-05-04 14:56:07,261 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 MINI @ 521.32, rule_id=MINI_SELL_OPEN_20240326141600, timestamp=2024-03-26 14:16:00, action=OPEN
+2025-05-04 14:56:07,261 - src.core.events.event_bus - INFO - Order dedup key: MINI_SELL_OPEN_20240326141600
+2025-05-04 14:56:07,261 - src.core.events.event_bus - DEBUG - Processing ORDER event (ID: 1e3e6d41-33ea-4053-8217-fabeada38317)
+2025-05-04 14:56:07,261 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,261 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,261 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,261 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,261 - src.execution.order_manager - INFO - Converting trading decision to order: order_8233f842 (SELL 100.0 MINI @ 521.32)
+2025-05-04 14:56:07,261 - src.execution.order_manager - INFO - Order order_8233f842 using quantity field 100.0 for size
+2025-05-04 14:56:07,261 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100.0 MINI @ 521.32
+2025-05-04 14:56:07,261 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_8233f842
+2025-05-04 14:56:07,261 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_8233f842
+2025-05-04 14:56:07,262 - src.core.events.event_bus - DEBUG - Processing FILL event (ID: 60ca4016-1ced-400c-ba11-3d73eeff1dd2)
+2025-05-04 14:56:07,262 - src.execution.order_manager - INFO - Processing fill event for order_id: order_8233f842
+2025-05-04 14:56:07,262 - src.execution.order_manager - DEBUG - Fill data: {'symbol': 'MINI', 'direction': 'SELL', 'quantity': 100.0, 'price': 521.32, 'timestamp': Timestamp('2024-03-26 14:16:00'), 'rule_id': 'MINI_SELL_OPEN_20240326141600', 'action_type': 'OPEN', 'order_id': 'order_8233f842', 'order_type': 'MARKET', 'status': 'PENDING', 'size': 100.0, 'fill_price': 520.7986800000001, 'fill_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 261951), 'commission': 52.07986800000001}
+2025-05-04 14:56:07,262 - src.execution.order_manager - INFO - Updated order with fill: Order(order_8233f842, MINI, SELL, 100.0, FILLED)
+2025-05-04 14:56:07,262 - src.execution.order_manager - INFO - Emitting TRADE_OPEN event for MINI: SELL 100.0 @ 521.32
+2025-05-04 14:56:07,262 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): fb61eef8-744c-40fc-9aec-047f45593c91
+2025-05-04 14:56:07,262 - src.core.events.event_bus - DEBUG - Processing TRADE_OPEN event (ID: fb61eef8-744c-40fc-9aec-047f45593c91)
+2025-05-04 14:56:07,262 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.32
+2025-05-04 14:56:07,262 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=0, change=-100.0, cost_basis=521.3
+2025-05-04 14:56:07,262 - src.risk.portfolio.position - DEBUG - Opening new position: quantity=-100.0, cost_basis=521.32
+2025-05-04 14:56:07,262 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-100.0, cost_basis=521.32, realized_pnl=0.0
+2025-05-04 14:56:07,262 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.32
+2025-05-04 14:56:07,262 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.32
+2025-05-04 14:56:07,262 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-100.0, change=-100.0, cost_basis=521.32
+2025-05-04 14:56:07,262 - src.risk.portfolio.position - DEBUG - Adding to position: new quantity=-200.0, new cost_basis=521.32
+2025-05-04 14:56:07,262 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-200.0, cost_basis=521.32, realized_pnl=0.0
+2025-05-04 14:56:07,262 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -104264.00000000001 -> -100000
+2025-05-04 14:56:07,262 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.32
+2025-05-04 14:56:07,262 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.32
+2025-05-04 14:56:07,262 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-200.0, change=-100.0, cost_basis=521.32
+2025-05-04 14:56:07,262 - src.risk.portfolio.position - DEBUG - Adding to position: new quantity=-300.0, new cost_basis=521.32
+2025-05-04 14:56:07,262 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-300.0, cost_basis=521.32, realized_pnl=0.0
+2025-05-04 14:56:07,262 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -156396.00000000003 -> -100000
+2025-05-04 14:56:07,262 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.32
+2025-05-04 14:56:07,262 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI SELL 100.0 @ 521.32
+2025-05-04 14:56:07,262 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-300.0, change=-100.0, cost_basis=521.32
+2025-05-04 14:56:07,262 - src.risk.portfolio.position - DEBUG - Adding to position: new quantity=-400.0, new cost_basis=521.32
+2025-05-04 14:56:07,262 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-400.0, cost_basis=521.32, realized_pnl=0.0
+2025-05-04 14:56:07,262 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208528.00000000003 -> -100000
+2025-05-04 14:56:07,262 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI SELL 100.0 @ 521.32
+2025-05-04 14:56:07,262 - src.core.events.event_bus - DEBUG - Event FILL consumed, skipping remaining handlers
+2025-05-04 14:56:07,262 - src.execution.broker.broker_simulator - DEBUG - Fill event emitted for MINI with order_id: order_8233f842
+2025-05-04 14:56:07,262 - src.core.events.event_bus - DEBUG - Event ORDER consumed, skipping remaining handlers
+2025-05-04 14:56:07,262 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 MINI @ 521.32, rule_id=MINI_SELL_OPEN_20240326141600
+2025-05-04 14:56:07,262 - src.core.events.event_bus - DEBUG - Event SIGNAL consumed, skipping remaining handlers
+2025-05-04 14:56:07,262 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 14:16:00
+2025-05-04 14:56:07,262 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208528.00000000003 -> -100000
+2025-05-04 14:56:07,262 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208528.00000000003 -> -100000
+2025-05-04 14:56:07,262 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208528.00000000003 -> -100000
+2025-05-04 14:56:07,262 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.30, Slow MA: 521.30, Prev Fast: 521.29, Prev Slow: 521.29
+2025-05-04 14:56:07,262 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208528.00000000003 -> -100000
+2025-05-04 14:56:07,262 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208528.00000000003 -> -100000
+2025-05-04 14:56:07,262 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): b3f44d54-d77d-4e92-a2a1-9f9096edc22c
+2025-05-04 14:56:07,262 - src.core.events.event_bus - DEBUG - Processing BAR event (ID: b3f44d54-d77d-4e92-a2a1-9f9096edc22c)
+2025-05-04 14:56:07,262 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -208552.0 -> -100000
+2025-05-04 14:56:07,262 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.32, Slow MA: 521.31, Prev Fast: 521.30, Prev Slow: 521.30
+2025-05-04 14:56:07,262 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-04 14:56:07,262 - src.core.events.event_bus - DEBUG - Processing SIGNAL event (ID: 7242810b-2c41-41fd-8c24-1e18e3b0a70a)
+2025-05-04 14:56:07,262 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.38
+2025-05-04 14:56:07,262 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 400.0 MINI @ 521.38, rule_id=MINI_BUY_CLOSE_20240326141700, timestamp=2024-03-26 14:17:00, action=CLOSE
+2025-05-04 14:56:07,263 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_CLOSE_20240326141700
+2025-05-04 14:56:07,263 - src.core.events.event_bus - DEBUG - Processing ORDER event (ID: c2e33ca4-4de1-4f61-b2dc-dd43b958b70c)
+2025-05-04 14:56:07,263 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,263 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,263 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,263 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,263 - src.execution.order_manager - INFO - Converting trading decision to order: order_6fb46273 (BUY 400.0 MINI @ 521.38)
+2025-05-04 14:56:07,263 - src.execution.order_manager - INFO - Order order_6fb46273 using quantity field 400.0 for size
+2025-05-04 14:56:07,263 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 400.0 MINI @ 521.38
+2025-05-04 14:56:07,263 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_6fb46273
+2025-05-04 14:56:07,263 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_6fb46273
+2025-05-04 14:56:07,263 - src.core.events.event_bus - DEBUG - Processing FILL event (ID: 04caf55e-392e-48b1-9135-6c1b04b29eb1)
+2025-05-04 14:56:07,263 - src.execution.order_manager - INFO - Processing fill event for order_id: order_6fb46273
+2025-05-04 14:56:07,263 - src.execution.order_manager - DEBUG - Fill data: {'symbol': 'MINI', 'direction': 'BUY', 'quantity': 400.0, 'price': 521.38, 'timestamp': Timestamp('2024-03-26 14:17:00'), 'rule_id': 'MINI_BUY_CLOSE_20240326141700', 'action_type': 'CLOSE', 'order_id': 'order_6fb46273', 'order_type': 'MARKET', 'status': 'PENDING', 'size': 400.0, 'fill_price': 521.9013799999999, 'fill_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 263153), 'commission': 208.76055199999996}
+2025-05-04 14:56:07,263 - src.execution.order_manager - INFO - Updated order with fill: Order(order_6fb46273, MINI, BUY, 400.0, FILLED)
+2025-05-04 14:56:07,263 - src.execution.order_manager - INFO - Emitting simplified TRADE_CLOSE event for MINI: BUY 400.0 @ 521.38
+2025-05-04 14:56:07,263 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): e59ede8e-77a3-43f2-a49c-06ec5d5dcfdd
+2025-05-04 14:56:07,263 - src.core.events.event_bus - DEBUG - Processing TRADE_CLOSE event (ID: e59ede8e-77a3-43f2-a49c-06ec5d5dcfdd)
+2025-05-04 14:56:07,263 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.38, PnL: 10427.60
+2025-05-04 14:56:07,263 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.38
+2025-05-04 14:56:07,263 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.38, PnL: 10427.60
+2025-05-04 14:56:07,263 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.38
+2025-05-04 14:56:07,263 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.38, PnL: 10427.60
+2025-05-04 14:56:07,263 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.38
+2025-05-04 14:56:07,263 - src.risk.portfolio.portfolio - INFO - Processing trade close: MINI SELL 400.0 @ 521.38, PnL: 10427.60
+2025-05-04 14:56:07,263 - src.risk.portfolio.portfolio - INFO - Created trade close record for MINI SELL 400.0 @ 521.38
+2025-05-04 14:56:07,263 - src.core.events.event_bus - DEBUG - Event FILL consumed, skipping remaining handlers
+2025-05-04 14:56:07,263 - src.execution.broker.broker_simulator - DEBUG - Fill event emitted for MINI with order_id: order_6fb46273
+2025-05-04 14:56:07,263 - src.core.events.event_bus - DEBUG - Event ORDER consumed, skipping remaining handlers
+2025-05-04 14:56:07,263 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: BUY 400.0 MINI @ 521.38, rule_id=MINI_BUY_CLOSE_20240326141700
+2025-05-04 14:56:07,263 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 MINI @ 521.38, rule_id=MINI_BUY_OPEN_20240326141700, timestamp=2024-03-26 14:17:00, action=OPEN
+2025-05-04 14:56:07,263 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_OPEN_20240326141700
+2025-05-04 14:56:07,263 - src.core.events.event_bus - DEBUG - Processing ORDER event (ID: bd26b324-b084-41fb-8f12-9806cfb1eb0a)
+2025-05-04 14:56:07,263 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,263 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,263 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,263 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 14:56:07,263 - src.execution.order_manager - INFO - Converting trading decision to order: order_e7b7a6b3 (BUY 100.0 MINI @ 521.38)
+2025-05-04 14:56:07,263 - src.execution.order_manager - INFO - Order order_e7b7a6b3 using quantity field 100.0 for size
+2025-05-04 14:56:07,263 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100.0 MINI @ 521.38
+2025-05-04 14:56:07,263 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_e7b7a6b3
+2025-05-04 14:56:07,263 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_e7b7a6b3
+2025-05-04 14:56:07,263 - src.core.events.event_bus - DEBUG - Processing FILL event (ID: 8e39b2ec-35a3-44bd-aa60-6f0d00f93e1d)
+2025-05-04 14:56:07,263 - src.execution.order_manager - INFO - Processing fill event for order_id: order_e7b7a6b3
+2025-05-04 14:56:07,263 - src.execution.order_manager - DEBUG - Fill data: {'symbol': 'MINI', 'direction': 'BUY', 'quantity': 100.0, 'price': 521.38, 'timestamp': Timestamp('2024-03-26 14:17:00'), 'rule_id': 'MINI_BUY_OPEN_20240326141700', 'action_type': 'OPEN', 'order_id': 'order_e7b7a6b3', 'order_type': 'MARKET', 'status': 'PENDING', 'size': 100.0, 'fill_price': 521.9013799999999, 'fill_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 263757), 'commission': 52.19013799999999}
+2025-05-04 14:56:07,263 - src.execution.order_manager - INFO - Updated order with fill: Order(order_e7b7a6b3, MINI, BUY, 100.0, FILLED)
+2025-05-04 14:56:07,263 - src.execution.order_manager - INFO - Emitting TRADE_OPEN event for MINI: BUY 100.0 @ 521.38
+2025-05-04 14:56:07,263 - src.core.events.event_bus - DEBUG - Default dedup key (event_id): 37365063-aea7-493e-9829-385de44a4812
+2025-05-04 14:56:07,263 - src.core.events.event_bus - DEBUG - Processing TRADE_OPEN event (ID: 37365063-aea7-493e-9829-385de44a4812)
+2025-05-04 14:56:07,263 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.38
+2025-05-04 14:56:07,263 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-400.0, change=100.0, cost_basis=521.32
+2025-05-04 14:56:07,263 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-5.999999999994543
+2025-05-04 14:56:07,263 - src.risk.portfolio.position - DEBUG - Position partially closed: new quantity=-300.0, cost=156396.00000000003
+2025-05-04 14:56:07,264 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-300.0, cost_basis=521.32, realized_pnl=-5.999999999994543
+2025-05-04 14:56:07,264 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -156414.0 -> -100000
+2025-05-04 14:56:07,264 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.38
+2025-05-04 14:56:07,264 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.38
+2025-05-04 14:56:07,264 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-300.0, change=100.0, cost_basis=521.32
+2025-05-04 14:56:07,264 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-5.999999999994543
+2025-05-04 14:56:07,264 - src.risk.portfolio.position - DEBUG - Position partially closed: new quantity=-200.0, cost=104264.00000000003
+2025-05-04 14:56:07,264 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-200.0, cost_basis=521.32, realized_pnl=-5.999999999994543
+2025-05-04 14:56:07,264 - src.risk.portfolio.portfolio - WARNING - Capping excessive position value for MINI: -104276.0 -> -100000
+2025-05-04 14:56:07,264 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.38
+2025-05-04 14:56:07,264 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.38
+2025-05-04 14:56:07,264 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-200.0, change=100.0, cost_basis=521.32
+2025-05-04 14:56:07,264 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-5.999999999994543
+2025-05-04 14:56:07,264 - src.risk.portfolio.position - DEBUG - Position partially closed: new quantity=-100.0, cost=52132.000000000015
+2025-05-04 14:56:07,264 - src.risk.portfolio.position - DEBUG - Update complete: quantity=-100.0, cost_basis=521.32, realized_pnl=-5.999999999994543
+2025-05-04 14:56:07,264 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.38
+2025-05-04 14:56:07,264 - src.risk.portfolio.portfolio - INFO - Processing trade open: MINI BUY 100.0 @ 521.38
+2025-05-04 14:56:07,264 - src.risk.portfolio.position - DEBUG - Position update for MINI: current=-100.0, change=100.0, cost_basis=521.32
+2025-05-04 14:56:07,264 - src.risk.portfolio.position - DEBUG - Closing portion: quantity=100.0, pnl=-5.999999999994543
+2025-05-04 14:56:07,264 - src.risk.portfolio.position - DEBUG - Position fully closed, pnl=-5.999999999994543
+2025-05-04 14:56:07,264 - src.risk.portfolio.position - DEBUG - Update complete: quantity=0, cost_basis=521.32, realized_pnl=-5.999999999994543
+2025-05-04 14:56:07,264 - src.risk.portfolio.portfolio - INFO - Created trade record for MINI BUY 100.0 @ 521.38
+2025-05-04 14:56:07,264 - src.core.events.event_bus - DEBUG - Event FILL consumed, skipping remaining handlers
+2025-05-04 14:56:07,264 - src.execution.broker.broker_simulator - DEBUG - Fill event emitted for MINI with order_id: order_e7b7a6b3
+2025-05-04 14:56:07,264 - src.core.events.event_bus - DEBUG - Event ORDER consumed, skipping remaining handlers
+2025-05-04 14:56:07,264 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 MINI @ 521.38, rule_id=MINI_BUY_OPEN_20240326141700
+2025-05-04 14:56:07,264 - src.core.events.event_bus - DEBUG - Event SIGNAL consumed, skipping remaining handlers
+2025-05-04 14:56:07,264 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 14:17:00
+2025-05-04 14:56:07,264 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.34, Slow MA: 521.32, Prev Fast: 521.32, Prev Slow: 521.31
+2025-05-04 14:56:07,264 - src.strategy.implementations.simple_ma_crossover - DEBUG - Symbol: MINI, Fast MA: 521.36, Slow MA: 521.32, Prev Fast: 521.34, Prev Slow: 521.32
+2025-05-04 14:56:07,264 - src.data.historical_data_handler - DEBUG - End of data reached for MINI
+2025-05-04 14:56:07,264 - src.execution.backtest.backtest - INFO - Backtest completed after 49 iterations
+2025-05-04 14:56:07,264 - src.risk.portfolio.portfolio - INFO - === TRADE TRACKING DEBUG ===
+2025-05-04 14:56:07,264 - src.risk.portfolio.portfolio - INFO - Portfolio trade list ID: 4388025664
+2025-05-04 14:56:07,264 - src.risk.portfolio.portfolio - INFO - Trade count: 72
+2025-05-04 14:56:07,264 - src.risk.portfolio.portfolio - INFO - First trade: eced5bf9-ed98-4845-b98d-968c42559cf0 - MINI
+2025-05-04 14:56:07,264 - src.risk.portfolio.portfolio - INFO - Last trade: 595d8d9c-93b6-44fa-a712-c17b08fb4f91 - MINI
+2025-05-04 14:56:07,264 - src.risk.portfolio.portfolio - INFO - Total PnL from trades: 250099.17
+2025-05-04 14:56:07,264 - src.risk.portfolio.portfolio - INFO - === END TRADE TRACKING DEBUG ===
+2025-05-04 14:56:07,265 - src.risk.portfolio.portfolio - INFO - === TRADE TRACKING DEBUG ===
+2025-05-04 14:56:07,265 - src.risk.portfolio.portfolio - INFO - Portfolio trade list ID: 4388025664
+2025-05-04 14:56:07,265 - src.risk.portfolio.portfolio - INFO - Trade count: 72
+2025-05-04 14:56:07,265 - src.risk.portfolio.portfolio - INFO - First trade: eced5bf9-ed98-4845-b98d-968c42559cf0 - MINI
+2025-05-04 14:56:07,265 - src.risk.portfolio.portfolio - INFO - Last trade: 595d8d9c-93b6-44fa-a712-c17b08fb4f91 - MINI
+2025-05-04 14:56:07,265 - src.risk.portfolio.portfolio - INFO - Total PnL from trades: 250099.17
+2025-05-04 14:56:07,265 - src.risk.portfolio.portfolio - INFO - === END TRADE TRACKING DEBUG ===
+2025-05-04 14:56:07,265 - src.risk.portfolio.portfolio - INFO - get_recent_trades called, self.trades has 72 items
+2025-05-04 14:56:07,265 - src.risk.portfolio.portfolio - INFO - Trade list object ID: 4388025664
+2025-05-04 14:56:07,265 - src.risk.portfolio.portfolio - INFO - First trade: {'id': 'eced5bf9-ed98-4845-b98d-968c42559cf0', 'timestamp': datetime.datetime(2025, 5, 4, 14, 56, 7, 243527), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 100.0, 'size': 100.0, 'price': 521.12, 'fill_price': 521.12, 'commission': 52.059888, 'pnl': 0.0, 'realized_pnl': 0.0, 'entry_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 243527), 'exit_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 243527), 'entry_price': 521.12, 'exit_price': 521.12, 'trade_value': 52112.0, 'order_id': 'order_9d34afa2', 'rule_id': 'MINI_SELL_OPEN_20240326133600', 'transaction_id': 'eced5bf9-ed98-4845-b98d-968c42559cf0', 'status': 'OPEN'}
+2025-05-04 14:56:07,265 - src.risk.portfolio.portfolio - INFO - Last trade: {'id': '595d8d9c-93b6-44fa-a712-c17b08fb4f91', 'timestamp': datetime.datetime(2025, 5, 4, 14, 56, 7, 263759), 'symbol': 'MINI', 'direction': 'BUY', 'quantity': 100.0, 'size': 100.0, 'price': 521.38, 'fill_price': 521.38, 'commission': 52.19013799999999, 'pnl': -5.999999999994543, 'realized_pnl': -5.999999999994543, 'entry_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 263759), 'exit_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 263759), 'entry_price': 521.38, 'exit_price': 521.38, 'trade_value': 52138.0, 'order_id': 'order_e7b7a6b3', 'rule_id': 'MINI_BUY_OPEN_20240326141700', 'transaction_id': '595d8d9c-93b6-44fa-a712-c17b08fb4f91', 'status': 'OPEN'}
+2025-05-04 14:56:07,265 - src.risk.portfolio.portfolio - INFO - Returning 72 validated trades
+2025-05-04 14:56:07,266 - src.execution.backtest.backtest - INFO - Collected 72 trades from portfolio for reporting
+2025-05-04 14:56:07,266 - src.execution.backtest.backtest - INFO - First trade sample: MINI SELL @ 521.12
+2025-05-04 14:56:07,266 - src.execution.backtest.backtest - INFO - Last trade sample: MINI BUY @ 521.38
+2025-05-04 14:56:07,266 - src.execution.backtest.backtest - INFO - Trade stats: 72 trades, 28 wins, 20 losses
+2025-05-04 14:56:07,266 - src.execution.backtest.backtest - INFO - PnL sum: 250099.17
+2025-05-04 14:56:07,266 - src.execution.backtest.backtest - INFO - Min PnL: -8.00, Max PnL: 10427.60
+2025-05-04 14:56:07,266 - src.execution.backtest.backtest - INFO - Stored 72 trades in results dictionary with ID 4439235904
+2025-05-04 14:56:07,266 - src.execution.backtest.backtest - INFO - Performance calculator configured with 72 trades
+2025-05-04 14:56:07,266 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 72 trades and equity curve with 289 points
+2025-05-04 14:56:07,266 - src.analytics.performance.calculator - INFO - Sample trade: {'id': 'eced5bf9-ed98-4845-b98d-968c42559cf0', 'timestamp': datetime.datetime(2025, 5, 4, 14, 56, 7, 243527), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 100.0, 'size': 100.0, 'price': 521.12, 'fill_price': 521.12, 'commission': 52.059888, 'pnl': 0.0, 'realized_pnl': 0.0, 'entry_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 243527), 'exit_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 243527), 'entry_price': 521.12, 'exit_price': 521.12, 'trade_value': 52112.0, 'order_id': 'order_9d34afa2', 'rule_id': 'MINI_SELL_OPEN_20240326133600', 'transaction_id': 'eced5bf9-ed98-4845-b98d-968c42559cf0', 'status': 'OPEN'}
+2025-05-04 14:56:07,266 - src.analytics.performance.calculator - INFO - Total PnL from trades: 250099.17
+2025-05-04 14:56:07,266 - src.analytics.performance.calculator - INFO - Trades with PnL field: 72 out of 72
+2025-05-04 14:56:07,266 - src.analytics.metrics.functional - INFO - Calculating metrics for 72 trades and 289 equity points
+2025-05-04 14:56:07,268 - src.analytics.metrics.functional - INFO - Win rate calculation: 28 wins out of 72 valid trades
+2025-05-04 14:56:07,268 - src.analytics.metrics.functional - INFO - Profit factor calculation: gross profit=250205.21, gross loss=106.04
+2025-05-04 14:56:07,268 - src.execution.backtest.backtest - INFO - Calculated performance metrics for 72 trades
+2025-05-04 14:56:07,268 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 72 trades and equity curve with 289 points
+2025-05-04 14:56:07,268 - src.analytics.performance.calculator - INFO - Sample trade: {'id': 'eced5bf9-ed98-4845-b98d-968c42559cf0', 'timestamp': datetime.datetime(2025, 5, 4, 14, 56, 7, 243527), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 100.0, 'size': 100.0, 'price': 521.12, 'fill_price': 521.12, 'commission': 52.059888, 'pnl': 0.0, 'realized_pnl': 0.0, 'entry_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 243527), 'exit_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 243527), 'entry_price': 521.12, 'exit_price': 521.12, 'trade_value': 52112.0, 'order_id': 'order_9d34afa2', 'rule_id': 'MINI_SELL_OPEN_20240326133600', 'transaction_id': 'eced5bf9-ed98-4845-b98d-968c42559cf0', 'status': 'OPEN'}
+2025-05-04 14:56:07,268 - src.analytics.performance.calculator - INFO - Total PnL from trades: 250099.17
+2025-05-04 14:56:07,268 - src.analytics.performance.calculator - INFO - Trades with PnL field: 72 out of 72
+2025-05-04 14:56:07,268 - src.analytics.metrics.functional - INFO - Calculating metrics for 72 trades and 289 equity points
+2025-05-04 14:56:07,269 - src.analytics.metrics.functional - INFO - Win rate calculation: 28 wins out of 72 valid trades
+2025-05-04 14:56:07,269 - src.analytics.metrics.functional - INFO - Profit factor calculation: gross profit=250205.21, gross loss=106.04
+2025-05-04 14:56:07,269 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 72 trades and equity curve with 289 points
+2025-05-04 14:56:07,269 - src.analytics.performance.calculator - INFO - Sample trade: {'id': 'eced5bf9-ed98-4845-b98d-968c42559cf0', 'timestamp': datetime.datetime(2025, 5, 4, 14, 56, 7, 243527), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 100.0, 'size': 100.0, 'price': 521.12, 'fill_price': 521.12, 'commission': 52.059888, 'pnl': 0.0, 'realized_pnl': 0.0, 'entry_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 243527), 'exit_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 243527), 'entry_price': 521.12, 'exit_price': 521.12, 'trade_value': 52112.0, 'order_id': 'order_9d34afa2', 'rule_id': 'MINI_SELL_OPEN_20240326133600', 'transaction_id': 'eced5bf9-ed98-4845-b98d-968c42559cf0', 'status': 'OPEN'}
+2025-05-04 14:56:07,269 - src.analytics.performance.calculator - INFO - Total PnL from trades: 250099.17
+2025-05-04 14:56:07,269 - src.analytics.performance.calculator - INFO - Trades with PnL field: 72 out of 72
+2025-05-04 14:56:07,269 - src.analytics.metrics.functional - INFO - Calculating metrics for 72 trades and 289 equity points
+2025-05-04 14:56:07,270 - src.analytics.metrics.functional - INFO - Win rate calculation: 28 wins out of 72 valid trades
+2025-05-04 14:56:07,270 - src.analytics.metrics.functional - INFO - Profit factor calculation: gross profit=250205.21, gross loss=106.04
+2025-05-04 14:56:07,275 - src.risk.portfolio.portfolio - INFO - get_recent_trades called, self.trades has 72 items
+2025-05-04 14:56:07,275 - src.risk.portfolio.portfolio - INFO - Trade list object ID: 4388025664
+2025-05-04 14:56:07,275 - src.risk.portfolio.portfolio - INFO - First trade: {'id': 'eced5bf9-ed98-4845-b98d-968c42559cf0', 'timestamp': datetime.datetime(2025, 5, 4, 14, 56, 7, 243527), 'symbol': 'MINI', 'direction': 'SELL', 'quantity': 100.0, 'size': 100.0, 'price': 521.12, 'fill_price': 521.12, 'commission': 52.059888, 'pnl': 0.0, 'realized_pnl': 0.0, 'entry_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 243527), 'exit_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 243527), 'entry_price': 521.12, 'exit_price': 521.12, 'trade_value': 52112.0, 'order_id': 'order_9d34afa2', 'rule_id': 'MINI_SELL_OPEN_20240326133600', 'transaction_id': 'eced5bf9-ed98-4845-b98d-968c42559cf0', 'status': 'OPEN'}
+2025-05-04 14:56:07,275 - src.risk.portfolio.portfolio - INFO - Last trade: {'id': '595d8d9c-93b6-44fa-a712-c17b08fb4f91', 'timestamp': datetime.datetime(2025, 5, 4, 14, 56, 7, 263759), 'symbol': 'MINI', 'direction': 'BUY', 'quantity': 100.0, 'size': 100.0, 'price': 521.38, 'fill_price': 521.38, 'commission': 52.19013799999999, 'pnl': -5.999999999994543, 'realized_pnl': -5.999999999994543, 'entry_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 263759), 'exit_time': datetime.datetime(2025, 5, 4, 14, 56, 7, 263759), 'entry_price': 521.38, 'exit_price': 521.38, 'trade_value': 52138.0, 'order_id': 'order_e7b7a6b3', 'rule_id': 'MINI_BUY_OPEN_20240326141700', 'transaction_id': '595d8d9c-93b6-44fa-a712-c17b08fb4f91', 'status': 'OPEN'}
+2025-05-04 14:56:07,275 - src.risk.portfolio.portfolio - INFO - Returning 72 validated trades
+2025-05-04 14:56:07,275 - src.execution.backtest.backtest - INFO - Backtest complete

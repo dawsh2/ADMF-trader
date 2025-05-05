@@ -1,0 +1,29 @@
+====== SIGNAL-ORDER ANALYSIS REPORT ======
+Analysis from: 2025-05-04 18:48:55.780848
+Duration: 0.222548 seconds
+
+=== SIGNAL STATISTICS ===
+Total signals: 0
+Buy signals: 0
+Sell signals: 0
+Neutral signals: 0
+Signals with rule_id: 0
+
+=== ORDER STATISTICS ===
+Total orders: 0
+Buy orders: 0
+Sell orders: 0
+Market orders: 0
+Limit orders: 0
+Orders with rule_id: 0
+
+=== ORDER INTENT STATISTICS ===
+OPEN: 0
+CLOSE: 0
+None: 0
+
+=== RULE ID ANALYSIS ===
+Unique rule IDs in signals: 0
+Unique rule IDs in orders: 0
+
+Rule IDs with both signals and orders: 0

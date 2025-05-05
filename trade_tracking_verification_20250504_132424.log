@@ -1,0 +1,316 @@
+2025-05-04 13:24:24,392 - __main__ - INFO - Starting trade tracking verification test
+2025-05-04 13:24:24,392 - __main__ - INFO - Loading configuration from config/mini_test.yaml
+2025-05-04 13:24:24,394 - __main__ - INFO - Setting up system
+2025-05-04 13:24:24,394 - src.core.system_bootstrap - INFO - Logging initialized at level INFO
+2025-05-04 13:24:24,394 - src.core.system_bootstrap - INFO - Log file: backtest.log
+2025-05-04 13:24:24,395 - src.core.system_bootstrap - INFO - Loaded configuration from config/mini_test.yaml
+2025-05-04 13:24:24,395 - src.core.system_bootstrap - INFO - Event system initialized with native deduplication
+2025-05-04 13:24:24,659 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-05-04 13:24:24,659 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-05-04 13:24:24,659 - src.core.system_bootstrap - INFO - Data components initialized with source type: csv
+2025-05-04 13:24:24,661 - src.execution.broker.broker_simulator - INFO - Simulated broker initialized
+2025-05-04 13:24:24,661 - src.execution.order_manager - INFO - Order manager initialized
+2025-05-04 13:24:24,661 - src.core.system_bootstrap - INFO - Execution components initialized
+2025-05-04 13:24:24,663 - src.core.system_bootstrap - INFO - Using Enhanced Risk Manager (refactored architecture)
+2025-05-04 13:24:24,663 - src.risk.managers.enhanced_risk_manager - INFO - Enhanced risk manager risk_manager_67829441 initialized
+2025-05-04 13:24:24,663 - src.core.system_bootstrap - INFO - Enhanced risk manager configured with position_sizing_method=fixed, position_size=100, max_position_size=1000
+2025-05-04 13:24:24,663 - src.core.system_bootstrap - INFO - No signal interpreter needed with enhanced risk manager
+2025-05-04 13:24:24,663 - src.core.system_bootstrap - INFO - Risk components initialized
+2025-05-04 13:24:24,664 - src.core.system_bootstrap - INFO - Discovering strategy implementations...
+2025-05-04 13:24:24,665 - src.core.utils.discovery - INFO - Registered component composite_regime in registry
+2025-05-04 13:24:24,665 - src.core.utils.discovery - INFO - Registered component ensemble_strategy in registry
+2025-05-04 13:24:24,665 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-05-04 13:24:24,665 - src.core.utils.discovery - INFO - Registered component mean_reversion in registry
+2025-05-04 13:24:24,665 - src.core.utils.discovery - INFO - Registered component regime_ensemble in registry
+2025-05-04 13:24:24,665 - src.core.utils.discovery - INFO - Registered component simple_ma_crossover in registry
+2025-05-04 13:24:24,665 - src.core.system_bootstrap - INFO - Discovered strategies: composite_regime, ensemble_strategy, ma_crossover, mean_reversion, regime_ensemble, simple_ma_crossover
+2025-05-04 13:24:24,665 - src.core.system_bootstrap - INFO - Requested strategy: simple_ma_crossover
+2025-05-04 13:24:24,665 - src.core.system_bootstrap - INFO - Available strategies in registry: ['composite_regime', 'ensemble_strategy', 'ma_crossover', 'mean_reversion', 'regime_ensemble', 'simple_ma_crossover']
+2025-05-04 13:24:24,665 - src.strategy.implementations.simple_ma_crossover - INFO - MA Crossover strategy initialized with fast_window=5, slow_window=15
+2025-05-04 13:24:24,665 - src.strategy.implementations.simple_ma_crossover - INFO - MA Crossover strategy configured with parameters: fast_window=5, slow_window=15
+2025-05-04 13:24:24,665 - src.core.system_bootstrap - INFO - Strategy 'simple_ma_crossover' initialized successfully
+2025-05-04 13:24:24,666 - src.core.system_bootstrap - INFO - Analytics components initialized
+2025-05-04 13:24:24,666 - src.core.system_bootstrap - INFO - Registered enhanced risk manager with high signal priority
+2025-05-04 13:24:24,666 - src.core.system_bootstrap - INFO - All components registered with event manager in optimal order
+2025-05-04 13:24:24,666 - src.core.system_bootstrap - INFO - Re-registered portfolio fill handler with high priority
+2025-05-04 13:24:24,666 - src.core.system_bootstrap - INFO - System bootstrap complete
+2025-05-04 13:24:24,666 - __main__ - INFO - Running backtest
+2025-05-04 13:24:24,666 - src.execution.backtest.backtest - INFO - Using timeframe from config: 1min
+2025-05-04 13:24:24,669 - src.execution.backtest.backtest - INFO - Backtest setup complete
+2025-05-04 13:24:24,669 - src.core.events.event_bus - INFO - Event bus reset complete
+2025-05-04 13:24:24,669 - src.execution.backtest.backtest - INFO - Event bus reset
+2025-05-04 13:24:24,669 - src.execution.backtest.backtest - INFO - Data handler reset
+2025-05-04 13:24:24,669 - src.strategy.implementations.simple_ma_crossover - INFO - Simple MA Crossover strategy simple_ma_crossover reset
+2025-05-04 13:24:24,669 - src.execution.backtest.backtest - INFO - Strategy reset
+2025-05-04 13:24:24,669 - src.risk.managers.enhanced_risk_manager - INFO - CLEARING 0 PROCESSED RULE IDs
+2025-05-04 13:24:24,669 - src.risk.managers.enhanced_risk_manager - INFO - After reset, processed_rule_ids size: 0
+2025-05-04 13:24:24,669 - src.risk.managers.enhanced_risk_manager - INFO - Risk manager risk_manager_67829441 reset completed
+2025-05-04 13:24:24,669 - src.execution.backtest.backtest - INFO - Risk manager reset
+2025-05-04 13:24:24,670 - src.execution.order_manager - INFO - Reset order manager
+2025-05-04 13:24:24,670 - src.execution.backtest.backtest - INFO - Order manager reset
+2025-05-04 13:24:24,670 - src.execution.broker.broker_simulator - INFO - Broker reset
+2025-05-04 13:24:24,670 - src.execution.backtest.backtest - INFO - Broker reset
+2025-05-04 13:24:24,670 - src.risk.portfolio.portfolio - INFO - Trade list reset - new empty list with ID: 4316860032
+2025-05-04 13:24:24,670 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_c77efa04 to initial state with cash: $100000.00
+2025-05-04 13:24:24,670 - src.execution.backtest.backtest - INFO - Portfolio reset
+2025-05-04 13:24:24,670 - src.execution.backtest.backtest - INFO - Reset all components for backtest
+2025-05-04 13:24:24,670 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['MINI'] with timeframe: 1min
+2025-05-04 13:24:24,670 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/MINI_1min.csv
+2025-05-04 13:24:24,672 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 48 rows
+2025-05-04 13:24:24,673 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2024-03-26 13:30:00
+2025-05-04 13:24:24,675 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2024-03-26 13:30:00
+2025-05-04 13:24:24,675 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2024-01-01 00:00:00
+2025-05-04 13:24:24,675 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2024-12-31 00:00:00
+2025-05-04 13:24:24,677 - src.data.sources.csv_handler - INFO - CSVDataSource: Set timestamp as index
+2025-05-04 13:24:24,679 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2024-03-26 13:30:00 to 2024-03-26 14:17:00
+2025-05-04 13:24:24,679 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume', 'trade_count', 'vwap']
+2025-05-04 13:24:24,679 - src.data.historical_data_handler - INFO - Loaded 48 bars for MINI from 2024-03-26 13:30:00 to 2024-03-26 14:17:00
+2025-05-04 13:24:24,679 - src.execution.backtest.backtest - INFO - Starting backtest
+2025-05-04 13:24:24,679 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-04 13:24:24,679 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.12
+2025-05-04 13:24:24,679 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 MINI @ 521.12, rule_id=MINI_SELL_OPEN_20240326133600, timestamp=2024-03-26 13:36:00, action=OPEN
+2025-05-04 13:24:24,679 - src.core.events.event_bus - INFO - Order dedup key: MINI_SELL_OPEN_20240326133600
+2025-05-04 13:24:24,679 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,679 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,679 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,679 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,679 - src.execution.order_manager - INFO - Converting trading decision to order: order_5020ba52 (SELL 100.0 MINI @ 521.12)
+2025-05-04 13:24:24,679 - src.execution.order_manager - INFO - Order order_5020ba52 using quantity field 100.0 for size
+2025-05-04 13:24:24,679 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100.0 MINI @ 521.12
+2025-05-04 13:24:24,679 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_5020ba52
+2025-05-04 13:24:24,679 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_5020ba52
+2025-05-04 13:24:24,679 - src.execution.order_manager - INFO - Processing fill event for order_id: order_5020ba52
+2025-05-04 13:24:24,679 - src.execution.order_manager - INFO - Updated order with fill: Order(order_5020ba52, MINI, SELL, 100.0, FILLED)
+2025-05-04 13:24:24,679 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 MINI @ 521.12, rule_id=MINI_SELL_OPEN_20240326133600
+2025-05-04 13:24:24,679 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 13:36:00
+2025-05-04 13:24:24,680 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-04 13:24:24,680 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.085
+2025-05-04 13:24:24,680 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 MINI @ 521.085, rule_id=MINI_BUY_OPEN_20240326134300, timestamp=2024-03-26 13:43:00, action=OPEN
+2025-05-04 13:24:24,680 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_OPEN_20240326134300
+2025-05-04 13:24:24,680 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,680 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,680 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,680 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,680 - src.execution.order_manager - INFO - Converting trading decision to order: order_874b7bbd (BUY 100.0 MINI @ 521.085)
+2025-05-04 13:24:24,680 - src.execution.order_manager - INFO - Order order_874b7bbd using quantity field 100.0 for size
+2025-05-04 13:24:24,680 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100.0 MINI @ 521.085
+2025-05-04 13:24:24,680 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_874b7bbd
+2025-05-04 13:24:24,680 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_874b7bbd
+2025-05-04 13:24:24,680 - src.execution.order_manager - INFO - Processing fill event for order_id: order_874b7bbd
+2025-05-04 13:24:24,680 - src.execution.order_manager - INFO - Updated order with fill: Order(order_874b7bbd, MINI, BUY, 100.0, FILLED)
+2025-05-04 13:24:24,680 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 MINI @ 521.085, rule_id=MINI_BUY_OPEN_20240326134300
+2025-05-04 13:24:24,680 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 13:43:00
+2025-05-04 13:24:24,680 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-04 13:24:24,680 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.09
+2025-05-04 13:24:24,680 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 MINI @ 521.09, rule_id=MINI_SELL_OPEN_20240326134700, timestamp=2024-03-26 13:47:00, action=OPEN
+2025-05-04 13:24:24,680 - src.core.events.event_bus - INFO - Order dedup key: MINI_SELL_OPEN_20240326134700
+2025-05-04 13:24:24,680 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,680 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,680 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,680 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,680 - src.execution.order_manager - INFO - Converting trading decision to order: order_4b3c2d48 (SELL 100.0 MINI @ 521.09)
+2025-05-04 13:24:24,680 - src.execution.order_manager - INFO - Order order_4b3c2d48 using quantity field 100.0 for size
+2025-05-04 13:24:24,680 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100.0 MINI @ 521.09
+2025-05-04 13:24:24,680 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_4b3c2d48
+2025-05-04 13:24:24,680 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_4b3c2d48
+2025-05-04 13:24:24,680 - src.execution.order_manager - INFO - Processing fill event for order_id: order_4b3c2d48
+2025-05-04 13:24:24,680 - src.execution.order_manager - INFO - Updated order with fill: Order(order_4b3c2d48, MINI, SELL, 100.0, FILLED)
+2025-05-04 13:24:24,681 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 MINI @ 521.09, rule_id=MINI_SELL_OPEN_20240326134700
+2025-05-04 13:24:24,681 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 13:47:00
+2025-05-04 13:24:24,681 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-04 13:24:24,681 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.17
+2025-05-04 13:24:24,681 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 MINI @ 521.17, rule_id=MINI_BUY_OPEN_20240326134800, timestamp=2024-03-26 13:48:00, action=OPEN
+2025-05-04 13:24:24,681 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_OPEN_20240326134800
+2025-05-04 13:24:24,681 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,681 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,681 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,681 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,681 - src.execution.order_manager - INFO - Converting trading decision to order: order_15d540a0 (BUY 100.0 MINI @ 521.17)
+2025-05-04 13:24:24,681 - src.execution.order_manager - INFO - Order order_15d540a0 using quantity field 100.0 for size
+2025-05-04 13:24:24,681 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100.0 MINI @ 521.17
+2025-05-04 13:24:24,681 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_15d540a0
+2025-05-04 13:24:24,681 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_15d540a0
+2025-05-04 13:24:24,681 - src.execution.order_manager - INFO - Processing fill event for order_id: order_15d540a0
+2025-05-04 13:24:24,681 - src.execution.order_manager - INFO - Updated order with fill: Order(order_15d540a0, MINI, BUY, 100.0, FILLED)
+2025-05-04 13:24:24,681 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 MINI @ 521.17, rule_id=MINI_BUY_OPEN_20240326134800
+2025-05-04 13:24:24,681 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 13:48:00
+2025-05-04 13:24:24,681 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-04 13:24:24,681 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.08
+2025-05-04 13:24:24,681 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 MINI @ 521.08, rule_id=MINI_SELL_OPEN_20240326135100, timestamp=2024-03-26 13:51:00, action=OPEN
+2025-05-04 13:24:24,681 - src.core.events.event_bus - INFO - Order dedup key: MINI_SELL_OPEN_20240326135100
+2025-05-04 13:24:24,681 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,681 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,681 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,681 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,681 - src.execution.order_manager - INFO - Converting trading decision to order: order_2f26c89e (SELL 100.0 MINI @ 521.08)
+2025-05-04 13:24:24,681 - src.execution.order_manager - INFO - Order order_2f26c89e using quantity field 100.0 for size
+2025-05-04 13:24:24,681 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100.0 MINI @ 521.08
+2025-05-04 13:24:24,681 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_2f26c89e
+2025-05-04 13:24:24,681 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_2f26c89e
+2025-05-04 13:24:24,681 - src.execution.order_manager - INFO - Processing fill event for order_id: order_2f26c89e
+2025-05-04 13:24:24,681 - src.execution.order_manager - INFO - Updated order with fill: Order(order_2f26c89e, MINI, SELL, 100.0, FILLED)
+2025-05-04 13:24:24,681 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 MINI @ 521.08, rule_id=MINI_SELL_OPEN_20240326135100
+2025-05-04 13:24:24,681 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 13:51:00
+2025-05-04 13:24:24,682 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-04 13:24:24,682 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.145
+2025-05-04 13:24:24,682 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 MINI @ 521.145, rule_id=MINI_BUY_OPEN_20240326135600, timestamp=2024-03-26 13:56:00, action=OPEN
+2025-05-04 13:24:24,682 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_OPEN_20240326135600
+2025-05-04 13:24:24,682 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,682 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,682 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,682 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,682 - src.execution.order_manager - INFO - Converting trading decision to order: order_5ea716a6 (BUY 100.0 MINI @ 521.145)
+2025-05-04 13:24:24,682 - src.execution.order_manager - INFO - Order order_5ea716a6 using quantity field 100.0 for size
+2025-05-04 13:24:24,682 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100.0 MINI @ 521.145
+2025-05-04 13:24:24,682 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_5ea716a6
+2025-05-04 13:24:24,682 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_5ea716a6
+2025-05-04 13:24:24,682 - src.execution.order_manager - INFO - Processing fill event for order_id: order_5ea716a6
+2025-05-04 13:24:24,682 - src.execution.order_manager - INFO - Updated order with fill: Order(order_5ea716a6, MINI, BUY, 100.0, FILLED)
+2025-05-04 13:24:24,682 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 MINI @ 521.145, rule_id=MINI_BUY_OPEN_20240326135600
+2025-05-04 13:24:24,682 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 13:56:00
+2025-05-04 13:24:24,682 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-04 13:24:24,682 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.25
+2025-05-04 13:24:24,682 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 MINI @ 521.25, rule_id=MINI_SELL_OPEN_20240326140300, timestamp=2024-03-26 14:03:00, action=OPEN
+2025-05-04 13:24:24,682 - src.core.events.event_bus - INFO - Order dedup key: MINI_SELL_OPEN_20240326140300
+2025-05-04 13:24:24,682 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,682 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,682 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,682 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,682 - src.execution.order_manager - INFO - Converting trading decision to order: order_b3daedd6 (SELL 100.0 MINI @ 521.25)
+2025-05-04 13:24:24,682 - src.execution.order_manager - INFO - Order order_b3daedd6 using quantity field 100.0 for size
+2025-05-04 13:24:24,682 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100.0 MINI @ 521.25
+2025-05-04 13:24:24,682 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_b3daedd6
+2025-05-04 13:24:24,682 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_b3daedd6
+2025-05-04 13:24:24,682 - src.execution.order_manager - INFO - Processing fill event for order_id: order_b3daedd6
+2025-05-04 13:24:24,682 - src.execution.order_manager - INFO - Updated order with fill: Order(order_b3daedd6, MINI, SELL, 100.0, FILLED)
+2025-05-04 13:24:24,682 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 MINI @ 521.25, rule_id=MINI_SELL_OPEN_20240326140300
+2025-05-04 13:24:24,682 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 14:03:00
+2025-05-04 13:24:24,683 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-04 13:24:24,683 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.31
+2025-05-04 13:24:24,683 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 MINI @ 521.31, rule_id=MINI_BUY_OPEN_20240326140500, timestamp=2024-03-26 14:05:00, action=OPEN
+2025-05-04 13:24:24,683 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_OPEN_20240326140500
+2025-05-04 13:24:24,683 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,683 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,683 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,683 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,683 - src.execution.order_manager - INFO - Converting trading decision to order: order_d4fbf729 (BUY 100.0 MINI @ 521.31)
+2025-05-04 13:24:24,683 - src.execution.order_manager - INFO - Order order_d4fbf729 using quantity field 100.0 for size
+2025-05-04 13:24:24,683 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100.0 MINI @ 521.31
+2025-05-04 13:24:24,683 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_d4fbf729
+2025-05-04 13:24:24,683 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_d4fbf729
+2025-05-04 13:24:24,683 - src.execution.order_manager - INFO - Processing fill event for order_id: order_d4fbf729
+2025-05-04 13:24:24,683 - src.execution.order_manager - INFO - Updated order with fill: Order(order_d4fbf729, MINI, BUY, 100.0, FILLED)
+2025-05-04 13:24:24,683 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 MINI @ 521.31, rule_id=MINI_BUY_OPEN_20240326140500
+2025-05-04 13:24:24,683 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 14:05:00
+2025-05-04 13:24:24,683 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-04 13:24:24,683 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.3
+2025-05-04 13:24:24,683 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 MINI @ 521.3, rule_id=MINI_SELL_OPEN_20240326140900, timestamp=2024-03-26 14:09:00, action=OPEN
+2025-05-04 13:24:24,683 - src.core.events.event_bus - INFO - Order dedup key: MINI_SELL_OPEN_20240326140900
+2025-05-04 13:24:24,683 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,683 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,683 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,683 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,683 - src.execution.order_manager - INFO - Converting trading decision to order: order_c222bf30 (SELL 100.0 MINI @ 521.3)
+2025-05-04 13:24:24,683 - src.execution.order_manager - INFO - Order order_c222bf30 using quantity field 100.0 for size
+2025-05-04 13:24:24,683 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100.0 MINI @ 521.3
+2025-05-04 13:24:24,683 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_c222bf30
+2025-05-04 13:24:24,683 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_c222bf30
+2025-05-04 13:24:24,683 - src.execution.order_manager - INFO - Processing fill event for order_id: order_c222bf30
+2025-05-04 13:24:24,683 - src.execution.order_manager - INFO - Updated order with fill: Order(order_c222bf30, MINI, SELL, 100.0, FILLED)
+2025-05-04 13:24:24,683 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 MINI @ 521.3, rule_id=MINI_SELL_OPEN_20240326140900
+2025-05-04 13:24:24,683 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 14:09:00
+2025-05-04 13:24:24,684 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-04 13:24:24,684 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.3001
+2025-05-04 13:24:24,684 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 MINI @ 521.3001, rule_id=MINI_BUY_OPEN_20240326141300, timestamp=2024-03-26 14:13:00, action=OPEN
+2025-05-04 13:24:24,684 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_OPEN_20240326141300
+2025-05-04 13:24:24,684 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,684 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,684 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,684 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,684 - src.execution.order_manager - INFO - Converting trading decision to order: order_54349e77 (BUY 100.0 MINI @ 521.3001)
+2025-05-04 13:24:24,684 - src.execution.order_manager - INFO - Order order_54349e77 using quantity field 100.0 for size
+2025-05-04 13:24:24,684 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100.0 MINI @ 521.3001
+2025-05-04 13:24:24,684 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_54349e77
+2025-05-04 13:24:24,684 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_54349e77
+2025-05-04 13:24:24,684 - src.execution.order_manager - INFO - Processing fill event for order_id: order_54349e77
+2025-05-04 13:24:24,684 - src.execution.order_manager - INFO - Updated order with fill: Order(order_54349e77, MINI, BUY, 100.0, FILLED)
+2025-05-04 13:24:24,684 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 MINI @ 521.3001, rule_id=MINI_BUY_OPEN_20240326141300
+2025-05-04 13:24:24,684 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 14:13:00
+2025-05-04 13:24:24,684 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-04 13:24:24,684 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.32
+2025-05-04 13:24:24,684 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 MINI @ 521.32, rule_id=MINI_SELL_OPEN_20240326141600, timestamp=2024-03-26 14:16:00, action=OPEN
+2025-05-04 13:24:24,684 - src.core.events.event_bus - INFO - Order dedup key: MINI_SELL_OPEN_20240326141600
+2025-05-04 13:24:24,684 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,684 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,684 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,684 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,684 - src.execution.order_manager - INFO - Converting trading decision to order: order_734845ca (SELL 100.0 MINI @ 521.32)
+2025-05-04 13:24:24,684 - src.execution.order_manager - INFO - Order order_734845ca using quantity field 100.0 for size
+2025-05-04 13:24:24,684 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100.0 MINI @ 521.32
+2025-05-04 13:24:24,684 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_734845ca
+2025-05-04 13:24:24,684 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_734845ca
+2025-05-04 13:24:24,684 - src.execution.order_manager - INFO - Processing fill event for order_id: order_734845ca
+2025-05-04 13:24:24,684 - src.execution.order_manager - INFO - Updated order with fill: Order(order_734845ca, MINI, SELL, 100.0, FILLED)
+2025-05-04 13:24:24,684 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 MINI @ 521.32, rule_id=MINI_SELL_OPEN_20240326141600
+2025-05-04 13:24:24,684 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 14:16:00
+2025-05-04 13:24:24,684 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-04 13:24:24,684 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.38
+2025-05-04 13:24:24,684 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 MINI @ 521.38, rule_id=MINI_BUY_OPEN_20240326141700, timestamp=2024-03-26 14:17:00, action=OPEN
+2025-05-04 13:24:24,684 - src.core.events.event_bus - INFO - Order dedup key: MINI_BUY_OPEN_20240326141700
+2025-05-04 13:24:24,684 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,684 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,684 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,684 - src.execution.broker.broker_simulator - ERROR - Cannot process order without order_id
+2025-05-04 13:24:24,684 - src.execution.order_manager - INFO - Converting trading decision to order: order_1e0d111e (BUY 100.0 MINI @ 521.38)
+2025-05-04 13:24:24,684 - src.execution.order_manager - INFO - Order order_1e0d111e using quantity field 100.0 for size
+2025-05-04 13:24:24,684 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100.0 MINI @ 521.38
+2025-05-04 13:24:24,684 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_1e0d111e
+2025-05-04 13:24:24,685 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_1e0d111e
+2025-05-04 13:24:24,685 - src.execution.order_manager - INFO - Processing fill event for order_id: order_1e0d111e
+2025-05-04 13:24:24,685 - src.execution.order_manager - INFO - Updated order with fill: Order(order_1e0d111e, MINI, BUY, 100.0, FILLED)
+2025-05-04 13:24:24,685 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 MINI @ 521.38, rule_id=MINI_BUY_OPEN_20240326141700
+2025-05-04 13:24:24,685 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 14:17:00
+2025-05-04 13:24:24,685 - src.execution.backtest.backtest - INFO - Backtest completed after 49 iterations
+2025-05-04 13:24:24,685 - src.risk.portfolio.portfolio - INFO - === TRADE TRACKING DEBUG ===
+2025-05-04 13:24:24,685 - src.risk.portfolio.portfolio - INFO - Portfolio trade list ID: 4316860032
+2025-05-04 13:24:24,685 - src.risk.portfolio.portfolio - INFO - Trade count: 0
+2025-05-04 13:24:24,685 - src.risk.portfolio.portfolio - INFO - === END TRADE TRACKING DEBUG ===
+2025-05-04 13:24:24,686 - src.risk.portfolio.portfolio - INFO - === TRADE TRACKING DEBUG ===
+2025-05-04 13:24:24,686 - src.risk.portfolio.portfolio - INFO - Portfolio trade list ID: 4316860032
+2025-05-04 13:24:24,686 - src.risk.portfolio.portfolio - INFO - Trade count: 0
+2025-05-04 13:24:24,686 - src.risk.portfolio.portfolio - INFO - === END TRADE TRACKING DEBUG ===
+2025-05-04 13:24:24,686 - src.risk.portfolio.portfolio - INFO - get_recent_trades called, self.trades has 0 items
+2025-05-04 13:24:24,686 - src.risk.portfolio.portfolio - INFO - Trade list object ID: 4316860032
+2025-05-04 13:24:24,686 - src.risk.portfolio.portfolio - INFO - Returning 0 validated trades
+2025-05-04 13:24:24,686 - src.execution.backtest.backtest - INFO - Collected 0 trades from portfolio for reporting
+2025-05-04 13:24:24,686 - src.execution.backtest.backtest - INFO - Stored 0 trades in results dictionary with ID 4367589312
+2025-05-04 13:24:24,686 - src.execution.backtest.backtest - INFO - Performance calculator configured with 0 trades
+2025-05-04 13:24:24,686 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 0 trades and equity curve with 289 points
+2025-05-04 13:24:24,686 - src.analytics.metrics.functional - INFO - Calculating metrics for 0 trades and 289 equity points
+2025-05-04 13:24:24,688 - src.analytics.metrics.functional - WARNING - No valid trades for trade metrics calculation
+2025-05-04 13:24:24,689 - src.execution.backtest.backtest - INFO - Calculated performance metrics for 0 trades
+2025-05-04 13:24:24,689 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 0 trades and equity curve with 289 points
+2025-05-04 13:24:24,689 - src.analytics.metrics.functional - INFO - Calculating metrics for 0 trades and 289 equity points
+2025-05-04 13:24:24,689 - src.analytics.metrics.functional - WARNING - No valid trades for trade metrics calculation
+2025-05-04 13:24:24,689 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 0 trades and equity curve with 289 points
+2025-05-04 13:24:24,689 - src.analytics.metrics.functional - INFO - Calculating metrics for 0 trades and 289 equity points
+2025-05-04 13:24:24,690 - src.analytics.metrics.functional - WARNING - No valid trades for trade metrics calculation
+2025-05-04 13:24:24,697 - src.risk.portfolio.portfolio - INFO - get_recent_trades called, self.trades has 0 items
+2025-05-04 13:24:24,697 - src.risk.portfolio.portfolio - INFO - Trade list object ID: 4316860032
+2025-05-04 13:24:24,697 - src.risk.portfolio.portfolio - INFO - Returning 0 validated trades
+2025-05-04 13:24:24,697 - src.execution.backtest.backtest - INFO - Backtest complete
+2025-05-04 13:24:24,697 - src.risk.portfolio.portfolio - INFO - get_recent_trades called, self.trades has 0 items
+2025-05-04 13:24:24,697 - src.risk.portfolio.portfolio - INFO - Trade list object ID: 4316860032
+2025-05-04 13:24:24,698 - src.risk.portfolio.portfolio - INFO - Returning 0 validated trades
+2025-05-04 13:24:24,698 - __main__ - INFO - Verifying trade tracking in portfolio
+2025-05-04 13:24:24,698 - src.risk.portfolio.portfolio - INFO - === TRADE TRACKING DEBUG ===
+2025-05-04 13:24:24,698 - src.risk.portfolio.portfolio - INFO - Portfolio trade list ID: 4316860032
+2025-05-04 13:24:24,698 - src.risk.portfolio.portfolio - INFO - Trade count: 0
+2025-05-04 13:24:24,698 - src.risk.portfolio.portfolio - INFO - === END TRADE TRACKING DEBUG ===
+2025-05-04 13:24:24,698 - __main__ - INFO - Portfolio reports 0 trades
+2025-05-04 13:24:24,698 - src.risk.portfolio.portfolio - INFO - get_recent_trades called, self.trades has 0 items
+2025-05-04 13:24:24,698 - src.risk.portfolio.portfolio - INFO - Trade list object ID: 4316860032
+2025-05-04 13:24:24,698 - src.risk.portfolio.portfolio - INFO - Returning 0 validated trades
+2025-05-04 13:24:24,698 - __main__ - INFO - Results contain 0 trades
+2025-05-04 13:24:24,698 - __main__ - INFO - Metrics report 0 trades
+2025-05-04 13:24:24,698 - __main__ - INFO - Trade tracking verification complete

@@ -76,11 +76,13 @@ class SimulatedBroker:
         order_data = order_event.data
         order_id = order_data.get('order_id')
         
-        # Validate required fields
+        # CRITICAL FIX: Generate order_id if missing rather than error
         if not order_id:
-            logger.error("Cannot process order without order_id")
-            return False
-            
+            import uuid
+            order_id = f"order_{uuid.uuid4().hex[:8]}"
+            order_data['order_id'] = order_id
+            logger.info(f"Generated missing order_id: {order_id}")
+        
         # Update stats
         self.stats['orders_received'] += 1
         

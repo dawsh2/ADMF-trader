@@ -1,0 +1,2 @@
+id,timestamp,symbol,direction,quantity,size,price,fill_price,commission,pnl,realized_pnl,entry_time,exit_time,entry_price,exit_price,trade_value,order_id,rule_id,transaction_id,status
+e14117c2-2eaa-4f61-a34e-d9873d39cc0a,2025-05-04 18:50:40.796123,HEAD,BUY,18.0,18.0,521.5186,521.5186,9.3967221348,-93.8733480000003,-93.8733480000003,2025-05-04 18:40:40.796123,2025-05-04 18:50:40.796123,516.303414,521.5186,9387.3348,8c44ec9a-1d1d-4895-9921-b958e2bc2510,ma_crossover_HEAD_1_20240327_1338,e14117c2-2eaa-4f61-a34e-d9873d39cc0a,CLOSED

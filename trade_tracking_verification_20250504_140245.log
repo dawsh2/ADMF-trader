@@ -1,0 +1,13 @@
+2025-05-04 14:02:45,651 - __main__ - INFO - Starting trade tracking verification test
+2025-05-04 14:02:45,651 - __main__ - INFO - Loading configuration from config/mini_test.yaml
+2025-05-04 14:02:45,653 - __main__ - INFO - Setting up system
+2025-05-04 14:02:45,653 - src.core.system_bootstrap - INFO - Logging initialized at level INFO
+2025-05-04 14:02:45,653 - src.core.system_bootstrap - INFO - Log file: backtest.log
+2025-05-04 14:02:45,654 - src.core.system_bootstrap - INFO - Loaded configuration from config/mini_test.yaml
+2025-05-04 14:02:45,654 - src.core.system_bootstrap - INFO - Event system initialized with native deduplication
+2025-05-04 14:02:45,967 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-05-04 14:02:45,968 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-05-04 14:02:45,968 - src.core.system_bootstrap - INFO - Data components initialized with source type: csv
+2025-05-04 14:02:45,971 - src.execution.broker.broker_simulator - INFO - Simulated broker initialized
+2025-05-04 14:02:45,971 - src.execution.order_manager - INFO - Order manager initialized
+2025-05-04 14:02:45,971 - src.core.system_bootstrap - INFO - Execution components initialized

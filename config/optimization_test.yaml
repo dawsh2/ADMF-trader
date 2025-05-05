@@ -7,9 +7,10 @@ backtest:
   data_dir: "./data"
   start_date: "2023-01-01"
   end_date: "2024-12-31"
+  strategy: "simple_ma_crossover"  # Explicitly specify the strategy name
 
 strategies:
-  ma_crossover:
+  simple_ma_crossover:
     enabled: true
     price_key: "close"
     # Make sure to include the symbols here too
@@ -19,8 +20,23 @@ strategies:
     slow_window: 30
 
 risk_manager:
+  type: "enhanced"  # Use the enhanced risk manager from refactored architecture
+  position_sizing_method: "fixed"
   position_size: 100
-  max_position_pct: 0.1
+  max_position_size: 1000 
+  equity_percent: 5.0
+  risk_percent: 2.0
+  max_open_trades: 5
+
+# Order handling settings
+order_manager:
+  default_order_type: "MARKET"
+
+# Broker simulation settings
+broker:
+  slippage: 0.001  # 0.1% slippage
+  commission: 0.001  # 0.1% commission
+  delay: 0  # No delay in order processing
   
 optimization:
   enabled: true
@@ -31,7 +47,7 @@ optimization:
   maximize: true
   
   parameter_space:
-    ma_crossover:
+    simple_ma_crossover:
       fast_window:
         type: "integer"
         min: 2

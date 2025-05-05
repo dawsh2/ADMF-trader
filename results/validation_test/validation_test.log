@@ -1,204 +1,164 @@
-2025-05-01 13:38:36,182 - src.core.system_bootstrap - INFO - Logging initialized at level INFO
-2025-05-01 13:38:36,182 - src.core.system_bootstrap - INFO - Log file: ./results/validation_test/validation_test.log
-2025-05-01 13:38:36,184 - src.core.system_bootstrap - INFO - Loaded configuration from config/validation_test.yaml
-2025-05-01 13:38:36,184 - src.core.system_bootstrap - INFO - Event system initialized with native deduplication
-2025-05-01 13:38:36,184 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
-2025-05-01 13:38:36,185 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
-2025-05-01 13:38:36,185 - src.core.system_bootstrap - INFO - Data components initialized with source type: csv
-2025-05-01 13:38:36,188 - src.execution.broker.broker_simulator - INFO - Simulated broker initialized
-2025-05-01 13:38:36,188 - src.execution.order_manager - INFO - Order manager initialized
-2025-05-01 13:38:36,188 - src.core.system_bootstrap - INFO - Execution components initialized
-2025-05-01 13:38:36,190 - src.core.system_bootstrap - INFO - Using Enhanced Risk Manager (refactored architecture)
-2025-05-01 13:38:36,190 - src.risk.managers.enhanced_risk_manager - INFO - Enhanced risk manager risk_manager_13d6ce5b initialized
-2025-05-01 13:38:36,190 - src.core.system_bootstrap - INFO - Enhanced risk manager configured with position_sizing_method=fixed, position_size=100, max_position_size=1000
-2025-05-01 13:38:36,190 - src.core.system_bootstrap - INFO - No signal interpreter needed with enhanced risk manager
-2025-05-01 13:38:36,190 - src.core.system_bootstrap - INFO - Risk components initialized
-2025-05-01 13:38:36,193 - src.core.system_bootstrap - INFO - Discovering strategy implementations...
-2025-05-01 13:38:36,193 - src.core.utils.discovery - INFO - Registered component ensemble_strategy in registry
-2025-05-01 13:38:36,194 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
-2025-05-01 13:38:36,194 - src.core.utils.discovery - INFO - Registered component regime_ensemble in registry
-2025-05-01 13:38:36,194 - src.core.utils.discovery - INFO - Registered component simple_ma_crossover in registry
-2025-05-01 13:38:36,194 - src.core.system_bootstrap - INFO - Discovered strategies: ensemble_strategy, ma_crossover, regime_ensemble, simple_ma_crossover
-2025-05-01 13:38:36,194 - src.core.system_bootstrap - INFO - Requested strategy: simple_ma_crossover
-2025-05-01 13:38:36,194 - src.core.system_bootstrap - INFO - Available strategies in registry: ['ensemble_strategy', 'ma_crossover', 'regime_ensemble', 'simple_ma_crossover']
-2025-05-01 13:38:36,194 - src.strategy.implementations.simple_ma_crossover - INFO - MA Crossover strategy initialized with fast_window=5, slow_window=15
-2025-05-01 13:38:36,194 - src.strategy.implementations.simple_ma_crossover - INFO - MA Crossover strategy configured with parameters: fast_window=5, slow_window=15
-2025-05-01 13:38:36,194 - src.core.system_bootstrap - INFO - Strategy 'simple_ma_crossover' initialized successfully
-2025-05-01 13:38:36,194 - src.core.system_bootstrap - INFO - Analytics components initialized
-2025-05-01 13:38:36,194 - src.core.system_bootstrap - INFO - Registered enhanced risk manager with high signal priority
-2025-05-01 13:38:36,194 - src.core.system_bootstrap - INFO - All components registered with event manager in optimal order
-2025-05-01 13:38:36,194 - src.core.system_bootstrap - INFO - Re-registered portfolio fill handler with high priority
-2025-05-01 13:38:36,194 - src.core.system_bootstrap - INFO - System bootstrap complete
-2025-05-01 13:38:36,194 - src.execution.backtest.backtest - INFO - Using timeframe from config: 1min
-2025-05-01 13:38:36,196 - src.execution.backtest.backtest - INFO - Backtest setup complete
-2025-05-01 13:38:36,196 - src.core.events.event_bus - INFO - Event bus reset complete
-2025-05-01 13:38:36,196 - src.execution.backtest.backtest - INFO - Event bus reset
-2025-05-01 13:38:36,196 - src.execution.backtest.backtest - INFO - Data handler reset
-2025-05-01 13:38:36,196 - src.strategy.implementations.simple_ma_crossover - INFO - Simple MA Crossover strategy simple_ma_crossover reset
-2025-05-01 13:38:36,196 - src.execution.backtest.backtest - INFO - Strategy reset
-2025-05-01 13:38:36,196 - src.risk.managers.enhanced_risk_manager - INFO - CLEARING 0 PROCESSED RULE IDs
-2025-05-01 13:38:36,196 - src.risk.managers.enhanced_risk_manager - INFO - After reset, processed_rule_ids size: 0
-2025-05-01 13:38:36,196 - src.risk.managers.enhanced_risk_manager - INFO - Risk manager risk_manager_13d6ce5b reset completed
-2025-05-01 13:38:36,196 - src.execution.backtest.backtest - INFO - Risk manager reset
-2025-05-01 13:38:36,196 - src.execution.order_manager - INFO - Reset order manager
-2025-05-01 13:38:36,196 - src.execution.backtest.backtest - INFO - Order manager reset
-2025-05-01 13:38:36,196 - src.execution.broker.broker_simulator - INFO - Broker reset
-2025-05-01 13:38:36,196 - src.execution.backtest.backtest - INFO - Broker reset
-2025-05-01 13:38:36,196 - src.risk.portfolio.portfolio - INFO - Trade list reset - new empty list with ID: 4375923328
-2025-05-01 13:38:36,196 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_184b0893 to initial state with cash: $100000.00
-2025-05-01 13:38:36,196 - src.execution.backtest.backtest - INFO - Portfolio reset
-2025-05-01 13:38:36,197 - src.execution.backtest.backtest - INFO - Reset all components for backtest
-2025-05-01 13:38:36,197 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['SYNTH'] with timeframe: 1min
-2025-05-01 13:38:36,197 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/SYNTH_1min.csv
-2025-05-01 13:38:36,198 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 120 rows
-2025-05-01 13:38:36,198 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2024-03-26 09:30:00
-2025-05-01 13:38:36,198 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2024-03-26 09:30:00
-2025-05-01 13:38:36,199 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2024-03-26 09:30:00
-2025-05-01 13:38:36,199 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2024-03-26 11:30:00
-2025-05-01 13:38:36,199 - src.data.sources.csv_handler - INFO - CSVDataSource: Set timestamp as index
-2025-05-01 13:38:36,199 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2024-03-26 09:30:00 to 2024-03-26 11:29:00
-2025-05-01 13:38:36,200 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume']
-2025-05-01 13:38:36,200 - src.data.historical_data_handler - INFO - Loaded 120 bars for SYNTH from 2024-03-26 09:30:00 to 2024-03-26 11:29:00
-2025-05-01 13:38:36,200 - src.execution.backtest.backtest - INFO - Starting backtest
-2025-05-01 13:38:36,200 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for SYNTH: fast MA crossed above slow MA
-2025-05-01 13:38:36,200 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: SYNTH direction=1 at 100.2
-2025-05-01 13:38:36,200 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 SYNTH @ 100.2, rule_id=SYNTH_BUY_OPEN_20240326094000, timestamp=2024-03-26 09:40:00, action=OPEN
-2025-05-01 13:38:36,200 - src.core.events.event_bus - INFO - Order dedup key: SYNTH_BUY_OPEN_20240326094000
-2025-05-01 13:38:36,201 - src.execution.order_manager - INFO - Converting trading decision to order: order_f9b05f01 (BUY 100.0 SYNTH @ 100.2)
-2025-05-01 13:38:36,201 - src.execution.order_manager - INFO - Order order_f9b05f01 using quantity field 100.0 for size
-2025-05-01 13:38:36,201 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100.0 SYNTH @ 100.2
-2025-05-01 13:38:36,201 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_f9b05f01
-2025-05-01 13:38:36,201 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_f9b05f01
-2025-05-01 13:38:36,201 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 0.00 to trade history. Total trades: 1
-2025-05-01 13:38:36,201 - src.risk.portfolio.portfolio - INFO - Trade list now contains 1 trades
-2025-05-01 13:38:36,201 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100.0 SYNTH @ 100.20, PnL: 0.00, Cash: 89980.00, Equity: 100000.00
-2025-05-01 13:38:36,201 - src.execution.order_manager - INFO - Processing fill event for order_id: order_f9b05f01
-2025-05-01 13:38:36,201 - src.execution.order_manager - INFO - Updated order with fill: Order(order_f9b05f01, SYNTH, BUY, 100.0, FILLED)
-2025-05-01 13:38:36,201 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 SYNTH @ 100.2, rule_id=SYNTH_BUY_OPEN_20240326094000
-2025-05-01 13:38:36,201 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for SYNTH: 1, timestamp=2024-03-26 09:40:00
-2025-05-01 13:38:36,202 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for SYNTH: fast MA crossed below slow MA
-2025-05-01 13:38:36,202 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: SYNTH direction=-1 at 101.85
-2025-05-01 13:38:36,202 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 SYNTH @ 101.85, rule_id=SYNTH_SELL_CLOSE_20240326100500, timestamp=2024-03-26 10:05:00, action=CLOSE
-2025-05-01 13:38:36,202 - src.core.events.event_bus - INFO - Order dedup key: SYNTH_SELL_CLOSE_20240326100500
-2025-05-01 13:38:36,202 - src.execution.order_manager - INFO - Converting trading decision to order: order_f08cd7fa (SELL 100.0 SYNTH @ 101.85)
-2025-05-01 13:38:36,202 - src.execution.order_manager - INFO - Order order_f08cd7fa using quantity field 100.0 for size
-2025-05-01 13:38:36,202 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100.0 SYNTH @ 101.85
-2025-05-01 13:38:36,202 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_f08cd7fa
-2025-05-01 13:38:36,202 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_f08cd7fa
-2025-05-01 13:38:36,202 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 165.00 to trade history. Total trades: 2
-2025-05-01 13:38:36,202 - src.risk.portfolio.portfolio - INFO - Trade list now contains 2 trades
-2025-05-01 13:38:36,202 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100.0 SYNTH @ 101.85, PnL: 165.00, Cash: 100165.00, Equity: 100165.00
-2025-05-01 13:38:36,202 - src.execution.order_manager - INFO - Processing fill event for order_id: order_f08cd7fa
-2025-05-01 13:38:36,202 - src.execution.order_manager - INFO - Updated order with fill: Order(order_f08cd7fa, SYNTH, SELL, 100.0, FILLED)
-2025-05-01 13:38:36,202 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: SELL 100.0 SYNTH @ 101.85, rule_id=SYNTH_SELL_CLOSE_20240326100500
-2025-05-01 13:38:36,202 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 SYNTH @ 101.85, rule_id=SYNTH_SELL_OPEN_20240326100500, timestamp=2024-03-26 10:05:00, action=OPEN
-2025-05-01 13:38:36,202 - src.core.events.event_bus - INFO - Order dedup key: SYNTH_SELL_OPEN_20240326100500
-2025-05-01 13:38:36,202 - src.execution.order_manager - INFO - Converting trading decision to order: order_b4853cb3 (SELL 100.0 SYNTH @ 101.85)
-2025-05-01 13:38:36,202 - src.execution.order_manager - INFO - Order order_b4853cb3 using quantity field 100.0 for size
-2025-05-01 13:38:36,202 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100.0 SYNTH @ 101.85
-2025-05-01 13:38:36,202 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_b4853cb3
-2025-05-01 13:38:36,202 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_b4853cb3
-2025-05-01 13:38:36,203 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 0.00 to trade history. Total trades: 3
-2025-05-01 13:38:36,203 - src.risk.portfolio.portfolio - INFO - Trade list now contains 3 trades
-2025-05-01 13:38:36,203 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100.0 SYNTH @ 101.85, PnL: 0.00, Cash: 110350.00, Equity: 100165.00
-2025-05-01 13:38:36,203 - src.execution.order_manager - INFO - Processing fill event for order_id: order_b4853cb3
-2025-05-01 13:38:36,203 - src.execution.order_manager - INFO - Updated order with fill: Order(order_b4853cb3, SYNTH, SELL, 100.0, FILLED)
-2025-05-01 13:38:36,203 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 SYNTH @ 101.85, rule_id=SYNTH_SELL_OPEN_20240326100500
-2025-05-01 13:38:36,203 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for SYNTH: -1, timestamp=2024-03-26 10:05:00
-2025-05-01 13:38:36,204 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for SYNTH: fast MA crossed above slow MA
-2025-05-01 13:38:36,204 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: SYNTH direction=1 at 99.95
-2025-05-01 13:38:36,204 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 SYNTH @ 99.95, rule_id=SYNTH_BUY_CLOSE_20240326103000, timestamp=2024-03-26 10:30:00, action=CLOSE
-2025-05-01 13:38:36,204 - src.core.events.event_bus - INFO - Order dedup key: SYNTH_BUY_CLOSE_20240326103000
-2025-05-01 13:38:36,204 - src.execution.order_manager - INFO - Converting trading decision to order: order_f88ea8a1 (BUY 100.0 SYNTH @ 99.95)
-2025-05-01 13:38:36,204 - src.execution.order_manager - INFO - Order order_f88ea8a1 using quantity field 100.0 for size
-2025-05-01 13:38:36,204 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100.0 SYNTH @ 99.95
-2025-05-01 13:38:36,204 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_f88ea8a1
-2025-05-01 13:38:36,204 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_f88ea8a1
-2025-05-01 13:38:36,204 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 190.00 to trade history. Total trades: 4
-2025-05-01 13:38:36,204 - src.risk.portfolio.portfolio - INFO - Trade list now contains 4 trades
-2025-05-01 13:38:36,204 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100.0 SYNTH @ 99.95, PnL: 190.00, Cash: 100355.00, Equity: 100355.00
-2025-05-01 13:38:36,204 - src.execution.order_manager - INFO - Processing fill event for order_id: order_f88ea8a1
-2025-05-01 13:38:36,204 - src.execution.order_manager - INFO - Updated order with fill: Order(order_f88ea8a1, SYNTH, BUY, 100.0, FILLED)
-2025-05-01 13:38:36,204 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: BUY 100.0 SYNTH @ 99.95, rule_id=SYNTH_BUY_CLOSE_20240326103000
-2025-05-01 13:38:36,204 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 SYNTH @ 99.95, rule_id=SYNTH_BUY_OPEN_20240326103000, timestamp=2024-03-26 10:30:00, action=OPEN
-2025-05-01 13:38:36,204 - src.core.events.event_bus - INFO - Order dedup key: SYNTH_BUY_OPEN_20240326103000
-2025-05-01 13:38:36,204 - src.execution.order_manager - INFO - Converting trading decision to order: order_1e93953f (BUY 100.0 SYNTH @ 99.95)
-2025-05-01 13:38:36,204 - src.execution.order_manager - INFO - Order order_1e93953f using quantity field 100.0 for size
-2025-05-01 13:38:36,204 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 100.0 SYNTH @ 99.95
-2025-05-01 13:38:36,204 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_1e93953f
-2025-05-01 13:38:36,204 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_1e93953f
-2025-05-01 13:38:36,205 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 0.00 to trade history. Total trades: 5
-2025-05-01 13:38:36,205 - src.risk.portfolio.portfolio - INFO - Trade list now contains 5 trades
-2025-05-01 13:38:36,205 - src.risk.portfolio.portfolio - INFO - Fill: BUY 100.0 SYNTH @ 99.95, PnL: 0.00, Cash: 90360.00, Equity: 100355.00
-2025-05-01 13:38:36,205 - src.execution.order_manager - INFO - Processing fill event for order_id: order_1e93953f
-2025-05-01 13:38:36,205 - src.execution.order_manager - INFO - Updated order with fill: Order(order_1e93953f, SYNTH, BUY, 100.0, FILLED)
-2025-05-01 13:38:36,205 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 SYNTH @ 99.95, rule_id=SYNTH_BUY_OPEN_20240326103000
-2025-05-01 13:38:36,205 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for SYNTH: 1, timestamp=2024-03-26 10:30:00
-2025-05-01 13:38:36,206 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for SYNTH: fast MA crossed below slow MA
-2025-05-01 13:38:36,206 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: SYNTH direction=-1 at 102.5
-2025-05-01 13:38:36,206 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 SYNTH @ 102.5, rule_id=SYNTH_SELL_CLOSE_20240326105500, timestamp=2024-03-26 10:55:00, action=CLOSE
-2025-05-01 13:38:36,206 - src.core.events.event_bus - INFO - Order dedup key: SYNTH_SELL_CLOSE_20240326105500
-2025-05-01 13:38:36,206 - src.execution.order_manager - INFO - Converting trading decision to order: order_a9b7baaf (SELL 100.0 SYNTH @ 102.5)
-2025-05-01 13:38:36,206 - src.execution.order_manager - INFO - Order order_a9b7baaf using quantity field 100.0 for size
-2025-05-01 13:38:36,206 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100.0 SYNTH @ 102.5
-2025-05-01 13:38:36,206 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_a9b7baaf
-2025-05-01 13:38:36,206 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_a9b7baaf
-2025-05-01 13:38:36,206 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 255.00 to trade history. Total trades: 6
-2025-05-01 13:38:36,206 - src.risk.portfolio.portfolio - INFO - Trade list now contains 6 trades
-2025-05-01 13:38:36,206 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100.0 SYNTH @ 102.50, PnL: 255.00, Cash: 100610.00, Equity: 100610.00
-2025-05-01 13:38:36,206 - src.execution.order_manager - INFO - Processing fill event for order_id: order_a9b7baaf
-2025-05-01 13:38:36,206 - src.execution.order_manager - INFO - Updated order with fill: Order(order_a9b7baaf, SYNTH, SELL, 100.0, FILLED)
-2025-05-01 13:38:36,206 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: SELL 100.0 SYNTH @ 102.5, rule_id=SYNTH_SELL_CLOSE_20240326105500
-2025-05-01 13:38:36,206 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 SYNTH @ 102.5, rule_id=SYNTH_SELL_OPEN_20240326105500, timestamp=2024-03-26 10:55:00, action=OPEN
-2025-05-01 13:38:36,206 - src.core.events.event_bus - INFO - Order dedup key: SYNTH_SELL_OPEN_20240326105500
-2025-05-01 13:38:36,206 - src.execution.order_manager - INFO - Converting trading decision to order: order_62ac7e18 (SELL 100.0 SYNTH @ 102.5)
-2025-05-01 13:38:36,206 - src.execution.order_manager - INFO - Order order_62ac7e18 using quantity field 100.0 for size
-2025-05-01 13:38:36,206 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 100.0 SYNTH @ 102.5
-2025-05-01 13:38:36,206 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_62ac7e18
-2025-05-01 13:38:36,206 - src.core.events.event_bus - INFO - Fill dedup key (order_id): order_62ac7e18
-2025-05-01 13:38:36,206 - src.risk.portfolio.portfolio - INFO - Adding trade with PnL: 0.00 to trade history. Total trades: 7
-2025-05-01 13:38:36,206 - src.risk.portfolio.portfolio - INFO - Trade list now contains 7 trades
-2025-05-01 13:38:36,206 - src.risk.portfolio.portfolio - INFO - Fill: SELL 100.0 SYNTH @ 102.50, PnL: 0.00, Cash: 110860.00, Equity: 100610.00
-2025-05-01 13:38:36,206 - src.execution.order_manager - INFO - Processing fill event for order_id: order_62ac7e18
-2025-05-01 13:38:36,207 - src.execution.order_manager - INFO - Updated order with fill: Order(order_62ac7e18, SYNTH, SELL, 100.0, FILLED)
-2025-05-01 13:38:36,207 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 SYNTH @ 102.5, rule_id=SYNTH_SELL_OPEN_20240326105500
-2025-05-01 13:38:36,207 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for SYNTH: -1, timestamp=2024-03-26 10:55:00
-2025-05-01 13:38:36,209 - src.execution.backtest.backtest - INFO - Backtest completed after 121 iterations
-2025-05-01 13:38:36,209 - src.risk.portfolio.portfolio - INFO - get_recent_trades called, self.trades has 7 items
-2025-05-01 13:38:36,209 - src.risk.portfolio.portfolio - INFO - Trade list object ID: 4375923328
-2025-05-01 13:38:36,209 - src.risk.portfolio.portfolio - INFO - First trade in list: {'id': 'a02da0a1-0a17-42fa-8f32-72e1f7de97fd', 'timestamp': datetime.datetime(2025, 5, 1, 13, 38, 36, 201073), 'symbol': 'SYNTH', 'direction': 'BUY', 'quantity': 100.0, 'size': 100.0, 'price': 100.2, 'fill_price': 100.2, 'commission': 0.0, 'pnl': 0.0, 'realized_pnl': 0.0}
-2025-05-01 13:38:36,209 - src.risk.portfolio.portfolio - INFO - Returning 7 validated trades
-2025-05-01 13:38:36,210 - src.execution.backtest.backtest - INFO - Backtest processed 7 trades
-2025-05-01 13:38:36,210 - src.execution.backtest.backtest - INFO - Trade stats: 7 trades, 3 wins, 0 losses
-2025-05-01 13:38:36,210 - src.execution.backtest.backtest - INFO - PnL sum: 610.00
-2025-05-01 13:38:36,210 - src.execution.backtest.backtest - INFO - Min PnL: 0.00, Max PnL: 255.00
-2025-05-01 13:38:36,210 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 7 trades and equity curve with 721 points
-2025-05-01 13:38:36,210 - src.analytics.performance.calculator - INFO - Sample trade: {'id': 'a02da0a1-0a17-42fa-8f32-72e1f7de97fd', 'timestamp': datetime.datetime(2025, 5, 1, 13, 38, 36, 201073), 'symbol': 'SYNTH', 'direction': 'BUY', 'quantity': 100.0, 'size': 100.0, 'price': 100.2, 'fill_price': 100.2, 'commission': 0.0, 'pnl': 0.0, 'realized_pnl': 0.0}
-2025-05-01 13:38:36,210 - src.analytics.performance.calculator - INFO - Total PnL from trades: 610.00
-2025-05-01 13:38:36,210 - src.analytics.performance.calculator - INFO - Trades with PnL field: 7 out of 7
-2025-05-01 13:38:36,210 - src.analytics.metrics.functional - INFO - Calculating metrics for 7 trades and 721 equity points
-2025-05-01 13:38:36,211 - src.analytics.metrics.functional - INFO - Win rate calculation: 3 wins out of 7 valid trades
-2025-05-01 13:38:36,211 - src.analytics.metrics.functional - INFO - Profit factor calculation: gross profit=610.00, gross loss=0.00
-2025-05-01 13:38:36,211 - src.execution.backtest.backtest - INFO - Calculated performance metrics for 7 trades
-2025-05-01 13:38:36,211 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 7 trades and equity curve with 721 points
-2025-05-01 13:38:36,211 - src.analytics.performance.calculator - INFO - Sample trade: {'id': 'a02da0a1-0a17-42fa-8f32-72e1f7de97fd', 'timestamp': datetime.datetime(2025, 5, 1, 13, 38, 36, 201073), 'symbol': 'SYNTH', 'direction': 'BUY', 'quantity': 100.0, 'size': 100.0, 'price': 100.2, 'fill_price': 100.2, 'commission': 0.0, 'pnl': 0.0, 'realized_pnl': 0.0}
-2025-05-01 13:38:36,211 - src.analytics.performance.calculator - INFO - Total PnL from trades: 610.00
-2025-05-01 13:38:36,211 - src.analytics.performance.calculator - INFO - Trades with PnL field: 7 out of 7
-2025-05-01 13:38:36,211 - src.analytics.metrics.functional - INFO - Calculating metrics for 7 trades and 721 equity points
-2025-05-01 13:38:36,212 - src.analytics.metrics.functional - INFO - Win rate calculation: 3 wins out of 7 valid trades
-2025-05-01 13:38:36,212 - src.analytics.metrics.functional - INFO - Profit factor calculation: gross profit=610.00, gross loss=0.00
-2025-05-01 13:38:36,212 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 7 trades and equity curve with 721 points
-2025-05-01 13:38:36,212 - src.analytics.performance.calculator - INFO - Sample trade: {'id': 'a02da0a1-0a17-42fa-8f32-72e1f7de97fd', 'timestamp': datetime.datetime(2025, 5, 1, 13, 38, 36, 201073), 'symbol': 'SYNTH', 'direction': 'BUY', 'quantity': 100.0, 'size': 100.0, 'price': 100.2, 'fill_price': 100.2, 'commission': 0.0, 'pnl': 0.0, 'realized_pnl': 0.0}
-2025-05-01 13:38:36,212 - src.analytics.performance.calculator - INFO - Total PnL from trades: 610.00
-2025-05-01 13:38:36,212 - src.analytics.performance.calculator - INFO - Trades with PnL field: 7 out of 7
-2025-05-01 13:38:36,212 - src.analytics.metrics.functional - INFO - Calculating metrics for 7 trades and 721 equity points
-2025-05-01 13:38:36,213 - src.analytics.metrics.functional - INFO - Win rate calculation: 3 wins out of 7 valid trades
-2025-05-01 13:38:36,213 - src.analytics.metrics.functional - INFO - Profit factor calculation: gross profit=610.00, gross loss=0.00
-2025-05-01 13:38:36,217 - src.risk.portfolio.portfolio - INFO - get_recent_trades called, self.trades has 7 items
-2025-05-01 13:38:36,217 - src.risk.portfolio.portfolio - INFO - Trade list object ID: 4375923328
-2025-05-01 13:38:36,217 - src.risk.portfolio.portfolio - INFO - First trade in list: {'id': 'a02da0a1-0a17-42fa-8f32-72e1f7de97fd', 'timestamp': datetime.datetime(2025, 5, 1, 13, 38, 36, 201073), 'symbol': 'SYNTH', 'direction': 'BUY', 'quantity': 100.0, 'size': 100.0, 'price': 100.2, 'fill_price': 100.2, 'commission': 0.0, 'pnl': 0.0, 'realized_pnl': 0.0}
-2025-05-01 13:38:36,217 - src.risk.portfolio.portfolio - INFO - Returning 7 validated trades
-2025-05-01 13:38:36,217 - src.execution.backtest.backtest - INFO - Backtest complete
-2025-05-01 13:38:36,220 - src.analytics.reporting.report_generator - INFO - Saved equity curve to './results/validation_test/equity_curve_20250501_133836.csv'
-2025-05-01 13:38:36,220 - src.analytics.reporting.report_generator - INFO - Saved detailed report to './results/validation_test/backtest_report_20250501_133836.txt'
-2025-05-01 13:38:36,220 - src.analytics.reporting.report_generator - INFO - Saved trade log to './results/validation_test/trades_20250501_133836.csv'
+2025-05-04 15:28:36,228 - src.core.system_bootstrap - INFO - Logging initialized at level INFO
+2025-05-04 15:28:36,228 - src.core.system_bootstrap - INFO - Log file: ./results/validation_test/validation_test.log
+2025-05-04 15:28:36,230 - src.core.system_bootstrap - INFO - Loaded configuration from config/validation_test.yaml
+2025-05-04 15:28:36,230 - src.core.system_bootstrap - INFO - Event system initialized with native deduplication
+2025-05-04 15:28:36,230 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-05-04 15:28:36,230 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-05-04 15:28:36,230 - src.core.system_bootstrap - INFO - Data components initialized with source type: csv
+2025-05-04 15:28:36,233 - src.execution.broker.broker_simulator - INFO - Simulated broker initialized
+2025-05-04 15:28:36,233 - src.execution.order_manager - INFO - Order manager initialized
+2025-05-04 15:28:36,233 - src.core.system_bootstrap - INFO - Execution components initialized
+2025-05-04 15:28:36,235 - src.core.system_bootstrap - INFO - Using Enhanced Risk Manager (refactored architecture)
+2025-05-04 15:28:36,235 - src.risk.managers.enhanced_risk_manager - INFO - Enhanced risk manager risk_manager_f5cb18a1 initialized
+2025-05-04 15:28:36,235 - src.core.system_bootstrap - INFO - Enhanced risk manager configured with position_sizing_method=fixed, position_size=100, max_position_size=1000
+2025-05-04 15:28:36,235 - src.core.system_bootstrap - INFO - No signal interpreter needed with enhanced risk manager
+2025-05-04 15:28:36,235 - src.core.system_bootstrap - INFO - Risk components initialized
+2025-05-04 15:28:36,237 - src.core.system_bootstrap - INFO - Discovering strategy implementations...
+2025-05-04 15:28:36,238 - src.core.utils.discovery - INFO - Registered component composite_regime in registry
+2025-05-04 15:28:36,238 - src.core.utils.discovery - INFO - Registered component ensemble_strategy in registry
+2025-05-04 15:28:36,238 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-05-04 15:28:36,238 - src.core.utils.discovery - INFO - Registered component mean_reversion in registry
+2025-05-04 15:28:36,238 - src.core.utils.discovery - INFO - Registered component regime_ensemble in registry
+2025-05-04 15:28:36,238 - src.core.utils.discovery - INFO - Registered component simple_ma_crossover in registry
+2025-05-04 15:28:36,238 - src.core.system_bootstrap - INFO - Discovered strategies: composite_regime, ensemble_strategy, ma_crossover, mean_reversion, regime_ensemble, simple_ma_crossover
+2025-05-04 15:28:36,238 - src.core.system_bootstrap - INFO - Requested strategy: simple_ma_crossover
+2025-05-04 15:28:36,238 - src.core.system_bootstrap - INFO - Available strategies in registry: ['composite_regime', 'ensemble_strategy', 'ma_crossover', 'mean_reversion', 'regime_ensemble', 'simple_ma_crossover']
+2025-05-04 15:28:36,238 - src.strategy.implementations.simple_ma_crossover - INFO - MA Crossover strategy initialized with fast_window=5, slow_window=15
+2025-05-04 15:28:36,238 - src.strategy.implementations.simple_ma_crossover - INFO - MA Crossover strategy configured with parameters: fast_window=5, slow_window=15
+2025-05-04 15:28:36,238 - src.core.system_bootstrap - INFO - Strategy 'simple_ma_crossover' initialized successfully
+2025-05-04 15:28:36,238 - src.core.system_bootstrap - INFO - Analytics components initialized
+2025-05-04 15:28:36,238 - src.core.system_bootstrap - INFO - Registered enhanced risk manager with high signal priority
+2025-05-04 15:28:36,239 - src.core.system_bootstrap - INFO - All components registered with event manager in optimal order
+2025-05-04 15:28:36,239 - src.core.system_bootstrap - INFO - Re-registered portfolio fill handler with high priority
+2025-05-04 15:28:36,239 - src.core.system_bootstrap - INFO - System bootstrap complete
+2025-05-04 15:28:36,239 - src.execution.backtest.backtest - INFO - Using timeframe from config: 1min
+2025-05-04 15:28:36,242 - src.execution.backtest.backtest - INFO - Backtest setup complete
+2025-05-04 15:28:36,242 - src.core.events.event_bus - INFO - Event bus reset complete
+2025-05-04 15:28:36,242 - src.execution.backtest.backtest - INFO - Event bus reset
+2025-05-04 15:28:36,242 - src.execution.backtest.backtest - INFO - Data handler reset
+2025-05-04 15:28:36,242 - src.strategy.implementations.simple_ma_crossover - INFO - Simple MA Crossover strategy simple_ma_crossover reset
+2025-05-04 15:28:36,242 - src.execution.backtest.backtest - INFO - Strategy reset
+2025-05-04 15:28:36,242 - src.risk.managers.enhanced_risk_manager - INFO - CLEARING 0 PROCESSED RULE IDs
+2025-05-04 15:28:36,242 - src.risk.managers.enhanced_risk_manager - INFO - After reset, processed_rule_ids size: 0
+2025-05-04 15:28:36,242 - src.risk.managers.enhanced_risk_manager - INFO - Risk manager risk_manager_f5cb18a1 reset completed
+2025-05-04 15:28:36,242 - src.execution.backtest.backtest - INFO - Risk manager reset
+2025-05-04 15:28:36,242 - src.execution.order_manager - INFO - Reset order manager
+2025-05-04 15:28:36,242 - src.execution.backtest.backtest - INFO - Order manager reset
+2025-05-04 15:28:36,242 - src.execution.broker.broker_simulator - INFO - Broker reset
+2025-05-04 15:28:36,242 - src.execution.backtest.backtest - INFO - Broker reset
+2025-05-04 15:28:36,243 - src.risk.portfolio.portfolio - INFO - Trade list reset - new empty list with ID: 4388577856
+2025-05-04 15:28:36,243 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_36993438 to initial state with cash: $100000.00
+2025-05-04 15:28:36,243 - src.execution.backtest.backtest - INFO - Portfolio reset
+2025-05-04 15:28:36,243 - src.execution.backtest.backtest - INFO - Reset all components for backtest
+2025-05-04 15:28:36,243 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['SYNTH'] with timeframe: 1min
+2025-05-04 15:28:36,243 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/SYNTH_1min.csv
+2025-05-04 15:28:36,246 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 120 rows
+2025-05-04 15:28:36,247 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2024-03-26 09:30:00
+2025-05-04 15:28:36,248 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2024-03-26 09:30:00
+2025-05-04 15:28:36,249 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2024-03-26 09:30:00
+2025-05-04 15:28:36,249 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2024-03-26 11:30:00
+2025-05-04 15:28:36,250 - src.data.sources.csv_handler - INFO - CSVDataSource: Set timestamp as index
+2025-05-04 15:28:36,252 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2024-03-26 09:30:00 to 2024-03-26 11:29:00
+2025-05-04 15:28:36,252 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume']
+2025-05-04 15:28:36,252 - src.data.historical_data_handler - INFO - Loaded 120 bars for SYNTH from 2024-03-26 09:30:00 to 2024-03-26 11:29:00
+2025-05-04 15:28:36,252 - src.execution.backtest.backtest - INFO - Starting backtest
+2025-05-04 15:28:36,253 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for SYNTH: fast MA crossed above slow MA
+2025-05-04 15:28:36,253 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: SYNTH direction=1 at 100.2
+2025-05-04 15:28:36,253 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 SYNTH @ 100.2, rule_id=SYNTH_BUY_OPEN_20240326094000, timestamp=2024-03-26 09:40:00, action=OPEN
+2025-05-04 15:28:36,253 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_d76b99c1
+2025-05-04 15:28:36,253 - src.execution.broker.broker_simulator - WARNING - Order order_d76b99c1 missing required fields. Using defaults: direction=BUY, price=100.2, symbol=SYNTH, size=1
+2025-05-04 15:28:36,253 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 1 SYNTH @ 100.2
+2025-05-04 15:28:36,253 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_d76b99c1
+2025-05-04 15:28:36,253 - src.execution.order_manager - INFO - Processing fill event for order_id: order_d76b99c1
+2025-05-04 15:28:36,253 - src.execution.order_manager - WARNING - Fill for unknown order: order_d76b99c1
+2025-05-04 15:28:36,253 - src.risk.portfolio.portfolio - INFO - Fill: BUY 1.0 SYNTH @ 100.20, PnL: 0.00, Cash: 99899.80, Equity: 100000.00
+2025-05-04 15:28:36,253 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 SYNTH @ 100.2, rule_id=SYNTH_BUY_OPEN_20240326094000
+2025-05-04 15:28:36,253 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for SYNTH: 1, timestamp=2024-03-26 09:40:00
+2025-05-04 15:28:36,254 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for SYNTH: fast MA crossed below slow MA
+2025-05-04 15:28:36,254 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: SYNTH direction=-1 at 101.85
+2025-05-04 15:28:36,254 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 1.0 SYNTH @ 101.85, rule_id=SYNTH_SELL_CLOSE_20240326100500, timestamp=2024-03-26 10:05:00, action=CLOSE
+2025-05-04 15:28:36,254 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_c56b9f53
+2025-05-04 15:28:36,254 - src.execution.broker.broker_simulator - WARNING - Order order_c56b9f53 missing required fields. Using defaults: direction=SELL, price=101.85, symbol=SYNTH, size=1
+2025-05-04 15:28:36,255 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 1 SYNTH @ 101.85
+2025-05-04 15:28:36,255 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_c56b9f53
+2025-05-04 15:28:36,255 - src.execution.order_manager - INFO - Processing fill event for order_id: order_c56b9f53
+2025-05-04 15:28:36,255 - src.execution.order_manager - WARNING - Fill for unknown order: order_c56b9f53
+2025-05-04 15:28:36,255 - src.risk.portfolio.portfolio - INFO - Fill: SELL 1.0 SYNTH @ 101.85, PnL: 1.65, Cash: 100001.65, Equity: 100001.65
+2025-05-04 15:28:36,255 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: SELL 1.0 SYNTH @ 101.85, rule_id=SYNTH_SELL_CLOSE_20240326100500
+2025-05-04 15:28:36,255 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 SYNTH @ 101.85, rule_id=SYNTH_SELL_OPEN_20240326100500, timestamp=2024-03-26 10:05:00, action=OPEN
+2025-05-04 15:28:36,255 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_b2dd6f0a
+2025-05-04 15:28:36,255 - src.execution.broker.broker_simulator - WARNING - Order order_b2dd6f0a missing required fields. Using defaults: direction=SELL, price=101.85, symbol=SYNTH, size=1
+2025-05-04 15:28:36,255 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 1 SYNTH @ 101.85
+2025-05-04 15:28:36,255 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_b2dd6f0a
+2025-05-04 15:28:36,255 - src.execution.order_manager - INFO - Processing fill event for order_id: order_b2dd6f0a
+2025-05-04 15:28:36,255 - src.execution.order_manager - WARNING - Fill for unknown order: order_b2dd6f0a
+2025-05-04 15:28:36,255 - src.risk.portfolio.portfolio - INFO - Fill: SELL 1.0 SYNTH @ 101.85, PnL: 0.00, Cash: 100103.50, Equity: 100001.65
+2025-05-04 15:28:36,255 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 SYNTH @ 101.85, rule_id=SYNTH_SELL_OPEN_20240326100500
+2025-05-04 15:28:36,255 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for SYNTH: -1, timestamp=2024-03-26 10:05:00
+2025-05-04 15:28:36,256 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for SYNTH: fast MA crossed above slow MA
+2025-05-04 15:28:36,257 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: SYNTH direction=1 at 99.95
+2025-05-04 15:28:36,257 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 1.0 SYNTH @ 99.95, rule_id=SYNTH_BUY_CLOSE_20240326103000, timestamp=2024-03-26 10:30:00, action=CLOSE
+2025-05-04 15:28:36,257 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_74a8b811
+2025-05-04 15:28:36,257 - src.execution.broker.broker_simulator - WARNING - Order order_74a8b811 missing required fields. Using defaults: direction=BUY, price=99.95, symbol=SYNTH, size=1
+2025-05-04 15:28:36,257 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 1 SYNTH @ 99.95
+2025-05-04 15:28:36,257 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_74a8b811
+2025-05-04 15:28:36,257 - src.execution.order_manager - INFO - Processing fill event for order_id: order_74a8b811
+2025-05-04 15:28:36,257 - src.execution.order_manager - WARNING - Fill for unknown order: order_74a8b811
+2025-05-04 15:28:36,257 - src.risk.portfolio.portfolio - INFO - Fill: BUY 1.0 SYNTH @ 99.95, PnL: 1.90, Cash: 100003.55, Equity: 100003.55
+2025-05-04 15:28:36,257 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: BUY 1.0 SYNTH @ 99.95, rule_id=SYNTH_BUY_CLOSE_20240326103000
+2025-05-04 15:28:36,257 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 SYNTH @ 99.95, rule_id=SYNTH_BUY_OPEN_20240326103000, timestamp=2024-03-26 10:30:00, action=OPEN
+2025-05-04 15:28:36,257 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_1e34aa65
+2025-05-04 15:28:36,257 - src.execution.broker.broker_simulator - WARNING - Order order_1e34aa65 missing required fields. Using defaults: direction=BUY, price=99.95, symbol=SYNTH, size=1
+2025-05-04 15:28:36,257 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 1 SYNTH @ 99.95
+2025-05-04 15:28:36,257 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_1e34aa65
+2025-05-04 15:28:36,257 - src.execution.order_manager - INFO - Processing fill event for order_id: order_1e34aa65
+2025-05-04 15:28:36,257 - src.execution.order_manager - WARNING - Fill for unknown order: order_1e34aa65
+2025-05-04 15:28:36,257 - src.risk.portfolio.portfolio - INFO - Fill: BUY 1.0 SYNTH @ 99.95, PnL: 0.00, Cash: 99903.60, Equity: 100003.55
+2025-05-04 15:28:36,257 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 SYNTH @ 99.95, rule_id=SYNTH_BUY_OPEN_20240326103000
+2025-05-04 15:28:36,257 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for SYNTH: 1, timestamp=2024-03-26 10:30:00
+2025-05-04 15:28:36,259 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for SYNTH: fast MA crossed below slow MA
+2025-05-04 15:28:36,259 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: SYNTH direction=-1 at 102.5
+2025-05-04 15:28:36,259 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 1.0 SYNTH @ 102.5, rule_id=SYNTH_SELL_CLOSE_20240326105500, timestamp=2024-03-26 10:55:00, action=CLOSE
+2025-05-04 15:28:36,259 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_53783603
+2025-05-04 15:28:36,259 - src.execution.broker.broker_simulator - WARNING - Order order_53783603 missing required fields. Using defaults: direction=SELL, price=102.5, symbol=SYNTH, size=1
+2025-05-04 15:28:36,259 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 1 SYNTH @ 102.5
+2025-05-04 15:28:36,259 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_53783603
+2025-05-04 15:28:36,259 - src.execution.order_manager - INFO - Processing fill event for order_id: order_53783603
+2025-05-04 15:28:36,259 - src.execution.order_manager - WARNING - Fill for unknown order: order_53783603
+2025-05-04 15:28:36,259 - src.risk.portfolio.portfolio - INFO - Fill: SELL 1.0 SYNTH @ 102.50, PnL: 2.55, Cash: 100006.10, Equity: 100006.10
+2025-05-04 15:28:36,259 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: SELL 1.0 SYNTH @ 102.5, rule_id=SYNTH_SELL_CLOSE_20240326105500
+2025-05-04 15:28:36,259 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 SYNTH @ 102.5, rule_id=SYNTH_SELL_OPEN_20240326105500, timestamp=2024-03-26 10:55:00, action=OPEN
+2025-05-04 15:28:36,259 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_d0b4d9dc
+2025-05-04 15:28:36,259 - src.execution.broker.broker_simulator - WARNING - Order order_d0b4d9dc missing required fields. Using defaults: direction=SELL, price=102.5, symbol=SYNTH, size=1
+2025-05-04 15:28:36,259 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 1 SYNTH @ 102.5
+2025-05-04 15:28:36,259 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_d0b4d9dc
+2025-05-04 15:28:36,259 - src.execution.order_manager - INFO - Processing fill event for order_id: order_d0b4d9dc
+2025-05-04 15:28:36,260 - src.execution.order_manager - WARNING - Fill for unknown order: order_d0b4d9dc
+2025-05-04 15:28:36,260 - src.risk.portfolio.portfolio - INFO - Fill: SELL 1.0 SYNTH @ 102.50, PnL: 0.00, Cash: 100108.60, Equity: 100006.10
+2025-05-04 15:28:36,260 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 SYNTH @ 102.5, rule_id=SYNTH_SELL_OPEN_20240326105500
+2025-05-04 15:28:36,260 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for SYNTH: -1, timestamp=2024-03-26 10:55:00
+2025-05-04 15:28:36,263 - src.execution.backtest.backtest - INFO - Backtest completed after 121 iterations
+2025-05-04 15:28:36,271 - src.execution.backtest.backtest - INFO - Collected 3 trades from portfolio for reporting
+2025-05-04 15:28:36,271 - src.execution.backtest.backtest - INFO - First trade sample: SYNTH SELL @ 101.85
+2025-05-04 15:28:36,271 - src.execution.backtest.backtest - INFO - Last trade sample: SYNTH SELL @ 102.5
+2025-05-04 15:28:36,271 - src.execution.backtest.backtest - INFO - Trade stats: 3 trades, 3 wins, 0 losses
+2025-05-04 15:28:36,271 - src.execution.backtest.backtest - INFO - PnL sum: 6.10
+2025-05-04 15:28:36,271 - src.execution.backtest.backtest - INFO - Min PnL: 1.65, Max PnL: 2.55
+2025-05-04 15:28:36,271 - src.execution.backtest.backtest - INFO - Stored 3 trades in results dictionary with ID 4392541248
+2025-05-04 15:28:36,271 - src.analytics.performance.calculator - INFO - Filtered 0 trades with zero PnL and 0 OPEN trades
+2025-05-04 15:28:36,271 - src.analytics.performance.calculator - INFO - Using 3 of 3 trades for performance calculation
+2025-05-04 15:28:36,271 - src.execution.backtest.backtest - INFO - Performance calculator configured with 3 trades
+2025-05-04 15:28:36,271 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 3 trades and equity curve with 721 points
+2025-05-04 15:28:36,271 - src.analytics.performance.calculator - INFO - Total PnL from trades: 6.10
+2025-05-04 15:28:36,271 - src.analytics.performance.calculator - INFO - Trades with PnL field: 3 out of 3
+2025-05-04 15:28:36,271 - src.analytics.metrics.functional - INFO - Calculating metrics for 3 trades and 721 equity points
+2025-05-04 15:28:36,279 - src.analytics.metrics.functional - INFO - Drawdown stats: Initial=100000.00, Final=100008.35, Min=100000.00, Max DD=0.0000
+2025-05-04 15:28:36,279 - src.analytics.metrics.functional - INFO - Win rate calculation: 3 wins out of 3 valid trades
+2025-05-04 15:28:36,279 - src.analytics.metrics.functional - INFO - Valid trades: 3, Winners: 3, Losers: 0
+2025-05-04 15:28:36,279 - src.analytics.metrics.functional - INFO - Profit factor calculation: gross profit=6.10, gross loss=0.00
+2025-05-04 15:28:36,279 - src.analytics.metrics.functional - WARNING - No losing trades detected, capping profit factor at 100
+2025-05-04 15:28:36,279 - src.execution.backtest.backtest - INFO - Calculated performance metrics for 3 trades
+2025-05-04 15:28:36,288 - src.execution.backtest.backtest - INFO - Backtest complete
+2025-05-04 15:28:36,291 - src.analytics.reporting.report_generator - INFO - Saved equity curve to './results/validation_test/equity_curve_20250504_152836.csv'
+2025-05-04 15:28:36,291 - src.analytics.reporting.report_generator - INFO - Saved detailed report to './results/validation_test/backtest_report_20250504_152836.txt'
+2025-05-04 15:28:36,292 - src.analytics.reporting.report_generator - INFO - Saved trade log to './results/validation_test/trades_20250504_152836.csv'

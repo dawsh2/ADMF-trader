@@ -10,7 +10,8 @@ from collections import defaultdict
 
 from .event_types import (
     Event, EventType, BarEvent, SignalEvent, OrderEvent, FillEvent,
-    WebSocketEvent, LifecycleEvent, ErrorEvent, OrderCancelEvent
+    WebSocketEvent, LifecycleEvent, ErrorEvent, OrderCancelEvent,
+    PositionOpenEvent, PositionCloseEvent, TradeOpenEvent, TradeCloseEvent
 )
 
 logger = logging.getLogger(__name__)
@@ -161,7 +162,7 @@ def create_signal_event(signal_value, price, symbol, rule_id=None,
 
 
 def create_order_event(direction, quantity, symbol, order_type, 
-                     price=None, timestamp=None, order_id=None):
+                     price=None, timestamp=None, order_id=None, intent=None, rule_id=None):
     """
     Create a standardized order event.
     
@@ -173,6 +174,8 @@ def create_order_event(direction, quantity, symbol, order_type,
         price: Optional price for limit/stop orders
         timestamp: Optional timestamp
         order_id: Optional order ID (will generate if None)
+        intent: Optional intent ('OPEN', 'CLOSE', or 'ADJUST')
+        rule_id: Optional rule ID for tracking
         
     Returns:
         OrderEvent: The created order event
@@ -189,6 +192,14 @@ def create_order_event(direction, quantity, symbol, order_type,
     
     # Add order_id to the data dictionary
     order.data['order_id'] = order_id
+    
+    # Add intent if provided
+    if intent:
+        order.data['intent'] = intent
+        
+    # Add rule_id if provided
+    if rule_id:
+        order.data['rule_id'] = rule_id
     
     return order
 
@@ -242,6 +253,97 @@ def create_error_event(error_type, message, source=None, exception=None, timesta
     """Create a standardized error event."""
     return ErrorEvent(error_type, message, source, exception, timestamp)
 
+def create_position_open_event(symbol, direction, quantity, price, rule_id=None,
+                         timestamp=None, order_id=None, metadata=None):
+    """
+    Create a standardized position open event.
+    
+    Args:
+        symbol: Instrument symbol
+        direction: Trade direction ('BUY' or 'SELL')
+        quantity: Position size
+        price: Current price
+        rule_id: Optional rule ID for tracking
+        timestamp: Optional timestamp
+        order_id: Optional order ID
+        metadata: Optional additional data
+        
+    Returns:
+        PositionOpenEvent: The created position open event
+    """
+    return PositionOpenEvent(symbol, direction, quantity, price, rule_id,
+                        timestamp, order_id, metadata)
+
+def create_position_close_event(symbol, direction, quantity, price, rule_id=None,
+                          timestamp=None, order_id=None, metadata=None):
+    """
+    Create a standardized position close event.
+    
+    Args:
+        symbol: Instrument symbol
+        direction: Trade direction ('BUY' or 'SELL')
+        quantity: Position size
+        price: Current price
+        rule_id: Optional rule ID for tracking
+        timestamp: Optional timestamp
+        order_id: Optional order ID
+        metadata: Optional additional data
+        
+    Returns:
+        PositionCloseEvent: The created position close event
+    """
+    return PositionCloseEvent(symbol, direction, quantity, price, rule_id,
+                         timestamp, order_id, metadata)
+
+def create_trade_open_event(symbol, direction, quantity, price, commission=0.0,
+                      timestamp=None, rule_id=None, order_id=None, transaction_id=None):
+    """
+    Create a standardized trade open event.
+    
+    Args:
+        symbol: Instrument symbol
+        direction: Trade direction ('BUY' or 'SELL')
+        quantity: Trade size
+        price: Trade price
+        commission: Optional commission amount
+        timestamp: Optional timestamp
+        rule_id: Optional rule ID for tracking
+        order_id: Optional order ID
+        transaction_id: Optional transaction ID
+        
+    Returns:
+        TradeOpenEvent: The created trade open event
+    """
+    return TradeOpenEvent(symbol, direction, quantity, price, commission,
+                     timestamp, rule_id, order_id, transaction_id)
+
+def create_trade_close_event(symbol, direction, quantity, entry_price, exit_price,
+                       entry_time, exit_time, pnl, commission=0.0, rule_id=None,
+                       order_id=None, transaction_id=None):
+    """
+    Create a standardized trade close event.
+    
+    Args:
+        symbol: Instrument symbol
+        direction: Trade direction ('BUY' or 'SELL')
+        quantity: Trade size
+        entry_price: Entry price
+        exit_price: Exit price
+        entry_time: Entry timestamp
+        exit_time: Exit timestamp
+        pnl: Profit/loss amount
+        commission: Optional commission amount
+        rule_id: Optional rule ID for tracking
+        order_id: Optional order ID
+        transaction_id: Optional transaction ID
+        
+    Returns:
+        TradeCloseEvent: The created trade close event
+    """
+    return TradeCloseEvent(symbol, direction, quantity, entry_price, exit_price,
+                      entry_time, exit_time, pnl, commission, rule_id,
+                      order_id, transaction_id)
+
 # Event serialization/deserialization functions
 
 def event_to_dict(event):
@@ -281,6 +383,18 @@ def event_to_dict(event):
         # No additional fields needed - all in data
         pass
     elif isinstance(event, OrderCancelEvent):
+        # No additional fields needed - all in data
+        pass
+    elif isinstance(event, PositionOpenEvent):
+        # No additional fields needed - all in data
+        pass
+    elif isinstance(event, PositionCloseEvent):
+        # No additional fields needed - all in data
+        pass
+    elif isinstance(event, TradeOpenEvent):
+        # No additional fields needed - all in data
+        pass
+    elif isinstance(event, TradeCloseEvent):
         # No additional fields needed - all in data
         pass
     
@@ -386,6 +500,55 @@ def dict_to_event(event_dict):
             order_id=data.get('order_id'),
             reason=data.get('reason'),
             timestamp=timestamp
+        )
+    elif class_name == 'PositionOpenEvent':
+        return PositionOpenEvent(
+            symbol=data.get('symbol'),
+            direction=data.get('direction'),
+            quantity=data.get('quantity'),
+            price=data.get('price'),
+            rule_id=data.get('rule_id'),
+            timestamp=timestamp,
+            order_id=data.get('order_id'),
+            metadata=data.get('metadata')
+        )
+    elif class_name == 'PositionCloseEvent':
+        return PositionCloseEvent(
+            symbol=data.get('symbol'),
+            direction=data.get('direction'),
+            quantity=data.get('quantity'),
+            price=data.get('price'),
+            rule_id=data.get('rule_id'),
+            timestamp=timestamp,
+            order_id=data.get('order_id'),
+            metadata=data.get('metadata')
+        )
+    elif class_name == 'TradeOpenEvent':
+        return TradeOpenEvent(
+            symbol=data.get('symbol'),
+            direction=data.get('direction'),
+            quantity=data.get('quantity'),
+            price=data.get('price'),
+            commission=data.get('commission', 0.0),
+            timestamp=timestamp,
+            rule_id=data.get('rule_id'),
+            order_id=data.get('order_id'),
+            transaction_id=data.get('transaction_id')
+        )
+    elif class_name == 'TradeCloseEvent':
+        return TradeCloseEvent(
+            symbol=data.get('symbol'),
+            direction=data.get('direction'),
+            quantity=data.get('quantity'),
+            entry_price=data.get('entry_price'),
+            exit_price=data.get('exit_price'),
+            entry_time=data.get('entry_time'),
+            exit_time=data.get('exit_time'),
+            pnl=data.get('pnl'),
+            commission=data.get('commission', 0.0),
+            rule_id=data.get('rule_id'),
+            order_id=data.get('order_id'),
+            transaction_id=data.get('transaction_id')
         )
     else:
         # Generic event

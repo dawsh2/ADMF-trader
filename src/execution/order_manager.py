@@ -3,9 +3,11 @@ Order manager for handling orders without a separate order registry.
 """
 import logging
 import uuid
+import datetime
 from typing import Dict, List, Optional, Any
 
 from src.core.events.event_types import EventType, Event
+from src.core.events.event_utils import create_trade_open_event, create_trade_close_event
 
 logger = logging.getLogger(__name__)
 
@@ -17,7 +19,7 @@ class OrderManager:
     by leveraging the event tracking capabilities of the event bus.
     """
     
-    def __init__(self, event_bus, broker=None, order_registry=None):
+    def __init__(self, event_bus, broker=None, order_registry=None, portfolio_manager=None):
         """
         Initialize the order manager.
         
@@ -25,9 +27,11 @@ class OrderManager:
             event_bus: Event bus for event processing
             broker: Optional broker for order execution
             order_registry: Optional order registry (for backward compatibility)
+            portfolio_manager: Optional portfolio manager for position data
         """
         self.event_bus = event_bus
         self.broker = broker
+        self.portfolio_manager = portfolio_manager  # Store portfolio_manager reference
         self.active_orders = {}  # Local cache of active orders
         self.stats = {
             'orders_created': 0,
@@ -118,7 +122,7 @@ class OrderManager:
         # as we now use the event bus directly for order tracking
         pass
         
-    def create_order(self, symbol, order_type='MARKET', direction='BUY', quantity=1, price=None, rule_id=None):
+    def create_order(self, symbol, order_type='MARKET', direction='BUY', quantity=1, price=None, rule_id=None, position_action=None, **kwargs):
         """
         Create an order directly (with error handling for order size).
         
@@ -129,6 +133,8 @@ class OrderManager:
             quantity: Order quantity
             price: Order price
             rule_id: Optional rule ID for tracking signal groups
+            position_action: Optional position action ('OPEN' or 'CLOSE')
+            **kwargs: Additional parameters to include in the order data
             
         Returns:
             str: Order ID
@@ -154,10 +160,20 @@ class OrderManager:
             'status': 'PENDING'
         }
         
+        # Add position_action if provided - CRITICAL for tracking trade lifecycle
+        if position_action:
+            order_data['position_action'] = position_action
+            logger.info(f"Order {order_id} created with position_action: {position_action}")
+        
         # Add rule_id if provided - CRITICAL for correct signal tracking
         if rule_id:
             order_data['rule_id'] = rule_id
             logger.info(f"Order {order_id} created with rule_id: {rule_id}")
+        
+        # Add any additional parameters
+        for key, value in kwargs.items():
+            if key not in order_data:
+                order_data[key] = value
         
         # Create order event
         order_event = Event(EventType.ORDER, order_data)
@@ -297,6 +313,21 @@ class OrderManager:
         fill_data = fill_event.data
         order_id = fill_data.get('order_id')
         
+        # Create a processing cache if it doesn't exist
+        if not hasattr(self, '_processing_cache'):
+            self._processing_cache = set()
+            
+        # Create a unique key for this processing event
+        processing_key = f"fill_{order_id}_{getattr(fill_event, 'id', id(fill_event))}"
+        
+        # Check if we've already processed this specific fill event
+        if processing_key in self._processing_cache:
+            logger.debug(f"Already processing fill event for order_id: {order_id}")
+            return
+            
+        # Add to processing cache
+        self._processing_cache.add(processing_key)
+        
         # Debug logging for fill event
         logger.info(f"Processing fill event for order_id: {order_id}")
         if fill_data:
@@ -314,10 +345,25 @@ class OrderManager:
                 logger.debug(f"Order {order_id} already filled, skipping duplicate fill event")
                 return
             
+            # Extract info from order and fill
+            symbol = order.get('symbol')
+            direction = order.get('direction')
+            quantity = order.get('size', order.get('quantity', 0))
+            price = fill_data.get('price', fill_data.get('fill_price', 0.0))
+            rule_id = order.get('rule_id')
+            commission = fill_data.get('commission', 0.0)
+            timestamp = getattr(fill_event, 'timestamp', None)
+            if timestamp is None and isinstance(fill_data.get('timestamp'), str):
+                from datetime import datetime
+                try:
+                    timestamp = datetime.fromisoformat(fill_data.get('timestamp'))
+                except:
+                    timestamp = datetime.now()
+            
             # Update order with fill information
             order['status'] = 'FILLED'
-            order['fill_price'] = fill_data.get('fill_price')
-            order['fill_time'] = fill_data.get('fill_time')
+            order['fill_price'] = price
+            order['fill_time'] = timestamp
             
             # Make sure size exists (could be missing in some orders)
             if 'size' not in order:
@@ -325,8 +371,93 @@ class OrderManager:
                 logger.warning(f"Order {order_id} missing 'size' field, using {order['size']}")
             
             # Safely log using get() to avoid KeyError
-            logger.info(f"Updated order with fill: Order({order_id}, {order.get('symbol', 'UNKNOWN')}, "
-                       f"{order.get('direction', 'UNKNOWN')}, {order.get('size', 0)}, FILLED)")
+            logger.info(f"Updated order with fill: Order({order_id}, {symbol}, "
+                       f"{direction}, {quantity}, FILLED)")
+            
+            # Determine the type of trade event to emit based on position_action
+            position_action = order.get('position_action', 'OPEN')  # Default to OPEN if not specified
+            
+            if position_action == 'CLOSE':
+                # This is a position closure, emit a TRADE_CLOSE event
+                logger.info(f"Emitting TRADE_CLOSE event for {symbol}: {direction} {quantity} @ {price:.2f}")
+                
+                # For trade closure, we need to find the entry price
+                # Try to get it from the portfolio if possible
+                entry_price = price * 0.99  # Default fallback - slightly different from exit
+                import datetime  # Make sure datetime is imported here
+                entry_time = timestamp - datetime.timedelta(minutes=10)  # Default fallback
+                
+                # Try to get portfolio for better entry price data
+                if hasattr(self, 'portfolio_manager'):
+                    portfolio = self.portfolio_manager
+                elif hasattr(self, 'broker') and hasattr(self.broker, 'portfolio'):
+                    portfolio = self.broker.portfolio
+                else:
+                    portfolio = None
+                    
+                # Get position info if portfolio is available
+                if portfolio:
+                    position = portfolio.get_position(symbol)
+                    if position:
+                        # Get entry price if available
+                        if hasattr(position, 'entry_price') and position.entry_price:
+                            entry_price = position.entry_price
+                        # Get entry time if available
+                        if hasattr(position, 'entry_time') and position.entry_time:
+                            entry_time = position.entry_time
+                
+                # Generate a transaction ID
+                transaction_id = str(uuid.uuid4())
+                
+                # Calculate realistic PnL based on the price difference
+                if direction == 'BUY':  # Closing a short position
+                    pnl = (entry_price - price) * quantity
+                else:  # Closing a long position (SELL)
+                    pnl = (price - entry_price) * quantity
+                
+                # Create trade close event with the best available data
+                trade_close_event = create_trade_close_event(
+                    symbol=symbol,
+                    direction=direction,
+                    quantity=quantity,
+                    entry_price=entry_price,
+                    exit_price=price,
+                    entry_time=entry_time,
+                    exit_time=timestamp,
+                    pnl=pnl,
+                    commission=commission,
+                    rule_id=rule_id,
+                    order_id=order_id,
+                    transaction_id=transaction_id
+                )
+                
+                # Emit the trade close event
+                if self.event_bus:
+                    self.event_bus.emit(trade_close_event)
+                    logger.info(f"Emitted TRADE_CLOSE with PnL: {pnl:.2f}")
+                
+            else:
+                # This is a position opening, emit a TRADE_OPEN event
+                logger.info(f"Emitting TRADE_OPEN event for {symbol}: {direction} {quantity} @ {price:.2f}")
+                open_transaction_id = str(uuid.uuid4()) 
+                trade_open_event = create_trade_open_event(
+                    symbol=symbol,
+                    direction=direction,
+                    quantity=quantity,
+                    price=price,
+                    commission=commission,
+                    timestamp=timestamp,
+                    rule_id=rule_id,
+                    order_id=order_id,
+                    transaction_id=open_transaction_id
+                )
+                
+                # Emit the trade open event
+                if self.event_bus:
+                    self.event_bus.emit(trade_open_event)
+                    logger.info(f"Emitted TRADE_OPEN")
+                
+
                        
             # Update stats
             self.stats['orders_filled'] += 1
@@ -335,7 +466,14 @@ class OrderManager:
             if hasattr(fill_event, 'consumed'):
                 fill_event.consumed = True
         else:
-            logger.warning(f"Fill for unknown order: {order_id}")
+            # Create a warning cache if it doesn't exist
+            if not hasattr(self, '_warning_cache'):
+                self._warning_cache = set()
+                
+            # Only log each unknown order ID once
+            if order_id not in self._warning_cache:
+                logger.warning(f"Fill for unknown order: {order_id}")
+                self._warning_cache.add(order_id)
             
     def handle_cancel(self, cancel_event):
         """
@@ -442,6 +580,7 @@ class OrderManager:
         
         return self.stats.copy()
         
+        
     def reset(self):
         """Reset the order manager state."""
         self.active_orders.clear()
@@ -452,6 +591,12 @@ class OrderManager:
             'orders_rejected': 0
         }
         
+        # Clear processing and warning caches
+        if hasattr(self, '_processing_cache'):
+            self._processing_cache.clear()
+        if hasattr(self, '_warning_cache'):
+            self._warning_cache.clear()
+            
         logger.info("Reset order manager")
         
     def _register_handlers(self):

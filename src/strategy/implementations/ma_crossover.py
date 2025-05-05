@@ -146,6 +146,8 @@ class MACrossoverStrategy(Strategy):
                 price=price,
                 symbol=symbol,
                 timestamp=timestamp
+            ,
+            rule_id=f"ma_crossover_{symbol}_{signal_value}_{timestamp.strftime('%Y%m%d_%H%M')}",
             )
             
             # Emit signal if we have an event bus

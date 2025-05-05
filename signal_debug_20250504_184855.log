@@ -1,0 +1,336 @@
+2025-05-04 18:48:55,777 - root - INFO - Logging to signal_debug_20250504_184855.log
+2025-05-04 18:48:55,780 - root - INFO - Starting signal-order debug with config: config/mini_test.yaml
+2025-05-04 18:48:55,780 - root - INFO - Initializing system with configuration: config/mini_test.yaml
+2025-05-04 18:48:55,780 - src.core.system_bootstrap - INFO - Logging initialized at level INFO
+2025-05-04 18:48:55,780 - src.core.system_bootstrap - INFO - Log file: signal_debug.log
+2025-05-04 18:48:55,782 - src.core.system_bootstrap - INFO - Loaded configuration from config/mini_test.yaml
+2025-05-04 18:48:55,782 - src.core.system_bootstrap - INFO - Event system initialized with native deduplication
+2025-05-04 18:48:55,976 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-05-04 18:48:55,976 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-05-04 18:48:55,977 - src.core.system_bootstrap - INFO - Data components initialized with source type: csv
+2025-05-04 18:48:55,979 - src.execution.broker.broker_simulator - INFO - Simulated broker initialized
+2025-05-04 18:48:55,979 - src.execution.order_manager - INFO - Order manager initialized
+2025-05-04 18:48:55,979 - src.core.system_bootstrap - INFO - Execution components initialized
+2025-05-04 18:48:55,981 - src.core.system_bootstrap - INFO - Using Enhanced Risk Manager (refactored architecture)
+2025-05-04 18:48:55,981 - src.risk.managers.enhanced_risk_manager - INFO - Enhanced risk manager risk_manager_3ab2bfa6 initialized
+2025-05-04 18:48:55,981 - src.core.system_bootstrap - INFO - Enhanced risk manager configured with position_sizing_method=fixed, position_size=100, max_position_size=1000
+2025-05-04 18:48:55,981 - src.core.system_bootstrap - INFO - No signal interpreter needed with enhanced risk manager
+2025-05-04 18:48:55,981 - src.core.system_bootstrap - INFO - Risk components initialized
+2025-05-04 18:48:55,983 - src.core.system_bootstrap - INFO - Discovering strategy implementations...
+2025-05-04 18:48:55,983 - src.core.utils.discovery - INFO - Registered component composite_regime in registry
+2025-05-04 18:48:55,983 - src.core.utils.discovery - INFO - Registered component ensemble_strategy in registry
+2025-05-04 18:48:55,983 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-05-04 18:48:55,983 - src.core.utils.discovery - INFO - Registered component mean_reversion in registry
+2025-05-04 18:48:55,984 - src.core.utils.discovery - INFO - Registered component regime_ensemble in registry
+2025-05-04 18:48:55,984 - src.core.utils.discovery - INFO - Registered component simple_ma_crossover in registry
+2025-05-04 18:48:55,984 - src.core.system_bootstrap - INFO - Discovered strategies: composite_regime, ensemble_strategy, ma_crossover, mean_reversion, regime_ensemble, simple_ma_crossover
+2025-05-04 18:48:55,984 - src.core.system_bootstrap - INFO - Requested strategy: simple_ma_crossover
+2025-05-04 18:48:55,984 - src.core.system_bootstrap - INFO - Available strategies in registry: ['composite_regime', 'ensemble_strategy', 'ma_crossover', 'mean_reversion', 'regime_ensemble', 'simple_ma_crossover']
+2025-05-04 18:48:55,984 - src.strategy.implementations.simple_ma_crossover - INFO - MA Crossover strategy initialized with fast_window=5, slow_window=15
+2025-05-04 18:48:55,984 - src.strategy.implementations.simple_ma_crossover - INFO - MA Crossover strategy configured with parameters: fast_window=5, slow_window=15
+2025-05-04 18:48:55,984 - src.core.system_bootstrap - INFO - Strategy 'simple_ma_crossover' initialized successfully
+2025-05-04 18:48:55,984 - src.core.system_bootstrap - INFO - Analytics components initialized
+2025-05-04 18:48:55,984 - src.core.system_bootstrap - INFO - Registered enhanced risk manager with high signal priority
+2025-05-04 18:48:55,984 - src.core.system_bootstrap - INFO - All components registered with event manager in optimal order
+2025-05-04 18:48:55,984 - src.core.system_bootstrap - INFO - Re-registered portfolio fill handler with high priority
+2025-05-04 18:48:55,984 - src.core.system_bootstrap - INFO - System bootstrap complete
+2025-05-04 18:48:55,984 - root - INFO - Registered tracker for SIGNAL events
+2025-05-04 18:48:55,984 - root - INFO - Registered tracker for ORDER events
+2025-05-04 18:48:55,984 - root - INFO - Running backtest with signal-order tracking...
+2025-05-04 18:48:55,984 - src.execution.backtest.backtest - INFO - Using timeframe from config: 1min
+2025-05-04 18:48:55,985 - src.execution.backtest.backtest - INFO - Backtest setup complete
+2025-05-04 18:48:55,985 - src.core.events.event_bus - INFO - Event bus reset complete
+2025-05-04 18:48:55,985 - src.execution.backtest.backtest - INFO - Event bus reset
+2025-05-04 18:48:55,985 - src.execution.backtest.backtest - INFO - Data handler reset
+2025-05-04 18:48:55,985 - src.strategy.implementations.simple_ma_crossover - INFO - Simple MA Crossover strategy simple_ma_crossover reset
+2025-05-04 18:48:55,985 - src.execution.backtest.backtest - INFO - Strategy reset
+2025-05-04 18:48:55,985 - src.risk.managers.enhanced_risk_manager - INFO - CLEARING 0 PROCESSED RULE IDs
+2025-05-04 18:48:55,985 - src.risk.managers.enhanced_risk_manager - INFO - After reset, processed_rule_ids size: 0
+2025-05-04 18:48:55,985 - src.risk.managers.enhanced_risk_manager - INFO - Risk manager risk_manager_3ab2bfa6 reset completed
+2025-05-04 18:48:55,985 - src.execution.backtest.backtest - INFO - Risk manager reset
+2025-05-04 18:48:55,985 - src.execution.order_manager - INFO - Reset order manager
+2025-05-04 18:48:55,985 - src.execution.backtest.backtest - INFO - Order manager reset
+2025-05-04 18:48:55,985 - src.execution.broker.broker_simulator - INFO - Broker reset
+2025-05-04 18:48:55,985 - src.execution.backtest.backtest - INFO - Broker reset
+2025-05-04 18:48:55,985 - src.risk.portfolio.portfolio - INFO - Trade list reset - new empty list with ID: 4328507136
+2025-05-04 18:48:55,985 - src.risk.portfolio.portfolio - INFO - Reset portfolio portfolio_865ae87f to initial state with cash: $100000.00
+2025-05-04 18:48:55,985 - src.execution.backtest.backtest - INFO - Portfolio reset
+2025-05-04 18:48:55,985 - src.execution.backtest.backtest - INFO - Reset all components for backtest
+2025-05-04 18:48:55,985 - src.execution.backtest.backtest - INFO - Loading data for symbols: ['MINI'] with timeframe: 1min
+2025-05-04 18:48:55,985 - src.data.sources.csv_handler - INFO - CSVDataSource: Loading file ./data/MINI_1min.csv
+2025-05-04 18:48:55,987 - src.data.sources.csv_handler - INFO - CSVDataSource: Loaded 48 rows
+2025-05-04 18:48:55,987 - src.data.sources.csv_handler - INFO - CSVDataSource: Original timestamp sample: 2024-03-26 13:30:00
+2025-05-04 18:48:55,988 - src.data.sources.csv_handler - INFO - CSVDataSource: Parsed timestamp sample: 2024-03-26 13:30:00
+2025-05-04 18:48:55,988 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates >= 2024-01-01 00:00:00
+2025-05-04 18:48:55,988 - src.data.sources.csv_handler - INFO - CSVDataSource: Filtered for dates <= 2024-12-31 00:00:00
+2025-05-04 18:48:55,988 - src.data.sources.csv_handler - INFO - CSVDataSource: Set timestamp as index
+2025-05-04 18:48:55,989 - src.data.sources.csv_handler - INFO - CSVDataSource: Date range in data: 2024-03-26 13:30:00 to 2024-03-26 14:17:00
+2025-05-04 18:48:55,989 - src.data.sources.csv_handler - INFO - CSVDataSource: Columns after mapping: ['open', 'high', 'low', 'close', 'volume', 'trade_count', 'vwap']
+2025-05-04 18:48:55,989 - src.data.historical_data_handler - INFO - Loaded 48 bars for MINI from 2024-03-26 13:30:00 to 2024-03-26 14:17:00
+2025-05-04 18:48:55,989 - src.execution.backtest.backtest - INFO - Starting backtest
+2025-05-04 18:48:55,989 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-04 18:48:55,989 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.12
+2025-05-04 18:48:55,989 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 MINI @ 521.12, rule_id=MINI_SELL_OPEN_20240326133600, timestamp=2024-03-26 13:36:00, action=OPEN
+2025-05-04 18:48:55,989 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_a9fd918f
+2025-05-04 18:48:55,989 - src.execution.broker.broker_simulator - WARNING - Order order_a9fd918f missing required fields. Using defaults: direction=SELL, price=521.12, symbol=MINI, size=1
+2025-05-04 18:48:55,989 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 1 MINI @ 521.12
+2025-05-04 18:48:55,989 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_a9fd918f
+2025-05-04 18:48:55,989 - src.execution.order_manager - INFO - Processing fill event for order_id: order_a9fd918f
+2025-05-04 18:48:55,989 - src.execution.order_manager - WARNING - Fill for unknown order: order_a9fd918f
+2025-05-04 18:48:55,989 - src.risk.portfolio.portfolio - INFO - Fill: SELL 1.0 MINI @ 520.60, PnL: 0.00, Cash: 100520.08, Equity: 99999.48
+2025-05-04 18:48:55,989 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 MINI @ 521.12, rule_id=MINI_SELL_OPEN_20240326133600
+2025-05-04 18:48:55,989 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 13:36:00
+2025-05-04 18:48:55,990 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-04 18:48:55,990 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.085
+2025-05-04 18:48:55,990 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 1.0 MINI @ 521.085, rule_id=MINI_BUY_CLOSE_20240326134300, timestamp=2024-03-26 13:43:00, action=CLOSE
+2025-05-04 18:48:55,990 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_ea400215
+2025-05-04 18:48:55,990 - src.execution.broker.broker_simulator - WARNING - Order order_ea400215 missing required fields. Using defaults: direction=BUY, price=521.085, symbol=MINI, size=1
+2025-05-04 18:48:55,990 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 1 MINI @ 521.085
+2025-05-04 18:48:55,990 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_ea400215
+2025-05-04 18:48:55,990 - src.execution.order_manager - INFO - Processing fill event for order_id: order_ea400215
+2025-05-04 18:48:55,990 - src.execution.order_manager - WARNING - Fill for unknown order: order_ea400215
+2025-05-04 18:48:55,990 - src.risk.portfolio.portfolio - INFO - Fill: BUY 1.0 MINI @ 521.61, PnL: -1.01, Cash: 99997.95, Equity: 99997.95
+2025-05-04 18:48:55,990 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: BUY 1.0 MINI @ 521.085, rule_id=MINI_BUY_CLOSE_20240326134300
+2025-05-04 18:48:55,990 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 MINI @ 521.085, rule_id=MINI_BUY_OPEN_20240326134300, timestamp=2024-03-26 13:43:00, action=OPEN
+2025-05-04 18:48:55,990 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_432223bf
+2025-05-04 18:48:55,990 - src.execution.broker.broker_simulator - WARNING - Order order_432223bf missing required fields. Using defaults: direction=BUY, price=521.085, symbol=MINI, size=1
+2025-05-04 18:48:55,990 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 1 MINI @ 521.085
+2025-05-04 18:48:55,990 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_432223bf
+2025-05-04 18:48:55,990 - src.execution.order_manager - INFO - Processing fill event for order_id: order_432223bf
+2025-05-04 18:48:55,990 - src.execution.order_manager - WARNING - Fill for unknown order: order_432223bf
+2025-05-04 18:48:55,990 - src.risk.portfolio.portfolio - INFO - Fill: BUY 1.0 MINI @ 521.61, PnL: 0.00, Cash: 99475.82, Equity: 99997.43
+2025-05-04 18:48:55,990 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 MINI @ 521.085, rule_id=MINI_BUY_OPEN_20240326134300
+2025-05-04 18:48:55,990 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 13:43:00
+2025-05-04 18:48:55,991 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-04 18:48:55,991 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.09
+2025-05-04 18:48:55,991 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 1.0 MINI @ 521.09, rule_id=MINI_SELL_CLOSE_20240326134700, timestamp=2024-03-26 13:47:00, action=CLOSE
+2025-05-04 18:48:55,991 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_28de4beb
+2025-05-04 18:48:55,991 - src.execution.broker.broker_simulator - WARNING - Order order_28de4beb missing required fields. Using defaults: direction=SELL, price=521.09, symbol=MINI, size=1
+2025-05-04 18:48:55,991 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 1 MINI @ 521.09
+2025-05-04 18:48:55,991 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_28de4beb
+2025-05-04 18:48:55,991 - src.execution.order_manager - INFO - Processing fill event for order_id: order_28de4beb
+2025-05-04 18:48:55,991 - src.execution.order_manager - WARNING - Fill for unknown order: order_28de4beb
+2025-05-04 18:48:55,991 - src.risk.portfolio.portfolio - INFO - Fill: SELL 1.0 MINI @ 520.57, PnL: -1.04, Cash: 99995.87, Equity: 99995.87
+2025-05-04 18:48:55,991 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: SELL 1.0 MINI @ 521.09, rule_id=MINI_SELL_CLOSE_20240326134700
+2025-05-04 18:48:55,991 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 MINI @ 521.09, rule_id=MINI_SELL_OPEN_20240326134700, timestamp=2024-03-26 13:47:00, action=OPEN
+2025-05-04 18:48:55,991 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_f09cbb9e
+2025-05-04 18:48:55,991 - src.execution.broker.broker_simulator - WARNING - Order order_f09cbb9e missing required fields. Using defaults: direction=SELL, price=521.09, symbol=MINI, size=1
+2025-05-04 18:48:55,991 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 1 MINI @ 521.09
+2025-05-04 18:48:55,991 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_f09cbb9e
+2025-05-04 18:48:55,991 - src.execution.order_manager - INFO - Processing fill event for order_id: order_f09cbb9e
+2025-05-04 18:48:55,991 - src.execution.order_manager - WARNING - Fill for unknown order: order_f09cbb9e
+2025-05-04 18:48:55,991 - src.risk.portfolio.portfolio - INFO - Fill: SELL 1.0 MINI @ 520.57, PnL: 0.00, Cash: 100515.92, Equity: 99995.35
+2025-05-04 18:48:55,991 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 MINI @ 521.09, rule_id=MINI_SELL_OPEN_20240326134700
+2025-05-04 18:48:55,991 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 13:47:00
+2025-05-04 18:48:55,991 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-04 18:48:55,991 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.17
+2025-05-04 18:48:55,991 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 1.0 MINI @ 521.17, rule_id=MINI_BUY_CLOSE_20240326134800, timestamp=2024-03-26 13:48:00, action=CLOSE
+2025-05-04 18:48:55,991 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_4081d0ef
+2025-05-04 18:48:55,991 - src.execution.broker.broker_simulator - WARNING - Order order_4081d0ef missing required fields. Using defaults: direction=BUY, price=521.17, symbol=MINI, size=1
+2025-05-04 18:48:55,991 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 1 MINI @ 521.17
+2025-05-04 18:48:55,991 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_4081d0ef
+2025-05-04 18:48:55,991 - src.execution.order_manager - INFO - Processing fill event for order_id: order_4081d0ef
+2025-05-04 18:48:55,991 - src.execution.order_manager - WARNING - Fill for unknown order: order_4081d0ef
+2025-05-04 18:48:55,991 - src.risk.portfolio.portfolio - INFO - Fill: BUY 1.0 MINI @ 521.69, PnL: -1.12, Cash: 99993.71, Equity: 99993.71
+2025-05-04 18:48:55,991 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: BUY 1.0 MINI @ 521.17, rule_id=MINI_BUY_CLOSE_20240326134800
+2025-05-04 18:48:55,991 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 MINI @ 521.17, rule_id=MINI_BUY_OPEN_20240326134800, timestamp=2024-03-26 13:48:00, action=OPEN
+2025-05-04 18:48:55,991 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_a82c6a97
+2025-05-04 18:48:55,991 - src.execution.broker.broker_simulator - WARNING - Order order_a82c6a97 missing required fields. Using defaults: direction=BUY, price=521.17, symbol=MINI, size=1
+2025-05-04 18:48:55,991 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 1 MINI @ 521.17
+2025-05-04 18:48:55,991 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_a82c6a97
+2025-05-04 18:48:55,991 - src.execution.order_manager - INFO - Processing fill event for order_id: order_a82c6a97
+2025-05-04 18:48:55,991 - src.execution.order_manager - WARNING - Fill for unknown order: order_a82c6a97
+2025-05-04 18:48:55,991 - src.risk.portfolio.portfolio - INFO - Fill: BUY 1.0 MINI @ 521.69, PnL: 0.00, Cash: 99471.49, Equity: 99993.19
+2025-05-04 18:48:55,992 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 MINI @ 521.17, rule_id=MINI_BUY_OPEN_20240326134800
+2025-05-04 18:48:55,992 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 13:48:00
+2025-05-04 18:48:55,992 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-04 18:48:55,992 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.08
+2025-05-04 18:48:55,992 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 1.0 MINI @ 521.08, rule_id=MINI_SELL_CLOSE_20240326135100, timestamp=2024-03-26 13:51:00, action=CLOSE
+2025-05-04 18:48:55,992 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_6f8bd1f2
+2025-05-04 18:48:55,992 - src.execution.broker.broker_simulator - WARNING - Order order_6f8bd1f2 missing required fields. Using defaults: direction=SELL, price=521.08, symbol=MINI, size=1
+2025-05-04 18:48:55,992 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 1 MINI @ 521.08
+2025-05-04 18:48:55,992 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_6f8bd1f2
+2025-05-04 18:48:55,992 - src.execution.order_manager - INFO - Processing fill event for order_id: order_6f8bd1f2
+2025-05-04 18:48:55,992 - src.execution.order_manager - WARNING - Fill for unknown order: order_6f8bd1f2
+2025-05-04 18:48:55,992 - src.risk.portfolio.portfolio - INFO - Fill: SELL 1.0 MINI @ 520.56, PnL: -1.13, Cash: 99991.53, Equity: 99991.53
+2025-05-04 18:48:55,992 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: SELL 1.0 MINI @ 521.08, rule_id=MINI_SELL_CLOSE_20240326135100
+2025-05-04 18:48:55,992 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 MINI @ 521.08, rule_id=MINI_SELL_OPEN_20240326135100, timestamp=2024-03-26 13:51:00, action=OPEN
+2025-05-04 18:48:55,992 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_924e7ea6
+2025-05-04 18:48:55,992 - src.execution.broker.broker_simulator - WARNING - Order order_924e7ea6 missing required fields. Using defaults: direction=SELL, price=521.08, symbol=MINI, size=1
+2025-05-04 18:48:55,992 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 1 MINI @ 521.08
+2025-05-04 18:48:55,992 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_924e7ea6
+2025-05-04 18:48:55,992 - src.execution.order_manager - INFO - Processing fill event for order_id: order_924e7ea6
+2025-05-04 18:48:55,992 - src.execution.order_manager - WARNING - Fill for unknown order: order_924e7ea6
+2025-05-04 18:48:55,992 - src.risk.portfolio.portfolio - INFO - Fill: SELL 1.0 MINI @ 520.56, PnL: 0.00, Cash: 100511.57, Equity: 99991.01
+2025-05-04 18:48:55,992 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 MINI @ 521.08, rule_id=MINI_SELL_OPEN_20240326135100
+2025-05-04 18:48:55,992 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 13:51:00
+2025-05-04 18:48:55,992 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-04 18:48:55,992 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.145
+2025-05-04 18:48:55,993 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 1.0 MINI @ 521.145, rule_id=MINI_BUY_CLOSE_20240326135600, timestamp=2024-03-26 13:56:00, action=CLOSE
+2025-05-04 18:48:55,993 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_85a5aba8
+2025-05-04 18:48:55,993 - src.execution.broker.broker_simulator - WARNING - Order order_85a5aba8 missing required fields. Using defaults: direction=BUY, price=521.145, symbol=MINI, size=1
+2025-05-04 18:48:55,993 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 1 MINI @ 521.145
+2025-05-04 18:48:55,993 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_85a5aba8
+2025-05-04 18:48:55,993 - src.execution.order_manager - INFO - Processing fill event for order_id: order_85a5aba8
+2025-05-04 18:48:55,993 - src.execution.order_manager - WARNING - Fill for unknown order: order_85a5aba8
+2025-05-04 18:48:55,993 - src.risk.portfolio.portfolio - INFO - Fill: BUY 1.0 MINI @ 521.67, PnL: -1.11, Cash: 99989.38, Equity: 99989.38
+2025-05-04 18:48:55,993 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: BUY 1.0 MINI @ 521.145, rule_id=MINI_BUY_CLOSE_20240326135600
+2025-05-04 18:48:55,993 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 MINI @ 521.145, rule_id=MINI_BUY_OPEN_20240326135600, timestamp=2024-03-26 13:56:00, action=OPEN
+2025-05-04 18:48:55,993 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_22434bfd
+2025-05-04 18:48:55,993 - src.execution.broker.broker_simulator - WARNING - Order order_22434bfd missing required fields. Using defaults: direction=BUY, price=521.145, symbol=MINI, size=1
+2025-05-04 18:48:55,993 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 1 MINI @ 521.145
+2025-05-04 18:48:55,993 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_22434bfd
+2025-05-04 18:48:55,993 - src.execution.order_manager - INFO - Processing fill event for order_id: order_22434bfd
+2025-05-04 18:48:55,993 - src.execution.order_manager - WARNING - Fill for unknown order: order_22434bfd
+2025-05-04 18:48:55,993 - src.risk.portfolio.portfolio - INFO - Fill: BUY 1.0 MINI @ 521.67, PnL: 0.00, Cash: 99467.19, Equity: 99988.86
+2025-05-04 18:48:55,993 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 MINI @ 521.145, rule_id=MINI_BUY_OPEN_20240326135600
+2025-05-04 18:48:55,993 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 13:56:00
+2025-05-04 18:48:55,993 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-04 18:48:55,993 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.25
+2025-05-04 18:48:55,993 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 1.0 MINI @ 521.25, rule_id=MINI_SELL_CLOSE_20240326140300, timestamp=2024-03-26 14:03:00, action=CLOSE
+2025-05-04 18:48:55,993 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_829207b3
+2025-05-04 18:48:55,993 - src.execution.broker.broker_simulator - WARNING - Order order_829207b3 missing required fields. Using defaults: direction=SELL, price=521.25, symbol=MINI, size=1
+2025-05-04 18:48:55,993 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 1 MINI @ 521.25
+2025-05-04 18:48:55,993 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_829207b3
+2025-05-04 18:48:55,993 - src.execution.order_manager - INFO - Processing fill event for order_id: order_829207b3
+2025-05-04 18:48:55,993 - src.execution.order_manager - WARNING - Fill for unknown order: order_829207b3
+2025-05-04 18:48:55,993 - src.risk.portfolio.portfolio - INFO - Fill: SELL 1.0 MINI @ 520.73, PnL: -0.94, Cash: 99987.40, Equity: 99987.40
+2025-05-04 18:48:55,994 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: SELL 1.0 MINI @ 521.25, rule_id=MINI_SELL_CLOSE_20240326140300
+2025-05-04 18:48:55,994 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 MINI @ 521.25, rule_id=MINI_SELL_OPEN_20240326140300, timestamp=2024-03-26 14:03:00, action=OPEN
+2025-05-04 18:48:55,994 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_651f0c9e
+2025-05-04 18:48:55,994 - src.execution.broker.broker_simulator - WARNING - Order order_651f0c9e missing required fields. Using defaults: direction=SELL, price=521.25, symbol=MINI, size=1
+2025-05-04 18:48:55,994 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 1 MINI @ 521.25
+2025-05-04 18:48:55,994 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_651f0c9e
+2025-05-04 18:48:55,994 - src.execution.order_manager - INFO - Processing fill event for order_id: order_651f0c9e
+2025-05-04 18:48:55,994 - src.execution.order_manager - WARNING - Fill for unknown order: order_651f0c9e
+2025-05-04 18:48:55,994 - src.risk.portfolio.portfolio - INFO - Fill: SELL 1.0 MINI @ 520.73, PnL: 0.00, Cash: 100507.61, Equity: 99986.88
+2025-05-04 18:48:55,994 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 MINI @ 521.25, rule_id=MINI_SELL_OPEN_20240326140300
+2025-05-04 18:48:55,994 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 14:03:00
+2025-05-04 18:48:55,994 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-04 18:48:55,994 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.31
+2025-05-04 18:48:55,994 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 1.0 MINI @ 521.31, rule_id=MINI_BUY_CLOSE_20240326140500, timestamp=2024-03-26 14:05:00, action=CLOSE
+2025-05-04 18:48:55,994 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_2ca89e31
+2025-05-04 18:48:55,994 - src.execution.broker.broker_simulator - WARNING - Order order_2ca89e31 missing required fields. Using defaults: direction=BUY, price=521.31, symbol=MINI, size=1
+2025-05-04 18:48:55,994 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 1 MINI @ 521.31
+2025-05-04 18:48:55,994 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_2ca89e31
+2025-05-04 18:48:55,994 - src.execution.order_manager - INFO - Processing fill event for order_id: order_2ca89e31
+2025-05-04 18:48:55,994 - src.execution.order_manager - WARNING - Fill for unknown order: order_2ca89e31
+2025-05-04 18:48:55,994 - src.risk.portfolio.portfolio - INFO - Fill: BUY 1.0 MINI @ 521.83, PnL: -1.10, Cash: 99985.26, Equity: 99985.26
+2025-05-04 18:48:55,994 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: BUY 1.0 MINI @ 521.31, rule_id=MINI_BUY_CLOSE_20240326140500
+2025-05-04 18:48:55,994 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 MINI @ 521.31, rule_id=MINI_BUY_OPEN_20240326140500, timestamp=2024-03-26 14:05:00, action=OPEN
+2025-05-04 18:48:55,994 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_17f3ae2b
+2025-05-04 18:48:55,994 - src.execution.broker.broker_simulator - WARNING - Order order_17f3ae2b missing required fields. Using defaults: direction=BUY, price=521.31, symbol=MINI, size=1
+2025-05-04 18:48:55,994 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 1 MINI @ 521.31
+2025-05-04 18:48:55,994 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_17f3ae2b
+2025-05-04 18:48:55,994 - src.execution.order_manager - INFO - Processing fill event for order_id: order_17f3ae2b
+2025-05-04 18:48:55,994 - src.execution.order_manager - WARNING - Fill for unknown order: order_17f3ae2b
+2025-05-04 18:48:55,994 - src.risk.portfolio.portfolio - INFO - Fill: BUY 1.0 MINI @ 521.83, PnL: 0.00, Cash: 99462.90, Equity: 99984.74
+2025-05-04 18:48:55,994 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 MINI @ 521.31, rule_id=MINI_BUY_OPEN_20240326140500
+2025-05-04 18:48:55,994 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 14:05:00
+2025-05-04 18:48:55,995 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-04 18:48:55,995 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.3
+2025-05-04 18:48:55,995 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 1.0 MINI @ 521.3, rule_id=MINI_SELL_CLOSE_20240326140900, timestamp=2024-03-26 14:09:00, action=CLOSE
+2025-05-04 18:48:55,995 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_81a4a297
+2025-05-04 18:48:55,995 - src.execution.broker.broker_simulator - WARNING - Order order_81a4a297 missing required fields. Using defaults: direction=SELL, price=521.3, symbol=MINI, size=1
+2025-05-04 18:48:55,995 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 1 MINI @ 521.3
+2025-05-04 18:48:55,995 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_81a4a297
+2025-05-04 18:48:55,995 - src.execution.order_manager - INFO - Processing fill event for order_id: order_81a4a297
+2025-05-04 18:48:55,995 - src.execution.order_manager - WARNING - Fill for unknown order: order_81a4a297
+2025-05-04 18:48:55,995 - src.risk.portfolio.portfolio - INFO - Fill: SELL 1.0 MINI @ 520.78, PnL: -1.05, Cash: 99983.16, Equity: 99983.16
+2025-05-04 18:48:55,995 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: SELL 1.0 MINI @ 521.3, rule_id=MINI_SELL_CLOSE_20240326140900
+2025-05-04 18:48:55,995 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 MINI @ 521.3, rule_id=MINI_SELL_OPEN_20240326140900, timestamp=2024-03-26 14:09:00, action=OPEN
+2025-05-04 18:48:55,995 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_595764ce
+2025-05-04 18:48:55,995 - src.execution.broker.broker_simulator - WARNING - Order order_595764ce missing required fields. Using defaults: direction=SELL, price=521.3, symbol=MINI, size=1
+2025-05-04 18:48:55,995 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 1 MINI @ 521.3
+2025-05-04 18:48:55,995 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_595764ce
+2025-05-04 18:48:55,995 - src.execution.order_manager - INFO - Processing fill event for order_id: order_595764ce
+2025-05-04 18:48:55,995 - src.execution.order_manager - WARNING - Fill for unknown order: order_595764ce
+2025-05-04 18:48:55,995 - src.risk.portfolio.portfolio - INFO - Fill: SELL 1.0 MINI @ 520.78, PnL: 0.00, Cash: 100503.42, Equity: 99982.64
+2025-05-04 18:48:55,995 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 MINI @ 521.3, rule_id=MINI_SELL_OPEN_20240326140900
+2025-05-04 18:48:55,995 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 14:09:00
+2025-05-04 18:48:55,995 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-04 18:48:55,995 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.3001
+2025-05-04 18:48:55,995 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 1.0 MINI @ 521.3001, rule_id=MINI_BUY_CLOSE_20240326141300, timestamp=2024-03-26 14:13:00, action=CLOSE
+2025-05-04 18:48:55,995 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_1bf72f48
+2025-05-04 18:48:55,995 - src.execution.broker.broker_simulator - WARNING - Order order_1bf72f48 missing required fields. Using defaults: direction=BUY, price=521.3001, symbol=MINI, size=1
+2025-05-04 18:48:55,995 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 1 MINI @ 521.3001
+2025-05-04 18:48:55,995 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_1bf72f48
+2025-05-04 18:48:55,995 - src.execution.order_manager - INFO - Processing fill event for order_id: order_1bf72f48
+2025-05-04 18:48:55,995 - src.execution.order_manager - WARNING - Fill for unknown order: order_1bf72f48
+2025-05-04 18:48:55,995 - src.risk.portfolio.portfolio - INFO - Fill: BUY 1.0 MINI @ 521.82, PnL: -1.04, Cash: 99981.08, Equity: 99981.08
+2025-05-04 18:48:55,995 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: BUY 1.0 MINI @ 521.3001, rule_id=MINI_BUY_CLOSE_20240326141300
+2025-05-04 18:48:55,995 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 MINI @ 521.3001, rule_id=MINI_BUY_OPEN_20240326141300, timestamp=2024-03-26 14:13:00, action=OPEN
+2025-05-04 18:48:55,995 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_64ad8e73
+2025-05-04 18:48:55,995 - src.execution.broker.broker_simulator - WARNING - Order order_64ad8e73 missing required fields. Using defaults: direction=BUY, price=521.3001, symbol=MINI, size=1
+2025-05-04 18:48:55,996 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 1 MINI @ 521.3001
+2025-05-04 18:48:55,996 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_64ad8e73
+2025-05-04 18:48:55,996 - src.execution.order_manager - INFO - Processing fill event for order_id: order_64ad8e73
+2025-05-04 18:48:55,996 - src.execution.order_manager - WARNING - Fill for unknown order: order_64ad8e73
+2025-05-04 18:48:55,996 - src.risk.portfolio.portfolio - INFO - Fill: BUY 1.0 MINI @ 521.82, PnL: 0.00, Cash: 99458.73, Equity: 99980.56
+2025-05-04 18:48:55,996 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 MINI @ 521.3001, rule_id=MINI_BUY_OPEN_20240326141300
+2025-05-04 18:48:55,996 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 14:13:00
+2025-05-04 18:48:55,996 - src.strategy.implementations.simple_ma_crossover - INFO - SELL signal for MINI: fast MA crossed below slow MA
+2025-05-04 18:48:55,996 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=-1 at 521.32
+2025-05-04 18:48:55,996 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 1.0 MINI @ 521.32, rule_id=MINI_SELL_CLOSE_20240326141600, timestamp=2024-03-26 14:16:00, action=CLOSE
+2025-05-04 18:48:55,996 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_45293b92
+2025-05-04 18:48:55,996 - src.execution.broker.broker_simulator - WARNING - Order order_45293b92 missing required fields. Using defaults: direction=SELL, price=521.32, symbol=MINI, size=1
+2025-05-04 18:48:55,996 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 1 MINI @ 521.32
+2025-05-04 18:48:55,996 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_45293b92
+2025-05-04 18:48:55,996 - src.execution.order_manager - INFO - Processing fill event for order_id: order_45293b92
+2025-05-04 18:48:55,996 - src.execution.order_manager - WARNING - Fill for unknown order: order_45293b92
+2025-05-04 18:48:55,996 - src.risk.portfolio.portfolio - INFO - Fill: SELL 1.0 MINI @ 520.80, PnL: -1.02, Cash: 99979.01, Equity: 99979.01
+2025-05-04 18:48:55,996 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: SELL 1.0 MINI @ 521.32, rule_id=MINI_SELL_CLOSE_20240326141600
+2025-05-04 18:48:55,996 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: SELL 100.0 MINI @ 521.32, rule_id=MINI_SELL_OPEN_20240326141600, timestamp=2024-03-26 14:16:00, action=OPEN
+2025-05-04 18:48:55,996 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_4dd2f7c8
+2025-05-04 18:48:55,996 - src.execution.broker.broker_simulator - WARNING - Order order_4dd2f7c8 missing required fields. Using defaults: direction=SELL, price=521.32, symbol=MINI, size=1
+2025-05-04 18:48:55,996 - src.execution.broker.broker_simulator - INFO - Broker processed order: SELL 1 MINI @ 521.32
+2025-05-04 18:48:55,996 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_4dd2f7c8
+2025-05-04 18:48:55,996 - src.execution.order_manager - INFO - Processing fill event for order_id: order_4dd2f7c8
+2025-05-04 18:48:55,996 - src.execution.order_manager - WARNING - Fill for unknown order: order_4dd2f7c8
+2025-05-04 18:48:55,996 - src.risk.portfolio.portfolio - INFO - Fill: SELL 1.0 MINI @ 520.80, PnL: 0.00, Cash: 100499.29, Equity: 99978.49
+2025-05-04 18:48:55,996 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: SELL 100.0 MINI @ 521.32, rule_id=MINI_SELL_OPEN_20240326141600
+2025-05-04 18:48:55,996 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: -1, timestamp=2024-03-26 14:16:00
+2025-05-04 18:48:55,996 - src.strategy.implementations.simple_ma_crossover - INFO - BUY signal for MINI: fast MA crossed above slow MA
+2025-05-04 18:48:55,996 - src.risk.managers.enhanced_risk_manager - INFO - Received signal: MINI direction=1 at 521.38
+2025-05-04 18:48:55,996 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 1.0 MINI @ 521.38, rule_id=MINI_BUY_CLOSE_20240326141700, timestamp=2024-03-26 14:17:00, action=CLOSE
+2025-05-04 18:48:55,996 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_6111d049
+2025-05-04 18:48:55,996 - src.execution.broker.broker_simulator - WARNING - Order order_6111d049 missing required fields. Using defaults: direction=BUY, price=521.38, symbol=MINI, size=1
+2025-05-04 18:48:55,996 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 1 MINI @ 521.38
+2025-05-04 18:48:55,996 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_6111d049
+2025-05-04 18:48:55,997 - src.execution.order_manager - INFO - Processing fill event for order_id: order_6111d049
+2025-05-04 18:48:55,997 - src.execution.order_manager - WARNING - Fill for unknown order: order_6111d049
+2025-05-04 18:48:55,997 - src.risk.portfolio.portfolio - INFO - Fill: BUY 1.0 MINI @ 521.90, PnL: -1.10, Cash: 99976.87, Equity: 99976.87
+2025-05-04 18:48:55,997 - src.risk.managers.enhanced_risk_manager - INFO - Closing position: BUY 1.0 MINI @ 521.38, rule_id=MINI_BUY_CLOSE_20240326141700
+2025-05-04 18:48:55,997 - src.risk.managers.enhanced_risk_manager - INFO - Trading decision: BUY 100.0 MINI @ 521.38, rule_id=MINI_BUY_OPEN_20240326141700, timestamp=2024-03-26 14:17:00, action=OPEN
+2025-05-04 18:48:55,997 - src.execution.broker.broker_simulator - INFO - Generated missing order_id: order_654e0e50
+2025-05-04 18:48:55,997 - src.execution.broker.broker_simulator - WARNING - Order order_654e0e50 missing required fields. Using defaults: direction=BUY, price=521.38, symbol=MINI, size=1
+2025-05-04 18:48:55,997 - src.execution.broker.broker_simulator - INFO - Broker processed order: BUY 1 MINI @ 521.38
+2025-05-04 18:48:55,997 - src.execution.broker.broker_simulator - INFO - Fill event created with order_id: order_654e0e50
+2025-05-04 18:48:55,997 - src.execution.order_manager - INFO - Processing fill event for order_id: order_654e0e50
+2025-05-04 18:48:55,997 - src.execution.order_manager - WARNING - Fill for unknown order: order_654e0e50
+2025-05-04 18:48:55,997 - src.risk.portfolio.portfolio - INFO - Fill: BUY 1.0 MINI @ 521.90, PnL: 0.00, Cash: 99454.44, Equity: 99976.34
+2025-05-04 18:48:55,997 - src.risk.managers.enhanced_risk_manager - INFO - Opening position: BUY 100.0 MINI @ 521.38, rule_id=MINI_BUY_OPEN_20240326141700
+2025-05-04 18:48:55,997 - src.strategy.implementations.simple_ma_crossover - INFO - Signal emitted for MINI: 1, timestamp=2024-03-26 14:17:00
+2025-05-04 18:48:55,997 - src.execution.backtest.backtest - INFO - Backtest completed after 49 iterations
+2025-05-04 18:48:55,997 - src.execution.backtest.backtest - INFO - Collected 11 trades from portfolio for reporting
+2025-05-04 18:48:55,997 - src.execution.backtest.backtest - INFO - First trade sample: MINI BUY @ 521.606085
+2025-05-04 18:48:55,997 - src.execution.backtest.backtest - INFO - Last trade sample: MINI BUY @ 521.9013799999999
+2025-05-04 18:48:55,997 - src.execution.backtest.backtest - INFO - Trade stats: 11 trades, 0 wins, 11 losses
+2025-05-04 18:48:55,997 - src.execution.backtest.backtest - INFO - PnL sum: -11.67
+2025-05-04 18:48:55,997 - src.execution.backtest.backtest - INFO - Min PnL: -1.13, Max PnL: -0.94
+2025-05-04 18:48:55,997 - src.execution.backtest.backtest - INFO - Stored 11 trades in results dictionary with ID 4379851392
+2025-05-04 18:48:55,998 - src.analytics.performance.calculator - INFO - Using all 11 closed trades for performance calculation (includes 0 with zero PnL)
+2025-05-04 18:48:55,998 - src.execution.backtest.backtest - INFO - Performance calculator configured with 11 trades
+2025-05-04 18:48:55,998 - src.analytics.performance.calculator - INFO - Performance calculator: Processing 11 trades and equity curve with 289 points
+2025-05-04 18:48:55,998 - src.analytics.performance.calculator - INFO - Total PnL from trades: -11.67
+2025-05-04 18:48:55,998 - src.analytics.performance.calculator - INFO - Trades with PnL field: 11 out of 11
+2025-05-04 18:48:55,998 - src.analytics.metrics.functional - INFO - Calculating metrics for 11 trades and 289 equity points
+2025-05-04 18:48:55,998 - src.analytics.metrics.functional - INFO - Drawdown stats: Initial=100000.00, Final=99975.82, Min=99975.82, Max DD=0.0002
+2025-05-04 18:48:55,999 - src.analytics.metrics.functional - INFO - Setting trade_count metric to 11 total trades
+2025-05-04 18:48:55,999 - src.analytics.metrics.functional - INFO - Win rate calculation: 0 wins out of 11 valid trades
+2025-05-04 18:48:55,999 - src.analytics.metrics.functional - INFO - Valid trades: 11, Winners: 0, Losers: 11
+2025-05-04 18:48:55,999 - src.analytics.metrics.functional - INFO - Profit factor calculation: gross profit=0.00, gross loss=11.67
+2025-05-04 18:48:55,999 - src.execution.backtest.backtest - INFO - Calculated performance metrics for 11 trades
+2025-05-04 18:48:56,000 - src.analytics.metrics.functional - INFO - Setting trade_count metric to 11 total trades
+2025-05-04 18:48:56,001 - src.analytics.metrics.functional - INFO - Setting trade_count metric to 11 total trades
+2025-05-04 18:48:56,003 - src.execution.backtest.backtest - INFO - Backtest complete

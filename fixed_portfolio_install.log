@@ -1,0 +1,90 @@
+2025-05-04 13:23:03,750 - install_fixed_portfolio - INFO - Starting fixed portfolio installation and test
+2025-05-04 13:23:03,750 - install_fixed_portfolio - INFO - Fixed portfolio module exists at src/risk/portfolio/fixed_portfolio.py
+2025-05-04 13:23:03,750 - install_fixed_portfolio - INFO - Running fixed portfolio tests
+2025-05-04 13:23:04,083 - src.risk.portfolio.fixed_portfolio - INFO - Initialized trades list with ID: 4379761152
+2025-05-04 13:23:04,083 - install_fixed_portfolio - INFO - Registered handler for EventType.FILL
+2025-05-04 13:23:04,083 - install_fixed_portfolio - INFO - Registered handler for EventType.BAR
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - INFO - Fixed portfolio manager initialized: test_portfolio
+2025-05-04 13:23:04,084 - install_fixed_portfolio - INFO - Created test portfolio with ID 4442136864
+2025-05-04 13:23:04,084 - install_fixed_portfolio - INFO - Processing OPEN fill event
+2025-05-04 13:23:04,084 - install_fixed_portfolio - INFO - Emitted event: EventType.FILL
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - INFO - Fill event for MINI BUY with action_type: OPEN, rule_id: MINI_BUY_OPEN_20250504
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - WARNING - Invalid trade: Insufficient cash: 10000.00 < 10250.00, rejecting
+2025-05-04 13:23:04,084 - install_fixed_portfolio - ERROR - Error: Position was not created
+2025-05-04 13:23:04,084 - install_fixed_portfolio - INFO - Trades count after OPEN: 0
+2025-05-04 13:23:04,084 - install_fixed_portfolio - INFO - Processing CLOSE fill event
+2025-05-04 13:23:04,084 - install_fixed_portfolio - INFO - Emitted event: EventType.FILL
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - INFO - Fill event for MINI SELL with action_type: CLOSE, rule_id: MINI_SELL_CLOSE_20250504
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - WARNING - No matching OPEN transaction found for CLOSE MINI SELL
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - INFO - Adding standalone CLOSE trade with ID 15f53115-92bb-48c9-9fb2-5b2c7c295dc3 to trade list
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - INFO - Fill: SELL 100.0 MINI @ 105.00, PnL: 0.00, Cash: 20499.50, Equity: 9999.50
+2025-05-04 13:23:04,084 - install_fixed_portfolio - INFO - Emitted event: EventType.PORTFOLIO
+2025-05-04 13:23:04,084 - install_fixed_portfolio - INFO - Position after CLOSE: Position(MINI, SHORT, quantity=-100.0, cost_basis=105.00, realized_pnl=0.00, unrealized_pnl=0.00)
+2025-05-04 13:23:04,084 - install_fixed_portfolio - INFO - Trades count after CLOSE: 1
+2025-05-04 13:23:04,084 - install_fixed_portfolio - INFO - Trade 1: 15f53115-92bb-48c9-9fb2-5b2c7c295dc3 - MINI - CLOSE - PnL: 0.0
+2025-05-04 13:23:04,084 - install_fixed_portfolio - INFO - Total PnL from trades: 0.00
+2025-05-04 13:23:04,084 - install_fixed_portfolio - INFO - Expected PnL: 249.00
+2025-05-04 13:23:04,084 - install_fixed_portfolio - ERROR - PnL calculation error: Got 0.00, expected 249.00
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - INFO - === TRADE TRACKING DEBUG ===
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - INFO - Portfolio trade list ID: 4379761152
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - INFO - Trade count: 1
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - INFO - Position transaction count: 0
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - INFO - First trade: 15f53115-92bb-48c9-9fb2-5b2c7c295dc3 - MINI - CLOSE
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - INFO - Last trade: 15f53115-92bb-48c9-9fb2-5b2c7c295dc3 - MINI - CLOSE
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - INFO - Total PnL from trades: 0.00
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - INFO - Trade types: OPEN=0, CLOSE=1, Standard=0
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - INFO - === END TRADE TRACKING DEBUG ===
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - INFO - get_recent_trades called, self.trades has 1 items
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - INFO - Returning 1 validated trades
+2025-05-04 13:23:04,084 - install_fixed_portfolio - INFO - Portfolio statistics: {'trades_executed': 1, 'long_trades': 0, 'short_trades': 0, 'winning_trades': 0, 'losing_trades': 0, 'break_even_trades': 1, 'total_pnl': 0.0, 'total_commission': 0.5, 'win_rate': 0.0, 'avg_win': 0.0, 'avg_loss': 0.0, 'profit_factor': 0.0, 'gross_profit': 0, 'gross_loss': 0, 'wins': 0, 'losses': 0}
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - INFO - Reset trades list - new empty list with ID: 4446849728
+2025-05-04 13:23:04,084 - src.risk.portfolio.fixed_portfolio - INFO - Reset portfolio test_portfolio to initial state with cash: $10000.00
+2025-05-04 13:23:04,084 - install_fixed_portfolio - INFO - After reset - trades count: 0
+2025-05-04 13:23:04,084 - install_fixed_portfolio - INFO - Fixed portfolio implementation is complete and working as expected!
+2025-05-04 13:23:26,306 - install_fixed_portfolio - INFO - Starting fixed portfolio installation and test
+2025-05-04 13:23:26,306 - install_fixed_portfolio - INFO - Fixed portfolio module exists at src/risk/portfolio/fixed_portfolio.py
+2025-05-04 13:23:26,306 - install_fixed_portfolio - INFO - Running fixed portfolio tests
+2025-05-04 13:23:26,608 - src.risk.portfolio.fixed_portfolio - INFO - Initialized trades list with ID: 4380055872
+2025-05-04 13:23:26,608 - install_fixed_portfolio - INFO - Registered handler for EventType.FILL
+2025-05-04 13:23:26,608 - install_fixed_portfolio - INFO - Registered handler for EventType.BAR
+2025-05-04 13:23:26,608 - src.risk.portfolio.fixed_portfolio - INFO - Fixed portfolio manager initialized: test_portfolio
+2025-05-04 13:23:26,608 - install_fixed_portfolio - INFO - Created test portfolio with ID 4441071568
+2025-05-04 13:23:26,608 - install_fixed_portfolio - INFO - Processing OPEN fill event
+2025-05-04 13:23:26,608 - install_fixed_portfolio - INFO - Emitted event: EventType.FILL
+2025-05-04 13:23:26,608 - src.risk.portfolio.fixed_portfolio - INFO - Fill event for MINI BUY with action_type: OPEN, rule_id: MINI_BUY_OPEN_20250504
+2025-05-04 13:23:26,608 - src.risk.portfolio.fixed_portfolio - INFO - Recorded OPEN transaction f58ad2c8-3490-46e0-853f-2db536d65072 for MINI BUY
+2025-05-04 13:23:26,608 - src.risk.portfolio.fixed_portfolio - INFO - Adding OPEN trade with ID a20e8807-ba05-4614-a2d9-106d0b9689e6 to trade list
+2025-05-04 13:23:26,608 - src.risk.portfolio.fixed_portfolio - INFO - Fill: BUY 100.0 MINI @ 102.50, PnL: 0.00, Cash: 39749.50, Equity: 49999.50
+2025-05-04 13:23:26,608 - install_fixed_portfolio - INFO - Emitted event: EventType.PORTFOLIO
+2025-05-04 13:23:26,608 - install_fixed_portfolio - INFO - Position created: Position(MINI, LONG, quantity=100.0, cost_basis=102.50, realized_pnl=0.00, unrealized_pnl=0.00)
+2025-05-04 13:23:26,608 - install_fixed_portfolio - INFO - Trades count after OPEN: 1
+2025-05-04 13:23:26,608 - install_fixed_portfolio - INFO - Processing CLOSE fill event
+2025-05-04 13:23:26,608 - install_fixed_portfolio - INFO - Emitted event: EventType.FILL
+2025-05-04 13:23:26,608 - src.risk.portfolio.fixed_portfolio - INFO - Fill event for MINI SELL with action_type: CLOSE, rule_id: MINI_SELL_CLOSE_20250504
+2025-05-04 13:23:26,608 - src.risk.portfolio.fixed_portfolio - INFO - Adding CLOSE trade with ID db121feb-15e9-4453-bc4e-5416e13eeafd to trade list - PnL: 249.0
+2025-05-04 13:23:26,608 - src.risk.portfolio.fixed_portfolio - INFO - Removed matched OPEN transaction f58ad2c8-3490-46e0-853f-2db536d65072
+2025-05-04 13:23:26,608 - src.risk.portfolio.fixed_portfolio - INFO - Fill: SELL 100.0 MINI @ 105.00, PnL: 250.00, Cash: 50249.00, Equity: 50249.00
+2025-05-04 13:23:26,608 - install_fixed_portfolio - INFO - Emitted event: EventType.PORTFOLIO
+2025-05-04 13:23:26,608 - install_fixed_portfolio - INFO - Position after CLOSE: Position(MINI, FLAT, quantity=0, cost_basis=102.50, realized_pnl=250.00, unrealized_pnl=0.00)
+2025-05-04 13:23:26,609 - install_fixed_portfolio - INFO - Trades count after CLOSE: 2
+2025-05-04 13:23:26,609 - install_fixed_portfolio - INFO - Trade 1: a20e8807-ba05-4614-a2d9-106d0b9689e6 - MINI - OPEN - PnL: 0.0
+2025-05-04 13:23:26,609 - install_fixed_portfolio - INFO - Trade 2: db121feb-15e9-4453-bc4e-5416e13eeafd - MINI - CLOSE - PnL: 249.0
+2025-05-04 13:23:26,609 - install_fixed_portfolio - INFO - Total PnL from trades: 249.00
+2025-05-04 13:23:26,609 - install_fixed_portfolio - INFO - Expected PnL: 249.00
+2025-05-04 13:23:26,609 - install_fixed_portfolio - INFO - PnL calculation is correct!
+2025-05-04 13:23:26,609 - src.risk.portfolio.fixed_portfolio - INFO - === TRADE TRACKING DEBUG ===
+2025-05-04 13:23:26,609 - src.risk.portfolio.fixed_portfolio - INFO - Portfolio trade list ID: 4380055872
+2025-05-04 13:23:26,609 - src.risk.portfolio.fixed_portfolio - INFO - Trade count: 2
+2025-05-04 13:23:26,609 - src.risk.portfolio.fixed_portfolio - INFO - Position transaction count: 0
+2025-05-04 13:23:26,609 - src.risk.portfolio.fixed_portfolio - INFO - First trade: a20e8807-ba05-4614-a2d9-106d0b9689e6 - MINI - OPEN
+2025-05-04 13:23:26,609 - src.risk.portfolio.fixed_portfolio - INFO - Last trade: db121feb-15e9-4453-bc4e-5416e13eeafd - MINI - CLOSE
+2025-05-04 13:23:26,609 - src.risk.portfolio.fixed_portfolio - INFO - Total PnL from trades: 249.00
+2025-05-04 13:23:26,609 - src.risk.portfolio.fixed_portfolio - INFO - Trade types: OPEN=1, CLOSE=1, Standard=0
+2025-05-04 13:23:26,609 - src.risk.portfolio.fixed_portfolio - INFO - === END TRADE TRACKING DEBUG ===
+2025-05-04 13:23:26,609 - src.risk.portfolio.fixed_portfolio - INFO - get_recent_trades called, self.trades has 2 items
+2025-05-04 13:23:26,609 - src.risk.portfolio.fixed_portfolio - INFO - Returning 2 validated trades
+2025-05-04 13:23:26,609 - install_fixed_portfolio - INFO - Portfolio statistics: {'trades_executed': 2, 'long_trades': 1, 'short_trades': 0, 'winning_trades': 1, 'losing_trades': 0, 'break_even_trades': 0, 'total_pnl': 249.0, 'total_commission': 1.0, 'win_rate': 0.5, 'avg_win': 249.0, 'avg_loss': 0.0, 'profit_factor': 0.0, 'gross_profit': 249.0, 'gross_loss': 0, 'wins': 1, 'losses': 0}
+2025-05-04 13:23:26,609 - src.risk.portfolio.fixed_portfolio - INFO - Reset trades list - new empty list with ID: 4445740352
+2025-05-04 13:23:26,609 - src.risk.portfolio.fixed_portfolio - INFO - Reset portfolio test_portfolio to initial state with cash: $50000.00
+2025-05-04 13:23:26,609 - install_fixed_portfolio - INFO - After reset - trades count: 0
+2025-05-04 13:23:26,609 - install_fixed_portfolio - INFO - Fixed portfolio implementation is complete and working as expected!

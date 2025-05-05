@@ -141,6 +141,8 @@ class BacktestCoordinator:
             # Set dependencies
             self.risk_manager.portfolio_manager = self.portfolio
             self.order_manager.set_broker(self.broker)
+            # Add portfolio reference to order manager for trade closing
+            self.order_manager.portfolio_manager = self.portfolio
             
             # Register components with event manager in the CRITICAL CORRECT ORDER for event flow
             # The order is important to prevent signal duplication and ensure proper processing
@@ -331,6 +333,10 @@ class BacktestCoordinator:
                 logger.info(f"Processed {iteration} iterations")
         
         logger.info(f"Backtest completed after {iteration} iterations")
+        
+        # Debug trade tracking at end of backtest
+        if hasattr(self.portfolio, 'debug_trade_tracking'):
+            self.portfolio.debug_trade_tracking()
 
     def _process_results(self):
         """
@@ -352,11 +358,22 @@ class BacktestCoordinator:
                     'positions_value': [0.0]
                 }, index=[pd.Timestamp.now()])
 
-            # Get trades with enhanced validation
+            # CRITICAL FIX: Debug the portfolio state and trade tracking
+            if hasattr(self.portfolio, 'debug_trade_tracking'):
+                self.portfolio.debug_trade_tracking()
+            
+            # CRITICAL FIX: Explicitly get the trades from the portfolio
             trades = self.portfolio.get_recent_trades()
-            logger.info(f"Backtest processed {len(trades)} trades")
-
-            # Debug trades
+            trade_count = len(trades) if trades else 0
+            logger.info(f"Collected {trade_count} trades from portfolio for reporting")
+            
+            # Log trade information for verification
+            if trades and len(trades) > 0:
+                logger.info(f"First trade sample: {trades[0]['symbol']} {trades[0]['direction']} @ {trades[0]['price']}")
+                if len(trades) > 1:
+                    logger.info(f"Last trade sample: {trades[-1]['symbol']} {trades[-1]['direction']} @ {trades[-1]['price']}")
+            
+            # Verify trade data is consistent
             if trades:
                 logger.info(f"Trade stats: {len(trades)} trades, "
                           f"{sum(1 for t in trades if t.get('pnl', 0) > 0)} wins, "
@@ -385,9 +402,16 @@ class BacktestCoordinator:
                 logger.warning("Creating empty trades list")
                 trades = []
 
+            # CRITICAL FIX: Explicitly store trades in results
+            self.results['trades'] = trades
+            logger.info(f"Stored {len(trades)} trades in results dictionary with ID {id(trades)}")
+            
             # Set up performance calculator
             self.calculator.set_equity_curve(equity_curve)
             self.calculator.set_trades(trades)
+            
+            # Log trade data for verification
+            logger.info(f"Performance calculator configured with {len(trades)} trades")
 
             # Calculate metrics with safe handling
             try:
@@ -420,8 +444,8 @@ class BacktestCoordinator:
                     'event_bus': self.event_bus.get_stats() if hasattr(self.event_bus, 'get_stats') else {},
                     'portfolio': self.portfolio.get_stats(),
                     'risk_manager': self.risk_manager.get_stats() if self.risk_manager else {},
-                    'broker': self.broker.get_stats() if self.broker else {},
-                    'order_manager': self.order_manager.get_stats() if self.order_manager else {}
+                    'broker': self.broker.get_stats() if hasattr(self.broker, 'get_stats') else {},
+                    'order_manager': self.order_manager.get_stats() if hasattr(self.order_manager, 'get_stats') else {}
                 }
             }
 

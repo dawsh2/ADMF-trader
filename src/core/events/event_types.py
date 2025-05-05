@@ -21,6 +21,11 @@ class EventType(Enum):
     ORDER_CANCEL = auto()   # Order cancellation events
     REJECT = auto()         # Order rejection events
 
+    # New event types for improved architecture
+    POSITION_OPEN = auto()  # Intent to open a position
+    POSITION_CLOSE = auto() # Intent to close a position
+    TRADE_OPEN = auto()     # Record of opened trade
+    TRADE_CLOSE = auto()    # Record of closed trade
 
     OPTIMIZATION = auto()   # Optimization events
     FILTER = auto()         # Filter state events
@@ -481,3 +486,184 @@ class RegimeEvent(Event):
         
     def get_confidence(self):
         return self.data['confidence']    
+
+
+class PositionOpenEvent(Event):
+    """Intent to open a new position."""
+    
+    def __init__(self, symbol, direction, quantity, price, rule_id=None,
+                 timestamp=None, order_id=None, metadata=None):
+        data = {
+            'symbol': symbol,
+            'direction': direction,  # "BUY" or "SELL"
+            'quantity': quantity,
+            'price': price,
+            'rule_id': rule_id,
+            'order_id': order_id,
+            'metadata': metadata or {}
+        }
+        super().__init__(EventType.POSITION_OPEN, data, timestamp)
+    
+    # Accessor methods
+    def get_symbol(self):
+        return self.data['symbol']
+        
+    def get_direction(self):
+        return self.data['direction']
+        
+    def get_quantity(self):
+        return self.data['quantity']
+        
+    def get_price(self):
+        return self.data['price']
+        
+    def get_rule_id(self):
+        return self.data['rule_id']
+        
+    def get_order_id(self):
+        return self.data['order_id']
+        
+    def get_metadata(self):
+        return self.data['metadata']
+
+
+class PositionCloseEvent(Event):
+    """Intent to close an existing position."""
+    
+    def __init__(self, symbol, direction, quantity, price, rule_id=None,
+                 timestamp=None, order_id=None, metadata=None):
+        data = {
+            'symbol': symbol,
+            'direction': direction,  # "BUY" or "SELL"
+            'quantity': quantity,
+            'price': price,
+            'rule_id': rule_id,
+            'order_id': order_id,
+            'metadata': metadata or {}
+        }
+        super().__init__(EventType.POSITION_CLOSE, data, timestamp)
+    
+    # Accessor methods
+    def get_symbol(self):
+        return self.data['symbol']
+        
+    def get_direction(self):
+        return self.data['direction']
+        
+    def get_quantity(self):
+        return self.data['quantity']
+        
+    def get_price(self):
+        return self.data['price']
+        
+    def get_rule_id(self):
+        return self.data['rule_id']
+        
+    def get_order_id(self):
+        return self.data['order_id']
+        
+    def get_metadata(self):
+        return self.data['metadata']
+
+
+class TradeOpenEvent(Event):
+    """Record of an opened trade."""
+    
+    def __init__(self, symbol, direction, quantity, price, commission=0.0,
+                 timestamp=None, rule_id=None, order_id=None, transaction_id=None):
+        data = {
+            'symbol': symbol,
+            'direction': direction,
+            'quantity': quantity,
+            'price': price,
+            'commission': commission,
+            'rule_id': rule_id,
+            'order_id': order_id,
+            'transaction_id': transaction_id or str(uuid.uuid4())
+        }
+        super().__init__(EventType.TRADE_OPEN, data, timestamp)
+    
+    # Accessor methods
+    def get_symbol(self):
+        return self.data['symbol']
+        
+    def get_direction(self):
+        return self.data['direction']
+        
+    def get_quantity(self):
+        return self.data['quantity']
+        
+    def get_price(self):
+        return self.data['price']
+        
+    def get_commission(self):
+        return self.data['commission']
+        
+    def get_rule_id(self):
+        return self.data['rule_id']
+        
+    def get_order_id(self):
+        return self.data['order_id']
+        
+    def get_transaction_id(self):
+        return self.data['transaction_id']
+
+
+class TradeCloseEvent(Event):
+    """Record of a closed trade."""
+    
+    def __init__(self, symbol, direction, quantity, entry_price, exit_price, 
+                 entry_time, exit_time, pnl, commission=0.0, rule_id=None, 
+                 order_id=None, transaction_id=None):
+        data = {
+            'symbol': symbol,
+            'direction': direction,
+            'quantity': quantity,
+            'entry_price': entry_price,
+            'exit_price': exit_price,
+            'entry_time': entry_time,
+            'exit_time': exit_time,
+            'pnl': pnl,
+            'commission': commission,
+            'rule_id': rule_id,
+            'order_id': order_id,
+            'transaction_id': transaction_id
+        }
+        super().__init__(EventType.TRADE_CLOSE, data, exit_time)
+    
+    # Accessor methods
+    def get_symbol(self):
+        return self.data['symbol']
+        
+    def get_direction(self):
+        return self.data['direction']
+        
+    def get_quantity(self):
+        return self.data['quantity']
+        
+    def get_entry_price(self):
+        return self.data['entry_price']
+        
+    def get_exit_price(self):
+        return self.data['exit_price']
+        
+    def get_entry_time(self):
+        return self.data['entry_time']
+        
+    def get_exit_time(self):
+        return self.data['exit_time']
+        
+    def get_pnl(self):
+        return self.data['pnl']
+        
+    def get_commission(self):
+        return self.data['commission']
+        
+    def get_rule_id(self):
+        return self.data['rule_id']
+        
+    def get_order_id(self):
+        return self.data['order_id']
+        
+    def get_transaction_id(self):
+        return self.data['transaction_id']

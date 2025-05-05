@@ -1,0 +1,15 @@
+2025-05-04 16:24:33,780 - event_debug - INFO - Running backtest with config config/head_test.yaml and debugger attached
+2025-05-04 16:24:33,780 - event_debug - INFO - Starting backtest with config: config/head_test.yaml
+2025-05-04 16:24:33,780 - event_debug - ERROR - Error loading configuration: cannot import name 'ConfigManager' from 'src.core.config.config_manager' (/Users/daws/ADMF-trader/src/core/config/config_manager.py)
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/debug_trading_events.py", line 471, in run_backtest_with_debugger
+    config = Config(config_file)
+TypeError: Config.__init__() takes 1 positional argument but 2 were given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/debug_trading_events.py", line 475, in run_backtest_with_debugger
+    from src.core.config.config_manager import ConfigManager
+ImportError: cannot import name 'ConfigManager' from 'src.core.config.config_manager' (/Users/daws/ADMF-trader/src/core/config/config_manager.py)
+2025-05-04 16:24:33,781 - event_debug - ERROR - Failed to run backtest with debugger

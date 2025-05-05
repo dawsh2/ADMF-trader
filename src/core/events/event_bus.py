@@ -62,11 +62,12 @@ class EventBus:
         
         # Check for duplicate if we have a key
         if dedup_key and self._is_duplicate(event_type, dedup_key):
-            logger.info(f"BLOCKED: Duplicate event {event_type.name} with key: {dedup_key}")
-            # Print all dedup keys for this event type
-            if event_type in self.processed_events:
+            # Use lower log level to reduce noise
+            logger.debug(f"BLOCKED: Duplicate event {event_type.name} with key: {dedup_key}")
+            # Only print all dedup keys in DEBUG mode to reduce log verbosity
+            if logger.getEffectiveLevel() <= logging.DEBUG and event_type in self.processed_events:
                 keys = sorted(list(self.processed_events[event_type].keys()))
-                logger.info(f"All dedup keys for {event_type.name}: {keys}")
+                logger.debug(f"All dedup keys for {event_type.name}: {keys}")
             return 0
             
         # Track the event
@@ -242,7 +243,7 @@ class EventBus:
             # Use rule_id for signal deduplication
             rule_id = data.get('rule_id')
             if rule_id:
-                logger.info(f"Signal dedup key (rule_id): {rule_id}")
+                logger.debug(f"Signal dedup key (rule_id): {rule_id}")
             return rule_id
         elif event_type == EventType.ORDER:
             # Use rule_id or order_id for order deduplication
@@ -251,13 +252,13 @@ class EventBus:
             
             dedup_key = rule_id or order_id
             if dedup_key:
-                logger.info(f"Order dedup key: {dedup_key}")
+                logger.debug(f"Order dedup key: {dedup_key}")
             return dedup_key
         elif event_type == EventType.FILL:
             # Use order_id for fill deduplication
             order_id = data.get('order_id')
             if order_id:
-                logger.info(f"Fill dedup key (order_id): {order_id}")
+                logger.debug(f"Fill dedup key (order_id): {order_id}")
             return order_id
             
         # Default case - use event ID if available

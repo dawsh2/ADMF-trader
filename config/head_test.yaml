@@ -10,6 +10,7 @@ backtest:
   data_source: "csv"
   start_date: "2024-01-01"
   end_date: "2024-12-31"
+  strategy: "simple_ma_crossover"  # Use the same refactored strategy as mini_test
 
 # Data handling configuration
 data:
@@ -25,8 +26,8 @@ data:
     volume: "Volume"
 
 # Strategy configuration
-strategies:  
-  ma_crossover:
+strategies:
+  simple_ma_crossover:  # Use the refactored strategy implementation
     enabled: true
     fast_window: 5    # Same as the working config
     slow_window: 15   # Same as the working config
@@ -35,9 +36,12 @@ strategies:
 
 # Risk management settings
 risk_manager:
+  type: "enhanced"  # Use the enhanced risk manager from refactored architecture
+  position_sizing_method: "fixed"
   position_size: 100
-  max_position_pct: 0.1  # Max 10% of equity per position
-  max_risk_per_trade: 0.01  # Max 1% risk per trade
+  max_position_size: 1000
+  equity_percent: 5.0
+  risk_percent: 2.0
   max_open_trades: 5
   
 # Order handling settings

@@ -4,11 +4,30 @@ Providing a structured approach to error handling across all modules.
 """
 
 
-class ADMFTraderError(Exception):
-    """Base exception class for all ADMF-Trader errors."""
-    def __init__(self, message="An error occurred in the ADMF-Trader system"):
+class ADMFException(Exception):
+    """Base exception class for ADMF-Trader."""
+    
+    def __init__(self, message, context=None):
         self.message = message
+        self.context = context or {}
         super().__init__(self.message)
+    
+    def __str__(self):
+        context_str = ', '.join(f"{k}={v}" for k, v in self.context.items())
+        if context_str:
+            return f"{self.message} [Context: {context_str}]"
+        return self.message
+    
+    def with_context(self, **kwargs):
+        """Add additional context to the exception."""
+        self.context.update(kwargs)
+        return self
+
+# Legacy class for backward compatibility
+class ADMFTraderError(ADMFException):
+    """Base exception class for all ADMF-Trader errors (legacy name)."""
+    def __init__(self, message="An error occurred in the ADMF-Trader system", context=None):
+        super().__init__(message, context)
 
 
 class ConfigError(ADMFTraderError):

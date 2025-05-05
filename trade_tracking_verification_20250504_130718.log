@@ -1,0 +1,2 @@
+2025-05-04 13:07:18,202 - __main__ - INFO - Starting trade tracking verification test
+2025-05-04 13:07:18,202 - __main__ - ERROR - Configuration file not found: config/ma_crossover.yaml

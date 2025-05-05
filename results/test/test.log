@@ -1,0 +1,34 @@
+2025-05-04 14:19:56,021 - src.core.system_bootstrap - INFO - Logging initialized at level INFO
+2025-05-04 14:19:56,021 - src.core.system_bootstrap - INFO - Log file: ./results/test/test.log
+2025-05-04 14:19:56,021 - src.core.system_bootstrap - ERROR - Error loading configuration from config/optimization/test.yaml: Configuration file not found: config/optimization/test.yaml
+2025-05-04 14:19:56,022 - src.core.system_bootstrap - INFO - Event system initialized with native deduplication
+2025-05-04 14:19:56,022 - src.core.events.event_emitters - INFO - Bar emitter bar_emitter started
+2025-05-04 14:19:56,022 - src.core.utils.discovery - INFO - Registered component csv_data_source in registry
+2025-05-04 14:19:56,022 - src.core.system_bootstrap - INFO - Data components initialized with source type: csv
+2025-05-04 14:19:56,025 - src.execution.broker.broker_simulator - INFO - Simulated broker initialized
+2025-05-04 14:19:56,025 - src.execution.order_manager - INFO - Order manager initialized
+2025-05-04 14:19:56,025 - src.core.system_bootstrap - INFO - Execution components initialized
+2025-05-04 14:19:56,027 - src.core.system_bootstrap - INFO - Using standard Simple Risk Manager
+2025-05-04 14:19:56,027 - src.core.system_bootstrap - INFO - Simple risk manager configured with position_size=100, max_position_pct=0.1
+2025-05-04 14:19:56,027 - src.core.system_bootstrap - INFO - No signal interpreter needed with enhanced risk manager
+2025-05-04 14:19:56,027 - src.core.system_bootstrap - INFO - Risk components initialized
+2025-05-04 14:19:56,029 - src.core.system_bootstrap - INFO - Discovering strategy implementations...
+2025-05-04 14:19:56,030 - src.core.utils.discovery - INFO - Registered component composite_regime in registry
+2025-05-04 14:19:56,030 - src.core.utils.discovery - INFO - Registered component ensemble_strategy in registry
+2025-05-04 14:19:56,030 - src.core.utils.discovery - INFO - Registered component ma_crossover in registry
+2025-05-04 14:19:56,030 - src.core.utils.discovery - INFO - Registered component mean_reversion in registry
+2025-05-04 14:19:56,030 - src.core.utils.discovery - INFO - Registered component regime_ensemble in registry
+2025-05-04 14:19:56,030 - src.core.utils.discovery - INFO - Registered component simple_ma_crossover in registry
+2025-05-04 14:19:56,030 - src.core.system_bootstrap - INFO - Discovered strategies: composite_regime, ensemble_strategy, ma_crossover, mean_reversion, regime_ensemble, simple_ma_crossover
+2025-05-04 14:19:56,030 - src.core.system_bootstrap - INFO - Requested strategy: ma_crossover
+2025-05-04 14:19:56,030 - src.core.system_bootstrap - INFO - Available strategies in registry: ['composite_regime', 'ensemble_strategy', 'ma_crossover', 'mean_reversion', 'regime_ensemble', 'simple_ma_crossover']
+2025-05-04 14:19:56,030 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy initialized with fast_window=5, slow_window=15
+2025-05-04 14:19:56,030 - src.strategy.strategy_base - INFO - Strategy ma_crossover reset
+2025-05-04 14:19:56,030 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy ma_crossover reset
+2025-05-04 14:19:56,030 - src.strategy.implementations.ma_crossover - INFO - MA Crossover strategy configured with parameters: fast_window=5, slow_window=15
+2025-05-04 14:19:56,030 - src.core.system_bootstrap - INFO - Strategy 'ma_crossover' initialized successfully
+2025-05-04 14:19:56,030 - src.core.system_bootstrap - INFO - Analytics components initialized
+2025-05-04 14:19:56,031 - src.core.system_bootstrap - INFO - All components registered with event manager in optimal order
+2025-05-04 14:19:56,031 - src.core.system_bootstrap - INFO - Re-registered portfolio fill handler with high priority
+2025-05-04 14:19:56,031 - src.core.system_bootstrap - INFO - System bootstrap complete
+2025-05-04 14:19:56,031 - src.execution.backtest.backtest - ERROR - No symbols provided for backtest

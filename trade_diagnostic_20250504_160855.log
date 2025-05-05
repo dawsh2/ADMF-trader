@@ -1,0 +1,43 @@
+2025-05-04 16:08:55,763 - __main__ - INFO - Loading backtest results from results/head_test
+2025-05-04 16:08:55,764 - __main__ - INFO - Using run ID: 20250504_160528
+2025-05-04 16:08:55,770 - __main__ - INFO - Loaded equity curve with 5995 data points
+2025-05-04 16:08:55,772 - __main__ - INFO - Loaded 243 trades from results/head_test/trades_20250504_160528.csv
+2025-05-04 16:08:55,772 - __main__ - INFO - Loaded metrics from backtest report
+2025-05-04 16:08:55,772 - __main__ - INFO - Analyzing 243 trades...
+2025-05-04 16:08:55,773 - __main__ - INFO - Trade direction stats: 122 BUY, 121 SELL
+2025-05-04 16:08:55,773 - __main__ - INFO - PnL distribution:
+2025-05-04 16:08:55,773 - __main__ - INFO -   - Winning trades: 243 (100.00%)
+2025-05-04 16:08:55,773 - __main__ - INFO -   - Losing trades: 0 (0.00%)
+2025-05-04 16:08:55,773 - __main__ - INFO -   - Zero PnL trades: 0 (0.00%)
+2025-05-04 16:08:55,773 - __main__ - WARNING - ISSUE DETECTED: All trades are winners (100% win rate)
+2025-05-04 16:08:55,775 - __main__ - INFO - Buy trades with exit price > entry price: 100.00%
+2025-05-04 16:08:55,775 - __main__ - WARNING - ARTIFICIAL PATTERN DETECTED: 100.00% of buy trades have exit price > entry price
+2025-05-04 16:08:55,775 - __main__ - INFO - Sell trades with exit price < entry price: 100.00%
+2025-05-04 16:08:55,775 - __main__ - WARNING - ARTIFICIAL PATTERN DETECTED: 100.00% of sell trades have exit price < entry price
+2025-05-04 16:08:55,776 - __main__ - WARNING - ARTIFICIAL PATTERN DETECTED: 50.21% of trades have price ratio very close to 1.001
+2025-05-04 16:08:55,776 - __main__ - WARNING - ARTIFICIAL PATTERN DETECTED: 49.79% of trades have price ratio very close to 0.999
+2025-05-04 16:08:55,776 - __main__ - INFO - Verifying performance metrics...
+2025-05-04 16:08:55,776 - __main__ - INFO - 
+=== DIAGNOSTIC RECOMMENDATIONS ===
+
+2025-05-04 16:08:55,777 - __main__ - INFO - 2. Artificial Trade Generation Detected:
+2025-05-04 16:08:55,777 - __main__ - INFO -    - Check src/execution/order_manager.py, handle_fill() method
+2025-05-04 16:08:55,777 - __main__ - INFO -    - Look for code that artificially sets exit_price based on entry price
+2025-05-04 16:08:55,777 - __main__ - INFO -    - Check for patterns like 'exit_price = price * 1.001' or similar
+2025-05-04 16:08:55,777 - __main__ - INFO -    - Consider removing artificial price adjustments to let strategy determine outcomes
+2025-05-04 16:08:55,777 - __main__ - INFO -    - Strategy should generate trade signals based on actual market data
+2025-05-04 16:08:55,777 - __main__ - INFO - 3. Event Flow and Order Execution:
+2025-05-04 16:08:55,777 - __main__ - INFO -    - Check event bus for proper event propagation (src/core/events/event_bus.py)
+2025-05-04 16:08:55,777 - __main__ - INFO -    - Verify portfolio correctly processes TRADE_OPEN/TRADE_CLOSE events (src/risk/portfolio/portfolio.py)
+2025-05-04 16:08:55,777 - __main__ - INFO -    - Consider implementing a debug tool to trace event flow through the system
+2025-05-04 16:08:55,777 - __main__ - INFO - 4. Proper Backtest Configuration:
+2025-05-04 16:08:55,777 - __main__ - INFO -    - Check src/execution/backtest/backtest.py for proper component initialization
+2025-05-04 16:08:55,777 - __main__ - INFO -    - Ensure event bus is properly reset between test runs
+2025-05-04 16:08:55,777 - __main__ - INFO -    - Verify that strategy signal generation works with your test data
+2025-05-04 16:08:55,777 - __main__ - INFO - 5. Test Data and Validation:
+2025-05-04 16:08:55,777 - __main__ - INFO -    - Create synthetic test data with known patterns to validate strategy
+2025-05-04 16:08:55,777 - __main__ - INFO -    - Implement a separate validation script to verify trades against raw price data
+2025-05-04 16:08:55,777 - __main__ - INFO -    - Check if HEAD_1min.csv or other synthetic datasets are properly formatted
+2025-05-04 16:08:55,778 - __main__ - INFO - Created validation script at validate_trades.py
+2025-05-04 16:08:55,778 - __main__ - INFO - You can run this script to validate trades against price data
+2025-05-04 16:08:55,778 - __main__ - INFO - Diagnostic completed. Check the log for details and recommendations.

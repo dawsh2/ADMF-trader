@@ -94,11 +94,24 @@ class Position:
             close_quantity = min(abs(quantity_change), abs(self.quantity))
             close_direction = -1 if self.quantity > 0 else 1
 
-            # Calculate P&L on the closed portion
+            # Calculate P&L on the closed portion with high precision
             if self.quantity > 0:  # Long position being reduced
-                realized_pnl = close_quantity * (price - self.cost_basis)
+                # Use full decimal precision for price differences
+                price_diff = price - self.cost_basis
+                # Only consider truly zero if difference is extremely small
+                if abs(price_diff) < 1e-10:
+                    realized_pnl = 0.0
+                    logger.debug(f"Price difference too small ({price_diff}), treating as zero PnL")
+                else:
+                    realized_pnl = close_quantity * price_diff
             else:  # Short position being reduced
-                realized_pnl = close_quantity * (self.cost_basis - price)
+                price_diff = self.cost_basis - price
+                # Only consider truly zero if difference is extremely small
+                if abs(price_diff) < 1e-10:
+                    realized_pnl = 0.0
+                    logger.debug(f"Price difference too small ({price_diff}), treating as zero PnL")
+                else:
+                    realized_pnl = close_quantity * price_diff
 
             logger.debug(f"Closing portion: quantity={close_quantity}, pnl={realized_pnl}")
 

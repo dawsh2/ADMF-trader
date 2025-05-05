@@ -166,14 +166,67 @@ def max_drawdown(equity_curve: pd.DataFrame, trades: List[Dict] = None) -> float
     """
     if len(equity_curve) < 2:
         return 0.0
+    
+    # Import logging for debugging
+    import logging
+    logger = logging.getLogger(__name__)
+    
+    # Create a simple in-memory cache to avoid duplicate warnings
+    if not hasattr(max_drawdown, '_warning_cache'):
+        max_drawdown._warning_cache = set()
+    
+    # Ensure equity values are reasonable
+    initial_equity = equity_curve['equity'].iloc[0]
+    min_equity = equity_curve['equity'].min()
+    
+    # Handle negative equity values by offsetting 
+    if min_equity <= 0:
+        warning_key = f"negative_equity_{min_equity:.2f}"
+        if warning_key not in max_drawdown._warning_cache:
+            logger.warning(f"Negative equity values detected (min={min_equity}). Adjusting for drawdown calculation.")
+            max_drawdown._warning_cache.add(warning_key)
+            
+        offset = abs(min_equity) + 1.0  # Add 1.0 to avoid division by zero
+        adjusted_equity = equity_curve['equity'] + offset
         
-    # Calculate running maximum
-    running_max = equity_curve['equity'].cummax()
+        # Calculate running maximum and drawdown on adjusted values
+        running_max = adjusted_equity.cummax()
+        drawdown = (running_max - adjusted_equity) / running_max
+    else:
+        # Calculate running maximum
+        running_max = equity_curve['equity'].cummax()
+        
+        # Calculate drawdown
+        drawdown = (running_max - equity_curve['equity']) / running_max
     
-    # Calculate drawdown
-    drawdown = (running_max - equity_curve['equity']) / running_max
+    # Get max drawdown and cap at 1.0 (100%)
+    max_dd = drawdown.max()
     
-    return drawdown.max()
+    # Validate max drawdown is between 0 and 1
+    if max_dd < 0:
+        warning_key = f"negative_max_dd_{max_dd:.4f}"
+        if warning_key not in max_drawdown._warning_cache:
+            logger.warning(f"Negative max drawdown calculated ({max_dd}). Setting to 0.")
+            max_drawdown._warning_cache.add(warning_key)
+        max_dd = 0.0
+    elif max_dd > 1.0:
+        # Log extreme drawdown for diagnostics
+        warning_key = f"excessive_max_dd_{max_dd:.4f}"
+        if warning_key not in max_drawdown._warning_cache:
+            logger.warning(f"Excessive drawdown calculated ({max_dd}). Capping at 1.0 (100%).")
+            max_drawdown._warning_cache.add(warning_key)
+        max_dd = 1.0
+    
+    # Add debugging to help diagnose extreme values, but only once per run
+    initial_value = equity_curve['equity'].iloc[0]
+    final_value = equity_curve['equity'].iloc[-1]
+    min_value = equity_curve['equity'].min()
+    debug_key = f"drawdown_stats_{initial_value:.2f}_{final_value:.2f}_{min_value:.2f}"
+    if debug_key not in max_drawdown._warning_cache:
+        logger.info(f"Drawdown stats: Initial={initial_value:.2f}, Final={final_value:.2f}, Min={min_value:.2f}, Max DD={max_dd:.4f}")
+        max_drawdown._warning_cache.add(debug_key)
+    
+    return max_dd
 
 def calmar_ratio(equity_curve: pd.DataFrame, trades: List[Dict] = None, 
                 years: int = 3) -> float:
@@ -219,6 +272,10 @@ def win_rate(trades: List[Dict]) -> float:
     import logging
     logger = logging.getLogger(__name__)
     
+    # Create a simple in-memory cache to avoid duplicate warnings
+    if not hasattr(win_rate, '_warning_cache'):
+        win_rate._warning_cache = set()
+    
     # Count valid trades (those with PnL field)
     valid_trades = [t for t in trades if 'pnl' in t and t['pnl'] is not None]
     
@@ -228,18 +285,30 @@ def win_rate(trades: List[Dict]) -> float:
         valid_trades = [t for t in trades if 'realized_pnl' in t and t['realized_pnl'] is not None]
         # Use the first field we can find
         if valid_trades:
-            logger.info(f"Using 'realized_pnl' instead of 'pnl' for win rate calculation")
+            info_key = "using_realized_pnl_win_rate"
+            if info_key not in win_rate._warning_cache:
+                logger.info(f"Using 'realized_pnl' instead of 'pnl' for win rate calculation")
+                win_rate._warning_cache.add(info_key)
+                
             wins = sum(1 for trade in valid_trades if trade.get('realized_pnl', 0) > 0)
             return wins / len(valid_trades)
             
     # If we still have no valid trades
     if not valid_trades:
-        logger.warning(f"No valid trades with PnL found for win rate calculation")
+        warning_key = "no_valid_trades_for_win_rate"
+        if warning_key not in win_rate._warning_cache:
+            logger.warning(f"No valid trades with PnL found for win rate calculation")
+            win_rate._warning_cache.add(warning_key)
         return 0.0
         
     # Standard calculation with valid trades
     wins = sum(1 for trade in valid_trades if trade.get('pnl', 0) > 0)
-    logger.info(f"Win rate calculation: {wins} wins out of {len(valid_trades)} valid trades")
+    
+    info_key = f"win_rate_{wins}_{len(valid_trades)}"
+    if info_key not in win_rate._warning_cache:
+        logger.info(f"Win rate calculation: {wins} wins out of {len(valid_trades)} valid trades")
+        win_rate._warning_cache.add(info_key)
+        
     return wins / len(valid_trades)
 
 def profit_factor(trades: List[Dict]) -> float:
@@ -259,16 +328,25 @@ def profit_factor(trades: List[Dict]) -> float:
     import logging
     logger = logging.getLogger(__name__)
     
-    # Get valid trades (those with PnL field)
-    valid_trades = [t for t in trades if 'pnl' in t and t['pnl'] is not None]
+    # Create a simple in-memory cache to avoid duplicate warnings
+    if not hasattr(profit_factor, '_warning_cache'):
+        profit_factor._warning_cache = set()
+    
+    # Filter out zero-PnL trades and get valid trades (those with PnL field)
+    # CRITICAL FIX: Only include completed trades with non-zero PnL
+    valid_trades = [t for t in trades if 'pnl' in t and t['pnl'] is not None and t['pnl'] != 0]
     
     # If no valid trades found, try alternate fields
     if not valid_trades:
         # Try alternate field names like 'realized_pnl'
-        valid_trades = [t for t in trades if 'realized_pnl' in t and t['realized_pnl'] is not None]
+        valid_trades = [t for t in trades if 'realized_pnl' in t and t['realized_pnl'] is not None and t['realized_pnl'] != 0]
         # Use the first field we can find
         if valid_trades:
-            logger.info(f"Using 'realized_pnl' instead of 'pnl' for profit factor calculation")
+            info_key = "using_realized_pnl"
+            if info_key not in profit_factor._warning_cache:
+                logger.info(f"Using 'realized_pnl' instead of 'pnl' for profit factor calculation")
+                profit_factor._warning_cache.add(info_key)
+                
             gross_profit = sum(trade.get('realized_pnl', 0) for trade in valid_trades if trade.get('realized_pnl', 0) > 0)
             gross_loss = abs(sum(trade.get('realized_pnl', 0) for trade in valid_trades if trade.get('realized_pnl', 0) < 0))
             
@@ -278,17 +356,45 @@ def profit_factor(trades: List[Dict]) -> float:
     
     # If we still have no valid trades
     if not valid_trades:
-        logger.warning(f"No valid trades with PnL found for profit factor calculation")
+        warning_key = "no_valid_trades_for_profit_factor"
+        if warning_key not in profit_factor._warning_cache:
+            logger.warning(f"No valid trades with non-zero PnL found for profit factor calculation")
+            profit_factor._warning_cache.add(warning_key)
         return 0.0
         
-    # Standard calculation with valid trades
+    # CRITICAL FIX: Remove zero PnL values from calculations as they represent open trades
     gross_profit = sum(trade.get('pnl', 0) for trade in valid_trades if trade.get('pnl', 0) > 0)
     gross_loss = abs(sum(trade.get('pnl', 0) for trade in valid_trades if trade.get('pnl', 0) < 0))
     
-    logger.info(f"Profit factor calculation: gross profit={gross_profit:.2f}, gross loss={gross_loss:.2f}")
+    # Add debugging to check for imbalanced values - log only once for similar values 
+    total_trades = len(valid_trades)
+    winning_trades = sum(1 for t in valid_trades if t.get('pnl', 0) > 0)
+    losing_trades = sum(1 for t in valid_trades if t.get('pnl', 0) < 0)
     
-    if gross_loss == 0:
-        return float('inf') if gross_profit > 0 else 0.0
+    info_key = f"trade_stats_{total_trades}_{winning_trades}_{losing_trades}"
+    if info_key not in profit_factor._warning_cache:
+        logger.info(f"Valid trades: {total_trades}, Winners: {winning_trades}, Losers: {losing_trades}")
+        logger.info(f"Profit factor calculation: gross profit={gross_profit:.2f}, gross loss={gross_loss:.2f}")
+        profit_factor._warning_cache.add(info_key)
+    
+    # Sanity check - if gross profit and loss are very imbalanced with many trades
+    if total_trades > 10 and gross_profit > 0 and gross_loss > 0:
+        ratio = gross_profit / gross_loss
+        if ratio > 100:
+            warning_key = f"high_profit_factor_{ratio:.2f}"
+            if warning_key not in profit_factor._warning_cache:
+                logger.warning(f"Extremely high profit factor detected ({ratio:.2f}). Capping at 100.")
+                profit_factor._warning_cache.add(warning_key)
+            return 100.0
+    
+    if gross_loss < 0.001:  # Use a small epsilon to avoid division by zero
+        if gross_profit > 0:
+            warning_key = "no_losing_trades"
+            if warning_key not in profit_factor._warning_cache:
+                logger.warning("No losing trades detected, capping profit factor at 100")
+                profit_factor._warning_cache.add(warning_key)
+            return 100.0
+        return 0.0
         
     return gross_profit / gross_loss
 
@@ -431,17 +537,31 @@ def calculate_all_metrics(equity_curve: pd.DataFrame, trades: List[Dict] = None)
     import logging
     logger = logging.getLogger(__name__)
     
+    # Create a simple in-memory cache to avoid duplicate warnings
+    if not hasattr(calculate_all_metrics, '_warning_cache'):
+        calculate_all_metrics._warning_cache = set()
+    
     if equity_curve is None or not isinstance(equity_curve, pd.DataFrame) or equity_curve.empty:
-        logger.warning("No equity curve data available for metrics calculation")
+        warning_key = "no_equity_curve"
+        if warning_key not in calculate_all_metrics._warning_cache:
+            logger.warning("No equity curve data available for metrics calculation")
+            calculate_all_metrics._warning_cache.add(warning_key)
         return {'warning': 'No equity curve data available'}
 
     # Ensure trades is a list, not None
     if trades is None:
         trades = []
-        logger.warning("No trades provided for metrics calculation")
+        warning_key = "no_trades"
+        if warning_key not in calculate_all_metrics._warning_cache:
+            logger.warning("No trades provided for metrics calculation")
+            calculate_all_metrics._warning_cache.add(warning_key)
 
-    # Log trade info for debugging
-    logger.info(f"Calculating metrics for {len(trades)} trades and {len(equity_curve)} equity points")
+    # Log trade info for debugging once per equity curve size + trade count 
+    # to prevent duplicate logs for repeated calculations on same dataset
+    info_key = f"metrics_calc_{len(trades)}_{len(equity_curve)}"
+    if info_key not in calculate_all_metrics._warning_cache:
+        logger.info(f"Calculating metrics for {len(trades)} trades and {len(equity_curve)} equity points")
+        calculate_all_metrics._warning_cache.add(info_key)
     
     # Calculate primary metrics
     try:
@@ -473,8 +593,9 @@ def calculate_all_metrics(equity_curve: pd.DataFrame, trades: List[Dict] = None)
     # Add trade-specific metrics if trades are provided and non-empty
     if trades and len(trades) > 0:
         try:
-            # Add trade counts regardless of errors elsewhere
+            # Add trade counts regardless of errors elsewhere - FORCE COUNT ALL TRADES
             metrics['trade_count'] = len(trades)
+            logger.info(f"Setting trade_count metric to {len(trades)} total trades")
             
             # Validate trade data - do we have PnL fields?
             pnl_count = sum(1 for t in trades if 'pnl' in t and t['pnl'] is not None)
