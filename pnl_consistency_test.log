@@ -1,0 +1,31 @@
+2025-05-08 13:46:03,871 - root - INFO - Starting PnL consistency test with config: config/ma_crossover_optimization.yaml
+2025-05-08 13:46:03,872 - root - INFO - Running simplified backtest with direct component setup
+2025-05-08 13:46:03,873 - src.core.backtest_state - INFO - BacktestState initialized with capital 100000.0
+2025-05-08 13:46:03,873 - src.core.backtest_state - INFO - Created fresh backtest state with new event bus, trade repository, and portfolio
+2025-05-08 13:46:03,873 - src.risk.position_manager - INFO - PositionManager initialized with fixed quantity 10
+2025-05-08 13:46:03,873 - root - ERROR - Error during test: 'SimpleEventBus' object has no attribute 'register'
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/test_pnl_consistency.py", line 218, in main
+    results = run_backtest(config)
+  File "/Users/daws/ADMF-trader/test_pnl_consistency.py", line 76, in run_backtest
+    position_manager = PositionManager(context['event_bus'], fixed_quantity=fixed_quantity)
+  File "/Users/daws/ADMF-trader/src/risk/position_manager.py", line 33, in __init__
+    event_bus.register(EventType.SIGNAL, self.on_signal)
+    ^^^^^^^^^^^^^^^^^^
+AttributeError: 'SimpleEventBus' object has no attribute 'register'
+2025-05-08 13:47:24,641 - root - INFO - Starting PnL consistency test with config: config/ma_crossover_optimization.yaml
+2025-05-08 13:47:24,642 - root - INFO - Running simplified backtest with direct component setup
+2025-05-08 13:47:24,642 - src.core.backtest_state - INFO - BacktestState initialized with capital 100000.0
+2025-05-08 13:47:24,642 - src.core.backtest_state - INFO - Created fresh backtest state with new event bus, trade repository, and portfolio
+2025-05-08 13:47:24,642 - root - INFO - Simulating trades
+2025-05-08 13:47:24,643 - root - INFO - PnL CONSISTENT: Trade PnL=200.00, Equity Change=200.00
+2025-05-08 13:47:24,643 - root - INFO - POSITION LIMIT ENFORCED: Maximum positions = 0
+2025-05-08 13:47:24,643 - root - INFO - TEST PASSED: PnL and position constraints are consistent
+2025-05-08 13:47:24,913 - root - INFO - Starting PnL consistency test with config: config/ma_crossover_optimization.yaml
+2025-05-08 13:47:24,914 - root - INFO - Running simplified backtest with direct component setup
+2025-05-08 13:47:24,914 - src.core.backtest_state - INFO - BacktestState initialized with capital 100000.0
+2025-05-08 13:47:24,914 - src.core.backtest_state - INFO - Created fresh backtest state with new event bus, trade repository, and portfolio
+2025-05-08 13:47:24,914 - root - INFO - Simulating trades
+2025-05-08 13:47:24,914 - root - INFO - PnL CONSISTENT: Trade PnL=200.00, Equity Change=200.00
+2025-05-08 13:47:24,914 - root - INFO - POSITION LIMIT ENFORCED: Maximum positions = 0
+2025-05-08 13:47:24,914 - root - INFO - TEST PASSED: PnL and position constraints are consistent

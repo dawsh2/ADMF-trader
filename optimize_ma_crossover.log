@@ -1,0 +1,52 @@
+2025-05-05 17:28:27,646 [INFO] Starting MA Crossover strategy optimization example
+2025-05-05 17:28:27,647 [INFO] Logging initialized at level INFO
+2025-05-05 17:28:27,647 [INFO] Log file: backtest.log
+2025-05-05 17:28:27,648 [INFO] Loaded configuration from /Users/daws/ADMF-trader/config/head_test.yaml
+2025-05-05 17:28:27,649 [INFO] Event system initialized with native deduplication
+2025-05-05 17:28:27,651 [INFO] Bar emitter bar_emitter started
+2025-05-05 17:28:27,651 [INFO] Registered component csv_data_source in registry
+2025-05-05 17:28:27,652 [INFO] Data components initialized with source type: csv
+2025-05-05 17:28:27,653 [INFO] Simulated broker initialized
+2025-05-05 17:28:27,653 [INFO] Order manager initialized
+2025-05-05 17:28:27,653 [INFO] Execution components initialized
+2025-05-05 17:28:27,655 [INFO] Trade registry global_trade_registry initialized
+2025-05-05 17:28:27,655 [INFO] Centralized trade registry initialized
+2025-05-05 17:28:27,655 [INFO] Trade registry set for portfolio portfolio_39f76dbd
+2025-05-05 17:28:27,655 [INFO] Trade registry set in portfolio
+2025-05-05 17:28:27,655 [INFO] Using Enhanced Risk Manager (refactored architecture)
+2025-05-05 17:28:27,655 [INFO] Enhanced risk manager risk_manager_b1e34561 initialized
+2025-05-05 17:28:27,655 [INFO] Enhanced risk manager configured with position_sizing_method=fixed, position_size=100, max_position_size=1000
+2025-05-05 17:28:27,655 [INFO] No signal interpreter needed with enhanced risk manager
+2025-05-05 17:28:27,655 [INFO] Risk components initialized
+2025-05-05 17:28:27,655 [INFO] Discovering strategy implementations...
+2025-05-05 17:28:27,656 [INFO] Registered component composite_regime in registry
+2025-05-05 17:28:27,656 [INFO] Registered component ensemble_strategy in registry
+2025-05-05 17:28:27,656 [INFO] Registered component ma_crossover in registry
+2025-05-05 17:28:27,656 [INFO] Registered component mean_reversion in registry
+2025-05-05 17:28:27,656 [INFO] Registered component regime_ensemble in registry
+2025-05-05 17:28:27,656 [INFO] Registered component simple_ma_crossover in registry
+2025-05-05 17:28:27,656 [INFO] Discovered strategies: composite_regime, ensemble_strategy, ma_crossover, mean_reversion, regime_ensemble, simple_ma_crossover
+2025-05-05 17:28:27,656 [INFO] Requested strategy: simple_ma_crossover
+2025-05-05 17:28:27,656 [INFO] Available strategies in registry: ['composite_regime', 'ensemble_strategy', 'ma_crossover', 'mean_reversion', 'regime_ensemble', 'simple_ma_crossover']
+2025-05-05 17:28:27,656 [INFO] MA Crossover strategy initialized with fast_window=5, slow_window=15
+2025-05-05 17:28:27,656 [INFO] MA Crossover strategy configured with parameters: fast_window=5, slow_window=15
+2025-05-05 17:28:27,656 [INFO] Strategy 'simple_ma_crossover' initialized successfully
+2025-05-05 17:28:27,656 [INFO] Analytics components initialized
+2025-05-05 17:28:27,657 [INFO] Registered enhanced risk manager with high signal priority
+2025-05-05 17:28:27,657 [INFO] All components registered with event manager in optimal order
+2025-05-05 17:28:27,657 [INFO] Re-registered portfolio fill handler with high priority
+2025-05-05 17:28:27,657 [INFO] System bootstrap complete
+2025-05-05 17:28:27,657 [WARNING] Data handler does not support train/test splitting
+2025-05-05 17:28:27,657 [INFO] Running grid search optimization
+2025-05-05 17:28:27,657 [ERROR] Optimization failed: 'OptimizingBacktestCoordinator' object has no attribute 'get_strategy_by_name'
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/examples/optimize_ma_crossover.py", line 355, in main
+    grid_results = backtest.optimize_strategy(
+        strategy_name="ma_crossover",
+        method="grid",
+        max_evaluations=100  # Limit evaluations for example
+    )
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 169, in optimize_strategy
+    strategy = self.get_strategy_by_name(strategy_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'OptimizingBacktestCoordinator' object has no attribute 'get_strategy_by_name'

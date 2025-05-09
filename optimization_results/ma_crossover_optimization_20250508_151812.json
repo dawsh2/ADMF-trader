@@ -1,0 +1,171 @@
+{
+  "best_parameters": {
+    "fast_window": 5,
+    "slow_window": 20
+  },
+  "best_train_score": 0.0,
+  "best_test_score": 0.0,
+  "all_results": [
+    {
+      "parameters": {
+        "fast_window": 5,
+        "slow_window": 20
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 5,
+          "slow_window": 20
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 5,
+          "slow_window": 20
+        },
+        "data_split": "test"
+      }
+    }
+  ],
+  "parameter_counts": 1,
+  "train_results": {
+    "final_capital": 100000.0,
+    "positions": {},
+    "trades": [],
+    "statistics": {
+      "initial_capital": 100000.0,
+      "final_capital": 100000.0,
+      "trades_executed": 0,
+      "return_pct_closed_only": 0.0,
+      "portfolio_realized_return_pct": 0.0,
+      "return_pct": 0.0,
+      "sharpe_ratio": 0.0,
+      "max_drawdown": 0.0
+    },
+    "equity_curve": [],
+    "trades_equity_consistent": false,
+    "metrics_consistent": true,
+    "parameters": {
+      "fast_window": 5,
+      "slow_window": 20
+    },
+    "data_split": "train"
+  },
+  "test_results": {
+    "final_capital": 100000.0,
+    "positions": {},
+    "trades": [],
+    "statistics": {
+      "initial_capital": 100000.0,
+      "final_capital": 100000.0,
+      "trades_executed": 0,
+      "return_pct_closed_only": 0.0,
+      "portfolio_realized_return_pct": 0.0,
+      "return_pct": 0.0,
+      "sharpe_ratio": 0.0,
+      "max_drawdown": 0.0
+    },
+    "equity_curve": [],
+    "trades_equity_consistent": false,
+    "metrics_consistent": true,
+    "parameters": {
+      "fast_window": 5,
+      "slow_window": 20
+    },
+    "data_split": "test"
+  },
+  "timestamp": "20250508_151812",
+  "id": "3262c5ae-4d3b-4861-b94a-12d6e1a0c9a6",
+  "config": {
+    "strategy": {
+      "name": "ma_crossover",
+      "parameters": {
+        "fast_window": 5,
+        "slow_window": 20
+      }
+    },
+    "risk": {
+      "position_manager": {
+        "config": {
+          "fixed_quantity": 10,
+          "max_positions": 1,
+          "enforce_single_position": true,
+          "position_sizing_method": "fixed",
+          "allow_multiple_entries": false
+        }
+      }
+    },
+    "backtest": {
+      "initial_capital": 100000.0,
+      "symbols": [
+        "HEAD"
+      ],
+      "timeframe": "1min"
+    },
+    "data": {
+      "source_type": "csv",
+      "sources": [
+        {
+          "symbol": "HEAD",
+          "file": "data/HEAD_1min.csv",
+          "date_column": "timestamp",
+          "price_column": "Close",
+          "date_format": "%Y-%m-%d %H:%M:%S"
+        }
+      ]
+    },
+    "parameter_space": [
+      {
+        "name": "fast_window",
+        "type": "integer",
+        "min": 5,
+        "max": 5,
+        "step": 1,
+        "description": "Fast moving average window"
+      },
+      {
+        "name": "slow_window",
+        "type": "integer",
+        "min": 20,
+        "max": 20,
+        "step": 1,
+        "description": "Slow moving average window"
+      }
+    ]
+  },
+  "best_score": 0.0
+}

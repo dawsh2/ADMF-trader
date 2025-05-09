@@ -1,0 +1,86 @@
+================================================================================
+OPTIMIZATION REPORT: simple_ma_crossover
+Timestamp: 20250508_131923
+================================================================================
+
+CONFIGURATION
+--------------------------------------------------------------------------------
+Optimization Method: grid
+Objective Function: sharpe_ratio
+Symbols: HEAD
+Train/Test Split: ratio (Train: 0.70, Test: 0.30)
+
+PARAMETER SPACE
+--------------------------------------------------------------------------------
+
+BEST PARAMETERS
+--------------------------------------------------------------------------------
+fast_period: 5
+slow_period: 20
+
+PERFORMANCE METRICS
+--------------------------------------------------------------------------------
+Training Performance:
+  avg_loss: -9.020000000000437
+  avg_profit: 25.19200000000031
+  break_even_trades: 0
+  closed_trades: 25
+  final_capital: 149787.35356000005
+  initial_capital: 100000.0
+  loss_trades: 10
+  max_drawdown: 0.0000
+  metrics_consistency: True
+  open_position_value: 49499.67356000005
+  pnl_equity_consistency: False
+  pnl_equity_consistent: False
+  portfolio_realized_return_pct: 0.2772
+  profit_factor: 4.189356984478785
+  profitable_trades: 15
+  return_pct: 0.2877
+  return_pct_closed_only: 0.2877
+  sharpe_ratio: 0.0000
+  trades_executed: 25
+  unexplained_pnl: 49499.67356000005
+  unexplained_pnl_percent: 99.42218258366894
+  win_rate: 0.6000
+
+Testing Performance:
+  avg_loss: -16.066666666666908
+  avg_profit: 65.42199999999575
+  break_even_trades: 0
+  closed_trades: 11
+  final_capital: 46792.62270999999
+  initial_capital: 100000.0
+  loss_trades: 6
+  max_drawdown: 0.0000
+  metrics_consistency: True
+  open_position_value: -53438.08728999999
+  pnl_equity_consistency: False
+  pnl_equity_consistent: False
+  portfolio_realized_return_pct: 0.2151
+  profit_factor: 3.393257261410517
+  profitable_trades: 5
+  return_pct: 0.2307
+  return_pct_closed_only: 0.2307
+  sharpe_ratio: 0.0000
+  trades_executed: 11
+  unexplained_pnl: -53438.08728999999
+  unexplained_pnl_percent: -100.43360528511398
+  win_rate: 0.4545
+
+OVERFITTING ANALYSIS
+--------------------------------------------------------------------------------
+Data Consistency Check:
+  Train metrics consistent: True
+  Test metrics consistent: True
+  Train trades/equity consistent: False
+  Test trades/equity consistent: False
+
+Return Difference (Train - Test): 0.06%
+Sharpe Ratio Difference: 0.00
+Profit Factor Difference: 0.80
+Overfitting Assessment: Moderate risk of overfitting (Score: 0.27)
+
+WARNING: Metric inconsistencies detected.
+This may indicate issues with trade tracking or equity calculation.
+Consider reviewing the implementation or running debug diagnostics.

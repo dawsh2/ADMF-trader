@@ -1,0 +1,46 @@
+# minimal_ma_crossover.yaml
+# Minimal configuration for testing MA crossover strategy
+
+strategy:
+  name: ma_crossover
+  parameters:
+    fast_window: 5
+    slow_window: 20
+
+risk:
+  position_manager:
+    config:
+      fixed_quantity: 10
+      max_positions: 1
+      enforce_single_position: true
+      position_sizing_method: fixed
+      allow_multiple_entries: false
+
+backtest:
+  initial_capital: 100000.0
+  symbols: ['HEAD']
+  timeframe: 1min
+
+data:
+  source_type: csv
+  sources:
+    - symbol: HEAD
+      file: data/HEAD_1min.csv
+      date_column: timestamp
+      price_column: Close
+      date_format: "%Y-%m-%d %H:%M:%S"
+
+# Only test one parameter combination to speed up testing
+parameter_space:
+  - name: fast_window
+    type: integer
+    min: 5
+    max: 5
+    step: 1
+    description: "Fast moving average window"
+  - name: slow_window
+    type: integer
+    min: 20
+    max: 20
+    step: 1
+    description: "Slow moving average window"

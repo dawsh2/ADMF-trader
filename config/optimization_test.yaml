@@ -1,72 +1,65 @@
-# config/optimization_test.yaml
 backtest:
   initial_capital: 100000.0
-  symbols: ['HEAD']  # Use the symbol that matches your data file
-  timeframe: "1min"  # Make sure this matches your data file's timeframe
-  data_source: "csv"
-  data_dir: "./data"
-  start_date: "2023-01-01"
-  end_date: "2024-12-31"
-  strategy: "simple_ma_crossover"  # Explicitly specify the strategy name
-
+  symbols:
+  - HEAD
+  timeframe: 1min
+  data_source: csv
+  data_dir: ./data
+  start_date: '2024-03-26'
+  end_date: '2024-03-28'
+  strategy: ma_crossover
 strategies:
-  simple_ma_crossover:
+  ma_crossover:
     enabled: true
-    price_key: "close"
-    # Make sure to include the symbols here too
-    symbols: ['HEAD']  
-    # Default parameters
+    price_key: close
+    symbols:
+    - HEAD
     fast_window: 10
     slow_window: 30
-
 risk_manager:
-  type: "enhanced"  # Use the enhanced risk manager from refactored architecture
-  position_sizing_method: "fixed"
+  type: enhanced
+  position_sizing_method: fixed
   position_size: 100
-  max_position_size: 1000 
+  max_position_size: 1000
   equity_percent: 5.0
   risk_percent: 2.0
   max_open_trades: 5
-
-# Order handling settings
 order_manager:
-  default_order_type: "MARKET"
-
-# Broker simulation settings
+  default_order_type: MARKET
 broker:
-  slippage: 0.001  # 0.1% slippage
-  commission: 0.001  # 0.1% commission
-  delay: 0  # No delay in order processing
-  
+  slippage: 0.001
+  commission: 0.001
+  delay: 0
 optimization:
   enabled: true
-  method: "grid_search"
+  method: grid_search
   max_evaluations: 50
   max_time: 600
-  objective: "sharpe_ratio"
+  objective: sharpe_ratio
   maximize: true
-  
   parameter_space:
-    simple_ma_crossover:
+    ma_crossover:
       fast_window:
-        type: "integer"
+        type: integer
         min: 2
         max: 20
-        step: 1
+        step: 2
       slow_window:
-        type: "integer"
-        min: 10
+        type: integer
+        min: 5
         max: 50
         step: 5
       price_key:
-        type: "categorical"
-        options: ["open", "high", "low", "close"]
-
+        type: categorical
+        options:
+        - open
+        - high
+        - low
+        - close
   random_search:
     seed: 42
     num_samples: 30
-
   output:
     save_results: true
-    results_dir: "./optimization_results"
+    results_dir: ./optimization_results
     plot_top_n: 5

@@ -1,122 +1,253 @@
-# ADMF-Trader Optimization Module
+# ADMF-Trader Optimization Framework
 
-This module provides tools and implementations for strategy optimization, parameter tuning, and performance evaluation.
+This module provides a standardized framework for optimizing trading strategies while preventing overfitting through train/test validation.
 
-## Components Implemented
+## Overview
 
-### Parameter Space
+The optimization framework leverages the analytics module for consistent performance calculations and can be run directly from the main.py entry point using configuration files.
 
-The `ParameterSpace` class defines the space of parameters for optimization, including:
+Key features:
+- Consistent metrics calculation using the analytics module
+- Multiple optimization methods (grid search, random search, walk-forward)
+- Proper train/test validation to prevent overfitting
+- Standardized reporting and visualization
+- Fully configurable through YAML files
 
-- `IntegerParameter`: Integer parameters with min, max, and step
-- `FloatParameter`: Float parameters with min, max, and optional step
-- `CategoricalParameter`: Parameters with a set of discrete options
-- `BooleanParameter`: Boolean parameters (True/False)
+## Usage
 
-### Optimizers
+The optimization framework can be used in two ways:
 
-- `GridSearch`: Exhaustive search over all combinations of parameters
-- `RandomSearch`: Random sampling of parameter combinations, useful for high-dimensional spaces
+### 1. Command Line Interface
 
-## Usage Examples
+Run optimization directly from the command line:
 
-### Creating a Parameter Space
-
-```python
-from src.strategy.optimization import ParameterSpace
-
-# Create a parameter space
-space = ParameterSpace("ma_crossover_space")
-
-# Add parameters
-space.add_integer("fast_window", 2, 20, 1)
-space.add_integer("slow_window", 10, 50, 5)
-space.add_float("threshold", 0.0, 1.0, 0.1)
-space.add_categorical("price_key", ["open", "high", "low", "close"])
-space.add_boolean("use_volatility")
-
-# Calculate grid size
-grid_size = space.get_grid_size()
-print(f"Grid size: {grid_size} parameter combinations")
-
-# Get a random point
-point = space.get_random_point()
-print(f"Random point: {point}")
+```bash
+python main.py optimize --config config/optimization/my_strategy.yaml
 ```
 
-### Grid Search Optimization
+#### Command Line Arguments
+
+When not using a configuration file, you can specify options directly:
+
+```bash
+python main.py optimize --strategy simple_ma_crossover --param-file config/parameter_spaces/ma_crossover_params.yaml --method grid --objective sharpe_ratio --train-ratio 0.7 --test-ratio 0.3
+```
+
+### 2. Programmatic API
 
 ```python
-from src.strategy.optimization import ParameterSpace, GridSearch
+from src.strategy.optimization.optimizer import StrategyOptimizer
 
-# Create parameter space
-space = ParameterSpace("ma_crossover_space")
-space.add_integer("fast_window", 2, 10, 1)
-space.add_integer("slow_window", 10, 30, 5)
+# Create configuration
+config = {
+    'strategy': {
+        'name': 'simple_ma_crossover'
+    },
+    'parameter_file': 'config/parameter_spaces/ma_crossover_params.yaml',
+    'optimization': {
+        'method': 'grid',
+        'objective': 'sharpe_ratio'
+    },
+    'data': {
+        'train_test_split': {
+            'method': 'ratio',
+            'train_ratio': 0.7,
+            'test_ratio': 0.3
+        }
+    }
+}
 
-# Create grid search optimizer
-optimizer = GridSearch(space)
-
-# Define objective function
-def objective_function(params):
-    # Create and test strategy with parameters
-    # Return performance metric (e.g., Sharpe ratio)
-    return sharpe_ratio
+# Create optimizer
+optimizer = StrategyOptimizer(config)
 
 # Run optimization
-results = optimizer.search(
-    objective_function=objective_function,
-    maximize=True,
-    max_evaluations=100,
-    max_time=300  # 5 minutes
-)
-
-# Get best parameters
-best_params = results['best_params']
-best_score = results['best_score']
-print(f"Best parameters: {best_params}")
-print(f"Best score: {best_score}")
+results = optimizer.optimize()
 ```
 
-### Random Search Optimization
+## Configuration
 
-```python
-from src.strategy.optimization import ParameterSpace, RandomSearch
+The optimization framework is configured through YAML files. A template is provided at `config/optimization/template.yaml`.
 
-# Create parameter space
-space = ParameterSpace("ma_crossover_space")
-space.add_integer("fast_window", 2, 50, 1)
-space.add_integer("slow_window", 10, 200, 1)
-space.add_float("threshold", 0.0, 1.0)
+### Key Configuration Sections
 
-# Create random search optimizer
-optimizer = RandomSearch(space, seed=42)  # for reproducibility
+#### Strategy
 
-# Define objective function
-def objective_function(params):
-    # Create and test strategy with parameters
-    # Return performance metric (e.g., Sharpe ratio)
-    return sharpe_ratio
+Defines the strategy to optimize and any fixed parameters:
 
-# Run optimization
-results = optimizer.search(
-    objective_function=objective_function,
-    num_samples=100,
-    maximize=True,
-    max_time=300  # 5 minutes
-)
-
-# Get best parameters
-best_params = results['best_params']
-best_score = results['best_score']
-print(f"Best parameters: {best_params}")
-print(f"Best score: {best_score}")
+```yaml
+strategy:
+  name: "simple_ma_crossover"
+  fixed_params:
+    position_size: 1.0
+    use_trailing_stop: false
 ```
 
-## Future Enhancements
+#### Parameter Space
 
-- Bayesian Optimization: Efficient optimization for expensive objective functions
-- Genetic Algorithms: Evolution-inspired parameter optimization
-- Walk-Forward Testing: Time-series cross-validation for strategies
-- Feature Selection: Identify relevant features for strategy development
-- Hyperparameter Tuning: Advanced methods for multi-level optimization
+Defines the parameters to optimize:
+
+```yaml
+parameter_space:
+  - name: fast_period
+    type: integer
+    min: 5
+    max: 30
+    step: 5
+  - name: slow_period
+    type: integer
+    min: 20
+    max: 100
+    step: 20
+```
+
+Or reference a separate parameter file:
+
+```yaml
+parameter_file: "config/parameter_spaces/ma_crossover_params.yaml"
+```
+
+#### Optimization Settings
+
+Defines the optimization method and objective function:
+
+```yaml
+optimization:
+  method: "grid"  # grid, random, walk_forward
+  objective: "sharpe_ratio"  # sharpe_ratio, profit_factor, max_drawdown, etc.
+  
+  # For random search
+  num_trials: 100
+  
+  # For walk-forward optimization
+  window_size: 60  # trading days
+  step_size: 20
+  window_type: "rolling"  # rolling, expanding
+```
+
+#### Train/Test Split
+
+Configures how data is split for validation:
+
+```yaml
+data:
+  train_test_split:
+    enabled: true
+    method: "ratio"  # ratio, date, or fixed
+    train_ratio: 0.7
+    test_ratio: 0.3
+```
+
+## Available Objective Functions
+
+The framework provides several objective functions:
+
+- `total_return`: Maximize total return
+- `sharpe_ratio`: Maximize Sharpe ratio (risk-adjusted return)
+- `profit_factor`: Maximize profit factor (gross profit / gross loss)
+- `max_drawdown`: Minimize maximum drawdown
+- `win_rate`: Maximize win rate
+- `expectancy`: Maximize expectancy (win rate * avg win - loss rate * avg loss)
+- `risk_adjusted_return`: Maximize return / max drawdown
+- `combined_score`: Weighted combination of multiple metrics
+- `stability_score`: Maximize equity curve stability
+
+## Optimization Methods
+
+### Grid Search
+
+Exhaustively tries all combinations of parameters within the defined grid.
+
+```yaml
+optimization:
+  method: "grid"
+```
+
+### Random Search
+
+Randomly samples parameter combinations from the defined space.
+
+```yaml
+optimization:
+  method: "random"
+  num_trials: 100
+```
+
+### Walk-Forward Optimization
+
+Optimizes parameters across rolling windows of data to ensure robustness.
+
+```yaml
+optimization:
+  method: "walk_forward"
+  window_size: 60  # trading days
+  step_size: 20
+  window_type: "rolling"  # rolling, expanding
+```
+
+## Preventing Overfitting
+
+The framework uses several techniques to prevent overfitting:
+
+1. **Train/Test Validation**: Optimizes on training data and validates on unseen test data
+2. **Walk-Forward Analysis**: Tests parameters across different market regimes
+3. **Overfitting Metrics**: Calculates performance differences between train and test to detect overfitting
+4. **Multiple Objectives**: Uses risk-adjusted metrics rather than just maximizing returns
+
+## Reporting
+
+The framework generates comprehensive reports in multiple formats:
+
+- **Text**: Human-readable summary of optimization results
+- **CSV**: Detailed results for all parameter combinations
+- **HTML**: Interactive report with visualizations
+- **Visualizations**: Parameter heatmaps, equity curves, and more
+
+Reports are saved to the specified output directory (default: `./optimization_results`).
+
+## Example
+
+To optimize a simple moving average crossover strategy:
+
+1. Create a configuration file:
+
+```yaml
+# config/optimization/ma_crossover.yaml
+strategy:
+  name: "simple_ma_crossover"
+  
+parameter_space:
+  - name: fast_period
+    type: integer
+    min: 5
+    max: 30
+    step: 5
+  - name: slow_period
+    type: integer
+    min: 20
+    max: 100
+    step: 20
+    
+optimization:
+  method: "grid"
+  objective: "sharpe_ratio"
+  
+data:
+  symbols: ["AAPL"]
+  sources:
+    - symbol: "AAPL"
+      file: "data/AAPL_1day.csv"
+      
+  train_test_split:
+    enabled: true
+    method: "ratio"
+    train_ratio: 0.7
+    test_ratio: 0.3
+```
+
+2. Run the optimization:
+
+```bash
+python main.py optimize --config config/optimization/ma_crossover.yaml
+```
+
+3. Review the results in the output directory.

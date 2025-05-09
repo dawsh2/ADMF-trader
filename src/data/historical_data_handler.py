@@ -1,185 +1,518 @@
-# src/data/historical_data_handler.py (fixed version)
 """
-Handler for historical data.
+Historical data handler with train/test split support.
+
+This implementation adds train/test split functionality to the data handler
+to support the optimization framework.
 """
-import datetime
+
 import pandas as pd
-import logging
-from typing import Dict, List, Optional, Union, Any, Deque
-from collections import deque
+from src.core.component import Component
+from src.core.events.event_types import Event, EventType
+from src.core.data_model import Bar
+from src.data.time_series_splitter import TimeSeriesSplitter
 
-from src.core.events.event_types import BarEvent
-from src.core.events.event_utils import create_bar_event
-from .data_handler_base import DataHandlerBase
-from .data_source_base import DataSourceBase
-
-logger = logging.getLogger(__name__)
-
-class HistoricalDataHandler(DataHandlerBase):
-    """Handler for historical data."""
-
-    # Fixed version for src/data/historical_data_handler.py
-
-    def __init__(self, data_source: DataSourceBase, bar_emitter, max_bars_history: int = 100):
+class HistoricalDataHandler(Component):
+    """
+    Data handler for historical market data with train/test split support.
+    
+    This component provides market data to the system and supports
+    train/test splitting for optimization.
+    """
+    
+    def __init__(self, name, data_config):
         """
-        Initialize the historical data handler.
-
+        Initialize the data handler.
+        
         Args:
-            data_source: Data source to use
-            bar_emitter: Emitter for bar events
-            max_bars_history: Maximum number of bars to keep in history
+            name (str): Component name
+            data_config (dict): Data configuration
         """
-        # Store attributes directly rather than using super().__init__
-        self._name = self.__class__.__name__  # Store name attribute from DataHandlerBase
-        self.data_source = data_source        # Store as data_source (not _data_source)
-        self.bar_emitter = bar_emitter        # Explicitly store bar_emitter
-        self.data_frames = {}                 # symbol -> DataFrame
-        self.current_idx = {}                 # symbol -> current index
-        self.bars_history = {}                # symbol -> deque of BarEvents
-        self.max_bars_history = max_bars_history
-        self.stats = {                        # Initialize stats from DataHandlerBase
-            'bars_processed': 0,
-            'symbols_loaded': 0,
-            'errors': 0
-        }
-
-        # Ensure bar emitter is running
-        if self.bar_emitter and hasattr(self.bar_emitter, 'start') and hasattr(self.bar_emitter, 'running'):
-            if not self.bar_emitter.running:
-                self.bar_emitter.start()
-                logger.info(f"Started bar emitter: {self.bar_emitter.name}")
-
-    def load_data(self, symbols: Union[str, List[str]], start_date=None, 
-                  end_date=None, timeframe='1m') -> None:
-        """Load data for the specified symbols."""
-        # Convert single symbol to list
-        if isinstance(symbols, str):
-            symbols = [symbols]
-
-        # Convert string dates to datetime objects if needed
-        if isinstance(start_date, str):
-            start_date = pd.to_datetime(start_date)
-        if isinstance(end_date, str):
-            end_date = pd.to_datetime(end_date)
-
-        # Load data for each symbol
-        for symbol in symbols:
+        super().__init__(name)
+        self.data_config = data_config
+        self.data = {}
+        self.data_splits = {}
+        self.current_split = None
+        self.current_indices = {}
+        
+    def initialize(self, context):
+        """
+        Initialize with dependencies.
+        
+        Args:
+            context (dict): Context containing dependencies
+        """
+        super().initialize(context)
+        
+        # Get event bus from context
+        self.event_bus = context.get('event_bus')
+        
+        if not self.event_bus:
+            raise ValueError("HistoricalDataHandler requires event_bus in context")
+            
+        # Load data from sources
+        self._load_data()
+        
+    def _load_data(self):
+        """Load data from configured sources."""
+        data_sources = self.data_config.get('sources', [])
+        
+        for source in data_sources:
+            symbol = source.get('symbol')
+            file_path = source.get('file')
+            date_format = source.get('date_format', '%Y-%m-%d')
+            
+            if not symbol or not file_path:
+                raise ValueError(f"Invalid data source configuration: {source}")
+                
+            # Load data from file
             try:
-                # Use self.data_source instead of self._data_source
-                df = self.data_source.get_data(symbol, start_date, end_date, timeframe)
-                if not df.empty:
-                    # Store data
-                    self.data_frames[symbol] = df
-                    self.current_idx[symbol] = 0
-                    self.bars_history[symbol] = deque(maxlen=self.max_bars_history)
-                    self.stats['symbols_loaded'] += 1
-
-                    logger.info(f"Loaded {len(df)} bars for {symbol} from {df.index.min()} to {df.index.max()}")
-                else:
-                    logger.warning(f"No data found for {symbol}")
+                df = pd.read_csv(file_path)
+                
+                # Convert date columns to datetime
+                date_col = source.get('date_column', 'date')
+                if date_col in df.columns:
+                    df[date_col] = pd.to_datetime(df[date_col], format=date_format)
+                    # Rename to standard 'timestamp' column
+                    df.rename(columns={date_col: 'timestamp'}, inplace=True)
+                
+                # Check for alternative column names and rename them to match expected format
+                column_mappings = {
+                    'Date': 'timestamp',
+                    'Time': 'time',
+                    'Open': 'open',
+                    'High': 'high',
+                    'Low': 'low',
+                    'Close': 'close',
+                    'Volume': 'volume'
+                }
+                
+                # Apply mappings (case-insensitive)
+                for src_col, dst_col in column_mappings.items():
+                    # Check for exact match first
+                    if src_col in df.columns and dst_col not in df.columns:
+                        df.rename(columns={src_col: dst_col}, inplace=True)
+                    # Then try case-insensitive match
+                    else:
+                        for col in df.columns:
+                            if col.lower() == src_col.lower() and dst_col not in df.columns:
+                                df.rename(columns={col: dst_col}, inplace=True)
+                                break
+                
+                # Ensure required columns exist
+                required_columns = ['timestamp', 'open', 'high', 'low', 'close']
+                missing_columns = [col for col in required_columns if col not in df.columns]
+                
+                if missing_columns:
+                    # Try to convert from possible legacy column names
+                    for legacy, standard in Bar.LEGACY_MAPPINGS.items():
+                        if legacy in df.columns and standard not in df.columns:
+                            df.rename(columns={legacy: standard}, inplace=True)
+                    
+                    # Check if we still have missing columns
+                    missing_columns = [col for col in required_columns if col not in df.columns]
+                    if missing_columns:
+                        # Log the issue and try additional transformations
+                        import logging
+                        logger = logging.getLogger(__name__)
+                        logger.warning(f"Missing required columns: {missing_columns}")
+                        logger.warning(f"Available columns: {list(df.columns)}")
+                        
+                        # Try harder case-insensitive matching
+                        for req_col in missing_columns:
+                            for col in df.columns:
+                                if col.lower() == req_col.lower() or req_col.lower() in col.lower():
+                                    logger.info(f"Mapping '{col}' to '{req_col}'")
+                                    df.rename(columns={col: req_col}, inplace=True)
+                                    break
+                
+                # Sort data by timestamp
+                df.sort_values('timestamp', inplace=True)
+                
+                # Store data
+                self.data[symbol] = df
+                
+                # Initialize current index
+                self.current_indices[symbol] = -1
+                
             except Exception as e:
-                logger.error(f"Error loading data for {symbol}: {e}", exc_info=True)
-                self.stats['errors'] += 1
-
-
-
-    def get_data_source(self) -> Any:
-        """Get the current data source."""
-        return self._data_source
-
-    def set_data_source(self, data_source) -> None:
+                raise ValueError(f"Error loading data from {file_path}: {e}")
+                
+        if not self.data:
+            raise ValueError("No data loaded")
+            
+    def setup_train_test_split(self, method="ratio", train_ratio=0.7, test_ratio=0.3,
+                            split_date=None, train_periods=None, test_periods=None):
         """
-        Set the data source.
-
+        Set up train/test split using specified method.
+        
         Args:
-            data_source: Data source instance
+            method (str): Splitting method ('ratio', 'date', or 'fixed')
+            train_ratio (float): Ratio of data for training (for 'ratio' method)
+            test_ratio (float): Ratio of data for testing (for 'ratio' method)
+            split_date (datetime): Date to split on (for 'date' method)
+            train_periods (int): Number of periods for training (for 'fixed' method)
+            test_periods (int): Number of periods for testing (for 'fixed' method)
         """
-        self._data_source = data_source    
-
-    
-
-    
-    def get_next_bar(self, symbol: str) -> Optional[BarEvent]:
-        """Get the next bar for a symbol."""
-        # Check if we have data for this symbol
-        if symbol not in self.data_frames:
-            logger.warning(f"No data loaded for symbol: {symbol}")
-            return None
-            
-        df = self.data_frames[symbol]
-        idx = self.current_idx[symbol]
+        import logging
+        logger = logging.getLogger(__name__)
         
-        # Check if we've reached the end of the data
-        if idx >= len(df):
-            logger.debug(f"End of data reached for {symbol}")
-            return None
-            
-        # Get the row
-        row = df.iloc[idx]
-        
-        # Get timestamp from index (should be a DatetimeIndex)
-        timestamp = df.index[idx]
-        
-        # Debugging for first few bars
-        if idx == 0 or idx % 100 == 0:
-            logger.debug(f"Processing bar for {symbol} at index {idx}: timestamp={timestamp}, type={type(timestamp)}")
-        
-        # Create bar event
         try:
-            # Extract data from row
-            open_price = float(row['open'])
-            high_price = float(row['high'])
-            low_price = float(row['low'])
-            close_price = float(row['close'])
-            volume = int(row['volume'])
-            
-            # Create bar event
-            bar = create_bar_event(
-                symbol=symbol,
-                timestamp=timestamp,
-                open_price=open_price,
-                high_price=high_price,
-                low_price=low_price,
-                close_price=close_price,
-                volume=volume
+            # Create splitter
+            splitter = TimeSeriesSplitter(
+                method=method,
+                train_ratio=train_ratio,
+                test_ratio=test_ratio,
+                split_date=split_date,
+                train_periods=train_periods,
+                test_periods=test_periods
             )
             
-            # Store in history
-            self.bars_history[symbol].append(bar)
+            # Split each symbol's data
+            self.data_splits = {}
+            for symbol, df in self.data.items():
+                self.data_splits[symbol] = splitter.split(df)
+                logger.info(f"Split data for {symbol}: train={len(self.data_splits[symbol]['train'])} rows, test={len(self.data_splits[symbol]['test'])} rows")
             
-            # Increment index
-            self.current_idx[symbol] = idx + 1
+            # Set default active split
+            self.set_active_split('train')
             
-            # Emit the bar event
-            if self.bar_emitter:
-                self.bar_emitter.emit(bar)
-                
-            return bar
         except Exception as e:
-            logger.error(f"Error creating bar event for {symbol} at index {idx}: {e}", exc_info=True)
-            self.current_idx[symbol] = idx + 1
-            return None
-    
-    def reset(self) -> None:
-        """Reset the data handler state."""
-        self.current_idx = {symbol: 0 for symbol in self.data_frames}
-        self.bars_history = {symbol: deque(maxlen=self.max_bars_history) 
-                            for symbol in self.data_frames}
-    
-    def get_symbols(self) -> List[str]:
-        """Get the list of available symbols."""
-        return list(self.data_frames.keys())
-    
-    def get_latest_bar(self, symbol: str) -> Optional[BarEvent]:
-        """Get the latest bar for a symbol."""
-        if symbol not in self.bars_history or not self.bars_history[symbol]:
-            return None
-        return self.bars_history[symbol][-1]
-    
-    def get_latest_bars(self, symbol: str, N: int = 1) -> List[BarEvent]:
-        """Get the last N bars for a symbol."""
-        if symbol not in self.bars_history:
-            return []
+            logger.warning(f"Data handler does not support train/test splitting: {e}")
+            # Fallback: use full data for both train and test
+            logger.info("Using full data for both train and test splits")
+            self.data_splits = {}
+            for symbol, df in self.data.items():
+                self.data_splits[symbol] = {
+                    'train': df.copy(),
+                    'test': df.copy()
+                }
+            # Set default active split
+            self.current_split = 'train'
+        
+    def set_active_split(self, split_name):
+        """
+        Switch between train and test datasets.
+        
+        Args:
+            split_name (str): Split to activate ('train' or 'test')
+        """
+        import logging
+        logger = logging.getLogger(__name__)
+        
+        if not self.data_splits:
+            logger.warning("No data splits available. Creating default splits using all data.")
+            # Create default splits using all data
+            self.data_splits = {}
+            for symbol, df in self.data.items():
+                self.data_splits[symbol] = {
+                    'train': df.copy(),
+                    'test': df.copy()
+                }
             
-        bars = list(self.bars_history[symbol])
-        return bars[-N:] if N < len(bars) else bars
+        if split_name not in ['train', 'test']:
+            logger.warning(f"Invalid split name: {split_name}. Using 'train' instead.")
+            split_name = 'train'
+            
+        # Verify all symbols have the requested split
+        for symbol, splits in self.data_splits.items():
+            if split_name not in splits:
+                logger.warning(f"Split {split_name} not found for symbol {symbol}. Creating it using all data.")
+                # Create the missing split using all data
+                self.data_splits[symbol][split_name] = self.data[symbol].copy()
+                
+        # Set the active split
+        self.current_split = split_name
+        logger.info(f"Activated '{split_name}' data split")
+        
+        # Reset current indices
+        self.current_indices = {symbol: -1 for symbol in self.data.keys()}
+        
+    def update(self):
+        """
+        Update by moving to the next data point.
+        
+        Returns:
+            bool: True if more data is available, False otherwise
+        """
+        # If no split is set, use full data
+        if not self.current_split:
+            return self._update_full_data()
+        else:
+            return self._update_split_data()
+            
+    def _update_full_data(self):
+        """
+        Update using full data.
+        
+        Returns:
+            bool: True if more data is available, False otherwise
+        """
+        # Find the earliest next bar across all symbols
+        next_timestamp = None
+        next_symbol = None
+        
+        for symbol, df in self.data.items():
+            current_idx = self.current_indices[symbol]
+            
+            # Check if there's more data for this symbol
+            if current_idx + 1 < len(df):
+                next_idx = current_idx + 1
+                timestamp = df.iloc[next_idx]['timestamp']
+                
+                # If this is the earliest timestamp, or we haven't found any yet
+                if next_timestamp is None or timestamp < next_timestamp:
+                    next_timestamp = timestamp
+                    next_symbol = symbol
+                    
+        # If no next timestamp found, we're done
+        if next_timestamp is None:
+            return False
+            
+        # Publish bars for all symbols with data at this timestamp
+        for symbol, df in self.data.items():
+            current_idx = self.current_indices[symbol]
+            
+            # Check if there's more data for this symbol
+            if current_idx + 1 < len(df):
+                next_idx = current_idx + 1
+                timestamp = df.iloc[next_idx]['timestamp']
+                
+                # If this bar is at the current timestamp, publish it
+                if timestamp == next_timestamp:
+                    bar_data = df.iloc[next_idx].to_dict()
+                    
+                    # Add symbol to the bar data (required by Bar.from_dict)
+                    bar_data['symbol'] = symbol
+                    
+                    # Standardize field names
+                    bar_data = Bar.from_dict(bar_data)
+                    
+                    # Publish the bar
+                    self.event_bus.publish(Event(
+                        EventType.BAR,
+                        bar_data
+                    ))
+                    
+                    # Update current index
+                    self.current_indices[symbol] = next_idx
+                    
+        return True
+        
+    def _update_split_data(self):
+        """
+        Update using split data.
+        
+        Returns:
+            bool: True if more data is available, False otherwise
+        """
+        # Find the earliest next bar across all symbols
+        next_timestamp = None
+        next_symbol = None
+        
+        for symbol in self.data.keys():
+            df = self.data_splits[symbol][self.current_split]
+            current_idx = self.current_indices[symbol]
+            
+            # Check if there's more data for this symbol
+            if current_idx + 1 < len(df):
+                next_idx = current_idx + 1
+                timestamp = df.iloc[next_idx]['timestamp']
+                
+                # If this is the earliest timestamp, or we haven't found any yet
+                if next_timestamp is None or timestamp < next_timestamp:
+                    next_timestamp = timestamp
+                    next_symbol = symbol
+                    
+        # If no next timestamp found, we're done
+        if next_timestamp is None:
+            return False
+            
+        # Publish bars for all symbols with data at this timestamp
+        for symbol in self.data.keys():
+            df = self.data_splits[symbol][self.current_split]
+            current_idx = self.current_indices[symbol]
+            
+            # Check if there's more data for this symbol
+            if current_idx + 1 < len(df):
+                next_idx = current_idx + 1
+                timestamp = df.iloc[next_idx]['timestamp']
+                
+                # If this bar is at the current timestamp, publish it
+                if timestamp == next_timestamp:
+                    bar_data = df.iloc[next_idx].to_dict()
+                    
+                    # Add symbol to the bar data (required by Bar.from_dict)
+                    bar_data['symbol'] = symbol
+                    
+                    # Standardize field names
+                    bar_data = Bar.from_dict(bar_data)
+                    
+                    # Publish the bar
+                    self.event_bus.publish(Event(
+                        EventType.BAR,
+                        bar_data
+                    ))
+                    
+                    # Update current index
+                    self.current_indices[symbol] = next_idx
+                    
+        return True
+        
+    def get_data(self, symbol=None):
+        """
+        Get data for a symbol or all symbols.
+        
+        Args:
+            symbol (str, optional): Symbol to get data for
+            
+        Returns:
+            pd.DataFrame or dict: Data for requested symbol(s)
+        """
+        if symbol:
+            return self.data.get(symbol).copy()
+        return {s: df.copy() for s, df in self.data.items()}
+        
+    def reset(self):
+        """Reset the data handler state."""
+        super().reset()
+        self.current_indices = {symbol: -1 for symbol in self.data.keys()}
+        
+    def get_current_timestamp(self):
+        """
+        Returns the current timestamp in the historical data.
+        If using split data, returns the last timestamp from the active split.
+        """
+        # If we have split data and an active split, use that
+        if hasattr(self, 'current_split') and self.current_split and self.data_splits:
+            for symbol in self.data_splits.keys():
+                # Get the dataframe for this symbol's active split
+                df = self.data_splits[symbol].get(self.current_split)
+                if df is not None and len(df) > 0:
+                    # Get the index in this dataframe
+                    current_idx = self.current_indices.get(symbol, -1)
+                    if current_idx >= 0 and current_idx < len(df):
+                        # Return timestamp at current index
+                        return df.iloc[current_idx]['timestamp']
+                    elif len(df) > 0:
+                        # Return the last timestamp as fallback
+                        return df.iloc[-1]['timestamp']
+        
+        # Fallback to using the full data
+        for symbol, df in self.data.items():
+            if len(df) > 0:
+                current_idx = self.current_indices.get(symbol, -1)
+                if current_idx >= 0 and current_idx < len(df):
+                    return df.iloc[current_idx]['timestamp']
+                else:
+                    return df.iloc[-1]['timestamp']
+        
+        # Last resort - import datetime and return current time
+        from datetime import datetime
+        return datetime.now()
+        
+    def get_current_price(self, symbol):
+        """
+        Returns the current price for the given symbol.
+        Uses the close price from the current or latest bar for the symbol.
+        
+        Args:
+            symbol (str): Symbol to get price for
+            
+        Returns:
+            float: Latest price or None if not available
+        """
+        # Check if we're using split data
+        if hasattr(self, 'current_split') and self.current_split and self.data_splits:
+            if symbol in self.data_splits:
+                df = self.data_splits[symbol].get(self.current_split)
+                if df is not None and len(df) > 0:
+                    # Get the current index for this symbol
+                    current_idx = self.current_indices.get(symbol, -1)
+                    
+                    # If the index is valid, return the close price at that index
+                    if current_idx >= 0 and current_idx < len(df):
+                        return df.iloc[current_idx]['close']
+                    elif len(df) > 0:
+                        # Return the last close price as fallback
+                        return df.iloc[-1]['close']
+        
+        # Fallback to using full data
+        if symbol in self.data:
+            df = self.data[symbol]
+            if len(df) > 0:
+                # Get the current index for this symbol
+                current_idx = self.current_indices.get(symbol, -1)
+                
+                # If the index is valid, return the close price at that index
+                if current_idx >= 0 and current_idx < len(df):
+                    return df.iloc[current_idx]['close']
+                elif len(df) > 0:
+                    # Return the last close price as fallback
+                    return df.iloc[-1]['close']
+        
+        # No price available
+        return None
+        
+    def get_symbols(self):
+        """
+        Get the list of symbols in the data handler.
+        
+        Returns:
+            list: List of symbol strings
+        """
+        # Return list of keys from the data dictionary
+        symbols = list(self.data.keys())
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.info(f"Data handler returning symbols: {symbols}")
+        return symbols
+        
+    def get_current_symbol(self):
+        """
+        Returns a representative symbol from the loaded data.
+        Used primarily for logging and diagnostics.
+        
+        Returns:
+            str: A symbol name or 'UNDEFINED' if no symbols are loaded
+        """
+        # Return the first symbol from the data
+        if self.data and len(self.data) > 0:
+            return next(iter(self.data.keys()))
+        return "UNDEFINED"
+        
+    def get_split_sizes(self):
+        """
+        Returns the sizes of the current data splits.
+        Used for logging and diagnostics.
+        
+        Returns:
+            dict: Map of split names to row counts
+        """
+        if not self.data_splits:
+            return {}
+            
+        # Use the first symbol's splits as representative
+        symbol = self.get_current_symbol()
+        if symbol in self.data_splits:
+            return {split: len(df) for split, df in self.data_splits[symbol].items()}
+        return {}
+        
+    def is_empty(self, split_name=None):
+        """
+        Check if the data is empty for a given split.
+        
+        Args:
+            split_name (str, optional): Split to check, or None for full data
+            
+        Returns:
+            bool: True if no data is available, False otherwise
+        """
+        if split_name and self.data_splits:
+            # Check if any symbol has data for this split
+            for symbol, splits in self.data_splits.items():
+                if split_name in splits and len(splits[split_name]) > 0:
+                    return False
+            return True
+        else:
+            # Check if any symbol has full data
+            return not any(len(df) > 0 for df in self.data.values())

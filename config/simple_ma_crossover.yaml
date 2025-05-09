@@ -1,0 +1,33 @@
+# simple_ma_crossover.yaml
+# Simple configuration for testing MA crossover strategy
+
+strategy:
+  name: ma_crossover
+  parameters:
+    fast_window: 5
+    slow_window: 20
+
+risk:
+  position_manager:
+    config:
+      fixed_quantity: 10
+      max_positions: 1
+      enforce_single_position: true
+      position_sizing_method: fixed
+      allow_multiple_entries: false
+
+backtest:
+  initial_capital: 100000.0
+  symbols: ['HEAD']  # Trading the HEAD symbol
+  timeframe: 1min    # Using 1-minute data
+  debug: true        # Enable debugging
+  verbose: true      # Enable verbose output
+
+data:
+  source_type: csv
+  sources:
+    - symbol: HEAD
+      file: data/HEAD_1min.csv
+      date_column: timestamp  # The file uses 'timestamp' as date column
+      price_column: Close     # The file uses 'Close' with capital C
+      date_format: "%Y-%m-%d %H:%M:%S"  # Format for datetime with both date and time

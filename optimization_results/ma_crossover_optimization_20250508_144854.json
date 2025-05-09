@@ -1,0 +1,1468 @@
+{
+  "best_parameters": {
+    "fast_window": 5,
+    "slow_window": 20
+  },
+  "best_train_score": 0.0,
+  "best_test_score": 0.0,
+  "all_results": [
+    {
+      "parameters": {
+        "fast_window": 5,
+        "slow_window": 20
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 5,
+          "slow_window": 20
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 5,
+          "slow_window": 20
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 5,
+        "slow_window": 30
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 5,
+          "slow_window": 30
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 5,
+          "slow_window": 30
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 5,
+        "slow_window": 40
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 5,
+          "slow_window": 40
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 5,
+          "slow_window": 40
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 5,
+        "slow_window": 50
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 5,
+          "slow_window": 50
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 5,
+          "slow_window": 50
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 5,
+        "slow_window": 60
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 5,
+          "slow_window": 60
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 5,
+          "slow_window": 60
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 10,
+        "slow_window": 20
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 10,
+          "slow_window": 20
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 10,
+          "slow_window": 20
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 10,
+        "slow_window": 30
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 10,
+          "slow_window": 30
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 10,
+          "slow_window": 30
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 10,
+        "slow_window": 40
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 10,
+          "slow_window": 40
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 10,
+          "slow_window": 40
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 10,
+        "slow_window": 50
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 10,
+          "slow_window": 50
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 10,
+          "slow_window": 50
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 10,
+        "slow_window": 60
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 10,
+          "slow_window": 60
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 10,
+          "slow_window": 60
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 15,
+        "slow_window": 20
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 15,
+          "slow_window": 20
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 15,
+          "slow_window": 20
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 15,
+        "slow_window": 30
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 15,
+          "slow_window": 30
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 15,
+          "slow_window": 30
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 15,
+        "slow_window": 40
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 15,
+          "slow_window": 40
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 15,
+          "slow_window": 40
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 15,
+        "slow_window": 50
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 15,
+          "slow_window": 50
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 15,
+          "slow_window": 50
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 15,
+        "slow_window": 60
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 15,
+          "slow_window": 60
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 15,
+          "slow_window": 60
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 20,
+        "slow_window": 20
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 20,
+          "slow_window": 20
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 20,
+          "slow_window": 20
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 20,
+        "slow_window": 30
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 20,
+          "slow_window": 30
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 20,
+          "slow_window": 30
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 20,
+        "slow_window": 40
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 20,
+          "slow_window": 40
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 20,
+          "slow_window": 40
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 20,
+        "slow_window": 50
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 20,
+          "slow_window": 50
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 20,
+          "slow_window": 50
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 20,
+        "slow_window": 60
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 20,
+          "slow_window": 60
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 20,
+          "slow_window": 60
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 25,
+        "slow_window": 20
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 25,
+          "slow_window": 20
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 25,
+          "slow_window": 20
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 25,
+        "slow_window": 30
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 25,
+          "slow_window": 30
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 25,
+          "slow_window": 30
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 25,
+        "slow_window": 40
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 25,
+          "slow_window": 40
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 25,
+          "slow_window": 40
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 25,
+        "slow_window": 50
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 25,
+          "slow_window": 50
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 25,
+          "slow_window": 50
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 25,
+        "slow_window": 60
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 25,
+          "slow_window": 60
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 25,
+          "slow_window": 60
+        },
+        "data_split": "test"
+      }
+    }
+  ],
+  "parameter_counts": 25,
+  "train_results": {
+    "final_capital": 100000.0,
+    "positions": {},
+    "trades": [],
+    "statistics": {
+      "initial_capital": 100000.0,
+      "final_capital": 100000.0,
+      "trades_executed": 0,
+      "return_pct_closed_only": 0.0,
+      "portfolio_realized_return_pct": 0.0,
+      "return_pct": 0.0,
+      "sharpe_ratio": 0.0,
+      "max_drawdown": 0.0
+    },
+    "equity_curve": [],
+    "trades_equity_consistent": false,
+    "metrics_consistent": true,
+    "parameters": {
+      "fast_window": 5,
+      "slow_window": 20
+    },
+    "data_split": "train"
+  },
+  "test_results": {
+    "final_capital": 100000.0,
+    "positions": {},
+    "trades": [],
+    "statistics": {
+      "initial_capital": 100000.0,
+      "final_capital": 100000.0,
+      "trades_executed": 0,
+      "return_pct_closed_only": 0.0,
+      "portfolio_realized_return_pct": 0.0,
+      "return_pct": 0.0,
+      "sharpe_ratio": 0.0,
+      "max_drawdown": 0.0
+    },
+    "equity_curve": [],
+    "trades_equity_consistent": false,
+    "metrics_consistent": true,
+    "parameters": {
+      "fast_window": 5,
+      "slow_window": 20
+    },
+    "data_split": "test"
+  },
+  "timestamp": "20250508_144854",
+  "id": "de8aa44f-ea6a-4415-a9d8-e1ef6ca1694c",
+  "config": {
+    "strategy": {
+      "name": "ma_crossover",
+      "parameters": {
+        "fast_window": 5,
+        "slow_window": 20
+      }
+    },
+    "risk": {
+      "position_manager": {
+        "fixed_quantity": 10,
+        "max_positions": 1,
+        "enforce_single_position": true
+      }
+    },
+    "backtest": {
+      "initial_capital": 100000.0,
+      "symbols": [
+        "HEAD"
+      ],
+      "timeframe": "1min"
+    },
+    "data": {
+      "source_type": "csv",
+      "sources": [
+        {
+          "symbol": "HEAD",
+          "file": "data/HEAD_1min.csv",
+          "date_column": "timestamp",
+          "price_column": "Close",
+          "date_format": "%Y-%m-%d %H:%M:%S"
+        }
+      ]
+    },
+    "optimization": {
+      "objective": "sharpe_ratio",
+      "method": "grid"
+    },
+    "parameter_space": [
+      {
+        "name": "fast_window",
+        "type": "integer",
+        "min": 5,
+        "max": 25,
+        "step": 5,
+        "description": "Fast moving average window"
+      },
+      {
+        "name": "slow_window",
+        "type": "integer",
+        "min": 20,
+        "max": 60,
+        "step": 10,
+        "description": "Slow moving average window"
+      }
+    ],
+    "initial_capital": 100000.0
+  },
+  "best_score": 0.0
+}

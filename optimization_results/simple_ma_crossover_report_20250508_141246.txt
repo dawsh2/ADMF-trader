@@ -1,0 +1,58 @@
+================================================================================
+OPTIMIZATION REPORT: simple_ma_crossover
+Timestamp: 20250508_141246
+================================================================================
+
+CONFIGURATION
+--------------------------------------------------------------------------------
+Optimization Method: grid
+Objective Function: sharpe_ratio
+Symbols: 
+Train/Test Split: ratio (Train: 0.70, Test: 0.30)
+
+PARAMETER SPACE
+--------------------------------------------------------------------------------
+
+BEST PARAMETERS
+--------------------------------------------------------------------------------
+fast_period: 20
+slow_period: 20
+
+PERFORMANCE METRICS
+--------------------------------------------------------------------------------
+Training Performance:
+  final_capital: 100000.0
+  initial_capital: 100000.0
+  max_drawdown: 0.0000
+  portfolio_realized_return_pct: 0.0000
+  return_pct: 0.0000
+  return_pct_closed_only: 0.0000
+  sharpe_ratio: 0.0000
+  trades_executed: 0
+
+Testing Performance:
+  final_capital: 100000.0
+  initial_capital: 100000.0
+  max_drawdown: 0.0000
+  portfolio_realized_return_pct: 0.0000
+  return_pct: 0.0000
+  return_pct_closed_only: 0.0000
+  sharpe_ratio: 0.0000
+  trades_executed: 0
+
+OVERFITTING ANALYSIS
+--------------------------------------------------------------------------------
+Data Consistency Check:
+  Train metrics consistent: True
+  Test metrics consistent: True
+  Train trades/equity consistent: False
+  Test trades/equity consistent: False
+
+Return Difference (Train - Test): 0.00%
+Sharpe Ratio Difference: 0.00
+Profit Factor Difference: 0.00
+Overfitting Assessment: Low risk of overfitting (Score: 0.00)
+
+WARNING: Metric inconsistencies detected.
+This may indicate issues with trade tracking or equity calculation.
+Consider reviewing the implementation or running debug diagnostics.

@@ -1,0 +1,146 @@
+2025-05-08 12:09:44,477 - __main__ - INFO - Starting ADMF-Trader Trade Diagnostics
+2025-05-08 12:09:44,477 - __main__ - INFO - Analyzing latest optimization results: ./optimization_results/test_optimization_results.json
+2025-05-08 12:09:44,478 - __main__ - INFO - Analyzing training results
+2025-05-08 12:09:44,478 - __main__ - INFO - Analyzing backtest results
+2025-05-08 12:09:44,478 - __main__ - INFO - Statistics from results: {'initial_capital': 100000, 'final_capital': -2453377.26644, 'trades_executed': 25, 'return_pct': -2553.37726644, 'profitable_trades': 14, 'loss_trades': 11, 'win_rate': 0.56, 'avg_profit': 26.241428571429587, 'avg_loss': -8.200000000000397, 'profit_factor': 4.072949002217255}
+2025-05-08 12:09:44,478 - __main__ - INFO - Initial capital: 100000.00
+2025-05-08 12:09:44,478 - __main__ - INFO - Final capital: -2453377.27
+2025-05-08 12:09:44,478 - __main__ - INFO - Expected return: -2553.38%
+2025-05-08 12:09:44,478 - __main__ - INFO - Reported return: -2553.38%
+2025-05-08 12:09:44,478 - __main__ - INFO - Analyzing 25 trades
+2025-05-08 12:09:44,478 - __main__ - INFO - Total P&L: 277.18
+2025-05-08 12:09:44,478 - __main__ - INFO - Winning trades: 14
+2025-05-08 12:09:44,478 - __main__ - INFO - Losing trades: 11
+2025-05-08 12:09:44,478 - __main__ - INFO - Average win: 26.24
+2025-05-08 12:09:44,478 - __main__ - INFO - Average loss: -8.20
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 1: short, Entry: 521.0069, Exit: 521.125, Qty: 100, P&L: -11.810000000002674
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 2: short, Entry: 521.3001, Exit: 521.33, Qty: 100, P&L: -2.9899999999997817
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 3: short, Entry: 521.2, Exit: 521.06, Qty: 100, P&L: 14.000000000010004
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 4: short, Entry: 521.09, Exit: 521.08, Qty: 100, P&L: 0.9999999999990905
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 5: short, Entry: 521.2, Exit: 521.1801, Qty: 100, P&L: 1.9900000000006912
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 6: short, Entry: 521.24, Exit: 521.28, Qty: 100, P&L: -3.999999999996362
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 7: short, Entry: 521.23, Exit: 521.09, Qty: 100, P&L: 13.999999999998636
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 8: short, Entry: 521.0199, Exit: 520.96, Qty: 100, P&L: 5.989999999997053
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 9: short, Entry: 520.875, Exit: 520.99, Qty: 100, P&L: -11.50000000000091
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 10: short, Entry: 520.83, Exit: 520.92, Qty: 100, P&L: -8.999999999991815
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 11: short, Entry: 520.804, Exit: 520.76, Qty: 100, P&L: 4.399999999998272
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 12: short, Entry: 520.7388, Exit: 520.85, Qty: 100, P&L: -11.120000000005348
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 13: short, Entry: 520.7999, Exit: 520.84, Qty: 100, P&L: -4.0100000000052205
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 14: short, Entry: 520.77, Exit: 519.13, Qty: 100, P&L: 163.99999999999864
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 15: short, Entry: 521.315, Exit: 520.29, Qty: 100, P&L: 102.5000000000091
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 16: short, Entry: 519.89, Exit: 520.1961, Qty: 100, P&L: -30.61000000000149
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 17: short, Entry: 519.935, Exit: 519.91, Qty: 100, P&L: 2.4999999999977263
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 18: short, Entry: 519.7985, Exit: 519.8201, Qty: 100, P&L: -2.1600000000034925
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 19: short, Entry: 519.85, Exit: 519.775, Qty: 100, P&L: 7.5000000000045475
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 20: short, Entry: 519.88, Exit: 519.91, Qty: 100, P&L: -2.9999999999972715
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 21: short, Entry: 519.98, Exit: 519.905, Qty: 100, P&L: 7.5000000000045475
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 22: short, Entry: 519.82, Exit: 519.71, Qty: 100, P&L: 11.000000000001364
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 23: short, Entry: 520.3099, Exit: 520.2, Qty: 100, P&L: 10.989999999992506
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 24: short, Entry: 520.3301, Exit: 520.13, Qty: 100, P&L: 20.010000000002037
+2025-05-08 12:09:44,478 - __main__ - INFO - Trade 25: short, Entry: 520.61, Exit: None, Qty: 100, P&L: 0
+2025-05-08 12:09:44,478 - __main__ - INFO - Checking for extreme values in trades...
+2025-05-08 12:09:44,478 - __main__ - INFO - Expected profit factor: 4.07
+2025-05-08 12:09:44,478 - __main__ - INFO - Reported profit factor: 4.07
+2025-05-08 12:09:44,478 - __main__ - WARNING - Suspicious max drawdown: 0.00% with return of -2553.38%
+2025-05-08 12:09:44,478 - __main__ - INFO - Analyzing testing results
+2025-05-08 12:09:44,478 - __main__ - INFO - Analyzing backtest results
+2025-05-08 12:09:44,478 - __main__ - INFO - Statistics from results: {'initial_capital': 100000, 'final_capital': -999185.3772900001, 'trades_executed': 11, 'return_pct': -1099.1853772900004, 'profitable_trades': 4, 'loss_trades': 7, 'win_rate': 0.36363636363636365, 'avg_profit': 77.87749999999676, 'avg_loss': -13.771428571429364, 'profit_factor': 3.231431535269389}
+2025-05-08 12:09:44,479 - __main__ - INFO - Initial capital: 100000.00
+2025-05-08 12:09:44,479 - __main__ - INFO - Final capital: -999185.38
+2025-05-08 12:09:44,479 - __main__ - INFO - Expected return: -1099.19%
+2025-05-08 12:09:44,479 - __main__ - INFO - Reported return: -1099.19%
+2025-05-08 12:09:44,479 - __main__ - INFO - Analyzing 11 trades
+2025-05-08 12:09:44,479 - __main__ - INFO - Total P&L: 215.11
+2025-05-08 12:09:44,479 - __main__ - INFO - Winning trades: 4
+2025-05-08 12:09:44,479 - __main__ - INFO - Losing trades: 7
+2025-05-08 12:09:44,479 - __main__ - INFO - Average win: 77.88
+2025-05-08 12:09:44,479 - __main__ - INFO - Average loss: -13.77
+2025-05-08 12:09:44,479 - __main__ - INFO - Trade 1: long, Entry: 520.45, Exit: 520.01, Qty: 100, P&L: -44.00000000000546
+2025-05-08 12:09:44,479 - __main__ - INFO - Trade 2: long, Entry: 520.38, Exit: 523.24, Qty: 100, P&L: 286.00000000000136
+2025-05-08 12:09:44,479 - __main__ - INFO - Trade 3: long, Entry: 523.485, Exit: 523.3, Qty: 100, P&L: -18.50000000000591
+2025-05-08 12:09:44,479 - __main__ - INFO - Trade 4: long, Entry: 523.19, Exit: 523.36, Qty: 100, P&L: 16.999999999995907
+2025-05-08 12:09:44,479 - __main__ - INFO - Trade 5: long, Entry: 523.43, Exit: 523.395, Qty: 100, P&L: -3.4999999999968168
+2025-05-08 12:09:44,479 - __main__ - INFO - Trade 6: long, Entry: 523.4699, Exit: 523.475, Qty: 100, P&L: 0.509999999997035
+2025-05-08 12:09:44,479 - __main__ - INFO - Trade 7: long, Entry: 523.48, Exit: 523.45, Qty: 100, P&L: -2.9999999999972715
+2025-05-08 12:09:44,479 - __main__ - INFO - Trade 8: long, Entry: 523.364, Exit: 523.15, Qty: 100, P&L: -21.400000000005548
+2025-05-08 12:09:44,479 - __main__ - INFO - Trade 9: long, Entry: 523.27, Exit: 523.21, Qty: 100, P&L: -5.999999999994543
+2025-05-08 12:09:44,479 - __main__ - INFO - Trade 10: long, Entry: 523.22, Exit: 523.3, Qty: 100, P&L: 7.999999999992724
+2025-05-08 12:09:44,479 - __main__ - INFO - Trade 11: long, Entry: 523.244, Exit: None, Qty: 100, P&L: 0
+2025-05-08 12:09:44,479 - __main__ - INFO - Checking for extreme values in trades...
+2025-05-08 12:09:44,479 - __main__ - INFO - Expected profit factor: 3.23
+2025-05-08 12:09:44,479 - __main__ - INFO - Reported profit factor: 3.23
+2025-05-08 12:09:44,479 - __main__ - WARNING - Suspicious max drawdown: 0.00% with return of -1099.19%
+2025-05-08 12:09:44,479 - __main__ - INFO - Trade diagnostics completed
+2025-05-08 12:13:45,314 - __main__ - INFO - Starting ADMF-Trader Trade Diagnostics
+2025-05-08 12:13:45,315 - __main__ - INFO - Analyzing latest optimization results: ./optimization_results/test_optimization_results.json
+2025-05-08 12:13:45,316 - __main__ - INFO - Analyzing training results
+2025-05-08 12:13:45,316 - __main__ - INFO - Analyzing backtest results
+2025-05-08 12:13:45,316 - __main__ - INFO - Statistics from results: {'initial_capital': 100000, 'final_capital': -2453377.26644, 'trades_executed': 25, 'return_pct': -2553.37726644, 'profitable_trades': 14, 'loss_trades': 11, 'win_rate': 0.56, 'avg_profit': 26.241428571429587, 'avg_loss': -8.200000000000397, 'profit_factor': 4.072949002217255}
+2025-05-08 12:13:45,316 - __main__ - INFO - Initial capital: 100000.00
+2025-05-08 12:13:45,316 - __main__ - INFO - Final capital: -2453377.27
+2025-05-08 12:13:45,316 - __main__ - INFO - Expected return: -2553.38%
+2025-05-08 12:13:45,316 - __main__ - INFO - Reported return: -2553.38%
+2025-05-08 12:13:45,316 - __main__ - INFO - Analyzing 25 trades
+2025-05-08 12:13:45,316 - __main__ - INFO - Total P&L: 277.18
+2025-05-08 12:13:45,316 - __main__ - INFO - Winning trades: 14
+2025-05-08 12:13:45,316 - __main__ - INFO - Losing trades: 11
+2025-05-08 12:13:45,316 - __main__ - INFO - Average win: 26.24
+2025-05-08 12:13:45,316 - __main__ - INFO - Average loss: -8.20
+2025-05-08 12:13:45,316 - __main__ - INFO - Trade 1: short, Entry: 521.0069, Exit: 521.125, Qty: 100, P&L: -11.810000000002674
+2025-05-08 12:13:45,316 - __main__ - INFO - Trade 2: short, Entry: 521.3001, Exit: 521.33, Qty: 100, P&L: -2.9899999999997817
+2025-05-08 12:13:45,316 - __main__ - INFO - Trade 3: short, Entry: 521.2, Exit: 521.06, Qty: 100, P&L: 14.000000000010004
+2025-05-08 12:13:45,316 - __main__ - INFO - Trade 4: short, Entry: 521.09, Exit: 521.08, Qty: 100, P&L: 0.9999999999990905
+2025-05-08 12:13:45,316 - __main__ - INFO - Trade 5: short, Entry: 521.2, Exit: 521.1801, Qty: 100, P&L: 1.9900000000006912
+2025-05-08 12:13:45,316 - __main__ - INFO - Trade 6: short, Entry: 521.24, Exit: 521.28, Qty: 100, P&L: -3.999999999996362
+2025-05-08 12:13:45,316 - __main__ - INFO - Trade 7: short, Entry: 521.23, Exit: 521.09, Qty: 100, P&L: 13.999999999998636
+2025-05-08 12:13:45,316 - __main__ - INFO - Trade 8: short, Entry: 521.0199, Exit: 520.96, Qty: 100, P&L: 5.989999999997053
+2025-05-08 12:13:45,316 - __main__ - INFO - Trade 9: short, Entry: 520.875, Exit: 520.99, Qty: 100, P&L: -11.50000000000091
+2025-05-08 12:13:45,316 - __main__ - INFO - Trade 10: short, Entry: 520.83, Exit: 520.92, Qty: 100, P&L: -8.999999999991815
+2025-05-08 12:13:45,316 - __main__ - INFO - Trade 11: short, Entry: 520.804, Exit: 520.76, Qty: 100, P&L: 4.399999999998272
+2025-05-08 12:13:45,316 - __main__ - INFO - Trade 12: short, Entry: 520.7388, Exit: 520.85, Qty: 100, P&L: -11.120000000005348
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 13: short, Entry: 520.7999, Exit: 520.84, Qty: 100, P&L: -4.0100000000052205
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 14: short, Entry: 520.77, Exit: 519.13, Qty: 100, P&L: 163.99999999999864
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 15: short, Entry: 521.315, Exit: 520.29, Qty: 100, P&L: 102.5000000000091
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 16: short, Entry: 519.89, Exit: 520.1961, Qty: 100, P&L: -30.61000000000149
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 17: short, Entry: 519.935, Exit: 519.91, Qty: 100, P&L: 2.4999999999977263
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 18: short, Entry: 519.7985, Exit: 519.8201, Qty: 100, P&L: -2.1600000000034925
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 19: short, Entry: 519.85, Exit: 519.775, Qty: 100, P&L: 7.5000000000045475
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 20: short, Entry: 519.88, Exit: 519.91, Qty: 100, P&L: -2.9999999999972715
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 21: short, Entry: 519.98, Exit: 519.905, Qty: 100, P&L: 7.5000000000045475
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 22: short, Entry: 519.82, Exit: 519.71, Qty: 100, P&L: 11.000000000001364
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 23: short, Entry: 520.3099, Exit: 520.2, Qty: 100, P&L: 10.989999999992506
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 24: short, Entry: 520.3301, Exit: 520.13, Qty: 100, P&L: 20.010000000002037
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 25: short, Entry: 520.61, Exit: None, Qty: 100, P&L: 0
+2025-05-08 12:13:45,317 - __main__ - INFO - Checking for extreme values in trades...
+2025-05-08 12:13:45,317 - __main__ - INFO - Expected profit factor: 4.07
+2025-05-08 12:13:45,317 - __main__ - INFO - Reported profit factor: 4.07
+2025-05-08 12:13:45,317 - __main__ - WARNING - Suspicious max drawdown: 0.00% with return of -2553.38%
+2025-05-08 12:13:45,317 - __main__ - INFO - Analyzing testing results
+2025-05-08 12:13:45,317 - __main__ - INFO - Analyzing backtest results
+2025-05-08 12:13:45,317 - __main__ - INFO - Statistics from results: {'initial_capital': 100000, 'final_capital': -999185.3772900001, 'trades_executed': 11, 'return_pct': -1099.1853772900004, 'profitable_trades': 4, 'loss_trades': 7, 'win_rate': 0.36363636363636365, 'avg_profit': 77.87749999999676, 'avg_loss': -13.771428571429364, 'profit_factor': 3.231431535269389}
+2025-05-08 12:13:45,317 - __main__ - INFO - Initial capital: 100000.00
+2025-05-08 12:13:45,317 - __main__ - INFO - Final capital: -999185.38
+2025-05-08 12:13:45,317 - __main__ - INFO - Expected return: -1099.19%
+2025-05-08 12:13:45,317 - __main__ - INFO - Reported return: -1099.19%
+2025-05-08 12:13:45,317 - __main__ - INFO - Analyzing 11 trades
+2025-05-08 12:13:45,317 - __main__ - INFO - Total P&L: 215.11
+2025-05-08 12:13:45,317 - __main__ - INFO - Winning trades: 4
+2025-05-08 12:13:45,317 - __main__ - INFO - Losing trades: 7
+2025-05-08 12:13:45,317 - __main__ - INFO - Average win: 77.88
+2025-05-08 12:13:45,317 - __main__ - INFO - Average loss: -13.77
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 1: long, Entry: 520.45, Exit: 520.01, Qty: 100, P&L: -44.00000000000546
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 2: long, Entry: 520.38, Exit: 523.24, Qty: 100, P&L: 286.00000000000136
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 3: long, Entry: 523.485, Exit: 523.3, Qty: 100, P&L: -18.50000000000591
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 4: long, Entry: 523.19, Exit: 523.36, Qty: 100, P&L: 16.999999999995907
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 5: long, Entry: 523.43, Exit: 523.395, Qty: 100, P&L: -3.4999999999968168
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 6: long, Entry: 523.4699, Exit: 523.475, Qty: 100, P&L: 0.509999999997035
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 7: long, Entry: 523.48, Exit: 523.45, Qty: 100, P&L: -2.9999999999972715
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 8: long, Entry: 523.364, Exit: 523.15, Qty: 100, P&L: -21.400000000005548
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 9: long, Entry: 523.27, Exit: 523.21, Qty: 100, P&L: -5.999999999994543
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 10: long, Entry: 523.22, Exit: 523.3, Qty: 100, P&L: 7.999999999992724
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade 11: long, Entry: 523.244, Exit: None, Qty: 100, P&L: 0
+2025-05-08 12:13:45,317 - __main__ - INFO - Checking for extreme values in trades...
+2025-05-08 12:13:45,317 - __main__ - INFO - Expected profit factor: 3.23
+2025-05-08 12:13:45,317 - __main__ - INFO - Reported profit factor: 3.23
+2025-05-08 12:13:45,317 - __main__ - WARNING - Suspicious max drawdown: 0.00% with return of -1099.19%
+2025-05-08 12:13:45,317 - __main__ - INFO - Trade diagnostics completed

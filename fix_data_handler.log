@@ -1,0 +1,10 @@
+2025-05-08 15:12:44,836 - fix_data - INFO - Applying data handler fixes...
+2025-05-08 15:12:44,836 - fix_data - INFO - Adding get_symbols method to data handler: src/data/historical_data_handler.py
+2025-05-08 15:12:44,837 - fix_data - INFO - Added get_symbols method to data handler
+2025-05-08 15:12:44,837 - fix_data - INFO - Successfully added get_symbols method to data handler
+2025-05-08 15:12:44,837 - fix_data - INFO - Making strategy adapter more resilient: src/strategy/strategy_adapters.py
+2025-05-08 15:12:44,838 - fix_data - INFO - Made strategy adapter more resilient to missing get_symbols method
+2025-05-08 15:12:44,838 - fix_data - INFO - Successfully made strategy adapter more resilient
+2025-05-08 15:12:44,838 - fix_data - INFO - Data handler fixes completed
+2025-05-08 15:12:44,838 - fix_data - INFO - Now run the optimization again with:
+2025-05-08 15:12:44,838 - fix_data - INFO - python run_all_fixes_and_optimize.py

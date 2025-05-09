@@ -1,0 +1,21 @@
+2025-05-08 15:07:24,477 - risk_check - INFO - Running risk manager check...
+2025-05-08 15:07:24,532 - risk_check - INFO - Importing position manager from src/risk/position_manager.py
+2025-05-08 15:07:24,533 - src.core.event_bus - WARNING - Importing from src.core.event_bus is deprecated. Use src.core.events.event_bus instead.
+2025-05-08 15:07:24,533 - src.core.events.event_adapter - INFO - Added get_data method to Event class
+2025-05-08 15:07:24,533 - src.core.events.event_adapter - INFO - Added get_symbol method to Event class
+2025-05-08 15:07:24,533 - src.core.events.event_adapter - INFO - Added get_close method to Event class
+2025-05-08 15:07:24,533 - src.core.events.event_bus - INFO - EventBus initialized with deduplication_strategy=test, enable_metrics=False, enable_replay=False
+2025-05-08 15:07:24,534 - src.core.events.event_bus - DEBUG - Subscribed signal_listener to SIGNAL with priority 0
+2025-05-08 15:07:24,534 - src.core.events.event_bus - DEBUG - Subscribed order_listener to ORDER with priority 0
+2025-05-08 15:07:24,534 - risk_check - ERROR - Error checking risk manager: PositionManager.__init__() got an unexpected keyword argument 'fixed_quantity'
+2025-05-08 15:07:24,534 - risk_check - ERROR - Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/check_risk_manager.py", line 80, in check_risk_manager
+    position_manager = PositionManager(
+        "test_pm",
+    ...<4 lines>...
+        allow_multiple_entries=False
+    )
+TypeError: PositionManager.__init__() got an unexpected keyword argument 'fixed_quantity'
+
+2025-05-08 15:07:24,534 - risk_check - WARNING - Risk manager check failed - signals are not converted to orders
+2025-05-08 15:07:24,534 - risk_check - INFO - This might be why no trades are generated during optimization

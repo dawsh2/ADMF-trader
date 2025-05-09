@@ -1,0 +1,64 @@
+backtest:
+  initial_capital: 100000.0
+  symbols: &id001
+  - HEAD
+  timeframe: 1min
+  data_source: csv
+  data_dir: ./data
+  start_date: '2024-03-26'
+  end_date: '2024-03-28'
+  strategy: simple_ma_crossover
+strategies:
+  simple_ma_crossover:
+    enabled: true
+    symbols: *id001
+    price_key: close
+    fast_window: 2
+    slow_window: 8
+risk_manager:
+  type: enhanced
+  position_sizing_method: fixed
+  position_size: 100
+  max_position_size: 1000
+  equity_percent: 5.0
+  risk_percent: 2.0
+  max_open_trades: 5
+order_manager:
+  default_order_type: MARKET
+broker:
+  slippage: 0.001
+  commission: 0.001
+  delay: 0
+optimization:
+  enabled: true
+  method: grid_search
+  max_evaluations: 50
+  max_time: 600
+  objective: sharpe_ratio
+  maximize: true
+  parameter_space:
+    simple_ma_crossover:
+      fast_window:
+        type: integer
+        min: 2
+        max: 20
+        step: 2
+      slow_window:
+        type: integer
+        min: 5
+        max: 50
+        step: 5
+      price_key:
+        type: categorical
+        options:
+        - open
+        - high
+        - low
+        - close
+  random_search:
+    seed: 42
+    num_samples: 30
+  output:
+    save_results: true
+    results_dir: ./optimization_results
+    plot_top_n: 5

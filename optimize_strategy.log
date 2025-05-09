@@ -1,0 +1,278 @@
+2025-05-05 17:28:20,334 [WARNING] Data handler does not support train/test splitting
+2025-05-05 17:28:20,336 [ERROR] Optimization failed: 'OptimizingBacktestCoordinator' object has no attribute 'get_strategy_by_name'
+2025-05-05 17:28:20,336 [ERROR] Optimization failed: Optimization failed: 'OptimizingBacktestCoordinator' object has no attribute 'get_strategy_by_name'
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 427, in run_with_optimization
+    optimization_results = self.optimize_strategy(
+        strategy_name=strategy_name,
+        method=optimization_method,
+        **kwargs
+    )
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 169, in optimize_strategy
+    strategy = self.get_strategy_by_name(strategy_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'OptimizingBacktestCoordinator' object has no attribute 'get_strategy_by_name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/optimize_strategy.py", line 425, in main
+    results = backtest.run_with_optimization(
+        strategy_name=strategy_name,
+    ...<3 lines>...
+        **opt_kwargs
+    )
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 435, in run_with_optimization
+    raise BacktestError(f"Optimization failed: {e}")
+src.core.exceptions.BacktestError: Optimization failed: 'OptimizingBacktestCoordinator' object has no attribute 'get_strategy_by_name'
+2025-05-05 17:30:32,920 [WARNING] Data handler does not support train/test splitting
+2025-05-05 17:30:32,921 [ERROR] Optimization failed: 'OptimizingBacktestCoordinator' object has no attribute 'get_strategy_by_name'
+2025-05-05 17:30:32,921 [ERROR] Optimization failed: Optimization failed: 'OptimizingBacktestCoordinator' object has no attribute 'get_strategy_by_name'
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 427, in run_with_optimization
+    optimization_results = self.optimize_strategy(
+        strategy_name=strategy_name,
+        method=optimization_method,
+        **kwargs
+    )
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 169, in optimize_strategy
+    strategy = self.get_strategy_by_name(strategy_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'OptimizingBacktestCoordinator' object has no attribute 'get_strategy_by_name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/optimize_strategy.py", line 425, in main
+    results = backtest.run_with_optimization(
+        strategy_name=strategy_name,
+    ...<3 lines>...
+        **opt_kwargs
+    )
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 435, in run_with_optimization
+    raise BacktestError(f"Optimization failed: {e}")
+src.core.exceptions.BacktestError: Optimization failed: 'OptimizingBacktestCoordinator' object has no attribute 'get_strategy_by_name'
+2025-05-05 17:37:09,136 [INFO] Starting strategy optimization
+2025-05-05 17:37:09,137 [INFO] Logging initialized at level INFO
+2025-05-05 17:37:09,137 [INFO] Log file: backtest.log
+2025-05-05 17:37:09,139 [INFO] Loaded configuration from config/head_test.yaml
+2025-05-05 17:37:09,139 [INFO] Event system initialized with native deduplication
+2025-05-05 17:37:09,142 [INFO] Bar emitter bar_emitter started
+2025-05-05 17:37:09,142 [INFO] Registered component csv_data_source in registry
+2025-05-05 17:37:09,142 [INFO] Data components initialized with source type: csv
+2025-05-05 17:37:09,143 [INFO] Simulated broker initialized
+2025-05-05 17:37:09,143 [INFO] Order manager initialized
+2025-05-05 17:37:09,143 [INFO] Execution components initialized
+2025-05-05 17:37:09,146 [INFO] Trade registry global_trade_registry initialized
+2025-05-05 17:37:09,146 [INFO] Centralized trade registry initialized
+2025-05-05 17:37:09,146 [INFO] Trade registry set for portfolio portfolio_e5b30f64
+2025-05-05 17:37:09,146 [INFO] Trade registry set in portfolio
+2025-05-05 17:37:09,146 [INFO] Using Enhanced Risk Manager (refactored architecture)
+2025-05-05 17:37:09,146 [INFO] Enhanced risk manager risk_manager_e781f6d7 initialized
+2025-05-05 17:37:09,146 [INFO] Enhanced risk manager configured with position_sizing_method=fixed, position_size=100, max_position_size=1000
+2025-05-05 17:37:09,146 [INFO] No signal interpreter needed with enhanced risk manager
+2025-05-05 17:37:09,146 [INFO] Risk components initialized
+2025-05-05 17:37:09,146 [INFO] Discovering strategy implementations...
+2025-05-05 17:37:09,146 [INFO] Registered component composite_regime in registry
+2025-05-05 17:37:09,146 [INFO] Registered component ensemble_strategy in registry
+2025-05-05 17:37:09,147 [INFO] Registered component ma_crossover in registry
+2025-05-05 17:37:09,147 [INFO] Registered component mean_reversion in registry
+2025-05-05 17:37:09,147 [INFO] Registered component regime_ensemble in registry
+2025-05-05 17:37:09,147 [INFO] Registered component simple_ma_crossover in registry
+2025-05-05 17:37:09,147 [INFO] Discovered strategies: composite_regime, ensemble_strategy, ma_crossover, mean_reversion, regime_ensemble, simple_ma_crossover
+2025-05-05 17:37:09,147 [INFO] Requested strategy: simple_ma_crossover
+2025-05-05 17:37:09,147 [INFO] Available strategies in registry: ['composite_regime', 'ensemble_strategy', 'ma_crossover', 'mean_reversion', 'regime_ensemble', 'simple_ma_crossover']
+2025-05-05 17:37:09,147 [INFO] MA Crossover strategy initialized with fast_window=5, slow_window=15
+2025-05-05 17:37:09,147 [INFO] MA Crossover strategy configured with parameters: fast_window=5, slow_window=15
+2025-05-05 17:37:09,147 [INFO] Strategy 'simple_ma_crossover' initialized successfully
+2025-05-05 17:37:09,147 [INFO] Analytics components initialized
+2025-05-05 17:37:09,148 [INFO] Registered enhanced risk manager with high signal priority
+2025-05-05 17:37:09,148 [INFO] All components registered with event manager in optimal order
+2025-05-05 17:37:09,148 [INFO] Re-registered portfolio fill handler with high priority
+2025-05-05 17:37:09,148 [INFO] System bootstrap complete
+2025-05-05 17:37:09,148 [INFO] Optimizing strategy: ma_crossover
+2025-05-05 17:37:09,148 [INFO] Skipping train/test split as requested
+2025-05-05 17:37:09,149 [INFO] Loaded parameter space with 5 parameters
+2025-05-05 17:37:09,149 [INFO] Running optimization with method: grid
+2025-05-05 17:37:09,149 [INFO] Starting optimization for strategy: ma_crossover
+2025-05-05 17:37:09,149 [ERROR] Optimization failed: Strategy not found: ma_crossover
+2025-05-05 17:37:09,149 [ERROR] Optimization failed: Optimization failed: Strategy not found: ma_crossover
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 457, in run_with_optimization
+    optimization_results = self.optimize_strategy(
+        strategy_name=strategy_name,
+        method=optimization_method,
+        **kwargs
+    )
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 199, in optimize_strategy
+    raise OptimizationError(f"Strategy not found: {strategy_name}")
+src.core.exceptions.OptimizationError: Strategy not found: ma_crossover
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/optimize_strategy.py", line 443, in main
+    results = backtest.run_with_optimization(
+        strategy_name=strategy_name,
+    ...<4 lines>...
+        **opt_kwargs
+    )
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 465, in run_with_optimization
+    raise BacktestError(f"Optimization failed: {e}")
+src.core.exceptions.BacktestError: Optimization failed: Strategy not found: ma_crossover
+2025-05-05 17:37:28,106 [WARNING] Data handler does not support train/test splitting
+2025-05-05 17:37:28,107 [ERROR] Optimization failed: Strategy not found: ma_crossover
+2025-05-05 17:37:28,107 [ERROR] Optimization failed: Optimization failed: Strategy not found: ma_crossover
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 457, in run_with_optimization
+    optimization_results = self.optimize_strategy(
+        strategy_name=strategy_name,
+        method=optimization_method,
+        **kwargs
+    )
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 199, in optimize_strategy
+    raise OptimizationError(f"Strategy not found: {strategy_name}")
+src.core.exceptions.OptimizationError: Strategy not found: ma_crossover
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/optimize_strategy.py", line 443, in main
+    results = backtest.run_with_optimization(
+        strategy_name=strategy_name,
+    ...<4 lines>...
+        **opt_kwargs
+    )
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 465, in run_with_optimization
+    raise BacktestError(f"Optimization failed: {e}")
+src.core.exceptions.BacktestError: Optimization failed: Strategy not found: ma_crossover
+2025-05-05 17:37:45,129 [WARNING] Data handler does not support train/test splitting
+2025-05-05 17:37:45,130 [ERROR] Optimization failed: Strategy not found: ma_crossover
+2025-05-05 17:37:45,130 [ERROR] Optimization failed: Optimization failed: Strategy not found: ma_crossover
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 457, in run_with_optimization
+    optimization_results = self.optimize_strategy(
+        strategy_name=strategy_name,
+        method=optimization_method,
+        **kwargs
+    )
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 199, in optimize_strategy
+    raise OptimizationError(f"Strategy not found: {strategy_name}")
+src.core.exceptions.OptimizationError: Strategy not found: ma_crossover
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/optimize_strategy.py", line 443, in main
+    results = backtest.run_with_optimization(
+        strategy_name=strategy_name,
+    ...<4 lines>...
+        **opt_kwargs
+    )
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 465, in run_with_optimization
+    raise BacktestError(f"Optimization failed: {e}")
+src.core.exceptions.BacktestError: Optimization failed: Strategy not found: ma_crossover
+2025-05-05 17:49:02,826 [WARNING] Data handler does not support train/test splitting
+2025-05-05 17:49:02,827 [ERROR] Optimization failed: 'ConfigSection' object has no attribute 'keys'
+2025-05-05 17:49:02,827 [ERROR] Optimization failed: Optimization failed: 'ConfigSection' object has no attribute 'keys'
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 504, in run_with_optimization
+    optimization_results = self.optimize_strategy(
+        strategy_name=strategy_name,
+        method=optimization_method,
+        **kwargs
+    )
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 244, in optimize_strategy
+    strategy = self.get_strategy_by_name(strategy_name)
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 190, in get_strategy_by_name
+    logger.info(f"Strategies in config: {strategies_config.keys()}")
+                                         ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ConfigSection' object has no attribute 'keys'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/optimize_strategy.py", line 443, in main
+    results = backtest.run_with_optimization(
+        strategy_name=strategy_name,
+    ...<4 lines>...
+        **opt_kwargs
+    )
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 512, in run_with_optimization
+    raise BacktestError(f"Optimization failed: {e}")
+src.core.exceptions.BacktestError: Optimization failed: 'ConfigSection' object has no attribute 'keys'
+2025-05-05 17:53:48,846 [INFO] Starting strategy optimization
+2025-05-05 17:53:48,847 [INFO] Logging initialized at level INFO
+2025-05-05 17:53:48,847 [INFO] Log file: backtest.log
+2025-05-05 17:53:48,848 [INFO] Loaded configuration from config/head_test.yaml
+2025-05-05 17:53:48,848 [INFO] Event system initialized with native deduplication
+2025-05-05 17:53:48,849 [INFO] Bar emitter bar_emitter started
+2025-05-05 17:53:48,850 [INFO] Registered component csv_data_source in registry
+2025-05-05 17:53:48,850 [INFO] Data components initialized with source type: csv
+2025-05-05 17:53:48,850 [INFO] Simulated broker initialized
+2025-05-05 17:53:48,850 [INFO] Order manager initialized
+2025-05-05 17:53:48,850 [INFO] Execution components initialized
+2025-05-05 17:53:48,851 [INFO] Trade registry global_trade_registry initialized
+2025-05-05 17:53:48,851 [INFO] Centralized trade registry initialized
+2025-05-05 17:53:48,851 [INFO] Trade registry set for portfolio portfolio_2bcb6bac
+2025-05-05 17:53:48,851 [INFO] Trade registry set in portfolio
+2025-05-05 17:53:48,851 [INFO] Using Enhanced Risk Manager (refactored architecture)
+2025-05-05 17:53:48,852 [INFO] Enhanced risk manager risk_manager_d70deb95 initialized
+2025-05-05 17:53:48,852 [INFO] Enhanced risk manager configured with position_sizing_method=fixed, position_size=100, max_position_size=1000
+2025-05-05 17:53:48,852 [INFO] No signal interpreter needed with enhanced risk manager
+2025-05-05 17:53:48,852 [INFO] Risk components initialized
+2025-05-05 17:53:48,852 [INFO] Discovering strategy implementations...
+2025-05-05 17:53:48,852 [INFO] Registered component composite_regime in registry
+2025-05-05 17:53:48,852 [INFO] Registered component ensemble_strategy in registry
+2025-05-05 17:53:48,852 [INFO] Registered component ma_crossover in registry
+2025-05-05 17:53:48,852 [INFO] Registered component mean_reversion in registry
+2025-05-05 17:53:48,852 [INFO] Registered component regime_ensemble in registry
+2025-05-05 17:53:48,852 [INFO] Registered component simple_ma_crossover in registry
+2025-05-05 17:53:48,852 [INFO] Discovered strategies: composite_regime, ensemble_strategy, ma_crossover, mean_reversion, regime_ensemble, simple_ma_crossover
+2025-05-05 17:53:48,852 [INFO] Requested strategy: simple_ma_crossover
+2025-05-05 17:53:48,853 [INFO] Available strategies in registry: ['composite_regime', 'ensemble_strategy', 'ma_crossover', 'mean_reversion', 'regime_ensemble', 'simple_ma_crossover']
+2025-05-05 17:53:48,853 [INFO] MA Crossover strategy initialized with fast_window=5, slow_window=15
+2025-05-05 17:53:48,853 [INFO] MA Crossover strategy configured with parameters: fast_window=5, slow_window=15
+2025-05-05 17:53:48,853 [INFO] Strategy 'simple_ma_crossover' initialized successfully
+2025-05-05 17:53:48,853 [INFO] Analytics components initialized
+2025-05-05 17:53:48,853 [INFO] Registered enhanced risk manager with high signal priority
+2025-05-05 17:53:48,853 [INFO] All components registered with event manager in optimal order
+2025-05-05 17:53:48,853 [INFO] Re-registered portfolio fill handler with high priority
+2025-05-05 17:53:48,853 [INFO] System bootstrap complete
+2025-05-05 17:53:48,853 [INFO] Optimizing strategy: simple_ma_crossover
+2025-05-05 17:53:48,853 [INFO] Skipping train/test split as requested
+2025-05-05 17:53:48,854 [INFO] Loaded parameter space with 5 parameters
+2025-05-05 17:53:48,854 [INFO] Running optimization with method: grid
+2025-05-05 17:53:48,854 [INFO] Starting optimization for strategy: simple_ma_crossover
+2025-05-05 17:53:48,854 [INFO] Looking for strategy: simple_ma_crossover
+2025-05-05 17:53:48,854 [INFO] No strategies dictionary found
+2025-05-05 17:53:48,854 [INFO] Found strategy attribute: None
+2025-05-05 17:53:48,854 [INFO] Falling back to config
+2025-05-05 17:53:48,854 [ERROR] Optimization failed: 'ConfigSection' object has no attribute 'keys'
+2025-05-05 17:53:48,854 [ERROR] Optimization failed: Optimization failed: 'ConfigSection' object has no attribute 'keys'
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 504, in run_with_optimization
+    optimization_results = self.optimize_strategy(
+        strategy_name=strategy_name,
+        method=optimization_method,
+        **kwargs
+    )
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 244, in optimize_strategy
+    strategy = self.get_strategy_by_name(strategy_name)
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 190, in get_strategy_by_name
+    logger.info(f"Strategies in config: {strategies_config.keys()}")
+                                         ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ConfigSection' object has no attribute 'keys'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/optimize_strategy.py", line 443, in main
+    results = backtest.run_with_optimization(
+        strategy_name=strategy_name,
+    ...<4 lines>...
+        **opt_kwargs
+    )
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 512, in run_with_optimization
+    raise BacktestError(f"Optimization failed: {e}")
+src.core.exceptions.BacktestError: Optimization failed: 'ConfigSection' object has no attribute 'keys'

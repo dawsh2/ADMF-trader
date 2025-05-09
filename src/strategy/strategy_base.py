@@ -119,6 +119,14 @@ class Strategy(Component):
             
         return space
 
+    def start(self):
+        """Start the strategy."""
+        logger.info(f"Strategy {self.name} started")
+    
+    def stop(self):
+        """Stop the strategy."""
+        logger.info(f"Strategy {self.name} stopped")
+
     def reset(self):
         """Reset strategy state."""
         # Default implementation - clear internal state

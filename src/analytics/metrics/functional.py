@@ -332,14 +332,13 @@ def profit_factor(trades: List[Dict]) -> float:
     if not hasattr(profit_factor, '_warning_cache'):
         profit_factor._warning_cache = set()
     
-    # Filter out zero-PnL trades and get valid trades (those with PnL field)
-    # CRITICAL FIX: Only include completed trades with non-zero PnL
-    valid_trades = [t for t in trades if 'pnl' in t and t['pnl'] is not None and t['pnl'] != 0]
+    # IMPROVED: Filter only completed trades with valid PnL
+    valid_trades = [t for t in trades if 'pnl' in t and t['pnl'] is not None and t.get('closed', True)]
     
     # If no valid trades found, try alternate fields
     if not valid_trades:
         # Try alternate field names like 'realized_pnl'
-        valid_trades = [t for t in trades if 'realized_pnl' in t and t['realized_pnl'] is not None and t['realized_pnl'] != 0]
+        valid_trades = [t for t in trades if 'realized_pnl' in t and t['realized_pnl'] is not None and t.get('closed', True)]
         # Use the first field we can find
         if valid_trades:
             info_key = "using_realized_pnl"
@@ -350,6 +349,9 @@ def profit_factor(trades: List[Dict]) -> float:
             gross_profit = sum(trade.get('realized_pnl', 0) for trade in valid_trades if trade.get('realized_pnl', 0) > 0)
             gross_loss = abs(sum(trade.get('realized_pnl', 0) for trade in valid_trades if trade.get('realized_pnl', 0) < 0))
             
+            # Calculate total PnL for consistency check
+            total_pnl = sum(trade.get('realized_pnl', 0) for trade in valid_trades)
+            
             if gross_loss == 0:
                 return float('inf') if gross_profit > 0 else 0.0
             return gross_profit / gross_loss
@@ -358,24 +360,38 @@ def profit_factor(trades: List[Dict]) -> float:
     if not valid_trades:
         warning_key = "no_valid_trades_for_profit_factor"
         if warning_key not in profit_factor._warning_cache:
-            logger.warning(f"No valid trades with non-zero PnL found for profit factor calculation")
+            logger.warning(f"No valid trades with PnL found for profit factor calculation")
             profit_factor._warning_cache.add(warning_key)
         return 0.0
-        
-    # CRITICAL FIX: Remove zero PnL values from calculations as they represent open trades
-    gross_profit = sum(trade.get('pnl', 0) for trade in valid_trades if trade.get('pnl', 0) > 0)
-    gross_loss = abs(sum(trade.get('pnl', 0) for trade in valid_trades if trade.get('pnl', 0) < 0))
+    
+    # IMPROVED: Calculate gross profit and loss, including zero PnL trades
+    # This ensures all closed trades are counted properly
+    gross_profit = sum(max(0, trade.get('pnl', 0)) for trade in valid_trades)
+    gross_loss = abs(sum(min(0, trade.get('pnl', 0)) for trade in valid_trades))
+    
+    # Calculate total PnL for consistency check
+    total_pnl = sum(trade.get('pnl', 0) for trade in valid_trades)
     
     # Add debugging to check for imbalanced values - log only once for similar values 
     total_trades = len(valid_trades)
     winning_trades = sum(1 for t in valid_trades if t.get('pnl', 0) > 0)
     losing_trades = sum(1 for t in valid_trades if t.get('pnl', 0) < 0)
+    trades_with_zero_pnl = sum(1 for t in valid_trades if t.get('pnl', 0) == 0)
     
     info_key = f"trade_stats_{total_trades}_{winning_trades}_{losing_trades}"
     if info_key not in profit_factor._warning_cache:
         logger.info(f"Valid trades: {total_trades}, Winners: {winning_trades}, Losers: {losing_trades}")
         logger.info(f"Profit factor calculation: gross profit={gross_profit:.2f}, gross loss={gross_loss:.2f}")
+        logger.info(f"Total PnL: {total_pnl:.2f}, Trades with zero PnL: {trades_with_zero_pnl}")
         profit_factor._warning_cache.add(info_key)
+    
+    # IMPROVED: Check for inconsistency between total PnL and gross profit minus loss
+    pnl_diff = abs(total_pnl - (gross_profit - gross_loss))
+    if pnl_diff > 0.01:  # More than 1 cent difference
+        warning_key = f"pnl_inconsistency_{pnl_diff:.2f}"
+        if warning_key not in profit_factor._warning_cache:
+            logger.warning(f"PnL inconsistency detected: total_pnl={total_pnl:.2f} but profit-loss={gross_profit-gross_loss:.2f}")
+            profit_factor._warning_cache.add(warning_key)
     
     # Sanity check - if gross profit and loss are very imbalanced with many trades
     if total_trades > 10 and gross_profit > 0 and gross_loss > 0:
@@ -386,6 +402,13 @@ def profit_factor(trades: List[Dict]) -> float:
                 logger.warning(f"Extremely high profit factor detected ({ratio:.2f}). Capping at 100.")
                 profit_factor._warning_cache.add(warning_key)
             return 100.0
+        
+        # IMPROVED: Check for return and profit factor consistency
+        if (total_pnl > 0 and ratio < 1) or (total_pnl < 0 and ratio > 1):
+            warning_key = f"profit_factor_inconsistency_{total_pnl:.2f}_{ratio:.2f}"
+            if warning_key not in profit_factor._warning_cache:
+                logger.warning(f"Inconsistency between total PnL ({total_pnl:.2f}) and profit factor ({ratio:.2f})")
+                profit_factor._warning_cache.add(warning_key)
     
     if gross_loss < 0.001:  # Use a small epsilon to avoid division by zero
         if gross_profit > 0:

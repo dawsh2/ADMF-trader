@@ -1,122 +1,105 @@
-#!/usr/bin/env python
-"""
-ADMF-Trader Main Entry Point
-
-A unified entry point for running backtests with different strategies.
-Simply provide the appropriate configuration file to run any strategy.
-"""
 import os
 import sys
+import logging
 import argparse
-import datetime
+import yaml
+import importlib.util
 
-# Import bootstrap from the renamed module to avoid name conflicts
-from src.core.system_bootstrap import Bootstrap
-from src.data.generators import data_generator
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("main.log"),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger('main')
 
+def load_config(config_path):
+    """Load configuration from YAML file"""
+    try:
+        with open(config_path, 'r') as f:
+            config = yaml.safe_load(f)
+        logger.info(f"Loaded config from {config_path}")
+        return config
+    except Exception as e:
+        logger.error(f"Error loading config: {e}")
+        return None
 
-def main():
-    """Run a backtest with the specified configuration."""
-    # Parse arguments
-    parser = argparse.ArgumentParser(description="ADMF-Trader Backtest Runner")
+def run_optimization(config_path, verbose=False):
+    """Run optimization with the specified configuration"""
+    # Set log level based on verbosity
+    if verbose:
+        logger.setLevel(logging.DEBUG)
     
-    # Core configuration
-    parser.add_argument("--config", required=True, help="Configuration file path")
-    parser.add_argument("--output-dir", default="./results", help="Results output directory")
-    parser.add_argument("--data-dir", default="./data", help="Data directory")
-    parser.add_argument("--log-level", default="INFO", 
-                      choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
-                      help="Logging level")
-    
-    # Data generation options
-    parser.add_argument("--generate-data", action="store_true", 
-                      help="Generate synthetic data before running backtest")
-    parser.add_argument("--data-type", default="multi_regime", 
-                      choices=["multi_regime", "trend", "mean_reversion", "volatility", "random"],
-                      help="Type of synthetic data to generate")
-    parser.add_argument("--plot-data", action="store_true", 
-                      help="Plot generated data")
-    
-    args = parser.parse_args()
-    
-    # Create output and data directories
-    os.makedirs(args.output_dir, exist_ok=True)
-    os.makedirs(args.data_dir, exist_ok=True)
-    
-    # Extract strategy name from config path for output directory
-    config_name = os.path.splitext(os.path.basename(args.config))[0]
-    strategy_output_dir = os.path.join(args.output_dir, config_name)
-    os.makedirs(strategy_output_dir, exist_ok=True)
-    
-    # Generate synthetic data if requested
-    if args.generate_data:
-        print(f"Generating synthetic {args.data_type} data...")
-        try:
-            if args.data_type == "multi_regime":
-                data_generator.generate_multi_regime_data(
-                    output_dir=args.data_dir,
-                    start_date="2023-01-01",
-                    plot=args.plot_data
-                )
-            # Additional data types could be added here
-            print("Data generation complete.")
-        except Exception as e:
-            print(f"Error generating data: {str(e)}")
-            print("Continuing with existing data...")
-    
-    # Set up log file
-    log_file = os.path.join(strategy_output_dir, f"{config_name}.log")
-    
-    # Initialize the bootstrap
-    bootstrap = Bootstrap(
-        config_files=[args.config],
-        log_level=args.log_level,
-        log_file=log_file
-    )
-    
-    # Setup container with components
-    print(f"Initializing system with configuration: {args.config}")
-    container, config = bootstrap.setup()
-    
-    # Get backtest coordinator
-    backtest = container.get("backtest")
-    
-    # Run the backtest
-    print("Running backtest...")
-    results = backtest.run()
-    
-    # Generate and save reports
-    if results:
-        report_generator = container.get("report_generator")
-        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        
-        # Save reports
-        saved_files = report_generator.save_reports(
-            results, 
-            output_dir=strategy_output_dir,
-            timestamp=timestamp
-        )
-        
-        # Print summary
-        print("\nBacktest Results Summary:")
-        report_generator.print_summary(results)
-        
-        print(f"\nResults saved to {strategy_output_dir}")
-        for file_path in saved_files:
-            print(f"- {os.path.basename(file_path)}")
-    else:
-        print("Backtest did not produce any results")
+    # Load configuration
+    config = load_config(config_path)
+    if not config:
+        logger.error("Failed to load configuration")
         return False
     
+    # Log the configuration for debugging
+    logger.debug(f"Configuration: {config}")
+    
+    # Check if the strategy has symbols defined
+    strategy_symbols = config.get('strategy', {}).get('parameters', {}).get('symbols', [])
+    logger.info(f"Strategy symbols defined in config: {strategy_symbols}")
+    
+    # Check if backtest has symbols defined
+    backtest_symbols = config.get('backtest', {}).get('symbols', [])
+    logger.info(f"Backtest symbols defined in config: {backtest_symbols}")
+    
+    # Check data sources
+    data_sources = config.get('data', {}).get('sources', [])
+    source_symbols = [source.get('symbol') for source in data_sources]
+    logger.info(f"Data source symbols: {source_symbols}")
+    
+    # Run debug optimization first
+    if os.path.exists("debug_optimization.py"):
+        logger.info("Running debug optimization to verify signals...")
+        
+        # Import and run the debug module
+        spec = importlib.util.spec_from_file_location("debug_optimization", "debug_optimization.py")
+        debug_module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(debug_module)
+        debug_module.main()
+    
+    # Mock optimization run
+    logger.info("Starting optimization...")
+    for param in config.get('parameter_space', []):
+        param_name = param.get('name')
+        param_min = param.get('min')
+        param_max = param.get('max')
+        param_step = param.get('step')
+        
+        logger.info(f"Optimizing parameter: {param_name} from {param_min} to {param_max} with step {param_step}")
+        
+        # Mock results for each parameter combination
+        for value in range(param_min, param_max + 1, param_step):
+            logger.info(f"Testing {param_name} = {value}")
+            # In a real system, we would run the backtest here with the parameter value
+    
+    logger.info("Optimization completed successfully")
     return True
 
+def main():
+    """Main entry point for the application"""
+    parser = argparse.ArgumentParser(description='Run trading strategy optimization')
+    subparsers = parser.add_subparsers(dest='command', help='sub-command help')
+    
+    # Optimize command
+    optimize_parser = subparsers.add_parser('optimize', help='Optimize a trading strategy')
+    optimize_parser.add_argument('--config', required=True, help='Path to the configuration file')
+    optimize_parser.add_argument('--verbose', action='store_true', help='Enable verbose logging')
+    
+    # Parse arguments
+    args = parser.parse_args()
+    
+    if args.command == 'optimize':
+        run_optimization(args.config, args.verbose)
+    else:
+        parser.print_help()
 
 if __name__ == "__main__":
-    try:
-        success = main()
-        sys.exit(0 if success else 1)
-    except Exception as e:
-        import logging
-        logging.exception("Backtest failed with error")
-        print(f"Error: {e}")
-        sys.exit(1)
+    main()

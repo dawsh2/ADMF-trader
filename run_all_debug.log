@@ -1,0 +1,63 @@
+2025-05-08 15:04:53,920 - run_all - INFO - Running debug_optimization.py: Checking for data file and signals
+2025-05-08 15:04:54,301 - run_all - INFO - debug_optimization.py completed with return code 0
+2025-05-08 15:04:54,301 - run_all - INFO - Output: ...
+2025-05-08 15:04:54,301 - run_all - INFO - Running debug_trade_flow.py: Testing signal-to-trade flow
+2025-05-08 15:04:54,526 - run_all - ERROR - debug_trade_flow.py failed with return code 1
+2025-05-08 15:04:54,526 - run_all - ERROR - Error output: Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/debug_trade_flow.py", line 10, in <module>
+    from src.strategy.implementations.ma_crossover import MACrossoverStrategy
+  File "/Users/daws/ADMF-trader/src/strategy/implementations/__init__.py", line 8, in <module>
+    from .simple_ma_crossover import SimpleMACrossoverStrategy
+  File "/Users/daws/ADMF-trader/src/strategy/implementations/simple_ma_crossover.py", line 12, in <module>
+    from src.core.event_bus import Event, EventType
+ModuleNotFoundError: No module named 'src.core.event_bus'
+
+2025-05-08 15:04:54,526 - run_all - INFO - Running patch_strategy_adapter.py: Patching strategy adapter with additional logging
+2025-05-08 15:04:54,720 - run_all - INFO - patch_strategy_adapter.py completed with return code 0
+2025-05-08 15:04:54,721 - run_all - INFO - Output: StrategyAdapter patched with additional debugging
+...
+2025-05-08 15:04:54,721 - run_all - INFO - Running full debug optimization
+2025-05-08 15:04:54,721 - run_all - INFO - Running run_debug_optimization.py: Running optimization with detailed logging
+2025-05-08 15:04:55,153 - run_all - ERROR - run_debug_optimization.py failed with return code 1
+2025-05-08 15:04:55,153 - run_all - ERROR - Error output: 2025-05-08 15:04:54,964 - matplotlib - DEBUG - matplotlib data path: /Users/daws/mmbt/venv/lib/python3.13/site-packages/matplotlib/mpl-data
+2025-05-08 15:04:54,967 - matplotlib - DEBUG - CONFIGDIR=/Users/daws/.matplotlib
+2025-05-08 15:04:54,967 - matplotlib - DEBUG - interactive is False
+2025-05-08 15:04:54,967 - matplotlib - DEBUG - platform is darwin
+2025-05-08 15:04:54,997 - matplotlib - DEBUG - CACHEDIR=/Users/daws/.matplotlib
+2025-05-08 15:04:54,999 - matplotlib.font_manager - DEBUG - Using fontManager instance from /Users/daws/.matplotlib/fontlist-v390.json
+2025-05-08 15:04:55,102 - src.strategy.strategy_factory - ERROR - Error importing strategy module ma_crossover_strategy: No module named 'src.core.event_bus'
+2025-05-08 15:04:55,102 - src.strategy.strategy_factory - INFO - Discovered strategy: regime_ensemble from regime_ensemble_strategy.RegimeEnsembleStrategy
+2025-05-08 15:04:55,103 - src.strategy.strategy_factory - INFO - Discovered strategy: composite_regime from composite_regime_strategy.CompositeRegimeStrategy
+2025-05-08 15:04:55,103 - src.strategy.strategy_factory - ERROR - Error importing strategy module simple_ma_crossover: No module named 'src.core.event_bus'
+2025-05-08 15:04:55,103 - src.strategy.strategy_factory - INFO - Discovered strategy: ensemble from ensemble_strategy.EnsembleStrategy
+2025-05-08 15:04:55,103 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from ma_crossover.MACrossoverStrategy
+2025-05-08 15:04:55,104 - src.strategy.strategy_factory - INFO - Discovered strategy: mean_reversion from mean_reversion.MeanReversionStrategy
+2025-05-08 15:04:55,104 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from backup.ma_crossover.MACrossoverStrategy
+2025-05-08 15:04:55,104 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from backup.ma_crossover_fixed.MACrossoverStrategy
+2025-05-08 15:04:55,105 - src.strategy.strategy_factory - ERROR - Error importing strategy module ma_crossover_strategy: No module named 'src.core.event_bus'
+2025-05-08 15:04:55,105 - src.strategy.strategy_factory - INFO - Discovered strategy: regime_ensemble from regime_ensemble_strategy.RegimeEnsembleStrategy
+2025-05-08 15:04:55,105 - src.strategy.strategy_factory - INFO - Discovered strategy: composite_regime from composite_regime_strategy.CompositeRegimeStrategy
+2025-05-08 15:04:55,105 - src.strategy.strategy_factory - ERROR - Error importing strategy module simple_ma_crossover: No module named 'src.core.event_bus'
+2025-05-08 15:04:55,105 - src.strategy.strategy_factory - INFO - Discovered strategy: ensemble from ensemble_strategy.EnsembleStrategy
+2025-05-08 15:04:55,105 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from ma_crossover.MACrossoverStrategy
+2025-05-08 15:04:55,105 - src.strategy.strategy_factory - INFO - Discovered strategy: mean_reversion from mean_reversion.MeanReversionStrategy
+2025-05-08 15:04:55,105 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from backup.ma_crossover.MACrossoverStrategy
+2025-05-08 15:04:55,105 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from backup.ma_crossover_fixed.MACrossoverStrategy
+2025-05-08 15:04:55,105 - root - INFO - Adding signal/order/trade event listeners
+Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/run_debug_optimization.py", line 91, in <module>
+    run_debug_optimization()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/daws/ADMF-trader/run_debug_optimization.py", line 87, in run_debug_optimization
+    results = optimizer.optimize()
+  File "/Users/daws/ADMF-trader/run_debug_optimization.py", line 60, in patched_optimize
+    original_run_backtest = optimizer._run_backtest_with_params
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'StrategyOptimizer' object has no attribute '_run_backtest_with_params'
+
+2025-05-08 15:04:55,154 - run_all - INFO - All debug scripts completed
+2025-05-08 15:04:55,154 - run_all - INFO - Check the following log files for detailed information:
+2025-05-08 15:04:55,154 - run_all - INFO - - signal_to_trade_debug.log
+2025-05-08 15:04:55,154 - run_all - INFO - - strategy_adapter_debug.log
+2025-05-08 15:04:55,154 - run_all - INFO - - optimization_detailed.log
+2025-05-08 15:04:55,154 - run_all - INFO - - debug_signals.csv

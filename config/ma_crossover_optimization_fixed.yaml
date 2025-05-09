@@ -1,0 +1,53 @@
+# ma_crossover_optimization_fixed.yaml
+# Fixed configuration for MA crossover optimization
+
+strategy:
+  name: ma_crossover
+  parameters:
+    fast_window: 5
+    slow_window: 20
+
+risk:
+  position_manager:
+    config:
+      fixed_quantity: 10
+      max_positions: 1
+      enforce_single_position: true
+      position_sizing_method: fixed
+      allow_multiple_entries: false
+
+backtest:
+  initial_capital: 100000.0
+  symbols: ['HEAD']  # Trading the HEAD symbol
+  timeframe: 1min    # Using 1-minute data
+  debug: true        # Enable debugging
+
+data:
+  source_type: csv
+  sources:
+    - symbol: HEAD
+      file: data/HEAD_1min.csv
+      date_column: timestamp
+      price_column: Close
+      date_format: "%Y-%m-%d %H:%M:%S"
+
+optimization:
+  objective: sharpe_ratio
+  method: grid
+
+# Reduced parameter space for faster testing
+parameter_space:
+  - name: fast_window
+    type: integer
+    min: 5
+    max: 10
+    step: 5
+    description: "Fast moving average window"
+  - name: slow_window
+    type: integer
+    min: 20
+    max: 30
+    step: 10
+    description: "Slow moving average window"
+  
+initial_capital: 100000.0

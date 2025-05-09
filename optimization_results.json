@@ -1,0 +1,1086 @@
+{
+  "best_parameters": {
+    "fast_period": 20,
+    "slow_period": 20
+  },
+  "best_combined_return": 0.0,
+  "best_train_stats": {
+    "initial_capital": 100000,
+    "final_capital": 100000,
+    "return_pct": 0.0,
+    "trades_executed": 0,
+    "profitable_trades": 0,
+    "loss_trades": 0,
+    "win_rate": 0,
+    "avg_profit": 0,
+    "avg_loss": 0,
+    "profit_factor": 0.0,
+    "sharpe_ratio": 0.0
+  },
+  "best_test_stats": {
+    "initial_capital": 100000,
+    "final_capital": 100000,
+    "return_pct": 0.0,
+    "trades_executed": 0,
+    "profitable_trades": 0,
+    "loss_trades": 0,
+    "win_rate": 0,
+    "avg_profit": 0,
+    "avg_loss": 0,
+    "profit_factor": 0.0,
+    "sharpe_ratio": 0.0
+  },
+  "all_results": [
+    {
+      "parameters": {
+        "fast_period": 20,
+        "slow_period": 20
+      },
+      "train_return": 0.0,
+      "test_return": 0.0,
+      "combined_return": 0.0,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 100000,
+        "return_pct": 0.0,
+        "trades_executed": 0,
+        "profitable_trades": 0,
+        "loss_trades": 0,
+        "win_rate": 0,
+        "avg_profit": 0,
+        "avg_loss": 0,
+        "profit_factor": 0.0,
+        "sharpe_ratio": 0.0
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 100000,
+        "return_pct": 0.0,
+        "trades_executed": 0,
+        "profitable_trades": 0,
+        "loss_trades": 0,
+        "win_rate": 0,
+        "avg_profit": 0,
+        "avg_loss": 0,
+        "profit_factor": 0.0,
+        "sharpe_ratio": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 25,
+        "slow_period": 100
+      },
+      "train_return": -4.169650384900015,
+      "test_return": -0.5239183950000006,
+      "combined_return": -1.9822111909600064,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 95830.34961509999,
+        "return_pct": -4.169650384900015,
+        "trades_executed": 4,
+        "profitable_trades": 2,
+        "loss_trades": 2,
+        "win_rate": 0.5,
+        "avg_profit": 0.1199999999999477,
+        "avg_loss": -0.4625499999999647,
+        "profit_factor": 0.25943141282014237,
+        "sharpe_ratio": -9.176628652235884
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 99476.081605,
+        "return_pct": -0.5239183950000006,
+        "trades_executed": 1,
+        "profitable_trades": 0,
+        "loss_trades": 1,
+        "win_rate": 0.0,
+        "avg_profit": 0,
+        "avg_loss": 0.0,
+        "profit_factor": 0.0,
+        "sharpe_ratio": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 30,
+        "slow_period": 100
+      },
+      "train_return": -4.691256770199979,
+      "test_return": -0.5237682449999993,
+      "combined_return": -2.1907636550799916,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 95308.74322980002,
+        "return_pct": -4.691256770199979,
+        "trades_executed": 5,
+        "profitable_trades": 0,
+        "loss_trades": 5,
+        "win_rate": 0.0,
+        "avg_profit": 0,
+        "avg_loss": -0.4340200000000095,
+        "profit_factor": 0.0,
+        "sharpe_ratio": -10.997523973915236
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 99476.231755,
+        "return_pct": -0.5237682449999993,
+        "trades_executed": 1,
+        "profitable_trades": 0,
+        "loss_trades": 1,
+        "win_rate": 0.0,
+        "avg_profit": 0,
+        "avg_loss": 0.0,
+        "profit_factor": 0.0,
+        "sharpe_ratio": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 20,
+        "slow_period": 80
+      },
+      "train_return": -4.691415528800018,
+      "test_return": -0.523873350000009,
+      "combined_return": -2.1908902215200126,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 95308.58447119998,
+        "return_pct": -4.691415528800018,
+        "trades_executed": 5,
+        "profitable_trades": 1,
+        "loss_trades": 4,
+        "win_rate": 0.2,
+        "avg_profit": 0.15989999999999327,
+        "avg_loss": -0.2872250000000065,
+        "profit_factor": 0.1391766037078855,
+        "sharpe_ratio": -7.519405330841064
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 99476.12664999999,
+        "return_pct": -0.523873350000009,
+        "trades_executed": 1,
+        "profitable_trades": 0,
+        "loss_trades": 1,
+        "win_rate": 0.0,
+        "avg_profit": 0,
+        "avg_loss": 0.0,
+        "profit_factor": 0.0,
+        "sharpe_ratio": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 20,
+        "slow_period": 100
+      },
+      "train_return": -5.212651243800007,
+      "test_return": -0.5239384149999968,
+      "combined_return": -2.399423546520001,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 94787.3487562,
+        "return_pct": -5.212651243800007,
+        "trades_executed": 5,
+        "profitable_trades": 1,
+        "loss_trades": 4,
+        "win_rate": 0.2,
+        "avg_profit": 0.2699999999999818,
+        "avg_loss": -0.3909500000000321,
+        "profit_factor": 0.17265634991684337,
+        "sharpe_ratio": -12.195195028896848
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 99476.061585,
+        "return_pct": -0.5239384149999968,
+        "trades_executed": 1,
+        "profitable_trades": 0,
+        "loss_trades": 1,
+        "win_rate": 0.0,
+        "avg_profit": 0,
+        "avg_loss": 0.0,
+        "profit_factor": 0.0,
+        "sharpe_ratio": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 15,
+        "slow_period": 100
+      },
+      "train_return": -6.255731682200043,
+      "test_return": -0.523873350000009,
+      "combined_return": -2.8166166828800225,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 93744.26831779996,
+        "return_pct": -6.255731682200043,
+        "trades_executed": 6,
+        "profitable_trades": 2,
+        "loss_trades": 4,
+        "win_rate": 0.3333333333333333,
+        "avg_profit": 0.19754999999997835,
+        "avg_loss": -0.35747499999999377,
+        "profit_factor": 0.2763130288831132,
+        "sharpe_ratio": -7.748290670318895
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 99476.12664999999,
+        "return_pct": -0.523873350000009,
+        "trades_executed": 1,
+        "profitable_trades": 0,
+        "loss_trades": 1,
+        "win_rate": 0.0,
+        "avg_profit": 0,
+        "avg_loss": 0.0,
+        "profit_factor": 0.0,
+        "sharpe_ratio": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 25,
+        "slow_period": 80
+      },
+      "train_return": -4.691687000000049,
+      "test_return": -1.5715599900000088,
+      "combined_return": -2.819610794000025,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 95308.31299999995,
+        "return_pct": -4.691687000000049,
+        "trades_executed": 5,
+        "profitable_trades": 0,
+        "loss_trades": 5,
+        "win_rate": 0.0,
+        "avg_profit": 0,
+        "avg_loss": -0.27596000000003185,
+        "profit_factor": 0.0,
+        "sharpe_ratio": -10.998969141858918
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 98428.44000999999,
+        "return_pct": -1.5715599900000088,
+        "trades_executed": 2,
+        "profitable_trades": 1,
+        "loss_trades": 1,
+        "win_rate": 0.5,
+        "avg_profit": 0.005000000000109139,
+        "avg_loss": 0.0,
+        "profit_factor": Infinity,
+        "sharpe_ratio": 15.874507866387544
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 30,
+        "slow_period": 80
+      },
+      "train_return": -4.691041354999994,
+      "test_return": -2.619236619999996,
+      "combined_return": -3.4479585139999953,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 95308.958645,
+        "return_pct": -4.691041354999994,
+        "trades_executed": 5,
+        "profitable_trades": 0,
+        "loss_trades": 5,
+        "win_rate": 0.0,
+        "avg_profit": 0,
+        "avg_loss": -0.38500000000001366,
+        "profit_factor": 0.0,
+        "sharpe_ratio": -10.075089025982077
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 97380.76338,
+        "return_pct": -2.619236619999996,
+        "trades_executed": 3,
+        "profitable_trades": 0,
+        "loss_trades": 3,
+        "win_rate": 0.0,
+        "avg_profit": 0,
+        "avg_loss": -0.015000000000024253,
+        "profit_factor": 0.0,
+        "sharpe_ratio": -13.381054950144279
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 15,
+        "slow_period": 80
+      },
+      "train_return": -6.775082013700056,
+      "test_return": -1.5719453749999956,
+      "combined_return": -3.6532000304800194,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 93224.91798629994,
+        "return_pct": -6.775082013700056,
+        "trades_executed": 7,
+        "profitable_trades": 1,
+        "loss_trades": 6,
+        "win_rate": 0.14285714285714285,
+        "avg_profit": 0.16000000000008185,
+        "avg_loss": -0.3093833333333009,
+        "profit_factor": 0.08619296449932587,
+        "sharpe_ratio": -7.380558380602414
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 98428.054625,
+        "return_pct": -1.5719453749999956,
+        "trades_executed": 2,
+        "profitable_trades": 0,
+        "loss_trades": 2,
+        "win_rate": 0.0,
+        "avg_profit": 0,
+        "avg_loss": -0.024999999999977263,
+        "profit_factor": 0.0,
+        "sharpe_ratio": -15.874507866387544
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 25,
+        "slow_period": 60
+      },
+      "train_return": -7.298162871999972,
+      "test_return": -1.5713047349999978,
+      "combined_return": -3.8620479897999878,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 92701.83712800003,
+        "return_pct": -7.298162871999972,
+        "trades_executed": 7,
+        "profitable_trades": 2,
+        "loss_trades": 5,
+        "win_rate": 0.2857142857142857,
+        "avg_profit": 0.242999999999995,
+        "avg_loss": -0.31759999999997035,
+        "profit_factor": 0.3060453400504001,
+        "sharpe_ratio": -7.897244625991334
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 98428.695265,
+        "return_pct": -1.5713047349999978,
+        "trades_executed": 2,
+        "profitable_trades": 0,
+        "loss_trades": 2,
+        "win_rate": 0.0,
+        "avg_profit": 0,
+        "avg_loss": -0.08249999999998181,
+        "profit_factor": 0.0,
+        "sharpe_ratio": -15.874507866387544
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 30,
+        "slow_period": 60
+      },
+      "train_return": -8.339371140100033,
+      "test_return": -1.5716402701999903,
+      "combined_return": -4.278732618160007,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 91660.62885989997,
+        "return_pct": -8.339371140100033,
+        "trades_executed": 8,
+        "profitable_trades": 3,
+        "loss_trades": 5,
+        "win_rate": 0.375,
+        "avg_profit": 0.21500000000003183,
+        "avg_loss": -0.3330199999999877,
+        "profit_factor": 0.3873641222750101,
+        "sharpe_ratio": -5.9857580711492835
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 98428.35972980001,
+        "return_pct": -1.5716402701999903,
+        "trades_executed": 2,
+        "profitable_trades": 0,
+        "loss_trades": 2,
+        "win_rate": 0.0,
+        "avg_profit": 0,
+        "avg_loss": -0.09510000000000218,
+        "profit_factor": 0.0,
+        "sharpe_ratio": -15.874507866387544
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 10,
+        "slow_period": 100
+      },
+      "train_return": -8.34018184999998,
+      "test_return": -1.5717650948999944,
+      "combined_return": -4.279131796939988,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 91659.81815000002,
+        "return_pct": -8.34018184999998,
+        "trades_executed": 8,
+        "profitable_trades": 3,
+        "loss_trades": 5,
+        "win_rate": 0.375,
+        "avg_profit": 0.15336666666663254,
+        "avg_loss": -0.27001999999999954,
+        "profit_factor": 0.34078957114280306,
+        "sharpe_ratio": -6.616278123610821
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 98428.2349051,
+        "return_pct": -1.5717650948999944,
+        "trades_executed": 2,
+        "profitable_trades": 0,
+        "loss_trades": 2,
+        "win_rate": 0.0,
+        "avg_profit": 0,
+        "avg_loss": -0.032450000000039836,
+        "profit_factor": 0.0,
+        "sharpe_ratio": -15.874507866387544
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 10,
+        "slow_period": 80
+      },
+      "train_return": -8.8590388887,
+      "test_return": -2.6196720550000028,
+      "combined_return": -5.115418788480002,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 91140.9611113,
+        "return_pct": -8.8590388887,
+        "trades_executed": 9,
+        "profitable_trades": 1,
+        "loss_trades": 8,
+        "win_rate": 0.1111111111111111,
+        "avg_profit": 0.08500000000003638,
+        "avg_loss": -0.2564624999999836,
+        "profit_factor": 0.04142905882928392,
+        "sharpe_ratio": -8.835727801181429
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 97380.327945,
+        "return_pct": -2.6196720550000028,
+        "trades_executed": 3,
+        "profitable_trades": 0,
+        "loss_trades": 3,
+        "win_rate": 0.0,
+        "avg_profit": 0,
+        "avg_loss": -0.1150000000000091,
+        "profit_factor": 0.0,
+        "sharpe_ratio": -17.7175643899535
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 20,
+        "slow_period": 60
+      },
+      "train_return": -9.379306836899996,
+      "test_return": -2.6193967799999953,
+      "combined_return": -5.3233608027599955,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 90620.6931631,
+        "return_pct": -9.379306836899996,
+        "trades_executed": 9,
+        "profitable_trades": 2,
+        "loss_trades": 7,
+        "win_rate": 0.2222222222222222,
+        "avg_profit": 0.22049999999995862,
+        "avg_loss": -0.3525857142857051,
+        "profit_factor": 0.17867995624161448,
+        "sharpe_ratio": -11.521048965399867
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 97380.60322,
+        "return_pct": -2.6193967799999953,
+        "trades_executed": 3,
+        "profitable_trades": 1,
+        "loss_trades": 2,
+        "win_rate": 0.3333333333333333,
+        "avg_profit": 0.049999999999954525,
+        "avg_loss": -0.17500000000001137,
+        "profit_factor": 0.14285714285700366,
+        "sharpe_ratio": -8.920703300102472
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 5,
+        "slow_period": 100
+      },
+      "train_return": -9.380739367999965,
+      "test_return": -2.6193767599999846,
+      "combined_return": -5.323921803199977,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 90619.26063200003,
+        "return_pct": -9.380739367999965,
+        "trades_executed": 9,
+        "profitable_trades": 2,
+        "loss_trades": 7,
+        "win_rate": 0.2222222222222222,
+        "avg_profit": 0.44999999999998863,
+        "avg_loss": -0.22142857142858116,
+        "profit_factor": 0.5806451612902823,
+        "sharpe_ratio": -3.278361139155141
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 97380.62324000002,
+        "return_pct": -2.6193767599999846,
+        "trades_executed": 3,
+        "profitable_trades": 0,
+        "loss_trades": 3,
+        "win_rate": 0.0,
+        "avg_profit": 0,
+        "avg_loss": -0.043333333333331815,
+        "profit_factor": 0.0,
+        "sharpe_ratio": -11.224972160321824
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 15,
+        "slow_period": 60
+      },
+      "train_return": -10.4198781687,
+      "test_return": -2.6191865700000054,
+      "combined_return": -5.739463209480004,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 89580.1218313,
+        "return_pct": -10.4198781687,
+        "trades_executed": 10,
+        "profitable_trades": 3,
+        "loss_trades": 7,
+        "win_rate": 0.3,
+        "avg_profit": 0.24833333333329696,
+        "avg_loss": -0.3380428571428768,
+        "profit_factor": 0.31483751003670185,
+        "sharpe_ratio": -8.397505972024904
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 97380.81343,
+        "return_pct": -2.6191865700000054,
+        "trades_executed": 3,
+        "profitable_trades": 0,
+        "loss_trades": 3,
+        "win_rate": 0.0,
+        "avg_profit": 0,
+        "avg_loss": -0.16333333333329847,
+        "profit_factor": 0.0,
+        "sharpe_ratio": -22.43593207898657
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 10,
+        "slow_period": 60
+      },
+      "train_return": -10.421992781200025,
+      "test_return": -3.1432891490000183,
+      "combined_return": -6.054770601880021,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 89578.00721879998,
+        "return_pct": -10.421992781200025,
+        "trades_executed": 10,
+        "profitable_trades": 2,
+        "loss_trades": 8,
+        "win_rate": 0.2,
+        "avg_profit": 0.14250000000004093,
+        "avg_loss": -0.28114999999995405,
+        "profit_factor": 0.12671171972262513,
+        "sharpe_ratio": -10.816315755865334
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 96856.71085099998,
+        "return_pct": -3.1432891490000183,
+        "trades_executed": 3,
+        "profitable_trades": 0,
+        "loss_trades": 3,
+        "win_rate": 0.0,
+        "avg_profit": 0,
+        "avg_loss": -0.21033333333336182,
+        "profit_factor": 0.0,
+        "sharpe_ratio": -94.30540444151114
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 5,
+        "slow_period": 80
+      },
+      "train_return": -15.113861362600002,
+      "test_return": -2.619566949999993,
+      "combined_return": -7.617284715039997,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 84886.1386374,
+        "return_pct": -15.113861362600002,
+        "trades_executed": 15,
+        "profitable_trades": 5,
+        "loss_trades": 10,
+        "win_rate": 0.3333333333333333,
+        "avg_profit": 0.07404000000003634,
+        "avg_loss": -0.23376000000000657,
+        "profit_factor": 0.15836755646824577,
+        "sharpe_ratio": -4.8304364271899685
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 97380.43305,
+        "return_pct": -2.619566949999993,
+        "trades_executed": 3,
+        "profitable_trades": 0,
+        "loss_trades": 3,
+        "win_rate": 0.0,
+        "avg_profit": 0,
+        "avg_loss": -0.12666666666666515,
+        "profit_factor": 0.0,
+        "sharpe_ratio": -19.69620010325478
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 15,
+        "slow_period": 40
+      },
+      "train_return": -12.505060768200012,
+      "test_return": -4.712228621100017,
+      "combined_return": -7.829361479940015,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 87494.93923179999,
+        "return_pct": -12.505060768200012,
+        "trades_executed": 12,
+        "profitable_trades": 1,
+        "loss_trades": 11,
+        "win_rate": 0.08333333333333333,
+        "avg_profit": 0.17499999999995453,
+        "avg_loss": -0.35243636363637426,
+        "profit_factor": 0.04514032191496834,
+        "sharpe_ratio": -20.853430459908708
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 95287.77137889998,
+        "return_pct": -4.712228621100017,
+        "trades_executed": 5,
+        "profitable_trades": 1,
+        "loss_trades": 4,
+        "win_rate": 0.2,
+        "avg_profit": 2.2100000000000364,
+        "avg_loss": -0.17497499999998922,
+        "profit_factor": 3.1575939419919594,
+        "sharpe_ratio": 4.997121901143643
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 25,
+        "slow_period": 40
+      },
+      "train_return": -14.588396322500005,
+      "test_return": -3.6647550940000073,
+      "combined_return": -8.034211585400007,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 85411.6036775,
+        "return_pct": -14.588396322500005,
+        "trades_executed": 14,
+        "profitable_trades": 5,
+        "loss_trades": 9,
+        "win_rate": 0.35714285714285715,
+        "avg_profit": 0.1610200000000077,
+        "avg_loss": -0.361377777777774,
+        "profit_factor": 0.24754027794860625,
+        "sharpe_ratio": -8.353498365105143
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 96335.24490599999,
+        "return_pct": -3.6647550940000073,
+        "trades_executed": 4,
+        "profitable_trades": 3,
+        "loss_trades": 1,
+        "win_rate": 0.75,
+        "avg_profit": 0.693333333333347,
+        "avg_loss": 0.0,
+        "profit_factor": Infinity,
+        "sharpe_ratio": 10.132907185568124
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 20,
+        "slow_period": 40
+      },
+      "train_return": -11.462036185600052,
+      "test_return": -5.760144289899982,
+      "combined_return": -8.040901048180011,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 88537.96381439995,
+        "return_pct": -11.462036185600052,
+        "trades_executed": 11,
+        "profitable_trades": 3,
+        "loss_trades": 8,
+        "win_rate": 0.2727272727272727,
+        "avg_profit": 0.16833333333336972,
+        "avg_loss": -0.3641499999999951,
+        "profit_factor": 0.17334889468629547,
+        "sharpe_ratio": -12.51255735956371
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 94239.85571010002,
+        "return_pct": -5.760144289899982,
+        "trades_executed": 6,
+        "profitable_trades": 2,
+        "loss_trades": 4,
+        "win_rate": 0.3333333333333333,
+        "avg_profit": 1.110050000000058,
+        "avg_loss": -0.07250000000001933,
+        "profit_factor": 7.6555172413776695,
+        "sharpe_ratio": 6.118918395315972
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 5,
+        "slow_period": 60
+      },
+      "train_return": -14.589258483800032,
+      "test_return": -4.191070883999986,
+      "combined_return": -8.350345923920004,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 85410.74151619997,
+        "return_pct": -14.589258483800032,
+        "trades_executed": 14,
+        "profitable_trades": 6,
+        "loss_trades": 8,
+        "win_rate": 0.42857142857142855,
+        "avg_profit": 0.11581666666671708,
+        "avg_loss": -0.2514125000000007,
+        "profit_factor": 0.3454979366580324,
+        "sharpe_ratio": -5.7872813847770965
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 95808.92911600001,
+        "return_pct": -4.191070883999986,
+        "trades_executed": 4,
+        "profitable_trades": 1,
+        "loss_trades": 3,
+        "win_rate": 0.25,
+        "avg_profit": 0.24099999999998545,
+        "avg_loss": -0.1183333333333394,
+        "profit_factor": 0.678873239436544,
+        "sharpe_ratio": -2.8104496443070377
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 30,
+        "slow_period": 20
+      },
+      "train_return": -15.113499400999993,
+      "test_return": -4.7125278199999885,
+      "combined_return": -8.872916452399991,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 84886.500599,
+        "return_pct": -15.113499400999993,
+        "trades_executed": 15,
+        "profitable_trades": 12,
+        "loss_trades": 3,
+        "win_rate": 0.8,
+        "avg_profit": 0.1486750000000067,
+        "avg_loss": -0.06496666666669171,
+        "profit_factor": 9.15392508978652,
+        "sharpe_ratio": 12.532470117402392
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 95287.47218000001,
+        "return_pct": -4.7125278199999885,
+        "trades_executed": 5,
+        "profitable_trades": 3,
+        "loss_trades": 2,
+        "win_rate": 0.6,
+        "avg_profit": 0.19833333333330452,
+        "avg_loss": -1.1350000000000477,
+        "profit_factor": 0.26211453744488483,
+        "sharpe_ratio": -5.47522215280767
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 30,
+        "slow_period": 40
+      },
+      "train_return": -16.673515758900002,
+      "test_return": -4.1889584737000405,
+      "combined_return": -9.182781387780025,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 83326.4842411,
+        "return_pct": -16.673515758900002,
+        "trades_executed": 16,
+        "profitable_trades": 7,
+        "loss_trades": 9,
+        "win_rate": 0.4375,
+        "avg_profit": 0.12072857142857174,
+        "avg_loss": -0.33155555555554705,
+        "profit_factor": 0.28321045576408305,
+        "sharpe_ratio": -6.837878452196545
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 95811.04152629996,
+        "return_pct": -4.1889584737000405,
+        "trades_executed": 4,
+        "profitable_trades": 3,
+        "loss_trades": 1,
+        "win_rate": 0.75,
+        "avg_profit": 0.7962333333333239,
+        "avg_loss": -0.014999999999986358,
+        "profit_factor": 159.2466666668096,
+        "sharpe_ratio": 10.20006792769015
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 10,
+        "slow_period": 40
+      },
+      "train_return": -13.547095061500034,
+      "test_return": -6.807294894399994,
+      "combined_return": -9.50321496124001,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 86452.90493849997,
+        "return_pct": -13.547095061500034,
+        "trades_executed": 13,
+        "profitable_trades": 3,
+        "loss_trades": 10,
+        "win_rate": 0.23076923076923078,
+        "avg_profit": 0.16333333333333636,
+        "avg_loss": -0.2073899999999867,
+        "profit_factor": 0.23626982978930544,
+        "sharpe_ratio": -8.113364206732845
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 93192.7051056,
+        "return_pct": -6.807294894399994,
+        "trades_executed": 7,
+        "profitable_trades": 2,
+        "loss_trades": 5,
+        "win_rate": 0.2857142857142857,
+        "avg_profit": 1.3075000000000045,
+        "avg_loss": -0.08307999999999538,
+        "profit_factor": 6.295137217140478,
+        "sharpe_ratio": 5.662172066680966
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 5,
+        "slow_period": 40
+      },
+      "train_return": -14.592026649200038,
+      "test_return": -6.807164664299998,
+      "combined_return": -9.921109458260014,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 85407.97335079996,
+        "return_pct": -14.592026649200038,
+        "trades_executed": 14,
+        "profitable_trades": 5,
+        "loss_trades": 9,
+        "win_rate": 0.35714285714285715,
+        "avg_profit": 0.12500000000004546,
+        "avg_loss": -0.14846666666668776,
+        "profit_factor": 0.4677443496483599,
+        "sharpe_ratio": -3.796269827616637
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 93192.8353357,
+        "return_pct": -6.807164664299998,
+        "trades_executed": 7,
+        "profitable_trades": 2,
+        "loss_trades": 5,
+        "win_rate": 0.2857142857142857,
+        "avg_profit": 1.3996999999999957,
+        "avg_loss": -0.04598000000000866,
+        "profit_factor": 12.1765985210938,
+        "sharpe_ratio": 6.056936354220485
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 10,
+        "slow_period": 20
+      },
+      "train_return": -18.763483238500005,
+      "test_return": -8.896898010000005,
+      "combined_return": -12.843532101400005,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 81236.5167615,
+        "return_pct": -18.763483238500005,
+        "trades_executed": 18,
+        "profitable_trades": 6,
+        "loss_trades": 12,
+        "win_rate": 0.3333333333333333,
+        "avg_profit": 0.24858333333332894,
+        "avg_loss": -0.20001666666663218,
+        "profit_factor": 0.6214065494543084,
+        "sharpe_ratio": -2.97833581577197
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 91103.10199,
+        "return_pct": -8.896898010000005,
+        "trades_executed": 9,
+        "profitable_trades": 3,
+        "loss_trades": 6,
+        "win_rate": 0.3333333333333333,
+        "avg_profit": 1.1066666666666454,
+        "avg_loss": -0.18666666666666742,
+        "profit_factor": 2.9642857142856456,
+        "sharpe_ratio": 3.999003389770507
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 25,
+        "slow_period": 20
+      },
+      "train_return": -22.40648149740002,
+      "test_return": -8.896958170099985,
+      "combined_return": -14.300767501019997,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 77593.51850259998,
+        "return_pct": -22.40648149740002,
+        "trades_executed": 22,
+        "profitable_trades": 13,
+        "loss_trades": 9,
+        "win_rate": 0.5909090909090909,
+        "avg_profit": 0.18310769230768423,
+        "avg_loss": -0.10519999999998061,
+        "profit_factor": 2.5141529362065205,
+        "sharpe_ratio": 5.996931626910746
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 91103.04182990002,
+        "return_pct": -8.896958170099985,
+        "trades_executed": 9,
+        "profitable_trades": 6,
+        "loss_trades": 3,
+        "win_rate": 0.6666666666666666,
+        "avg_profit": 0.13085000000002842,
+        "avg_loss": -0.8900000000000242,
+        "profit_factor": 0.29404494382028057,
+        "sharpe_ratio": -3.819968534230901
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 15,
+        "slow_period": 20
+      },
+      "train_return": -23.45536613419994,
+      "test_return": -10.991639759099984,
+      "combined_return": -15.977130309139968,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 76544.63386580006,
+        "return_pct": -23.45536613419994,
+        "trades_executed": 23,
+        "profitable_trades": 10,
+        "loss_trades": 13,
+        "win_rate": 0.43478260869565216,
+        "avg_profit": 0.14330000000002202,
+        "avg_loss": -0.24427692307691673,
+        "profit_factor": 0.451253306461852,
+        "sharpe_ratio": -4.336707516869035
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 89008.36024090002,
+        "return_pct": -10.991639759099984,
+        "trades_executed": 11,
+        "profitable_trades": 3,
+        "loss_trades": 8,
+        "win_rate": 0.2727272727272727,
+        "avg_profit": 1.1333333333333258,
+        "avg_loss": -0.1638875000000155,
+        "profit_factor": 2.5932423156125815,
+        "sharpe_ratio": 3.2210118112511603
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 5,
+        "slow_period": 20
+      },
+      "train_return": -25.533772664400008,
+      "test_return": -10.991853772899994,
+      "combined_return": -16.8086213295,
+      "train_stats": {
+        "initial_capital": 100000,
+        "final_capital": 74466.2273356,
+        "return_pct": -25.533772664400008,
+        "trades_executed": 25,
+        "profitable_trades": 14,
+        "loss_trades": 11,
+        "win_rate": 0.56,
+        "avg_profit": 0.26241428571429587,
+        "avg_loss": -0.08200000000000397,
+        "profit_factor": 4.072949002217255,
+        "sharpe_ratio": 4.574367341395623
+      },
+      "test_stats": {
+        "initial_capital": 100000,
+        "final_capital": 89008.1462271,
+        "return_pct": -10.991853772899994,
+        "trades_executed": 11,
+        "profitable_trades": 4,
+        "loss_trades": 7,
+        "win_rate": 0.36363636363636365,
+        "avg_profit": 0.7787749999999676,
+        "avg_loss": -0.13771428571429364,
+        "profit_factor": 3.231431535269389,
+        "sharpe_ratio": 3.6235188110752303
+      }
+    }
+  ],
+  "parameter_counts": 30
+}

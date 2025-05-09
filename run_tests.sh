@@ -1,32 +1,27 @@
 #!/bin/bash
-# Simple script to run tests and capture output
+# Run test script for trade tracking fix
 
-# Set the output file
-OUTPUT_FILE="test_results_$(date +%Y%m%d_%H%M%S).txt"
+echo "Running trade tracking test with mini_test.yaml..."
+python3 test_trade_tracking.py --config config/mini_test.yaml --log-level INFO
 
-# Run the test
-echo "Running tests..."
-echo "Output will be saved to $OUTPUT_FILE"
-
-# Run the test and capture output
-python test_the_fixes.py > "$OUTPUT_FILE" 2>&1
-
-# Get the exit code
-EXIT_CODE=$?
-
-# Print a summary based on exit code
-if [ $EXIT_CODE -eq 0 ]; then
-    echo "Tests PASSED!"
+if [ $? -eq 0 ]; then
+    echo "Mini test passed successfully!"
 else
-    echo "Tests FAILED with exit code $EXIT_CODE"
-    echo "Check $OUTPUT_FILE for details"
+    echo "Mini test failed!"
+    exit 1
 fi
 
-# Show the output
 echo ""
-echo "Test output:"
-echo "============"
-cat "$OUTPUT_FILE"
+echo "Running trade tracking test with head_test.yaml..."
+python3 test_trade_tracking.py --config config/head_test.yaml --log-level INFO
 
-# Exit with the same code as the test
-exit $EXIT_CODE
+if [ $? -eq 0 ]; then
+    echo "Head test passed successfully!"
+else
+    echo "Head test failed!"
+    exit 1
+fi
+
+echo ""
+echo "All tests passed! Trade tracking fix is working correctly."
+exit 0

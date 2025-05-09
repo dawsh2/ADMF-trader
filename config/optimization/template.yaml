@@ -1,0 +1,108 @@
+# Sample Optimization Configuration
+name: "MA Crossover Optimization"
+description: "Optimize moving average crossover parameters"
+
+# Strategy to optimize
+strategy:
+  name: "simple_ma_crossover"
+  fixed_params:
+    position_size: 1.0
+    use_trailing_stop: false
+    stop_loss_pct: 0.03
+
+# Parameter space (can also be defined in a separate file referenced by parameter_file)
+parameter_space:
+  - name: fast_period
+    type: integer
+    min: 5
+    max: 30
+    step: 5
+  - name: slow_period
+    type: integer
+    min: 20
+    max: 100
+    step: 20
+  - name: signal_threshold
+    type: float
+    min: 0.0
+    max: 0.5
+    step: 0.1
+  - name: price_type
+    type: categorical
+    categories: ["close", "open", "high", "low", "vwap"]
+  - name: use_filter
+    type: boolean
+
+# Optimization settings
+optimization:
+  method: "grid"  # grid, random, walk_forward
+  objective: "sharpe_ratio"  # sharpe_ratio, profit_factor, max_drawdown, etc.
+  
+  # For random search
+  num_trials: 100
+  
+  # For walk-forward optimization
+  window_size: 60  # trading days
+  step_size: 20
+  window_type: "rolling"  # rolling, expanding
+  
+  # For combined metrics
+  weights:
+    sharpe_ratio: 0.5
+    profit_factor: 0.3
+    max_drawdown: 0.2
+  
+  # For train/test combined evaluation
+  train_weight: 0.4
+  test_weight: 0.6
+  sub_objective: "sharpe_ratio"
+  
+# Data settings
+data:
+  symbols: ["AAPL", "MSFT", "GOOG"]
+  timeframe: "1D"
+  
+  # Sources can be files or database
+  sources:
+    - symbol: "AAPL"
+      file: "data/AAPL_1day.csv"
+      date_column: "timestamp"
+      date_format: "%Y-%m-%d %H:%M:%S"
+      
+  # Train/test split configuration
+  train_test_split:
+    enabled: true
+    method: "ratio"  # ratio, date, or fixed
+    
+    # For ratio-based splitting
+    train_ratio: 0.7
+    test_ratio: 0.3
+    
+    # For date-based splitting
+    # train_start: "2020-01-01"
+    # train_end: "2021-12-31"
+    # test_start: "2022-01-01"
+    # test_end: "2022-12-31"
+    
+    # For fixed-length splitting
+    # train_periods: 252  # trading days
+    # test_periods: 63    # trading days
+
+# Backtest settings
+backtest:
+  initial_capital: 100000.0
+  commission: 0.001
+  slippage: 0.0005
+  position_sizing: "fixed"
+  risk_per_trade: 0.02
+  max_positions: 5
+
+# Reporting settings
+reporting:
+  format: "all"  # all, text, csv, html, visualization
+  include_trade_list: true
+  include_equity_curve: true
+  generate_visualizations: true
+  
+# Output directory
+output_dir: "./optimization_results"

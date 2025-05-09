@@ -1,0 +1,36 @@
+2025-05-08 15:12:44,675 - final_fix - INFO - Running all fixes and optimization...
+2025-05-08 15:12:44,675 - final_fix - INFO - Step 1: Fixing import paths...
+2025-05-08 15:12:44,675 - final_fix - INFO - Running: ['/Users/daws/mmbt/venv/bin/python3', 'fix_import_paths.py'] - Fixing import paths
+2025-05-08 15:12:44,709 - final_fix - INFO - Command completed with return code 0
+2025-05-08 15:12:44,709 - final_fix - INFO - Step 2: Fixing risk manager...
+2025-05-08 15:12:44,709 - final_fix - INFO - Running: ['/Users/daws/mmbt/venv/bin/python3', 'fix_risk_manager.py'] - Fixing risk manager
+2025-05-08 15:12:44,815 - final_fix - INFO - Command completed with return code 0
+2025-05-08 15:12:44,815 - final_fix - INFO - Step 3: Fixing data handler...
+2025-05-08 15:12:44,815 - final_fix - INFO - Running: ['/Users/daws/mmbt/venv/bin/python3', 'fix_data_handler.py'] - Fixing data handler
+2025-05-08 15:12:44,841 - final_fix - INFO - Command completed with return code 0
+2025-05-08 15:12:44,841 - final_fix - INFO - Step 4: Creating helper modules...
+2025-05-08 15:12:44,841 - final_fix - INFO - Creating simple config: config/simple_ma_crossover.yaml
+2025-05-08 15:12:44,841 - final_fix - INFO - Created simple config at config/simple_ma_crossover.yaml
+2025-05-08 15:12:44,841 - final_fix - INFO - Creating event logger: src/util/event_logger.py
+2025-05-08 15:12:44,842 - final_fix - INFO - Created event logger at src/util/event_logger.py
+2025-05-08 15:12:44,842 - final_fix - INFO - Created util package initialization file at src/util/__init__.py
+2025-05-08 15:12:44,842 - final_fix - INFO - Creating backtest hooks: src/util/backtest_hooks.py
+2025-05-08 15:12:44,842 - final_fix - INFO - Created backtest hooks at src/util/backtest_hooks.py
+2025-05-08 15:12:44,842 - final_fix - INFO - Creating simple backtest runner: run_simple_backtest.py
+2025-05-08 15:12:44,842 - final_fix - INFO - Created simple backtest runner at run_simple_backtest.py
+2025-05-08 15:12:44,842 - final_fix - INFO - Waiting for 1 second before running backtest...
+2025-05-08 15:12:45,847 - final_fix - INFO - Step 5: Running simple backtest...
+2025-05-08 15:12:45,847 - final_fix - INFO - Running: ['/Users/daws/mmbt/venv/bin/python3', 'run_simple_backtest.py'] - Running simple backtest
+2025-05-08 15:12:46,260 - final_fix - ERROR - Command failed with return code 1
+2025-05-08 15:12:46,260 - final_fix - ERROR - Error (first 500 chars): 2025-05-08 15:12:45,900 - simple_backtest - INFO - Running simple backtest with all fixes...
+2025-05-08 15:12:46,226 - src.util.backtest_hooks - INFO - Installing backtest hooks
+2025-05-08 15:12:46,226 - src.util.backtest_hooks - INFO - Backtest hooks installed
+2025-05-08 15:12:46,226 - simple_backtest - INFO - Installed backtest hooks
+2025-05-08 15:12:46,232 - simple_backtest - INFO - Loading configuration from config/simple_ma_crossover.yaml
+2025-05-08 15:12:46,233 - simple_backtest - INFO - C
+2025-05-08 15:12:46,260 - final_fix - INFO - All fixes and backtest completed
+2025-05-08 15:12:46,260 - final_fix - INFO - 
+DEBUG INSTRUCTIONS:
+2025-05-08 15:12:46,260 - final_fix - INFO - 1. Check 'simple_backtest.log' for detailed log messages
+2025-05-08 15:12:46,260 - final_fix - INFO - 2. If simple backtest worked, run the optimization:
+2025-05-08 15:12:46,260 - final_fix - INFO -    python main.py optimize --config config/ma_crossover_optimization_fixed.yaml

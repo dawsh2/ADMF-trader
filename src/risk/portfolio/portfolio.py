@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 class PortfolioManager:
     """Portfolio for tracking positions and equity."""
 
-    def __init__(self, event_bus=None, name=None, initial_cash=10000.0):
+    def __init__(self, event_bus=None, name=None, initial_cash=10000.0, trade_registry=None):
         """
         Initialize portfolio manager with improved fill tracking.
 
@@ -24,6 +24,7 @@ class PortfolioManager:
             event_bus: Event bus for communication
             name: Portfolio name
             initial_cash: Initial cash balance
+            trade_registry: Optional centralized trade registry
         """
         self._name = name or f"portfolio_{uuid.uuid4().hex[:8]}"
         self.event_bus = event_bus
@@ -31,9 +32,13 @@ class PortfolioManager:
         self.cash = initial_cash
         self.positions = {}  # symbol -> Position
         self.equity = initial_cash
-        self.trades = []  # List of completed trades
         self.equity_curve = []  # List of equity points
         self.configured = False
+        
+        # Use external trade registry if provided or create an internal trades list
+        self.trade_registry = trade_registry
+        self.use_registry = trade_registry is not None
+        self.trades = []  # For backward compatibility when registry isn't used
 
         # Add set to track processed fills
         self.processed_fill_ids = set()
@@ -143,9 +148,13 @@ class PortfolioManager:
             'status': 'OPEN'  # Mark as an open trade
         }
         
-        # Add the trade to our list
-        self.trades.append(trade)
-        logger.info(f"Created trade record for {symbol} {direction} {quantity} @ {price:.2f}")
+        # Add the trade to registry or local list
+        if self.use_registry and self.trade_registry:
+            self.trade_registry.add_trade(trade)
+            logger.info(f"Added trade record to registry for {symbol} {direction} {quantity} @ {price:.2f}")
+        else:
+            self.trades.append(trade)
+            logger.info(f"Created trade record for {symbol} {direction} {quantity} @ {price:.2f}")
         
         # Update statistics
         self.stats['trades_executed'] += 1
@@ -221,9 +230,13 @@ class PortfolioManager:
             'status': 'CLOSED'  # Mark as a closed trade
         }
         
-        # Add the trade to our list
-        self.trades.append(trade)
-        logger.info(f"Created trade close record for {symbol} {direction} {quantity} @ {exit_price:.2f}")
+        # Add the trade to registry or local list
+        if self.use_registry and self.trade_registry:
+            self.trade_registry.add_trade(trade)
+            logger.info(f"Added trade close record to registry for {symbol} {direction} {quantity} @ {exit_price:.2f}")
+        else:
+            self.trades.append(trade)
+            logger.info(f"Created trade close record for {symbol} {direction} {quantity} @ {exit_price:.2f}")
         
         # Update statistics
         self.stats['total_commission'] += commission
@@ -358,13 +371,21 @@ class PortfolioManager:
         # Log at DEBUG level to reduce noise
         logger.debug(f"Creating trade record {trade_id} for {symbol} {direction} with PnL {pnl:.2f}")
         
-        # Explicitly append the trade to self.trades list
-        self.trades.append(trade)
-        logger.debug(f"Trade list now contains {len(self.trades)} trades")
+        # Add the trade to registry or local list
+        if self.use_registry and self.trade_registry:
+            success = self.trade_registry.add_trade(trade)
+            if success:
+                logger.debug(f"Added trade to registry: {trade['id']} for {symbol}")
+            else:
+                logger.warning(f"Failed to add trade to registry: {trade['id']} for {symbol}")
+        else:
+            # Explicitly append the trade to self.trades list
+            self.trades.append(trade)
+            logger.debug(f"Trade list now contains {len(self.trades)} trades")
 
-        # Verify trade was added - log at debug level
-        if len(self.trades) > 0:
-            logger.debug(f"Latest trade added: {trade['id']} for {symbol}")
+            # Verify trade was added - log at debug level
+            if len(self.trades) > 0:
+                logger.debug(f"Latest trade added: {trade['id']} for {symbol}")
 
         # Update statistics
         self.stats['trades_executed'] += 1
@@ -408,10 +429,15 @@ class PortfolioManager:
         self.positions = {}
         self.equity = self.initial_cash
         
-        # Critical: Make sure trades collection is properly initialized as a new list
-        # DO NOT use self.trades.clear() as it might leave references intact
-        self.trades = []
-        logger.info(f"Trade list reset - new empty list with ID: {id(self.trades)}")
+        # Reset trade registry or local trades list
+        if self.use_registry and self.trade_registry:
+            self.trade_registry.reset()
+            logger.info("Trade registry reset")
+        else:
+            # Critical: Make sure trades collection is properly initialized as a new list
+            # DO NOT use self.trades.clear() as it might leave references intact
+            self.trades = []
+            logger.info(f"Trade list reset - new empty list with ID: {id(self.trades)}")
         
         self.equity_curve = []
         self.processed_fill_ids.clear()  # Clear processed fill IDs
@@ -753,7 +779,21 @@ class PortfolioManager:
         # Create a simple in-memory cache to avoid duplicate logs
         if not hasattr(self, '_get_trades_cache'):
             self._get_trades_cache = set()
+        
+        # Use trade registry if available
+        if self.use_registry and self.trade_registry:
+            # Get trades from registry
+            trades = self.trade_registry.get_trades(filter_open=filter_open, n=n)
             
+            # Only log once per trade count
+            cache_key = f"registry_get_trades_{len(trades)}"
+            if cache_key not in self._get_trades_cache:
+                logger.debug(f"Retrieved {len(trades)} trades from trade registry")
+                self._get_trades_cache.add(cache_key)
+                
+            return trades
+            
+        # Legacy trade list handling if no registry is available
         # Only log once per trade count to avoid duplicates
         cache_key = f"get_trades_{len(self.trades) if self.trades else 0}"
         if cache_key not in self._get_trades_cache:
@@ -975,30 +1015,75 @@ class PortfolioManager:
         if not hasattr(self, '_debug_tracking_cache'):
             self._debug_tracking_cache = set()
             
-        # Only log once per trade count to avoid duplicates
-        cache_key = f"trade_tracking_{len(self.trades)}"
-        if cache_key in self._debug_tracking_cache:
+        if self.use_registry and self.trade_registry:
+            # Get trades from registry for debugging
+            trades = self.trade_registry.get_trades(filter_open=False)
+            trade_count = len(trades)
+            
+            # Only log once per trade count
+            cache_key = f"registry_trade_tracking_{trade_count}"
+            if cache_key in self._debug_tracking_cache:
+                return trade_count
+                
+            self._debug_tracking_cache.add(cache_key)
+            
+            # Log registry details
+            logger.debug(f"=== TRADE REGISTRY DEBUG ===")
+            logger.debug(f"Trade registry stats: {self.trade_registry.get_stats()}")
+            logger.debug(f"Trade count: {trade_count}")
+            
+            if trade_count > 0:
+                # Sample the first and last trade
+                logger.debug(f"First trade: {trades[0]['id']} - {trades[0]['symbol']}")
+                logger.debug(f"Last trade: {trades[-1]['id']} - {trades[-1]['symbol']}")
+                
+                # Calculate total PnL
+                total_pnl = sum(trade.get('pnl', 0.0) for trade in trades)
+                logger.debug(f"Total PnL from registry: {total_pnl:.2f}")
+            
+            logger.debug(f"=== END TRADE REGISTRY DEBUG ===")
+            return trade_count
+        else:
+            # Use legacy trade list for debugging
+            # Only log once per trade count to avoid duplicates
+            cache_key = f"trade_tracking_{len(self.trades)}"
+            if cache_key in self._debug_tracking_cache:
+                return len(self.trades)
+                
+            self._debug_tracking_cache.add(cache_key)
+            
+            # Use debug level to reduce log verbosity
+            logger.debug(f"=== TRADE TRACKING DEBUG ===")
+            logger.debug(f"Portfolio trade list ID: {id(self.trades)}")
+            logger.debug(f"Trade count: {len(self.trades)}")
+            
+            if len(self.trades) > 0:
+                # Sample the first and last trade
+                logger.debug(f"First trade: {self.trades[0]['id']} - {self.trades[0]['symbol']}")
+                logger.debug(f"Last trade: {self.trades[-1]['id']} - {self.trades[-1]['symbol']}")
+                
+                # Calculate total PnL
+                total_pnl = sum(trade.get('pnl', 0.0) for trade in self.trades)
+                logger.debug(f"Total PnL from trades: {total_pnl:.2f}")
+            
+            logger.debug(f"=== END TRADE TRACKING DEBUG ===")
             return len(self.trades)
-            
-        self._debug_tracking_cache.add(cache_key)
         
-        # Use debug level to reduce log verbosity
-        logger.debug(f"=== TRADE TRACKING DEBUG ===")
-        logger.debug(f"Portfolio trade list ID: {id(self.trades)}")
-        logger.debug(f"Trade count: {len(self.trades)}")
+    def set_trade_registry(self, trade_registry):
+        """Set or replace the trade registry."""
+        self.trade_registry = trade_registry
+        self.use_registry = trade_registry is not None
+        logger.info(f"Trade registry set for portfolio {self._name}")
         
-        if len(self.trades) > 0:
-            # Sample the first and last trade
-            logger.debug(f"First trade: {self.trades[0]['id']} - {self.trades[0]['symbol']}")
-            logger.debug(f"Last trade: {self.trades[-1]['id']} - {self.trades[-1]['symbol']}")
-            
-            # Calculate total PnL
-            total_pnl = sum(trade['pnl'] for trade in self.trades)
-            logger.debug(f"Total PnL from trades: {total_pnl:.2f}")
-        
-        logger.debug(f"=== END TRADE TRACKING DEBUG ===")
-        return len(self.trades)
-        
+        # If there are existing trades in the local list, migrate them to the registry
+        if self.use_registry and self.trade_registry and self.trades:
+            logger.info(f"Migrating {len(self.trades)} existing trades to registry")
+            migrated = 0
+            for trade in self.trades:
+                if self.trade_registry.add_trade(trade):
+                    migrated += 1
+            logger.info(f"Successfully migrated {migrated} of {len(self.trades)} trades to registry")
+    
     @property
     def name(self):
         """Get portfolio name."""

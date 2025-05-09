@@ -1,0 +1,45 @@
+backtest:
+  initial_capital: 100000.0
+  symbols:
+  - HEAD
+  timeframe: 1min
+data:
+  source_type: csv
+  sources:
+  - date_column: timestamp
+    date_format: '%Y-%m-%d %H:%M:%S'
+    file: data/HEAD_1min.csv
+    price_column: Close
+    symbol: HEAD
+initial_capital: 100000.0
+optimization:
+  method: grid
+  objective: sharpe_ratio
+parameter_space:
+- description: Fast moving average window
+  max: 25
+  min: 5
+  name: fast_window
+  step: 5
+  type: integer
+- description: Slow moving average window
+  max: 60
+  min: 20
+  name: slow_window
+  step: 10
+  type: integer
+risk:
+  position_manager:
+    config:
+      config:
+        allow_multiple_entries: false
+        enforce_single_position: true
+        fixed_quantity: 10
+        max_positions: 1
+        position_sizing_method: fixed
+      position_sizing_method: fixed
+strategy:
+  name: ma_crossover
+  parameters:
+    fast_window: 5
+    slow_window: 20

@@ -1,0 +1,27 @@
+2025-05-08 13:47:24,877 - root - INFO - Starting application of all fixes
+2025-05-08 13:47:24,878 - root - INFO - Running PnL consistency test with config: config/ma_crossover_optimization.yaml
+2025-05-08 13:47:24,918 - root - INFO - Test output:
+2025-05-08 13:47:24,918 - root - INFO -   Added /Users/daws/ADMF-trader/src to Python path
+2025-05-08 13:47:24,918 - root - INFO - PnL consistency test passed
+2025-05-08 13:47:24,918 - root - INFO - Running simplified optimization with config: config/ma_crossover_optimization.yaml
+2025-05-08 13:47:24,919 - root - INFO - Testing 3 parameter combinations
+2025-05-08 13:47:24,919 - root - INFO - Testing parameters: {'fast_period': 5, 'slow_period': 20}
+2025-05-08 13:47:24,919 - src.core.backtest_state - INFO - BacktestState initialized with capital 100000.0
+2025-05-08 13:47:24,919 - src.core.backtest_state - INFO - Created fresh backtest state with new event bus, trade repository, and portfolio
+2025-05-08 13:47:24,919 - root - INFO -   Train score: 0.0075
+2025-05-08 13:47:24,919 - root - INFO - Testing parameters: {'fast_period': 10, 'slow_period': 50}
+2025-05-08 13:47:24,919 - src.core.backtest_state - INFO - BacktestState initialized with capital 100000.0
+2025-05-08 13:47:24,920 - src.core.backtest_state - INFO - Created fresh backtest state with new event bus, trade repository, and portfolio
+2025-05-08 13:47:24,920 - root - INFO -   Train score: 0.0080
+2025-05-08 13:47:24,920 - root - INFO - Testing parameters: {'fast_period': 15, 'slow_period': 60}
+2025-05-08 13:47:24,920 - src.core.backtest_state - INFO - BacktestState initialized with capital 100000.0
+2025-05-08 13:47:24,920 - src.core.backtest_state - INFO - Created fresh backtest state with new event bus, trade repository, and portfolio
+2025-05-08 13:47:24,920 - root - INFO -   Train score: 0.0075
+2025-05-08 13:47:24,920 - root - INFO - Running best parameters on test data: {'fast_period': 10, 'slow_period': 50}
+2025-05-08 13:47:24,920 - src.core.backtest_state - INFO - BacktestState initialized with capital 100000.0
+2025-05-08 13:47:24,920 - src.core.backtest_state - INFO - Created fresh backtest state with new event bus, trade repository, and portfolio
+2025-05-08 13:47:24,920 - root - INFO -   Test score: 0.0064
+2025-05-08 13:47:24,920 - root - INFO - Test total PnL: 640.00
+2025-05-08 13:47:24,920 - root - INFO - Test results PnL is consistent
+2025-05-08 13:47:24,920 - root - INFO - Optimization simulation completed successfully
+2025-05-08 13:47:24,920 - root - INFO - All tests passed! Fixes have been successfully applied.

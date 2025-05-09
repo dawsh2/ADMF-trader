@@ -1,0 +1,72 @@
+================================================================================
+OPTIMIZATION REPORT: simple_ma_crossover
+Timestamp: 20250508_132410
+================================================================================
+
+CONFIGURATION
+--------------------------------------------------------------------------------
+Optimization Method: grid
+Objective Function: sharpe_ratio
+Symbols: HEAD
+Train/Test Split: ratio (Train: 0.70, Test: 0.30)
+
+PARAMETER SPACE
+--------------------------------------------------------------------------------
+
+BEST PARAMETERS
+--------------------------------------------------------------------------------
+fast_period: 5
+slow_period: 40
+
+PERFORMANCE METRICS
+--------------------------------------------------------------------------------
+Training Performance:
+  max_drawdown: 0.0000
+  profit_factor: 0.0
+  return_pct: 0.0000
+  sharpe_ratio: 0.0000
+  trades_executed: 0
+
+Testing Performance:
+  avg_loss: -5.74750000000131
+  avg_profit: 98.51333333333362
+  break_even_trades: 0
+  closed_trades: 7
+  final_capital: 47252.51357
+  initial_capital: 100000.0
+  loss_trades: 4
+  max_drawdown: 0.5841
+  max_drawdown_full: 0.5841
+  metrics_consistency: True
+  open_position_value: -53020.03642999999
+  pnl_equity_consistency: False
+  pnl_equity_consistent: False
+  portfolio_realized_return_pct: 0.2569
+  profit_factor: 12.855154414960136
+  profitable_trades: 3
+  return_pct: 0.2725
+  return_pct_closed_only: 0.2725
+  return_pct_with_open: -0.3656
+  sharpe_ratio: -6.0541
+  sharpe_ratio_full: -6.0541
+  trades_executed: 7
+  unexplained_pnl: -53020.03642999999
+  unexplained_pnl_percent: -100.51670708586596
+  win_rate: 0.4286
+
+OVERFITTING ANALYSIS
+--------------------------------------------------------------------------------
+Data Consistency Check:
+  Train metrics consistent: True
+  Test metrics consistent: True
+  Train trades/equity consistent: True
+  Test trades/equity consistent: False
+
+Return Difference (Train - Test): -0.27%
+Sharpe Ratio Difference: 6.05
+Profit Factor Difference: -12.86
+Overfitting Assessment: High risk of overfitting (Score: 6.30)
+
+WARNING: Metric inconsistencies detected.
+This may indicate issues with trade tracking or equity calculation.
+Consider reviewing the implementation or running debug diagnostics.

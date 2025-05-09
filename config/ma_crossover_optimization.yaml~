@@ -1,0 +1,50 @@
+# ma_crossover_optimization.yaml
+# Configuration for MA crossover optimization with improved risk management
+# This configuration ensures only one position is allowed at a time
+# with fixed position sizes
+
+strategy:
+  name: simple_ma_crossover
+  parameters:
+    fast_period: 5
+    slow_period: 20
+
+risk:
+  position_manager:
+    fixed_quantity: 10  # Fixed quantity of 10 shares
+    max_positions: 1    # Only one position at a time
+    enforce_single_position: true
+
+backtest:
+  initial_capital: 100000.0
+  symbols: ['AAPL']  # Symbol to backtest
+  timeframe: 1d      # Daily timeframe
+
+data:
+  source_type: csv
+  sources:
+    - symbol: AAPL
+      file: data/AAPL_1d.csv
+      date_column: date
+      price_column: close
+
+optimization:
+  objective: sharpe_ratio
+  method: grid  # Corrected from grid_search to grid
+
+# Parameter space definition for optimization in the expected format
+parameter_space:
+  - name: fast_period
+    type: integer
+    min: 5
+    max: 30
+    step: 5
+    description: "Fast moving average period"
+  - name: slow_period
+    type: integer
+    min: 20
+    max: 100
+    step: 20
+    description: "Slow moving average period"
+  
+initial_capital: 100000.0

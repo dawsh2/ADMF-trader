@@ -1,0 +1,175 @@
+2025-05-08 15:09:30,687 - fix_risk - INFO - Starting risk manager fixes...
+2025-05-08 15:09:30,687 - fix_risk - INFO - 1. Fixing import paths...
+2025-05-08 15:09:30,689 - fix_imports - INFO - Starting import path fixes...
+2025-05-08 15:09:30,689 - fix_imports - INFO - Finding files to fix...
+2025-05-08 15:09:30,690 - fix_imports - INFO - Found 12 strategy files to check
+2025-05-08 15:09:30,690 - fix_imports - INFO - Fixing imports in src/strategy/implementations/ma_crossover_strategy.py
+2025-05-08 15:09:30,690 - fix_imports - INFO - Created backup at src/strategy/implementations/ma_crossover_strategy.py.bak.import
+2025-05-08 15:09:30,690 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/ma_crossover_strategy.py
+2025-05-08 15:09:30,690 - fix_imports - INFO - Fixing imports in src/strategy/implementations/regime_ensemble_strategy.py
+2025-05-08 15:09:30,690 - fix_imports - INFO - Created backup at src/strategy/implementations/regime_ensemble_strategy.py.bak.import
+2025-05-08 15:09:30,690 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/regime_ensemble_strategy.py
+2025-05-08 15:09:30,690 - fix_imports - INFO - Fixing imports in src/strategy/implementations/composite_regime_strategy.py
+2025-05-08 15:09:30,690 - fix_imports - INFO - Created backup at src/strategy/implementations/composite_regime_strategy.py.bak.import
+2025-05-08 15:09:30,690 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/composite_regime_strategy.py
+2025-05-08 15:09:30,690 - fix_imports - INFO - Fixing imports in src/strategy/implementations/simple_ma_crossover.py
+2025-05-08 15:09:30,691 - fix_imports - INFO - Created backup at src/strategy/implementations/simple_ma_crossover.py.bak.import
+2025-05-08 15:09:30,691 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/simple_ma_crossover.py
+2025-05-08 15:09:30,691 - fix_imports - INFO - Fixing imports in src/strategy/implementations/ensemble_strategy.py
+2025-05-08 15:09:30,691 - fix_imports - INFO - Created backup at src/strategy/implementations/ensemble_strategy.py.bak.import
+2025-05-08 15:09:30,691 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/ensemble_strategy.py
+2025-05-08 15:09:30,691 - fix_imports - INFO - Fixing imports in src/strategy/implementations/__init__.py
+2025-05-08 15:09:30,691 - fix_imports - INFO - Created backup at src/strategy/implementations/__init__.py.bak.import
+2025-05-08 15:09:30,691 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/__init__.py
+2025-05-08 15:09:30,691 - fix_imports - INFO - Fixing imports in src/strategy/implementations/ma_crossover.py
+2025-05-08 15:09:30,691 - fix_imports - INFO - Created backup at src/strategy/implementations/ma_crossover.py.bak.import
+2025-05-08 15:09:30,691 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/ma_crossover.py
+2025-05-08 15:09:30,691 - fix_imports - INFO - Fixing imports in src/strategy/implementations/mean_reversion.py
+2025-05-08 15:09:30,691 - fix_imports - INFO - Created backup at src/strategy/implementations/mean_reversion.py.bak.import
+2025-05-08 15:09:30,691 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/mean_reversion.py
+2025-05-08 15:09:30,691 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:09:30,691 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover.py.bak.import
+2025-05-08 15:09:30,691 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:09:30,691 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:09:30,691 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover_fixed.py.bak.import
+2025-05-08 15:09:30,691 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:09:30,691 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:09:30,692 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover.py.bak.import
+2025-05-08 15:09:30,692 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:09:30,692 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:09:30,692 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover_fixed.py.bak.import
+2025-05-08 15:09:30,692 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:09:30,692 - fix_imports - INFO - Fixed imports in 0 files
+2025-05-08 15:09:30,692 - fix_imports - WARNING - No imports were fixed in strategy files
+2025-05-08 15:09:30,692 - fix_imports - INFO - Creating compatibility modules
+2025-05-08 15:09:30,692 - fix_imports - INFO - Created compatibility module: src/core/event_bus.py
+2025-05-08 15:09:30,692 - fix_imports - INFO - Created compatibility modules
+2025-05-08 15:09:30,692 - fix_imports - INFO - Import path fixes completed
+2025-05-08 15:09:30,692 - fix_imports - INFO - 
+Now you can try running optimization again with:
+2025-05-08 15:09:30,692 - fix_imports - INFO - python main.py optimize --config config/ma_crossover_optimization.yaml
+2025-05-08 15:09:30,692 - fix_risk - INFO - 2. Fixing optimization config...
+2025-05-08 15:09:30,692 - fix_risk - INFO - Fixing optimization config: config/ma_crossover_optimization.yaml
+2025-05-08 15:09:30,708 - fix_risk - INFO - Fixed optimization config risk section
+2025-05-08 15:09:30,708 - fix_risk - INFO - Optimization config fixed
+2025-05-08 15:09:30,708 - fix_risk - INFO - 3. Checking risk manager...
+2025-05-08 15:09:30,708 - fix_risk - INFO - Running risk manager check with fixed initialization...
+2025-05-08 15:09:30,758 - src.core.event_bus - WARNING - Importing from src.core.event_bus is deprecated. Use src.core.events.event_bus instead.
+2025-05-08 15:09:30,758 - src.core.events.event_adapter - INFO - Added get_data method to Event class
+2025-05-08 15:09:30,758 - src.core.events.event_adapter - INFO - Added get_symbol method to Event class
+2025-05-08 15:09:30,758 - src.core.events.event_adapter - INFO - Added get_close method to Event class
+2025-05-08 15:09:30,758 - src.core.events.event_bus - INFO - EventBus initialized with deduplication_strategy=test, enable_metrics=False, enable_replay=False
+2025-05-08 15:09:30,758 - src.core.events.event_bus - DEBUG - Subscribed signal_listener to SIGNAL with priority 0
+2025-05-08 15:09:30,758 - src.core.events.event_bus - DEBUG - Subscribed order_listener to ORDER with priority 0
+2025-05-08 15:09:30,758 - src.risk.position_manager - INFO - Position Manager initialized with max_positions=1, enforce_single_position=True
+2025-05-08 15:09:30,758 - src.core.events.event_bus - DEBUG - Subscribed on_signal to SIGNAL with priority 0
+2025-05-08 15:09:30,758 - src.core.events.event_bus - DEBUG - Subscribed on_portfolio_update to PORTFOLIO_UPDATE with priority 0
+2025-05-08 15:09:30,758 - src.core.events.event_bus - DEBUG - Subscribed on_trade_open to TRADE_OPEN with priority 0
+2025-05-08 15:09:30,758 - src.core.events.event_bus - DEBUG - Subscribed on_trade_close to TRADE_CLOSE with priority 0
+2025-05-08 15:09:30,758 - src.risk.position_manager - INFO - Position Manager successfully initialized and subscribed to events
+2025-05-08 15:09:30,758 - fix_risk - INFO - Sending test signal: <src.core.events.event_types.SignalEvent object at 0x101f68d70>
+2025-05-08 15:09:30,758 - src.core.events.event_bus - DEBUG - Processing SIGNAL event (ID: 0b1ad49d-2dc7-4c77-9477-b08d6b5ee350)
+2025-05-08 15:09:30,758 - fix_risk - INFO - Signal received: <src.core.events.event_types.SignalEvent object at 0x101f68d70>
+2025-05-08 15:09:30,758 - src.risk.position_manager - DEBUG - Processing signal: symbol=HEAD, direction=None, rule_id=test_signal
+2025-05-08 15:09:30,758 - src.risk.position_manager - INFO - Modified signal for HEAD: direction=None, quantity adjusted from 10 to 10
+2025-05-08 15:09:30,758 - src.core.events.event_bus - DEBUG - Processing SIGNAL event (ID: a7f146f2-2ba0-4d12-a01e-4569c60ff02b)
+2025-05-08 15:09:30,758 - fix_risk - INFO - Signal received: <src.core.events.event_types.Event object at 0x101f68ec0>
+2025-05-08 15:09:30,758 - src.risk.position_manager - DEBUG - Processing signal: symbol=HEAD, direction=None, rule_id=test_signal
+2025-05-08 15:09:30,758 - src.risk.position_manager - WARNING - Ignoring duplicate signal for HEAD with rule_id test_signal
+2025-05-08 15:09:30,758 - fix_risk - INFO - Signals received: 2
+2025-05-08 15:09:30,758 - fix_risk - INFO - Orders received: 0
+2025-05-08 15:09:30,758 - fix_risk - WARNING - FAILURE: Risk manager did not generate an order from the signal
+2025-05-08 15:09:30,758 - fix_risk - INFO - Position manager active_signals: {'HEAD': {'direction': None, 'rule_id': 'test_signal'}}
+2025-05-08 15:09:30,758 - fix_risk - INFO - Position manager active_positions: {}
+2025-05-08 15:09:30,758 - fix_risk - INFO - Checking for signal handling code in position_manager.py...
+2025-05-08 15:09:30,758 - fix_risk - WARNING - ISSUE FOUND: Position manager does not generate order events!
+2025-05-08 15:09:30,758 - fix_risk - INFO - Adding order generation logic to position manager...
+2025-05-08 15:09:30,759 - fix_risk - INFO - Added order generation logic to position manager
+2025-05-08 15:09:30,759 - fix_risk - INFO - Risk manager fixed or working properly
+2025-05-08 15:09:30,759 - fix_risk - INFO - All risk manager fixes applied
+2025-05-08 15:09:30,759 - fix_risk - INFO - Now try running the optimization again with:
+2025-05-08 15:09:30,759 - fix_risk - INFO - python main.py optimize --config config/ma_crossover_optimization.yaml
+2025-05-08 15:12:44,734 - fix_risk - INFO - Starting risk manager fixes...
+2025-05-08 15:12:44,734 - fix_risk - INFO - 1. Fixing import paths...
+2025-05-08 15:12:44,734 - fix_imports - INFO - Starting import path fixes...
+2025-05-08 15:12:44,734 - fix_imports - INFO - Finding files to fix...
+2025-05-08 15:12:44,734 - fix_imports - INFO - Found 12 strategy files to check
+2025-05-08 15:12:44,734 - fix_imports - INFO - Fixing imports in src/strategy/implementations/ma_crossover_strategy.py
+2025-05-08 15:12:44,735 - fix_imports - INFO - Created backup at src/strategy/implementations/ma_crossover_strategy.py.bak.import
+2025-05-08 15:12:44,735 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/ma_crossover_strategy.py
+2025-05-08 15:12:44,735 - fix_imports - INFO - Fixing imports in src/strategy/implementations/regime_ensemble_strategy.py
+2025-05-08 15:12:44,735 - fix_imports - INFO - Created backup at src/strategy/implementations/regime_ensemble_strategy.py.bak.import
+2025-05-08 15:12:44,735 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/regime_ensemble_strategy.py
+2025-05-08 15:12:44,735 - fix_imports - INFO - Fixing imports in src/strategy/implementations/composite_regime_strategy.py
+2025-05-08 15:12:44,735 - fix_imports - INFO - Created backup at src/strategy/implementations/composite_regime_strategy.py.bak.import
+2025-05-08 15:12:44,735 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/composite_regime_strategy.py
+2025-05-08 15:12:44,735 - fix_imports - INFO - Fixing imports in src/strategy/implementations/simple_ma_crossover.py
+2025-05-08 15:12:44,735 - fix_imports - INFO - Created backup at src/strategy/implementations/simple_ma_crossover.py.bak.import
+2025-05-08 15:12:44,735 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/simple_ma_crossover.py
+2025-05-08 15:12:44,735 - fix_imports - INFO - Fixing imports in src/strategy/implementations/ensemble_strategy.py
+2025-05-08 15:12:44,735 - fix_imports - INFO - Created backup at src/strategy/implementations/ensemble_strategy.py.bak.import
+2025-05-08 15:12:44,735 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/ensemble_strategy.py
+2025-05-08 15:12:44,735 - fix_imports - INFO - Fixing imports in src/strategy/implementations/__init__.py
+2025-05-08 15:12:44,736 - fix_imports - INFO - Created backup at src/strategy/implementations/__init__.py.bak.import
+2025-05-08 15:12:44,736 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/__init__.py
+2025-05-08 15:12:44,736 - fix_imports - INFO - Fixing imports in src/strategy/implementations/ma_crossover.py
+2025-05-08 15:12:44,736 - fix_imports - INFO - Created backup at src/strategy/implementations/ma_crossover.py.bak.import
+2025-05-08 15:12:44,736 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/ma_crossover.py
+2025-05-08 15:12:44,736 - fix_imports - INFO - Fixing imports in src/strategy/implementations/mean_reversion.py
+2025-05-08 15:12:44,736 - fix_imports - INFO - Created backup at src/strategy/implementations/mean_reversion.py.bak.import
+2025-05-08 15:12:44,736 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/mean_reversion.py
+2025-05-08 15:12:44,736 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:12:44,736 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover.py.bak.import
+2025-05-08 15:12:44,736 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:12:44,736 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:12:44,736 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover_fixed.py.bak.import
+2025-05-08 15:12:44,736 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:12:44,736 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:12:44,736 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover.py.bak.import
+2025-05-08 15:12:44,736 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:12:44,736 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:12:44,736 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover_fixed.py.bak.import
+2025-05-08 15:12:44,736 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:12:44,736 - fix_imports - INFO - Fixed imports in 0 files
+2025-05-08 15:12:44,736 - fix_imports - WARNING - No imports were fixed in strategy files
+2025-05-08 15:12:44,736 - fix_imports - INFO - Creating compatibility modules
+2025-05-08 15:12:44,736 - fix_imports - INFO - Created compatibility module: src/core/event_bus.py
+2025-05-08 15:12:44,736 - fix_imports - INFO - Created compatibility modules
+2025-05-08 15:12:44,736 - fix_imports - INFO - Import path fixes completed
+2025-05-08 15:12:44,736 - fix_imports - INFO - 
+Now you can try running optimization again with:
+2025-05-08 15:12:44,736 - fix_imports - INFO - python main.py optimize --config config/ma_crossover_optimization.yaml
+2025-05-08 15:12:44,736 - fix_risk - INFO - 2. Fixing optimization config...
+2025-05-08 15:12:44,737 - fix_risk - INFO - Fixing optimization config: config/ma_crossover_optimization.yaml
+2025-05-08 15:12:44,753 - fix_risk - INFO - Fixed optimization config risk section
+2025-05-08 15:12:44,753 - fix_risk - INFO - Optimization config fixed
+2025-05-08 15:12:44,753 - fix_risk - INFO - 3. Checking risk manager...
+2025-05-08 15:12:44,753 - fix_risk - INFO - Running risk manager check with fixed initialization...
+2025-05-08 15:12:44,807 - src.core.event_bus - WARNING - Importing from src.core.event_bus is deprecated. Use src.core.events.event_bus instead.
+2025-05-08 15:12:44,807 - src.core.events.event_adapter - INFO - Added get_data method to Event class
+2025-05-08 15:12:44,807 - src.core.events.event_adapter - INFO - Added get_symbol method to Event class
+2025-05-08 15:12:44,808 - src.core.events.event_adapter - INFO - Added get_close method to Event class
+2025-05-08 15:12:44,808 - src.core.events.event_bus - INFO - EventBus initialized with deduplication_strategy=test, enable_metrics=False, enable_replay=False
+2025-05-08 15:12:44,808 - src.core.events.event_bus - DEBUG - Subscribed signal_listener to SIGNAL with priority 0
+2025-05-08 15:12:44,808 - src.core.events.event_bus - DEBUG - Subscribed order_listener to ORDER with priority 0
+2025-05-08 15:12:44,808 - src.risk.position_manager - INFO - Position Manager initialized with max_positions=1, enforce_single_position=True
+2025-05-08 15:12:44,808 - src.core.events.event_bus - DEBUG - Subscribed on_signal to SIGNAL with priority 0
+2025-05-08 15:12:44,808 - src.core.events.event_bus - DEBUG - Subscribed on_portfolio_update to PORTFOLIO_UPDATE with priority 0
+2025-05-08 15:12:44,808 - src.core.events.event_bus - DEBUG - Subscribed on_trade_open to TRADE_OPEN with priority 0
+2025-05-08 15:12:44,808 - src.core.events.event_bus - DEBUG - Subscribed on_trade_close to TRADE_CLOSE with priority 0
+2025-05-08 15:12:44,808 - src.risk.position_manager - INFO - Position Manager successfully initialized and subscribed to events
+2025-05-08 15:12:44,808 - fix_risk - INFO - Sending test signal: <src.core.events.event_types.SignalEvent object at 0x101658d70>
+2025-05-08 15:12:44,808 - src.core.events.event_bus - DEBUG - Processing SIGNAL event (ID: 6329161e-e6d5-4467-a37c-0a4bb024cacd)
+2025-05-08 15:12:44,808 - fix_risk - INFO - Signal received: <src.core.events.event_types.SignalEvent object at 0x101658d70>
+2025-05-08 15:12:44,808 - src.risk.position_manager - DEBUG - Processing signal: symbol=HEAD, direction=None, rule_id=test_signal
+2025-05-08 15:12:44,808 - src.risk.position_manager - INFO - Modified signal for HEAD: direction=None, quantity adjusted from 10 to 10
+2025-05-08 15:12:44,808 - src.risk.position_manager - INFO - Generating order for HEAD: direction=None, quantity=10
+2025-05-08 15:12:44,808 - src.core.events.event_bus - DEBUG - Processing ORDER event (ID: 3eb48429-8e6c-48e0-be94-118fa82c372f)
+2025-05-08 15:12:44,808 - fix_risk - INFO - Order received: <src.core.events.event_types.Event object at 0x101658ec0>
+2025-05-08 15:12:44,808 - fix_risk - INFO - Signals received: 1
+2025-05-08 15:12:44,808 - fix_risk - INFO - Orders received: 1
+2025-05-08 15:12:44,808 - fix_risk - INFO - SUCCESS: Risk manager generated an order from the signal
+2025-05-08 15:12:44,808 - fix_risk - INFO - Risk manager fixed or working properly
+2025-05-08 15:12:44,808 - fix_risk - INFO - All risk manager fixes applied
+2025-05-08 15:12:44,808 - fix_risk - INFO - Now try running the optimization again with:
+2025-05-08 15:12:44,808 - fix_risk - INFO - python main.py optimize --config config/ma_crossover_optimization.yaml

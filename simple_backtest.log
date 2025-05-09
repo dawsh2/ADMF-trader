@@ -1,0 +1,7 @@
+2025-05-08 15:12:45,900 - simple_backtest - INFO - Running simple backtest with all fixes...
+2025-05-08 15:12:46,226 - src.util.backtest_hooks - INFO - Installing backtest hooks
+2025-05-08 15:12:46,226 - src.util.backtest_hooks - INFO - Backtest hooks installed
+2025-05-08 15:12:46,226 - simple_backtest - INFO - Installed backtest hooks
+2025-05-08 15:12:46,232 - simple_backtest - INFO - Loading configuration from config/simple_ma_crossover.yaml
+2025-05-08 15:12:46,233 - simple_backtest - INFO - Creating backtest coordinator
+2025-05-08 15:12:46,233 - simple_backtest - INFO - Initializing backtest

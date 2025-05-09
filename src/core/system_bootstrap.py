@@ -188,8 +188,13 @@ class Bootstrap:
         broker.commission = broker_config.get_float("commission", 0.0)
         container.register_instance("broker", broker)
         
-        # Create order manager
-        order_manager = OrderManager(event_bus, broker)
+        # Create order manager with trade registry if available
+        if container.has("trade_registry"):
+            trade_registry = container.get("trade_registry")
+            order_manager = OrderManager(event_bus, broker, trade_registry=trade_registry)
+            logger.info("Created order manager with trade registry")
+        else:
+            order_manager = OrderManager(event_bus, broker)
         container.register_instance("order_manager", order_manager)
         
         # Create signal interpreter placeholder - will be properly configured after portfolio and risk manager
@@ -206,6 +211,7 @@ class Bootstrap:
         from src.risk.portfolio.portfolio import PortfolioManager
         from src.risk.managers.simple import SimpleRiskManager
         from src.risk.managers.enhanced_risk_manager import EnhancedRiskManager
+        from src.risk.trades.trade_registry import TradeRegistry
         
         # Check if signal interpreter module exists
         signal_interpreter_module_exists = self._check_module_exists("src.execution.signal_interpreter.standard_interpreter")
@@ -214,12 +220,23 @@ class Bootstrap:
         event_bus = container.get("event_bus")
         order_manager = container.get("order_manager")
         
+        # Create centralized trade registry
+        trade_registry = TradeRegistry(event_bus, name="global_trade_registry")
+        container.register_instance("trade_registry", trade_registry)
+        logger.info("Centralized trade registry initialized")
+        
         # Create portfolio
         portfolio_config = config.get_section("portfolio")
         initial_cash = portfolio_config.get_float("initial_cash", 100000.0)
         
         portfolio = PortfolioManager(event_bus, initial_cash=initial_cash)
         container.register_instance("portfolio", portfolio)
+        
+        # Get trade registry and set it in the portfolio
+        trade_registry = container.get("trade_registry")
+        if hasattr(portfolio, 'set_trade_registry'):
+            portfolio.set_trade_registry(trade_registry)
+            logger.info("Trade registry set in portfolio")
         
         # Check for risk manager type in config
         risk_config = config.get_section("risk_manager")

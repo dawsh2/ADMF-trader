@@ -1,0 +1,110 @@
+2025-05-08 15:01:03,725 - debug - INFO - Starting debug process for MA Crossover optimization
+2025-05-08 15:01:03,725 - debug - INFO - Checking data file...
+2025-05-08 15:01:03,730 - debug - INFO - Data file found with 999 rows
+2025-05-08 15:01:03,730 - debug - INFO - Columns: ['timestamp', 'Open', 'High', 'Low', 'Close', 'Volume', 'trade_count', 'vwap']
+2025-05-08 15:01:03,735 - debug - INFO - First 5 rows:
+             timestamp    Open    High     Low     Close  Volume  trade_count  vwap
+0  2024-03-26 13:30:00  521.23  521.26  520.92  521.0100  342898          NaN   NaN
+1  2024-03-26 13:31:00  521.03  521.11  520.88  521.0700  186082          NaN   NaN
+2  2024-03-26 13:32:00  521.05  521.32  521.04  521.2200  144430          NaN   NaN
+3  2024-03-26 13:33:00  521.23  521.36  521.15  521.2896  120104          NaN   NaN
+4  2024-03-26 13:34:00  521.30  521.44  521.27  521.3600   95387          NaN   NaN
+2025-05-08 15:01:03,736 - debug - INFO - Sufficient data for moving averages: 999 rows, slow window = 20
+2025-05-08 15:01:03,736 - debug - INFO - Checking configuration file...
+2025-05-08 15:01:03,738 - debug - INFO - Configuration file loaded: config/ma_crossover_optimization.yaml
+2025-05-08 15:01:03,738 - debug - INFO - Simulating MA crossover strategy...
+2025-05-08 15:01:03,739 - debug - INFO - Converted timestamp using format: %Y-%m-%d %H:%M:%S
+2025-05-08 15:01:03,741 - debug - INFO - Using MA parameters: fast_window=5, slow_window=20
+2025-05-08 15:01:03,743 - debug - INFO - Found 36 buy signals and 35 sell signals
+2025-05-08 15:01:03,744 - debug - INFO - Signal details (first 10):
+2025-05-08 15:01:03,746 - debug - INFO - 2024-03-26 13:49:00 - BUY - Price: 521.19, Fast MA: 521.13, Slow MA: 521.11
+2025-05-08 15:01:03,746 - debug - INFO - 2024-03-26 13:54:00 - SELL - Price: 520.96, Fast MA: 521.08, Slow MA: 521.08
+2025-05-08 15:01:03,746 - debug - INFO - 2024-03-26 13:58:00 - BUY - Price: 521.14, Fast MA: 521.08, Slow MA: 521.08
+2025-05-08 15:01:03,746 - debug - INFO - 2024-03-26 14:14:00 - SELL - Price: 521.33, Fast MA: 521.25, Slow MA: 521.26
+2025-05-08 15:01:03,746 - debug - INFO - 2024-03-26 14:15:00 - BUY - Price: 521.27, Fast MA: 521.27, Slow MA: 521.27
+2025-05-08 15:01:03,746 - debug - INFO - 2024-03-26 14:28:00 - SELL - Price: 521.19, Fast MA: 521.29, Slow MA: 521.32
+2025-05-08 15:01:03,746 - debug - INFO - 2024-03-26 14:43:00 - BUY - Price: 521.17, Fast MA: 521.08, Slow MA: 521.07
+2025-05-08 15:01:03,746 - debug - INFO - 2024-03-26 14:52:00 - SELL - Price: 521.08, Fast MA: 521.02, Slow MA: 521.03
+2025-05-08 15:01:03,746 - debug - INFO - 2024-03-26 14:53:00 - BUY - Price: 521.13, Fast MA: 521.05, Slow MA: 521.04
+2025-05-08 15:01:03,746 - debug - INFO - 2024-03-26 15:14:00 - SELL - Price: 521.22, Fast MA: 521.24, Slow MA: 521.25
+2025-05-08 15:01:03,747 - debug - INFO - Saved 71 signals to debug_signals.csv
+2025-05-08 15:01:03,747 - debug - INFO - Debug summary:
+2025-05-08 15:01:03,747 - debug - INFO - Data check: PASS
+2025-05-08 15:01:03,747 - debug - INFO - Configuration check: PASS
+2025-05-08 15:01:03,747 - debug - INFO - Strategy simulation: PASS
+2025-05-08 15:01:03,747 - debug - INFO - All checks PASSED. Run the optimization with:
+2025-05-08 15:01:03,747 - debug - INFO - python main.py optimize --config config/ma_crossover_optimization.yaml
+2025-05-08 15:01:43,183 - debug - INFO - Starting debug process for MA Crossover optimization
+2025-05-08 15:01:43,184 - debug - INFO - Checking data file...
+2025-05-08 15:01:43,185 - debug - INFO - Data file found with 999 rows
+2025-05-08 15:01:43,185 - debug - INFO - Columns: ['timestamp', 'Open', 'High', 'Low', 'Close', 'Volume', 'trade_count', 'vwap']
+2025-05-08 15:01:43,189 - debug - INFO - First 5 rows:
+             timestamp    Open    High     Low     Close  Volume  trade_count  vwap
+0  2024-03-26 13:30:00  521.23  521.26  520.92  521.0100  342898          NaN   NaN
+1  2024-03-26 13:31:00  521.03  521.11  520.88  521.0700  186082          NaN   NaN
+2  2024-03-26 13:32:00  521.05  521.32  521.04  521.2200  144430          NaN   NaN
+3  2024-03-26 13:33:00  521.23  521.36  521.15  521.2896  120104          NaN   NaN
+4  2024-03-26 13:34:00  521.30  521.44  521.27  521.3600   95387          NaN   NaN
+2025-05-08 15:01:43,191 - debug - INFO - Sufficient data for moving averages: 999 rows, slow window = 20
+2025-05-08 15:01:43,191 - debug - INFO - Checking configuration file...
+2025-05-08 15:01:43,192 - debug - INFO - Configuration file loaded: config/ma_crossover_optimization.yaml
+2025-05-08 15:01:43,192 - debug - INFO - Simulating MA crossover strategy...
+2025-05-08 15:01:43,194 - debug - INFO - Converted timestamp using format: %Y-%m-%d %H:%M:%S
+2025-05-08 15:01:43,195 - debug - INFO - Using MA parameters: fast_window=5, slow_window=20
+2025-05-08 15:01:43,198 - debug - INFO - Found 36 buy signals and 35 sell signals
+2025-05-08 15:01:43,200 - debug - INFO - Signal details (first 10):
+2025-05-08 15:01:43,201 - debug - INFO - 2024-03-26 13:49:00 - BUY - Price: 521.19, Fast MA: 521.13, Slow MA: 521.11
+2025-05-08 15:01:43,201 - debug - INFO - 2024-03-26 13:54:00 - SELL - Price: 520.96, Fast MA: 521.08, Slow MA: 521.08
+2025-05-08 15:01:43,201 - debug - INFO - 2024-03-26 13:58:00 - BUY - Price: 521.14, Fast MA: 521.08, Slow MA: 521.08
+2025-05-08 15:01:43,201 - debug - INFO - 2024-03-26 14:14:00 - SELL - Price: 521.33, Fast MA: 521.25, Slow MA: 521.26
+2025-05-08 15:01:43,201 - debug - INFO - 2024-03-26 14:15:00 - BUY - Price: 521.27, Fast MA: 521.27, Slow MA: 521.27
+2025-05-08 15:01:43,201 - debug - INFO - 2024-03-26 14:28:00 - SELL - Price: 521.19, Fast MA: 521.29, Slow MA: 521.32
+2025-05-08 15:01:43,201 - debug - INFO - 2024-03-26 14:43:00 - BUY - Price: 521.17, Fast MA: 521.08, Slow MA: 521.07
+2025-05-08 15:01:43,201 - debug - INFO - 2024-03-26 14:52:00 - SELL - Price: 521.08, Fast MA: 521.02, Slow MA: 521.03
+2025-05-08 15:01:43,201 - debug - INFO - 2024-03-26 14:53:00 - BUY - Price: 521.13, Fast MA: 521.05, Slow MA: 521.04
+2025-05-08 15:01:43,201 - debug - INFO - 2024-03-26 15:14:00 - SELL - Price: 521.22, Fast MA: 521.24, Slow MA: 521.25
+2025-05-08 15:01:43,203 - debug - INFO - Saved 71 signals to debug_signals.csv
+2025-05-08 15:01:43,203 - debug - INFO - Debug summary:
+2025-05-08 15:01:43,203 - debug - INFO - Data check: PASS
+2025-05-08 15:01:43,203 - debug - INFO - Configuration check: PASS
+2025-05-08 15:01:43,203 - debug - INFO - Strategy simulation: PASS
+2025-05-08 15:01:43,203 - debug - INFO - All checks PASSED. Run the optimization with:
+2025-05-08 15:01:43,203 - debug - INFO - python main.py optimize --config config/ma_crossover_optimization.yaml
+2025-05-08 15:04:54,257 - debug - INFO - Starting debug process for MA Crossover optimization
+2025-05-08 15:04:54,257 - debug - INFO - Checking data file...
+2025-05-08 15:04:54,261 - debug - INFO - Data file found with 999 rows
+2025-05-08 15:04:54,261 - debug - INFO - Columns: ['timestamp', 'Open', 'High', 'Low', 'Close', 'Volume', 'trade_count', 'vwap']
+2025-05-08 15:04:54,266 - debug - INFO - First 5 rows:
+             timestamp    Open    High  ...  Volume  trade_count  vwap
+0  2024-03-26 13:30:00  521.23  521.26  ...  342898          NaN   NaN
+1  2024-03-26 13:31:00  521.03  521.11  ...  186082          NaN   NaN
+2  2024-03-26 13:32:00  521.05  521.32  ...  144430          NaN   NaN
+3  2024-03-26 13:33:00  521.23  521.36  ...  120104          NaN   NaN
+4  2024-03-26 13:34:00  521.30  521.44  ...   95387          NaN   NaN
+
+[5 rows x 8 columns]
+2025-05-08 15:04:54,268 - debug - INFO - Sufficient data for moving averages: 999 rows, slow window = 20
+2025-05-08 15:04:54,268 - debug - INFO - Checking configuration file...
+2025-05-08 15:04:54,269 - debug - INFO - Configuration file loaded: config/ma_crossover_optimization.yaml
+2025-05-08 15:04:54,269 - debug - INFO - Simulating MA crossover strategy...
+2025-05-08 15:04:54,271 - debug - INFO - Converted timestamp using format: %Y-%m-%d %H:%M:%S
+2025-05-08 15:04:54,272 - debug - INFO - Using MA parameters: fast_window=5, slow_window=20
+2025-05-08 15:04:54,275 - debug - INFO - Found 36 buy signals and 35 sell signals
+2025-05-08 15:04:54,275 - debug - INFO - Signal details (first 10):
+2025-05-08 15:04:54,276 - debug - INFO - 2024-03-26 13:49:00 - BUY - Price: 521.19, Fast MA: 521.13, Slow MA: 521.11
+2025-05-08 15:04:54,276 - debug - INFO - 2024-03-26 13:54:00 - SELL - Price: 520.96, Fast MA: 521.08, Slow MA: 521.08
+2025-05-08 15:04:54,276 - debug - INFO - 2024-03-26 13:58:00 - BUY - Price: 521.14, Fast MA: 521.08, Slow MA: 521.08
+2025-05-08 15:04:54,277 - debug - INFO - 2024-03-26 14:14:00 - SELL - Price: 521.33, Fast MA: 521.25, Slow MA: 521.26
+2025-05-08 15:04:54,277 - debug - INFO - 2024-03-26 14:15:00 - BUY - Price: 521.27, Fast MA: 521.27, Slow MA: 521.27
+2025-05-08 15:04:54,277 - debug - INFO - 2024-03-26 14:28:00 - SELL - Price: 521.19, Fast MA: 521.29, Slow MA: 521.32
+2025-05-08 15:04:54,277 - debug - INFO - 2024-03-26 14:43:00 - BUY - Price: 521.17, Fast MA: 521.08, Slow MA: 521.07
+2025-05-08 15:04:54,277 - debug - INFO - 2024-03-26 14:52:00 - SELL - Price: 521.08, Fast MA: 521.02, Slow MA: 521.03
+2025-05-08 15:04:54,277 - debug - INFO - 2024-03-26 14:53:00 - BUY - Price: 521.13, Fast MA: 521.05, Slow MA: 521.04
+2025-05-08 15:04:54,277 - debug - INFO - 2024-03-26 15:14:00 - SELL - Price: 521.22, Fast MA: 521.24, Slow MA: 521.25
+2025-05-08 15:04:54,278 - debug - INFO - Saved 71 signals to debug_signals.csv
+2025-05-08 15:04:54,279 - debug - INFO - Debug summary:
+2025-05-08 15:04:54,279 - debug - INFO - Data check: PASS
+2025-05-08 15:04:54,279 - debug - INFO - Configuration check: PASS
+2025-05-08 15:04:54,279 - debug - INFO - Strategy simulation: PASS
+2025-05-08 15:04:54,279 - debug - INFO - All checks PASSED. Run the optimization with:
+2025-05-08 15:04:54,279 - debug - INFO - python main.py optimize --config config/ma_crossover_optimization.yaml

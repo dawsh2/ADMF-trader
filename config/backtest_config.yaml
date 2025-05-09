@@ -1,0 +1,32 @@
+# Backtest Configuration
+
+# Basic settings
+name: ADMF-Trader Backtest
+description: "Backtest configuration for the ADMF-Trader system"
+initial_capital: 100000
+commission_rate: 0.001
+
+# Data settings
+data:
+  sources:
+    - symbol: HEAD
+      file: data/HEAD_1min.csv
+      date_column: timestamp
+      date_format: "%Y-%m-%d %H:%M:%S"
+
+# Default strategy settings
+strategy:
+  name: simple_ma_crossover
+  default_params:
+    fast_period: 10
+    slow_period: 30
+    position_size: 100
+
+# Optimization settings
+optimization:
+  mode: grid_search  # grid_search, random_search, or walk_forward
+  objective: sharpe_ratio  # sharpe_ratio, total_return, max_drawdown, etc.
+  train_test_split:
+    method: ratio  # ratio, date, or fixed
+    train_ratio: 0.7
+    test_ratio: 0.3

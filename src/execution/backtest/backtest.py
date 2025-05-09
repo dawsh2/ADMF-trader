@@ -46,6 +46,7 @@ class BacktestCoordinator:
         self.strategy = None
         self.calculator = None
         self.report_generator = None
+        self.trade_registry = None  # Centralized trade registry
         self.results = {}
         self.configured = False
     
@@ -83,6 +84,13 @@ class BacktestCoordinator:
             else:
                 logger.error("No data handler available")
                 return False
+                
+            # Get trade registry if available
+            if self.container and self.container.has('trade_registry'):
+                self.trade_registry = self.container.get('trade_registry')
+                logger.info("Using centralized trade registry for trade tracking")
+            else:
+                logger.warning("No trade registry available, using portfolio-based trade tracking")
             
             # Create portfolio
             if self.container and self.container.has('portfolio'):
@@ -143,6 +151,14 @@ class BacktestCoordinator:
             self.order_manager.set_broker(self.broker)
             # Add portfolio reference to order manager for trade closing
             self.order_manager.portfolio_manager = self.portfolio
+            
+            # Connect trade registry to order manager if available
+            if self.trade_registry and hasattr(self.order_manager, 'set_trade_registry'):
+                try:
+                    self.order_manager.set_trade_registry(self.trade_registry)
+                    logger.info("Connected trade registry to order manager in backtest")
+                except Exception as e:
+                    logger.error(f"Error connecting trade registry to order manager: {e}")
             
             # Register components with event manager in the CRITICAL CORRECT ORDER for event flow
             # The order is important to prevent signal duplication and ensure proper processing
@@ -362,10 +378,17 @@ class BacktestCoordinator:
             if hasattr(self.portfolio, 'debug_trade_tracking'):
                 self.portfolio.debug_trade_tracking()
             
-            # CRITICAL FIX: Explicitly get the trades from the portfolio
-            trades = self.portfolio.get_recent_trades()
-            trade_count = len(trades) if trades else 0
-            logger.info(f"Collected {trade_count} trades from portfolio for reporting")
+            # Get trades from the trade registry if available, otherwise from portfolio
+            trades = []
+            if self.trade_registry:
+                trades = self.trade_registry.get_trades(filter_open=True)
+                trade_count = len(trades)
+                logger.info(f"Collected {trade_count} trades from centralized trade registry for reporting")
+            else:
+                # CRITICAL FIX: Explicitly get the trades from the portfolio
+                trades = self.portfolio.get_recent_trades()
+                trade_count = len(trades) if trades else 0
+                logger.info(f"Collected {trade_count} trades from portfolio for reporting")
             
             # Log trade information for verification
             if trades and len(trades) > 0:
@@ -402,9 +425,10 @@ class BacktestCoordinator:
                 logger.warning("Creating empty trades list")
                 trades = []
 
-            # CRITICAL FIX: Explicitly store trades in results
+            # CRITICAL FIX: Explicitly store trades in results with source info
             self.results['trades'] = trades
-            logger.info(f"Stored {len(trades)} trades in results dictionary with ID {id(trades)}")
+            trade_source = "trade registry" if self.trade_registry else "portfolio"
+            logger.info(f"Stored {len(trades)} trades from {trade_source} in results dictionary with ID {id(trades)}")
             
             # Set up performance calculator
             self.calculator.set_equity_curve(equity_curve)
@@ -415,6 +439,10 @@ class BacktestCoordinator:
 
             # Calculate metrics with safe handling
             try:
+                # Set trades in calculator (ensure trades are set explicitly each time)
+                self.calculator.set_trades(trades)
+                
+                # Calculate metrics
                 metrics = self.calculator.calculate_all_metrics()
                 logger.info(f"Calculated performance metrics for {len(trades)} trades")
             except Exception as calc_error:

@@ -1,797 +1,544 @@
 """
-Parameter space implementation for optimization.
+Parameter space definition for strategy optimization.
 
 This module provides classes for defining parameter spaces for strategy optimization,
-including different parameter types, constraints, and search methods.
+supporting different parameter types and constraints.
 """
 
-import json
-import random
-import itertools
-import math
-import uuid
-from typing import Dict, Any, List, Tuple, Union, Optional, Iterator, Callable
-
-from src.core.exceptions import OptimizationError, ParameterSpaceError
-
+import numpy as np
+from itertools import product
 
 class Parameter:
-    """Base class for a parameter in the parameter space."""
+    """Base class for optimization parameters."""
     
-    def __init__(self, name: str, param_type: str):
-        """Initialize a parameter.
+    def __init__(self, name, description=None):
+        """
+        Initialize a parameter.
         
         Args:
-            name: Name of the parameter
-            param_type: Type of the parameter
+            name (str): Parameter name
+            description (str, optional): Parameter description
         """
         self.name = name
-        self.type = param_type
-        self.id = str(uuid.uuid4())
-    
-    def get_grid_points(self, num_points: Optional[int] = None) -> List[Any]:
-        """Get a list of grid points for this parameter.
+        self.description = description
         
-        Args:
-            num_points: Optional number of points to generate
-            
-        Returns:
-            List of parameter values for grid search
+    def get_values(self):
         """
-        raise NotImplementedError("Subclasses must implement get_grid_points")
-    
-    def get_random_point(self) -> Any:
-        """Get a random point in the parameter space.
+        Get possible values for this parameter.
         
         Returns:
-            Random parameter value
+            list: Possible values
         """
-        raise NotImplementedError("Subclasses must implement get_random_point")
-    
-    def validate(self, value: Any) -> Tuple[bool, Optional[str]]:
-        """Validate a parameter value.
+        raise NotImplementedError("Subclasses must implement get_values")
+        
+    def validate(self, value):
+        """
+        Validate a parameter value.
         
         Args:
             value: Value to validate
             
         Returns:
-            Tuple of (is_valid, error_message)
+            bool: True if valid, False otherwise
         """
         raise NotImplementedError("Subclasses must implement validate")
-    
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert parameter to dictionary representation.
         
-        Returns:
-            Dictionary representation of parameter
-        """
-        return {
-            "name": self.name,
-            "type": self.type,
-            "id": self.id
-        }
-    
-    @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'Parameter':
-        """Create parameter from dictionary representation.
-        
-        Args:
-            data: Dictionary representation of parameter
-            
-        Returns:
-            Parameter instance
-        
-        Raises:
-            ParameterSpaceError: If parameter type is unknown
-        """
-        param_type = data.get("type")
-        if param_type == "integer":
-            return IntegerParameter.from_dict(data)
-        elif param_type == "float":
-            return FloatParameter.from_dict(data)
-        elif param_type == "categorical":
-            return CategoricalParameter.from_dict(data)
-        elif param_type == "boolean":
-            return BooleanParameter.from_dict(data)
-        else:
-            raise ParameterSpaceError(
-                message=f"Unknown parameter type: {param_type}"
-            )
-
+    def __str__(self):
+        """String representation of the parameter."""
+        return f"{self.__class__.__name__}({self.name})"
 
 class IntegerParameter(Parameter):
-    """Integer parameter with min, max, and step."""
+    """Integer parameter for optimization."""
     
-    def __init__(self, name: str, min_value: int, max_value: int, 
-                 step: Optional[int] = 1, log_scale: bool = False):
-        """Initialize an integer parameter.
+    def __init__(self, name, min_value, max_value, step=1, log_scale=False, description=None):
+        """
+        Initialize an integer parameter.
         
         Args:
-            name: Name of the parameter
-            min_value: Minimum value (inclusive)
-            max_value: Maximum value (inclusive)
-            step: Step size between values (default: 1)
-            log_scale: Whether to use logarithmic scale for grid points (default: False)
-            
-        Raises:
-            ParameterSpaceError: If min > max or step <= 0
+            name (str): Parameter name
+            min_value (int): Minimum value
+            max_value (int): Maximum value
+            step (int, optional): Step size
+            log_scale (bool, optional): Whether to use logarithmic scale
+            description (str, optional): Parameter description
         """
-        super().__init__(name, "integer")
-        
-        if min_value > max_value:
-            raise ParameterSpaceError(
-                parameter=name,
-                message=f"Minimum value ({min_value}) must be <= maximum value ({max_value})"
-            )
-        
-        if step <= 0:
-            raise ParameterSpaceError(
-                parameter=name,
-                message=f"Step ({step}) must be > 0"
-            )
-        
+        super().__init__(name, description)
         self.min_value = min_value
         self.max_value = max_value
         self.step = step
         self.log_scale = log_scale
-    
-    def get_grid_points(self, num_points: Optional[int] = None) -> List[int]:
-        """Get a list of grid points for this parameter.
         
-        Args:
-            num_points: Optional number of points to generate
-                (ignores step if provided)
+        self._validate_bounds()
+        
+    def _validate_bounds(self):
+        """Validate parameter bounds."""
+        if self.min_value > self.max_value:
+            raise ValueError(f"Min value {self.min_value} is greater than max value {self.max_value}")
             
-        Returns:
-            List of parameter values for grid search
+        if self.step <= 0:
+            raise ValueError(f"Step must be positive, got {self.step}")
+            
+        if self.log_scale and self.min_value <= 0:
+            raise ValueError(f"Min value must be positive for log scale, got {self.min_value}")
+            
+    def get_values(self):
         """
-        if num_points is not None:
-            # Generate num_points evenly spaced points
-            if self.log_scale and self.min_value > 0:
-                # Logarithmic scale
-                log_min = math.log(self.min_value)
-                log_max = math.log(self.max_value)
-                return [
-                    round(math.exp(log_min + i * (log_max - log_min) / (num_points - 1)))
-                    for i in range(num_points)
-                ]
-            else:
-                # Linear scale
-                if num_points == 1:
-                    return [self.min_value]
-                return [
-                    round(self.min_value + i * (self.max_value - self.min_value) / (num_points - 1))
-                    for i in range(num_points)
-                ]
-        else:
-            # Use step
-            return list(range(self.min_value, self.max_value + 1, self.step))
-    
-    def get_random_point(self) -> int:
-        """Get a random point in the parameter space.
+        Get possible values for this parameter.
         
         Returns:
-            Random integer between min_value and max_value
+            list: Possible values
         """
-        if self.log_scale and self.min_value > 0:
-            # Logarithmic scale
-            log_min = math.log(self.min_value)
-            log_max = math.log(self.max_value)
-            return round(math.exp(random.uniform(log_min, log_max)))
+        if self.log_scale:
+            # Generate values on a logarithmic scale
+            log_min = np.log10(self.min_value)
+            log_max = np.log10(self.max_value)
+            log_step = (log_max - log_min) / ((self.max_value - self.min_value) / self.step)
+            
+            log_values = np.arange(log_min, log_max + log_step, log_step)
+            values = np.power(10, log_values)
+            
+            # Convert to integers and ensure uniqueness
+            values = np.unique(np.round(values).astype(int))
+            
+            # Ensure bounds are respected
+            values = values[(values >= self.min_value) & (values <= self.max_value)]
+            
+            return values.tolist()
         else:
-            # Linear scale - ensure we respect the step size
-            steps = (self.max_value - self.min_value) // self.step
-            return self.min_value + random.randint(0, steps) * self.step
-    
-    def validate(self, value: Any) -> Tuple[bool, Optional[str]]:
-        """Validate a parameter value.
+            # Generate values on a linear scale
+            return list(range(self.min_value, self.max_value + 1, self.step))
+            
+    def validate(self, value):
+        """
+        Validate a parameter value.
         
         Args:
             value: Value to validate
             
         Returns:
-            Tuple of (is_valid, error_message)
+            bool: True if valid, False otherwise
         """
-        try:
-            # Type check
-            if not isinstance(value, int):
-                return False, f"Value must be an integer, got {type(value).__name__}"
+        # Check if value is an integer
+        if not isinstance(value, int):
+            return False
             
-            # Range check
-            if value < self.min_value:
-                return False, f"Value {value} is below minimum {self.min_value}"
+        # Check if value is within bounds
+        if value < self.min_value or value > self.max_value:
+            return False
             
-            if value > self.max_value:
-                return False, f"Value {value} is above maximum {self.max_value}"
+        # For non-log scale, check if value is a multiple of step
+        if not self.log_scale and (value - self.min_value) % self.step != 0:
+            return False
             
-            # Step check (if step > 1)
-            if self.step > 1:
-                if (value - self.min_value) % self.step != 0:
-                    return False, f"Value {value} does not match step size {self.step}"
-            
-            return True, None
-        except Exception as e:
-            return False, str(e)
-    
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert parameter to dictionary representation."""
-        result = super().to_dict()
-        result.update({
-            "min_value": self.min_value,
-            "max_value": self.max_value,
-            "step": self.step,
-            "log_scale": self.log_scale
-        })
-        return result
-    
-    @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'IntegerParameter':
-        """Create parameter from dictionary representation."""
-        param = cls(
-            name=data["name"],
-            min_value=data["min_value"],
-            max_value=data["max_value"],
-            step=data.get("step", 1),
-            log_scale=data.get("log_scale", False)
-        )
-        if "id" in data:
-            param.id = data["id"]
-        return param
-
+        return True
 
 class FloatParameter(Parameter):
-    """Float parameter with min, max, and step."""
+    """Float parameter for optimization."""
     
-    def __init__(self, name: str, min_value: float, max_value: float, 
-                 step: Optional[float] = None, log_scale: bool = False):
-        """Initialize a float parameter.
+    def __init__(self, name, min_value, max_value, step=None, num_points=10, 
+                log_scale=False, description=None):
+        """
+        Initialize a float parameter.
         
         Args:
-            name: Name of the parameter
-            min_value: Minimum value (inclusive)
-            max_value: Maximum value (inclusive)
-            step: Step size between values (default: None)
-            log_scale: Whether to use logarithmic scale for grid points (default: False)
-            
-        Raises:
-            ParameterSpaceError: If min > max or step <= 0
+            name (str): Parameter name
+            min_value (float): Minimum value
+            max_value (float): Maximum value
+            step (float, optional): Step size
+            num_points (int, optional): Number of points if step not specified
+            log_scale (bool, optional): Whether to use logarithmic scale
+            description (str, optional): Parameter description
         """
-        super().__init__(name, "float")
-        
-        if min_value > max_value:
-            raise ParameterSpaceError(
-                parameter=name,
-                message=f"Minimum value ({min_value}) must be <= maximum value ({max_value})"
-            )
-        
-        if step is not None and step <= 0:
-            raise ParameterSpaceError(
-                parameter=name,
-                message=f"Step ({step}) must be > 0"
-            )
-        
+        super().__init__(name, description)
         self.min_value = min_value
         self.max_value = max_value
         self.step = step
+        self.num_points = num_points
         self.log_scale = log_scale
-    
-    def get_grid_points(self, num_points: Optional[int] = None) -> List[float]:
-        """Get a list of grid points for this parameter.
         
-        Args:
-            num_points: Optional number of points to generate
-                (overrides step if provided)
+        self._validate_bounds()
+        
+    def _validate_bounds(self):
+        """Validate parameter bounds."""
+        if self.min_value > self.max_value:
+            raise ValueError(f"Min value {self.min_value} is greater than max value {self.max_value}")
             
-        Returns:
-            List of parameter values for grid search
+        if self.step is not None and self.step <= 0:
+            raise ValueError(f"Step must be positive, got {self.step}")
+            
+        if self.log_scale and self.min_value <= 0:
+            raise ValueError(f"Min value must be positive for log scale, got {self.min_value}")
+            
+    def get_values(self):
         """
-        if num_points is None:
-            if self.step is None:
-                # Default to 10 points if no step and no num_points
-                num_points = 10
-            else:
-                # Use step if provided
-                num_steps = int((self.max_value - self.min_value) / self.step) + 1
-                return [self.min_value + i * self.step for i in range(num_steps)]
-        
-        # Generate num_points evenly spaced points
-        if num_points == 1:
-            return [self.min_value]
-        
-        if self.log_scale and self.min_value > 0:
-            # Logarithmic scale
-            log_min = math.log(self.min_value)
-            log_max = math.log(self.max_value)
-            return [
-                math.exp(log_min + i * (log_max - log_min) / (num_points - 1))
-                for i in range(num_points)
-            ]
-        else:
-            # Linear scale
-            return [
-                self.min_value + i * (self.max_value - self.min_value) / (num_points - 1)
-                for i in range(num_points)
-            ]
-    
-    def get_random_point(self) -> float:
-        """Get a random point in the parameter space.
+        Get possible values for this parameter.
         
         Returns:
-            Random float between min_value and max_value
+            list: Possible values
         """
-        if self.log_scale and self.min_value > 0:
-            # Logarithmic scale
-            log_min = math.log(self.min_value)
-            log_max = math.log(self.max_value)
-            return math.exp(random.uniform(log_min, log_max))
-        else:
-            # Linear scale
-            value = random.uniform(self.min_value, self.max_value)
-            
-            # Respect step if provided
+        if self.log_scale:
+            # Generate values on a logarithmic scale
             if self.step is not None:
-                steps = round((value - self.min_value) / self.step)
-                value = self.min_value + steps * self.step
-                # Ensure we don't exceed max_value due to rounding
-                value = min(value, self.max_value)
-            
-            return value
-    
-    def validate(self, value: Any) -> Tuple[bool, Optional[str]]:
-        """Validate a parameter value.
+                log_min = np.log10(self.min_value)
+                log_max = np.log10(self.max_value)
+                num_steps = int((log_max - log_min) / self.step) + 1
+                log_values = np.linspace(log_min, log_max, num_steps)
+            else:
+                log_min = np.log10(self.min_value)
+                log_max = np.log10(self.max_value)
+                log_values = np.linspace(log_min, log_max, self.num_points)
+                
+            values = np.power(10, log_values)
+        else:
+            # Generate values on a linear scale
+            if self.step is not None:
+                num_steps = int((self.max_value - self.min_value) / self.step) + 1
+                values = np.linspace(self.min_value, self.max_value, num_steps)
+            else:
+                values = np.linspace(self.min_value, self.max_value, self.num_points)
+                
+        return values.tolist()
+        
+    def validate(self, value):
+        """
+        Validate a parameter value.
         
         Args:
             value: Value to validate
             
         Returns:
-            Tuple of (is_valid, error_message)
+            bool: True if valid, False otherwise
         """
-        try:
-            # Type check
-            if not isinstance(value, (int, float)):
-                return False, f"Value must be a number, got {type(value).__name__}"
+        # Check if value is a number
+        if not isinstance(value, (int, float)):
+            return False
             
-            # Range check
-            if value < self.min_value:
-                return False, f"Value {value} is below minimum {self.min_value}"
+        # Check if value is within bounds
+        if value < self.min_value or value > self.max_value:
+            return False
             
-            if value > self.max_value:
-                return False, f"Value {value} is above maximum {self.max_value}"
+        # For non-log scale with step, check if value is approximately a multiple of step
+        if (not self.log_scale and self.step is not None and 
+            abs((value - self.min_value) % self.step) > 1e-10 and
+            abs((value - self.min_value) % self.step - self.step) > 1e-10):
+            return False
             
-            # Step check (if provided)
-            if self.step is not None:
-                # Allow small floating-point errors
-                step_diff = abs(((value - self.min_value) / self.step) % 1)
-                if step_diff > 1e-10 and step_diff < (1 - 1e-10):
-                    return False, f"Value {value} does not match step size {self.step}"
-            
-            return True, None
-        except Exception as e:
-            return False, str(e)
-    
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert parameter to dictionary representation."""
-        result = super().to_dict()
-        result.update({
-            "min_value": self.min_value,
-            "max_value": self.max_value,
-            "step": self.step,
-            "log_scale": self.log_scale
-        })
-        return result
-    
-    @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'FloatParameter':
-        """Create parameter from dictionary representation."""
-        param = cls(
-            name=data["name"],
-            min_value=data["min_value"],
-            max_value=data["max_value"],
-            step=data.get("step"),
-            log_scale=data.get("log_scale", False)
-        )
-        if "id" in data:
-            param.id = data["id"]
-        return param
-
+        return True
 
 class CategoricalParameter(Parameter):
-    """Categorical parameter with a list of possible values."""
+    """Categorical parameter for optimization."""
     
-    def __init__(self, name: str, categories: List[Any]):
-        """Initialize a categorical parameter.
+    def __init__(self, name, categories, description=None):
+        """
+        Initialize a categorical parameter.
         
         Args:
-            name: Name of the parameter
-            categories: List of possible values
-            
-        Raises:
-            ParameterSpaceError: If categories is empty
+            name (str): Parameter name
+            categories (list): Possible categories
+            description (str, optional): Parameter description
         """
-        super().__init__(name, "categorical")
+        super().__init__(name, description)
+        self.categories = categories
         
-        if not categories:
-            raise ParameterSpaceError(
-                parameter=name,
-                message="Categories cannot be empty"
-            )
+        self._validate_categories()
         
-        self.categories = list(categories)
-    
-    def get_grid_points(self, num_points: Optional[int] = None) -> List[Any]:
-        """Get a list of grid points for this parameter.
-        
-        Args:
-            num_points: Optional number of points to generate
-                (ignores categories if provided)
+    def _validate_categories(self):
+        """Validate parameter categories."""
+        if not self.categories:
+            raise ValueError("Categories cannot be empty")
             
-        Returns:
-            List of parameter values for grid search
+    def get_values(self):
         """
-        if num_points is not None and num_points < len(self.categories):
-            # Return a subset of categories if num_points is less than total
-            indices = [int(i * len(self.categories) / num_points) for i in range(num_points)]
-            return [self.categories[i] for i in indices]
-        else:
-            # Return all categories
-            return list(self.categories)
-    
-    def get_random_point(self) -> Any:
-        """Get a random point in the parameter space.
+        Get possible values for this parameter.
         
         Returns:
-            Random value from categories
+            list: Possible values
         """
-        return random.choice(self.categories)
-    
-    def validate(self, value: Any) -> Tuple[bool, Optional[str]]:
-        """Validate a parameter value.
+        return self.categories
+        
+    def validate(self, value):
+        """
+        Validate a parameter value.
         
         Args:
             value: Value to validate
             
         Returns:
-            Tuple of (is_valid, error_message)
+            bool: True if valid, False otherwise
         """
-        if value not in self.categories:
-            categories_str = str(self.categories)
-            if len(categories_str) > 100:
-                categories_str = f"{str(self.categories[:3])[:-1]}, ... (total: {len(self.categories)})]"
-            return False, f"Value '{value}' is not in categories: {categories_str}"
-        return True, None
-    
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert parameter to dictionary representation."""
-        result = super().to_dict()
-        result.update({
-            "categories": self.categories
-        })
-        return result
-    
-    @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'CategoricalParameter':
-        """Create parameter from dictionary representation."""
-        param = cls(
-            name=data["name"],
-            categories=data["categories"]
-        )
-        if "id" in data:
-            param.id = data["id"]
-        return param
+        return value in self.categories
 
-
-class BooleanParameter(CategoricalParameter):
-    """Boolean parameter (special case of categorical with [True, False])."""
+class BooleanParameter(Parameter):
+    """Boolean parameter for optimization."""
     
-    def __init__(self, name: str):
-        """Initialize a boolean parameter.
+    def __init__(self, name, description=None):
+        """
+        Initialize a boolean parameter.
         
         Args:
-            name: Name of the parameter
+            name (str): Parameter name
+            description (str, optional): Parameter description
         """
-        super().__init__(name, [True, False])
-        self.type = "boolean"
-    
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert parameter to dictionary representation."""
-        result = Parameter.to_dict(self)  # Skip CategoricalParameter.to_dict
-        result.update({
-            "categories": [True, False]
-        })
-        return result
-    
-    @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'BooleanParameter':
-        """Create parameter from dictionary representation."""
-        param = cls(name=data["name"])
-        if "id" in data:
-            param.id = data["id"]
-        return param
+        super().__init__(name, description)
+        
+    def get_values(self):
+        """
+        Get possible values for this parameter.
+        
+        Returns:
+            list: Possible values
+        """
+        return [True, False]
+        
+    def validate(self, value):
+        """
+        Validate a parameter value.
+        
+        Args:
+            value: Value to validate
+            
+        Returns:
+            bool: True if valid, False otherwise
+        """
+        return isinstance(value, bool)
 
+class ConditionalParameter(Parameter):
+    """Conditional parameter that depends on another parameter."""
+    
+    def __init__(self, name, parent_parameter, value_map, description=None):
+        """
+        Initialize a conditional parameter.
+        
+        Args:
+            name (str): Parameter name
+            parent_parameter (Parameter): Parent parameter this depends on
+            value_map (dict): Mapping from parent values to this parameter's values
+            description (str, optional): Parameter description
+        """
+        super().__init__(name, description)
+        self.parent_parameter = parent_parameter
+        self.value_map = value_map
+        
+        self._validate_value_map()
+        
+    def _validate_value_map(self):
+        """Validate the value map."""
+        if not self.value_map:
+            raise ValueError("Value map cannot be empty")
+            
+        parent_values = self.parent_parameter.get_values()
+        for parent_value in self.value_map:
+            if parent_value not in parent_values:
+                raise ValueError(f"Parent value {parent_value} not found in parent parameter values")
+                
+    def get_values(self, parent_value=None):
+        """
+        Get possible values for this parameter.
+        
+        Args:
+            parent_value: Value of the parent parameter
+            
+        Returns:
+            list: Possible values
+        """
+        if parent_value is None:
+            # Return all possible values
+            all_values = []
+            for values in self.value_map.values():
+                all_values.extend(values)
+            return list(set(all_values))
+        
+        # Return values for specific parent value
+        return self.value_map.get(parent_value, [])
+        
+    def validate(self, value, parent_value=None):
+        """
+        Validate a parameter value.
+        
+        Args:
+            value: Value to validate
+            parent_value: Value of the parent parameter
+            
+        Returns:
+            bool: True if valid, False otherwise
+        """
+        if parent_value is None:
+            # Check if value is valid for any parent value
+            for values in self.value_map.values():
+                if value in values:
+                    return True
+            return False
+            
+        # Check if value is valid for specific parent value
+        return value in self.value_map.get(parent_value, [])
 
 class ParameterSpace:
-    """A space of parameters for optimization."""
+    """Parameter space for optimization."""
     
-    def __init__(self, name: str = "default"):
-        """Initialize a parameter space.
+    def __init__(self):
+        """Initialize a parameter space."""
+        self.parameters = {}
+        self.conditional_dependencies = {}
         
-        Args:
-            name: Name of the parameter space
+    def add_parameter(self, parameter):
         """
-        self.name = name
-        self.parameters: Dict[str, Parameter] = {}
-    
-    def add_parameter(self, parameter: Parameter) -> None:
-        """Add a parameter to the space.
+        Add a parameter to the space.
         
         Args:
-            parameter: Parameter to add
-            
-        Raises:
-            ParameterSpaceError: If parameter with same name already exists
+            parameter (Parameter): Parameter to add
         """
         if parameter.name in self.parameters:
-            raise ParameterSpaceError(
-                parameter=parameter.name,
-                message=f"Parameter '{parameter.name}' already exists in space"
-            )
-        
+            raise ValueError(f"Parameter {parameter.name} already exists")
+            
         self.parameters[parameter.name] = parameter
-    
-    def add_integer(self, name: str, min_value: int, max_value: int, 
-                   step: int = 1, log_scale: bool = False) -> IntegerParameter:
-        """Add an integer parameter to the space.
+        
+        # Add conditional dependencies
+        if isinstance(parameter, ConditionalParameter):
+            parent_name = parameter.parent_parameter.name
+            if parent_name not in self.conditional_dependencies:
+                self.conditional_dependencies[parent_name] = []
+            self.conditional_dependencies[parent_name].append(parameter.name)
+            
+    def get_parameter(self, name):
+        """
+        Get a parameter by name.
         
         Args:
-            name: Name of the parameter
-            min_value: Minimum value (inclusive)
-            max_value: Maximum value (inclusive)
-            step: Step size between values (default: 1)
-            log_scale: Whether to use logarithmic scale for grid points (default: False)
+            name (str): Parameter name
             
         Returns:
-            The created parameter
-            
-        Raises:
-            ParameterSpaceError: If parameter with same name already exists
+            Parameter: Parameter instance
         """
-        param = IntegerParameter(name, min_value, max_value, step, log_scale)
-        self.add_parameter(param)
-        return param
-    
-    def add_float(self, name: str, min_value: float, max_value: float, 
-                 step: Optional[float] = None, log_scale: bool = False) -> FloatParameter:
-        """Add a float parameter to the space.
+        if name not in self.parameters:
+            raise ValueError(f"Parameter {name} not found")
+            
+        return self.parameters[name]
         
-        Args:
-            name: Name of the parameter
-            min_value: Minimum value (inclusive)
-            max_value: Maximum value (inclusive)
-            step: Step size between values (default: None)
-            log_scale: Whether to use logarithmic scale for grid points (default: False)
-            
-        Returns:
-            The created parameter
-            
-        Raises:
-            ParameterSpaceError: If parameter with same name already exists
+    def get_combinations(self):
         """
-        param = FloatParameter(name, min_value, max_value, step, log_scale)
-        self.add_parameter(param)
-        return param
-    
-    def add_categorical(self, name: str, categories: List[Any]) -> CategoricalParameter:
-        """Add a categorical parameter to the space.
-        
-        Args:
-            name: Name of the parameter
-            categories: List of possible values
-            
-        Returns:
-            The created parameter
-            
-        Raises:
-            ParameterSpaceError: If parameter with same name already exists
-        """
-        param = CategoricalParameter(name, categories)
-        self.add_parameter(param)
-        return param
-    
-    def add_boolean(self, name: str) -> BooleanParameter:
-        """Add a boolean parameter to the space.
-        
-        Args:
-            name: Name of the parameter
-            
-        Returns:
-            The created parameter
-            
-        Raises:
-            ParameterSpaceError: If parameter with same name already exists
-        """
-        param = BooleanParameter(name)
-        self.add_parameter(param)
-        return param
-    
-    def get_parameter(self, name: str) -> Optional[Parameter]:
-        """Get a parameter by name.
-        
-        Args:
-            name: Name of the parameter
-            
-        Returns:
-            Parameter if found, None otherwise
-        """
-        return self.parameters.get(name)
-    
-    def get_grid_points(self, parameter_name: str, num_points: Optional[int] = None) -> List[Any]:
-        """Get grid points for a parameter.
-        
-        Args:
-            parameter_name: Name of the parameter
-            num_points: Optional number of points to generate
-            
-        Returns:
-            List of parameter values for grid search
-            
-        Raises:
-            ParameterSpaceError: If parameter does not exist
-        """
-        param = self.get_parameter(parameter_name)
-        if param is None:
-            raise ParameterSpaceError(
-                parameter=parameter_name,
-                message=f"Parameter '{parameter_name}' does not exist in space"
-            )
-        
-        return param.get_grid_points(num_points)
-    
-    def get_grid_size(self) -> int:
-        """Get the total size of the grid search space.
+        Get all valid parameter combinations.
         
         Returns:
-            Number of points in the grid
+            list: List of parameter dictionaries
         """
-        sizes = [len(param.get_grid_points()) for param in self.parameters.values()]
-        if not sizes:
-            return 0
-        
-        total = 1
-        for size in sizes:
-            total *= size
-        
-        return total
-    
-    def get_all_grid_points(self) -> List[Dict[str, Any]]:
-        """Get all grid points as a Cartesian product.
-        
-        Returns:
-            List of parameter dictionaries for grid search
-        """
-        if not self.parameters:
-            return []
-        
-        # Get grid points for each parameter
-        param_points = {
-            name: param.get_grid_points()
-            for name, param in self.parameters.items()
+        # Identify top-level parameters (not conditional)
+        top_level_params = {
+            name: param for name, param in self.parameters.items()
+            if not isinstance(param, ConditionalParameter)
         }
         
-        # Generate Cartesian product
-        param_names = list(param_points.keys())
-        param_values = [param_points[name] for name in param_names]
-        
-        result = []
-        for value_combo in itertools.product(*param_values):
-            point = {name: value for name, value in zip(param_names, value_combo)}
-            result.append(point)
-        
-        return result
-    
-    def get_random_point(self) -> Dict[str, Any]:
-        """Get a random point in the parameter space.
-        
-        Returns:
-            Random parameter values as a dictionary
-        """
-        return {
-            name: param.get_random_point()
-            for name, param in self.parameters.items()
+        # Get values for top-level parameters
+        param_values = {
+            name: param.get_values() for name, param in top_level_params.items()
         }
-    
-    def get_random_points(self, num_points: int) -> List[Dict[str, Any]]:
-        """Get multiple random points in the parameter space.
+        
+        # Generate combinations of top-level parameters
+        param_names = list(param_values.keys())
+        combinations = []
+        
+        for values in product(*param_values.values()):
+            # Create parameter dictionary
+            param_dict = dict(zip(param_names, values))
+            
+            # Add conditional parameters
+            self._add_conditional_parameters(param_dict)
+            
+            combinations.append(param_dict)
+            
+        return combinations
+        
+    def _add_conditional_parameters(self, param_dict):
+        """
+        Add conditional parameters to a parameter dictionary.
         
         Args:
-            num_points: Number of points to generate
-            
-        Returns:
-            List of random parameter dictionaries
+            param_dict (dict): Parameter dictionary to update
         """
-        return [self.get_random_point() for _ in range(num_points)]
-    
-    def validate_point(self, point: Dict[str, Any]) -> Tuple[bool, Optional[str]]:
-        """Validate a point in the parameter space.
+        # Check each parent parameter
+        for parent_name in self.conditional_dependencies:
+            if parent_name not in param_dict:
+                continue
+                
+            parent_value = param_dict[parent_name]
+            
+            # Add dependent parameters
+            for dependent_name in self.conditional_dependencies[parent_name]:
+                param = self.parameters[dependent_name]
+                
+                # Get values for this parent value
+                values = param.get_values(parent_value)
+                
+                if values:
+                    # Add first value to the dictionary
+                    param_dict[dependent_name] = values[0]
+                    
+    def from_dict(self, config):
+        """
+        Create a parameter space from a configuration dictionary.
         
         Args:
-            point: Dictionary of parameter values
+            config (dict): Configuration dictionary
             
         Returns:
-            Tuple of (is_valid, error_message)
+            ParameterSpace: Parameter space instance
         """
-        # Check for unknown parameters
-        unknown_params = set(point.keys()) - set(self.parameters.keys())
-        if unknown_params:
-            return False, f"Unknown parameters: {', '.join(unknown_params)}"
-        
-        # Validate each parameter
-        for name, param in self.parameters.items():
-            if name in point:
-                valid, message = param.validate(point[name])
-                if not valid:
-                    return False, f"Parameter '{name}': {message}"
-        
-        return True, None
-    
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert parameter space to dictionary representation.
-        
-        Returns:
-            Dictionary representation of parameter space
-        """
-        return {
-            "name": self.name,
-            "parameters": {
-                name: param.to_dict()
-                for name, param in self.parameters.items()
-            }
-        }
-    
-    def to_json(self) -> str:
-        """Convert parameter space to JSON representation.
-        
-        Returns:
-            JSON representation of parameter space
-        """
-        return json.dumps(self.to_dict())
-    
-    @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'ParameterSpace':
-        """Create parameter space from dictionary representation.
-        
-        Args:
-            data: Dictionary representation of parameter space
+        for param_config in config.get('parameters', []):
+            param_type = param_config.get('type')
+            name = param_config.get('name')
             
-        Returns:
-            ParameterSpace instance
-        """
-        space = cls(name=data.get("name", "default"))
-        
-        # Add parameters
-        for name, param_data in data.get("parameters", {}).items():
-            param_data["name"] = name  # Ensure name is set
-            param = Parameter.from_dict(param_data)
-            space.add_parameter(param)
-        
-        return space
-    
-    @classmethod
-    def from_json(cls, json_str: str) -> 'ParameterSpace':
-        """Create parameter space from JSON representation.
-        
-        Args:
-            json_str: JSON representation of parameter space
+            if not name:
+                raise ValueError("Parameter name is required")
+                
+            if param_type == 'integer':
+                param = IntegerParameter(
+                    name=name,
+                    min_value=param_config.get('min'),
+                    max_value=param_config.get('max'),
+                    step=param_config.get('step', 1),
+                    log_scale=param_config.get('log_scale', False),
+                    description=param_config.get('description')
+                )
+                
+            elif param_type == 'float':
+                param = FloatParameter(
+                    name=name,
+                    min_value=param_config.get('min'),
+                    max_value=param_config.get('max'),
+                    step=param_config.get('step'),
+                    num_points=param_config.get('num_points', 10),
+                    log_scale=param_config.get('log_scale', False),
+                    description=param_config.get('description')
+                )
+                
+            elif param_type == 'categorical':
+                param = CategoricalParameter(
+                    name=name,
+                    categories=param_config.get('categories', []),
+                    description=param_config.get('description')
+                )
+                
+            elif param_type == 'boolean':
+                param = BooleanParameter(
+                    name=name,
+                    description=param_config.get('description')
+                )
+                
+            elif param_type == 'conditional':
+                parent_name = param_config.get('parent')
+                
+                if not parent_name or parent_name not in self.parameters:
+                    raise ValueError(f"Parent parameter {parent_name} not found")
+                    
+                param = ConditionalParameter(
+                    name=name,
+                    parent_parameter=self.parameters[parent_name],
+                    value_map=param_config.get('value_map', {}),
+                    description=param_config.get('description')
+                )
+                
+            else:
+                raise ValueError(f"Unknown parameter type: {param_type}")
+                
+            self.add_parameter(param)
             
-        Returns:
-            ParameterSpace instance
-            
-        Raises:
-            OptimizationError: If JSON is invalid
-        """
-        try:
-            data = json.loads(json_str)
-            return cls.from_dict(data)
-        except json.JSONDecodeError as e:
-            raise OptimizationError(f"Invalid JSON: {e}")
-        except Exception as e:
-            raise OptimizationError(f"Error parsing parameter space: {e}")
+        return self

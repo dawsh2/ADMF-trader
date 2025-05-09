@@ -1,0 +1,4315 @@
+{
+  "best_parameters": {
+    "fast_period": 5,
+    "slow_period": 40
+  },
+  "best_train_score": 39.65253557195335,
+  "best_test_score": -6.308365276892444,
+  "all_results": [
+    {
+      "parameters": {
+        "fast_period": 5,
+        "slow_period": 40
+      },
+      "train_score": 39.65253557195335,
+      "test_score": -6.308365276892444,
+      "train_result": {
+        "final_capital": 90705.74791081855,
+        "positions": {
+          "AAPL": 100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 100.20130053997536,
+            "entry_time": "2023-03-08 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 104.4519027102382,
+            "close_time": "2023-04-12 00:00:00",
+            "pnl": 425.0602170262846,
+            "closed_quantity": 100
+          },
+          {
+            "id": "trade_fill_order_3",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 96.89157828054675,
+            "entry_time": "2023-06-11 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_3"
+            ],
+            "close_price": 98.14356823159538,
+            "close_time": "2023-06-17 00:00:00",
+            "pnl": 125.19899510486357,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 90705.74791081855,
+          "trades_executed": 2,
+          "return_pct_closed_only": 0.5502592121311481,
+          "portfolio_realized_return_pct": 0.42506021702628455,
+          "return_pct_with_open": 1.161074653086627,
+          "return_pct": 0.5502592121311481,
+          "sharpe_ratio": 39.65253557195335,
+          "sharpe_ratio_full": 39.65253557195335,
+          "max_drawdown": 0.0,
+          "max_drawdown_full": 0.0,
+          "win_rate": 1.0,
+          "profitable_trades": 2,
+          "loss_trades": 0,
+          "break_even_trades": 0,
+          "closed_trades": 2,
+          "avg_profit": 275.1296060655741,
+          "avg_loss": 0,
+          "profit_factor": 100.0,
+          "open_position_value": -9844.511301312597,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -9844.511301312597,
+          "unexplained_pnl_percent": -105.92042486959927
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-03-08 00:00:00",
+            "cash": 89969.84981594847,
+            "closed_pnl": 0,
+            "market_value": 10020.130053997536,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99989.97986994601,
+            "equity": 99989.97986994601
+          },
+          {
+            "timestamp": "2023-04-12 00:00:00",
+            "cash": 100404.59489670127,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100404.59489670127,
+            "equity": 100404.59489670127
+          },
+          {
+            "timestamp": "2023-06-11 00:00:00",
+            "cash": 90705.74791081855,
+            "closed_pnl": 0,
+            "market_value": 10445.190271023821,
+            "closed_only_equity": 100000.0,
+            "full_equity": 101150.93818184237,
+            "equity": 101150.93818184237
+          }
+        ],
+        "trades_equity_consistent": "False",
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 5,
+          "slow_period": 40
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 99933.02663837928,
+        "positions": {
+          "AAPL": 0
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 99.72273947857956,
+            "entry_time": "2023-07-29 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 99.32985536254968,
+            "close_time": "2023-07-30 00:00:00",
+            "pnl": -39.28841160298725,
+            "closed_quantity": 100
+          },
+          {
+            "id": "trade_fill_order_3",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 98.86975582280957,
+            "entry_time": "2023-08-08 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_3"
+            ],
+            "close_price": 98.989818491788,
+            "close_time": "2023-08-09 00:00:00",
+            "pnl": 12.006266897842579,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 99933.02663837928,
+          "trades_executed": 2,
+          "return_pct_closed_only": -0.027282144705144673,
+          "portfolio_realized_return_pct": -0.027282144705144673,
+          "return_pct_with_open": -0.05700677254438988,
+          "return_pct": -0.027282144705144673,
+          "sharpe_ratio": -6.308365276892444,
+          "sharpe_ratio_full": -6.308365276892444,
+          "max_drawdown": 0.05700677254438988,
+          "max_drawdown_full": 0.05700677254438988,
+          "win_rate": 0.5,
+          "profitable_trades": 1,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 2,
+          "avg_profit": 12.006266897842579,
+          "avg_loss": -39.28841160298725,
+          "profit_factor": 0.30559308477947467,
+          "open_position_value": -39.69121691557848,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -39.69121691557848,
+          "unexplained_pnl_percent": -59.26418497604139
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-07-29 00:00:00",
+            "cash": 90017.75377819418,
+            "closed_pnl": 0,
+            "market_value": 9972.273947857955,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.02772605214,
+            "equity": 99990.02772605214
+          },
+          {
+            "timestamp": "2023-07-30 00:00:00",
+            "cash": 99940.80632891289,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99940.80632891289,
+            "equity": 99940.80632891289
+          },
+          {
+            "timestamp": "2023-08-08 00:00:00",
+            "cash": 90043.94377104966,
+            "closed_pnl": 0,
+            "market_value": 9932.985536254968,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99976.92930730463,
+            "equity": 99976.92930730463
+          },
+          {
+            "timestamp": "2023-08-09 00:00:00",
+            "cash": 99933.02663837928,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99933.02663837928,
+            "equity": 99933.02663837928
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 5,
+          "slow_period": 40
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 5,
+        "slow_period": 60
+      },
+      "train_score": NaN,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100197.52257084067,
+        "positions": {
+          "AAPL": 0
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 100.60710434803616,
+            "entry_time": "2023-03-09 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 102.78572288367464,
+            "close_time": "2023-04-18 00:00:00",
+            "pnl": 217.86185356384885,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100197.52257084067,
+          "trades_executed": 1,
+          "return_pct_closed_only": 0.21786185356384885,
+          "portfolio_realized_return_pct": 0.21786185356384885,
+          "return_pct_with_open": 0.20760416772963286,
+          "return_pct": 0.21786185356384885,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.0,
+          "max_drawdown_full": 0.0,
+          "win_rate": 1.0,
+          "profitable_trades": 1,
+          "loss_trades": 0,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 217.86185356384885,
+          "avg_loss": 0,
+          "profit_factor": 100.0,
+          "open_position_value": -20.339282723183715,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -20.339282723183715,
+          "unexplained_pnl_percent": -10.297194207537292
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-03-09 00:00:00",
+            "cash": 89929.22885476158,
+            "closed_pnl": 0,
+            "market_value": 10060.710434803615,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99989.9392895652,
+            "equity": 99989.9392895652
+          },
+          {
+            "timestamp": "2023-04-18 00:00:00",
+            "cash": 100197.52257084067,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100197.52257084067,
+            "equity": 100197.52257084067
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 5,
+          "slow_period": 60
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 5,
+          "slow_period": 60
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 10,
+        "slow_period": 20
+      },
+      "train_score": 13.173666630150183,
+      "test_score": -38.08463916194682,
+      "train_result": {
+        "final_capital": 100966.36337574129,
+        "positions": {
+          "AAPL": 0
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 99.85829264435463,
+            "entry_time": "2023-01-20 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 100.60710434803616,
+            "close_time": "2023-03-09 00:00:00",
+            "pnl": -74.88117036815129,
+            "closed_quantity": 100
+          },
+          {
+            "id": "trade_fill_order_3",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 107.65727661896456,
+            "entry_time": "2023-03-30 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_3"
+            ],
+            "close_price": 96.83986861564308,
+            "close_time": "2023-06-12 00:00:00",
+            "pnl": 1081.740800332147,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100966.36337574129,
+          "trades_executed": 2,
+          "return_pct_closed_only": 1.0068596299639958,
+          "portfolio_realized_return_pct": 1.0068596299639958,
+          "return_pct_with_open": 0.9764467113071742,
+          "return_pct": 1.0068596299639958,
+          "sharpe_ratio": 13.173666630150183,
+          "sharpe_ratio_full": 13.173666630150183,
+          "max_drawdown": 0.08495036380124733,
+          "max_drawdown_full": 0.08495036380124733,
+          "win_rate": 0.5,
+          "profitable_trades": 1,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 2,
+          "avg_profit": 1081.740800332147,
+          "avg_loss": -74.88117036815129,
+          "profit_factor": 14.446098999438671,
+          "open_position_value": -40.49625422270583,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -40.49625422270583,
+          "unexplained_pnl_percent": -4.190582470247433
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-01-20 00:00:00",
+            "cash": 109975.84343517103,
+            "closed_pnl": 0,
+            "market_value": -9985.829264435464,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.01417073557,
+            "equity": 99990.01417073557
+          },
+          {
+            "timestamp": "2023-03-09 00:00:00",
+            "cash": 99905.0722899326,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99905.0722899326,
+            "equity": 99905.0722899326
+          },
+          {
+            "timestamp": "2023-03-30 00:00:00",
+            "cash": 110660.03422416716,
+            "closed_pnl": 0,
+            "market_value": -10060.710434803615,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100599.32378936355,
+            "equity": 100599.32378936355
+          },
+          {
+            "timestamp": "2023-06-12 00:00:00",
+            "cash": 100966.36337574129,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100966.36337574129,
+            "equity": 100966.36337574129
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 10,
+          "slow_period": 20
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 109697.73511947629,
+        "positions": {
+          "AAPL": -100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 98.16283382877572,
+            "entry_time": "2023-07-15 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 99.87827020327693,
+            "close_time": "2023-07-28 00:00:00",
+            "pnl": -171.54363745012233,
+            "closed_quantity": 100
+          },
+          {
+            "id": "trade_fill_order_3",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 98.989818491788,
+            "entry_time": "2023-08-09 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_3"
+            ],
+            "close_price": 93.180597251687,
+            "close_time": "2023-08-28 00:00:00",
+            "pnl": 580.9221240100997,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 109697.73511947629,
+          "trades_executed": 2,
+          "return_pct_closed_only": 0.4093784865599773,
+          "portfolio_realized_return_pct": -0.17154363745012233,
+          "return_pct_with_open": -0.2803031328183686,
+          "return_pct": 0.4093784865599773,
+          "sharpe_ratio": -38.08463916194682,
+          "sharpe_ratio_full": -38.08463916194682,
+          "max_drawdown": 0.2803031328183686,
+          "max_drawdown_full": 0.2803031328183686,
+          "win_rate": 0.5,
+          "profitable_trades": 1,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 2,
+          "avg_profit": 580.9221240100997,
+          "avg_loss": -171.54363745012233,
+          "profit_factor": 3.386439349457116,
+          "open_position_value": 9288.356632916311,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": 9288.356632916311,
+          "unexplained_pnl_percent": 95.77861756877843
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-07-15 00:00:00",
+            "cash": 109806.4670994947,
+            "closed_pnl": 0,
+            "market_value": -9816.283382877571,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.18371661712,
+            "equity": 99990.18371661712
+          },
+          {
+            "timestamp": "2023-07-28 00:00:00",
+            "cash": 99808.65225214667,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99808.65225214667,
+            "equity": 99808.65225214667
+          },
+          {
+            "timestamp": "2023-08-09 00:00:00",
+            "cash": 109697.73511947629,
+            "closed_pnl": 0,
+            "market_value": -9987.827020327693,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99709.9080991486,
+            "equity": 99709.9080991486
+          }
+        ],
+        "trades_equity_consistent": "False",
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 10,
+          "slow_period": 20
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 10,
+        "slow_period": 40
+      },
+      "train_score": 13.147838666923898,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 90296.2607720235,
+        "positions": {
+          "AAPL": 100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 103.79958234898665,
+            "entry_time": "2023-03-10 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 104.4519027102382,
+            "close_time": "2023-04-12 00:00:00",
+            "pnl": 65.23203612515681,
+            "closed_quantity": 100
+          },
+          {
+            "id": "trade_fill_order_3",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 97.38407707887843,
+            "entry_time": "2023-06-15 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_3"
+            ],
+            "close_price": 98.14356823159538,
+            "close_time": "2023-06-17 00:00:00",
+            "pnl": 75.94911527169461,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 90296.2607720235,
+          "trades_executed": 2,
+          "return_pct_closed_only": 0.14118115139685142,
+          "portfolio_realized_return_pct": 0.06523203612515681,
+          "return_pct_with_open": 0.7519090491274824,
+          "return_pct": 0.14118115139685142,
+          "sharpe_ratio": 13.147838666923898,
+          "sharpe_ratio_full": 13.147838666923898,
+          "max_drawdown": 0.0,
+          "max_drawdown_full": 0.0,
+          "win_rate": 1.0,
+          "profitable_trades": 2,
+          "loss_trades": 0,
+          "break_even_trades": 0,
+          "closed_trades": 2,
+          "avg_profit": 70.59057569842571,
+          "avg_loss": 0,
+          "profit_factor": 100.0,
+          "open_position_value": -9844.920379373356,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -9844.920379373356,
+          "unexplained_pnl_percent": -101.45491493619096
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-03-10 00:00:00",
+            "cash": 89609.66180686644,
+            "closed_pnl": 0,
+            "market_value": 10379.958234898664,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99989.6200417651,
+            "equity": 99989.6200417651
+          },
+          {
+            "timestamp": "2023-04-12 00:00:00",
+            "cash": 100044.40688761923,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100044.40688761923,
+            "equity": 100044.40688761923
+          },
+          {
+            "timestamp": "2023-06-15 00:00:00",
+            "cash": 90296.2607720235,
+            "closed_pnl": 0,
+            "market_value": 10445.190271023821,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100741.45104304732,
+            "equity": 100741.45104304732
+          }
+        ],
+        "trades_equity_consistent": "False",
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 10,
+          "slow_period": 40
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 10,
+          "slow_period": 40
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 5,
+        "slow_period": 20
+      },
+      "train_score": 4.361587176792064,
+      "test_score": -25.54162448546954,
+      "train_result": {
+        "final_capital": 90765.91564260371,
+        "positions": {
+          "AAPL": 100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 96.03761645548715,
+            "entry_time": "2023-02-27 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 93.97333946908824,
+            "close_time": "2023-03-01 00:00:00",
+            "pnl": -206.42769863989088,
+            "closed_quantity": 100
+          },
+          {
+            "id": "trade_fill_order_3",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 98.40680138721852,
+            "entry_time": "2023-03-07 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_3"
+            ],
+            "close_price": 107.66796763792244,
+            "close_time": "2023-03-29 00:00:00",
+            "pnl": 926.1166250703918,
+            "closed_quantity": 100
+          },
+          {
+            "id": "trade_fill_order_5",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 104.30128248201996,
+            "entry_time": "2023-04-27 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_5"
+            ],
+            "close_price": 103.788860979812,
+            "close_time": "2023-04-28 00:00:00",
+            "pnl": -51.24215022079625,
+            "closed_quantity": 100
+          },
+          {
+            "id": "trade_fill_order_7",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 98.32281265499346,
+            "entry_time": "2023-06-09 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_7"
+            ],
+            "close_price": 98.14356823159538,
+            "close_time": "2023-06-17 00:00:00",
+            "pnl": -17.924442339806774,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 90765.91564260371,
+          "trades_executed": 4,
+          "return_pct_closed_only": 0.650522333869898,
+          "portfolio_realized_return_pct": 0.6684467762097047,
+          "return_pct_with_open": 1.154516379231673,
+          "return_pct": 0.650522333869898,
+          "sharpe_ratio": 4.361587176792064,
+          "sharpe_ratio_full": 4.361587176792064,
+          "max_drawdown": 0.6690761610182823,
+          "max_drawdown_full": 0.6690761610182823,
+          "win_rate": 0.25,
+          "profitable_trades": 1,
+          "loss_trades": 3,
+          "break_even_trades": 0,
+          "closed_trades": 4,
+          "avg_profit": 926.1166250703918,
+          "avg_loss": -91.86476373349797,
+          "profit_factor": 3.3604347210394323,
+          "open_position_value": -9884.60669126619,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -9884.60669126619,
+          "unexplained_pnl_percent": -107.04479522486541
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-02-27 00:00:00",
+            "cash": 90386.63459280574,
+            "closed_pnl": 0,
+            "market_value": 9603.761645548715,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.39623835446,
+            "equity": 99990.39623835446
+          },
+          {
+            "timestamp": "2023-03-01 00:00:00",
+            "cash": 99774.57120576766,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99774.57120576766,
+            "equity": 99774.57120576766
+          },
+          {
+            "timestamp": "2023-03-07 00:00:00",
+            "cash": 89924.05038690708,
+            "closed_pnl": 0,
+            "market_value": 9397.333946908824,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99321.3843338159,
+            "equity": 99321.3843338159
+          },
+          {
+            "timestamp": "2023-03-29 00:00:00",
+            "cash": 100680.08035393553,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100680.08035393553,
+            "equity": 100680.08035393553
+          },
+          {
+            "timestamp": "2023-04-27 00:00:00",
+            "cash": 90239.52197748533,
+            "closed_pnl": 0,
+            "market_value": 10766.796763792245,
+            "closed_only_equity": 100000.0,
+            "full_equity": 101006.31874127757,
+            "equity": 101006.31874127757
+          },
+          {
+            "timestamp": "2023-04-28 00:00:00",
+            "cash": 100608.02918936855,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100608.02918936855,
+            "equity": 100608.02918936855
+          },
+          {
+            "timestamp": "2023-06-09 00:00:00",
+            "cash": 90765.91564260371,
+            "closed_pnl": 0,
+            "market_value": 10378.8860979812,
+            "closed_only_equity": 100000.0,
+            "full_equity": 101144.80174058491,
+            "equity": 101144.80174058491
+          }
+        ],
+        "trades_equity_consistent": "False",
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 5,
+          "slow_period": 20
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 109650.01744638685,
+        "positions": {
+          "AAPL": -100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 99.05571992748143,
+            "entry_time": "2023-07-13 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 99.87500069142617,
+            "close_time": "2023-07-26 00:00:00",
+            "pnl": -81.92807639447165,
+            "closed_quantity": 100
+          },
+          {
+            "id": "trade_fill_order_3",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 97.61600195038228,
+            "entry_time": "2023-08-10 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_3"
+            ],
+            "close_price": 93.180597251687,
+            "close_time": "2023-08-28 00:00:00",
+            "pnl": 443.54046986952926,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 109650.01744638685,
+          "trades_executed": 2,
+          "return_pct_closed_only": 0.36161239347505764,
+          "portfolio_realized_return_pct": -0.08192807639447164,
+          "return_pct_with_open": -0.3276095023581334,
+          "return_pct": 0.36161239347505764,
+          "sharpe_ratio": -25.54162448546954,
+          "sharpe_ratio_full": -25.54162448546954,
+          "max_drawdown": 0.3276095023581334,
+          "max_drawdown_full": 0.3276095023581334,
+          "win_rate": 0.5,
+          "profitable_trades": 1,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 2,
+          "avg_profit": 443.54046986952926,
+          "avg_loss": -81.92807639447165,
+          "profit_factor": 5.4137786383992115,
+          "open_position_value": 9288.405052911789,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": 9288.405052911789,
+          "unexplained_pnl_percent": 96.25272808589116
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-07-13 00:00:00",
+            "cash": 109895.6664207554,
+            "closed_pnl": 0,
+            "market_value": -9905.571992748144,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.09442800726,
+            "equity": 99990.09442800726
+          },
+          {
+            "timestamp": "2023-07-26 00:00:00",
+            "cash": 99898.17885154365,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99898.17885154365,
+            "equity": 99898.17885154365
+          },
+          {
+            "timestamp": "2023-08-10 00:00:00",
+            "cash": 109650.01744638685,
+            "closed_pnl": 0,
+            "market_value": -9987.500069142616,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99662.51737724424,
+            "equity": 99662.51737724424
+          }
+        ],
+        "trades_equity_consistent": "False",
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 5,
+          "slow_period": 20
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 5,
+        "slow_period": 80
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 110065.22621603658,
+        "positions": {
+          "AAPL": -100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 100.75301517554134,
+            "entry_time": "2023-04-30 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 98.14356823159538,
+            "close_time": "2023-06-17 00:00:00",
+            "pnl": 260.944694394595,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 110065.22621603658,
+          "trades_executed": 1,
+          "return_pct_closed_only": 0.26094469439459494,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.26094469439459494,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0,
+          "win_rate": 1.0,
+          "profitable_trades": 1,
+          "loss_trades": 0,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 260.944694394595,
+          "avg_loss": 0,
+          "profit_factor": 100.0,
+          "open_position_value": 9804.281521641984,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": 9804.281521641984,
+          "unexplained_pnl_percent": 97.407463192642
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-04-30 00:00:00",
+            "cash": 110065.22621603658,
+            "closed_pnl": 0,
+            "market_value": -10075.301517554133,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99989.92469848244,
+            "equity": 99989.92469848244
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 5,
+          "slow_period": 80
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 5,
+          "slow_period": 80
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 5,
+        "slow_period": 100
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 109993.12705331472,
+        "positions": {
+          "AAPL": -100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 100.03130183498216,
+            "entry_time": "2023-05-01 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 98.14356823159538,
+            "close_time": "2023-06-17 00:00:00",
+            "pnl": 188.77336033867687,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 109993.12705331472,
+          "trades_executed": 1,
+          "return_pct_closed_only": 0.18877336033867687,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.18877336033867687,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0,
+          "win_rate": 1.0,
+          "profitable_trades": 1,
+          "loss_trades": 0,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 188.77336033867687,
+          "avg_loss": 0,
+          "profit_factor": 100.0,
+          "open_position_value": 9804.353692976041,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": 9804.353692976041,
+          "unexplained_pnl_percent": 98.11096807504252
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-05-01 00:00:00",
+            "cash": 109993.12705331472,
+            "closed_pnl": 0,
+            "market_value": -10003.130183498215,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99989.9968698165,
+            "equity": 99989.9968698165
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 5,
+          "slow_period": 100
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 5,
+          "slow_period": 100
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 10,
+        "slow_period": 60
+      },
+      "train_score": NaN,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 99724.17991049148,
+        "positions": {
+          "AAPL": 0
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 104.87160329588362,
+            "entry_time": "2023-03-11 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 102.3205945986931,
+            "close_time": "2023-04-20 00:00:00",
+            "pnl": -255.10086971905184,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 99724.17991049148,
+          "trades_executed": 1,
+          "return_pct_closed_only": -0.2551008697190518,
+          "portfolio_realized_return_pct": -0.2551008697190518,
+          "return_pct_with_open": -0.2653607579870688,
+          "return_pct": -0.2551008697190518,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.2653607579870688,
+          "max_drawdown_full": 0.2653607579870688,
+          "win_rate": 0.0,
+          "profitable_trades": 0,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 0,
+          "avg_loss": -255.10086971905184,
+          "profit_factor": 0.0,
+          "open_position_value": -20.71921978946557,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -20.71921978946557,
+          "unexplained_pnl_percent": -7.5118602950151505
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-03-11 00:00:00",
+            "cash": 89502.35251008204,
+            "closed_pnl": 0,
+            "market_value": 10487.160329588361,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99989.51283967041,
+            "equity": 99989.51283967041
+          },
+          {
+            "timestamp": "2023-04-20 00:00:00",
+            "cash": 99724.17991049148,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99724.17991049148,
+            "equity": 99724.17991049148
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 10,
+          "slow_period": 60
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 10,
+          "slow_period": 60
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 15,
+        "slow_period": 20
+      },
+      "train_score": 9.69512159233686,
+      "test_score": -27.64360402382265,
+      "train_result": {
+        "final_capital": 100957.93160061773,
+        "positions": {
+          "AAPL": 0
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 100.04755064261468,
+            "entry_time": "2023-01-22 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 100.20130053997536,
+            "close_time": "2023-03-08 00:00:00",
+            "pnl": -15.374989736068528,
+            "closed_quantity": 100
+          },
+          {
+            "id": "trade_fill_order_3",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 107.52608787627892,
+            "entry_time": "2023-03-31 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_3"
+            ],
+            "close_price": 97.52438288793329,
+            "close_time": "2023-05-21 00:00:00",
+            "pnl": 1000.1704988345646,
+            "closed_quantity": 100
+          },
+          {
+            "id": "trade_fill_order_5",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 97.71932150459492,
+            "entry_time": "2023-05-25 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_5"
+            ],
+            "close_price": 97.38755439155952,
+            "close_time": "2023-06-14 00:00:00",
+            "pnl": 33.17671130354029,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100957.93160061773,
+          "trades_executed": 3,
+          "return_pct_closed_only": 1.0179722204020363,
+          "portfolio_realized_return_pct": 1.0179722204020363,
+          "return_pct_with_open": 0.9680332050330923,
+          "return_pct": 1.0179722204020363,
+          "sharpe_ratio": 9.69512159233686,
+          "sharpe_ratio_full": 9.69512159233686,
+          "max_drawdown": 0.02539766076381203,
+          "max_drawdown_full": 0.02539766076381203,
+          "win_rate": 0.6666666666666666,
+          "profitable_trades": 2,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 3,
+          "avg_profit": 516.6736050690524,
+          "avg_loss": -15.374989736068528,
+          "profit_factor": 67.20961951044121,
+          "open_position_value": -60.040619784311275,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -60.040619784311275,
+          "unexplained_pnl_percent": -6.267735582122345
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-01-22 00:00:00",
+            "cash": 109994.7503091972,
+            "closed_pnl": 0,
+            "market_value": -10004.755064261468,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99989.99524493574,
+            "equity": 99989.99524493574
+          },
+          {
+            "timestamp": "2023-03-08 00:00:00",
+            "cash": 99964.60012514568,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99964.60012514568,
+            "equity": 99964.60012514568
+          },
+          {
+            "timestamp": "2023-03-31 00:00:00",
+            "cash": 110706.45630398593,
+            "closed_pnl": 0,
+            "market_value": -10020.130053997536,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100686.3262499884,
+            "equity": 100686.3262499884
+          },
+          {
+            "timestamp": "2023-05-21 00:00:00",
+            "cash": 100944.26557690381,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100944.26557690381,
+            "equity": 100944.26557690381
+          },
+          {
+            "timestamp": "2023-05-25 00:00:00",
+            "cash": 110706.42579521284,
+            "closed_pnl": 0,
+            "market_value": -9752.438288793328,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100953.98750641951,
+            "equity": 100953.98750641951
+          },
+          {
+            "timestamp": "2023-06-14 00:00:00",
+            "cash": 100957.93160061773,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100957.93160061773,
+            "equity": 100957.93160061773
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 15,
+          "slow_period": 20
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 109556.47544927403,
+        "positions": {
+          "AAPL": -100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 96.54302296646009,
+            "entry_time": "2023-07-17 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 98.30180958959558,
+            "close_time": "2023-07-31 00:00:00",
+            "pnl": -175.87866231354928,
+            "closed_quantity": 100
+          },
+          {
+            "id": "trade_fill_order_3",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 97.61600195038228,
+            "entry_time": "2023-08-10 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_3"
+            ],
+            "close_price": 93.180597251687,
+            "close_time": "2023-08-28 00:00:00",
+            "pnl": 443.54046986952926,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 109556.47544927403,
+          "trades_executed": 2,
+          "return_pct_closed_only": 0.26766180755597996,
+          "portfolio_realized_return_pct": -0.1758786623135493,
+          "return_pct_with_open": -0.26407670215200296,
+          "return_pct": 0.26766180755597996,
+          "sharpe_ratio": -27.64360402382265,
+          "sharpe_ratio_full": -27.64360402382265,
+          "max_drawdown": 0.26407670215200296,
+          "max_drawdown_full": 0.26407670215200296,
+          "win_rate": 0.5,
+          "profitable_trades": 1,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 2,
+          "avg_profit": 443.54046986952926,
+          "avg_loss": -175.87866231354928,
+          "profit_factor": 2.5218549199493197,
+          "open_position_value": 9288.813641718052,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": 9288.813641718052,
+          "unexplained_pnl_percent": 97.19915769180034
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-07-17 00:00:00",
+            "cash": 109644.64799434936,
+            "closed_pnl": 0,
+            "market_value": -9654.302296646008,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.34569770335,
+            "equity": 99990.34569770335
+          },
+          {
+            "timestamp": "2023-07-31 00:00:00",
+            "cash": 99804.63685443084,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99804.63685443084,
+            "equity": 99804.63685443084
+          },
+          {
+            "timestamp": "2023-08-10 00:00:00",
+            "cash": 109556.47544927403,
+            "closed_pnl": 0,
+            "market_value": -9830.180958959558,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99726.29449031447,
+            "equity": 99726.29449031447
+          }
+        ],
+        "trades_equity_consistent": "False",
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 15,
+          "slow_period": 20
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 10,
+        "slow_period": 80
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 109928.91509527102,
+        "positions": {
+          "AAPL": -100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 99.38853949220233,
+            "entry_time": "2023-05-02 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 98.14356823159538,
+            "close_time": "2023-06-17 00:00:00",
+            "pnl": 124.49712606069443,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 109928.91509527102,
+          "trades_executed": 1,
+          "return_pct_closed_only": 0.12449712606069444,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.12449712606069444,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0,
+          "win_rate": 1.0,
+          "profitable_trades": 1,
+          "loss_trades": 0,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 124.49712606069443,
+          "avg_loss": 0,
+          "profit_factor": 100.0,
+          "open_position_value": 9804.417969210324,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": 9804.417969210324,
+          "unexplained_pnl_percent": 98.74611551346642
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-05-02 00:00:00",
+            "cash": 109928.91509527102,
+            "closed_pnl": 0,
+            "market_value": -9938.853949220233,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.06114605078,
+            "equity": 99990.06114605078
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 10,
+          "slow_period": 80
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 10,
+          "slow_period": 80
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 10,
+        "slow_period": 100
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 109782.96856817513,
+        "positions": {
+          "AAPL": -100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 97.92761329504629,
+            "entry_time": "2023-05-03 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 98.14356823159538,
+            "close_time": "2023-06-17 00:00:00",
+            "pnl": -21.59549365490966,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 109782.96856817513,
+          "trades_executed": 1,
+          "return_pct_closed_only": -0.02159549365490966,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": -0.02159549365490966,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0,
+          "win_rate": 0.0,
+          "profitable_trades": 0,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 0,
+          "avg_loss": -21.59549365490966,
+          "profit_factor": 0.0,
+          "open_position_value": 9804.564061830039,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": 9804.564061830039,
+          "unexplained_pnl_percent": 100.22074581456964
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-05-03 00:00:00",
+            "cash": 109782.96856817513,
+            "closed_pnl": 0,
+            "market_value": -9792.761329504629,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.2072386705,
+            "equity": 99990.2072386705
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 10,
+          "slow_period": 100
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 10,
+          "slow_period": 100
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 15,
+        "slow_period": 40
+      },
+      "train_score": NaN,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100054.41354277785,
+        "positions": {
+          "AAPL": 0
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 103.79958234898665,
+            "entry_time": "2023-03-10 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 104.55206942854274,
+            "close_time": "2023-04-13 00:00:00",
+            "pnl": 75.24870795561037,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100054.41354277785,
+          "trades_executed": 1,
+          "return_pct_closed_only": 0.07524870795561037,
+          "portfolio_realized_return_pct": 0.07524870795561037,
+          "return_pct_with_open": 0.06480022724927946,
+          "return_pct": 0.07524870795561037,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.0,
+          "max_drawdown_full": 0.0,
+          "win_rate": 1.0,
+          "profitable_trades": 1,
+          "loss_trades": 0,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 75.24870795561037,
+          "avg_loss": 0,
+          "profit_factor": 100.0,
+          "open_position_value": -20.835165177757517,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -20.835165177757517,
+          "unexplained_pnl_percent": -38.29040366443067
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-03-10 00:00:00",
+            "cash": 89609.66180686644,
+            "closed_pnl": 0,
+            "market_value": 10379.958234898664,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99989.6200417651,
+            "equity": 99989.6200417651
+          },
+          {
+            "timestamp": "2023-04-13 00:00:00",
+            "cash": 100054.41354277785,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100054.41354277785,
+            "equity": 100054.41354277785
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 15,
+          "slow_period": 40
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 15,
+          "slow_period": 40
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 15,
+        "slow_period": 60
+      },
+      "train_score": NaN,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 99611.80925281892,
+        "positions": {
+          "AAPL": 0
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 106.67644616984272,
+            "entry_time": "2023-03-13 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 103.00421936356518,
+            "close_time": "2023-04-23 00:00:00",
+            "pnl": -367.2226806277522,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 99611.80925281892,
+          "trades_executed": 1,
+          "return_pct_closed_only": -0.3672226806277522,
+          "portfolio_realized_return_pct": -0.3672226806277522,
+          "return_pct_with_open": -0.37756337968364545,
+          "return_pct": -0.3672226806277522,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.37756337968364545,
+          "max_drawdown_full": 0.37756337968364545,
+          "win_rate": 0.0,
+          "profitable_trades": 0,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 0,
+          "avg_loss": -367.2226806277522,
+          "profit_factor": 0.0,
+          "open_position_value": -20.968066553332392,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -20.968066553332392,
+          "unexplained_pnl_percent": -5.40148540520239
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-03-13 00:00:00",
+            "cash": 89321.68773839874,
+            "closed_pnl": 0,
+            "market_value": 10667.644616984271,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99989.33235538301,
+            "equity": 99989.33235538301
+          },
+          {
+            "timestamp": "2023-04-23 00:00:00",
+            "cash": 99611.80925281892,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99611.80925281892,
+            "equity": 99611.80925281892
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 15,
+          "slow_period": 60
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 15,
+          "slow_period": 60
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 15,
+        "slow_period": 80
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 109928.91509527102,
+        "positions": {
+          "AAPL": -100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 99.38853949220233,
+            "entry_time": "2023-05-02 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 98.14356823159538,
+            "close_time": "2023-06-17 00:00:00",
+            "pnl": 124.49712606069443,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 109928.91509527102,
+          "trades_executed": 1,
+          "return_pct_closed_only": 0.12449712606069444,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.12449712606069444,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0,
+          "win_rate": 1.0,
+          "profitable_trades": 1,
+          "loss_trades": 0,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 124.49712606069443,
+          "avg_loss": 0,
+          "profit_factor": 100.0,
+          "open_position_value": 9804.417969210324,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": 9804.417969210324,
+          "unexplained_pnl_percent": 98.74611551346642
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-05-02 00:00:00",
+            "cash": 109928.91509527102,
+            "closed_pnl": 0,
+            "market_value": -9938.853949220233,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.06114605078,
+            "equity": 99990.06114605078
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 15,
+          "slow_period": 80
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 15,
+          "slow_period": 80
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 15,
+        "slow_period": 100
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 109833.90326202949,
+        "positions": {
+          "AAPL": -100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 98.43747009038536,
+            "entry_time": "2023-05-04 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 98.14356823159538,
+            "close_time": "2023-06-17 00:00:00",
+            "pnl": 29.390185878997727,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 109833.90326202949,
+          "trades_executed": 1,
+          "return_pct_closed_only": 0.029390185878997728,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.029390185878997728,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0,
+          "win_rate": 1.0,
+          "profitable_trades": 1,
+          "loss_trades": 0,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 29.390185878997727,
+          "avg_loss": 0,
+          "profit_factor": 100.0,
+          "open_position_value": 9804.513076150492,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": 9804.513076150492,
+          "unexplained_pnl_percent": 99.70113407569832
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-05-04 00:00:00",
+            "cash": 109833.90326202949,
+            "closed_pnl": 0,
+            "market_value": -9843.747009038536,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.15625299096,
+            "equity": 99990.15625299096
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 15,
+          "slow_period": 100
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 15,
+          "slow_period": 100
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 20,
+        "slow_period": 20
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 20,
+          "slow_period": 20
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 20,
+          "slow_period": 20
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 20,
+        "slow_period": 40
+      },
+      "train_score": NaN,
+      "test_score": NaN,
+      "train_result": {
+        "final_capital": 99826.62462478415,
+        "positions": {
+          "AAPL": 0
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 105.81398811295456,
+            "entry_time": "2023-03-12 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 104.29033868759656,
+            "close_time": "2023-04-14 00:00:00",
+            "pnl": -152.36494253579986,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 99826.62462478415,
+          "trades_executed": 1,
+          "return_pct_closed_only": -0.15236494253579985,
+          "portfolio_realized_return_pct": -0.15236494253579985,
+          "return_pct_with_open": -0.1628112041073747,
+          "return_pct": -0.15236494253579985,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.1628112041073747,
+          "max_drawdown_full": 0.1628112041073747,
+          "win_rate": 0.0,
+          "profitable_trades": 0,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 0,
+          "avg_loss": -152.36494253579986,
+          "profit_factor": 0.0,
+          "open_position_value": -21.010432680051963,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -21.010432680051963,
+          "unexplained_pnl_percent": -12.118464143996249
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-03-12 00:00:00",
+            "cash": 89408.01978989325,
+            "closed_pnl": 0,
+            "market_value": 10581.398811295456,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99989.4186011887,
+            "equity": 99989.4186011887
+          },
+          {
+            "timestamp": "2023-04-14 00:00:00",
+            "cash": 99826.62462478415,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99826.62462478415,
+            "equity": 99826.62462478415
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 20,
+          "slow_period": 40
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100021.52809832466,
+        "positions": {
+          "AAPL": 0
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 98.80115419937653,
+            "entry_time": "2023-08-15 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 99.21445078761,
+            "close_time": "2023-08-16 00:00:00",
+            "pnl": 41.32965882334793,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100021.52809832466,
+          "trades_executed": 1,
+          "return_pct_closed_only": 0.04132965882334793,
+          "portfolio_realized_return_pct": 0.04132965882334793,
+          "return_pct_with_open": 0.031411317218990986,
+          "return_pct": 0.04132965882334793,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.0,
+          "max_drawdown_full": 0.0,
+          "win_rate": 1.0,
+          "profitable_trades": 1,
+          "loss_trades": 0,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 41.32965882334793,
+          "avg_loss": 0,
+          "profit_factor": 100.0,
+          "open_position_value": -19.80156049868492,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -19.80156049868492,
+          "unexplained_pnl_percent": -91.98007274056283
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-08-15 00:00:00",
+            "cash": 90110.00446464242,
+            "closed_pnl": 0,
+            "market_value": 9880.115419937652,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.11988458007,
+            "equity": 99990.11988458007
+          },
+          {
+            "timestamp": "2023-08-16 00:00:00",
+            "cash": 100021.52809832466,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100021.52809832466,
+            "equity": 100021.52809832466
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 20,
+          "slow_period": 40
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 20,
+        "slow_period": 60
+      },
+      "train_score": NaN,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 99463.70345063091,
+        "positions": {
+          "AAPL": 0
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 109.10018397781003,
+            "entry_time": "2023-03-14 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 103.95026893703408,
+            "close_time": "2023-04-25 00:00:00",
+            "pnl": -514.9915040775941,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 99463.70345063091,
+          "trades_executed": 1,
+          "return_pct_closed_only": -0.5149915040775941,
+          "portfolio_realized_return_pct": -0.5149915040775941,
+          "return_pct_with_open": -0.5254438569927681,
+          "return_pct": -0.5149915040775941,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.5254438569927681,
+          "max_drawdown_full": 0.5254438569927681,
+          "win_rate": 0.0,
+          "profitable_trades": 0,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 0,
+          "avg_loss": -514.9915040775941,
+          "profit_factor": 0.0,
+          "open_position_value": -21.305045291492206,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -21.305045291492206,
+          "unexplained_pnl_percent": -3.97262397391071
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-03-14 00:00:00",
+            "cash": 89079.0715838212,
+            "closed_pnl": 0,
+            "market_value": 10910.018397781003,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99989.08998160221,
+            "equity": 99989.08998160221
+          },
+          {
+            "timestamp": "2023-04-25 00:00:00",
+            "cash": 99463.70345063091,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99463.70345063091,
+            "equity": 99463.70345063091
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 20,
+          "slow_period": 60
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 20,
+          "slow_period": 60
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 20,
+        "slow_period": 80
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 109928.91509527102,
+        "positions": {
+          "AAPL": -100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 99.38853949220233,
+            "entry_time": "2023-05-02 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 98.14356823159538,
+            "close_time": "2023-06-17 00:00:00",
+            "pnl": 124.49712606069443,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 109928.91509527102,
+          "trades_executed": 1,
+          "return_pct_closed_only": 0.12449712606069444,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.12449712606069444,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0,
+          "win_rate": 1.0,
+          "profitable_trades": 1,
+          "loss_trades": 0,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 124.49712606069443,
+          "avg_loss": 0,
+          "profit_factor": 100.0,
+          "open_position_value": 9804.417969210324,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": 9804.417969210324,
+          "unexplained_pnl_percent": 98.74611551346642
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-05-02 00:00:00",
+            "cash": 109928.91509527102,
+            "closed_pnl": 0,
+            "market_value": -9938.853949220233,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.06114605078,
+            "equity": 99990.06114605078
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 20,
+          "slow_period": 80
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 20,
+          "slow_period": 80
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 20,
+        "slow_period": 100
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 109704.0606134278,
+        "positions": {
+          "AAPL": -100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 97.13774387815614,
+            "entry_time": "2023-05-06 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 98.14356823159538,
+            "close_time": "2023-06-17 00:00:00",
+            "pnl": -100.58243534392386,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 109704.0606134278,
+          "trades_executed": 1,
+          "return_pct_closed_only": -0.10058243534392386,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": -0.10058243534392386,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0,
+          "win_rate": 0.0,
+          "profitable_trades": 0,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 0,
+          "avg_loss": -100.58243534392386,
+          "profit_factor": 0.0,
+          "open_position_value": 9804.64304877173,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": 9804.64304877173,
+          "unexplained_pnl_percent": 101.03649842422402
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-05-06 00:00:00",
+            "cash": 109704.0606134278,
+            "closed_pnl": 0,
+            "market_value": -9713.774387815614,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.28622561219,
+            "equity": 99990.28622561219
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 20,
+          "slow_period": 100
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 20,
+          "slow_period": 100
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 25,
+        "slow_period": 20
+      },
+      "train_score": -8.544268673602954,
+      "test_score": 16.409568163568927,
+      "train_result": {
+        "final_capital": 89578.03094969149,
+        "positions": {
+          "AAPL": 100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 98.6681550607381,
+            "entry_time": "2023-01-26 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 100.60710434803616,
+            "close_time": "2023-03-09 00:00:00",
+            "pnl": 193.89492872980554,
+            "closed_quantity": 100
+          },
+          {
+            "id": "trade_fill_order_3",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 106.0909773492512,
+            "entry_time": "2023-04-05 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_3"
+            ],
+            "close_price": 96.46932066959346,
+            "close_time": "2023-05-26 00:00:00",
+            "pnl": -962.1656679657754,
+            "closed_quantity": 100
+          },
+          {
+            "id": "trade_fill_order_5",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 96.039108444853,
+            "entry_time": "2023-05-29 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_5"
+            ],
+            "close_price": 98.14356823159538,
+            "close_time": "2023-06-17 00:00:00",
+            "pnl": 210.4459786742391,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 89578.03094969149,
+          "trades_executed": 3,
+          "return_pct_closed_only": -0.5578247605617307,
+          "portfolio_realized_return_pct": -0.7682707392359698,
+          "return_pct_with_open": -0.7652456732218432,
+          "return_pct": -0.5578247605617307,
+          "sharpe_ratio": -8.544268673602954,
+          "sharpe_ratio_full": -8.544268673602954,
+          "max_drawdown": 0.9807155723576779,
+          "max_drawdown_full": 0.9807155723576779,
+          "win_rate": 0.6666666666666666,
+          "profitable_trades": 2,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 3,
+          "avg_profit": 202.17045370202231,
+          "avg_loss": -962.1656679657754,
+          "profit_factor": 0.42024042310604165,
+          "open_position_value": -9864.144289746784,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -9864.144289746784,
+          "unexplained_pnl_percent": -94.64760682104291
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-01-26 00:00:00",
+            "cash": 90123.31767842012,
+            "closed_pnl": 0,
+            "market_value": 9866.81550607381,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.13318449393,
+            "equity": 99990.13318449393
+          },
+          {
+            "timestamp": "2023-03-09 00:00:00",
+            "cash": 100173.96740278893,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100173.96740278893,
+            "equity": 100173.96740278893
+          },
+          {
+            "timestamp": "2023-04-05 00:00:00",
+            "cash": 89554.26057012888,
+            "closed_pnl": 0,
+            "market_value": 10060.710434803615,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99614.97100493251,
+            "equity": 99614.97100493251
+          },
+          {
+            "timestamp": "2023-05-26 00:00:00",
+            "cash": 99191.54570502127,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99191.54570502127,
+            "equity": 99191.54570502127
+          },
+          {
+            "timestamp": "2023-05-29 00:00:00",
+            "cash": 89578.03094969149,
+            "closed_pnl": 0,
+            "market_value": 9646.932066959345,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99224.96301665083,
+            "equity": 99224.96301665083
+          }
+        ],
+        "trades_equity_consistent": "False",
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 25,
+          "slow_period": 20
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 90178.73975527888,
+        "positions": {
+          "AAPL": 100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 98.16283382877572,
+            "entry_time": "2023-07-15 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 99.04739696593502,
+            "close_time": "2023-08-05 00:00:00",
+            "pnl": 88.45631371593117,
+            "closed_quantity": 100
+          },
+          {
+            "id": "trade_fill_order_3",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 98.80115419937653,
+            "entry_time": "2023-08-15 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_3"
+            ],
+            "close_price": 93.180597251687,
+            "close_time": "2023-08-28 00:00:00",
+            "pnl": -562.0556947689529,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 90178.73975527888,
+          "trades_executed": 2,
+          "return_pct_closed_only": -0.47359938105302174,
+          "portfolio_realized_return_pct": 0.08845631371593118,
+          "return_pct_with_open": 0.09330489432809945,
+          "return_pct": -0.47359938105302174,
+          "sharpe_ratio": 16.409568163568927,
+          "sharpe_ratio_full": 16.409568163568927,
+          "max_drawdown": 0.0,
+          "max_drawdown_full": 0.0,
+          "win_rate": 0.5,
+          "profitable_trades": 1,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 2,
+          "avg_profit": 88.45631371593117,
+          "avg_loss": -562.0556947689529,
+          "profit_factor": 0.1573799794917003,
+          "open_position_value": -9347.660863668103,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -9347.660863668103,
+          "unexplained_pnl_percent": -95.1778145650139
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-07-15 00:00:00",
+            "cash": 90173.90033373954,
+            "closed_pnl": 0,
+            "market_value": 9816.283382877571,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.18371661712,
+            "equity": 99990.18371661712
+          },
+          {
+            "timestamp": "2023-08-05 00:00:00",
+            "cash": 100068.73529063645,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100068.73529063645,
+            "equity": 100068.73529063645
+          },
+          {
+            "timestamp": "2023-08-15 00:00:00",
+            "cash": 90178.73975527888,
+            "closed_pnl": 0,
+            "market_value": 9904.739696593502,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100083.47945187238,
+            "equity": 100083.47945187238
+          }
+        ],
+        "trades_equity_consistent": "False",
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 25,
+          "slow_period": 20
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 25,
+        "slow_period": 40
+      },
+      "train_score": NaN,
+      "test_score": NaN,
+      "train_result": {
+        "final_capital": 99614.31087502233,
+        "positions": {
+          "AAPL": 0
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 106.67644616984272,
+            "entry_time": "2023-03-13 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 103.02926062686264,
+            "close_time": "2023-04-15 00:00:00",
+            "pnl": -364.7185542980078,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 99614.31087502233,
+          "trades_executed": 1,
+          "return_pct_closed_only": -0.36471855429800776,
+          "portfolio_realized_return_pct": -0.36471855429800776,
+          "return_pct_with_open": -0.37506149058759064,
+          "return_pct": -0.36471855429800776,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.37506149058759064,
+          "max_drawdown_full": 0.37506149058759064,
+          "win_rate": 0.0,
+          "profitable_trades": 0,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 0,
+          "avg_loss": -364.7185542980078,
+          "profit_factor": 0.0,
+          "open_position_value": -20.97057067965943,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -20.97057067965943,
+          "unexplained_pnl_percent": -5.437169295575472
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-03-13 00:00:00",
+            "cash": 89321.68773839874,
+            "closed_pnl": 0,
+            "market_value": 10667.644616984271,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99989.33235538301,
+            "equity": 99989.33235538301
+          },
+          {
+            "timestamp": "2023-04-15 00:00:00",
+            "cash": 99614.31087502233,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99614.31087502233,
+            "equity": 99614.31087502233
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 25,
+          "slow_period": 40
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 99645.42895303614,
+        "positions": {
+          "AAPL": 0
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 98.80115419937653,
+            "entry_time": "2023-08-15 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 95.4496945785158,
+            "close_time": "2023-08-22 00:00:00",
+            "pnl": -335.14596208607145,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 99645.42895303614,
+          "trades_executed": 1,
+          "return_pct_closed_only": -0.33514596208607145,
+          "portfolio_realized_return_pct": -0.33514596208607145,
+          "return_pct_with_open": -0.34472499077089563,
+          "return_pct": -0.33514596208607145,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.34472499077089563,
+          "max_drawdown_full": 0.34472499077089563,
+          "win_rate": 0.0,
+          "profitable_trades": 0,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 0,
+          "avg_loss": -335.14596208607145,
+          "profit_factor": 0.0,
+          "open_position_value": -19.425084877786503,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -19.425084877786503,
+          "unexplained_pnl_percent": -5.478474636922776
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-08-15 00:00:00",
+            "cash": 90110.00446464242,
+            "closed_pnl": 0,
+            "market_value": 9880.115419937652,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.11988458007,
+            "equity": 99990.11988458007
+          },
+          {
+            "timestamp": "2023-08-22 00:00:00",
+            "cash": 99645.42895303614,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99645.42895303614,
+            "equity": 99645.42895303614
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 25,
+          "slow_period": 40
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 25,
+        "slow_period": 60
+      },
+      "train_score": NaN,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 99551.05177919404,
+        "positions": {
+          "AAPL": 0
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 108.57788552207543,
+            "entry_time": "2023-03-15 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 104.30128248201996,
+            "close_time": "2023-04-27 00:00:00",
+            "pnl": -427.660304005547,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 99551.05177919404,
+          "trades_executed": 1,
+          "return_pct_closed_only": -0.427660304005547,
+          "portfolio_realized_return_pct": -0.427660304005547,
+          "return_pct_with_open": -0.4381380043518329,
+          "return_pct": -0.427660304005547,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.4381380043518329,
+          "max_drawdown_full": 0.4381380043518329,
+          "win_rate": 0.0,
+          "profitable_trades": 0,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 0,
+          "avg_loss": -427.660304005547,
+          "profit_factor": 0.0,
+          "open_position_value": -21.287916800416497,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -21.287916800416497,
+          "unexplained_pnl_percent": -4.741730964475118
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-03-15 00:00:00",
+            "cash": 89131.35365924025,
+            "closed_pnl": 0,
+            "market_value": 10857.788552207543,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99989.14221144779,
+            "equity": 99989.14221144779
+          },
+          {
+            "timestamp": "2023-04-27 00:00:00",
+            "cash": 99551.05177919404,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99551.05177919404,
+            "equity": 99551.05177919404
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 25,
+          "slow_period": 60
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 25,
+          "slow_period": 60
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 25,
+        "slow_period": 80
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 109833.90326202949,
+        "positions": {
+          "AAPL": -100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 98.43747009038536,
+            "entry_time": "2023-05-04 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 98.14356823159538,
+            "close_time": "2023-06-17 00:00:00",
+            "pnl": 29.390185878997727,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 109833.90326202949,
+          "trades_executed": 1,
+          "return_pct_closed_only": 0.029390185878997728,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.029390185878997728,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0,
+          "win_rate": 1.0,
+          "profitable_trades": 1,
+          "loss_trades": 0,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 29.390185878997727,
+          "avg_loss": 0,
+          "profit_factor": 100.0,
+          "open_position_value": 9804.513076150492,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": 9804.513076150492,
+          "unexplained_pnl_percent": 99.70113407569832
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-05-04 00:00:00",
+            "cash": 109833.90326202949,
+            "closed_pnl": 0,
+            "market_value": -9843.747009038536,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.15625299096,
+            "equity": 99990.15625299096
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 25,
+          "slow_period": 80
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 25,
+          "slow_period": 80
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 25,
+        "slow_period": 100
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 109678.0278143755,
+        "positions": {
+          "AAPL": -100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 96.877155299054,
+            "entry_time": "2023-05-07 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 98.14356823159538,
+            "close_time": "2023-06-17 00:00:00",
+            "pnl": -126.64129325413887,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 109678.0278143755,
+          "trades_executed": 1,
+          "return_pct_closed_only": -0.12664129325413886,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": -0.12664129325413886,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0,
+          "win_rate": 0.0,
+          "profitable_trades": 0,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 0,
+          "avg_loss": -126.64129325413887,
+          "profit_factor": 0.0,
+          "open_position_value": 9804.669107629637,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": 9804.669107629637,
+          "unexplained_pnl_percent": 101.30854442333828
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-05-07 00:00:00",
+            "cash": 109678.0278143755,
+            "closed_pnl": 0,
+            "market_value": -9687.7155299054,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.3122844701,
+            "equity": 99990.3122844701
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 25,
+          "slow_period": 100
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 25,
+          "slow_period": 100
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 30,
+        "slow_period": 20
+      },
+      "train_score": NaN,
+      "test_score": 50.77461502024404,
+      "train_result": {
+        "final_capital": 99736.14848049328,
+        "positions": {
+          "AAPL": 0
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 103.79958234898665,
+            "entry_time": "2023-03-10 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 106.22806989181288,
+            "close_time": "2023-04-08 00:00:00",
+            "pnl": -242.8487542826242,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 99736.14848049328,
+          "trades_executed": 1,
+          "return_pct_closed_only": -0.24284875428262423,
+          "portfolio_realized_return_pct": -0.24284875428262423,
+          "return_pct_with_open": -0.25349787424528675,
+          "return_pct": -0.24284875428262423,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.25349787424528675,
+          "max_drawdown_full": 0.25349787424528675,
+          "win_rate": 0.0,
+          "profitable_trades": 0,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 0,
+          "avg_loss": -242.8487542826242,
+          "profit_factor": 0.0,
+          "open_position_value": -21.00276522409149,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -21.00276522409149,
+          "unexplained_pnl_percent": -7.9600698390357065
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-03-10 00:00:00",
+            "cash": 110369.57827666376,
+            "closed_pnl": 0,
+            "market_value": -10379.958234898664,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99989.6200417651,
+            "equity": 99989.6200417651
+          },
+          {
+            "timestamp": "2023-04-08 00:00:00",
+            "cash": 99736.14848049328,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99736.14848049328,
+            "equity": 99736.14848049328
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 30,
+          "slow_period": 20
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 90572.48658954914,
+        "positions": {
+          "AAPL": 100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 96.29012932820984,
+            "entry_time": "2023-07-18 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 99.84645254860403,
+            "close_time": "2023-08-07 00:00:00",
+            "pnl": 355.6323220394188,
+            "closed_quantity": 100
+          },
+          {
+            "id": "trade_fill_order_3",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 97.53778296006566,
+            "entry_time": "2023-08-17 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_3"
+            ],
+            "close_price": 93.180597251687,
+            "close_time": "2023-08-28 00:00:00",
+            "pnl": -435.7185708378656,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 90572.48658954914,
+          "trades_executed": 2,
+          "return_pct_closed_only": -0.08008624879844684,
+          "portfolio_realized_return_pct": 0.3556323220394188,
+          "return_pct_with_open": 0.5668154360740089,
+          "return_pct": -0.08008624879844684,
+          "sharpe_ratio": 50.77461502024404,
+          "sharpe_ratio_full": 50.77461502024404,
+          "max_drawdown": 0.0,
+          "max_drawdown_full": 0.0,
+          "win_rate": 0.5,
+          "profitable_trades": 1,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 2,
+          "avg_profit": 355.6323220394188,
+          "avg_loss": -435.7185708378656,
+          "profit_factor": 0.8161973022071451,
+          "open_position_value": -9347.427161652415,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -9347.427161652415,
+          "unexplained_pnl_percent": -99.15050506627053
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-07-18 00:00:00",
+            "cash": 90361.35805424619,
+            "closed_pnl": 0,
+            "market_value": 9629.012932820984,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.37098706717,
+            "equity": 99990.37098706717
+          },
+          {
+            "timestamp": "2023-08-07 00:00:00",
+            "cash": 100336.01866385172,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100336.01866385172,
+            "equity": 100336.01866385172
+          },
+          {
+            "timestamp": "2023-08-17 00:00:00",
+            "cash": 90572.48658954914,
+            "closed_pnl": 0,
+            "market_value": 9984.645254860403,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100557.13184440954,
+            "equity": 100557.13184440954
+          }
+        ],
+        "trades_equity_consistent": "False",
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 30,
+          "slow_period": 20
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 30,
+        "slow_period": 40
+      },
+      "train_score": NaN,
+      "test_score": NaN,
+      "train_result": {
+        "final_capital": 99323.69148933452,
+        "positions": {
+          "AAPL": 0
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 109.10018397781003,
+            "entry_time": "2023-03-14 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 102.54874780293608,
+            "close_time": "2023-04-16 00:00:00",
+            "pnl": -655.1436174873943,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 99323.69148933452,
+          "trades_executed": 1,
+          "return_pct_closed_only": -0.6551436174873944,
+          "portfolio_realized_return_pct": -0.6551436174873944,
+          "return_pct_with_open": -0.6654710952866177,
+          "return_pct": -0.6551436174873944,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.6654710952866177,
+          "max_drawdown_full": 0.6654710952866177,
+          "win_rate": 0.0,
+          "profitable_trades": 0,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 0,
+          "avg_loss": -655.1436174873943,
+          "profit_factor": 0.0,
+          "open_position_value": -21.16489317808191,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -21.16489317808191,
+          "unexplained_pnl_percent": -3.129473139005158
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-03-14 00:00:00",
+            "cash": 89079.0715838212,
+            "closed_pnl": 0,
+            "market_value": 10910.018397781003,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99989.08998160221,
+            "equity": 99989.08998160221
+          },
+          {
+            "timestamp": "2023-04-16 00:00:00",
+            "cash": 99323.69148933452,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99323.69148933452,
+            "equity": 99323.69148933452
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 30,
+          "slow_period": 40
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 99752.59593391478,
+        "positions": {
+          "AAPL": 0
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 97.53778296006566,
+            "entry_time": "2023-08-17 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 95.25653661879248,
+            "close_time": "2023-08-25 00:00:00",
+            "pnl": -228.1246341273163,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 99752.59593391478,
+          "trades_executed": 1,
+          "return_pct_closed_only": -0.22812463412731632,
+          "portfolio_realized_return_pct": -0.22812463412731632,
+          "return_pct_with_open": -0.237673469932531,
+          "return_pct": -0.22812463412731632,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.237673469932531,
+          "max_drawdown_full": 0.237673469932531,
+          "win_rate": 0.0,
+          "profitable_trades": 0,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 0,
+          "avg_loss": -228.1246341273163,
+          "profit_factor": 0.0,
+          "open_position_value": -19.27943195790249,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -19.27943195790249,
+          "unexplained_pnl_percent": -7.792690016364425
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-08-17 00:00:00",
+            "cash": 90236.46792569742,
+            "closed_pnl": 0,
+            "market_value": 9753.778296006565,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.24622170399,
+            "equity": 99990.24622170399
+          },
+          {
+            "timestamp": "2023-08-25 00:00:00",
+            "cash": 99752.59593391478,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99752.59593391478,
+            "equity": 99752.59593391478
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 30,
+          "slow_period": 40
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 30,
+        "slow_period": 60
+      },
+      "train_score": NaN,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 99170.0908658487,
+        "positions": {
+          "AAPL": 0
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "LONG",
+            "quantity": 100,
+            "entry_price": 109.2424078229785,
+            "entry_time": "2023-03-16 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 101.15371260189056,
+            "close_time": "2023-04-29 00:00:00",
+            "pnl": -808.8695221087946,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 99170.0908658487,
+          "trades_executed": 1,
+          "return_pct_closed_only": -0.8088695221087947,
+          "portfolio_realized_return_pct": -0.8088695221087947,
+          "return_pct_with_open": -0.8190743710254706,
+          "return_pct": -0.8088695221087947,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.8190743710254706,
+          "max_drawdown_full": 0.8190743710254706,
+          "win_rate": 0.0,
+          "profitable_trades": 0,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 0,
+          "avg_loss": -808.8695221087946,
+          "profit_factor": 0.0,
+          "open_position_value": -21.039612042502995,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": -21.039612042502995,
+          "unexplained_pnl_percent": -2.5351705598491874
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-03-16 00:00:00",
+            "cash": 89064.83497691984,
+            "closed_pnl": 0,
+            "market_value": 10924.240782297851,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99989.0757592177,
+            "equity": 99989.0757592177
+          },
+          {
+            "timestamp": "2023-04-29 00:00:00",
+            "cash": 99170.0908658487,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99170.0908658487,
+            "equity": 99170.0908658487
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 30,
+          "slow_period": 60
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 30,
+          "slow_period": 60
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 30,
+        "slow_period": 80
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 109704.0606134278,
+        "positions": {
+          "AAPL": -100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 97.13774387815614,
+            "entry_time": "2023-05-06 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 98.14356823159538,
+            "close_time": "2023-06-17 00:00:00",
+            "pnl": -100.58243534392386,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 109704.0606134278,
+          "trades_executed": 1,
+          "return_pct_closed_only": -0.10058243534392386,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": -0.10058243534392386,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0,
+          "win_rate": 0.0,
+          "profitable_trades": 0,
+          "loss_trades": 1,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 0,
+          "avg_loss": -100.58243534392386,
+          "profit_factor": 0.0,
+          "open_position_value": 9804.64304877173,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": 9804.64304877173,
+          "unexplained_pnl_percent": 101.03649842422402
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-05-06 00:00:00",
+            "cash": 109704.0606134278,
+            "closed_pnl": 0,
+            "market_value": -9713.774387815614,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.28622561219,
+            "equity": 99990.28622561219
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 30,
+          "slow_period": 80
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 30,
+          "slow_period": 80
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_period": 30,
+        "slow_period": 100
+      },
+      "train_score": 0.0,
+      "test_score": 0.0,
+      "train_result": {
+        "final_capital": 109912.61791302945,
+        "positions": {
+          "AAPL": -100
+        },
+        "trades": [
+          {
+            "id": "trade_fill_order_1",
+            "symbol": "AAPL",
+            "direction": "SHORT",
+            "quantity": 100,
+            "entry_price": 99.22540453482924,
+            "entry_time": "2023-05-10 00:00:00",
+            "closed": true,
+            "related_order_ids": [
+              "order_1"
+            ],
+            "close_price": 98.14356823159538,
+            "close_time": "2023-06-17 00:00:00",
+            "pnl": 108.18363032338493,
+            "closed_quantity": 100
+          }
+        ],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 109912.61791302945,
+          "trades_executed": 1,
+          "return_pct_closed_only": 0.10818363032338493,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.10818363032338493,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0,
+          "win_rate": 1.0,
+          "profitable_trades": 1,
+          "loss_trades": 0,
+          "break_even_trades": 0,
+          "closed_trades": 1,
+          "avg_profit": 108.18363032338493,
+          "avg_loss": 0,
+          "profit_factor": 100.0,
+          "open_position_value": 9804.434282706063,
+          "pnl_equity_consistency": false,
+          "metrics_consistency": true,
+          "pnl_equity_consistent": false,
+          "unexplained_pnl": 9804.434282706063,
+          "unexplained_pnl_percent": 98.9086270521818
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2023-05-10 00:00:00",
+            "cash": 109912.61791302945,
+            "closed_pnl": 0,
+            "market_value": -9922.540453482923,
+            "closed_only_equity": 100000.0,
+            "full_equity": 99990.07745954652,
+            "equity": 99990.07745954652
+          }
+        ],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 30,
+          "slow_period": 100
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {},
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": 0.0,
+          "max_drawdown": 0.0
+        },
+        "equity_curve": [],
+        "trades_equity_consistent": false,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_period": 30,
+          "slow_period": 100
+        },
+        "data_split": "test"
+      }
+    }
+  ],
+  "parameter_counts": 30,
+  "train_results": {
+    "final_capital": 90705.74791081855,
+    "positions": {
+      "AAPL": 100
+    },
+    "trades": [
+      {
+        "id": "trade_fill_order_1",
+        "symbol": "AAPL",
+        "direction": "LONG",
+        "quantity": 100,
+        "entry_price": 100.20130053997536,
+        "entry_time": "2023-03-08 00:00:00",
+        "closed": true,
+        "related_order_ids": [
+          "order_1"
+        ],
+        "close_price": 104.4519027102382,
+        "close_time": "2023-04-12 00:00:00",
+        "pnl": 425.0602170262846,
+        "closed_quantity": 100
+      },
+      {
+        "id": "trade_fill_order_3",
+        "symbol": "AAPL",
+        "direction": "LONG",
+        "quantity": 100,
+        "entry_price": 96.89157828054675,
+        "entry_time": "2023-06-11 00:00:00",
+        "closed": true,
+        "related_order_ids": [
+          "order_3"
+        ],
+        "close_price": 98.14356823159538,
+        "close_time": "2023-06-17 00:00:00",
+        "pnl": 125.19899510486357,
+        "closed_quantity": 100
+      }
+    ],
+    "statistics": {
+      "initial_capital": 100000.0,
+      "final_capital": 90705.74791081855,
+      "trades_executed": 2,
+      "return_pct_closed_only": 0.5502592121311481,
+      "portfolio_realized_return_pct": 0.42506021702628455,
+      "return_pct_with_open": 1.161074653086627,
+      "return_pct": 0.5502592121311481,
+      "sharpe_ratio": 39.65253557195335,
+      "sharpe_ratio_full": 39.65253557195335,
+      "max_drawdown": 0.0,
+      "max_drawdown_full": 0.0,
+      "win_rate": 1.0,
+      "profitable_trades": 2,
+      "loss_trades": 0,
+      "break_even_trades": 0,
+      "closed_trades": 2,
+      "avg_profit": 275.1296060655741,
+      "avg_loss": 0,
+      "profit_factor": 100.0,
+      "open_position_value": -9844.511301312597,
+      "pnl_equity_consistency": false,
+      "metrics_consistency": true,
+      "pnl_equity_consistent": false,
+      "unexplained_pnl": -9844.511301312597,
+      "unexplained_pnl_percent": -105.92042486959927
+    },
+    "equity_curve": [
+      {
+        "timestamp": "2023-03-08 00:00:00",
+        "cash": 89969.84981594847,
+        "closed_pnl": 0,
+        "market_value": 10020.130053997536,
+        "closed_only_equity": 100000.0,
+        "full_equity": 99989.97986994601,
+        "equity": 99989.97986994601
+      },
+      {
+        "timestamp": "2023-04-12 00:00:00",
+        "cash": 100404.59489670127,
+        "closed_pnl": 0,
+        "market_value": 0,
+        "closed_only_equity": 100000.0,
+        "full_equity": 100404.59489670127,
+        "equity": 100404.59489670127
+      },
+      {
+        "timestamp": "2023-06-11 00:00:00",
+        "cash": 90705.74791081855,
+        "closed_pnl": 0,
+        "market_value": 10445.190271023821,
+        "closed_only_equity": 100000.0,
+        "full_equity": 101150.93818184237,
+        "equity": 101150.93818184237
+      }
+    ],
+    "trades_equity_consistent": "False",
+    "metrics_consistent": true,
+    "parameters": {
+      "fast_period": 5,
+      "slow_period": 40
+    },
+    "data_split": "train"
+  },
+  "test_results": {
+    "final_capital": 99933.02663837928,
+    "positions": {
+      "AAPL": 0
+    },
+    "trades": [
+      {
+        "id": "trade_fill_order_1",
+        "symbol": "AAPL",
+        "direction": "LONG",
+        "quantity": 100,
+        "entry_price": 99.72273947857956,
+        "entry_time": "2023-07-29 00:00:00",
+        "closed": true,
+        "related_order_ids": [
+          "order_1"
+        ],
+        "close_price": 99.32985536254968,
+        "close_time": "2023-07-30 00:00:00",
+        "pnl": -39.28841160298725,
+        "closed_quantity": 100
+      },
+      {
+        "id": "trade_fill_order_3",
+        "symbol": "AAPL",
+        "direction": "LONG",
+        "quantity": 100,
+        "entry_price": 98.86975582280957,
+        "entry_time": "2023-08-08 00:00:00",
+        "closed": true,
+        "related_order_ids": [
+          "order_3"
+        ],
+        "close_price": 98.989818491788,
+        "close_time": "2023-08-09 00:00:00",
+        "pnl": 12.006266897842579,
+        "closed_quantity": 100
+      }
+    ],
+    "statistics": {
+      "initial_capital": 100000.0,
+      "final_capital": 99933.02663837928,
+      "trades_executed": 2,
+      "return_pct_closed_only": -0.027282144705144673,
+      "portfolio_realized_return_pct": -0.027282144705144673,
+      "return_pct_with_open": -0.05700677254438988,
+      "return_pct": -0.027282144705144673,
+      "sharpe_ratio": -6.308365276892444,
+      "sharpe_ratio_full": -6.308365276892444,
+      "max_drawdown": 0.05700677254438988,
+      "max_drawdown_full": 0.05700677254438988,
+      "win_rate": 0.5,
+      "profitable_trades": 1,
+      "loss_trades": 1,
+      "break_even_trades": 0,
+      "closed_trades": 2,
+      "avg_profit": 12.006266897842579,
+      "avg_loss": -39.28841160298725,
+      "profit_factor": 0.30559308477947467,
+      "open_position_value": -39.69121691557848,
+      "pnl_equity_consistency": false,
+      "metrics_consistency": true,
+      "pnl_equity_consistent": false,
+      "unexplained_pnl": -39.69121691557848,
+      "unexplained_pnl_percent": -59.26418497604139
+    },
+    "equity_curve": [
+      {
+        "timestamp": "2023-07-29 00:00:00",
+        "cash": 90017.75377819418,
+        "closed_pnl": 0,
+        "market_value": 9972.273947857955,
+        "closed_only_equity": 100000.0,
+        "full_equity": 99990.02772605214,
+        "equity": 99990.02772605214
+      },
+      {
+        "timestamp": "2023-07-30 00:00:00",
+        "cash": 99940.80632891289,
+        "closed_pnl": 0,
+        "market_value": 0,
+        "closed_only_equity": 100000.0,
+        "full_equity": 99940.80632891289,
+        "equity": 99940.80632891289
+      },
+      {
+        "timestamp": "2023-08-08 00:00:00",
+        "cash": 90043.94377104966,
+        "closed_pnl": 0,
+        "market_value": 9932.985536254968,
+        "closed_only_equity": 100000.0,
+        "full_equity": 99976.92930730463,
+        "equity": 99976.92930730463
+      },
+      {
+        "timestamp": "2023-08-09 00:00:00",
+        "cash": 99933.02663837928,
+        "closed_pnl": 0,
+        "market_value": 0,
+        "closed_only_equity": 100000.0,
+        "full_equity": 99933.02663837928,
+        "equity": 99933.02663837928
+      }
+    ],
+    "trades_equity_consistent": false,
+    "metrics_consistent": true,
+    "parameters": {
+      "fast_period": 5,
+      "slow_period": 40
+    },
+    "data_split": "test"
+  },
+  "timestamp": "20250508_135536",
+  "id": "1d2b76e8-3e39-4c77-82a0-2324d17155f2",
+  "config": {
+    "strategy": {
+      "name": "simple_ma_crossover",
+      "parameters": {
+        "fast_period": 5,
+        "slow_period": 20
+      }
+    },
+    "risk": {
+      "position_manager": {
+        "fixed_quantity": 10,
+        "max_positions": 1,
+        "enforce_single_position": true
+      }
+    },
+    "backtest": {
+      "initial_capital": 100000.0,
+      "symbols": [
+        "AAPL"
+      ],
+      "timeframe": "1d"
+    },
+    "data": {
+      "source_type": "csv",
+      "sources": [
+        {
+          "symbol": "AAPL",
+          "file": "data/AAPL_1d.csv",
+          "date_column": "date",
+          "price_column": "close"
+        }
+      ]
+    },
+    "optimization": {
+      "objective": "sharpe_ratio",
+      "method": "grid"
+    },
+    "parameter_space": [
+      {
+        "name": "fast_period",
+        "type": "integer",
+        "min": 5,
+        "max": 30,
+        "step": 5,
+        "description": "Fast moving average period"
+      },
+      {
+        "name": "slow_period",
+        "type": "integer",
+        "min": 20,
+        "max": 100,
+        "step": 20,
+        "description": "Slow moving average period"
+      }
+    ],
+    "initial_capital": 100000.0
+  },
+  "best_score": 39.65253557195335
+}

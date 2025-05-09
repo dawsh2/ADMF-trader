@@ -1,0 +1,382 @@
+"""
+Optimizing backtest coordinator with train/test validation.
+
+This implementation adds train/test validation to the backtest process
+for proper parameter optimization.
+"""
+
+import logging
+from src.core.component import Component
+from src.core.event_bus import SimpleEventBus, EventType, Event
+from src.core.trade_repository import TradeRepository
+from src.core.backtest_state import BacktestState
+from src.risk.position_manager import PositionManager
+from src.execution.backtest.backtest_coordinator import BacktestCoordinator
+
+# Set up logging
+logger = logging.getLogger(__name__)
+
+class OptimizingBacktest(Component):
+    """
+    Manages the optimization process with train/test validation.
+    
+    This class coordinates the optimization process, ensuring proper
+    train/test validation to prevent overfitting.
+    """
+    
+    def __init__(self, name, config, parameter_space):
+        """
+        Initialize the optimizing backtest.
+        
+        Args:
+            name (str): Component name
+            config (dict): Base configuration
+            parameter_space (ParameterSpace): Parameter space for optimization
+        """
+        super().__init__(name)
+        self.config = config
+        self.parameter_space = parameter_space
+        self.best_parameters = None
+        self.best_train_result = None
+        self.best_test_result = None
+        self.all_results = []
+        
+        # Initialize logger
+        self.logger = logging.getLogger(__name__)
+        
+    def initialize(self, context):
+        """
+        Initialize with dependencies.
+        
+        Args:
+            context (dict): Context containing dependencies
+        """
+        super().initialize(context)
+        self.strategy_factory = context.get('strategy_factory')
+        
+        if not self.strategy_factory:
+            raise ValueError("OptimizingBacktest requires strategy_factory in context")
+            
+    def optimize(self, strategy_name, objective_function, train_test_config=None):
+        """
+        Run optimization with train/test validation.
+        
+        Args:
+            strategy_name (str): Name of the strategy to optimize
+            objective_function (callable): Function to evaluate results
+            train_test_config (dict, optional): Train/test configuration
+            
+        Returns:
+            dict: Optimization results
+        """
+        # Default to using 70/30 train/test split if not specified
+        if not train_test_config:
+            train_test_config = {
+                'method': 'ratio',
+                'train_ratio': 0.7,
+                'test_ratio': 0.3
+            }
+            
+        # Get parameter combinations to test
+        parameter_combinations = self.parameter_space.get_combinations()
+        
+        if not parameter_combinations:
+            raise ValueError("No parameter combinations to test")
+            
+        # Track results
+        self.all_results = []
+        best_train_score = float('-inf')
+        
+        # Test each parameter combination
+        for params in parameter_combinations:
+            # Run backtest with training data
+            train_result = self._run_backtest_with_params(
+                strategy_name, 
+                params, 
+                'train',
+                train_test_config
+            )
+            
+            # Evaluate result
+            train_score = objective_function(train_result)
+            
+            # Run backtest with test data for current parameters
+            test_result = self._run_backtest_with_params(
+                strategy_name, 
+                params, 
+                'test',
+                train_test_config
+            )
+            
+            # Evaluate test result
+            test_score = objective_function(test_result)
+            
+            # Print progress update
+            train_stats = train_result.get('statistics', {})
+            test_stats = test_result.get('statistics', {})
+            
+            # Format parameters as string
+            params_str = ', '.join([f"{k}={v}" for k, v in params.items()])
+            
+            print(f"Parameters: {params_str} | "
+                  f"Train Score: {train_score:.4f}, Return: {train_stats.get('return_pct', 0):.2f}%, "
+                  f"Sharpe: {train_stats.get('sharpe_ratio', 0):.2f} | "
+                  f"Test Score: {test_score:.4f}, Return: {test_stats.get('return_pct', 0):.2f}%, "
+                  f"Sharpe: {test_stats.get('sharpe_ratio', 0):.2f}")
+            
+            # Store result
+            result = {
+                'parameters': params,
+                'train_score': train_score,
+                'test_score': test_score,
+                'train_result': train_result,
+                'test_result': test_result
+            }
+            
+            self.all_results.append(result)
+            
+            # Update best result if this is better
+            if train_score > best_train_score:
+                best_train_score = train_score
+                self.best_parameters = params
+                self.best_train_result = train_result
+                self.best_test_result = test_result
+                
+        # Sort results by train score
+        self.all_results.sort(key=lambda x: x['train_score'], reverse=True)
+        
+        # Prepare final results
+        optimization_results = {
+            'best_parameters': self.best_parameters,
+            'best_train_score': best_train_score,
+            'best_test_score': objective_function(self.best_test_result),
+            'all_results': self.all_results,
+            'parameter_counts': len(parameter_combinations),
+            'train_results': self.best_train_result,  # Add full train results
+            'test_results': self.best_test_result     # Add full test results
+        }
+        
+        return optimization_results
+        
+    def get_strategy_by_name(self, strategy_name):
+        """
+        Get a strategy by name using the strategy factory.
+        
+        Args:
+            strategy_name (str): Name of the strategy to get
+            
+        Returns:
+            object: Strategy class
+            
+        Raises:
+            ValueError: If the strategy is not found
+        """
+        if not self.strategy_factory:
+            raise ValueError("No strategy factory available")
+            
+        # Use the strategy factory to get the strategy
+        try:
+            strategy = self.strategy_factory.create_strategy(strategy_name, name='strategy')
+            logger.info(f"Successfully created strategy: {strategy_name}")
+            return strategy
+        except Exception as e:
+            logger.error(f"Error creating strategy '{strategy_name}': {e}")
+            # Try to debug which strategies are available
+            strategy_names = self.strategy_factory.get_strategy_names() if hasattr(self.strategy_factory, 'get_strategy_names') else []
+            logger.info(f"Available strategies: {strategy_names}")
+            raise ValueError(f"Failed to create strategy '{strategy_name}': {e}")
+    
+    def _run_backtest_with_params(self, strategy_name, params, data_split, train_test_config):
+        """
+        Run a backtest with specific parameters and data split.
+        
+        Args:
+            strategy_name (str): Name of the strategy to use
+            params (dict): Strategy parameters
+            data_split (str): Data split to use ('train' or 'test')
+            train_test_config (dict): Train/test configuration
+            
+        Returns:
+            dict: Backtest results
+        """
+        # Use consistent initial capital for all backtests
+        initial_capital = self.config.get('initial_capital', 100000)
+        
+        # Create new event bus for this backtest
+        event_bus = SimpleEventBus()
+        
+        # Create fresh trade repository for each backtest to avoid state leakage
+        trade_repository = TradeRepository()
+        
+        # Create backtest coordinator
+        backtest = BacktestCoordinator("backtest", self.config)
+        
+        # Initialize context
+        context = {
+            'event_bus': event_bus,
+            'trade_repository': trade_repository,
+            'config': self.config,
+            'strategy_factory': self.strategy_factory
+        }
+        
+        # Create data handler with correct configuration
+        data_handler_class = self._get_data_handler_class()
+        data_handler = data_handler_class("data_handler", self.config.get('data', {}))
+        data_handler.initialize(context)
+        
+        # Setup train/test split with logging to trace issues
+        self.logger.info(f"Setting up train/test split with method: {train_test_config.get('method', 'ratio')}")
+        data_handler.setup_train_test_split(
+            method=train_test_config.get('method', 'ratio'),
+            train_ratio=train_test_config.get('train_ratio', 0.7),
+            test_ratio=train_test_config.get('test_ratio', 0.3),
+            split_date=train_test_config.get('split_date'),
+            train_periods=train_test_config.get('train_periods'),
+            test_periods=train_test_config.get('test_periods')
+        )
+        
+        # Log information about the split sizes
+        if hasattr(data_handler, 'get_split_sizes'):
+            split_sizes = data_handler.get_split_sizes()
+            self.logger.info(f"Split data for {data_handler.get_current_symbol()}: "
+                         f"train={split_sizes.get('train', 0)} rows, "
+                         f"test={split_sizes.get('test', 0)} rows")
+        
+        # Activate the data split
+        self.logger.info(f"Activated '{data_split}' data split")
+        data_handler.set_active_split(data_split)
+        
+        # IMPROVED: Verify data is available for this split
+        if hasattr(data_handler, 'is_empty') and data_handler.is_empty(data_split):
+            logger.warning(f"No data available for {data_split} split. Returning empty results.")
+            return {
+                'parameters': params,
+                'data_split': data_split,
+                'trades': [],
+                'statistics': {
+                    'return_pct': 0,
+                    'sharpe_ratio': 0,
+                    'profit_factor': 0,
+                    'max_drawdown': 0,
+                    'trades_executed': 0
+                },
+                'warning': f"No data available for {data_split} split"
+            }
+        
+        # Create strategy with parameters
+        strategy_params = dict(params)  # Copy parameters
+        strategy_params['name'] = 'strategy'  # Add required name parameter
+        try:
+            strategy = self.strategy_factory.create_strategy(strategy_name, **strategy_params)
+        except Exception as e:
+            logger.error(f"Error creating strategy '{strategy_name}' with parameters {strategy_params}: {e}")
+            # Try simplified parameter set as fallback
+            logger.info(f"Trying simplified parameters for strategy '{strategy_name}'")
+            try:
+                strategy = self.strategy_factory.create_strategy(strategy_name, name='strategy')
+                # Apply parameters after creation
+                for key, value in params.items():
+                    setattr(strategy, key, value)
+            except Exception as e2:
+                raise ValueError(f"Failed to create strategy '{strategy_name}': {e2}")
+        
+        # Create other components with fresh state for each backtest
+        from src.execution.portfolio import Portfolio
+        from src.execution.broker.simulated_broker import SimulatedBroker
+        from src.execution.order_manager import OrderManager
+        
+        # Create fresh portfolio for this backtest with consistent initial capital
+        portfolio = Portfolio("portfolio", initial_capital)
+        self.logger.info(f"Created new portfolio with initial capital: {initial_capital}")
+        
+        # Create fresh broker and order manager
+        broker = SimulatedBroker("broker")
+        order_manager = OrderManager("order_manager")
+        
+        # Add components to backtest
+        backtest.add_component('data_handler', data_handler)
+        backtest.add_component('strategy', strategy)
+        backtest.add_component('portfolio', portfolio)
+        backtest.add_component('broker', broker)
+        backtest.add_component('order_manager', order_manager)
+        
+        # Initialize backtest
+        backtest.initialize(context)
+        
+        # Setup and run backtest
+        backtest.setup()
+        results = backtest.run()
+        
+        # Add parameters and split info to results
+        results['parameters'] = params
+        results['data_split'] = data_split
+        
+        # Add trade tracking debug info
+        if 'trades' in results:
+            # IMPROVED: Add detailed trade analysis
+            trades = results['trades']
+            closed_trades = [t for t in trades if t.get('closed', True)]
+            open_trades = [t for t in trades if not t.get('closed', True)]
+            winners = [t for t in closed_trades if t.get('pnl', 0) > 0]
+            losers = [t for t in closed_trades if t.get('pnl', 0) < 0]
+            break_even = [t for t in closed_trades if t.get('pnl', 0) == 0]
+            
+            logger.info(f"Backtest completed with {len(trades)} trades in {data_split} split")
+            logger.info(f"  Closed trades: {len(closed_trades)}, Open trades: {len(open_trades)}")
+            logger.info(f"  Winners: {len(winners)}, Losers: {len(losers)}, Break-even: {len(break_even)}")
+            
+            # Verify that all closed trades have a valid PnL value
+            invalid_pnl = [i for i, t in enumerate(closed_trades) if 'pnl' not in t or t['pnl'] is None]
+            if invalid_pnl:
+                logger.warning(f"Found {len(invalid_pnl)} closed trades without valid PnL values")
+                # Add diagnostics about these trades
+                for idx in invalid_pnl[:5]:  # Show details for up to 5 invalid trades
+                    trade = closed_trades[idx]
+                    logger.warning(f"  Invalid trade #{idx}: {trade}")
+                    
+            # Calculate total PnL from trades
+            total_pnl = sum(t.get('pnl', 0) for t in closed_trades if t.get('pnl') is not None)
+            equity_change = results.get('final_capital', 0) - portfolio.initial_capital
+            logger.info(f"  Total PnL from trades: {total_pnl:.2f}, Equity change: {equity_change:.2f}")
+            
+            # IMPROVED: Check for inconsistency between PnL and equity change
+            if abs(total_pnl - equity_change) > 0.01 * abs(equity_change) and abs(equity_change) > 0.001:
+                logger.warning(f"  Inconsistency between trade PnL ({total_pnl:.2f}) and equity change ({equity_change:.2f})")
+                # Calculate unexplained difference for tracking
+                unexplained_diff = equity_change - total_pnl
+                percent_unexplained = (unexplained_diff / abs(equity_change)) * 100 if abs(equity_change) > 0.001 else 0
+                
+                logger.warning(f"  Unexplained difference: {unexplained_diff:.2f} ({percent_unexplained:.2f}% of equity change)")
+                
+                # Add consistency flag and diagnostics to results
+                if 'statistics' in results:
+                    results['statistics']['pnl_equity_consistent'] = False
+                    results['statistics']['unexplained_pnl'] = unexplained_diff
+                    results['statistics']['unexplained_pnl_percent'] = percent_unexplained
+        else:
+            logger.warning(f"No trades found in results for {data_split} split")
+            # Add empty trades list to ensure consistent structure
+            results['trades'] = []
+        
+        # IMPROVED: Always ensure statistics are present in results
+        if 'statistics' not in results:
+            results['statistics'] = {
+                'return_pct': (results.get('final_capital', portfolio.initial_capital) - portfolio.initial_capital) / portfolio.initial_capital * 100,
+                'sharpe_ratio': 0.0,
+                'profit_factor': 0.0,
+                'max_drawdown': 0.0,
+                'trades_executed': len(results.get('trades', []))
+            }
+        
+        return results
+        
+    def _get_data_handler_class(self):
+        """
+        Get the data handler class for backtest.
+        
+        Returns:
+            class: Data handler class
+        """
+        # Import here to avoid circular imports
+        from src.data.historical_data_handler import HistoricalDataHandler
+        return HistoricalDataHandler

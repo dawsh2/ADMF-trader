@@ -1,36 +1,20 @@
 #!/bin/bash
-# Run the debug script to see detailed output
+# Run the debug script to analyze position management
 
-echo "Running MA strategy debug script..."
-python debug_ma_strategy.py > ma_debug_output.txt 2>&1
-DEBUG_RESULT=$?
+# Change to the script directory
+cd "$(dirname "$0")"
 
-echo "Debug script exited with code $DEBUG_RESULT"
-echo "Debug output saved to ma_debug_output.txt"
-
-# Show the beginning of the output
-echo ""
-echo "Beginning of debug output:"
-echo "=========================="
-head -n 30 ma_debug_output.txt
-
-echo ""
-echo "End of debug output snippet"
-echo "=========================="
-echo "To see full output, check ma_debug_output.txt"
-
-# Run the main test script with the fixes
-echo ""
-echo "Running main test script..."
-python test_the_fixes.py
-TEST_RESULT=$?
-
-echo "Test script exited with code $TEST_RESULT"
-
-if [ $TEST_RESULT -eq 0 ]; then
-    echo "All tests passed!"
-else
-    echo "Some tests still failed. Check the output for details."
+# Activate virtual environment if present
+if [ -d "venv" ]; then
+    echo "Activating virtual environment..."
+    source venv/bin/activate
 fi
 
-exit $TEST_RESULT
+# Make the debug script executable
+chmod +x debug_positions.py
+
+# Run the debug script
+echo "Running debug script..."
+python debug_positions.py --config config/ma_crossover_optimization.yaml
+
+echo "Done! Check debug_positions.log for detailed output."

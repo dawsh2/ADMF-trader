@@ -1,0 +1,146 @@
+2025-05-08 15:07:16,685 - fix_imports - INFO - Starting import path fixes...
+2025-05-08 15:07:16,685 - fix_imports - INFO - Finding files to fix...
+2025-05-08 15:07:16,686 - fix_imports - INFO - Found 12 strategy files to check
+2025-05-08 15:07:16,686 - fix_imports - INFO - Fixing imports in src/strategy/implementations/ma_crossover_strategy.py
+2025-05-08 15:07:16,687 - fix_imports - INFO - Created backup at src/strategy/implementations/ma_crossover_strategy.py.bak.import
+2025-05-08 15:07:16,687 - fix_imports - INFO - Found incorrect event_bus import in src/strategy/implementations/ma_crossover_strategy.py
+2025-05-08 15:07:16,687 - fix_imports - INFO - Fixed imports in src/strategy/implementations/ma_crossover_strategy.py
+2025-05-08 15:07:16,687 - fix_imports - INFO - Fixing imports in src/strategy/implementations/regime_ensemble_strategy.py
+2025-05-08 15:07:16,687 - fix_imports - INFO - Created backup at src/strategy/implementations/regime_ensemble_strategy.py.bak.import
+2025-05-08 15:07:16,687 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/regime_ensemble_strategy.py
+2025-05-08 15:07:16,687 - fix_imports - INFO - Fixing imports in src/strategy/implementations/composite_regime_strategy.py
+2025-05-08 15:07:16,688 - fix_imports - INFO - Created backup at src/strategy/implementations/composite_regime_strategy.py.bak.import
+2025-05-08 15:07:16,688 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/composite_regime_strategy.py
+2025-05-08 15:07:16,688 - fix_imports - INFO - Fixing imports in src/strategy/implementations/simple_ma_crossover.py
+2025-05-08 15:07:16,688 - fix_imports - INFO - Created backup at src/strategy/implementations/simple_ma_crossover.py.bak.import
+2025-05-08 15:07:16,688 - fix_imports - INFO - Found incorrect event_bus import in src/strategy/implementations/simple_ma_crossover.py
+2025-05-08 15:07:16,689 - fix_imports - INFO - Fixed imports in src/strategy/implementations/simple_ma_crossover.py
+2025-05-08 15:07:16,689 - fix_imports - INFO - Fixing imports in src/strategy/implementations/ensemble_strategy.py
+2025-05-08 15:07:16,689 - fix_imports - INFO - Created backup at src/strategy/implementations/ensemble_strategy.py.bak.import
+2025-05-08 15:07:16,689 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/ensemble_strategy.py
+2025-05-08 15:07:16,689 - fix_imports - INFO - Fixing imports in src/strategy/implementations/__init__.py
+2025-05-08 15:07:16,689 - fix_imports - INFO - Created backup at src/strategy/implementations/__init__.py.bak.import
+2025-05-08 15:07:16,689 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/__init__.py
+2025-05-08 15:07:16,689 - fix_imports - INFO - Fixing imports in src/strategy/implementations/ma_crossover.py
+2025-05-08 15:07:16,690 - fix_imports - INFO - Created backup at src/strategy/implementations/ma_crossover.py.bak.import
+2025-05-08 15:07:16,690 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/ma_crossover.py
+2025-05-08 15:07:16,690 - fix_imports - INFO - Fixing imports in src/strategy/implementations/mean_reversion.py
+2025-05-08 15:07:16,690 - fix_imports - INFO - Created backup at src/strategy/implementations/mean_reversion.py.bak.import
+2025-05-08 15:07:16,690 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/mean_reversion.py
+2025-05-08 15:07:16,690 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:07:16,690 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover.py.bak.import
+2025-05-08 15:07:16,690 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:07:16,690 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:07:16,691 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover_fixed.py.bak.import
+2025-05-08 15:07:16,691 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:07:16,691 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:07:16,691 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover.py.bak.import
+2025-05-08 15:07:16,691 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:07:16,691 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:07:16,691 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover_fixed.py.bak.import
+2025-05-08 15:07:16,691 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:07:16,691 - fix_imports - INFO - Fixed imports in 2 files
+2025-05-08 15:07:16,691 - fix_imports - INFO - Successfully fixed imports in strategy files
+2025-05-08 15:07:16,691 - fix_imports - INFO - Creating compatibility modules
+2025-05-08 15:07:16,691 - fix_imports - INFO - Created compatibility module: src/core/event_bus.py
+2025-05-08 15:07:16,691 - fix_imports - INFO - Created compatibility modules
+2025-05-08 15:07:16,691 - fix_imports - INFO - Import path fixes completed
+2025-05-08 15:07:16,691 - fix_imports - INFO - 
+Now you can try running optimization again with:
+2025-05-08 15:07:16,691 - fix_imports - INFO - python main.py optimize --config config/ma_crossover_optimization.yaml
+2025-05-08 15:09:30,652 - fix_imports - INFO - Starting import path fixes...
+2025-05-08 15:09:30,652 - fix_imports - INFO - Finding files to fix...
+2025-05-08 15:09:30,654 - fix_imports - INFO - Found 12 strategy files to check
+2025-05-08 15:09:30,654 - fix_imports - INFO - Fixing imports in src/strategy/implementations/ma_crossover_strategy.py
+2025-05-08 15:09:30,654 - fix_imports - INFO - Created backup at src/strategy/implementations/ma_crossover_strategy.py.bak.import
+2025-05-08 15:09:30,654 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/ma_crossover_strategy.py
+2025-05-08 15:09:30,654 - fix_imports - INFO - Fixing imports in src/strategy/implementations/regime_ensemble_strategy.py
+2025-05-08 15:09:30,655 - fix_imports - INFO - Created backup at src/strategy/implementations/regime_ensemble_strategy.py.bak.import
+2025-05-08 15:09:30,655 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/regime_ensemble_strategy.py
+2025-05-08 15:09:30,655 - fix_imports - INFO - Fixing imports in src/strategy/implementations/composite_regime_strategy.py
+2025-05-08 15:09:30,656 - fix_imports - INFO - Created backup at src/strategy/implementations/composite_regime_strategy.py.bak.import
+2025-05-08 15:09:30,656 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/composite_regime_strategy.py
+2025-05-08 15:09:30,656 - fix_imports - INFO - Fixing imports in src/strategy/implementations/simple_ma_crossover.py
+2025-05-08 15:09:30,656 - fix_imports - INFO - Created backup at src/strategy/implementations/simple_ma_crossover.py.bak.import
+2025-05-08 15:09:30,656 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/simple_ma_crossover.py
+2025-05-08 15:09:30,656 - fix_imports - INFO - Fixing imports in src/strategy/implementations/ensemble_strategy.py
+2025-05-08 15:09:30,657 - fix_imports - INFO - Created backup at src/strategy/implementations/ensemble_strategy.py.bak.import
+2025-05-08 15:09:30,657 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/ensemble_strategy.py
+2025-05-08 15:09:30,657 - fix_imports - INFO - Fixing imports in src/strategy/implementations/__init__.py
+2025-05-08 15:09:30,657 - fix_imports - INFO - Created backup at src/strategy/implementations/__init__.py.bak.import
+2025-05-08 15:09:30,657 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/__init__.py
+2025-05-08 15:09:30,657 - fix_imports - INFO - Fixing imports in src/strategy/implementations/ma_crossover.py
+2025-05-08 15:09:30,658 - fix_imports - INFO - Created backup at src/strategy/implementations/ma_crossover.py.bak.import
+2025-05-08 15:09:30,658 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/ma_crossover.py
+2025-05-08 15:09:30,658 - fix_imports - INFO - Fixing imports in src/strategy/implementations/mean_reversion.py
+2025-05-08 15:09:30,658 - fix_imports - INFO - Created backup at src/strategy/implementations/mean_reversion.py.bak.import
+2025-05-08 15:09:30,658 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/mean_reversion.py
+2025-05-08 15:09:30,658 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:09:30,658 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover.py.bak.import
+2025-05-08 15:09:30,658 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:09:30,658 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:09:30,659 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover_fixed.py.bak.import
+2025-05-08 15:09:30,659 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:09:30,659 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:09:30,659 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover.py.bak.import
+2025-05-08 15:09:30,659 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:09:30,659 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:09:30,659 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover_fixed.py.bak.import
+2025-05-08 15:09:30,659 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:09:30,659 - fix_imports - INFO - Fixed imports in 0 files
+2025-05-08 15:09:30,659 - fix_imports - WARNING - No imports were fixed in strategy files
+2025-05-08 15:09:30,659 - fix_imports - INFO - Creating compatibility modules
+2025-05-08 15:09:30,659 - fix_imports - INFO - Created compatibility module: src/core/event_bus.py
+2025-05-08 15:09:30,659 - fix_imports - INFO - Created compatibility modules
+2025-05-08 15:09:30,659 - fix_imports - INFO - Import path fixes completed
+2025-05-08 15:09:30,659 - fix_imports - INFO - 
+Now you can try running optimization again with:
+2025-05-08 15:09:30,659 - fix_imports - INFO - python main.py optimize --config config/ma_crossover_optimization.yaml
+2025-05-08 15:12:44,699 - fix_imports - INFO - Starting import path fixes...
+2025-05-08 15:12:44,700 - fix_imports - INFO - Finding files to fix...
+2025-05-08 15:12:44,701 - fix_imports - INFO - Found 12 strategy files to check
+2025-05-08 15:12:44,701 - fix_imports - INFO - Fixing imports in src/strategy/implementations/ma_crossover_strategy.py
+2025-05-08 15:12:44,701 - fix_imports - INFO - Created backup at src/strategy/implementations/ma_crossover_strategy.py.bak.import
+2025-05-08 15:12:44,701 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/ma_crossover_strategy.py
+2025-05-08 15:12:44,701 - fix_imports - INFO - Fixing imports in src/strategy/implementations/regime_ensemble_strategy.py
+2025-05-08 15:12:44,702 - fix_imports - INFO - Created backup at src/strategy/implementations/regime_ensemble_strategy.py.bak.import
+2025-05-08 15:12:44,702 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/regime_ensemble_strategy.py
+2025-05-08 15:12:44,702 - fix_imports - INFO - Fixing imports in src/strategy/implementations/composite_regime_strategy.py
+2025-05-08 15:12:44,702 - fix_imports - INFO - Created backup at src/strategy/implementations/composite_regime_strategy.py.bak.import
+2025-05-08 15:12:44,702 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/composite_regime_strategy.py
+2025-05-08 15:12:44,702 - fix_imports - INFO - Fixing imports in src/strategy/implementations/simple_ma_crossover.py
+2025-05-08 15:12:44,703 - fix_imports - INFO - Created backup at src/strategy/implementations/simple_ma_crossover.py.bak.import
+2025-05-08 15:12:44,703 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/simple_ma_crossover.py
+2025-05-08 15:12:44,703 - fix_imports - INFO - Fixing imports in src/strategy/implementations/ensemble_strategy.py
+2025-05-08 15:12:44,703 - fix_imports - INFO - Created backup at src/strategy/implementations/ensemble_strategy.py.bak.import
+2025-05-08 15:12:44,703 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/ensemble_strategy.py
+2025-05-08 15:12:44,703 - fix_imports - INFO - Fixing imports in src/strategy/implementations/__init__.py
+2025-05-08 15:12:44,703 - fix_imports - INFO - Created backup at src/strategy/implementations/__init__.py.bak.import
+2025-05-08 15:12:44,703 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/__init__.py
+2025-05-08 15:12:44,703 - fix_imports - INFO - Fixing imports in src/strategy/implementations/ma_crossover.py
+2025-05-08 15:12:44,704 - fix_imports - INFO - Created backup at src/strategy/implementations/ma_crossover.py.bak.import
+2025-05-08 15:12:44,704 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/ma_crossover.py
+2025-05-08 15:12:44,704 - fix_imports - INFO - Fixing imports in src/strategy/implementations/mean_reversion.py
+2025-05-08 15:12:44,704 - fix_imports - INFO - Created backup at src/strategy/implementations/mean_reversion.py.bak.import
+2025-05-08 15:12:44,704 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/mean_reversion.py
+2025-05-08 15:12:44,704 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:12:44,705 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover.py.bak.import
+2025-05-08 15:12:44,705 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:12:44,705 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:12:44,705 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover_fixed.py.bak.import
+2025-05-08 15:12:44,705 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:12:44,705 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:12:44,705 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover.py.bak.import
+2025-05-08 15:12:44,705 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 15:12:44,705 - fix_imports - INFO - Fixing imports in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:12:44,705 - fix_imports - INFO - Created backup at src/strategy/implementations/backup/ma_crossover_fixed.py.bak.import
+2025-05-08 15:12:44,705 - fix_imports - INFO - No incorrect imports found in src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 15:12:44,705 - fix_imports - INFO - Fixed imports in 0 files
+2025-05-08 15:12:44,705 - fix_imports - WARNING - No imports were fixed in strategy files
+2025-05-08 15:12:44,705 - fix_imports - INFO - Creating compatibility modules
+2025-05-08 15:12:44,705 - fix_imports - INFO - Created compatibility module: src/core/event_bus.py
+2025-05-08 15:12:44,705 - fix_imports - INFO - Created compatibility modules
+2025-05-08 15:12:44,705 - fix_imports - INFO - Import path fixes completed
+2025-05-08 15:12:44,706 - fix_imports - INFO - 
+Now you can try running optimization again with:
+2025-05-08 15:12:44,706 - fix_imports - INFO - python main.py optimize --config config/ma_crossover_optimization.yaml

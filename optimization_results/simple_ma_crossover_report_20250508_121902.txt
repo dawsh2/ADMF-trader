@@ -1,0 +1,56 @@
+================================================================================
+OPTIMIZATION REPORT: simple_ma_crossover
+Timestamp: 20250508_121902
+================================================================================
+
+CONFIGURATION
+--------------------------------------------------------------------------------
+Optimization Method: grid
+Objective Function: sharpe_ratio
+Symbols: 
+Train/Test Split: ratio (Train: 0.70, Test: 0.30)
+
+PARAMETER SPACE
+--------------------------------------------------------------------------------
+
+BEST PARAMETERS
+--------------------------------------------------------------------------------
+fast_period: 10
+slow_period: 20
+
+PERFORMANCE METRICS
+--------------------------------------------------------------------------------
+Training Performance:
+  avg_loss: -20.001666666663215
+  avg_profit: 24.858333333332894
+  final_capital: 98034.65615000005
+  initial_capital: 100000
+  loss_trades: 12
+  max_drawdown: 53.9693
+  profit_factor: 0.6214065494543084
+  profitable_trades: 6
+  return_pct: -1.9653
+  sharpe_ratio: 5.6536
+  trades_executed: 18
+  win_rate: 0.3333
+
+Testing Performance:
+  avg_loss: -18.666666666666742
+  avg_profit: 110.66666666666454
+  final_capital: 46987.199
+  initial_capital: 100000
+  loss_trades: 6
+  max_drawdown: 53.0321
+  profit_factor: 2.9642857142856456
+  profitable_trades: 3
+  return_pct: -53.0128
+  sharpe_ratio: 4.6991
+  trades_executed: 9
+  win_rate: 0.3333
+
+OVERFITTING ANALYSIS
+--------------------------------------------------------------------------------
+Return Difference (Train - Test): 51.05%
+Sharpe Ratio Difference: 0.95
+Profit Factor Difference: -2.34
+Overfitting Assessment: High risk of overfitting (Score: 1.27)
