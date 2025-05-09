@@ -1,0 +1,93 @@
+# Integrated Backtest Configuration with Analytics
+
+# System mode
+mode: backtest
+
+# Basic settings
+name: ADMF-Trader Backtest with Analytics
+description: "Backtest configuration with automated analytics reporting"
+initial_capital: 100000
+commission_rate: 0.001
+
+# Data settings
+data:
+  # Data configuration
+  date_column: date  # Add this global date column configuration
+  date_format: "%Y-%m-%d"  # Add this global date format
+  sources:
+    - symbol: AAPL
+      file: data/AAPL_1d.csv
+    - symbol: MSFT
+      file: data/MSFT_1d.csv
+
+# Default strategy settings
+strategy:
+  name: simple_ma_crossover
+  default_params:
+    fast_period: 10
+    slow_period: 30
+    position_size: 100
+
+# Analytics settings - this enables automatic reporting after backtest
+analytics:
+  # Enable analytics processing and reporting
+  enabled: true
+  
+  # Analysis settings
+  analysis:
+    risk_free_rate: 0.0
+    periods_per_year: 252
+    metrics:
+      - total_return
+      - annualized_return
+      - sharpe_ratio
+      - sortino_ratio
+      - calmar_ratio
+      - max_drawdown
+      - volatility
+      - win_rate
+      - profit_factor
+      - expectancy
+  
+  # Reporting settings
+  reporting:
+    # Enable report generation
+    enabled: true
+    
+    # Output directory
+    output_directory: "./results/reports"
+    
+    # Report formats to generate
+    formats:
+      - text
+      - html
+    
+    # Text report settings
+    text:
+      width: 100
+    
+    # HTML report settings
+    html:
+      title: "Backtest Performance Report"
+      description: "Comprehensive analysis of trading strategy performance"
+      charts:
+        - equity_curve
+        - returns_distribution
+        - monthly_returns
+        - trade_pnl
+
+# Broker settings
+broker:
+  # Market simulator settings
+  market_simulator:
+    price_impact: 0.0001  # Price impact per unit of volume
+  
+  # Slippage model
+  slippage:
+    model: fixed
+    value: 0.0005  # 0.05% slippage
+  
+  # Commission model
+  commission:
+    type: percentage
+    rate: 0.001  # 0.1% commission

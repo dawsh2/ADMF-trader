@@ -1,0 +1,59 @@
+# Configuration for simple test with MA Crossover
+# ------------------------------------------------------
+
+# Global settings
+mode: "backtest"  # Options: backtest, live
+
+# Backtest settings
+backtest:
+  initial_capital: 100000.0
+  symbols: ['AAPL']
+  timeframe: "1d"
+  start_date: "2022-01-01"
+  end_date: "2022-12-31"
+  strategy: "ma_crossover"
+
+# Data handling configuration
+data:
+  source_type: "csv"
+  data_dir: "./data"
+  file_pattern: "{symbol}_{timeframe}.csv"
+  timestamp_column: "timestamp"
+  price_columns:
+    open: "Open" 
+    high: "High"
+    low: "Low"
+    close: "Close"
+    volume: "Volume"
+
+# Strategy configuration
+strategy:
+  name: "ma_crossover"
+  symbols: ['AAPL']
+  parameters:
+    fast_period: 10
+    slow_period: 30
+    position_size: 100
+
+# Risk management settings
+risk:
+  position_size: 100
+  max_position_pct: 10.0
+  max_open_trades: 5
+  
+# Broker simulation settings
+broker:
+  slippage: 0.001  # 0.1% slippage
+  commission: 0.001  # 0.1% commission
+  
+# Performance metrics settings
+metrics:
+  - "total_return"
+  - "sharpe_ratio"
+  - "max_drawdown"
+  - "win_rate"
+  - "profit_factor"
+  
+# Logging settings
+logging:
+  level: "INFO"

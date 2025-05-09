@@ -1,0 +1,44 @@
+====================================================================================================
+                      ADMF-Trader Backtest with Analytics - Performance Report                      
+====================================================================================================
+                                   Generated: 2025-05-09 02:12:28                                   
+
+
+Performance Summary
+===================
+
+Period: 2025-05-09 to 2025-05-09 (0 days)
+
+Total Return:............ 0.00%
+Annualized Return:....... 0.00%
+Max Drawdown:............ 0.00%
+Sharpe Ratio:............ 0.0000
+Volatility:.............. 0.00%
+Win Rate:................ 0.00%
+Profit Factor:........... 0.0000
+
+Return Metrics
+==============
+
+
+Returns
+-------
+
+Total Return:............ 0.00%
+Annualized Return:....... 0.00%
+
+
+Risk
+----
+
+Max Drawdown:............ 0.00%
+Avg Drawdown:............ 0.0000
+
+
+Other Metrics
+-------------
+
+Max Length:.............. 0
+Avg Length:.............. 0
+Num Drawdowns:........... 0
+Time In Drawdown:........ 0.0000

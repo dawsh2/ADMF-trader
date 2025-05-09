@@ -1,0 +1,36 @@
+This system is an event driven backtesting system, managed in a configuration forward manner (i.e, the main entry point serves to load and execute the config to keep things tidy) divided into the following modules and responsiblities:
+
+** Core
+Handles core system functionality, e.g bootstrap, dependency injection, loggging, config and event system. Maybe more. 
+
+*** Events
+Event bus with pub/sub architecture and multiple event types (BAR, SIGNAL, ORDER, FILL, PORTFOLIO_UPDATE, BACKTEST_END, etc)
+
+** Data
+Module for data handlers; loading historical data, handling train/test splits, handling live data.
+
+Packages raw data and publishes/emits BAR event objects.
+** Strategy
+Module for converting bar data into signals. Includes component based strategy building blocks (component ABC, indicators, features, rules, then finally strategies). Strategies may act as wrappers around other strategies as well, for things like regime filtering, signal processing, etc. Includes optimization module.
+
+Contains directory with implementations, which are discovered automatically. 
+
+Consumes BAR event objects and publishes SIGNAL event objects.
+** Risk
+Module for converting SIGNAL event objects into 
+
+Consumes SIGNAL event objects and publishes ORDER event objects.
+** Execution
+Noting here that this handles the optimization module by running each unique parameter configuration as a seperate backtest. 
+
+Consumes ORDER event objects and publishes FILL and PORTFOLIO_UPDATE objects. Perhaps the latter is redundant.
+** Analytics
+Module for performance and reporting. All metrics and results math should be using this code.
+
+** Problems and Improvements
+Trouble getting simple backtest accomplished with all the moving parts. To accomplish this I wanted simple 'passthrough' risk and position managers that simply longed/shorted according the signal with fixed size, but even that has been too complex to introduce for some reason. e.g, if current signal is -1 and we're short, and signal switchs from -1 to 1, we should buy to close, then buy to open a long. This behavior should be consistent or maybe defined within the risk manager or position manager we're using. 
+
+Another issue, in my opinion signals should be sustained after events like a crossover until they revert and crossover oppositely (e.g, bullish to bearish crossover). But this can lead to difficulty in tracking signal duplication. 
+
+Duplicate events, no single source of truth for equity curve / trade PnL. Forgetting to close trades before backtest ends.
+Config option to close trades at end of day.

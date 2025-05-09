@@ -341,3 +341,30 @@ class Portfolio(Component):
             list: Closed trades
         """
         return self.trade_repository.get_closed_trades(symbol)
+        
+    def add_trade(self, trade):
+        """
+        Add a trade to the portfolio.
+        
+        Args:
+            trade (dict): Trade data
+            
+        Returns:
+            bool: True if the trade was added successfully
+        """
+        if self.trade_repository:
+            try:
+                self.trade_repository.add_trade(trade)
+                self.logger.info(f"Trade added to repository: {trade.get('id')}")
+                return True
+            except Exception as e:
+                self.logger.error(f"Error adding trade to repository: {e}")
+                return False
+        else:
+            self.logger.warning("No trade repository available")
+            # Add trade to a local collection if no repository
+            if not hasattr(self, 'trades'):
+                self.trades = []
+            self.trades.append(trade)
+            self.logger.info(f"Trade stored locally: {trade.get('id')}")
+            return True

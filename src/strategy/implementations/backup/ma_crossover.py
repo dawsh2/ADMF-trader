@@ -95,7 +95,49 @@ class MACrossoverStrategy(Strategy):
         logger.debug(f"Bar event symbol: {symbol}")
         
         # Skip if not in our symbol list
+        # If this symbol isn't in our list, add it
+        # If this symbol isn't in our list, add it
+        # If this symbol isn't in our list, add it
         if symbol not in self.symbols:
+            logger.info(f"Adding new symbol {symbol} to strategy symbols list")
+            self.symbols.append(symbol)
+            
+        # Legacy code - keeping commented out for reference
+        # if symbol not in self.symbols:
+            logger.info(f"Adding new symbol {symbol} to strategy symbols list")
+            self.symbols.append(symbol)
+            
+        # Legacy code - keeping commented out for reference
+        # # If this symbol isn't in our list, add it
+        if symbol not in self.symbols:
+            logger.info(f"Adding new symbol {symbol} to strategy symbols list")
+            self.symbols.append(symbol)
+            
+        # Legacy code - keeping commented out for reference
+        # if symbol not in self.symbols:
+            logger.info(f"Adding new symbol {symbol} to strategy symbols list")
+            self.symbols.append(symbol)
+            
+        # Legacy code - keeping commented out for reference
+        # # If this symbol isn't in our list, add it
+        # If this symbol isn't in our list, add it
+        if symbol not in self.symbols:
+            logger.info(f"Adding new symbol {symbol} to strategy symbols list")
+            self.symbols.append(symbol)
+            
+        # Legacy code - keeping commented out for reference
+        # if symbol not in self.symbols:
+            logger.info(f"Adding new symbol {symbol} to strategy symbols list")
+            self.symbols.append(symbol)
+            
+        # Legacy code - keeping commented out for reference
+        # # If this symbol isn't in our list, add it
+        if symbol not in self.symbols:
+            logger.info(f"Adding new symbol {symbol} to strategy symbols list")
+            self.symbols.append(symbol)
+            
+        # Legacy code - keeping commented out for reference
+        # if symbol not in self.symbols:
             logger.debug(f"Symbol {symbol} not in strategy symbols list: {self.symbols}")
             return None
         

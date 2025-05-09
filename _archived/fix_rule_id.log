@@ -1,0 +1,18 @@
+2025-05-08 20:28:01,427 - fix_rule_id - INFO - Starting rule_id and trade recording fix
+2025-05-08 20:28:01,427 - fix_rule_id - INFO - Found order manager at src/execution/order_manager.py
+2025-05-08 20:28:01,435 - fix_rule_id - WARNING - Could not find execution handler file
+2025-05-08 20:28:01,436 - fix_rule_id - INFO - Found signal handler at src/core/event_bus.py
+2025-05-08 20:28:01,436 - fix_rule_id - INFO - Analyzing order manager at src/execution/order_manager.py
+2025-05-08 20:28:01,436 - fix_rule_id - INFO - Found order creation function in src/execution/order_manager.py
+2025-05-08 20:28:01,436 - fix_rule_id - INFO - Order constructor doesn't include rule_id: self, symbol, direction, quantity, order_type, price=None
+2025-05-08 20:28:01,437 - fix_rule_id - INFO - Created backup at src/execution/order_manager.py.bak
+2025-05-08 20:28:01,437 - fix_rule_id - WARNING - Could not find signal attributes in src/execution/order_manager.py
+2025-05-08 20:28:01,437 - fix_rule_id - INFO - Created backup at src/execution/order_manager.py.bak
+2025-05-08 20:28:01,437 - fix_rule_id - INFO - Added debug logging to src/execution/order_manager.py
+2025-05-08 20:28:01,437 - fix_rule_id - INFO - Analyzing signal handler at src/core/event_bus.py
+2025-05-08 20:28:01,438 - fix_rule_id - WARNING - Could not find signal handling function in src/core/event_bus.py
+2025-05-08 20:28:01,438 - fix_rule_id - INFO - Fix summary:
+2025-05-08 20:28:01,438 - fix_rule_id - INFO - Order manager fix: Applied
+2025-05-08 20:28:01,438 - fix_rule_id - INFO - Execution handler fix: Not applied
+2025-05-08 20:28:01,438 - fix_rule_id - INFO - Signal handler fix: Not applied
+2025-05-08 20:28:01,438 - fix_rule_id - INFO - Some fixes were applied. Please test the system to verify the fixes.

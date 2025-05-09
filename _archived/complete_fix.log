@@ -1,0 +1,96 @@
+2025-05-08 20:28:01,402 - complete_fix - INFO - Starting comprehensive fix process
+2025-05-08 20:28:01,402 - complete_fix - INFO - Applying fixes for rule_id and trade recording...
+2025-05-08 20:28:01,402 - complete_fix - INFO - Running: /Users/daws/kraken/claudeTrader/venv/bin/python fix_rule_id.py
+2025-05-08 20:28:01,444 - complete_fix - INFO - Script executed successfully: fix_rule_id.py
+2025-05-08 20:28:01,444 - complete_fix - INFO - Applying fixes for reporter...
+2025-05-08 20:28:01,444 - complete_fix - INFO - Running: /Users/daws/kraken/claudeTrader/venv/bin/python direct_optimizer_fix.py
+2025-05-08 20:28:01,474 - complete_fix - INFO - Script executed successfully: direct_optimizer_fix.py
+2025-05-08 20:28:01,474 - complete_fix - INFO - Running optimization with fixes applied...
+2025-05-08 20:28:01,474 - complete_fix - INFO - Running optimization with config: config/ma_crossover_fixed_symbols.yaml
+2025-05-08 20:28:01,476 - complete_fix - INFO - Loaded config from config/ma_crossover_fixed_symbols.yaml
+2025-05-08 20:28:01,476 - complete_fix - INFO - Applying runtime fixes for trade recording
+2025-05-08 20:28:01,478 - complete_fix - ERROR - Error patching order_manager: invalid syntax (order_manager.py, line 83)
+2025-05-08 20:28:01,481 - complete_fix - ERROR - Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/run_complete_fix.py", line 76, in apply_runtime_fixes
+    order_manager = importlib.import_module(path)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1022, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1160, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1090, in source_to_code
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 83
+    logger.debug("Signal has no rule_id or strategy_id")"""Reset the order manager state."""
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax
+
+2025-05-08 20:28:01,481 - complete_fix - INFO - Found execution_handler at src.execution.broker
+2025-05-08 20:28:01,481 - complete_fix - WARNING - Could not find execution handler class with fill_order method
+2025-05-08 20:28:02,066 - complete_fix - INFO - Patched _generate_text_report in reporter
+2025-05-08 20:28:02,066 - complete_fix - INFO - Runtime fixes applied
+2025-05-08 20:28:02,069 - src.strategy.strategy_factory - INFO - Discovered strategy: simple_ma_crossover from ma_crossover_strategy.SimpleMACrossoverStrategy
+2025-05-08 20:28:02,069 - src.strategy.strategy_factory - INFO - Discovered strategy: regime_ensemble from regime_ensemble_strategy.RegimeEnsembleStrategy
+2025-05-08 20:28:02,069 - src.strategy.strategy_factory - INFO - Discovered strategy: composite_regime from composite_regime_strategy.CompositeRegimeStrategy
+2025-05-08 20:28:02,070 - src.strategy.strategy_factory - INFO - Discovered strategy: simple_ma_crossover from simple_ma_crossover.SimpleMACrossoverStrategy
+2025-05-08 20:28:02,070 - src.strategy.strategy_factory - INFO - Discovered strategy: ensemble from ensemble_strategy.EnsembleStrategy
+2025-05-08 20:28:02,070 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from ma_crossover.MovingAverageCrossoverStrategy
+2025-05-08 20:28:02,070 - src.strategy.strategy_factory - INFO - Discovered strategy: mean_reversion from mean_reversion.MeanReversionStrategy
+2025-05-08 20:28:02,072 - src.strategy.strategy_factory - ERROR - Error importing strategy module ma_crossover_fixed: expected 'except' or 'finally' block (ma_crossover_fixed.py, line 197)
+2025-05-08 20:28:02,072 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from backup.ma_crossover.MACrossoverStrategy
+2025-05-08 20:28:02,073 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from backup.ma_crossover_fixed.MACrossoverStrategy
+2025-05-08 20:28:02,073 - src.strategy.strategy_factory - INFO - Discovered strategy: simple_ma_crossover from ma_crossover_strategy.SimpleMACrossoverStrategy
+2025-05-08 20:28:02,073 - src.strategy.strategy_factory - INFO - Discovered strategy: regime_ensemble from regime_ensemble_strategy.RegimeEnsembleStrategy
+2025-05-08 20:28:02,073 - src.strategy.strategy_factory - INFO - Discovered strategy: composite_regime from composite_regime_strategy.CompositeRegimeStrategy
+2025-05-08 20:28:02,073 - src.strategy.strategy_factory - INFO - Discovered strategy: simple_ma_crossover from simple_ma_crossover.SimpleMACrossoverStrategy
+2025-05-08 20:28:02,073 - src.strategy.strategy_factory - INFO - Discovered strategy: ensemble from ensemble_strategy.EnsembleStrategy
+2025-05-08 20:28:02,073 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from ma_crossover.MovingAverageCrossoverStrategy
+2025-05-08 20:28:02,073 - src.strategy.strategy_factory - INFO - Discovered strategy: mean_reversion from mean_reversion.MeanReversionStrategy
+2025-05-08 20:28:02,074 - src.strategy.strategy_factory - ERROR - Error importing strategy module ma_crossover_fixed: expected 'except' or 'finally' block (ma_crossover_fixed.py, line 197)
+2025-05-08 20:28:02,074 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from backup.ma_crossover.MACrossoverStrategy
+2025-05-08 20:28:02,074 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from backup.ma_crossover_fixed.MACrossoverStrategy
+2025-05-08 20:28:02,074 - complete_fix - INFO - Starting optimization...
+2025-05-08 20:28:02,074 - src.strategy.optimization.optimizer - INFO - Starting optimization for strategy: ma_crossover
+2025-05-08 20:28:02,074 - src.strategy.optimization.optimizer - INFO - Parameter space: <src.strategy.optimization.parameter_space.ParameterSpace object at 0x10a5b1940>
+2025-05-08 20:28:02,074 - src.strategy.optimization.optimizer - INFO - Using grid search optimization
+2025-05-08 20:28:02,074 - src.core.events.event_adapter - INFO - Added get_data method to Event class
+2025-05-08 20:28:02,074 - src.core.events.event_adapter - INFO - Added get_symbol method to Event class
+2025-05-08 20:28:02,074 - src.core.events.event_adapter - INFO - Added get_close method to Event class
+2025-05-08 20:28:02,074 - src.core.events.event_adapter - INFO - Added get_timestamp method to Event class
+2025-05-08 20:28:02,074 - src.core.events.event_bus - INFO - EventBus initialized with deduplication_strategy=full, enable_metrics=False, enable_replay=False
+2025-05-08 20:28:02,089 - src.execution.backtest.optimizing_backtest - INFO - Setting up train/test split with method: ratio
+2025-05-08 20:28:02,090 - src.data.historical_data_handler - INFO - Split data for HEAD: train=700 rows, test=300 rows
+2025-05-08 20:28:02,090 - src.data.historical_data_handler - INFO - Activated 'train' data split
+2025-05-08 20:28:02,090 - src.execution.backtest.optimizing_backtest - INFO - Split data for HEAD: train=700 rows, test=300 rows
+2025-05-08 20:28:02,090 - src.execution.backtest.optimizing_backtest - INFO - Activated 'train' data split
+2025-05-08 20:28:02,090 - src.data.historical_data_handler - INFO - Activated 'train' data split
+2025-05-08 20:28:02,090 - backup.ma_crossover_fixed - INFO - MA Crossover strategy initialized with fast_window=5, slow_window=15
+2025-05-08 20:28:02,090 - src.execution.backtest.optimizing_backtest - INFO - Created strategy 'ma_crossover' with parameters {'fast_window': 5, 'slow_window': 20}
+2025-05-08 20:28:02,091 - complete_fix - ERROR - Error during optimization: invalid syntax (order_manager.py, line 83)
+2025-05-08 20:28:02,092 - complete_fix - ERROR - Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/run_complete_fix.py", line 244, in run_optimization
+    results = optimizer.optimize()
+  File "/Users/daws/ADMF-trader/src/strategy/optimization/optimizer.py", line 259, in optimize
+    results = optimizer.optimize(
+        self.config['strategy']['name'],
+        self.objective_function,
+        train_test_config
+    )
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 95, in optimize
+    train_result = self._run_backtest_with_params(
+        strategy_name,
+    ...<2 lines>...
+        train_test_config
+    )
+  File "/Users/daws/ADMF-trader/src/execution/backtest/optimizing_backtest.py", line 317, in _run_backtest_with_params
+    from src.execution.order_manager import OrderManager
+  File "/Users/daws/ADMF-trader/src/execution/order_manager.py", line 83
+    logger.debug("Signal has no rule_id or strategy_id")"""Reset the order manager state."""
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax
+
+2025-05-08 20:28:02,092 - complete_fix - WARNING - Optimization failed or produced no results

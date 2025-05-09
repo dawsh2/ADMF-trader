@@ -1,105 +1,236 @@
+#!/usr/bin/env python
+"""
+ADMF-Trader main entry point.
+
+This is a minimal entry point that handles:
+1. Parsing command-line arguments
+2. Setting up the bootstrap system
+3. Running the appropriate command
+"""
+
 import os
 import sys
-import logging
 import argparse
+import traceback
 import yaml
-import importlib.util
+import pandas as pd
+from datetime import datetime
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler("main.log"),
-        logging.StreamHandler()
-    ]
-)
-logger = logging.getLogger('main')
+from src.core.system_init import Bootstrap
+from src.core.logging import configure_logging, get_logger
 
-def load_config(config_path):
-    """Load configuration from YAML file"""
-    try:
-        with open(config_path, 'r') as f:
-            config = yaml.safe_load(f)
-        logger.info(f"Loaded config from {config_path}")
-        return config
-    except Exception as e:
-        logger.error(f"Error loading config: {e}")
-        return None
-
-def run_optimization(config_path, verbose=False):
-    """Run optimization with the specified configuration"""
-    # Set log level based on verbosity
-    if verbose:
-        logger.setLevel(logging.DEBUG)
-    
-    # Load configuration
-    config = load_config(config_path)
-    if not config:
-        logger.error("Failed to load configuration")
-        return False
-    
-    # Log the configuration for debugging
-    logger.debug(f"Configuration: {config}")
-    
-    # Check if the strategy has symbols defined
-    strategy_symbols = config.get('strategy', {}).get('parameters', {}).get('symbols', [])
-    logger.info(f"Strategy symbols defined in config: {strategy_symbols}")
-    
-    # Check if backtest has symbols defined
-    backtest_symbols = config.get('backtest', {}).get('symbols', [])
-    logger.info(f"Backtest symbols defined in config: {backtest_symbols}")
-    
-    # Check data sources
-    data_sources = config.get('data', {}).get('sources', [])
-    source_symbols = [source.get('symbol') for source in data_sources]
-    logger.info(f"Data source symbols: {source_symbols}")
-    
-    # Run debug optimization first
-    if os.path.exists("debug_optimization.py"):
-        logger.info("Running debug optimization to verify signals...")
-        
-        # Import and run the debug module
-        spec = importlib.util.spec_from_file_location("debug_optimization", "debug_optimization.py")
-        debug_module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(debug_module)
-        debug_module.main()
-    
-    # Mock optimization run
-    logger.info("Starting optimization...")
-    for param in config.get('parameter_space', []):
-        param_name = param.get('name')
-        param_min = param.get('min')
-        param_max = param.get('max')
-        param_step = param.get('step')
-        
-        logger.info(f"Optimizing parameter: {param_name} from {param_min} to {param_max} with step {param_step}")
-        
-        # Mock results for each parameter combination
-        for value in range(param_min, param_max + 1, param_step):
-            logger.info(f"Testing {param_name} = {value}")
-            # In a real system, we would run the backtest here with the parameter value
-    
-    logger.info("Optimization completed successfully")
-    return True
+# Get logger - will be configured based on command line arguments
+logger = get_logger('main')
 
 def main():
-    """Main entry point for the application"""
-    parser = argparse.ArgumentParser(description='Run trading strategy optimization')
-    subparsers = parser.add_subparsers(dest='command', help='sub-command help')
+    """
+    Main entry point for the application.
     
-    # Optimize command
-    optimize_parser = subparsers.add_parser('optimize', help='Optimize a trading strategy')
-    optimize_parser.add_argument('--config', required=True, help='Path to the configuration file')
-    optimize_parser.add_argument('--verbose', action='store_true', help='Enable verbose logging')
+    Returns:
+        int: Exit code
+    """
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(description='ADMF-Trader CLI')
+    parser.add_argument('--config', required=True, help='Path to configuration file')
+    
+    # System options
+    parser.add_argument('--symbols', nargs='+', help='Override symbols in config')
+    parser.add_argument('--start-date', help='Override start date (YYYY-MM-DD)')
+    parser.add_argument('--end-date', help='Override end date (YYYY-MM-DD)')
+    parser.add_argument('--output-dir', help='Output directory for results')
+    parser.add_argument('--optimize', action='store_true', help='Run parameter optimization')
+    parser.add_argument('--analytics', action='store_true', help='Run analytics on trading results')
+    parser.add_argument('--equity-file', help='Path to equity curve CSV file for analytics')
+    parser.add_argument('--trades-file', help='Path to trades CSV file for analytics')
+    parser.add_argument('--param-file', help='Parameter space file for optimization')
+    parser.add_argument('--method', choices=['grid', 'random', 'walk_forward'], 
+                       default='grid', help='Optimization method')
+    parser.add_argument('--bars', type=int, help='Limit processing to specified number of bars (default: process all)')
+    
+    # Logging options
+    parser.add_argument('--verbose', action='store_true', help='Enable verbose logging (INFO level)')
+    parser.add_argument('--debug', action='store_true', help='Enable debug logging for all modules')
+    parser.add_argument('--debug-module', action='append', dest='debug_modules',
+                       help='Enable debug logging for specific module (can be used multiple times)')
+    parser.add_argument('--log-file', help='Write logs to file')
+    parser.add_argument('--quiet', action='store_true', help='Suppress console output')
     
     # Parse arguments
     args = parser.parse_args()
     
-    if args.command == 'optimize':
-        run_optimization(args.config, args.verbose)
+    try:
+        # Configure logging based on arguments
+        configure_logging(
+            debug=args.debug,
+            debug_modules=args.debug_modules,
+            log_file=args.log_file,
+            console=not args.quiet
+        )
+        
+        # If verbose but not debug, set to INFO level
+        if args.verbose and not args.debug:
+            from src.core.logging.config import logging
+            logger.setLevel(logging.INFO)
+            
+        # Load the config to determine mode
+        with open(args.config, 'r') as f:
+            config = yaml.safe_load(f)
+        
+        # Check mode and determine what to run
+        mode = config.get('mode', 'backtest')
+        
+        if args.optimize:
+            return run_optimization(args)
+        elif args.analytics or mode == 'analytics':
+            # Import the analytics runner
+            from src.analytics.runner import run_analytics
+            success, message = run_analytics(
+                config,
+                equity_file=args.equity_file,
+                trades_file=args.trades_file,
+                output_dir=args.output_dir
+            )
+            if success:
+                logger.info(message)
+                return 0
+            else:
+                logger.error(message)
+                return 1
+        else:
+            # Default is to run trading system (backtest or live based on config)
+            return run_trading_system(args)
+            
+    except Exception as e:
+        logger.error(f"Unhandled exception: {e}")
+        logger.error(traceback.format_exc())
+        return 1
+
+def run_trading_system(args):
+    """
+    Run the trading system (backtest or live).
+    
+    Args:
+        args: Command-line arguments
+        
+    Returns:
+        int: Exit code
+    """
+    # Set up bootstrap with logging options already configured
+    bootstrap = Bootstrap(
+        config_files=[args.config],
+        debug=args.debug,
+        log_file=args.log_file or "trading.log"
+    )
+    
+    # Store max bars limit in the bootstrap context if specified
+    if args.bars is not None:
+        bootstrap.set_context_value('max_bars', args.bars)
+    
+    # Initialize system
+    container, config = bootstrap.setup()
+    
+    # Determine if we're running in backtest or live mode based on config
+    mode = config.get('mode', 'backtest')
+    logger.info(f"Running in {mode} mode")
+    
+    if mode == 'backtest':
+        # Get backtest from container
+        if container.has('backtest'):
+            backtest = container.get('backtest')
+            
+            # Override config with command-line arguments if provided
+            if args.symbols:
+                logger.info(f"Overriding symbols with {args.symbols}")
+                # TODO: Apply override
+                
+            if args.start_date:
+                logger.info(f"Overriding start date with {args.start_date}")
+                # TODO: Apply override
+                
+            if args.end_date:
+                logger.info(f"Overriding end date with {args.end_date}")
+                # TODO: Apply override
+                
+            # Run backtest
+            logger.info("Starting backtest")
+            
+            try:
+                # Setup and run the backtest
+                backtest.setup()  # Ensure components are properly initialized
+                results = backtest.run()
+                
+                # Process results
+                if results:
+                    final_capital = results.get('final_capital', 0)
+                    trades = results.get('trades', [])
+                    statistics = results.get('statistics', {})
+                    
+                    # Log basic results
+                    logger.info(f"Backtest completed with final capital: ${final_capital:.2f}")
+                    logger.info(f"Total trades: {len(trades)}")
+                    
+                    # Log key metrics
+                    if statistics:
+                        logger.info("Performance metrics:")
+                        for key in ['return_pct', 'sharpe_ratio', 'max_drawdown', 'profit_factor', 'win_rate']:
+                            if key in statistics:
+                                logger.info(f"  {key}: {statistics[key]}")
+                    
+                    return 0
+                else:
+                    logger.error("Backtest completed but returned no results")
+                    return 1
+            except Exception as e:
+                logger.error(f"Error running backtest: {e}", exc_info=True)
+                return 1
+            
+            return 0
+        else:
+            logger.error("Backtest component not available")
+            return 1
+    elif mode == 'live':
+        # TODO: Implement live trading
+        logger.info("Live trading not yet implemented")
+        return 0
     else:
-        parser.print_help()
+        logger.error(f"Unknown mode: {mode}")
+        return 1
+
+def run_optimization(args):
+    """
+    Run parameter optimization.
+    
+    Args:
+        args: Command-line arguments
+        
+    Returns:
+        int: Exit code
+    """
+    # Set up bootstrap with logging options already configured
+    bootstrap = Bootstrap(
+        config_files=[args.config],
+        debug=args.debug,
+        log_file=args.log_file or "optimization.log"
+    )
+    
+    # Initialize system
+    container, config = bootstrap.setup()
+    
+    # Override method if specified
+    if args.method:
+        logger.info(f"Using optimization method: {args.method}")
+        # TODO: Apply method override
+        
+    # Use param file if specified
+    if args.param_file:
+        logger.info(f"Using parameter space from: {args.param_file}")
+        # TODO: Load parameter space from file
+        
+    # Get optimizer from container
+    # TODO: Implement optimizer orchestration once components are ready
+    logger.info("Optimization functionality not yet implemented")
+    
+    return 0
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

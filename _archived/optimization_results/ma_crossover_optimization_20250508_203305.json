@@ -1,0 +1,4004 @@
+{
+  "best_parameters": {},
+  "best_train_score": -Infinity,
+  "best_test_score": 0.0,
+  "all_results": [
+    {
+      "parameters": {
+        "fast_window": 5,
+        "slow_window": 20
+      },
+      "train_score": NaN,
+      "test_score": NaN,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {
+          "HEAD": 0
+        },
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct_with_open": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.0,
+          "max_drawdown_full": 0.0
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2024-03-26 13:43:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 13:51:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 13:56:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:09:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:13:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:22:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:23:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:24:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:37:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:45:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:46:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:47:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:51:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:03:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:09:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:12:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:17:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:20:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:20:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:29:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:42:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:42:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:49:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:01:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:27:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:32:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:47:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:51:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:03:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:10:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:12:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:16:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:28:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:36:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:53:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:09:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:14:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:20:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:23:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:36:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:36:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:37:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:47:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:48:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:50:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:59:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 19:08:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 19:11:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 19:26:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 19:28:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 19:40:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 19:42:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 20:00:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 13:39:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 13:44:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 13:51:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:09:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:10:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:14:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:20:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:29:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:42:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:54:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:01:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:07:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:11:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:13:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:20:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:23:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:23:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:35:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:45:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:47:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:49:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:05:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:11:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:17:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:38:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:41:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:45:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:45:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:55:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:57:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:57:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:01:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:03:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:13:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:26:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:30:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:34:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:45:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:49:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:56:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:56:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 18:09:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 18:09:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 18:10:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 18:32:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          }
+        ],
+        "trades_equity_consistent": true,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 5,
+          "slow_window": 20
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {
+          "HEAD": 0
+        },
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct_with_open": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.0,
+          "max_drawdown_full": 0.0
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2024-03-27 18:59:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 19:09:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 19:20:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 13:33:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 13:38:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 13:53:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:00:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:07:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:24:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:32:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:33:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:41:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:43:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:46:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:49:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:57:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:59:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:01:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:04:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:06:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:13:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:27:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:28:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:33:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:47:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:56:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:57:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:00:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:12:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:17:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:25:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:30:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:38:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:40:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:41:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:44:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:46:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:52:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:53:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:56:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:58:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 17:00:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 17:03:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          }
+        ],
+        "trades_equity_consistent": true,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 5,
+          "slow_window": 20
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 5,
+        "slow_window": 40
+      },
+      "train_score": NaN,
+      "test_score": NaN,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {
+          "HEAD": 0
+        },
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct_with_open": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.0,
+          "max_drawdown_full": 0.0
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2024-03-26 13:52:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 13:56:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:10:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:12:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:26:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:42:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:48:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:50:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:12:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:18:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:19:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:21:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:30:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:50:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:03:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:28:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:31:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:48:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:51:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:05:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:16:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:29:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:38:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:55:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:11:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:13:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:20:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:22:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:38:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:52:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 19:01:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 19:02:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 19:02:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 19:09:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 19:11:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 20:00:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 13:52:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:15:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:20:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:32:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:43:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:00:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:01:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:04:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:05:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:06:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:11:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:13:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:24:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:26:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:27:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:37:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:51:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:17:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:58:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:01:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:03:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:16:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:34:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:37:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:38:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 18:12:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 18:33:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          }
+        ],
+        "trades_equity_consistent": true,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 5,
+          "slow_window": 40
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {
+          "HEAD": 0
+        },
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct_with_open": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.0,
+          "max_drawdown_full": 0.0
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2024-03-27 19:02:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 19:09:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 19:22:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 13:57:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:00:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:07:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:26:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:47:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:49:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:02:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:04:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:06:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:14:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:34:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:48:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:02:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:26:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:30:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:42:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:43:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:46:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:57:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:58:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 17:00:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 17:03:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          }
+        ],
+        "trades_equity_consistent": true,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 5,
+          "slow_window": 40
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 10,
+        "slow_window": 20
+      },
+      "train_score": NaN,
+      "test_score": NaN,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {
+          "HEAD": 0
+        },
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct_with_open": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.0,
+          "max_drawdown_full": 0.0
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2024-03-26 13:45:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 13:53:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 13:58:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:10:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:15:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:24:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:37:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:47:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:53:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:04:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:10:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:14:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:19:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:30:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:44:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:46:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:50:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:02:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:28:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:33:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:48:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:52:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:05:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:11:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:14:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:17:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:29:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:38:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:53:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:10:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:15:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:22:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:25:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:38:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:49:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 19:00:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 19:09:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 19:13:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 19:26:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 19:28:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 19:41:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 19:42:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 20:00:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 13:38:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 13:40:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 13:42:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 13:44:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 13:52:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:09:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:12:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:16:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:21:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:29:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:42:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:55:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:02:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:07:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:13:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:16:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:22:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:36:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:48:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:05:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:12:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:17:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:39:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:42:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:54:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:04:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:05:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:14:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:26:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:31:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:36:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:47:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:50:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:58:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:59:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 18:10:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 18:33:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          }
+        ],
+        "trades_equity_consistent": true,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 10,
+          "slow_window": 20
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {
+          "HEAD": 0
+        },
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct_with_open": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.0,
+          "max_drawdown_full": 0.0
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2024-03-27 18:48:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 19:00:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 19:09:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 19:22:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 13:34:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 13:39:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 13:52:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:01:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:07:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:25:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:41:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:45:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:48:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:51:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:01:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:14:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:35:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:48:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:59:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:13:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:17:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:27:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:32:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:38:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:55:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:56:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:58:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 17:04:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          }
+        ],
+        "trades_equity_consistent": true,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 10,
+          "slow_window": 20
+        },
+        "data_split": "test"
+      }
+    },
+    {
+      "parameters": {
+        "fast_window": 10,
+        "slow_window": 40
+      },
+      "train_score": NaN,
+      "test_score": NaN,
+      "train_result": {
+        "final_capital": 100000.0,
+        "positions": {
+          "HEAD": 0
+        },
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct_with_open": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.0,
+          "max_drawdown_full": 0.0
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2024-03-26 13:53:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 13:57:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:13:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:14:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:27:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:42:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:51:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 14:52:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:13:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:20:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:32:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 15:50:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:04:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:30:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:33:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:49:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 16:52:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:06:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:18:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:30:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:39:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 17:56:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:12:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:14:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:39:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 18:53:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 19:03:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-26 20:00:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 13:53:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:17:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:22:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:33:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 14:44:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:00:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:02:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:03:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:04:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:06:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:24:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:25:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:26:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:38:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 15:52:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:17:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 16:59:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:17:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 17:36:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 18:12:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 18:34:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          }
+        ],
+        "trades_equity_consistent": true,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 10,
+          "slow_window": 40
+        },
+        "data_split": "train"
+      },
+      "test_result": {
+        "final_capital": 100000.0,
+        "positions": {
+          "HEAD": 0
+        },
+        "trades": [],
+        "statistics": {
+          "initial_capital": 100000.0,
+          "final_capital": 100000.0,
+          "trades_executed": 0,
+          "return_pct_closed_only": 0.0,
+          "portfolio_realized_return_pct": 0.0,
+          "return_pct_with_open": 0.0,
+          "return_pct": 0.0,
+          "sharpe_ratio": NaN,
+          "sharpe_ratio_full": NaN,
+          "max_drawdown": 0.0,
+          "max_drawdown_full": 0.0
+        },
+        "equity_curve": [
+          {
+            "timestamp": "2024-03-27 19:03:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 19:10:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-27 19:23:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 13:58:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:01:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:08:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 14:27:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:02:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:04:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:06:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:15:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:35:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 15:50:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:03:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:28:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:31:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 16:47:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 17:00:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 17:02:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 17:03:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          },
+          {
+            "timestamp": "2024-03-28 17:04:00",
+            "cash": 100000.0,
+            "closed_pnl": 0,
+            "market_value": 0,
+            "closed_only_equity": 100000.0,
+            "full_equity": 100000.0,
+            "equity": 100000.0
+          }
+        ],
+        "trades_equity_consistent": true,
+        "metrics_consistent": true,
+        "parameters": {
+          "fast_window": 10,
+          "slow_window": 40
+        },
+        "data_split": "test"
+      }
+    }
+  ],
+  "parameter_counts": 4,
+  "train_results": null,
+  "test_results": null,
+  "timestamp": "20250508_203305",
+  "id": "2f2dd45c-56bf-4f9a-8ec5-8fb0ab126b01",
+  "config": {
+    "strategy": {
+      "name": "ma_crossover",
+      "parameters": {
+        "fast_window": 5,
+        "slow_window": 20,
+        "symbols": [
+          "HEAD"
+        ]
+      }
+    },
+    "risk": {
+      "position_manager": {
+        "config": {
+          "fixed_quantity": 10,
+          "max_positions": 1,
+          "enforce_single_position": true,
+          "position_sizing_method": "fixed",
+          "allow_multiple_entries": false
+        }
+      }
+    },
+    "backtest": {
+      "initial_capital": 100000.0,
+      "symbols": [
+        "HEAD"
+      ],
+      "timeframe": "1min"
+    },
+    "data": {
+      "source_type": "csv",
+      "sources": [
+        {
+          "symbol": "HEAD",
+          "file": "data/HEAD_1min.csv",
+          "date_column": "timestamp",
+          "price_column": "Close",
+          "date_format": "%Y-%m-%d %H:%M:%S"
+        }
+      ]
+    },
+    "optimization": {
+      "objective": "sharpe_ratio",
+      "method": "grid"
+    },
+    "parameter_space": [
+      {
+        "name": "fast_window",
+        "type": "integer",
+        "min": 5,
+        "max": 10,
+        "step": 5,
+        "description": "Fast moving average window"
+      },
+      {
+        "name": "slow_window",
+        "type": "integer",
+        "min": 20,
+        "max": 40,
+        "step": 20,
+        "description": "Slow moving average window"
+      }
+    ]
+  },
+  "best_score": -Infinity
+}

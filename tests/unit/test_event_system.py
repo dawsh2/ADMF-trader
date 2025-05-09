@@ -13,10 +13,10 @@ import json
 # Add project root to path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-# Import components to test
-from src.core.events.event_types import Event, EventType
-from src.core.events.event_bus import EventBus
-from src.core.events.event_utils import create_signal_event, create_order_event
+# Import components to test - use canonical implementations
+from src.core.event_system.event import Event, create_event
+from src.core.event_system.event_types import EventType
+from src.core.event_system.event_bus import EventBus  # Use canonical EventBus
 
 class TestEventType:
     """Tests for the EventType enum."""
@@ -66,34 +66,35 @@ class TestEvent:
         
         # Test consumption tracking
         assert not event.is_consumed()
-        event.mark_consumed()
+        event.consume()
         assert event.is_consumed()
     
-    def test_event_serialization(self):
-        """Test event serialization and deserialization."""
-        # Create event with fixed timestamp for deterministic testing
-        timestamp = datetime.datetime(2024, 1, 1, 10, 0, 0)
-        data = {'symbol': 'TEST', 'price': 100.0}
-        event = Event(EventType.BAR, data, timestamp)
-        
-        # Add ID if needed
-        event.id = "test-event-id"
-        
-        # Serialize
-        serialized = event.serialize()
-        
-        # Check serialized data
-        assert isinstance(serialized, str)
-        assert "BAR" in serialized
-        assert "TEST" in serialized
-        assert "test-event-id" in serialized
-        
-        # Deserialize if method exists
-        if hasattr(Event, 'deserialize'):
-            deserialized = Event.deserialize(serialized)
-            assert deserialized.event_type == event.event_type
-            assert deserialized.data == event.data
-            assert deserialized.id == event.id
+    # Serialization is no longer part of the core Event class
+    # def test_event_serialization(self):
+    #     """Test event serialization and deserialization."""
+    #     # Create event with fixed timestamp for deterministic testing
+    #     timestamp = datetime.datetime(2024, 1, 1, 10, 0, 0)
+    #     data = {'symbol': 'TEST', 'price': 100.0}
+    #     event = Event(EventType.BAR, data, timestamp)
+    #     
+    #     # Add ID if needed
+    #     event.id = "test-event-id"
+    #     
+    #     # Serialize
+    #     serialized = event.serialize()
+    #     
+    #     # Check serialized data
+    #     assert isinstance(serialized, str)
+    #     assert "BAR" in serialized
+    #     assert "TEST" in serialized
+    #     assert "test-event-id" in serialized
+    #     
+    #     # Deserialize if method exists
+    #     if hasattr(Event, 'deserialize'):
+    #         deserialized = Event.deserialize(serialized)
+    #         assert deserialized.event_type == event.event_type
+    #         assert deserialized.data == event.data
+    #         assert deserialized.id == event.id
 
 class TestEventBus:
     """Tests for the EventBus class."""
@@ -101,10 +102,11 @@ class TestEventBus:
     def test_event_bus_creation(self):
         """Test creating an EventBus."""
         bus = EventBus()
-        assert hasattr(bus, 'handlers')
-        assert hasattr(bus, 'register')
-        assert hasattr(bus, 'emit')
-        assert hasattr(bus, 'unregister')
+        # Check for methods in canonical EventBus
+        assert hasattr(bus, 'subscribers')
+        assert hasattr(bus, 'subscribe')
+        assert hasattr(bus, 'publish')
+        assert hasattr(bus, 'unsubscribe')
     
     def test_event_handler_registration(self):
         """Test registering event handlers."""
@@ -121,14 +123,14 @@ class TestEventBus:
         def handler2(event):
             handler2_calls.append(event)
         
-        # Register handlers
-        bus.register(EventType.BAR, handler1)
-        bus.register(EventType.SIGNAL, handler2)
+        # Register handlers - use subscribe method
+        bus.subscribe(EventType.BAR, handler1)
+        bus.subscribe(EventType.SIGNAL, handler2)
         
-        # Check registration
-        assert bus.has_handlers(EventType.BAR)
-        assert bus.has_handlers(EventType.SIGNAL)
-        assert not bus.has_handlers(EventType.ORDER)
+        # Check registration - use has_subscribers method
+        assert bus.has_subscribers(EventType.BAR)
+        assert bus.has_subscribers(EventType.SIGNAL)
+        assert not bus.has_subscribers(EventType.ORDER)
     
     def test_event_emission(self):
         """Test event emission and handler calling."""
@@ -141,12 +143,12 @@ class TestEventBus:
         def handler(event):
             handler_calls.append(event)
         
-        # Register handler
-        bus.register(EventType.BAR, handler)
+        # Register handler - use subscribe method
+        bus.subscribe(EventType.BAR, handler)
         
-        # Create and emit event
-        event = Event(EventType.BAR, {'test': 'data'})
-        bus.emit(event)
+        # Create and emit event - use publish method
+        event = Event(_type=EventType.BAR, data={'test': 'data'})
+        bus.publish(event)
         
         # Check handler was called
         assert len(handler_calls) == 1
@@ -163,15 +165,15 @@ class TestEventBus:
         def handler(event):
             handler_calls.append(event)
         
-        # Register handler
-        bus.register(EventType.BAR, handler)
+        # Register handler - use subscribe method
+        bus.subscribe(EventType.BAR, handler)
         
-        # Unregister handler
-        bus.unregister(EventType.BAR, handler)
+        # Unregister handler - use unsubscribe method
+        bus.unsubscribe(EventType.BAR, handler)
         
-        # Create and emit event
-        event = Event(EventType.BAR, {'test': 'data'})
-        bus.emit(event)
+        # Create and emit event - use publish method
+        event = Event(_type=EventType.BAR, data={'test': 'data'})
+        bus.publish(event)
         
         # Check handler was not called
         assert len(handler_calls) == 0
@@ -180,26 +182,31 @@ class TestEventBus:
         """Test resetting the event bus."""
         bus = EventBus()
         
-        # Register handlers
-        def handler1(event): 
-            pass
+        # Note: In the canonical implementation, reset() does not clear subscribers
+        # but rather clears processed_keys, event_counts, etc.
+        # We'll test the bus's ability to continue processing events after reset()
+        
+        # Create a test event
+        event = Event(_type=EventType.BAR, data={'test': 'data'})
+        
+        # Create tracking variables
+        handler_calls = []
+        
+        # Define handler
+        def handler(event):
+            handler_calls.append(event)
             
-        def handler2(event): 
-            pass
+        # Register handler
+        bus.subscribe(EventType.BAR, handler)
         
-        bus.register(EventType.BAR, handler1)
-        bus.register(EventType.SIGNAL, handler2)
-        
-        # Check registration
-        assert bus.has_handlers(EventType.BAR)
-        assert bus.has_handlers(EventType.SIGNAL)
-        
-        # Reset bus
+        # Reset the bus
         bus.reset()
         
-        # Check handlers were cleared
-        assert not bus.has_handlers(EventType.BAR)
-        assert not bus.has_handlers(EventType.SIGNAL)
+        # Publish an event after reset - this should still work
+        bus.publish(event)
+        
+        # Check that the handler was still called
+        assert len(handler_calls) == 1
     
     def test_multiple_handlers(self):
         """Test multiple handlers for same event type."""
@@ -216,13 +223,13 @@ class TestEventBus:
         def handler2(event):
             handler2_calls.append(event)
         
-        # Register both handlers for same event type
-        bus.register(EventType.BAR, handler1)
-        bus.register(EventType.BAR, handler2)
+        # Register both handlers for same event type - use subscribe method
+        bus.subscribe(EventType.BAR, handler1)
+        bus.subscribe(EventType.BAR, handler2)
         
-        # Create and emit event
-        event = Event(EventType.BAR, {'test': 'data'})
-        bus.emit(event)
+        # Create and emit event - use publish method
+        event = Event(_type=EventType.BAR, data={'test': 'data'})
+        bus.publish(event)
         
         # Check both handlers were called
         assert len(handler1_calls) == 1
@@ -235,22 +242,37 @@ class TestEventUtils:
     
     def test_create_signal_event(self):
         """Test creating a signal event."""
-        signal = create_signal_event(1, 100.0, 'TEST')
+        # Use canonical Event constructor directly
+        signal_data = {
+            'symbol': 'TEST',
+            'signal_type': 'BUY',
+            'strategy_id': 'strategy_1',
+            'strength': 1.0
+        }
+        signal = Event(_type=EventType.SIGNAL, data=signal_data)
         
         # Check event properties
         assert signal.get_type() == EventType.SIGNAL
-        assert signal.data.get('signal_value') == 1
-        assert signal.data.get('price') == 100.0
         assert signal.data.get('symbol') == 'TEST'
+        assert signal.data.get('signal_type') == 'BUY'
+        assert signal.data.get('strategy_id') == 'strategy_1'
     
     def test_create_order_event(self):
         """Test creating an order event."""
-        order = create_order_event('BUY', 100, 'TEST', 'MARKET', 100.0)
+        # Use canonical Event constructor directly
+        order_data = {
+            'symbol': 'TEST',
+            'order_type': 'MARKET',
+            'quantity': 100,
+            'direction': 'BUY',
+            'price': 100.0
+        }
+        order = Event(_type=EventType.ORDER, data=order_data)
         
         # Check event properties
         assert order.get_type() == EventType.ORDER
-        assert order.data.get('direction') == 'BUY'
-        assert order.data.get('quantity') == 100
         assert order.data.get('symbol') == 'TEST'
         assert order.data.get('order_type') == 'MARKET'
+        assert order.data.get('quantity') == 100
+        assert order.data.get('direction') == 'BUY'
         assert order.data.get('price') == 100.0

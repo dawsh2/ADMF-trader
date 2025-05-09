@@ -93,6 +93,15 @@ class OrderManager(Component):
         direction = signal_data.get('direction')
         rule_id = signal_data.get('rule_id')
         
+        # Debug logging for tracking rule_id
+        logger.debug(f"Signal data: {signal_data}")
+        if rule_id:
+            logger.debug(f"Signal has rule_id: {rule_id}")
+        elif signal_data.get('strategy_id'):
+            logger.debug(f"Signal has strategy_id: {signal_data.get('strategy_id')}")
+        else:
+            logger.debug("Signal has no rule_id or strategy_id")
+        
         # Check if we already have active orders for this symbol
         active_orders = self.active_orders_by_symbol.get(symbol, [])
         if len(active_orders) >= self.max_orders_per_symbol and self.enforce_single_position:
@@ -240,6 +249,11 @@ class OrderManager(Component):
         price = signal_data.get('price')
         timestamp = signal_data.get('timestamp')
         rule_id = signal_data.get('rule_id')  # Store rule_id for reference
+        
+        # If rule_id is None, check for strategy_id as fallback
+        if rule_id is None and 'strategy_id' in signal_data:
+            rule_id = signal_data.get('strategy_id')
+            logger.info(f"Using strategy_id as rule_id: {rule_id}")
         
         # Create order data
         order_data = {

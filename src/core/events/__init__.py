@@ -8,10 +8,9 @@ allowing for efficient handling of real-time data streams and WebSocket
 connections.
 """
 
-from .event_types import (
-    EventType, Event, BarEvent, SignalEvent, OrderEvent, FillEvent,
-    WebSocketEvent, LifecycleEvent, ErrorEvent
-)
+# Import canonical Event and EventType from event_system
+from src.core.event_system.event_types import EventType
+from src.core.event_system.event import Event, create_event
 
 from .event_bus import EventBus
 
@@ -23,6 +22,8 @@ from .event_utils import (
     # Event creation
     create_bar_event, create_signal_event, create_order_event, create_fill_event,
     create_websocket_event, create_lifecycle_event, create_error_event,
+    create_backtest_event, create_optimization_event,
+    create_portfolio_event, create_position_event, create_trade_event, create_performance_event,
     
     # Serialization
     event_to_dict, dict_to_event, serialize_event, deserialize_event,
@@ -67,8 +68,7 @@ from .event_emitters import (
 
 __all__ = [
     # Event types
-    'EventType', 'Event', 'BarEvent', 'SignalEvent', 'OrderEvent', 'FillEvent',
-    'WebSocketEvent', 'LifecycleEvent', 'ErrorEvent',
+    'EventType', 'Event', 'create_event',
     
     # Event bus
     'EventBus',
@@ -79,6 +79,8 @@ __all__ = [
     # Event utilities
     'create_bar_event', 'create_signal_event', 'create_order_event', 'create_fill_event',
     'create_websocket_event', 'create_lifecycle_event', 'create_error_event',
+    'create_backtest_event', 'create_optimization_event',
+    'create_portfolio_event', 'create_position_event', 'create_trade_event', 'create_performance_event',
     'event_to_dict', 'dict_to_event', 'serialize_event', 'deserialize_event',
     'filter_events_by_type', 'filter_events_by_symbol', 'filter_events_by_time',
     'emit_event_async', 'emit_events_async', 'is_async_handler',

@@ -139,8 +139,10 @@ class SimpleMACrossoverStrategy(Component):
         prev_slow_ma = np.mean(prev_prices[-self.slow_period:]) if len(prev_prices) >= self.slow_period else None
         
         # Debug log moving averages
+        prev_fast_str = f"{prev_fast_ma:.2f}" if prev_fast_ma is not None else "None"
+        prev_slow_str = f"{prev_slow_ma:.2f}" if prev_slow_ma is not None else "None"
         logger.debug(f"Symbol: {symbol}, Price: {close_price}, Fast MA: {fast_ma:.2f}, Slow MA: {slow_ma:.2f}, " +
-                    f"Prev Fast: {prev_fast_ma:.2f}, Prev Slow: {prev_slow_ma:.2f}")
+                    f"Prev Fast: {prev_fast_str}, Prev Slow: {prev_slow_str}")
         
         # New: Check if we already have active orders for this symbol
         if len(self.active_orders[symbol]) > 0:

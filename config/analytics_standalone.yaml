@@ -1,0 +1,58 @@
+# Analytics Standalone Configuration
+
+# System mode
+mode: analytics
+
+# Basic settings
+name: ADMF-Trader Analytics
+description: "Analytics-only configuration for analyzing backtest results"
+
+# Data input settings
+data:
+  # Sample AAPL file for equity curve
+  equity_curve: "./data/AAPL_1d.csv"
+  
+  # No trades specified (we'll generate synthetic trades for demo)
+  trades: null
+
+# Analysis settings
+analysis:
+  # Risk-free rate (annualized)
+  risk_free_rate: 0.0
+  # Number of periods per year (252 trading days)
+  periods_per_year: 252
+  # Metrics to include
+  metrics:
+    - total_return
+    - annualized_return
+    - cagr
+    - volatility
+    - sharpe_ratio
+    - sortino_ratio
+    - calmar_ratio
+    - max_drawdown
+    - win_rate
+    - profit_factor
+
+# Reporting settings
+reporting:
+  # Enable report generation
+  enabled: true
+  # Output directory
+  output_directory: "./results/analytics"
+  # Report formats to generate
+  formats:
+    - text
+    - html
+  # Text report settings
+  text:
+    width: 100
+  # HTML report settings
+  html:
+    title: "AAPL Trading Performance Report"
+    description: "Performance analysis of AAPL trading strategy"
+    charts:
+      - equity_curve
+      - returns_distribution
+      - monthly_returns
+      - trade_pnl

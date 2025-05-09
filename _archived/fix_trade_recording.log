@@ -1,0 +1,127 @@
+2025-05-08 20:18:33,833 - fix_trade_recording - INFO - Starting trade recording fix
+2025-05-08 20:18:33,837 - fix_trade_recording - INFO - Fixing Event class in src/core/events/event_tracer.py
+2025-05-08 20:18:33,837 - fix_trade_recording - INFO - Created backup at src/core/events/event_tracer.py.bak
+2025-05-08 20:18:33,837 - fix_trade_recording - WARNING - Could not find Event class in src/core/events/event_tracer.py
+2025-05-08 20:18:33,837 - fix_trade_recording - INFO - Searching for execution handler file...
+2025-05-08 20:18:33,843 - fix_trade_recording - ERROR - Could not find execution handler file
+2025-05-08 20:18:33,843 - fix_trade_recording - INFO - Searching for signal handler file...
+2025-05-08 20:18:33,844 - fix_trade_recording - INFO - Fixing signal handler at src/core/events/event_utils.py
+2025-05-08 20:18:33,844 - fix_trade_recording - INFO - Created backup at src/core/events/event_utils.py.bak
+2025-05-08 20:18:33,844 - fix_trade_recording - WARNING - Could not find create_order method in src/core/events/event_utils.py
+2025-05-08 20:18:33,848 - fix_trade_recording - INFO - Checking strategy file at src/strategy/strategy_base.py
+2025-05-08 20:18:33,848 - fix_trade_recording - INFO - Created backup at src/strategy/strategy_base.py.bak
+2025-05-08 20:18:33,848 - fix_trade_recording - INFO - Checking strategy file at src/strategy/composite_strategy.py
+2025-05-08 20:18:33,848 - fix_trade_recording - INFO - Created backup at src/strategy/composite_strategy.py.bak
+2025-05-08 20:18:33,848 - fix_trade_recording - INFO - Checking strategy file at src/strategy/implementations/regime_ensemble_strategy.py
+2025-05-08 20:18:33,849 - fix_trade_recording - INFO - Created backup at src/strategy/implementations/regime_ensemble_strategy.py.bak
+2025-05-08 20:18:33,849 - fix_trade_recording - INFO - Fixed signal event creation in src/strategy/implementations/regime_ensemble_strategy.py
+2025-05-08 20:18:33,849 - fix_trade_recording - INFO - Checking strategy file at src/strategy/implementations/composite_regime_strategy.py
+2025-05-08 20:18:33,849 - fix_trade_recording - INFO - Created backup at src/strategy/implementations/composite_regime_strategy.py.bak
+2025-05-08 20:18:33,850 - fix_trade_recording - INFO - Fixed signal event creation in src/strategy/implementations/composite_regime_strategy.py
+2025-05-08 20:18:33,850 - fix_trade_recording - INFO - Checking strategy file at src/strategy/implementations/ensemble_strategy.py
+2025-05-08 20:18:33,850 - fix_trade_recording - INFO - Created backup at src/strategy/implementations/ensemble_strategy.py.bak
+2025-05-08 20:18:33,850 - fix_trade_recording - INFO - Fixed signal event creation in src/strategy/implementations/ensemble_strategy.py
+2025-05-08 20:18:33,850 - fix_trade_recording - INFO - Fixed signal event creation in 3 files
+2025-05-08 20:18:33,851 - fix_trade_recording - INFO - Fixing objective functions in src/strategy/optimization/objective_functions.py
+2025-05-08 20:18:33,851 - fix_trade_recording - INFO - Created backup at src/strategy/optimization/objective_functions.py.bak
+2025-05-08 20:18:33,852 - fix_trade_recording - INFO - No changes needed in objective functions in src/strategy/optimization/objective_functions.py
+2025-05-08 20:18:33,852 - fix_trade_recording - INFO - Fix summary:
+2025-05-08 20:18:33,852 - fix_trade_recording - INFO - Event class consumption tracking: Not fixed
+2025-05-08 20:18:33,852 - fix_trade_recording - INFO - Execution handler: Not fixed
+2025-05-08 20:18:33,852 - fix_trade_recording - INFO - Signal handler: Not fixed
+2025-05-08 20:18:33,852 - fix_trade_recording - INFO - Signal event creation: Fixed
+2025-05-08 20:18:33,852 - fix_trade_recording - INFO - Objective functions: Not fixed
+2025-05-08 20:18:33,852 - fix_trade_recording - INFO - Some fixes were applied. Please test the system to verify the fixes.
+2025-05-08 20:19:10,028 - fix_trade_recording - INFO - Starting trade recording fix
+2025-05-08 20:19:10,029 - fix_trade_recording - INFO - Fixing Event class in src/core/events/event_tracer.py
+2025-05-08 20:19:10,029 - fix_trade_recording - INFO - Created backup at src/core/events/event_tracer.py.bak
+2025-05-08 20:19:10,030 - fix_trade_recording - WARNING - Could not find Event class in src/core/events/event_tracer.py
+2025-05-08 20:19:10,030 - fix_trade_recording - INFO - Searching for execution handler file...
+2025-05-08 20:19:10,032 - fix_trade_recording - ERROR - Could not find execution handler file
+2025-05-08 20:19:10,032 - fix_trade_recording - INFO - Searching for signal handler file...
+2025-05-08 20:19:10,032 - fix_trade_recording - INFO - Fixing signal handler at src/core/events/event_utils.py
+2025-05-08 20:19:10,033 - fix_trade_recording - INFO - Created backup at src/core/events/event_utils.py.bak
+2025-05-08 20:19:10,033 - fix_trade_recording - WARNING - Could not find create_order method in src/core/events/event_utils.py
+2025-05-08 20:19:10,036 - fix_trade_recording - INFO - Checking strategy file at src/strategy/strategy_base.py
+2025-05-08 20:19:10,036 - fix_trade_recording - INFO - Created backup at src/strategy/strategy_base.py.bak
+2025-05-08 20:19:10,036 - fix_trade_recording - INFO - Checking strategy file at src/strategy/composite_strategy.py
+2025-05-08 20:19:10,037 - fix_trade_recording - INFO - Created backup at src/strategy/composite_strategy.py.bak
+2025-05-08 20:19:10,037 - fix_trade_recording - INFO - Checking strategy file at src/strategy/implementations/regime_ensemble_strategy.py
+2025-05-08 20:19:10,037 - fix_trade_recording - INFO - Created backup at src/strategy/implementations/regime_ensemble_strategy.py.bak
+2025-05-08 20:19:10,037 - fix_trade_recording - INFO - Checking strategy file at src/strategy/implementations/composite_regime_strategy.py
+2025-05-08 20:19:10,038 - fix_trade_recording - INFO - Created backup at src/strategy/implementations/composite_regime_strategy.py.bak
+2025-05-08 20:19:10,038 - fix_trade_recording - INFO - Checking strategy file at src/strategy/implementations/ensemble_strategy.py
+2025-05-08 20:19:10,038 - fix_trade_recording - INFO - Created backup at src/strategy/implementations/ensemble_strategy.py.bak
+2025-05-08 20:19:10,038 - fix_trade_recording - INFO - Fixed signal event creation in 0 files
+2025-05-08 20:19:10,039 - fix_trade_recording - INFO - Fixing objective functions in src/strategy/optimization/objective_functions.py
+2025-05-08 20:19:10,039 - fix_trade_recording - INFO - Created backup at src/strategy/optimization/objective_functions.py.bak
+2025-05-08 20:19:10,039 - fix_trade_recording - INFO - No changes needed in objective functions in src/strategy/optimization/objective_functions.py
+2025-05-08 20:19:10,039 - fix_trade_recording - INFO - Fix summary:
+2025-05-08 20:19:10,040 - fix_trade_recording - INFO - Event class consumption tracking: Not fixed
+2025-05-08 20:19:10,040 - fix_trade_recording - INFO - Execution handler: Not fixed
+2025-05-08 20:19:10,040 - fix_trade_recording - INFO - Signal handler: Not fixed
+2025-05-08 20:19:10,040 - fix_trade_recording - INFO - Signal event creation: Not fixed
+2025-05-08 20:19:10,040 - fix_trade_recording - INFO - Objective functions: Not fixed
+2025-05-08 20:19:10,040 - fix_trade_recording - WARNING - No fixes were applied. Either the system is already fixed or the files could not be found.
+2025-05-08 20:19:25,367 - fix_trade_recording - INFO - Starting trade recording fix
+2025-05-08 20:19:25,368 - fix_trade_recording - INFO - Fixing Event class in src/core/events/event_tracer.py
+2025-05-08 20:19:25,369 - fix_trade_recording - INFO - Created backup at src/core/events/event_tracer.py.bak
+2025-05-08 20:19:25,369 - fix_trade_recording - WARNING - Could not find Event class in src/core/events/event_tracer.py
+2025-05-08 20:19:25,369 - fix_trade_recording - INFO - Searching for execution handler file...
+2025-05-08 20:19:25,374 - fix_trade_recording - ERROR - Could not find execution handler file
+2025-05-08 20:19:25,374 - fix_trade_recording - INFO - Searching for signal handler file...
+2025-05-08 20:19:25,375 - fix_trade_recording - INFO - Fixing signal handler at src/core/events/event_utils.py
+2025-05-08 20:19:25,375 - fix_trade_recording - INFO - Created backup at src/core/events/event_utils.py.bak
+2025-05-08 20:19:25,376 - fix_trade_recording - WARNING - Could not find create_order method in src/core/events/event_utils.py
+2025-05-08 20:19:25,380 - fix_trade_recording - INFO - Checking strategy file at src/strategy/strategy_base.py
+2025-05-08 20:19:25,380 - fix_trade_recording - INFO - Created backup at src/strategy/strategy_base.py.bak
+2025-05-08 20:19:25,380 - fix_trade_recording - INFO - Checking strategy file at src/strategy/composite_strategy.py
+2025-05-08 20:19:25,381 - fix_trade_recording - INFO - Created backup at src/strategy/composite_strategy.py.bak
+2025-05-08 20:19:25,381 - fix_trade_recording - INFO - Checking strategy file at src/strategy/implementations/regime_ensemble_strategy.py
+2025-05-08 20:19:25,381 - fix_trade_recording - INFO - Created backup at src/strategy/implementations/regime_ensemble_strategy.py.bak
+2025-05-08 20:19:25,381 - fix_trade_recording - INFO - Checking strategy file at src/strategy/implementations/composite_regime_strategy.py
+2025-05-08 20:19:25,381 - fix_trade_recording - INFO - Created backup at src/strategy/implementations/composite_regime_strategy.py.bak
+2025-05-08 20:19:25,381 - fix_trade_recording - INFO - Checking strategy file at src/strategy/implementations/ensemble_strategy.py
+2025-05-08 20:19:25,381 - fix_trade_recording - INFO - Created backup at src/strategy/implementations/ensemble_strategy.py.bak
+2025-05-08 20:19:25,382 - fix_trade_recording - INFO - Fixed signal event creation in 0 files
+2025-05-08 20:19:25,383 - fix_trade_recording - INFO - Fixing objective functions in src/strategy/optimization/objective_functions.py
+2025-05-08 20:19:25,383 - fix_trade_recording - INFO - Created backup at src/strategy/optimization/objective_functions.py.bak
+2025-05-08 20:19:25,383 - fix_trade_recording - INFO - No changes needed in objective functions in src/strategy/optimization/objective_functions.py
+2025-05-08 20:19:25,383 - fix_trade_recording - INFO - Fix summary:
+2025-05-08 20:19:25,383 - fix_trade_recording - INFO - Event class consumption tracking: Not fixed
+2025-05-08 20:19:25,383 - fix_trade_recording - INFO - Execution handler: Not fixed
+2025-05-08 20:19:25,383 - fix_trade_recording - INFO - Signal handler: Not fixed
+2025-05-08 20:19:25,383 - fix_trade_recording - INFO - Signal event creation: Not fixed
+2025-05-08 20:19:25,383 - fix_trade_recording - INFO - Objective functions: Not fixed
+2025-05-08 20:19:25,384 - fix_trade_recording - WARNING - No fixes were applied. Either the system is already fixed or the files could not be found.
+2025-05-08 20:20:23,970 - fix_trade_recording - INFO - Starting trade recording fix
+2025-05-08 20:20:23,972 - fix_trade_recording - INFO - Fixing Event class in src/core/events/event_tracer.py
+2025-05-08 20:20:23,972 - fix_trade_recording - INFO - Created backup at src/core/events/event_tracer.py.bak
+2025-05-08 20:20:23,972 - fix_trade_recording - WARNING - Could not find Event class in src/core/events/event_tracer.py
+2025-05-08 20:20:23,972 - fix_trade_recording - INFO - Searching for execution handler file...
+2025-05-08 20:20:23,979 - fix_trade_recording - ERROR - Could not find execution handler file
+2025-05-08 20:20:23,979 - fix_trade_recording - INFO - Searching for signal handler file...
+2025-05-08 20:20:23,980 - fix_trade_recording - INFO - Fixing signal handler at src/core/events/event_utils.py
+2025-05-08 20:20:23,980 - fix_trade_recording - INFO - Created backup at src/core/events/event_utils.py.bak
+2025-05-08 20:20:23,980 - fix_trade_recording - WARNING - Could not find create_order method in src/core/events/event_utils.py
+2025-05-08 20:20:23,984 - fix_trade_recording - INFO - Checking strategy file at src/strategy/strategy_base.py
+2025-05-08 20:20:23,984 - fix_trade_recording - INFO - Created backup at src/strategy/strategy_base.py.bak
+2025-05-08 20:20:23,984 - fix_trade_recording - INFO - Checking strategy file at src/strategy/composite_strategy.py
+2025-05-08 20:20:23,985 - fix_trade_recording - INFO - Created backup at src/strategy/composite_strategy.py.bak
+2025-05-08 20:20:23,985 - fix_trade_recording - INFO - Checking strategy file at src/strategy/implementations/regime_ensemble_strategy.py
+2025-05-08 20:20:23,985 - fix_trade_recording - INFO - Created backup at src/strategy/implementations/regime_ensemble_strategy.py.bak
+2025-05-08 20:20:23,985 - fix_trade_recording - INFO - Checking strategy file at src/strategy/implementations/composite_regime_strategy.py
+2025-05-08 20:20:23,986 - fix_trade_recording - INFO - Created backup at src/strategy/implementations/composite_regime_strategy.py.bak
+2025-05-08 20:20:23,986 - fix_trade_recording - INFO - Checking strategy file at src/strategy/implementations/ensemble_strategy.py
+2025-05-08 20:20:23,986 - fix_trade_recording - INFO - Created backup at src/strategy/implementations/ensemble_strategy.py.bak
+2025-05-08 20:20:23,986 - fix_trade_recording - INFO - Fixed signal event creation in 0 files
+2025-05-08 20:20:23,987 - fix_trade_recording - INFO - Fixing objective functions in src/strategy/optimization/objective_functions.py
+2025-05-08 20:20:23,988 - fix_trade_recording - INFO - Created backup at src/strategy/optimization/objective_functions.py.bak
+2025-05-08 20:20:23,988 - fix_trade_recording - INFO - No changes needed in objective functions in src/strategy/optimization/objective_functions.py
+2025-05-08 20:20:23,988 - fix_trade_recording - INFO - Fix summary:
+2025-05-08 20:20:23,988 - fix_trade_recording - INFO - Event class consumption tracking: Not fixed
+2025-05-08 20:20:23,988 - fix_trade_recording - INFO - Execution handler: Not fixed
+2025-05-08 20:20:23,988 - fix_trade_recording - INFO - Signal handler: Not fixed
+2025-05-08 20:20:23,988 - fix_trade_recording - INFO - Signal event creation: Not fixed
+2025-05-08 20:20:23,988 - fix_trade_recording - INFO - Objective functions: Not fixed
+2025-05-08 20:20:23,988 - fix_trade_recording - WARNING - No fixes were applied. Either the system is already fixed or the files could not be found.

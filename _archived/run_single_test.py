@@ -1,55 +1,47 @@
 #!/usr/bin/env python
 """
-Run just the test_risk_manager_deduplication test.
+Script to run a single test file with debugging.
 """
+
+import argparse
 import subprocess
 import sys
-import logging
+import os
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler('single_test_output.log', mode='w')
-    ]
-)
-logger = logging.getLogger("SingleTestRunner")
-
-def run_test():
-    """Run just the test_risk_manager_deduplication test."""
-    try:
-        # Run the test
-        logger.info("Running test_risk_manager_deduplication...")
-        
-        result = subprocess.run(
-            ["python", "-c", "from test_order_flow import test_risk_manager_deduplication; result = test_risk_manager_deduplication(); print(f'Test result: {result}')"],
-            cwd="/Users/daws/ADMF-trader",
-            capture_output=True,
-            text=True,
-            timeout=30  # 30 second timeout
-        )
-        
-        # Log the output
-        logger.info(f"Exit code: {result.returncode}")
-        
-        stdout = result.stdout.strip()
-        logger.info(f"STDOUT: {stdout}")
-        
-        if result.stderr:
-            logger.error(f"STDERR: {result.stderr}")
-        
-        # Check if the test passed
-        if "Test result: True" in stdout:
-            logger.info("SUCCESS! The test passed!")
-            return 0
-        else:
-            logger.error("FAILURE: The test is still failing.")
-            return 1
-    except Exception as e:
-        logger.error(f"Error running test: {e}")
-        return 2
+def main():
+    parser = argparse.ArgumentParser(description="Run a single test file with debugging")
+    parser.add_argument('test_file', help='Path to the test file to run')
+    parser.add_argument('--debug', action='store_true', help='Enable debug mode')
+    parser.add_argument('--verbose', '-v', action='count', default=0, help='Increase verbosity')
+    
+    args = parser.parse_args()
+    
+    if not os.path.exists(args.test_file):
+        print(f"Error: Test file '{args.test_file}' not found")
+        sys.exit(1)
+    
+    # Build command
+    cmd = ["python", "-m", "pytest"]
+    
+    # Add debug flags
+    if args.debug:
+        cmd.extend(["-vv", "--showlocals", "--no-header"])
+    
+    # Add verbosity
+    if args.verbose > 0:
+        cmd.append("-" + "v" * args.verbose)
+    
+    # Add test file
+    cmd.append(args.test_file)
+    
+    # Print command
+    print(f"Running: {' '.join(cmd)}")
+    
+    # Run command
+    result = subprocess.run(cmd)
+    
+    # Return exit code
+    return result.returncode
 
 if __name__ == "__main__":
-    sys.exit(run_test())
+    sys.exit(main())

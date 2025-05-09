@@ -1,0 +1,46 @@
+# Analytics Configuration
+
+# System mode
+mode: analytics
+
+# Data input settings
+data:
+  equity_curve: ./results/MINI_test/equity_curve_20250501_104147.csv
+  trades: ./results/MINI_test/trades_20250501_104147.csv
+  benchmark:
+    enabled: false
+    symbol: "SPY"
+    file: "./data/SPY_1min.csv"
+
+# Analysis settings
+analysis:
+  risk_free_rate: 0.0
+  periods_per_year: 252
+  metrics:
+    - total_return
+    - annualized_return
+    - sharpe_ratio
+    - sortino_ratio
+    - calmar_ratio
+    - max_drawdown
+    - volatility
+    - win_rate
+    - profit_factor
+    - expectancy
+
+# Report settings
+reporting:
+  output_directory: "./results/analytics"
+  formats:
+    - text
+    - html
+  text:
+    width: 100
+  html:
+    title: "Trading Strategy Performance Report"
+    description: "Comprehensive analysis of trading strategy performance"
+    charts:
+      - equity_curve
+      - returns_distribution
+      - monthly_returns
+      - trade_pnl

@@ -6,7 +6,11 @@ import datetime
 from typing import Dict, Any, Optional, List, Union, Set
 
 from .event_bus import EventBus
-from .event_types import EventType, Event, LifecycleEvent, ErrorEvent
+# Import canonical implementations
+from src.core.event_system.event_types import EventType
+from src.core.event_system.event import Event
+# Import factory functions for lifecycle and error events
+from .event_utils import create_lifecycle_event, create_error_event
 from .event_handlers import EventHandler, AsyncEventHandler
 
 logger = logging.getLogger(__name__)
@@ -173,7 +177,8 @@ class EventManager:
     
     def _emit_lifecycle_event(self, state, component=None, data=None):
         """Emit a lifecycle event."""
-        event = LifecycleEvent(state, component, data)
+        # Use factory function instead of direct class constructor
+        event = create_lifecycle_event(state, component, data)
         try:
             self.event_bus.emit(event)
         except Exception as e:
@@ -181,7 +186,8 @@ class EventManager:
     
     async def _emit_lifecycle_event_async(self, state, component=None, data=None):
         """Emit a lifecycle event asynchronously."""
-        event = LifecycleEvent(state, component, data)
+        # Use factory function instead of direct class constructor
+        event = create_lifecycle_event(state, component, data)
         try:
             if hasattr(self.event_bus, 'emit_async'):
                 await self.event_bus.emit_async(event)
@@ -192,7 +198,8 @@ class EventManager:
     
     def _emit_error_event(self, error_type, message, source=None, exception=None):
         """Emit an error event."""
-        event = ErrorEvent(error_type, message, source, exception)
+        # Use factory function instead of direct class constructor
+        event = create_error_event(error_type, message, source, exception)
         try:
             self.event_bus.emit(event)
         except Exception as e:
@@ -200,7 +207,8 @@ class EventManager:
     
     async def _emit_error_event_async(self, error_type, message, source=None, exception=None):
         """Emit an error event asynchronously."""
-        event = ErrorEvent(error_type, message, source, exception)
+        # Use factory function instead of direct class constructor
+        event = create_error_event(error_type, message, source, exception)
         try:
             if hasattr(self.event_bus, 'emit_async'):
                 await self.event_bus.emit_async(event)

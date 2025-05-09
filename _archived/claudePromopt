@@ -1,0 +1,69 @@
+This system is an event driven backtesting system, managed in a configuration forward manner (i.e, the main entry point serves to load and execute the config to keep things tidy) divided into the following modules and responsiblities:
+
+Note we also try and make use of the factory and registry pattern, I think, and make use of abstract base classes.
+
+** Core
+Handles core system functionality, e.g bootstrap, dependency injection, errors, exceptions and loggging, config and event system. A central trade repository.
+
+Maybe more I don't realize.
+
+*** Events
+Event bus with pub/sub architecture and multiple event types (BAR, SIGNAL, ORDER, FILL, PORTFOLIO_UPDATE, BACKTEST_END, etc)
+
+** Data
+Module for data handlers; loading historical data, handling train/test splits, handling live data.
+
+Utilities for handling time stamps, time zones, etc. Transformers (normalizer, resampler).
+
+Packages raw data and publishes/emits BAR event objects.
+** Strategy
+Module for converting bar data into signals. Includes component based strategy building blocks (component ABC, indicators, features, rules, then finally strategies). Strategies may act as wrappers around other strategies as well, for things like regime filtering, signal processing, etc. Includes optimization module.
+
+Strategies are composed of rules, rules of features, features of indicators, until we get to components. All these inherit from the Component ABC, I believe is best. Components build into strategies in other words.
+
+Strategies can have any number of rules or even substrategies as part of them.
+
+Contains directory with implementations, which are discovered automatically. We've written a lot in docs/ about how the optimization module should look and it's important we get this right. 
+
+Consumes BAR event objects and publishes SIGNAL event objects.
+
+** Risk
+Module for converting SIGNAL event objects into ORDER event objects. Includes sub modules/classes portfolio.py, position.py, PositionManager.
+
+Risk managers are responsible for assessing current portfolio state and deciding to take a trade or not, as well as the position size. They should also include support for more advanced features
+
+As mentioned below this module, for simplicity sake, should be easily configured to function as a passthrough, so I can focus on strategy development and trade validation without getting tangled up with this.
+
+Consumes SIGNAL event objects and publishes ORDER event objects. Important to not duplicate ORDER event objects as they're passed off to the exeuction module.
+
+** Execution
+Module for handling order execution. Include submodules broker (simulated for backtewsting and modeling slippage, commission, etc and real). Simulated broker can be plugged up to synthetic data generator for complete synthetic market experience. Also includes order manager module for creating and handling orders.
+
+Inlcudes a backtest module for setting up the backtest environment. Our current version seems to include a specific optimization_backtest.py module for setting up backtests that utilize optimization, and a backtest container is used somewhere for clean seperation of backtests state (seems this ended up in our src/core module somehow).
+
+
+Noting here that our system handles the optimization process presumably by running each unique parameter configuration as a seperate backtest. 
+
+Consumes ORDER event objects and publishes FILL and PORTFOLIO_UPDATE objects. Perhaps the latter is redundant?
+** Analytics
+Module for performance and reporting. All metrics and results math should be using this code. Pretty stragihtforward but extremely important! Will utlimately display graphics and a dashboard as well.
+
+** Problems and Improvements
+Trouble getting simple backtest accomplished with all the moving parts. To accomplish this I wanted simple 'passthrough' risk and position managers that simply longed/shorted according the signal with fixed size, but even that has been too complex to introduce for some reason. e.g, if current signal is -1 and we're short, and signal
+switchs from -1 to 1, we should buy to close, then buy to open a long. This behavior should be consistent or maybe defined within the risk manager or position manager we're using. 
+
+Another issue, in my opinion signals should be sustained after events like a crossover until they revert and crossover oppositely (e.g, bullish to bearish crossover). But this can lead to difficulty in tracking signal duplication. 
+
+Duplicate events, no single source of truth for equity curve / trade PnL. Forgetting to close trades before backtest ends.
+Config option to close trades at end of day.
+
+In general a more robust development process that consistently test and validates results externally using synthetic results and/or contried rules to ensure things are behaving as expected should be used. Doing full on test driven development is too complex right now as the process is too amorphous. 
+
+Also need consistent, elegant design and such throughout. A typical entry point should look like:
+
+python main.py --config config/regime_filter_ensemble.yaml
+
+There are also some wrappers and garbage stuff like fixed_xyz.py that should not exist in a quality codebase.
+
+
+Overall it's really not complicated but my code keeps spaghetti'ing out. What I'd liek you to do is to determine if a rewrite is necassary or if we can save ourselves. 

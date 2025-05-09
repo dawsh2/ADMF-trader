@@ -95,7 +95,49 @@ class MACrossoverStrategy(Strategy):
         logger.debug(f"Bar event symbol: {symbol}")
         
         # Skip if not in our symbol list
+        # If this symbol isn't in our list, add it
+        # If this symbol isn't in our list, add it
+        # If this symbol isn't in our list, add it
         if symbol not in self.symbols:
+            logger.info(f"Adding new symbol {symbol} to strategy symbols list")
+            self.symbols.append(symbol)
+            
+        # Legacy code - keeping commented out for reference
+        # if symbol not in self.symbols:
+            logger.info(f"Adding new symbol {symbol} to strategy symbols list")
+            self.symbols.append(symbol)
+            
+        # Legacy code - keeping commented out for reference
+        # # If this symbol isn't in our list, add it
+        if symbol not in self.symbols:
+            logger.info(f"Adding new symbol {symbol} to strategy symbols list")
+            self.symbols.append(symbol)
+            
+        # Legacy code - keeping commented out for reference
+        # if symbol not in self.symbols:
+            logger.info(f"Adding new symbol {symbol} to strategy symbols list")
+            self.symbols.append(symbol)
+            
+        # Legacy code - keeping commented out for reference
+        # # If this symbol isn't in our list, add it
+        # If this symbol isn't in our list, add it
+        if symbol not in self.symbols:
+            logger.info(f"Adding new symbol {symbol} to strategy symbols list")
+            self.symbols.append(symbol)
+            
+        # Legacy code - keeping commented out for reference
+        # if symbol not in self.symbols:
+            logger.info(f"Adding new symbol {symbol} to strategy symbols list")
+            self.symbols.append(symbol)
+            
+        # Legacy code - keeping commented out for reference
+        # # If this symbol isn't in our list, add it
+        if symbol not in self.symbols:
+            logger.info(f"Adding new symbol {symbol} to strategy symbols list")
+            self.symbols.append(symbol)
+            
+        # Legacy code - keeping commented out for reference
+        # if symbol not in self.symbols:
             logger.debug(f"Symbol {symbol} not in strategy symbols list: {self.symbols}")
             return None
         
@@ -190,21 +232,21 @@ class MACrossoverStrategy(Strategy):
             
             # Generate and emit signal event
             signal = create_signal_event(
-                signal_value=signal_value,
-                price=price,
                 symbol=symbol,
-                rule_id=rule_id,
-                timestamp=timestamp
+                signal_type="BUY" if signal_value == 1 else "SELL",  # Convert numerical value to type string
+                strategy_id=rule_id,  # Use rule_id as the strategy_id
+                timestamp=timestamp,
+                strength=abs(signal_value)  # Use signal_value magnitude as strength
             )
             
-            # Debug the signal to verify rule_id is included
+            # Debug the signal to verify strategy_id is included
             if hasattr(signal, 'data') and isinstance(signal.data, dict):
-                logger.info(f"DEBUG: Signal created with rule_id={signal.data.get('rule_id')}")
+                logger.info(f"DEBUG: Signal created with strategy_id={signal.data.get('strategy_id')}")
             
             # Emit signal if we have an event bus
             if self.event_bus:
                 self.event_bus.emit(signal)
-                logger.info(f"Signal #{group_id} emitted for {symbol}: {signal_value}, rule_id={rule_id}, timestamp={timestamp}")
+                logger.info(f"Signal #{group_id} emitted for {symbol}: {signal_value}, strategy_id={rule_id}, timestamp={timestamp}")
             
             return signal
         

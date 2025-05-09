@@ -1,0 +1,181 @@
+2025-05-08 15:09:30,628 - run_all - INFO - Running all fixes and then optimization...
+2025-05-08 15:09:30,628 - run_all - INFO - Step 1: Fixing import paths...
+2025-05-08 15:09:30,629 - run_all - INFO - Running: ['/Users/daws/mmbt/venv/bin/python3', 'fix_import_paths.py'] - Fixing import paths
+2025-05-08 15:09:30,663 - run_all - INFO - Command completed with return code 0
+2025-05-08 15:09:30,663 - run_all - INFO - Output: 
+2025-05-08 15:09:30,663 - run_all - INFO - Import paths fixed successfully
+2025-05-08 15:09:30,663 - run_all - INFO - Step 2: Fixing risk manager...
+2025-05-08 15:09:30,663 - run_all - INFO - Running: ['/Users/daws/mmbt/venv/bin/python3', 'fix_risk_manager.py'] - Fixing risk manager
+2025-05-08 15:09:30,765 - run_all - INFO - Command completed with return code 0
+2025-05-08 15:09:30,766 - run_all - INFO - Output: 
+2025-05-08 15:09:30,766 - run_all - INFO - Risk manager fixed successfully
+2025-05-08 15:09:30,766 - run_all - INFO - Step 3: Applying additional fixes...
+2025-05-08 15:09:30,766 - run_all - INFO - Checking position manager: src/risk/position_manager.py
+2025-05-08 15:09:30,766 - run_all - INFO - Position manager already has order generation
+2025-05-08 15:09:30,766 - run_all - INFO - Checking backtest coordinator: src/execution/backtest/backtest_coordinator.py
+2025-05-08 15:09:30,766 - run_all - INFO - Adding event bus debug to backtest coordinator
+2025-05-08 15:09:30,767 - run_all - INFO - Added event bus debug to backtest coordinator
+2025-05-08 15:09:30,767 - run_all - INFO - Creating super-charged config: config/ma_crossover_optimization_fixed.yaml
+2025-05-08 15:09:30,767 - run_all - INFO - Created super-charged config
+2025-05-08 15:09:30,767 - run_all - INFO - Waiting for 1 second before running optimization...
+2025-05-08 15:09:31,773 - run_all - INFO - Step 4: Running optimization...
+2025-05-08 15:09:31,773 - run_all - INFO - Running: ['/Users/daws/mmbt/venv/bin/python3', 'main.py', 'optimize', '--config', 'config/ma_crossover_optimization_fixed.yaml', '--verbose'] - Running optimization
+2025-05-08 15:09:33,179 - run_all - INFO - Command completed with return code 0
+2025-05-08 15:09:33,180 - run_all - INFO - Output: Parameters: fast_window=5, slow_window=20 | Train Score: 0.0000, Return: 0.00%, Sharpe: 0.00 | Test Score: 0.0000, Return: 0.00%, Sharpe: 0.00
+Parameters: fast_window=5, slow_window=30 | Train Score: 0.0000, Return: 0.00%, Sharpe: 0.00 | Test Score: 0.0000, Return: 0.00%, Sharpe: 0.00
+Parameters: fast_window=10, slow_window=20 | Train Score: 0.0000, Return: 0.00%, Sharpe: 0.00 | Test Score: 0.0000, Return: 0.00%, Sharpe: 0.00
+Parameters: fast_window=10, slow_window=30 | Train Score: 0.0000, Retu
+2025-05-08 15:09:33,180 - run_all - INFO - Optimization completed successfully
+2025-05-08 15:09:33,180 - run_all - INFO - All fixes and optimization completed
+2025-05-08 15:09:33,180 - run_all - INFO - 
+DEBUG INSTRUCTIONS:
+2025-05-08 15:09:33,180 - run_all - INFO - 1. Check 'fix_and_optimize.log' for detailed log messages
+2025-05-08 15:09:33,180 - run_all - INFO - 2. Check 'optimization_results/' directory for optimization results
+2025-05-08 15:09:33,180 - run_all - INFO - 3. If still no trades, run: python main.py optimize --config config/ma_crossover_optimization_fixed.yaml --verbose
+2025-05-08 20:18:33,806 - fix_and_optimize - INFO - Starting fix and optimize process
+2025-05-08 20:18:33,807 - fix_and_optimize - INFO - Made scripts executable
+2025-05-08 20:18:33,807 - fix_and_optimize - INFO - Applying fixes...
+2025-05-08 20:18:33,807 - fix_and_optimize - INFO - Running: /Users/daws/kraken/claudeTrader/venv/bin/python fix_trade_recording.py
+2025-05-08 20:18:33,858 - fix_and_optimize - INFO - Script executed successfully: fix_trade_recording.py
+2025-05-08 20:18:33,859 - fix_and_optimize - INFO - Running optimization with fixed modules...
+2025-05-08 20:18:33,859 - fix_and_optimize - INFO - Running: /Users/daws/kraken/claudeTrader/venv/bin/python run_fixed_optimization.py --config path/to/your/config.yaml --verbose
+2025-05-08 20:18:33,900 - fix_and_optimize - ERROR - Script failed: run_fixed_optimization.py
+2025-05-08 20:18:33,900 - fix_and_optimize - ERROR - Error: Command '['/Users/daws/kraken/claudeTrader/venv/bin/python', 'run_fixed_optimization.py', '--config', 'path/to/your/config.yaml', '--verbose']' returned non-zero exit status 1.
+2025-05-08 20:18:33,900 - fix_and_optimize - ERROR - STDOUT: 
+2025-05-08 20:18:33,900 - fix_and_optimize - ERROR - STDERR: 2025-05-08 20:18:33,896 - fixed_optimization - ERROR - Error loading config: [Errno 2] No such file or directory: 'path/to/your/config.yaml'
+2025-05-08 20:18:33,897 - fixed_optimization - ERROR - Failed to load configuration
+
+2025-05-08 20:18:33,900 - fix_and_optimize - ERROR - Optimization failed
+2025-05-08 20:19:10,002 - fix_and_optimize - INFO - Starting fix and optimize process
+2025-05-08 20:19:10,002 - fix_and_optimize - INFO - Made scripts executable
+2025-05-08 20:19:10,002 - fix_and_optimize - INFO - Applying fixes...
+2025-05-08 20:19:10,002 - fix_and_optimize - INFO - Running: /Users/daws/kraken/claudeTrader/venv/bin/python fix_trade_recording.py
+2025-05-08 20:19:10,043 - fix_and_optimize - ERROR - Script failed: fix_trade_recording.py
+2025-05-08 20:19:10,043 - fix_and_optimize - ERROR - Error: Command '['/Users/daws/kraken/claudeTrader/venv/bin/python', 'fix_trade_recording.py']' returned non-zero exit status 1.
+2025-05-08 20:19:10,043 - fix_and_optimize - ERROR - STDOUT: 
+2025-05-08 20:19:10,043 - fix_and_optimize - ERROR - STDERR: 2025-05-08 20:19:10,028 - fix_trade_recording - INFO - Starting trade recording fix
+2025-05-08 20:19:10,029 - fix_trade_recording - INFO - Fixing Event class in src/core/events/event_tracer.py
+2025-05-08 20:19:10,029 - fix_trade_recording - INFO - Created backup at src/core/events/event_tracer.py.bak
+2025-05-08 20:19:10,030 - fix_trade_recording - WARNING - Could not find Event class in src/core/events/event_tracer.py
+2025-05-08 20:19:10,030 - fix_trade_recording - INFO - Searching for execution handler file...
+2025-05-08 20:19:10,032 - fix_trade_recording - ERROR - Could not find execution handler file
+2025-05-08 20:19:10,032 - fix_trade_recording - INFO - Searching for signal handler file...
+2025-05-08 20:19:10,032 - fix_trade_recording - INFO - Fixing signal handler at src/core/events/event_utils.py
+2025-05-08 20:19:10,033 - fix_trade_recording - INFO - Created backup at src/core/events/event_utils.py.bak
+2025-05-08 20:19:10,033 - fix_trade_recording - WARNING - Could not find create_order method in src/core/events/event_utils.py
+2025-05-08 20:19:10,036 - fix_trade_recording - INFO - Checking strategy file at src/strategy/strategy_base.py
+2025-05-08 20:19:10,036 - fix_trade_recording - INFO - Created backup at src/strategy/strategy_base.py.bak
+2025-05-08 20:19:10,036 - fix_trade_recording - INFO - Checking strategy file at src/strategy/composite_strategy.py
+2025-05-08 20:19:10,037 - fix_trade_recording - INFO - Created backup at src/strategy/composite_strategy.py.bak
+2025-05-08 20:19:10,037 - fix_trade_recording - INFO - Checking strategy file at src/strategy/implementations/regime_ensemble_strategy.py
+2025-05-08 20:19:10,037 - fix_trade_recording - INFO - Created backup at src/strategy/implementations/regime_ensemble_strategy.py.bak
+2025-05-08 20:19:10,037 - fix_trade_recording - INFO - Checking strategy file at src/strategy/implementations/composite_regime_strategy.py
+2025-05-08 20:19:10,038 - fix_trade_recording - INFO - Created backup at src/strategy/implementations/composite_regime_strategy.py.bak
+2025-05-08 20:19:10,038 - fix_trade_recording - INFO - Checking strategy file at src/strategy/implementations/ensemble_strategy.py
+2025-05-08 20:19:10,038 - fix_trade_recording - INFO - Created backup at src/strategy/implementations/ensemble_strategy.py.bak
+2025-05-08 20:19:10,038 - fix_trade_recording - INFO - Fixed signal event creation in 0 files
+2025-05-08 20:19:10,039 - fix_trade_recording - INFO - Fixing objective functions in src/strategy/optimization/objective_functions.py
+2025-05-08 20:19:10,039 - fix_trade_recording - INFO - Created backup at src/strategy/optimization/objective_functions.py.bak
+2025-05-08 20:19:10,039 - fix_trade_recording - INFO - No changes needed in objective functions in src/strategy/optimization/objective_functions.py
+2025-05-08 20:19:10,039 - fix_trade_recording - INFO - Fix summary:
+2025-05-08 20:19:10,040 - fix_trade_recording - INFO - Event class consumption tracking: Not fixed
+2025-05-08 20:19:10,040 - fix_trade_recording - INFO - Execution handler: Not fixed
+2025-05-08 20:19:10,040 - fix_trade_recording - INFO - Signal handler: Not fixed
+2025-05-08 20:19:10,040 - fix_trade_recording - INFO - Signal event creation: Not fixed
+2025-05-08 20:19:10,040 - fix_trade_recording - INFO - Objective functions: Not fixed
+2025-05-08 20:19:10,040 - fix_trade_recording - WARNING - No fixes were applied. Either the system is already fixed or the files could not be found.
+
+2025-05-08 20:19:10,043 - fix_and_optimize - WARNING - Fix application may have issues, but continuing...
+2025-05-08 20:19:10,043 - fix_and_optimize - INFO - Running optimization with fixed modules...
+2025-05-08 20:19:10,043 - fix_and_optimize - INFO - Running: /Users/daws/kraken/claudeTrader/venv/bin/python run_fixed_optimization.py --config config/.yaml --verbose
+2025-05-08 20:19:10,085 - fix_and_optimize - ERROR - Script failed: run_fixed_optimization.py
+2025-05-08 20:19:10,085 - fix_and_optimize - ERROR - Error: Command '['/Users/daws/kraken/claudeTrader/venv/bin/python', 'run_fixed_optimization.py', '--config', 'config/.yaml', '--verbose']' returned non-zero exit status 1.
+2025-05-08 20:19:10,085 - fix_and_optimize - ERROR - STDOUT: 
+2025-05-08 20:19:10,085 - fix_and_optimize - ERROR - STDERR: 2025-05-08 20:19:10,081 - fixed_optimization - ERROR - Error loading config: [Errno 2] No such file or directory: 'config/.yaml'
+2025-05-08 20:19:10,082 - fixed_optimization - ERROR - Failed to load configuration
+
+2025-05-08 20:19:10,085 - fix_and_optimize - ERROR - Optimization failed
+2025-05-08 20:19:25,341 - fix_and_optimize - INFO - Starting fix and optimize process
+2025-05-08 20:19:25,341 - fix_and_optimize - INFO - Made scripts executable
+2025-05-08 20:19:25,341 - fix_and_optimize - INFO - Applying fixes...
+2025-05-08 20:19:25,342 - fix_and_optimize - INFO - Running: /Users/daws/kraken/claudeTrader/venv/bin/python fix_trade_recording.py
+2025-05-08 20:19:25,388 - fix_and_optimize - ERROR - Script failed: fix_trade_recording.py
+2025-05-08 20:19:25,388 - fix_and_optimize - ERROR - Error: Command '['/Users/daws/kraken/claudeTrader/venv/bin/python', 'fix_trade_recording.py']' returned non-zero exit status 1.
+2025-05-08 20:19:25,388 - fix_and_optimize - ERROR - STDOUT: 
+2025-05-08 20:19:25,388 - fix_and_optimize - ERROR - STDERR: 2025-05-08 20:19:25,367 - fix_trade_recording - INFO - Starting trade recording fix
+2025-05-08 20:19:25,368 - fix_trade_recording - INFO - Fixing Event class in src/core/events/event_tracer.py
+2025-05-08 20:19:25,369 - fix_trade_recording - INFO - Created backup at src/core/events/event_tracer.py.bak
+2025-05-08 20:19:25,369 - fix_trade_recording - WARNING - Could not find Event class in src/core/events/event_tracer.py
+2025-05-08 20:19:25,369 - fix_trade_recording - INFO - Searching for execution handler file...
+2025-05-08 20:19:25,374 - fix_trade_recording - ERROR - Could not find execution handler file
+2025-05-08 20:19:25,374 - fix_trade_recording - INFO - Searching for signal handler file...
+2025-05-08 20:19:25,375 - fix_trade_recording - INFO - Fixing signal handler at src/core/events/event_utils.py
+2025-05-08 20:19:25,375 - fix_trade_recording - INFO - Created backup at src/core/events/event_utils.py.bak
+2025-05-08 20:19:25,376 - fix_trade_recording - WARNING - Could not find create_order method in src/core/events/event_utils.py
+2025-05-08 20:19:25,380 - fix_trade_recording - INFO - Checking strategy file at src/strategy/strategy_base.py
+2025-05-08 20:19:25,380 - fix_trade_recording - INFO - Created backup at src/strategy/strategy_base.py.bak
+2025-05-08 20:19:25,380 - fix_trade_recording - INFO - Checking strategy file at src/strategy/composite_strategy.py
+2025-05-08 20:19:25,381 - fix_trade_recording - INFO - Created backup at src/strategy/composite_strategy.py.bak
+2025-05-08 20:19:25,381 - fix_trade_recording - INFO - Checking strategy file at src/strategy/implementations/regime_ensemble_strategy.py
+2025-05-08 20:19:25,381 - fix_trade_recording - INFO - Created backup at src/strategy/implementations/regime_ensemble_strategy.py.bak
+2025-05-08 20:19:25,381 - fix_trade_recording - INFO - Checking strategy file at src/strategy/implementations/composite_regime_strategy.py
+2025-05-08 20:19:25,381 - fix_trade_recording - INFO - Created backup at src/strategy/implementations/composite_regime_strategy.py.bak
+2025-05-08 20:19:25,381 - fix_trade_recording - INFO - Checking strategy file at src/strategy/implementations/ensemble_strategy.py
+2025-05-08 20:19:25,381 - fix_trade_recording - INFO - Created backup at src/strategy/implementations/ensemble_strategy.py.bak
+2025-05-08 20:19:25,382 - fix_trade_recording - INFO - Fixed signal event creation in 0 files
+2025-05-08 20:19:25,383 - fix_trade_recording - INFO - Fixing objective functions in src/strategy/optimization/objective_functions.py
+2025-05-08 20:19:25,383 - fix_trade_recording - INFO - Created backup at src/strategy/optimization/objective_functions.py.bak
+2025-05-08 20:19:25,383 - fix_trade_recording - INFO - No changes needed in objective functions in src/strategy/optimization/objective_functions.py
+2025-05-08 20:19:25,383 - fix_trade_recording - INFO - Fix summary:
+2025-05-08 20:19:25,383 - fix_trade_recording - INFO - Event class consumption tracking: Not fixed
+2025-05-08 20:19:25,383 - fix_trade_recording - INFO - Execution handler: Not fixed
+2025-05-08 20:19:25,383 - fix_trade_recording - INFO - Signal handler: Not fixed
+2025-05-08 20:19:25,383 - fix_trade_recording - INFO - Signal event creation: Not fixed
+2025-05-08 20:19:25,383 - fix_trade_recording - INFO - Objective functions: Not fixed
+2025-05-08 20:19:25,384 - fix_trade_recording - WARNING - No fixes were applied. Either the system is already fixed or the files could not be found.
+
+2025-05-08 20:19:25,388 - fix_and_optimize - WARNING - Fix application may have issues, but continuing...
+2025-05-08 20:19:25,388 - fix_and_optimize - INFO - Running optimization with fixed modules...
+2025-05-08 20:19:25,388 - fix_and_optimize - INFO - Running: /Users/daws/kraken/claudeTrader/venv/bin/python run_fixed_optimization.py --config config/ma_crossover_fixed_symbols.yaml --verbose
+2025-05-08 20:19:26,080 - fix_and_optimize - ERROR - Script failed: run_fixed_optimization.py
+2025-05-08 20:19:26,081 - fix_and_optimize - ERROR - Error: Command '['/Users/daws/kraken/claudeTrader/venv/bin/python', 'run_fixed_optimization.py', '--config', 'config/ma_crossover_fixed_symbols.yaml', '--verbose']' returned non-zero exit status 1.
+2025-05-08 20:19:26,081 - fix_and_optimize - ERROR - STDOUT: 
+2025-05-08 20:19:26,081 - fix_and_optimize - ERROR - STDERR: 2025-05-08 20:19:25,429 - fixed_optimization - INFO - Loaded config from config/ma_crossover_fixed_symbols.yaml
+2025-05-08 20:19:25,429 - fixed_optimization - INFO - Running optimization for strategy: ma_crossover
+2025-05-08 20:19:25,429 - fixed_optimization - INFO - Strategy symbols defined in config: ['HEAD']
+2025-05-08 20:19:25,429 - fixed_optimization - INFO - Backtest symbols defined in config: ['HEAD']
+2025-05-08 20:19:25,429 - fixed_optimization - INFO - Data source symbols: ['HEAD']
+2025-05-08 20:19:25,429 - fixed_optimization - INFO - Starting optimization with improved error handling...
+2025-05-08 20:19:26,025 - src.strategy.strategy_factory - INFO - Discovered strategy: simple_ma_crossover from ma_crossover_strategy.SimpleMACrossoverStrategy
+2025-05-08 20:19:26,025 - src.strategy.strategy_factory - INFO - Discovered strategy: regime_ensemble from regime_ensemble_strategy.RegimeEnsembleStrategy
+2025-05-08 20:19:26,027 - src.strategy.strategy_factory - INFO - Discovered strategy: composite_regime from composite_regime_strategy.CompositeRegimeStrategy
+2025-05-08 20:19:26,027 - src.strategy.strategy_factory - INFO - Discovered strategy: simple_ma_crossover from simple_ma_crossover.SimpleMACrossoverStrategy
+2025-05-08 20:19:26,027 - src.strategy.strategy_factory - INFO - Discovered strategy: ensemble from ensemble_strategy.EnsembleStrategy
+2025-05-08 20:19:26,028 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from ma_crossover.MovingAverageCrossoverStrategy
+2025-05-08 20:19:26,028 - src.strategy.strategy_factory - INFO - Discovered strategy: mean_reversion from mean_reversion.MeanReversionStrategy
+2025-05-08 20:19:26,029 - src.strategy.strategy_factory - ERROR - Error importing strategy module ma_crossover_fixed: expected 'except' or 'finally' block (ma_crossover_fixed.py, line 197)
+2025-05-08 20:19:26,030 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from backup.ma_crossover.MACrossoverStrategy
+2025-05-08 20:19:26,030 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from backup.ma_crossover_fixed.MACrossoverStrategy
+2025-05-08 20:19:26,030 - src.strategy.strategy_factory - INFO - Discovered strategy: simple_ma_crossover from ma_crossover_strategy.SimpleMACrossoverStrategy
+2025-05-08 20:19:26,030 - src.strategy.strategy_factory - INFO - Discovered strategy: regime_ensemble from regime_ensemble_strategy.RegimeEnsembleStrategy
+2025-05-08 20:19:26,030 - src.strategy.strategy_factory - INFO - Discovered strategy: composite_regime from composite_regime_strategy.CompositeRegimeStrategy
+2025-05-08 20:19:26,031 - src.strategy.strategy_factory - INFO - Discovered strategy: simple_ma_crossover from simple_ma_crossover.SimpleMACrossoverStrategy
+2025-05-08 20:19:26,031 - src.strategy.strategy_factory - INFO - Discovered strategy: ensemble from ensemble_strategy.EnsembleStrategy
+2025-05-08 20:19:26,031 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from ma_crossover.MovingAverageCrossoverStrategy
+2025-05-08 20:19:26,031 - src.strategy.strategy_factory - INFO - Discovered strategy: mean_reversion from mean_reversion.MeanReversionStrategy
+2025-05-08 20:19:26,032 - src.strategy.strategy_factory - ERROR - Error importing strategy module ma_crossover_fixed: expected 'except' or 'finally' block (ma_crossover_fixed.py, line 197)
+2025-05-08 20:19:26,032 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from backup.ma_crossover.MACrossoverStrategy
+2025-05-08 20:19:26,032 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from backup.ma_crossover_fixed.MACrossoverStrategy
+2025-05-08 20:19:26,032 - src.strategy.optimization.fixed_optimizer - INFO - Starting optimization for strategy: ma_crossover
+2025-05-08 20:19:26,032 - src.strategy.optimization.fixed_optimizer - INFO - Parameter space: <src.strategy.optimization.parameter_space.ParameterSpace object at 0x105cdda90>
+2025-05-08 20:19:26,032 - fixed_optimization - ERROR - Error during optimization: 'ParameterSpace' object has no attribute 'to_dict'
+2025-05-08 20:19:26,032 - fixed_optimization - ERROR - Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/run_fixed_optimization.py", line 80, in main
+    results = optimizer.optimize()
+  File "/Users/daws/ADMF-trader/src/strategy/optimization/fixed_optimizer.py", line 282, in optimize
+    'parameter_space': self.parameter_space.to_dict(),
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ParameterSpace' object has no attribute 'to_dict'. Did you mean: 'from_dict'?
+
+
+2025-05-08 20:19:26,081 - fix_and_optimize - ERROR - Optimization failed

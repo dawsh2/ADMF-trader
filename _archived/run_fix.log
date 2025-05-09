@@ -1,0 +1,71 @@
+2025-05-08 19:00:07,456 - run_fix - INFO - Starting MA Crossover strategy symbol fixes
+2025-05-08 19:00:07,462 - fix_symbols - INFO - Found 6 MA Crossover strategy files: ['src/strategy/implementations/ma_crossover_strategy.py', 'src/strategy/implementations/simple_ma_crossover.py', 'src/strategy/implementations/ma_crossover.py', 'src/strategy/implementations/ma_crossover_fixed.py', 'src/strategy/implementations/backup/ma_crossover.py', 'src/strategy/implementations/backup/ma_crossover_fixed.py']
+2025-05-08 19:00:07,462 - fix_symbols - INFO - Checking strategy file: src/strategy/implementations/ma_crossover_strategy.py
+2025-05-08 19:00:07,463 - fix_symbols - INFO - Added symbols initialization to src/strategy/implementations/ma_crossover_strategy.py
+2025-05-08 19:00:07,463 - fix_symbols - INFO - Checking strategy file: src/strategy/implementations/simple_ma_crossover.py
+2025-05-08 19:00:07,463 - fix_symbols - INFO - Added symbols initialization to src/strategy/implementations/simple_ma_crossover.py
+2025-05-08 19:00:07,463 - fix_symbols - INFO - Checking strategy file: src/strategy/implementations/ma_crossover.py
+2025-05-08 19:00:07,463 - fix_symbols - INFO - Strategy already initializes symbols from parameters
+2025-05-08 19:00:07,463 - fix_symbols - INFO - Added better symbol handling to src/strategy/implementations/ma_crossover.py
+2025-05-08 19:00:07,464 - fix_symbols - INFO - Fixed on_bar method in src/strategy/implementations/ma_crossover.py to accept new symbols
+2025-05-08 19:00:07,464 - fix_symbols - INFO - Checking strategy file: src/strategy/implementations/ma_crossover_fixed.py
+2025-05-08 19:00:07,464 - fix_symbols - INFO - Strategy already initializes symbols from parameters
+2025-05-08 19:00:07,464 - fix_symbols - INFO - Strategy already handles symbols from data handler
+2025-05-08 19:00:07,464 - fix_symbols - INFO - Fixed on_bar method in src/strategy/implementations/ma_crossover_fixed.py to accept new symbols
+2025-05-08 19:00:07,464 - fix_symbols - INFO - Checking strategy file: src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 19:00:07,465 - fix_symbols - INFO - Added symbols initialization to src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 19:00:07,465 - fix_symbols - INFO - Fixed on_bar method in src/strategy/implementations/backup/ma_crossover.py to accept new symbols
+2025-05-08 19:00:07,465 - fix_symbols - INFO - Checking strategy file: src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 19:00:07,465 - fix_symbols - INFO - Added symbols initialization to src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 19:00:07,465 - fix_symbols - INFO - Fixed on_bar method in src/strategy/implementations/backup/ma_crossover_fixed.py to accept new symbols
+2025-05-08 19:00:07,466 - fix_symbols - INFO - Created fixed config with explicit symbols at config/ma_crossover_fixed_symbols.yaml
+2025-05-08 19:00:07,466 - run_fix - INFO - Fixes completed successfully
+2025-05-08 19:00:07,466 - run_fix - INFO - Fixed configuration: config/ma_crossover_fixed_symbols.yaml
+2025-05-08 19:28:45,779 - run_fix - INFO - Starting MA Crossover strategy symbol fixes
+2025-05-08 19:28:45,781 - fix_symbols - INFO - Found 6 MA Crossover strategy files: ['src/strategy/implementations/ma_crossover_strategy.py', 'src/strategy/implementations/simple_ma_crossover.py', 'src/strategy/implementations/ma_crossover.py', 'src/strategy/implementations/ma_crossover_fixed.py', 'src/strategy/implementations/backup/ma_crossover.py', 'src/strategy/implementations/backup/ma_crossover_fixed.py']
+2025-05-08 19:28:45,781 - fix_symbols - INFO - Checking strategy file: src/strategy/implementations/ma_crossover_strategy.py
+2025-05-08 19:28:45,781 - fix_symbols - INFO - Added symbols initialization to src/strategy/implementations/ma_crossover_strategy.py
+2025-05-08 19:28:45,781 - fix_symbols - INFO - Checking strategy file: src/strategy/implementations/simple_ma_crossover.py
+2025-05-08 19:28:45,782 - fix_symbols - INFO - Added symbols initialization to src/strategy/implementations/simple_ma_crossover.py
+2025-05-08 19:28:45,783 - fix_symbols - INFO - Checking strategy file: src/strategy/implementations/ma_crossover.py
+2025-05-08 19:28:45,783 - fix_symbols - INFO - Strategy already initializes symbols from parameters
+2025-05-08 19:28:45,783 - fix_symbols - INFO - Added better symbol handling to src/strategy/implementations/ma_crossover.py
+2025-05-08 19:28:45,783 - fix_symbols - INFO - Fixed on_bar method in src/strategy/implementations/ma_crossover.py to accept new symbols
+2025-05-08 19:28:45,783 - fix_symbols - INFO - Checking strategy file: src/strategy/implementations/ma_crossover_fixed.py
+2025-05-08 19:28:45,783 - fix_symbols - INFO - Strategy already initializes symbols from parameters
+2025-05-08 19:28:45,783 - fix_symbols - INFO - Strategy already handles symbols from data handler
+2025-05-08 19:28:45,783 - fix_symbols - INFO - Fixed on_bar method in src/strategy/implementations/ma_crossover_fixed.py to accept new symbols
+2025-05-08 19:28:45,783 - fix_symbols - INFO - Checking strategy file: src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 19:28:45,784 - fix_symbols - INFO - Added symbols initialization to src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 19:28:45,784 - fix_symbols - INFO - Fixed on_bar method in src/strategy/implementations/backup/ma_crossover.py to accept new symbols
+2025-05-08 19:28:45,784 - fix_symbols - INFO - Checking strategy file: src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 19:28:45,785 - fix_symbols - INFO - Added symbols initialization to src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 19:28:45,785 - fix_symbols - INFO - Fixed on_bar method in src/strategy/implementations/backup/ma_crossover_fixed.py to accept new symbols
+2025-05-08 19:28:45,785 - fix_symbols - INFO - Created fixed config with explicit symbols at config/ma_crossover_fixed_symbols.yaml
+2025-05-08 19:28:45,785 - run_fix - INFO - Fixes completed successfully
+2025-05-08 19:28:45,785 - run_fix - INFO - Fixed configuration: config/ma_crossover_fixed_symbols.yaml
+2025-05-08 19:28:45,785 - run_fix - INFO - Running optimization with fixed configuration...
+2025-05-08 19:43:05,104 - run_fix - INFO - Starting MA Crossover strategy symbol fixes
+2025-05-08 19:43:05,108 - fix_symbols - INFO - Found 6 MA Crossover strategy files: ['src/strategy/implementations/ma_crossover_strategy.py', 'src/strategy/implementations/simple_ma_crossover.py', 'src/strategy/implementations/ma_crossover.py', 'src/strategy/implementations/ma_crossover_fixed.py', 'src/strategy/implementations/backup/ma_crossover.py', 'src/strategy/implementations/backup/ma_crossover_fixed.py']
+2025-05-08 19:43:05,108 - fix_symbols - INFO - Checking strategy file: src/strategy/implementations/ma_crossover_strategy.py
+2025-05-08 19:43:05,109 - fix_symbols - INFO - Added symbols initialization to src/strategy/implementations/ma_crossover_strategy.py
+2025-05-08 19:43:05,109 - fix_symbols - INFO - Checking strategy file: src/strategy/implementations/simple_ma_crossover.py
+2025-05-08 19:43:05,110 - fix_symbols - INFO - Added symbols initialization to src/strategy/implementations/simple_ma_crossover.py
+2025-05-08 19:43:05,110 - fix_symbols - INFO - Checking strategy file: src/strategy/implementations/ma_crossover.py
+2025-05-08 19:43:05,110 - fix_symbols - INFO - Strategy already initializes symbols from parameters
+2025-05-08 19:43:05,110 - fix_symbols - INFO - Added better symbol handling to src/strategy/implementations/ma_crossover.py
+2025-05-08 19:43:05,110 - fix_symbols - INFO - Fixed on_bar method in src/strategy/implementations/ma_crossover.py to accept new symbols
+2025-05-08 19:43:05,110 - fix_symbols - INFO - Checking strategy file: src/strategy/implementations/ma_crossover_fixed.py
+2025-05-08 19:43:05,111 - fix_symbols - INFO - Strategy already initializes symbols from parameters
+2025-05-08 19:43:05,111 - fix_symbols - INFO - Strategy already handles symbols from data handler
+2025-05-08 19:43:05,111 - fix_symbols - INFO - Fixed on_bar method in src/strategy/implementations/ma_crossover_fixed.py to accept new symbols
+2025-05-08 19:43:05,112 - fix_symbols - INFO - Checking strategy file: src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 19:43:05,112 - fix_symbols - INFO - Added symbols initialization to src/strategy/implementations/backup/ma_crossover.py
+2025-05-08 19:43:05,112 - fix_symbols - INFO - Fixed on_bar method in src/strategy/implementations/backup/ma_crossover.py to accept new symbols
+2025-05-08 19:43:05,112 - fix_symbols - INFO - Checking strategy file: src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 19:43:05,113 - fix_symbols - INFO - Added symbols initialization to src/strategy/implementations/backup/ma_crossover_fixed.py
+2025-05-08 19:43:05,113 - fix_symbols - INFO - Fixed on_bar method in src/strategy/implementations/backup/ma_crossover_fixed.py to accept new symbols
+2025-05-08 19:43:05,113 - fix_symbols - INFO - Created fixed config with explicit symbols at config/ma_crossover_fixed_symbols.yaml
+2025-05-08 19:43:05,113 - run_fix - INFO - Fixes completed successfully
+2025-05-08 19:43:05,113 - run_fix - INFO - Fixed configuration: config/ma_crossover_fixed_symbols.yaml
+2025-05-08 19:43:05,113 - run_fix - INFO - Running optimization with fixed configuration...

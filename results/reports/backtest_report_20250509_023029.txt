@@ -1,0 +1,78 @@
+====================================================================================================
+                      ADMF-Trader Backtest with Analytics - Performance Report                      
+====================================================================================================
+                                   Generated: 2025-05-09 02:30:29                                   
+
+
+Performance Summary
+===================
+
+Period: 2025-05-09 to 2025-05-09 (0 days)
+
+Total Return:............ 0.00%
+Annualized Return:....... 0.00%
+Max Drawdown:............ 0.00%
+Sharpe Ratio:............ 0.0000
+Volatility:.............. 0.00%
+Win Rate:................ 100.00%
+Profit Factor:........... inf
+
+Return Metrics
+==============
+
+
+Returns
+-------
+
+Total Return:............ 0.00%
+Annualized Return:....... 0.00%
+
+
+Risk
+----
+
+Max Drawdown:............ 0.00%
+Avg Drawdown:............ 0.0000
+
+
+Other Metrics
+-------------
+
+Max Length:.............. 0
+Avg Length:.............. 0
+Num Drawdowns:........... 0
+Time In Drawdown:........ 0.0000
+
+Trade Performance
+=================
+
+
+Overall Statistics
+------------------
+
+Win Rate:................ 100.00%
+Profit Factor:........... inf
+Expectancy:.............. 1227.9761
+
+
+Profit/Loss Statistics
+----------------------
+
+Avg Win:................. 1227.9761
+Avg Loss:................ 0.0000
+Total Pnl:............... 1227.9761
+
+
+Streak Analysis
+---------------
+
+Max Consecutive Wins:.... 1
+Max Consecutive Losses:.. 0
+Current Consecutive Wins: 1
+Current Consecutive Losses: 0
+
+
+Trade Duration
+--------------
+
+Avg Holding Period:...... {'avg_holding_period': 1.5088194444444444e-06, 'avg_winning_holding_period': 1.5088194444444444e-06, 'avg_losing_holding_period': 0.0}

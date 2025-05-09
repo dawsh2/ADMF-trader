@@ -171,6 +171,12 @@ class OptimizationReporter:
         
         # Add best parameters
         best_parameters = results.get('best_parameters', {})
+        # Check if best_parameters is None
+        if best_parameters is None:
+            best_parameters = {}
+        # Check if best_parameters is None
+        if best_parameters is None:
+            best_parameters = {}
         report.append('BEST PARAMETERS')
         report.append('-' * 80)
         
@@ -416,7 +422,12 @@ class OptimizationReporter:
         
         # Add best parameters
         best_parameters = results.get('best_parameters', {})
-        
+        # Check if best_parameters is None
+        if best_parameters is None:
+            best_parameters = {}
+        # Check if best_parameters is None
+        if best_parameters is None:
+            best_parameters = {}
         html.append('<div class="card">')
         html.append('<h2>Best Parameters</h2>')
         
@@ -849,6 +860,12 @@ class OptimizationReporter:
         
         # Print best parameters
         best_parameters = results.get('best_parameters', {})
+        # Check if best_parameters is None
+        if best_parameters is None:
+            best_parameters = {}
+        # Check if best_parameters is None
+        if best_parameters is None:
+            best_parameters = {}
         print("\nBEST PARAMETERS:")
         print('-' * 40)
         

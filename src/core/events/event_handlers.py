@@ -4,7 +4,9 @@ import inspect
 from typing import Dict, Any, Optional, List, Callable, Union, Coroutine
 from abc import ABC, abstractmethod
 
-from .event_types import Event, EventType
+# Import canonical implementations
+from src.core.event_system.event_types import EventType
+from src.core.event_system.event import Event
 from .event_schema import SchemaValidator
 
 logger = logging.getLogger(__name__)

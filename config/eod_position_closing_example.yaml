@@ -1,0 +1,50 @@
+# Example configuration with end-of-day position closing
+# This configuration shows how to enable end-of-day position closing
+# and configure broker components for more realistic simulations
+
+backtest:
+  start_date: "2023-01-01"
+  end_date: "2023-12-31"
+  initial_capital: 100000.0
+  close_positions_eod: true  # Enable end-of-day position closing
+  
+  # Broker configuration
+  broker:
+    # Slippage model configuration
+    slippage:
+      model: "variable"  # Options: "fixed" or "variable"
+      base_slippage_percent: 0.05  # 0.05% base slippage
+      size_impact: 0.01  # Impact of trade size on slippage
+      volatility_impact: 0.5  # Impact of volatility on slippage
+      random_factor: 0.2  # Random component for realistic simulation
+    
+    # Commission model configuration
+    commission:
+      commission_type: "percentage"  # Options: "percentage", "fixed", "per_share", "tiered"
+      rate: 0.1  # 0.1% commission rate
+      min_commission: 1.0  # $1 minimum commission
+      max_commission: 50.0  # $50 maximum commission
+    
+    # Market simulator configuration
+    market_simulator:
+      max_price_impact: 0.01  # Maximum price impact as a percentage
+      liquidity_factor: 1.0  # Market liquidity factor (higher = more liquid)
+      enable_gaps: true  # Enable price gaps between bars
+      randomize_fills: true  # Add randomness to fill prices
+      max_history_bars: 100  # Maximum historical bars to keep in memory
+    
+    # Optional: restrict allowed order types
+    allowed_order_types: ["MARKET", "LIMIT", "STOP"]
+
+# Strategy configuration
+strategy:
+  name: "SampleStrategy"
+  symbols: ["SPY", "AAPL", "MSFT"]
+  # Strategy-specific parameters would go here
+
+# Data configuration
+data:
+  source: "csv"
+  data_dir: "./data"
+  timeframe: "1d"
+  instruments: ["SPY", "AAPL", "MSFT"]

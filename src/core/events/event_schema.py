@@ -1,6 +1,7 @@
 import json
 from typing import Dict, Any, Optional, List, Callable
-from .event_types import EventType
+# Import canonical implementation
+from src.core.event_system.event_types import EventType
 
 class SchemaValidator:
     """Validator for event data schemas."""

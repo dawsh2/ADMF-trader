@@ -192,16 +192,20 @@ class MACrossoverStrategy(Strategy):
             
             # Auto-add symbol if not already in our list
             if symbol not in self.symbols:
-                logger.debug(f"Symbol {symbol} not in strategy symbols list: {self.symbols}")
-                
-                # Add the symbol to our tracking lists
-                self.symbols.append(symbol)
-                self.data[symbol] = []
-                self.fast_ma[symbol] = []
-                self.slow_ma[symbol] = []
-                self.current_position[symbol] = 0
-                
-                logger.info(f"Auto-added new symbol: {symbol}")
+                try:
+                    # Debug the symbol not in the list
+                    logger.debug(f"Symbol {symbol} not in strategy symbols list: {self.symbols}")
+                    
+                    # Add the symbol to our tracking lists
+                    self.symbols.append(symbol)
+                    self.data[symbol] = []
+                    self.fast_ma[symbol] = []
+                    self.slow_ma[symbol] = []
+                    self.current_position[symbol] = 0
+                    
+                    logger.info(f"Auto-added new symbol: {symbol}")
+                except Exception as e:
+                    logger.error(f"Error in auto-adding symbol {symbol}: {e}")
             
             # Debug - log the complete bar event
             logger.debug(f"Received bar event: {bar_event}")

@@ -6,10 +6,13 @@ import time
 from typing import Dict, Any, Optional, List, Callable, Union, Coroutine
 from abc import ABC, abstractmethod
 
-from .event_types import (
-    Event, EventType, BarEvent, WebSocketEvent, ErrorEvent
+# Import canonical implementations
+from src.core.event_system.event_types import EventType
+from src.core.event_system.event import Event
+# Import factory functions for specialized events
+from .event_utils import (
+    create_bar_event, create_websocket_event, create_error_event
 )
-from .event_utils import create_bar_event
 
 logger = logging.getLogger(__name__)
 

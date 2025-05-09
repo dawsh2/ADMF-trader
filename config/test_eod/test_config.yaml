@@ -1,0 +1,20 @@
+backtest:
+  broker:
+    commission:
+      commission_type: percentage
+      min_commission: 1.0
+      rate: 0.1
+    slippage:
+      model: fixed
+      slippage_percent: 0.1
+  close_positions_eod: true
+data:
+  file_path: data/test_eod/test_data.csv
+  source: csv
+  symbols: &id001
+  - SPY
+strategy:
+  name: TestStrategy
+  params:
+    buy_every: 3
+  symbols: *id001

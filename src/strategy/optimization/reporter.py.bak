@@ -171,6 +171,9 @@ class OptimizationReporter:
         
         # Add best parameters
         best_parameters = results.get('best_parameters', {})
+        # Check if best_parameters is None
+        if best_parameters is None:
+            best_parameters = {}
         report.append('BEST PARAMETERS')
         report.append('-' * 80)
         
@@ -235,6 +238,19 @@ class OptimizationReporter:
             train_stats = train_results.get('statistics', {})
             test_stats = test_results.get('statistics', {})
             
+            # Display consistency metrics
+            train_metrics_consistent = train_results.get('metrics_consistent', True)
+            test_metrics_consistent = test_results.get('metrics_consistent', True)
+            train_trades_consistent = train_results.get('trades_equity_consistent', True)
+            test_trades_consistent = test_results.get('trades_equity_consistent', True)
+            
+            report.append("Data Consistency Check:")
+            report.append(f"  Train metrics consistent: {train_metrics_consistent}")
+            report.append(f"  Test metrics consistent: {test_metrics_consistent}")
+            report.append(f"  Train trades/equity consistent: {train_trades_consistent}")
+            report.append(f"  Test trades/equity consistent: {test_trades_consistent}")
+            report.append("")
+            
             # Calculate performance differences
             return_diff = train_stats.get('return_pct', 0) - test_stats.get('return_pct', 0)
             sharpe_diff = train_stats.get('sharpe_ratio', 0) - test_stats.get('sharpe_ratio', 0)
@@ -255,6 +271,15 @@ class OptimizationReporter:
                 assessment = "High risk of overfitting"
                 
             report.append(f"Overfitting Assessment: {assessment} (Score: {overfitting_score:.2f})")
+            
+            # Add warning about inconsistent metrics
+            if not (train_metrics_consistent and test_metrics_consistent and 
+                   train_trades_consistent and test_trades_consistent):
+                report.append("")
+                report.append("WARNING: Metric inconsistencies detected.")
+                report.append("This may indicate issues with trade tracking or equity calculation.")
+                report.append("Consider reviewing the implementation or running debug diagnostics.")
+            
             report.append('')
             
         # Add parameter importance if available
@@ -394,7 +419,9 @@ class OptimizationReporter:
         
         # Add best parameters
         best_parameters = results.get('best_parameters', {})
-        
+        # Check if best_parameters is None
+        if best_parameters is None:
+            best_parameters = {}
         html.append('<div class="card">')
         html.append('<h2>Best Parameters</h2>')
         
@@ -438,10 +465,18 @@ class OptimizationReporter:
                 test_value = test_results.get('statistics', {}).get(key, 'N/A')
                 
                 if train_value != 'N/A' and format_str and isinstance(train_value, (int, float)):
-                    train_value = f'{train_value:{format_str}}'
+                    # Safe alternative to f-string formatting
+                    try:
+                        train_value = format(train_value, format_str)
+                    except (ValueError, TypeError):
+                        train_value = str(train_value)
                     
                 if test_value != 'N/A' and format_str and isinstance(test_value, (int, float)):
-                    test_value = f'{test_value:{format_str}}'
+                    # Safe alternative to f-string formatting
+                    try:
+                        test_value = format(test_value, format_str)
+                    except (ValueError, TypeError):
+                        test_value = str(test_value)
                     
                 html.append(f'<tr><td>{label}</td><td>{train_value}</td><td>{test_value}</td></tr>')
                 
@@ -819,6 +854,9 @@ class OptimizationReporter:
         
         # Print best parameters
         best_parameters = results.get('best_parameters', {})
+        # Check if best_parameters is None
+        if best_parameters is None:
+            best_parameters = {}
         print("\nBEST PARAMETERS:")
         print('-' * 40)
         

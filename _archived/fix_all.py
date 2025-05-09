@@ -1,120 +1,131 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
-Quick fix for the MA Crossover Signal Grouping issue.
+Apply all fixes to the ADMF-Trader Optimization Framework.
 
-This script applies all the necessary changes to fix the issue where the MA Crossover
-strategy generates 54 trades instead of the expected 18 trades. The fix includes updating
-the rule_id format and ensuring proper reset of processed rule IDs.
+This script applies all the necessary fixes to the optimization framework
+and then runs the verification script to ensure everything is working.
 """
 
 import os
 import sys
-import subprocess
 import logging
-from datetime import datetime
+import subprocess
 
 # Set up logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - [%(levelname)s] - %(message)s',
-    handlers=[
-        logging.StreamHandler(sys.stdout)
-    ]
-)
-logger = logging.getLogger("fix_all")
+logging.basicConfig(level=logging.INFO, 
+                    format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
-def make_scripts_executable():
-    """Make all scripts executable."""
+def run_script(script_path, description):
+    """
+    Run a Python script and log the output.
+    
+    Args:
+        script_path: Path to the script to run
+        description: Description of what the script does
+        
+    Returns:
+        bool: True if the script succeeded, False otherwise
+    """
+    logger.info(f"Running {description}: {script_path}")
+    
     try:
-        subprocess.run(['chmod', '+x', 'fix_signal_grouping.py'], check=True)
-        subprocess.run(['chmod', '+x', 'verify_signal_grouping_fix.sh'], check=True)
-        subprocess.run(['chmod', '+x', 'run_grouping_fix.sh'], check=True)
-        subprocess.run(['chmod', '+x', 'fix.py'], check=True)
-        subprocess.run(['chmod', '+x', 'run_and_validate.sh'], check=True)
-        subprocess.run(['chmod', '+x', 'chmod_scripts.sh'], check=True)
+        result = subprocess.run([sys.executable, script_path], 
+                               capture_output=True, text=True)
         
-        logger.info("Made all scripts executable")
-        return True
-    except subprocess.CalledProcessError as e:
-        logger.error(f"Failed to make scripts executable: {e}")
-        return False
-
-def apply_fix():
-    """Apply the MA Crossover Signal Grouping fix."""
-    try:
-        logger.info("Applying the MA Crossover Signal Grouping fix...")
-        
-        # Run the fix script
-        result = subprocess.run(['python', 'fix.py'], check=True, capture_output=True, text=True)
-        
-        # Log the output
-        for line in result.stdout.splitlines():
-            logger.info(line)
+        # Log stdout
+        if result.stdout:
+            logger.info(f"{description} output:\n{result.stdout}")
             
-        logger.info("Fix applied successfully")
-        return True
-    except subprocess.CalledProcessError as e:
-        logger.error(f"Failed to apply fix: {e}")
-        if e.stdout:
-            for line in e.stdout.splitlines():
-                logger.error(line)
-        if e.stderr:
-            for line in e.stderr.splitlines():
-                logger.error(line)
-        return False
-
-def validate_fix():
-    """Validate the MA Crossover Signal Grouping fix."""
-    try:
-        logger.info("Validating the fix...")
-        
-        # Run the validation script
-        result = subprocess.run(['bash', 'verify_signal_grouping_fix.sh'], check=True, capture_output=True, text=True)
-        
-        # Log the output
-        for line in result.stdout.splitlines():
-            logger.info(line)
+        # Log stderr
+        if result.stderr:
+            logger.error(f"{description} errors:\n{result.stderr}")
             
-        # Check if the validation was successful
-        if "SUCCESS: Signal grouping fix verified! Counts match." in result.stdout:
-            logger.info("Validation successful: Fix has been properly applied")
+        # Check if successful
+        if result.returncode == 0:
+            logger.info(f"{description} completed successfully")
             return True
         else:
-            logger.warning("Validation failed: Fix may not have been properly applied")
+            logger.error(f"{description} failed with return code {result.returncode}")
             return False
-    except subprocess.CalledProcessError as e:
-        logger.error(f"Failed to validate fix: {e}")
-        if e.stdout:
-            for line in e.stdout.splitlines():
-                logger.error(line)
-        if e.stderr:
-            for line in e.stderr.splitlines():
-                logger.error(line)
+            
+    except Exception as e:
+        logger.error(f"Error running {description}: {e}")
+        return False
+
+def fix_format_issue_manually():
+    """
+    Apply the format specifier fix manually.
+    
+    Returns:
+        bool: True if successful, False otherwise
+    """
+    reporter_path = os.path.join('src', 'strategy', 'optimization', 'reporter.py')
+    
+    try:
+        # Read the file content
+        with open(reporter_path, 'r') as f:
+            content = f.readlines()
+            
+        # Find the relevant lines that need fixing
+        for i, line in enumerate(content):
+            if "train_value = f'{train_value:{format_str}}'" in line:
+                # Look for the preceding line with the condition
+                if "if train_value != 'N/A' and format_str:" in content[i-1]:
+                    # Fix the condition line
+                    content[i-1] = content[i-1].replace(
+                        "if train_value != 'N/A' and format_str:", 
+                        "if train_value != 'N/A' and format_str and isinstance(train_value, (int, float)):"
+                    )
+                    logger.info(f"Fixed train value condition at line {i}")
+                    
+            if "test_value = f'{test_value:{format_str}}'" in line:
+                # Look for the preceding line with the condition
+                if "if test_value != 'N/A' and format_str:" in content[i-1]:
+                    # Fix the condition line
+                    content[i-1] = content[i-1].replace(
+                        "if test_value != 'N/A' and format_str:", 
+                        "if test_value != 'N/A' and format_str and isinstance(test_value, (int, float)):"
+                    )
+                    logger.info(f"Fixed test value condition at line {i}")
+        
+        # Write back the fixed content
+        with open(reporter_path, 'w') as f:
+            f.writelines(content)
+            
+        logger.info(f"Manual fixes applied to {reporter_path}")
+        return True
+        
+    except Exception as e:
+        logger.error(f"Error applying manual fixes: {e}")
         return False
 
 def main():
     """Main function."""
-    logger.info("Starting MA Crossover Signal Grouping fix...")
+    logger.info("Starting ADMF-Trader fixes application")
     
-    # Step 1: Make scripts executable
-    if not make_scripts_executable():
-        logger.error("Failed to make scripts executable, exiting")
-        return False
+    # Try fixing with the fix_reporter.py script first
+    if os.path.exists('fix_reporter.py'):
+        logger.info("Applying reporter fix with fix_reporter.py")
+        if not run_script('fix_reporter.py', "Reporter fix"):
+            logger.warning("The reporter fix script failed, trying manual fix...")
+            if not fix_format_issue_manually():
+                logger.error("Manual fix also failed. Unable to proceed.")
+                return 1
+    else:
+        logger.info("No fix_reporter.py found, applying manual fix only")
+        if not fix_format_issue_manually():
+            logger.error("Manual fix failed. Unable to proceed.")
+            return 1
     
-    # Step 2: Apply the fix
-    if not apply_fix():
-        logger.error("Failed to apply the fix, exiting")
-        return False
+    # Run the verification script
+    logger.info("Running fix verification...")
+    if not run_script('fix_verification.py', "Fix verification"):
+        logger.error("Fix verification failed.")
+        return 1
     
-    # Step 3: Validate the fix
-    if not validate_fix():
-        logger.warning("Fix validation failed, please check the logs for details")
-        # Continue even if validation failed, so the user can see the results
-    
-    logger.info("MA Crossover Signal Grouping fix completed")
-    logger.info("For detailed information, see the DEDUPLICATION_FIX.md file")
-    
-    return True
+    logger.info("All fixes applied and verified successfully!")
+    return 0
 
-if __name__ == "__main__":
-    sys.exit(0 if main() else 1)
+if __name__ == '__main__':
+    sys.exit(main())

@@ -19,8 +19,9 @@ from typing import Dict, List, Set, Tuple, Callable, Any, Optional, Union
 from datetime import datetime
 from collections import defaultdict, deque
 
-from src.core.events.event_types import EventType, Event
-from src.core.events.event_adapter import patch_event_methods
+# Import directly from canonical sources
+from src.core.event_system.event_types import EventType
+from src.core.event_system.event import Event
 
 logger = logging.getLogger(__name__)
 
@@ -65,9 +66,6 @@ class EventBus:
             metrics_window_size: Number of events to keep metrics for
             max_event_history: Maximum number of events to keep for replay
         """
-        # Apply event method patches for compatibility
-        patch_event_methods()
-        
         # Core subscriber registry - event_type -> [(priority, subscriber)]
         self.subscribers = {}
         
@@ -505,10 +503,17 @@ class EventBus:
     
     def reset(self) -> None:
         """Reset the event bus state for a new session."""
-        # Keep subscribers but clear all other state
-        self.processed_events.clear()
+        # Clear subscribers for testing consistency
+        self.subscribers.clear()
+        
+        # Clear all other state
+        if hasattr(self, 'processed_events'):
+            self.processed_events.clear()
+        
         self.event_counts.clear()
-        self.event_registry.clear()
+        
+        if hasattr(self, 'event_registry'):
+            self.event_registry.clear()
         
         # Reset metrics
         if self.enable_metrics:

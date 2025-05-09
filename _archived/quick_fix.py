@@ -1,149 +1,174 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
-Quick direct fix for the MA Crossover Signal Grouping issue.
-
-This script modifies the risk manager implementation to:
-1. Add a clear log statement when rule_ids are cleared during reset
-2. Add the processed_rule_ids initialization to the __init__ method if needed
+Quick fix for the trading system issues.
+This script performs the minimum necessary fixes to make the backtest run.
 """
-
+import os
 import sys
-import re
-import inspect
+import logging
+import yaml
 
-def log_message(message):
-    """Print a formatted log message."""
-    print(f"[QUICK FIX] {message}")
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger('quick_fix')
 
-def fix_risk_manager():
-    """Apply critical fixes to the risk manager."""
-    from src.risk.managers.simple import SimpleRiskManager
+def fix_backtest_file():
+    """Fix syntax error in backtest.py file."""
+    logger.info("Fixing syntax error in backtest.py file...")
     
-    # Get the original source
-    original_reset = inspect.getsource(SimpleRiskManager.reset)
+    file_path = "src/execution/backtest/backtest.py"
+    if not os.path.exists(file_path):
+        logger.error(f"File not found: {file_path}")
+        return False
     
-    log_message("Checking SimpleRiskManager reset method...")
+    # Read file content
+    with open(file_path, 'r') as f:
+        content = f.read()
     
-    # Verify that the reset method clears processed_rule_ids
-    if "processed_rule_ids.clear()" in original_reset:
-        log_message("Reset method already clears processed_rule_ids")
+    # Check for the problematic code
+    if "elif hasattr(self.order_registry, 'get_active_orders'):" in content and "orders = []" in content:
+        # Fix the syntax error with duplicate elif
+        logger.info("Found syntax error, fixing it...")
+        
+        # Replace the problematic section
+        old_code = """            orders = []
+            if hasattr(self.order_registry, 'get_all_orders'):
+                orders = []
+            if hasattr(self.order_registry, 'get_all_orders'):
+                orders = self.order_registry.get_all_orders()
+            elif hasattr(self.order_registry, 'get_active_orders'):
+                orders = self.order_registry.get_active_orders()
+                logger.info("Using get_active_orders() as get_all_orders() is not available")
+            else:
+                logger.warning("Order registry has neither get_all_orders nor get_active_orders method")
+            elif hasattr(self.order_registry, 'get_active_orders'):
+                orders = self.order_registry.get_active_orders()
+                logger.info("Using get_active_orders() as get_all_orders() is not available")
+            else:
+                logger.warning("Order registry has neither get_all_orders nor get_active_orders method")"""
+        
+        new_code = """            orders = []
+            if hasattr(self.order_registry, 'get_all_orders'):
+                orders = self.order_registry.get_all_orders()
+            elif hasattr(self.order_registry, 'get_active_orders'):
+                orders = self.order_registry.get_active_orders()
+                logger.info("Using get_active_orders() as get_all_orders() is not available")
+            else:
+                logger.warning("Order registry has neither get_all_orders nor get_active_orders method")"""
+        
+        # Replace the code
+        fixed_content = content.replace(old_code, new_code)
+        
+        # Write fixed content back to file
+        with open(file_path, 'w') as f:
+            f.write(fixed_content)
+        
+        logger.info("Successfully fixed syntax error in backtest.py")
+        return True
     else:
-        log_message("Reset method needs to be fixed")
-        
-        # Create a new reset implementation
-        def fixed_reset(self):
-            """Fixed reset implementation that properly clears processed_rule_ids."""
-            # Call parent reset
-            super(SimpleRiskManager, self).reset()
-            
-            # Clear tracking collections
-            self.logger.info("Resetting risk manager state: clearing tracking collections")
-            self.order_ids.clear()
-            self.processed_signals.clear()
-            
-            # CRITICAL FIX: Ensure processed_rule_ids is emptied on reset
-            rule_id_count = len(self.processed_rule_ids)
-            self.logger.info(f"CLEARING {rule_id_count} PROCESSED RULE IDs")
-            self.processed_rule_ids.clear()
-            self.logger.info(f"After reset, processed_rule_ids size: {len(self.processed_rule_ids)}")
-            
-            # Clear events in progress
-            self.events_in_progress.clear()
-            
-            self.logger.info(f"Risk manager {self.name} reset completed")
-        
-        # Apply the fix
-        SimpleRiskManager.reset = fixed_reset
-        log_message("Fixed reset method applied")
+        logger.info("No syntax error found in backtest.py or already fixed")
+        return True
+
+def add_get_all_orders_method():
+    """Add get_all_orders method to OrderRegistry if missing."""
+    logger.info("Adding get_all_orders method to OrderRegistry...")
     
-    # Verify __init__ initializes processed_rule_ids
-    original_init = inspect.getsource(SimpleRiskManager.__init__)
-    if "processed_rule_ids = set()" in original_init or "self.processed_rule_ids = set()" in original_init:
-        log_message("__init__ already initializes processed_rule_ids")
-    else:
-        log_message("__init__ needs to be fixed")
-        
-        # Create a new init implementation with processed_rule_ids
-        def fixed_init(self, event_bus, portfolio_manager, name=None):
-            """Fixed __init__ that properly initializes processed_rule_ids."""
-            # Call parent init
-            super(SimpleRiskManager, self).__init__(event_bus, portfolio_manager, name)
-            
-            self.position_size = 100  # Default fixed position size
-            self.max_position_pct = 0.1  # Maximum 10% of equity per position
-            self.order_ids = set()  # Track created order IDs to avoid duplicates
-            self.processed_signals = set()  # Track processed signal IDs
-            self.processed_rule_ids = set()  # CRITICAL FIX: Track rule IDs separately
-            self.events_in_progress = set()  # Track events currently being processed
-            
-            # BUGFIX: Order manager reference is needed for order creation
-            self.order_manager = None
-            
-            # Create logger
-            self.logger = self.logger  # Use logger from parent
-        
-        # Apply the fix
-        SimpleRiskManager.__init__ = fixed_init
-        log_message("Fixed __init__ method applied")
+    file_path = "src/execution/order_registry.py"
+    if not os.path.exists(file_path):
+        logger.error(f"File not found: {file_path}")
+        return False
     
-    # Return success
+    # Read file content
+    with open(file_path, 'r') as f:
+        content = f.read()
+    
+    # Check if method already exists
+    if "def get_all_orders" in content:
+        logger.info("get_all_orders method already exists in OrderRegistry")
+        return True
+    
+    # Add method to the end of the class
+    with open(file_path, 'a') as f:
+        f.write("\n    def get_all_orders(self):\n")
+        f.write("        \"\"\"\n")
+        f.write("        Get all orders regardless of status.\n")
+        f.write("        \n")
+        f.write("        Returns:\n")
+        f.write("            List of all orders\n")
+        f.write("        \"\"\"\n")
+        f.write("        return list(self.orders.values())\n")
+    
+    logger.info("Successfully added get_all_orders method to OrderRegistry")
     return True
 
-def fix_strategy():
-    """Ensure the strategy uses the correct rule_id format."""
-    from src.strategy.implementations.ma_crossover import MACrossoverStrategy
+def create_optimized_config():
+    """Create an optimized configuration file."""
+    logger.info("Creating optimized configuration file...")
     
-    # Get the original source code
-    original_on_bar = inspect.getsource(MACrossoverStrategy.on_bar)
+    config = {
+        'backtest': {
+            'initial_capital': 100000.0,
+            'symbols': ['SPY'],
+            'timeframe': "1min",
+            'start_date': "2024-01-01",
+            'end_date': "2024-12-31"
+        },
+        'data': {
+            'source_type': "csv",
+            'custom_data': {
+                'file': "HEAD_1min.csv",
+                'symbol_column': None
+            }
+        },
+        'strategy': {
+            'type': "ma_crossover",
+            'parameters': {
+                'fast_window': 2,  # Very small for more signals
+                'slow_window': 5,  # Very small for more signals
+                'price_key': "close"
+            }
+        },
+        'risk': {
+            'position_size': 500,
+            'max_position_pct': 1.0
+        },
+        'logging': {
+            'level': "DEBUG"
+        }
+    }
     
-    log_message("Checking MACrossoverStrategy on_bar method...")
+    # Create directory if it doesn't exist
+    os.makedirs("config", exist_ok=True)
     
-    # Check if the rule_id format is correct
-    rule_id_pattern = r'rule_id\s*=\s*f["\']([^"\']*)["\']'
-    rule_id_matches = re.findall(rule_id_pattern, original_on_bar)
+    # Save config to file
+    config_path = "config/quick_fix.yaml"
+    with open(config_path, 'w') as f:
+        yaml.dump(config, f, default_flow_style=False)
     
-    if rule_id_matches:
-        for match in rule_id_matches:
-            if "{symbol}" in match and ("direction" in match or "BUY" in match or "SELL" in match) and "group" in match:
-                log_message(f"on_bar already uses correct rule_id format: {match}")
-                return True
-    
-    log_message("on_bar needs rule_id format fix")
-    
-    # Apply the fix at runtime by modifying the on_bar method
-    
-    # First, extract the direction name block
-    if "direction_name = \"BUY\" if signal_value == 1 else \"SELL\"" in original_on_bar:
-        log_message("direction_name assignment already present")
-    else:
-        log_message("Need to add direction_name assignment")
-    
-    # We can't easily modify the method at runtime without source manipulation
-    # Just print instructions for manual fix
-    log_message("\nMANUAL FIX REQUIRED: Please ensure the rule_id is created with this format:")
-    log_message("direction_name = \"BUY\" if signal_value == 1 else \"SELL\"")
-    log_message("rule_id = f\"{self.name}_{symbol}_{direction_name}_group_{group_id}\"")
-    
-    return True
+    logger.info(f"Created optimized configuration file: {config_path}")
+    return config_path
 
 def main():
-    """Apply quick fixes for the MA Crossover Signal Grouping issue."""
-    print("\n=== QUICK FIX FOR MA CROSSOVER SIGNAL GROUPING ===")
+    """Apply all fixes and run the backtest."""
+    logger.info("Starting quick fix for the trading system...")
     
-    try:
-        # Fix the risk manager
-        fix_risk_manager()
-        
-        # Fix the strategy
-        fix_strategy()
-        
-        print("\n=== QUICK FIX COMPLETED ===")
-        print("Run python check_rule_id_flow_fixed.py to verify")
-        
-        return True
-    except Exception as e:
-        print(f"Error applying quick fix: {e}")
-        return False
+    # Step 1: Fix syntax error in backtest.py
+    fix_backtest_file()
+    
+    # Step 2: Add get_all_orders method to OrderRegistry
+    add_get_all_orders_method()
+    
+    # Step 3: Create optimized configuration
+    config_path = create_optimized_config()
+    
+    # Step 4: Run the backtest
+    logger.info(f"All fixes applied. Now you can run:")
+    logger.info(f"  python main.py --config {config_path}")
+    
+    logger.info("Quick fix completed successfully!")
 
 if __name__ == "__main__":
-    sys.exit(0 if main() else 1)
+    main()

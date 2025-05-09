@@ -1,15 +1,24 @@
 """
-BacktestCoordinator with improved component lifecycle management.
+BacktestCoordinator with enhanced broker integration and component lifecycle management.
 
 This implementation addresses the architectural issues in the original
 BacktestCoordinator, particularly with component coupling and
-event processing order dependencies.
+event processing order dependencies. It also integrates the enhanced
+broker module for more realistic market simulation.
+
+Key features:
+- Clean component lifecycle management
+- Enhanced broker integration with realistic market simulation
+- Configurable slippage and commission models
+- Daily position closing option for overnight risk management
+- Proper state isolation for optimization
 """
 
 from src.core.component import Component
 from src.core.events.event_types import Event, EventType
 from src.core.trade_repository import TradeRepository
 import logging
+import datetime
 # Import analytics metrics
 from src.analytics.metrics.functional import (
     calculate_all_metrics,
@@ -19,6 +28,12 @@ from src.analytics.metrics.functional import (
     max_drawdown,
     win_rate
 )
+
+# Import broker components
+from src.execution.broker.simulated_broker import SimulatedBroker
+from src.execution.broker.market_simulator import MarketSimulator
+from src.execution.broker.slippage_model import FixedSlippageModel, VariableSlippageModel
+from src.execution.broker.commission_model import CommissionModel
 
 # Set up logging
 logger = logging.getLogger(__name__)
@@ -47,17 +62,36 @@ class BacktestCoordinator(Component):
         # Initialize logger
         self.logger = logging.getLogger(__name__)
         
+        # Trading settings from config
+        self.close_positions_eod = self.config.get('close_positions_eod', False)
+        self.current_day = None  # Track current day for EOD processing
+        
+        # Track simulation state
+        self.last_bar_timestamp = None
+        self.previous_trading_day = None
+        
+        # Broker configuration
+        self.broker_config = self.config.get('broker', {})
+        
+        # Initialize statistics tracking
+        self.stats = {
+            'bars_processed': 0,
+            'signals_generated': 0,
+            'orders_created': 0,
+            'trades_executed': 0,
+            'positions_closed_eod': 0
+        }
+        
     def initialize(self, context):
-        # Debug logging for initialization
-        import logging
-        logger = logging.getLogger(__name__)
-        logger.info(f"Initializing backtest coordinator with context: {context.keys()}")
         """
         Initialize with dependencies.
         
         Args:
             context (dict): Context containing required components
         """
+        # Debug logging for initialization
+        logger.info(f"Initializing backtest coordinator with context: {context.keys()}")
+        
         super().initialize(context)
         
         # Get event bus and trade repository from context
@@ -76,9 +110,17 @@ class BacktestCoordinator(Component):
         # Create empty equity curve
         self.equity_curve = []
         
+        # Create and configure broker components if not provided
+        self._setup_broker_components()
+        
         # Subscribe to events
         self.event_bus.subscribe(EventType.BACKTEST_END, self.on_backtest_end)
         self.event_bus.subscribe(EventType.PORTFOLIO, self.on_portfolio_update)
+        
+        # Subscribe to bar events for EOD position handling
+        if self.close_positions_eod:
+            self.event_bus.subscribe(EventType.BAR, self.on_bar_eod_check)
+            logger.info("Enabled end-of-day position closing")
         
     def add_component(self, name, component):
         """
@@ -96,69 +138,96 @@ class BacktestCoordinator(Component):
         
         This ensures proper dependency injection instead of direct references.
         """
+        # Get required components from context
+        self.event_bus = self.shared_context.get('event_bus')
+        
+        # If components haven't been added yet, try to find them in the shared context
+        if not self.components:
+            # Add components from context if available
+            for component_key in ['data_handler', 'strategy', 'portfolio', 'risk_manager', 'broker', 'market_simulator']:
+                if component_key in self.shared_context:
+                    component = self.shared_context.get(component_key)
+                    self.add_component(component_key, component)
+            
+            self.logger.info(f"Added {len(self.components)} components from context")
+        
+        # Ensure the market simulator is properly linked to the data handler
+        data_handler = self.components.get('data_handler')
+        market_simulator = self.components.get('market_simulator')
+        
+        if data_handler and market_simulator:
+            # Add data handler to market simulator's context for direct initialization
+            market_sim_context = {
+                'data_handler': data_handler,
+                'event_bus': self.event_bus
+            }
+            # Initialize market simulator with data handler
+            market_simulator.initialize(market_sim_context)
+            self.logger.info("Linked market simulator to data handler for direct data access")
+        
         # Initialize all components with the shared context
         for name, component in self.components.items():
-            component.initialize(self.shared_context)
+            if hasattr(component, 'initialize') and callable(getattr(component, 'initialize')):
+                try:
+                    component.initialize(self.shared_context)
+                    self.logger.info(f"Initialized component: {name}")
+                except Exception as e:
+                    self.logger.warning(f"Error initializing component {name}: {e}")
+            else:
+                self.logger.info(f"Component {name} does not have initialize method, skipping initialization")
             
         # Start all components
         for name, component in self.components.items():
-            component.start()
+            if hasattr(component, 'start') and callable(getattr(component, 'start')):
+                try:
+                    component.start()
+                    self.logger.info(f"Started component: {name}")
+                except Exception as e:
+                    self.logger.warning(f"Error starting component {name}: {e}")
+            else:
+                self.logger.info(f"Component {name} does not have start method, skipping start")
+            
+        self.logger.info("Backtest components initialized and started")
     
     def close_all_open_trades(self):
-        # Get position manager from components
-        position_manager = self.components.get('position_manager')
-        if position_manager:
-            self.logger.info("Using PositionManager to ensure clean position tracking")
-            
         """
         Close all open trades at the end of the backtest using last available prices.
         This ensures all PnL is realized and metrics are based on closed trades only.
         """
-        # Get data handler from components
-        data_handler = self.components.get('data_handler')
-        if not data_handler:
-            logger.warning("Cannot close open trades - no data handler found")
-            return
-        
-        # Get trade repository from context
-        trade_repository = self.shared_context.get('trade_repository')
-        if not trade_repository:
-            logger.warning("Cannot close open trades - no trade repository found")
+        # Get the portfolio manager
+        portfolio = self.components.get('portfolio')
+        if not portfolio:
+            self.logger.warning("Cannot close open trades - no portfolio component found")
             return
             
-        # Get all open trades
-        all_open_trades = []
-        for symbol_trades in trade_repository.open_trades.values():
-            all_open_trades.extend(symbol_trades)
-            
-        if not all_open_trades:
-            self.logger.info("No open trades to close at end of backtest")
-            return
-            
-        self.logger.info(f"Closing {len(all_open_trades)} open trades at end of backtest")
-        
         # Get current time for close timestamp
-        current_time = data_handler.get_current_timestamp()
+        current_time = datetime.datetime.now()
         
-        # Close each open trade
-        for trade in all_open_trades[:]:  # Create a copy to avoid modification during iteration
-            symbol = trade.get('symbol')
-            current_price = data_handler.get_current_price(symbol)
-            
-            if current_price is None:
-                self.logger.warning(f"Cannot close trade for {symbol} - no current price available")
-                continue
-                
-            # Close the trade
-            trade_repository.close_trade(
-                trade_id=trade.get('id'),
-                close_price=current_price,
-                close_time=current_time,
-                quantity=trade.get('quantity')
-            )
-            
-            self.logger.info(f"Closed trade {trade.get('id')} at end of backtest, "
-                       f"symbol: {symbol}, price: {current_price}")
+        # Try different approaches to get the latest timestamp from data
+        data_handler = self.components.get('data_handler')
+        if data_handler:
+            # Try various methods that might exist on the data handler
+            if hasattr(data_handler, 'get_current_timestamp'):
+                current_time = data_handler.get_current_timestamp()
+            elif hasattr(data_handler, 'latest_timestamp'):
+                current_time = data_handler.latest_timestamp
+            # For CSV data handler, try to get the last timestamp from a symbol's latest bar
+            elif hasattr(data_handler, 'get_latest_bar') and hasattr(data_handler, 'symbols'):
+                for symbol in data_handler.symbols:
+                    bar = data_handler.get_latest_bar(symbol)
+                    if bar and hasattr(bar, 'timestamp'):
+                        current_time = bar.timestamp
+                        break
+        
+        # Use the portfolio manager to close all positions
+        if hasattr(portfolio, 'close_all_positions'):
+            closed_trades = portfolio.close_all_positions(current_time)
+            if closed_trades:
+                self.logger.info(f"Closed {len(closed_trades)} positions at end of backtest")
+            else:
+                self.logger.info("No open trades to close at end of backtest")
+        else:
+            self.logger.warning("Portfolio manager doesn't support close_all_positions method")
             
     def run(self):
         """
@@ -176,16 +245,85 @@ class BacktestCoordinator(Component):
             'config': self.config
         }))
         
-        # Get data handler from components
+        # Get required components
         data_handler = self.components.get('data_handler')
         if not data_handler:
             raise ValueError("No data_handler component registered")
             
+        # Get the market simulator to ensure it's initialized properly
+        market_simulator = self.components.get('market_simulator')
+        if market_simulator:
+            self.logger.info("Ensuring market simulator has current price data")
+            # Make sure market simulator has access to data handler in its context
+            # FIXED: Explicitly set the data handler regardless, to ensure it's the current instance
+            market_simulator.data_handler = data_handler
+            self.logger.info(f"Set data_handler reference directly in market_simulator")
+            
+            # FIXED: Also ensure broker has access to market simulator
+            broker = self.components.get('broker')
+            if broker:
+                broker.market_simulator = market_simulator
+                self.logger.info(f"Set market_simulator reference directly in broker")
+        
+            # Pre-initialize with first bar for each symbol if possible
+            for symbol in data_handler.get_symbols():
+                bar = data_handler.get_latest_bar(symbol)
+                if bar and hasattr(market_simulator, 'update_price_data'):
+                    success = market_simulator.update_price_data(symbol, bar)
+                    if success:
+                        self.logger.info(f"Pre-loaded price data for {symbol} in market simulator")
+                    else:
+                        self.logger.warning(f"Failed to pre-load price data for {symbol} in market simulator")
+                    
+                    # Verify price data was successfully loaded
+                    if symbol in market_simulator.current_prices:
+                        close_price = market_simulator.current_prices[symbol]['close']
+                        self.logger.info(f"Verified price data for {symbol}: close={close_price:.4f}")
+                    else:
+                        self.logger.warning(f"Price verification failed for {symbol} - not in current_prices")
+        
+        # Get strategy from components
+        strategy = self.components.get('strategy')
+        if not strategy:
+            self.logger.warning("No strategy component registered")
+        
+        # Load data for symbols from config
+        symbols = self.shared_context.get('symbols', [])
+        if not symbols:
+            symbols = [source.get('symbol') for source in self.config.get('data', {}).get('sources', [])]
+        
+        if not symbols:
+            raise ValueError("No symbols specified for backtest")
+        
+        self.logger.info(f"Loading data for symbols: {symbols}")
+        data_handler.load_data(symbols)
+        
+        # Initialize other components
+        if 'portfolio' in self.components:
+            portfolio = self.components['portfolio']
+            self.logger.info(f"Using portfolio: {portfolio.name}")
+        
+        # Debug info before starting
+        self.logger.info(f"Beginning backtest with {len(symbols)} symbols: {symbols}")
+        
         # Run through all data
         has_more_data = True
+        bar_count = 0
+        
         while has_more_data:
-            has_more_data = data_handler.update()
+            # Process the next bar
+            has_more_data = data_handler.update_bars()  # This should emit bar events to the event bus
+            bar_count += 1
             
+            if bar_count % 100 == 0:  # Only log occasionally
+                self.logger.info(f"Processed {bar_count} bars")
+            
+            # Check if we've reached a limit
+            max_bars = self.shared_context.get('max_bars')
+            if max_bars and bar_count >= max_bars:
+                self.logger.info(f"Reached bar limit of {max_bars}, stopping backtest")
+                break
+        
         # Close all open trades at the end of the backtest
         self.close_all_open_trades()
             
@@ -193,6 +331,7 @@ class BacktestCoordinator(Component):
         self.event_bus.publish(Event(EventType.BACKTEST_END, {}))
         
         # Return the results
+        self.logger.info(f"Backtest completed after processing {bar_count} bars")
         return self.results
         
     def on_portfolio_update(self, event):
@@ -233,7 +372,14 @@ class BacktestCoordinator(Component):
         
         # Stop all components
         for name, component in self.components.items():
-            component.stop()
+            if hasattr(component, 'stop') and callable(getattr(component, 'stop')):
+                try:
+                    component.stop()
+                    self.logger.info(f"Stopped component: {name}")
+                except Exception as e:
+                    self.logger.warning(f"Error stopping component {name}: {e}")
+            else:
+                self.logger.info(f"Component {name} does not have stop method, skipping stop")
             
     def verify_trades_vs_equity(self, trades, initial_capital):
         """
@@ -323,21 +469,19 @@ class BacktestCoordinator(Component):
         if not portfolio:
             raise ValueError("No portfolio component registered")
             
-        # Get trades from the shared trade repository
-        trade_repository = self.shared_context.get('trade_repository')
-        trades = trade_repository.get_trades() if trade_repository else []
-        
-        self.logger.info(f"Processing results with {len(trades)} trades from trade repository")
-        
-        # If no trades found in trade repository, try to get them from portfolio
-        if not trades and hasattr(portfolio, 'get_trades'):
-            portfolio_trades = portfolio.get_trades()
-            if portfolio_trades:
-                self.logger.info(f"Retrieved {len(portfolio_trades)} trades from portfolio")
-                trades = portfolio_trades
+        # Get trades directly from the portfolio - this is a more elegant approach
+        # than using a separate trade repository as a middleman
+        trades = []
+        if hasattr(portfolio, 'get_trades'):
+            trades = portfolio.get_trades()
+            self.logger.info(f"Retrieved {len(trades)} trades directly from portfolio")
         
         # CRITICAL VERIFICATION: Verify trades vs equity curve consistency
-        is_consistent = self.verify_trades_vs_equity(trades, portfolio.initial_capital)
+        initial_capital = getattr(portfolio, 'initial_capital', None)
+        if initial_capital is None:
+            initial_capital = getattr(portfolio, 'initial_cash', 100000)
+            self.logger.info(f"Using initial_cash ({initial_capital}) as initial_capital")
+        is_consistent = self.verify_trades_vs_equity(trades, initial_capital)
         if not is_consistent:
             self.logger.warning("Trade PnL doesn't match equity curve change - this will cause metrics inconsistency")
         
@@ -371,6 +515,131 @@ class BacktestCoordinator(Component):
         
         self.logger.info(f"Backtest completed with {len(trades)} trades and final capital: {portfolio.get_capital():.2f}")
         
+        # Run advanced analytics and generate reports if configured
+        analytics_config = self.config.get('analytics', {})
+        if analytics_config.get('enabled', False):
+            self._run_analytics(trades, analytics_config)
+    
+    def _run_analytics(self, trades, analytics_config):
+        """
+        Run advanced analytics and generate reports.
+        
+        Args:
+            trades: List of trade dictionaries
+            analytics_config: Analytics configuration
+        """
+        # Get portfolio from components if available
+        portfolio = None
+        if 'portfolio' in self.components:
+            portfolio = self.components['portfolio']
+        try:
+            import os
+            import pandas as pd
+            from datetime import datetime
+            
+            from src.analytics.analysis.performance import PerformanceAnalyzer
+            from src.analytics.reporting.text_report import TextReportBuilder
+            from src.analytics.reporting.html_report import HTMLReportBuilder
+            
+            self.logger.info("Running advanced analytics...")
+            
+            # Convert equity curve to DataFrame
+            equity_data = []
+            for point in self.equity_curve:
+                equity_point = {
+                    'timestamp': point.get('timestamp', datetime.now()),
+                    'equity': point.get('equity', 0),
+                    'cash': point.get('cash', 0),
+                    'market_value': point.get('market_value', 0),
+                    'closed_pnl': point.get('closed_pnl', 0)
+                }
+                equity_data.append(equity_point)
+            
+            # If we don't have any equity data points, create at least one with initial values
+            if not equity_data:
+                self.logger.warning("No equity data points available for analytics, creating a minimal placeholder")
+                # Create a single data point with initial capital
+                initial_capital = portfolio.initial_capital if hasattr(portfolio, 'initial_capital') else 100000
+                equity_data.append({
+                    'timestamp': datetime.now(),
+                    'equity': initial_capital,
+                    'cash': initial_capital,
+                    'market_value': 0,
+                    'closed_pnl': 0
+                })
+            
+            equity_df = pd.DataFrame(equity_data)
+            
+            # Set timestamp as index if present
+            if 'timestamp' in equity_df.columns:
+                equity_df.set_index('timestamp', inplace=True)
+            
+            # Create analyzer
+            analyzer = PerformanceAnalyzer(
+                equity_curve=equity_df,
+                trades=trades
+            )
+            
+            # Run analysis
+            analysis_config = analytics_config.get('analysis', {})
+            risk_free_rate = analysis_config.get('risk_free_rate', 0.0)
+            periods_per_year = analysis_config.get('periods_per_year', 252)
+            
+            self.logger.info("Running performance analysis...")
+            metrics = analyzer.analyze_performance(
+                risk_free_rate=risk_free_rate,
+                periods_per_year=periods_per_year
+            )
+            
+            # Generate reports if enabled
+            reporting_config = analytics_config.get('reporting', {})
+            if reporting_config.get('enabled', False):
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                output_dir = reporting_config.get('output_directory', './results/reports')
+                
+                # Ensure output directory exists
+                if not os.path.exists(output_dir):
+                    os.makedirs(output_dir)
+                
+                # Get report formats
+                formats = reporting_config.get('formats', ['text'])
+                
+                # Generate text report
+                if 'text' in formats:
+                    text_config = reporting_config.get('text', {})
+                    width = text_config.get('width', 80)
+                    
+                    self.logger.info("Generating text report...")
+                    text_builder = TextReportBuilder(
+                        analyzer=analyzer,
+                        title=f"{self.config.get('name', 'Backtest')} - Performance Report",
+                        width=width
+                    )
+                    
+                    text_file = os.path.join(output_dir, f"backtest_report_{timestamp}.txt")
+                    text_builder.save(text_file)
+                    self.logger.info(f"Text report saved to: {text_file}")
+                
+                # Generate HTML report
+                if 'html' in formats:
+                    html_config = reporting_config.get('html', {})
+                    
+                    self.logger.info("Generating HTML report...")
+                    html_builder = HTMLReportBuilder(
+                        analyzer=analyzer,
+                        title=html_config.get('title', f"{self.config.get('name', 'Backtest')} - Performance Report"),
+                        description=html_config.get('description', "")
+                    )
+                    
+                    html_file = os.path.join(output_dir, f"backtest_report_{timestamp}.html")
+                    html_builder.save(html_file)
+                    self.logger.info(f"HTML report saved to: {html_file}")
+            
+            self.logger.info("Analytics processing completed successfully")
+            
+        except Exception as e:
+            self.logger.error(f"Error running analytics: {e}", exc_info=True)
+        
     def _calculate_statistics(self, portfolio, trades):
         """
         Calculate backtest statistics using the analytics module.
@@ -383,8 +652,13 @@ class BacktestCoordinator(Component):
             dict: Calculated statistics
         """
         # Calculate basic statistics
+        initial_capital = getattr(portfolio, 'initial_capital', None)
+        if initial_capital is None:
+            initial_capital = getattr(portfolio, 'initial_cash', 100000)
+            self.logger.info(f"Using initial_cash ({initial_capital}) as initial_capital")
+            
         stats = {
-            'initial_capital': portfolio.initial_capital,
+            'initial_capital': initial_capital,
             'final_capital': portfolio.get_capital(),
             'trades_executed': len(trades),
         }
@@ -515,7 +789,7 @@ class BacktestCoordinator(Component):
             
             # IMPROVED: Calculate total PnL and verify consistency with equity curve
             total_pnl = sum(t.get('pnl', 0) for t in closed_trades if t.get('pnl') is not None)
-            equity_change = portfolio.get_capital() - portfolio.initial_capital
+            equity_change = portfolio.get_capital() - initial_capital  # Use the initial_capital we determined earlier
             pnl_equity_diff = abs(total_pnl - equity_change)
             
             # Log diagnostic info
@@ -549,4 +823,192 @@ class BacktestCoordinator(Component):
         
         # Reset all components
         for name, component in self.components.items():
-            component.reset()
+            try:
+                if hasattr(component, 'reset') and callable(getattr(component, 'reset')):
+                    component.reset()
+                    self.logger.info(f"Reset component: {name}")
+                else:
+                    self.logger.warning(f"Component {name} does not have reset method, skipping reset")
+            except Exception as e:
+                self.logger.warning(f"Error resetting component {name}: {e}")
+            
+    def _setup_broker_components(self):
+        """
+        Create and configure broker components if not provided.
+        
+        This method creates and initializes the necessary broker components
+        for backtesting, including the simulated broker, market simulator,
+        slippage model, and commission model.
+        """
+        # Check if broker components already exist in context
+        if 'broker' in self.components:
+            logger.info("Using existing broker component")
+            return
+            
+        # Get broker configuration
+        broker_config = self.config.get('broker', {})
+        
+        # Create market simulator
+        market_simulator = MarketSimulator("market_simulator", broker_config.get('market_simulator', {}))
+        
+        # Create slippage model based on configuration
+        slippage_config = broker_config.get('slippage', {})
+        slippage_type = slippage_config.get('model', 'fixed')
+        
+        if slippage_type.lower() == 'variable':
+            slippage_model = VariableSlippageModel()
+        else:
+            slippage_model = FixedSlippageModel()
+            
+        # Configure slippage model
+        slippage_model.configure(slippage_config)
+        
+        # Create commission model
+        commission_model = CommissionModel()
+        commission_model.configure(broker_config.get('commission', {}))
+        
+        # Create simulated broker
+        broker = SimulatedBroker("simulated_broker", broker_config)
+        
+        # Add components to shared context
+        self.shared_context['market_simulator'] = market_simulator
+        self.shared_context['slippage_model'] = slippage_model
+        self.shared_context['commission_model'] = commission_model
+        
+        # Register broker components
+        self.add_component('market_simulator', market_simulator)
+        self.add_component('broker', broker)
+        
+        # Log
+        logger.info("Broker components created and configured")
+        
+        # Initialize with order types if specified
+        if 'allowed_order_types' in broker_config:
+            logger.info(f"Restricting to order types: {broker_config['allowed_order_types']}")
+            
+        # Debug
+        logger.debug(f"Broker configuration: {broker_config}")
+        logger.debug(f"Slippage model: {slippage_model.__class__.__name__}")
+        logger.debug(f"Commission model: {commission_model.commission_type}, rate={commission_model.rate}")
+    
+    def on_bar_eod_check(self, event):
+        """
+        Check for end-of-day position closing.
+        
+        This method monitors bars and detects when the trading day changes.
+        When a new day is detected, it can optionally close all positions.
+        
+        Args:
+            event (Event): Bar event
+        """
+        # Early exit if EOD closing is disabled
+        if not self.close_positions_eod:
+            return
+            
+        # Get bar data
+        if hasattr(event, 'get_data') and callable(event.get_data):
+            bar_data = event.get_data()
+        elif hasattr(event, 'data'):
+            bar_data = event.data
+        else:
+            return
+            
+        # Get timestamp
+        timestamp = bar_data.get('timestamp')
+        if not timestamp:
+            return
+            
+        # Extract date (ignoring time)
+        if hasattr(timestamp, 'date'):
+            current_date = timestamp.date()
+        else:
+            # Try to convert string to datetime if needed
+            try:
+                from datetime import datetime
+                current_date = datetime.fromisoformat(str(timestamp)).date()
+            except (ValueError, TypeError):
+                logger.warning(f"Could not parse timestamp: {timestamp}")
+                return
+        
+        # First bar of the backtest - initialize the day tracking
+        if self.current_day is None:
+            self.current_day = current_date
+            return
+            
+        # Check if day has changed
+        if current_date != self.current_day:
+            # Day has changed - close positions from previous day
+            logger.info(f"Day changed from {self.current_day} to {current_date}, closing positions")
+            
+            # Close positions
+            self._close_all_positions(self.current_day)
+            
+            # Update current day
+            self.current_day = current_date
+    
+    def _close_all_positions(self, trading_day):
+        """
+        Close all open positions at the end of a trading day.
+        
+        Args:
+            trading_day: The trading day that's ending
+        """
+        # Get portfolio from components
+        portfolio = self.components.get('portfolio')
+        if not portfolio:
+            logger.warning("Cannot close positions - no portfolio component found")
+            return
+            
+        # Get position manager if available - should be provided by the portfolio
+        position_manager = portfolio.get_position_manager() if hasattr(portfolio, 'get_position_manager') else None
+        
+        # Determine which component to use for position closing
+        if position_manager:
+            # Get all open positions
+            open_positions = position_manager.get_all_positions()
+            
+            if not open_positions:
+                logger.info(f"No open positions to close for trading day {trading_day}")
+                return
+                
+            logger.info(f"Closing {len(open_positions)} positions at end of trading day {trading_day}")
+            
+            # Close each position by creating a neutralizing order
+            for symbol, position in open_positions.items():
+                # Skip if no position quantity
+                quantity = position.get('quantity', 0)
+                if quantity == 0:
+                    continue
+                    
+                # Create closing order with opposite direction
+                direction = "SELL" if quantity > 0 else "BUY"
+                close_quantity = abs(quantity)
+                
+                # Create order event
+                close_order = {
+                    'id': f"eod_close_{symbol}_{trading_day}",
+                    'symbol': symbol,
+                    'order_type': 'MARKET',
+                    'direction': direction,
+                    'quantity': close_quantity,
+                    'timestamp': datetime.datetime.now(),
+                    'status': 'CREATED',
+                    'reason': 'EOD_POSITION_CLOSE'
+                }
+                
+                # Publish order event
+                self.event_bus.publish(Event(EventType.ORDER, close_order))
+                
+                logger.info(f"Created EOD closing order for {symbol}: {direction} {close_quantity}")
+                
+                # Update stats
+                self.stats['positions_closed_eod'] += 1
+        else:
+            # Fallback to portfolio's close_all_positions method if available
+            if hasattr(portfolio, 'close_all_positions'):
+                logger.info(f"Using portfolio.close_all_positions() for EOD position closing")
+                portfolio.close_all_positions(reason="EOD_POSITION_CLOSE")
+            else:
+                logger.warning("Cannot close positions - no position manager or portfolio.close_all_positions method found")
+                
+        logger.info(f"End of day position closing completed for {trading_day}")

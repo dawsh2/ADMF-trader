@@ -1,0 +1,22 @@
+2025-05-08 20:22:51,598 - direct_fix - INFO - Starting direct optimizer fix
+2025-05-08 20:22:51,598 - direct_fix - INFO - Fixing reporter at src/strategy/optimization/reporter.py
+2025-05-08 20:22:51,598 - direct_fix - INFO - Created backup at src/strategy/optimization/reporter.py.bak
+2025-05-08 20:22:51,599 - direct_fix - INFO - Fixed best_parameters None check in src/strategy/optimization/reporter.py
+2025-05-08 20:22:51,599 - direct_fix - INFO - Fixing objective functions at src/strategy/optimization/objective_functions.py
+2025-05-08 20:22:51,599 - direct_fix - INFO - Created backup at src/strategy/optimization/objective_functions.py.bak
+2025-05-08 20:22:51,599 - direct_fix - INFO - No changes needed in objective functions in src/strategy/optimization/objective_functions.py
+2025-05-08 20:22:51,600 - direct_fix - INFO - Fix summary:
+2025-05-08 20:22:51,600 - direct_fix - INFO - Reporter fix: Applied
+2025-05-08 20:22:51,600 - direct_fix - INFO - Objective functions fix: Not applied
+2025-05-08 20:22:51,600 - direct_fix - INFO - Some fixes were applied. Please test the system to verify the fixes.
+2025-05-08 20:28:01,469 - direct_fix - INFO - Starting direct optimizer fix
+2025-05-08 20:28:01,469 - direct_fix - INFO - Fixing reporter at src/strategy/optimization/reporter.py
+2025-05-08 20:28:01,469 - direct_fix - INFO - Created backup at src/strategy/optimization/reporter.py.bak
+2025-05-08 20:28:01,470 - direct_fix - INFO - Fixed best_parameters None check in src/strategy/optimization/reporter.py
+2025-05-08 20:28:01,470 - direct_fix - INFO - Fixing objective functions at src/strategy/optimization/objective_functions.py
+2025-05-08 20:28:01,470 - direct_fix - INFO - Created backup at src/strategy/optimization/objective_functions.py.bak
+2025-05-08 20:28:01,471 - direct_fix - INFO - No changes needed in objective functions in src/strategy/optimization/objective_functions.py
+2025-05-08 20:28:01,471 - direct_fix - INFO - Fix summary:
+2025-05-08 20:28:01,471 - direct_fix - INFO - Reporter fix: Applied
+2025-05-08 20:28:01,471 - direct_fix - INFO - Objective functions fix: Not applied
+2025-05-08 20:28:01,471 - direct_fix - INFO - Some fixes were applied. Please test the system to verify the fixes.

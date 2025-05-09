@@ -32,6 +32,9 @@ class Position:
         self.id = str(uuid.uuid4())
         self.last_update = datetime.datetime.now()
         
+        # Add average_price attribute (required by portfolio manager)
+        self.average_price = cost_basis
+        
         # Track transactions for analysis
         self.transactions = []
         
@@ -76,6 +79,7 @@ class Position:
             self.quantity = quantity_change
             self._total_cost = abs(quantity_change) * price
             self.cost_basis = price
+            self.average_price = price
             logger.debug(f"Opening new position: quantity={self.quantity}, cost_basis={self.cost_basis}")
 
         elif self.quantity * quantity_change > 0:
@@ -85,6 +89,7 @@ class Position:
             self._total_cost += abs(quantity_change) * price
             if abs(self.quantity) > 0:
                 self.cost_basis = self._total_cost / abs(self.quantity)
+                self.average_price = self.cost_basis
             logger.debug(f"Adding to position: new quantity={self.quantity}, new cost_basis={self.cost_basis}")
 
         else:
@@ -135,6 +140,7 @@ class Position:
                 self.quantity = remaining_quantity
                 self._total_cost = flip_quantity * price
                 self.cost_basis = price
+                self.average_price = price
                 logger.debug(f"Position flipped: new quantity={self.quantity}, new cost_basis={self.cost_basis}")
 
         # Update realized P&L
@@ -420,6 +426,7 @@ class Position:
             'symbol': self.symbol,
             'quantity': self.quantity,
             'cost_basis': self.cost_basis,
+            'average_price': self.average_price,
             'current_price': self.current_price,
             'market_value': self.quantity * self.current_price,
             'realized_pnl': self.realized_pnl,
@@ -443,6 +450,13 @@ class Position:
         position = cls(data["symbol"], data["quantity"], data["cost_basis"])
         position.realized_pnl = data["realized_pnl"]
         position.current_price = data["current_price"]
+        
+        # Handle average_price field
+        if "average_price" in data:
+            position.average_price = data["average_price"]
+        else:
+            # Default to cost_basis if average_price not provided
+            position.average_price = data["cost_basis"]
         
         if "id" in data:
             position.id = data["id"]
