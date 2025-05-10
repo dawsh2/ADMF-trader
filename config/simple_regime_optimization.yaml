@@ -1,0 +1,96 @@
+# Simple Regime Ensemble Optimization Configuration
+# This configuration is optimized to work with the current ADMF-trader system architecture
+
+# Mode
+mode: backtest
+
+# Basic settings
+backtest:
+  initial_capital: 100000.0
+  symbols: ['SPY']
+  timeframe: "1min"
+  optimize: true
+
+# Data configuration
+data:
+  source_type: csv
+  date_column: timestamp
+  date_format: "%Y-%m-%d %H:%M:%S"
+  sources:
+    - symbol: SPY
+      file: data/SPY_1min.csv
+      price_column: close
+  
+  # Train/test split configuration (70% train, 30% test)
+  train_test_split:
+    method: ratio
+    train_ratio: 0.7
+    test_ratio: 0.3
+
+# Strategy configuration
+strategy:
+  name: simple_regime_ensemble  # This matches the strategy class name in simple_regime_ensemble.py
+  default_params:
+    # Regime detection parameters
+    volatility_window: 60
+    volatility_threshold: 0.002
+    trend_ma_window: 120
+    trend_threshold: 0.01
+    
+    # Strategy parameters - Trend following
+    fast_ma_window: 20
+    slow_ma_window: 60
+    
+    # Strategy parameters - Mean reversion
+    rsi_window: 30
+    rsi_overbought: 70
+    rsi_oversold: 30
+    
+    # Strategy parameters - Volatility breakout
+    breakout_window: 60
+    breakout_multiplier: 1.5
+
+# Optimization settings
+optimization:
+  method: grid
+  objective: sharpe_ratio
+  output_dir: ./optimization_results
+
+# Parameter space definition for optimization
+parameter_space:
+  # Limited parameter space for testing
+  - name: volatility_window
+    type: integer
+    min: 30
+    max: 90
+    step: 30
+    description: "Volatility calculation window"
+
+  - name: fast_ma_window
+    type: integer
+    min: 10
+    max: 30
+    step: 10
+    description: "Fast moving average window"
+
+  - name: slow_ma_window
+    type: integer
+    min: 30
+    max: 90
+    step: 30
+    description: "Slow moving average window"
+
+# Broker configuration
+broker:
+  slippage: 
+    type: percentage
+    amount: 0.0005
+  commission:
+    type: percentage
+    rate: 0.0005
+
+# Risk management settings
+risk:
+  position_sizing_method: fixed
+  position_size: 100
+  max_position_pct: 0.05

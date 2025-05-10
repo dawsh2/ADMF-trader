@@ -320,13 +320,20 @@ class BacktestCoordinator(Component):
             
             # Check if we've reached a limit
             max_bars = self.shared_context.get('max_bars')
+            if max_bars is None and 'config' in self.shared_context:
+                # Try to get max_bars from config
+                config = self.shared_context.get('config')
+                max_bars = config.get('max_bars') if hasattr(config, 'get') else None
+                if max_bars:
+                    self.logger.info(f"Found max_bars={max_bars} in config")
+
             if max_bars and bar_count >= max_bars:
                 self.logger.info(f"Reached bar limit of {max_bars}, stopping backtest")
                 break
         
         # Close all open trades at the end of the backtest
         self.close_all_open_trades()
-            
+
         # Signal end of backtest
         self.event_bus.publish(Event(EventType.BACKTEST_END, {}))
         
@@ -946,10 +953,115 @@ class BacktestCoordinator(Component):
             # Update current day
             self.current_day = current_date
     
+    def close_all_open_trades(self):
+        """
+        Close all open trades at the end of the backtest using last available prices.
+        This ensures all PnL is realized and metrics are based on closed trades only.
+        """
+        # Get the portfolio
+        portfolio = self.components.get('portfolio')
+        if not portfolio:
+            self.logger.warning("Cannot close positions - no portfolio component found")
+            return
+
+        # Get current time for close timestamp
+        current_time = datetime.datetime.now()
+
+        # Try different approaches to get the latest timestamp from data
+        data_handler = self.components.get('data_handler')
+        if data_handler:
+            # Try various methods that might exist on the data handler
+            if hasattr(data_handler, 'get_current_timestamp'):
+                current_time = data_handler.get_current_timestamp()
+            elif hasattr(data_handler, 'latest_timestamp'):
+                current_time = data_handler.latest_timestamp
+            # For CSV data handler, try to get the last timestamp from a symbol's latest bar
+            elif hasattr(data_handler, 'get_latest_bar') and hasattr(data_handler, 'symbols'):
+                for symbol in data_handler.symbols:
+                    bar = data_handler.get_latest_bar(symbol)
+                    if bar and hasattr(bar, 'timestamp'):
+                        current_time = bar.timestamp
+                        break
+
+        # Try different approaches to close positions
+        positions_closed = False
+
+        # Approach 1: Use portfolio's close_all_positions method if available
+        if hasattr(portfolio, 'close_all_positions') and callable(getattr(portfolio, 'close_all_positions')):
+            try:
+                self.logger.info("Attempting to close positions using portfolio.close_all_positions()")
+                closed_trades = portfolio.close_all_positions(current_time)
+                if closed_trades:
+                    self.logger.info(f"Closed {len(closed_trades)} positions at end of backtest")
+                    positions_closed = True
+                else:
+                    self.logger.info("No open trades to close at end of backtest (or method returned None)")
+            except Exception as e:
+                self.logger.warning(f"Error closing positions with portfolio.close_all_positions(): {e}")
+
+        # Approach 2: If the first approach didn't work, try to access positions and close them directly
+        if not positions_closed:
+            self.logger.info("Attempting alternative position closing approach")
+            broker = self.components.get('broker')
+            positions = None
+
+            # Try different ways to get positions
+            if hasattr(portfolio, 'get_positions') and callable(getattr(portfolio, 'get_positions')):
+                positions = portfolio.get_positions()
+            elif hasattr(portfolio, 'positions'):
+                positions = portfolio.positions
+
+            if positions and broker:
+                closed_count = 0
+                # Create closing orders for each position
+                for symbol, position in positions.items():
+                    # Get position quantity (handle different position formats)
+                    quantity = 0
+                    if isinstance(position, dict):
+                        quantity = position.get('quantity', 0)
+                    elif hasattr(position, 'quantity'):
+                        quantity = position.quantity
+
+                    if quantity != 0:
+                        # Create a market order in the opposite direction
+                        direction = "SELL" if quantity > 0 else "BUY"
+                        close_quantity = abs(quantity)
+
+                        # Create order data
+                        order_data = {
+                            'symbol': symbol,
+                            'order_type': 'MARKET',
+                            'direction': direction,
+                            'quantity': close_quantity,
+                            'timestamp': current_time,
+                            'reason': 'BACKTEST_END_CLOSING'
+                        }
+
+                        # Execute the order directly through the broker if possible
+                        if hasattr(broker, 'execute_order') and callable(getattr(broker, 'execute_order')):
+                            self.logger.info(f"Closing {quantity} {symbol} position with direct broker order")
+                            broker.execute_order(order_data)
+                            closed_count += 1
+                        # Or send through event bus
+                        elif self.event_bus:
+                            self.logger.info(f"Closing {quantity} {symbol} position with order event")
+                            self.event_bus.publish(Event(EventType.ORDER, order_data))
+                            closed_count += 1
+
+                if closed_count > 0:
+                    self.logger.info(f"Closed {closed_count} positions at end of backtest")
+                    positions_closed = True
+                else:
+                    self.logger.info("No positions to close")
+
+        # Log warning if we couldn't close positions by any method
+        if not positions_closed:
+            self.logger.warning("Could not close positions - neither portfolio.close_all_positions() nor direct order creation worked")
+
     def _close_all_positions(self, trading_day):
         """
         Close all open positions at the end of a trading day.
-        
+
         Args:
             trading_day: The trading day that's ending
         """

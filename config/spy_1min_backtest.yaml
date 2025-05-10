@@ -1,0 +1,91 @@
+# SPY 1-minute Backtest Configuration with Analytics
+
+# System mode
+mode: backtest
+
+# Basic settings
+name: SPY 1-minute MA Crossover Backtest
+description: "Backtest using 1-minute SPY data with moving average crossover strategy"
+initial_capital: 100000
+commission_rate: 0.001
+
+# Data settings
+data:
+  # Data configuration for minute data
+  date_column: date  
+  date_format: "%Y-%m-%d %H:%M:%S"  # Include time for minute data
+  sources:
+    - symbol: SPY
+      file: data/SPY_1min.csv
+
+# Strategy settings
+strategy:
+  name: simple_ma_crossover
+  default_params:
+    fast_period: 20    # Faster MA for minute data
+    slow_period: 50    # Slower MA for minute data
+    position_size: 100
+
+# Analytics settings - this enables automatic reporting after backtest
+analytics:
+  # Enable analytics processing and reporting
+  enabled: true
+  
+  # Analysis settings
+  analysis:
+    risk_free_rate: 0.0
+    periods_per_year: 252 * 390  # 252 trading days * 390 minutes per day
+    metrics:
+      - total_return
+      - annualized_return
+      - sharpe_ratio
+      - sortino_ratio
+      - calmar_ratio
+      - max_drawdown
+      - volatility
+      - win_rate
+      - profit_factor
+      - expectancy
+  
+  # Reporting settings
+  reporting:
+    # Enable report generation
+    enabled: true
+    
+    # Output directory
+    output_directory: "./results/reports"
+    
+    # Report formats to generate
+    formats:
+      - text
+      - html
+    
+    # Text report settings
+    text:
+      width: 100
+    
+    # HTML report settings
+    html:
+      title: "SPY 1-minute Backtest Performance Report"
+      description: "Analysis of MA crossover strategy on 1-minute SPY data"
+      charts:
+        - equity_curve
+        - returns_distribution
+        - monthly_returns
+        - trade_pnl
+
+# Broker settings
+broker:
+  # Market simulator settings
+  market_simulator:
+    price_impact: 0.0001  # Price impact per unit of volume
+  
+  # Slippage model - more realistic for intraday
+  slippage:
+    model: fixed
+    value: 0.0010  # 0.10% slippage for intraday trading
+  
+  # Commission model - higher for intraday
+  commission:
+    type: percentage
+    rate: 0.0015  # 0.15% commission for intraday trading

@@ -60,18 +60,39 @@ class SimpleMACrossoverStrategy(Component):
     def initialize(self, context):
         """
         Initialize with dependencies.
-        
+
         Args:
             context (dict): Context containing dependencies
         """
         super().initialize(context)
-        
+
         # Get event bus from context
         self.event_bus = context.get('event_bus')
-        
+
         if not self.event_bus:
             raise ValueError("Strategy requires event_bus in context")
-            
+
+        # Ensure our fast and slow periods make sense
+        if self.fast_period >= self.slow_period:
+            logger.warning(f"Fast period ({self.fast_period}) should be smaller than slow period ({self.slow_period}). Setting fast=slow-1")
+            self.fast_period = self.slow_period - 1
+
+        # Validate that we have enough data for these lookback periods
+        data_handler = context.get('data_handler')
+        if data_handler:
+            # Get the active split ('train' or 'test')
+            active_split = getattr(data_handler, 'current_split', None)
+
+            # Get the number of data points in the current split
+            symbols = data_handler.get_symbols()
+            if active_split and symbols and hasattr(data_handler, 'data_splits'):
+                for symbol in symbols:
+                    if symbol in data_handler.data_splits and active_split in data_handler.data_splits[symbol]:
+                        data_length = len(data_handler.data_splits[symbol][active_split])
+                        if data_length < self.slow_period * 2:  # Need at least 2x slow period for meaningful results
+                            logger.warning(f"Insufficient data for {symbol} in {active_split} split: {data_length} bars < {self.slow_period*2} required")
+                            logger.warning(f"Performance will be poor with these parameters on this dataset")
+
         # New: Get risk config if available
         risk_config = context.get('config', {}).get('risk', {})
         position_manager_config = risk_config.get('position_manager', {})

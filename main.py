@@ -212,25 +212,65 @@ def run_optimization(args):
         debug=args.debug,
         log_file=args.log_file or "optimization.log"
     )
-    
-    # Initialize system
+
+    # Store max bars limit in the bootstrap context if specified
+    if args.bars is not None:
+        bootstrap.set_context_value('max_bars', args.bars)
+        logger.info(f"Setting max_bars={args.bars} for optimization")
+
+    # Initialize system - this sets up the container and loads the config
     container, config = bootstrap.setup()
-    
-    # Override method if specified
-    if args.method:
-        logger.info(f"Using optimization method: {args.method}")
-        # TODO: Apply method override
+
+    # Make sure bootstrap is available in the container
+    if not hasattr(container, 'register_instance'):
+        logger.warning("Container doesn't have register_instance method")
+    else:
+        # Register bootstrap in container so run_with_context can access it
+        container.register_instance('bootstrap', bootstrap)
+        logger.info(f"Registered bootstrap in container with max_bars={bootstrap.context.get('max_bars')}")
+
+    # Also directly modify the config to include max_bars
+    if args.bars is not None and hasattr(config, 'set'):
+        config.set('max_bars', args.bars)
+        logger.info(f"Set max_bars={args.bars} directly in config")
+
+    # Import the optimization runner
+    try:
+        from src.strategy.optimization.runner import run_with_context
         
-    # Use param file if specified
-    if args.param_file:
-        logger.info(f"Using parameter space from: {args.param_file}")
-        # TODO: Load parameter space from file
+        # Run optimization with the configured container and any command line overrides
+        # Pass max_bars directly as a keyword argument
+        kwargs = {
+            'method': args.method,
+            'param_file': args.param_file,
+            'output_dir': args.output_dir
+        }
+
+        # Add max_bars if specified
+        if args.bars is not None:
+            kwargs['max_bars'] = args.bars
+            logger.info(f"Passing max_bars={args.bars} directly to run_with_context")
+
+        success, message, _ = run_with_context(
+            config,
+            container,
+            **kwargs
+        )
         
-    # Get optimizer from container
-    # TODO: Implement optimizer orchestration once components are ready
-    logger.info("Optimization functionality not yet implemented")
-    
-    return 0
+        # Display result
+        if success:
+            logger.info(message)
+            return 0
+        else:
+            logger.error(message)
+            return 1
+            
+    except ImportError:
+        logger.error("Optimization module not found")
+        return 1
+    except Exception as e:
+        logger.error(f"Error running optimization: {e}", exc_info=True)
+        return 1
 
 if __name__ == "__main__":
     sys.exit(main())

@@ -1,0 +1,93 @@
+# Simplified Regime Ensemble Strategy Optimization Configuration
+# This is a minimal configuration designed to work with the existing optimization system
+
+# Basic settings
+backtest:
+  initial_capital: 100000.0
+  symbols:
+  - SPY
+  timeframe: 1min
+
+# Data configuration
+data:
+  source_type: csv
+  sources:
+  - date_column: timestamp
+    date_format: '%Y-%m-%d %H:%M:%S'
+    file: data/SPY_1min.csv
+    price_column: close
+    symbol: SPY
+  
+  # Train/test split configuration (70% train, 30% test)
+  train_test_split:
+    method: ratio
+    train_ratio: 0.7
+    test_ratio: 0.3
+
+# Initial capital
+initial_capital: 100000.0
+
+# Optimization settings - matching the format used in ma_crossover_optimization.yaml
+optimization:
+  method: grid
+  objective: sharpe_ratio
+  
+# Parameter space definition - similar to ma_crossover_optimization.yaml
+parameter_space:
+# Limited parameter space for initial testing
+- description: Fast moving average window
+  max: 30
+  min: 10
+  name: fast_ma_window
+  step: 10
+  type: integer
+- description: Slow moving average window
+  max: 90
+  min: 30
+  name: slow_ma_window
+  step: 30
+  type: integer
+- description: Volatility window
+  max: 90
+  min: 30
+  name: volatility_window
+  step: 30
+  type: integer
+
+# Risk settings - matching the format used in ma_crossover_optimization.yaml
+risk:
+  position_manager:
+    config:
+      config:
+        allow_multiple_entries: false
+        enforce_single_position: true
+        fixed_quantity: 100
+        max_positions: 1
+        position_sizing_method: fixed
+      position_sizing_method: fixed
+
+# Strategy configuration - matching the format used in ma_crossover_optimization.yaml
+strategy:
+  name: simple_regime_ensemble
+  parameters:
+    # Default parameters that will be overridden by the optimizer
+    volatility_window: 60
+    volatility_threshold: 0.002
+    trend_ma_window: 120
+    trend_threshold: 0.01
+    fast_ma_window: 20
+    slow_ma_window: 60
+    rsi_window: 30
+    rsi_overbought: 70
+    rsi_oversold: 30
+    breakout_window: 60
+    breakout_multiplier: 1.5
+
+# Broker configuration
+broker:
+  slippage: 
+    type: percentage
+    amount: 0.0005
+  commission:
+    type: percentage
+    rate: 0.0005

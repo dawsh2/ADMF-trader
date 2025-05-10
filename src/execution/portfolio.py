@@ -255,22 +255,33 @@ class Portfolio(Component):
         """Publish portfolio update event."""
         # Calculate closed-only equity using closed trade PnL only
         closed_only_equity = self.initial_capital + closed_pnl
-        
+
         # Calculate market value separately from cash positions
+        # FIXED: Calculate market value for ALL open positions, not just the current symbol
         market_value = 0
         for symbol, quantity in self.positions.items():
             if quantity != 0:
                 # If we have price data available for this symbol
                 last_fill_price = self._get_last_price(symbol)
                 if last_fill_price is not None:
-                    market_value += quantity * last_fill_price
-        
+                    position_value = quantity * last_fill_price
+                    market_value += position_value
+                    self.logger.debug(f"Position value for {symbol}: {quantity} x {last_fill_price:.2f} = {position_value:.2f}")
+                else:
+                    self.logger.warning(f"No price data available for {symbol} - position value not included in equity")
+
         # Log market value for debugging
-        self.logger.debug(f"Market value: {market_value:.2f}, Cash: {self.current_capital:.2f}")
-        
+        self.logger.debug(f"Total market value: {market_value:.2f}, Cash: {self.current_capital:.2f}")
+
         # Full equity includes both cash and market value
         full_equity = self.current_capital + market_value
-        
+
+        # Store values in history for tracking
+        if timestamp:
+            self.cash_history.append(self.current_capital)
+            self.equity_history.append(full_equity)
+            self.timestamp_history.append(timestamp)
+
         update_data = {
             'timestamp': timestamp,
             'capital': self.current_capital,  # Cash only
@@ -281,11 +292,11 @@ class Portfolio(Component):
             'market_value': market_value,  # Explicit market value
             'full_equity': full_equity  # Cash + market value
         }
-        
+
         self.logger.debug(f"Portfolio update: Capital={self.current_capital:.2f}, "
                           f"Closed PnL={closed_pnl:.2f}, Market Value={market_value:.2f}, "
                           f"Full Equity={full_equity:.2f}")
-        
+
         self.event_bus.publish(Event(
             EventType.PORTFOLIO,
             update_data
@@ -333,22 +344,102 @@ class Portfolio(Component):
     def get_closed_trades(self, symbol=None):
         """
         Get closed trades, optionally filtered by symbol.
-        
+
         Args:
             symbol (str, optional): Symbol to filter by
-            
+
         Returns:
             list: Closed trades
         """
         return self.trade_repository.get_closed_trades(symbol)
-        
+
+    def close_all_positions(self, timestamp=None):
+        """
+        Close all open positions at the current timestamp.
+
+        Args:
+            timestamp (datetime, optional): Timestamp to use for closing
+
+        Returns:
+            list: Closed trades
+        """
+        if not timestamp:
+            import datetime
+            timestamp = datetime.datetime.now()
+
+        self.logger.info(f"Closing all positions at timestamp: {timestamp}")
+
+        closed_trades = []
+        open_positions = [symbol for symbol, quantity in self.positions.items() if quantity != 0]
+
+        # Nothing to close
+        if not open_positions:
+            self.logger.info("No open positions to close")
+            return closed_trades
+
+        for symbol in open_positions:
+            # Get the quantity
+            quantity = self.positions[symbol]
+            if quantity == 0:
+                continue
+
+            # Get the last price for the symbol
+            last_price = self._get_last_price(symbol)
+            if not last_price:
+                self.logger.warning(f"No price data for {symbol} to close position")
+                continue
+
+            # Find open trades for this symbol
+            open_trades = self.trade_repository.get_open_trades(symbol)
+            if not open_trades:
+                self.logger.warning(f"No open trades found for {symbol} despite open position")
+                continue
+
+            # Close trades
+            for trade in open_trades:
+                trade_id = trade.get('id')
+                try:
+                    # Use the trade repository to close the trade
+                    closed_trade = self.trade_repository.close_trade(
+                        trade_id=trade_id,
+                        close_price=last_price,
+                        close_time=timestamp
+                    )
+
+                    if closed_trade:
+                        closed_trades.append(closed_trade)
+                        # Update realized PnL tracking
+                        self.realized_pnl += closed_trade.get('pnl', 0.0)
+
+                        # Log the trade close
+                        self.logger.info(f"Closed trade {trade_id} at {last_price:.2f} with PnL {closed_trade.get('pnl', 0.0):.2f}")
+
+                        # Set position to zero - this position is now closed
+                        self.positions[symbol] = 0
+
+                        # Publish trade close event for subscribers
+                        self.event_bus.publish(Event(
+                            EventType.TRADE_CLOSE,
+                            closed_trade
+                        ))
+                except Exception as e:
+                    self.logger.error(f"Error closing trade {trade_id}: {e}")
+
+        # Update portfolio state
+        total_closed_pnl = sum(t.get('pnl', 0) for t in closed_trades if t.get('pnl') is not None)
+        self._publish_update(timestamp, closed_pnl=self.realized_pnl, open_value=0)
+
+        self.logger.info(f"Closed {len(closed_trades)} trades with total PnL: {total_closed_pnl:.2f}")
+
+        return closed_trades
+
     def add_trade(self, trade):
         """
         Add a trade to the portfolio.
-        
+
         Args:
             trade (dict): Trade data
-            
+
         Returns:
             bool: True if the trade was added successfully
         """

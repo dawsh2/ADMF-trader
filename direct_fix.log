@@ -1,0 +1,25 @@
+2025-05-09 16:35:54,131 - direct_fix - INFO - Starting direct train/test split verification
+2025-05-09 16:35:54,131 - direct_fix - INFO - Loading SPY 1min data directly
+2025-05-09 16:35:54,182 - direct_fix - INFO - Loaded 102236 rows from data/SPY_1min.csv
+2025-05-09 16:35:54,199 - direct_fix - INFO - Date range: 2024-03-26 13:30:00 to 2025-04-02 19:23:00
+2025-05-09 16:35:54,201 - direct_fix - INFO - Created train dataset with 71565 rows
+2025-05-09 16:35:54,201 - direct_fix - INFO - Created test dataset with 30671 rows
+2025-05-09 16:35:54,276 - direct_fix - INFO - SUCCESS: No overlapping timestamps between train and test.
+2025-05-09 16:35:54,276 - direct_fix - INFO - Running strategy on train dataset...
+2025-05-09 16:36:26,763 - direct_fix - INFO - Starting direct train/test split verification
+2025-05-09 16:36:26,763 - direct_fix - INFO - Loading SPY 1min data directly
+2025-05-09 16:36:26,811 - direct_fix - INFO - Loaded 102236 rows from data/SPY_1min.csv
+2025-05-09 16:36:26,829 - direct_fix - INFO - Date range: 2024-03-26 13:30:00 to 2025-04-02 19:23:00
+2025-05-09 16:36:26,831 - direct_fix - INFO - Created train dataset with 71565 rows
+2025-05-09 16:36:26,831 - direct_fix - INFO - Created test dataset with 30671 rows
+2025-05-09 16:36:26,903 - direct_fix - INFO - SUCCESS: No overlapping timestamps between train and test.
+2025-05-09 16:36:26,903 - direct_fix - INFO - Running strategy on train dataset...
+2025-05-09 16:36:26,904 - direct_fix - INFO - Using price column: Close
+2025-05-09 16:36:26,914 - direct_fix - INFO - Running strategy on test dataset...
+2025-05-09 16:36:26,914 - direct_fix - INFO - Using price column: Close
+2025-05-09 16:36:26,919 - direct_fix - INFO - Train results: {'total_return': np.float64(-0.06419003510370302), 'sharpe_ratio': np.float64(-0.03201802964523799), 'num_trades': 2657}
+2025-05-09 16:36:26,919 - direct_fix - INFO - Test results: {'total_return': np.float64(0.0888465497943185), 'sharpe_ratio': np.float64(0.0906051058016358), 'num_trades': 1126}
+2025-05-09 16:36:26,919 - direct_fix - INFO - SUCCESS: Train and test results are different as expected!
+2025-05-09 16:36:26,919 - direct_fix - INFO - Total return difference: 238.04%
+2025-05-09 16:36:26,919 - direct_fix - INFO - Sharpe ratio difference: 381.79%
+2025-05-09 16:36:26,921 - direct_fix - INFO - ✅ VERIFICATION PASSED: Train/test split is working correctly in isolation

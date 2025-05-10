@@ -134,7 +134,8 @@ class StrategyFactory:
             'SimpleMovingAverageCrossoverStrategy': 'simple_ma_crossover',
             'MovingAverageCrossoverStrategy': 'ma_crossover',
             'SimpleMACrossoverStrategy': 'simple_ma_crossover',
-            'RSIStrategy': 'rsi'
+            'RSIStrategy': 'rsi',
+            'SimpleRegimeEnsembleStrategy': 'regime_ensemble'
             # Add more mappings as needed
         }
         

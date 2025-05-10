@@ -1,0 +1,23 @@
+================================================================================
+OPTIMIZATION REPORT: simple_ma_crossover
+Timestamp: 20250509_161315
+================================================================================
+
+CONFIGURATION
+--------------------------------------------------------------------------------
+Optimization Method: grid
+Objective Function: sharpe_ratio
+Symbols: 
+Train/Test Split: ratio (Train: 0.70, Test: 0.30)
+
+PARAMETER SPACE
+--------------------------------------------------------------------------------
+<src.strategy.optimization.parameter_space.ParameterSpace object at 0x105976120>
+
+
+BEST PARAMETERS
+--------------------------------------------------------------------------------
+No valid parameters found. Optimization may have failed to produce results.
+
+PERFORMANCE METRICS
+--------------------------------------------------------------------------------

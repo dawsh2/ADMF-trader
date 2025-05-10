@@ -1,0 +1,625 @@
+2025-05-09 16:24:00,880 - debug_train_test - INFO - Starting train/test debug with config: config/simple_ma_optimization.yaml
+2025-05-09 16:24:00,880 - debug_train_test - INFO - 
+
+Testing TimeSeriesSplitter in isolation
+2025-05-09 16:24:00,880 - debug_train_test - INFO - ==================================================
+2025-05-09 16:24:00,886 - debug_train_test - INFO - Created test DataFrame with shape (100, 3)
+2025-05-09 16:24:00,886 - debug_train_test - INFO - ===== Original Test Data DataFrame Inspection =====
+2025-05-09 16:24:00,886 - debug_train_test - INFO - Shape: (100, 3)
+2025-05-09 16:24:00,887 - debug_train_test - INFO - Date range: 2023-01-01 00:00:00 to 2023-04-10 00:00:00
+2025-05-09 16:24:00,888 - debug_train_test - INFO - Fingerprint: 42c81c020bdbdee397b9e236e263520f
+2025-05-09 16:24:00,888 - debug_train_test - INFO - ==================================================
+2025-05-09 16:24:29,619 - debug_train_test - INFO - Starting train/test debug with config: config/simple_ma_optimization.yaml
+2025-05-09 16:24:29,620 - debug_train_test - INFO - 
+
+Testing TimeSeriesSplitter in isolation
+2025-05-09 16:24:29,620 - debug_train_test - INFO - ==================================================
+2025-05-09 16:24:29,622 - debug_train_test - INFO - Created test DataFrame with shape (100, 3)
+2025-05-09 16:24:29,622 - debug_train_test - INFO - ===== Original Test Data DataFrame Inspection =====
+2025-05-09 16:24:29,622 - debug_train_test - INFO - Shape: (100, 3)
+2025-05-09 16:24:29,623 - debug_train_test - INFO - Date range: 2023-01-01 00:00:00 to 2023-04-10 00:00:00
+2025-05-09 16:24:29,624 - debug_train_test - INFO - Fingerprint: a038081cdaa4c751bd002ac8909d3d7c
+2025-05-09 16:24:29,625 - debug_train_test - INFO - ==================================================
+2025-05-09 16:24:29,626 - data.time_series_splitter - INFO - Created train dataset: 70 rows
+2025-05-09 16:24:29,627 - data.time_series_splitter - INFO -   Train period: 2023-01-01 00:00:00 to 2023-03-11 00:00:00
+2025-05-09 16:24:29,627 - data.time_series_splitter - INFO - Created test dataset: 30 rows
+2025-05-09 16:24:29,627 - data.time_series_splitter - INFO -   Test period: 2023-03-12 00:00:00 to 2023-04-10 00:00:00
+2025-05-09 16:24:29,627 - debug_train_test - INFO - ===== Train Split (Direct) DataFrame Inspection =====
+2025-05-09 16:24:29,627 - debug_train_test - INFO - Shape: (70, 4)
+2025-05-09 16:24:29,627 - debug_train_test - INFO - Date range: 2023-01-01 00:00:00 to 2023-03-11 00:00:00
+2025-05-09 16:24:29,628 - debug_train_test - INFO - Fingerprint: 4c42da8c052981f1329e2245e9939601
+2025-05-09 16:24:29,630 - debug_train_test - INFO - First 5 rows:
+   timestamp  value       close _split
+0 2023-01-01      0  101.487034  train
+1 2023-01-02      1   99.896519  train
+2 2023-01-03      2  100.261181  train
+3 2023-01-04      3   99.892926  train
+4 2023-01-05      4  100.436222  train
+2025-05-09 16:24:29,631 - debug_train_test - INFO - Last 5 rows:
+    timestamp  value      close _split
+65 2023-03-07     65  86.022745  train
+66 2023-03-08     66  84.918090  train
+67 2023-03-09     67  86.965186  train
+68 2023-03-10     68  87.482032  train
+69 2023-03-11     69  86.531967  train
+2025-05-09 16:24:29,631 - debug_train_test - INFO - Column info: timestamp    datetime64[ns]
+value                 int64
+close               float64
+_split               object
+dtype: object
+2025-05-09 16:24:29,632 - debug_train_test - INFO - Memory usage: 0.00 MB
+2025-05-09 16:24:29,632 - debug_train_test - INFO - Split marker: ['train']
+2025-05-09 16:24:29,632 - debug_train_test - INFO - ==================================================
+2025-05-09 16:24:29,632 - debug_train_test - INFO - ===== Test Split (Direct) DataFrame Inspection =====
+2025-05-09 16:24:29,632 - debug_train_test - INFO - Shape: (30, 4)
+2025-05-09 16:24:29,632 - debug_train_test - INFO - Date range: 2023-03-12 00:00:00 to 2023-04-10 00:00:00
+2025-05-09 16:24:29,632 - debug_train_test - INFO - Fingerprint: 0d7f354251ef226e1a2f504ace68db35
+2025-05-09 16:24:29,633 - debug_train_test - INFO - First 5 rows:
+   timestamp  value      close _split
+0 2023-03-12     70  88.000477   test
+1 2023-03-13     71  90.044560   test
+2 2023-03-14     72  91.780917   test
+3 2023-03-15     73  93.124150   test
+4 2023-03-16     74  93.915474   test
+2025-05-09 16:24:29,634 - debug_train_test - INFO - Last 5 rows:
+    timestamp  value      close _split
+25 2023-04-06     95  88.792776   test
+26 2023-04-07     96  89.926892   test
+27 2023-04-08     97  88.858747   test
+28 2023-04-09     98  87.610306   test
+29 2023-04-10     99  89.743524   test
+2025-05-09 16:24:29,634 - debug_train_test - INFO - Column info: timestamp    datetime64[ns]
+value                 int64
+close               float64
+_split               object
+dtype: object
+2025-05-09 16:24:29,635 - debug_train_test - INFO - Memory usage: 0.00 MB
+2025-05-09 16:24:29,635 - debug_train_test - INFO - Split marker: ['test']
+2025-05-09 16:24:29,635 - debug_train_test - INFO - ==================================================
+2025-05-09 16:24:29,635 - debug_train_test - INFO - Checking for data isolation:
+2025-05-09 16:24:29,635 - debug_train_test - INFO - Train shape: (70, 4), Test shape: (30, 4)
+2025-05-09 16:24:29,635 - debug_train_test - INFO - Are train and test DataFrames the same object? False
+2025-05-09 16:24:29,635 - debug_train_test - INFO - Testing data isolation by modifying train DataFrame
+2025-05-09 16:24:29,635 - debug_train_test - INFO - Modified train_df[0, 'value'] to 9999
+2025-05-09 16:24:29,635 - debug_train_test - INFO - Now train_df[0, 'value'] = 9999
+2025-05-09 16:24:29,636 - debug_train_test - INFO - test_df first few rows:
+   timestamp  value      close _split
+0 2023-03-12     70  88.000477   test
+1 2023-03-13     71  90.044560   test
+2 2023-03-14     72  91.780917   test
+3 2023-03-15     73  93.124150   test
+4 2023-03-16     74  93.915474   test
+2025-05-09 16:24:29,636 - debug_train_test - INFO - ✅ No data leakage detected. Modifications to train don't affect test.
+2025-05-09 16:24:29,636 - debug_train_test - INFO - 
+
+Testing HistoricalDataHandler with config file
+2025-05-09 16:24:29,636 - debug_train_test - INFO - ==================================================
+2025-05-09 16:24:29,638 - debug_train_test - INFO - Loaded config from config/simple_ma_optimization.yaml
+2025-05-09 16:24:59,316 - debug_train_test - INFO - Starting train/test debug with config: config/simple_ma_optimization.yaml
+2025-05-09 16:24:59,316 - debug_train_test - INFO - 
+
+Testing TimeSeriesSplitter in isolation
+2025-05-09 16:24:59,316 - debug_train_test - INFO - ==================================================
+2025-05-09 16:24:59,318 - debug_train_test - INFO - Created test DataFrame with shape (100, 3)
+2025-05-09 16:24:59,318 - debug_train_test - INFO - ===== Original Test Data DataFrame Inspection =====
+2025-05-09 16:24:59,318 - debug_train_test - INFO - Shape: (100, 3)
+2025-05-09 16:24:59,320 - debug_train_test - INFO - Date range: 2023-01-01 00:00:00 to 2023-04-10 00:00:00
+2025-05-09 16:24:59,321 - debug_train_test - INFO - Fingerprint: 5057ef7af7f8a0fd4e3ed8557b06ed89
+2025-05-09 16:24:59,321 - debug_train_test - INFO - ==================================================
+2025-05-09 16:24:59,323 - data.time_series_splitter - INFO - Created train dataset: 70 rows
+2025-05-09 16:24:59,323 - data.time_series_splitter - INFO -   Train period: 2023-01-01 00:00:00 to 2023-03-11 00:00:00
+2025-05-09 16:24:59,323 - data.time_series_splitter - INFO - Created test dataset: 30 rows
+2025-05-09 16:24:59,323 - data.time_series_splitter - INFO -   Test period: 2023-03-12 00:00:00 to 2023-04-10 00:00:00
+2025-05-09 16:24:59,323 - debug_train_test - INFO - ===== Train Split (Direct) DataFrame Inspection =====
+2025-05-09 16:24:59,323 - debug_train_test - INFO - Shape: (70, 4)
+2025-05-09 16:24:59,324 - debug_train_test - INFO - Date range: 2023-01-01 00:00:00 to 2023-03-11 00:00:00
+2025-05-09 16:24:59,325 - debug_train_test - INFO - Fingerprint: cff724ac220c9d9d70dfc45f7b587b66
+2025-05-09 16:24:59,327 - debug_train_test - INFO - First 5 rows:
+   timestamp  value       close _split
+0 2023-01-01      0  100.512486  train
+1 2023-01-02      1  100.860731  train
+2 2023-01-03      2  101.371505  train
+3 2023-01-04      3  101.056517  train
+4 2023-01-05      4  100.499970  train
+2025-05-09 16:24:59,328 - debug_train_test - INFO - Last 5 rows:
+    timestamp  value       close _split
+65 2023-03-07     65  112.786679  train
+66 2023-03-08     66  113.671874  train
+67 2023-03-09     67  115.379516  train
+68 2023-03-10     68  116.074756  train
+69 2023-03-11     69  116.595128  train
+2025-05-09 16:24:59,328 - debug_train_test - INFO - Column info: timestamp    datetime64[ns]
+value                 int64
+close               float64
+_split               object
+dtype: object
+2025-05-09 16:24:59,328 - debug_train_test - INFO - Memory usage: 0.00 MB
+2025-05-09 16:24:59,328 - debug_train_test - INFO - Split marker: ['train']
+2025-05-09 16:24:59,328 - debug_train_test - INFO - ==================================================
+2025-05-09 16:24:59,328 - debug_train_test - INFO - ===== Test Split (Direct) DataFrame Inspection =====
+2025-05-09 16:24:59,328 - debug_train_test - INFO - Shape: (30, 4)
+2025-05-09 16:24:59,328 - debug_train_test - INFO - Date range: 2023-03-12 00:00:00 to 2023-04-10 00:00:00
+2025-05-09 16:24:59,329 - debug_train_test - INFO - Fingerprint: cf59fbf788ca67d36709a6ed566a3b6d
+2025-05-09 16:24:59,330 - debug_train_test - INFO - First 5 rows:
+   timestamp  value       close _split
+0 2023-03-12     70  116.373396   test
+1 2023-03-13     71  116.933627   test
+2 2023-03-14     72  118.196604   test
+3 2023-03-15     73  117.302631   test
+4 2023-03-16     74  116.367072   test
+2025-05-09 16:24:59,331 - debug_train_test - INFO - Last 5 rows:
+    timestamp  value       close _split
+25 2023-04-06     95  121.744218   test
+26 2023-04-07     96  121.164166   test
+27 2023-04-08     97  120.759267   test
+28 2023-04-09     98  121.322938   test
+29 2023-04-10     99  121.759968   test
+2025-05-09 16:24:59,331 - debug_train_test - INFO - Column info: timestamp    datetime64[ns]
+value                 int64
+close               float64
+_split               object
+dtype: object
+2025-05-09 16:24:59,331 - debug_train_test - INFO - Memory usage: 0.00 MB
+2025-05-09 16:24:59,331 - debug_train_test - INFO - Split marker: ['test']
+2025-05-09 16:24:59,331 - debug_train_test - INFO - ==================================================
+2025-05-09 16:24:59,331 - debug_train_test - INFO - Checking for data isolation:
+2025-05-09 16:24:59,331 - debug_train_test - INFO - Train shape: (70, 4), Test shape: (30, 4)
+2025-05-09 16:24:59,331 - debug_train_test - INFO - Are train and test DataFrames the same object? False
+2025-05-09 16:24:59,331 - debug_train_test - INFO - Testing data isolation by modifying train DataFrame
+2025-05-09 16:24:59,331 - debug_train_test - INFO - Modified train_df[0, 'value'] to 9999
+2025-05-09 16:24:59,331 - debug_train_test - INFO - Now train_df[0, 'value'] = 9999
+2025-05-09 16:24:59,332 - debug_train_test - INFO - test_df first few rows:
+   timestamp  value       close _split
+0 2023-03-12     70  116.373396   test
+1 2023-03-13     71  116.933627   test
+2 2023-03-14     72  118.196604   test
+3 2023-03-15     73  117.302631   test
+4 2023-03-16     74  116.367072   test
+2025-05-09 16:24:59,333 - debug_train_test - INFO - ✅ No data leakage detected. Modifications to train don't affect test.
+2025-05-09 16:24:59,333 - debug_train_test - INFO - 
+
+Testing HistoricalDataHandler with config file
+2025-05-09 16:24:59,333 - debug_train_test - INFO - ==================================================
+2025-05-09 16:24:59,334 - debug_train_test - INFO - Loaded config from config/simple_ma_optimization.yaml
+2025-05-09 16:25:11,712 - debug_train_test - INFO - Starting train/test debug with config: config/simple_ma_optimization.yaml
+2025-05-09 16:25:11,712 - debug_train_test - INFO - 
+
+Testing TimeSeriesSplitter in isolation
+2025-05-09 16:25:11,712 - debug_train_test - INFO - ==================================================
+2025-05-09 16:25:11,718 - debug_train_test - INFO - Created test DataFrame with shape (100, 3)
+2025-05-09 16:25:11,718 - debug_train_test - INFO - ===== Original Test Data DataFrame Inspection =====
+2025-05-09 16:25:11,718 - debug_train_test - INFO - Shape: (100, 3)
+2025-05-09 16:25:11,718 - debug_train_test - INFO - Date range: 2023-01-01 00:00:00 to 2023-04-10 00:00:00
+2025-05-09 16:25:11,719 - debug_train_test - INFO - Fingerprint: 783d6949f1bbd29eba3806da6578ea08
+2025-05-09 16:25:11,719 - debug_train_test - INFO - ==================================================
+2025-05-09 16:25:11,721 - data.time_series_splitter - INFO - Created train dataset: 70 rows
+2025-05-09 16:25:11,722 - data.time_series_splitter - INFO -   Train period: 2023-01-01 00:00:00 to 2023-03-11 00:00:00
+2025-05-09 16:25:11,722 - data.time_series_splitter - INFO - Created test dataset: 30 rows
+2025-05-09 16:25:11,722 - data.time_series_splitter - INFO -   Test period: 2023-03-12 00:00:00 to 2023-04-10 00:00:00
+2025-05-09 16:25:11,722 - debug_train_test - INFO - ===== Train Split (Direct) DataFrame Inspection =====
+2025-05-09 16:25:11,722 - debug_train_test - INFO - Shape: (70, 4)
+2025-05-09 16:25:11,722 - debug_train_test - INFO - Date range: 2023-01-01 00:00:00 to 2023-03-11 00:00:00
+2025-05-09 16:25:11,723 - debug_train_test - INFO - Fingerprint: 4c8ed9079c335e7bca781bfd850e0381
+2025-05-09 16:25:11,726 - debug_train_test - INFO - First 5 rows:
+   timestamp  value      close _split
+0 2023-01-01      0  99.739318  train
+1 2023-01-02      1  99.193588  train
+2 2023-01-03      2  99.284148  train
+3 2023-01-04      3  98.481964  train
+4 2023-01-05      4  99.026388  train
+2025-05-09 16:25:11,727 - debug_train_test - INFO - Last 5 rows:
+    timestamp  value       close _split
+65 2023-03-07     65  105.385594  train
+66 2023-03-08     66  105.509737  train
+67 2023-03-09     67  106.152716  train
+68 2023-03-10     68  105.654011  train
+69 2023-03-11     69  104.470406  train
+2025-05-09 16:25:11,727 - debug_train_test - INFO - Column info: timestamp    datetime64[ns]
+value                 int64
+close               float64
+_split               object
+dtype: object
+2025-05-09 16:25:11,727 - debug_train_test - INFO - Memory usage: 0.00 MB
+2025-05-09 16:25:11,727 - debug_train_test - INFO - Split marker: ['train']
+2025-05-09 16:25:11,727 - debug_train_test - INFO - ==================================================
+2025-05-09 16:25:11,727 - debug_train_test - INFO - ===== Test Split (Direct) DataFrame Inspection =====
+2025-05-09 16:25:11,727 - debug_train_test - INFO - Shape: (30, 4)
+2025-05-09 16:25:11,727 - debug_train_test - INFO - Date range: 2023-03-12 00:00:00 to 2023-04-10 00:00:00
+2025-05-09 16:25:11,728 - debug_train_test - INFO - Fingerprint: e03524deb3e2712c04b252393cc15399
+2025-05-09 16:25:11,729 - debug_train_test - INFO - First 5 rows:
+   timestamp  value       close _split
+0 2023-03-12     70  105.454733   test
+1 2023-03-13     71  104.227627   test
+2 2023-03-14     72  104.615590   test
+3 2023-03-15     73  104.720273   test
+4 2023-03-16     74  104.668937   test
+2025-05-09 16:25:11,730 - debug_train_test - INFO - Last 5 rows:
+    timestamp  value       close _split
+25 2023-04-06     95  118.069799   test
+26 2023-04-07     96  119.941776   test
+27 2023-04-08     97  119.697322   test
+28 2023-04-09     98  119.284413   test
+29 2023-04-10     99  119.362306   test
+2025-05-09 16:25:11,730 - debug_train_test - INFO - Column info: timestamp    datetime64[ns]
+value                 int64
+close               float64
+_split               object
+dtype: object
+2025-05-09 16:25:11,730 - debug_train_test - INFO - Memory usage: 0.00 MB
+2025-05-09 16:25:11,730 - debug_train_test - INFO - Split marker: ['test']
+2025-05-09 16:25:11,730 - debug_train_test - INFO - ==================================================
+2025-05-09 16:25:11,730 - debug_train_test - INFO - Checking for data isolation:
+2025-05-09 16:25:11,730 - debug_train_test - INFO - Train shape: (70, 4), Test shape: (30, 4)
+2025-05-09 16:25:11,730 - debug_train_test - INFO - Are train and test DataFrames the same object? False
+2025-05-09 16:25:11,730 - debug_train_test - INFO - Testing data isolation by modifying train DataFrame
+2025-05-09 16:25:11,731 - debug_train_test - INFO - Modified train_df[0, 'value'] to 9999
+2025-05-09 16:25:11,731 - debug_train_test - INFO - Now train_df[0, 'value'] = 9999
+2025-05-09 16:25:11,732 - debug_train_test - INFO - test_df first few rows:
+   timestamp  value       close _split
+0 2023-03-12     70  105.454733   test
+1 2023-03-13     71  104.227627   test
+2 2023-03-14     72  104.615590   test
+3 2023-03-15     73  104.720273   test
+4 2023-03-16     74  104.668937   test
+2025-05-09 16:25:11,732 - debug_train_test - INFO - ✅ No data leakage detected. Modifications to train don't affect test.
+2025-05-09 16:25:11,732 - debug_train_test - INFO - 
+
+Testing HistoricalDataHandler with config file
+2025-05-09 16:25:11,732 - debug_train_test - INFO - ==================================================
+2025-05-09 16:25:11,734 - debug_train_test - INFO - Loaded config from config/simple_ma_optimization.yaml
+2025-05-09 16:25:42,087 - debug_train_test - INFO - Starting train/test debug with config: config/simple_ma_optimization.yaml
+2025-05-09 16:25:42,087 - debug_train_test - INFO - 
+
+Testing TimeSeriesSplitter in isolation
+2025-05-09 16:25:42,087 - debug_train_test - INFO - ==================================================
+2025-05-09 16:25:42,091 - debug_train_test - INFO - Created test DataFrame with shape (100, 3)
+2025-05-09 16:25:42,091 - debug_train_test - INFO - ===== Original Test Data DataFrame Inspection =====
+2025-05-09 16:25:42,091 - debug_train_test - INFO - Shape: (100, 3)
+2025-05-09 16:25:42,092 - debug_train_test - INFO - Date range: 2023-01-01 00:00:00 to 2023-04-10 00:00:00
+2025-05-09 16:25:42,094 - debug_train_test - INFO - Fingerprint: 687a40f073e7b58d62bb3407825f9003
+2025-05-09 16:25:42,094 - debug_train_test - INFO - ==================================================
+2025-05-09 16:25:42,096 - data.time_series_splitter - INFO - Created train dataset: 70 rows
+2025-05-09 16:25:42,096 - data.time_series_splitter - INFO -   Train period: 2023-01-01 00:00:00 to 2023-03-11 00:00:00
+2025-05-09 16:25:42,096 - data.time_series_splitter - INFO - Created test dataset: 30 rows
+2025-05-09 16:25:42,096 - data.time_series_splitter - INFO -   Test period: 2023-03-12 00:00:00 to 2023-04-10 00:00:00
+2025-05-09 16:25:42,096 - debug_train_test - INFO - ===== Train Split (Direct) DataFrame Inspection =====
+2025-05-09 16:25:42,096 - debug_train_test - INFO - Shape: (70, 4)
+2025-05-09 16:25:42,097 - debug_train_test - INFO - Date range: 2023-01-01 00:00:00 to 2023-03-11 00:00:00
+2025-05-09 16:25:42,098 - debug_train_test - INFO - Fingerprint: 6c4a9c36e615d2639e775c5a8ebcefd8
+2025-05-09 16:25:42,100 - debug_train_test - INFO - First 5 rows:
+   timestamp  value       close _split
+0 2023-01-01      0  100.475149  train
+1 2023-01-02      1  100.854069  train
+2 2023-01-03      2  100.014528  train
+3 2023-01-04      3  101.383108  train
+4 2023-01-05      4  100.623860  train
+2025-05-09 16:25:42,101 - debug_train_test - INFO - Last 5 rows:
+    timestamp  value      close _split
+65 2023-03-07     65  88.368796  train
+66 2023-03-08     66  86.729193  train
+67 2023-03-09     67  87.541919  train
+68 2023-03-10     68  85.446996  train
+69 2023-03-11     69  83.568679  train
+2025-05-09 16:25:42,101 - debug_train_test - INFO - Column info: timestamp    datetime64[ns]
+value                 int64
+close               float64
+_split               object
+dtype: object
+2025-05-09 16:25:42,101 - debug_train_test - INFO - Memory usage: 0.00 MB
+2025-05-09 16:25:42,101 - debug_train_test - INFO - Split marker: ['train']
+2025-05-09 16:25:42,101 - debug_train_test - INFO - ==================================================
+2025-05-09 16:25:42,101 - debug_train_test - INFO - ===== Test Split (Direct) DataFrame Inspection =====
+2025-05-09 16:25:42,101 - debug_train_test - INFO - Shape: (30, 4)
+2025-05-09 16:25:42,102 - debug_train_test - INFO - Date range: 2023-03-12 00:00:00 to 2023-04-10 00:00:00
+2025-05-09 16:25:42,102 - debug_train_test - INFO - Fingerprint: 9cbaf142893376071d531f3bb366c3e7
+2025-05-09 16:25:42,103 - debug_train_test - INFO - First 5 rows:
+   timestamp  value      close _split
+0 2023-03-12     70  83.336246   test
+1 2023-03-13     71  82.093764   test
+2 2023-03-14     72  82.562522   test
+3 2023-03-15     73  82.830118   test
+4 2023-03-16     74  85.068902   test
+2025-05-09 16:25:42,104 - debug_train_test - INFO - Last 5 rows:
+    timestamp  value      close _split
+25 2023-04-06     95  87.786137   test
+26 2023-04-07     96  87.521440   test
+27 2023-04-08     97  85.981858   test
+28 2023-04-09     98  86.362528   test
+29 2023-04-10     99  87.270932   test
+2025-05-09 16:25:42,104 - debug_train_test - INFO - Column info: timestamp    datetime64[ns]
+value                 int64
+close               float64
+_split               object
+dtype: object
+2025-05-09 16:25:42,104 - debug_train_test - INFO - Memory usage: 0.00 MB
+2025-05-09 16:25:42,104 - debug_train_test - INFO - Split marker: ['test']
+2025-05-09 16:25:42,104 - debug_train_test - INFO - ==================================================
+2025-05-09 16:25:42,104 - debug_train_test - INFO - Checking for data isolation:
+2025-05-09 16:25:42,104 - debug_train_test - INFO - Train shape: (70, 4), Test shape: (30, 4)
+2025-05-09 16:25:42,104 - debug_train_test - INFO - Are train and test DataFrames the same object? False
+2025-05-09 16:25:42,104 - debug_train_test - INFO - Testing data isolation by modifying train DataFrame
+2025-05-09 16:25:42,105 - debug_train_test - INFO - Modified train_df[0, 'value'] to 9999
+2025-05-09 16:25:42,105 - debug_train_test - INFO - Now train_df[0, 'value'] = 9999
+2025-05-09 16:25:42,106 - debug_train_test - INFO - test_df first few rows:
+   timestamp  value      close _split
+0 2023-03-12     70  83.336246   test
+1 2023-03-13     71  82.093764   test
+2 2023-03-14     72  82.562522   test
+3 2023-03-15     73  82.830118   test
+4 2023-03-16     74  85.068902   test
+2025-05-09 16:25:42,106 - debug_train_test - INFO - ✅ No data leakage detected. Modifications to train don't affect test.
+2025-05-09 16:25:42,106 - debug_train_test - INFO - 
+
+Testing HistoricalDataHandler with config file
+2025-05-09 16:25:42,106 - debug_train_test - INFO - ==================================================
+2025-05-09 16:25:42,107 - debug_train_test - INFO - Loaded config from config/simple_ma_optimization.yaml
+2025-05-09 16:25:42,107 - data.historical_data_handler.HistoricalDataHandler - INFO - Detected timeframe from filename: MINUTE_1 for data/SPY_1min.csv
+2025-05-09 16:25:42,172 - debug_train_test - INFO - Successfully initialized data handler
+2025-05-09 16:25:42,172 - data.historical_data_handler - INFO - Data handler returning symbols: ['SPY']
+2025-05-09 16:25:42,172 - debug_train_test - INFO - Data handler initialized with symbols: ['SPY']
+2025-05-09 16:25:42,172 - debug_train_test - INFO - 
+Examining data for symbol: SPY
+2025-05-09 16:26:22,154 - debug_train_test - INFO - Starting train/test debug with config: config/simple_ma_optimization.yaml
+2025-05-09 16:26:22,155 - debug_train_test - INFO - 
+
+Testing TimeSeriesSplitter in isolation
+2025-05-09 16:26:22,155 - debug_train_test - INFO - ==================================================
+2025-05-09 16:26:22,157 - debug_train_test - INFO - Created test DataFrame with shape (100, 3)
+2025-05-09 16:26:22,157 - debug_train_test - INFO - ===== Original Test Data DataFrame Inspection =====
+2025-05-09 16:26:22,157 - debug_train_test - INFO - Shape: (100, 3)
+2025-05-09 16:26:22,158 - debug_train_test - INFO - Date range: 2023-01-01 00:00:00 to 2023-04-10 00:00:00
+2025-05-09 16:26:22,159 - debug_train_test - INFO - Fingerprint: 0fbef01a8f6cef9fce062e239a4af018
+2025-05-09 16:26:22,159 - debug_train_test - INFO - ==================================================
+2025-05-09 16:26:22,162 - data.time_series_splitter - INFO - Created train dataset: 70 rows
+2025-05-09 16:26:22,162 - data.time_series_splitter - INFO -   Train period: 2023-01-01 00:00:00 to 2023-03-11 00:00:00
+2025-05-09 16:26:22,162 - data.time_series_splitter - INFO - Created test dataset: 30 rows
+2025-05-09 16:26:22,162 - data.time_series_splitter - INFO -   Test period: 2023-03-12 00:00:00 to 2023-04-10 00:00:00
+2025-05-09 16:26:22,162 - debug_train_test - INFO - ===== Train Split (Direct) DataFrame Inspection =====
+2025-05-09 16:26:22,162 - debug_train_test - INFO - Shape: (70, 4)
+2025-05-09 16:26:22,162 - debug_train_test - INFO - Date range: 2023-01-01 00:00:00 to 2023-03-11 00:00:00
+2025-05-09 16:26:22,164 - debug_train_test - INFO - Fingerprint: bbd472ea9cbb8fe40bc7b7b9d35aa4df
+2025-05-09 16:26:22,166 - debug_train_test - INFO - First 5 rows:
+   timestamp  value       close _split
+0 2023-01-01      0   98.063067  train
+1 2023-01-02      1   97.730807  train
+2 2023-01-03      2   97.930249  train
+3 2023-01-04      3   99.541324  train
+4 2023-01-05      4  100.023713  train
+2025-05-09 16:26:22,167 - debug_train_test - INFO - Last 5 rows:
+    timestamp  value       close _split
+65 2023-03-07     65  105.677038  train
+66 2023-03-08     66  106.533880  train
+67 2023-03-09     67  107.193390  train
+68 2023-03-10     68  108.905754  train
+69 2023-03-11     69  108.096604  train
+2025-05-09 16:26:22,167 - debug_train_test - INFO - Column info: timestamp    datetime64[ns]
+value                 int64
+close               float64
+_split               object
+dtype: object
+2025-05-09 16:26:22,167 - debug_train_test - INFO - Memory usage: 0.00 MB
+2025-05-09 16:26:22,168 - debug_train_test - INFO - Split marker: ['train']
+2025-05-09 16:26:22,168 - debug_train_test - INFO - ==================================================
+2025-05-09 16:26:22,168 - debug_train_test - INFO - ===== Test Split (Direct) DataFrame Inspection =====
+2025-05-09 16:26:22,168 - debug_train_test - INFO - Shape: (30, 4)
+2025-05-09 16:26:22,168 - debug_train_test - INFO - Date range: 2023-03-12 00:00:00 to 2023-04-10 00:00:00
+2025-05-09 16:26:22,168 - debug_train_test - INFO - Fingerprint: 599391c999e3e6901335db1c7715c83c
+2025-05-09 16:26:22,169 - debug_train_test - INFO - First 5 rows:
+   timestamp  value       close _split
+0 2023-03-12     70  107.688948   test
+1 2023-03-13     71  106.919273   test
+2 2023-03-14     72  106.102826   test
+3 2023-03-15     73  105.967214   test
+4 2023-03-16     74  105.870164   test
+2025-05-09 16:26:22,170 - debug_train_test - INFO - Last 5 rows:
+    timestamp  value       close _split
+25 2023-04-06     95  101.730793   test
+26 2023-04-07     96   99.984543   test
+27 2023-04-08     97  100.743924   test
+28 2023-04-09     98  101.080426   test
+29 2023-04-10     99  101.928800   test
+2025-05-09 16:26:22,170 - debug_train_test - INFO - Column info: timestamp    datetime64[ns]
+value                 int64
+close               float64
+_split               object
+dtype: object
+2025-05-09 16:26:22,170 - debug_train_test - INFO - Memory usage: 0.00 MB
+2025-05-09 16:26:22,170 - debug_train_test - INFO - Split marker: ['test']
+2025-05-09 16:26:22,171 - debug_train_test - INFO - ==================================================
+2025-05-09 16:26:22,171 - debug_train_test - INFO - Checking for data isolation:
+2025-05-09 16:26:22,171 - debug_train_test - INFO - Train shape: (70, 4), Test shape: (30, 4)
+2025-05-09 16:26:22,171 - debug_train_test - INFO - Are train and test DataFrames the same object? False
+2025-05-09 16:26:22,171 - debug_train_test - INFO - Testing data isolation by modifying train DataFrame
+2025-05-09 16:26:22,171 - debug_train_test - INFO - Modified train_df[0, 'value'] to 9999
+2025-05-09 16:26:22,171 - debug_train_test - INFO - Now train_df[0, 'value'] = 9999
+2025-05-09 16:26:22,172 - debug_train_test - INFO - test_df first few rows:
+   timestamp  value       close _split
+0 2023-03-12     70  107.688948   test
+1 2023-03-13     71  106.919273   test
+2 2023-03-14     72  106.102826   test
+3 2023-03-15     73  105.967214   test
+4 2023-03-16     74  105.870164   test
+2025-05-09 16:26:22,172 - debug_train_test - INFO - ✅ No data leakage detected. Modifications to train don't affect test.
+2025-05-09 16:26:22,172 - debug_train_test - INFO - 
+
+Testing HistoricalDataHandler with config file
+2025-05-09 16:26:22,172 - debug_train_test - INFO - ==================================================
+2025-05-09 16:26:22,174 - debug_train_test - INFO - Loaded config from config/simple_ma_optimization.yaml
+2025-05-09 16:26:22,174 - data.historical_data_handler.HistoricalDataHandler - INFO - Detected timeframe from filename: MINUTE_1 for data/SPY_1min.csv
+2025-05-09 16:26:22,240 - debug_train_test - INFO - Successfully initialized data handler
+2025-05-09 16:26:22,240 - data.historical_data_handler - INFO - Data handler returning symbols: ['SPY']
+2025-05-09 16:26:22,240 - debug_train_test - INFO - Data handler initialized with symbols: ['SPY']
+2025-05-09 16:26:22,240 - debug_train_test - INFO - 
+Examining data for symbol: SPY
+2025-05-09 16:26:54,060 - debug_train_test - INFO - Starting train/test debug with config: config/simple_ma_optimization.yaml
+2025-05-09 16:26:54,060 - debug_train_test - INFO - 
+
+Testing TimeSeriesSplitter in isolation
+2025-05-09 16:26:54,060 - debug_train_test - INFO - ==================================================
+2025-05-09 16:26:54,064 - debug_train_test - INFO - Created test DataFrame with shape (100, 3)
+2025-05-09 16:26:54,064 - debug_train_test - INFO - ===== Original Test Data DataFrame Inspection =====
+2025-05-09 16:26:54,064 - debug_train_test - INFO - Shape: (100, 3)
+2025-05-09 16:26:54,065 - debug_train_test - INFO - Date range: 2023-01-01 00:00:00 to 2023-04-10 00:00:00
+2025-05-09 16:26:54,067 - debug_train_test - INFO - Fingerprint: e3c1d99a882617b088864bdba17e2829
+2025-05-09 16:26:54,067 - debug_train_test - INFO - ==================================================
+2025-05-09 16:26:54,069 - data.time_series_splitter - INFO - Created train dataset: 70 rows
+2025-05-09 16:26:54,069 - data.time_series_splitter - INFO -   Train period: 2023-01-01 00:00:00 to 2023-03-11 00:00:00
+2025-05-09 16:26:54,069 - data.time_series_splitter - INFO - Created test dataset: 30 rows
+2025-05-09 16:26:54,069 - data.time_series_splitter - INFO -   Test period: 2023-03-12 00:00:00 to 2023-04-10 00:00:00
+2025-05-09 16:26:54,069 - debug_train_test - INFO - ===== Train Split (Direct) DataFrame Inspection =====
+2025-05-09 16:26:54,069 - debug_train_test - INFO - Shape: (70, 4)
+2025-05-09 16:26:54,069 - debug_train_test - INFO - Date range: 2023-01-01 00:00:00 to 2023-03-11 00:00:00
+2025-05-09 16:26:54,070 - debug_train_test - INFO - Fingerprint: 6fc4acf21b7f4444f58a7a3ee287b3ec
+2025-05-09 16:26:54,073 - debug_train_test - INFO - First 5 rows:
+   timestamp  value       close _split
+0 2023-01-01      0  100.039737  train
+1 2023-01-02      1  104.106483  train
+2 2023-01-03      2  103.183050  train
+3 2023-01-04      3  104.960698  train
+4 2023-01-05      4  105.230291  train
+2025-05-09 16:26:54,074 - debug_train_test - INFO - Last 5 rows:
+    timestamp  value       close _split
+65 2023-03-07     65  106.268008  train
+66 2023-03-08     66  106.458233  train
+67 2023-03-09     67  107.895713  train
+68 2023-03-10     68  107.289790  train
+69 2023-03-11     69  108.317976  train
+2025-05-09 16:26:54,074 - debug_train_test - INFO - Column info: timestamp    datetime64[ns]
+value                 int64
+close               float64
+_split               object
+dtype: object
+2025-05-09 16:26:54,075 - debug_train_test - INFO - Memory usage: 0.00 MB
+2025-05-09 16:26:54,075 - debug_train_test - INFO - Split marker: ['train']
+2025-05-09 16:26:54,075 - debug_train_test - INFO - ==================================================
+2025-05-09 16:26:54,075 - debug_train_test - INFO - ===== Test Split (Direct) DataFrame Inspection =====
+2025-05-09 16:26:54,075 - debug_train_test - INFO - Shape: (30, 4)
+2025-05-09 16:26:54,075 - debug_train_test - INFO - Date range: 2023-03-12 00:00:00 to 2023-04-10 00:00:00
+2025-05-09 16:26:54,075 - debug_train_test - INFO - Fingerprint: f3f46d2966ffa5b71ce03b0085e4b814
+2025-05-09 16:26:54,076 - debug_train_test - INFO - First 5 rows:
+   timestamp  value       close _split
+0 2023-03-12     70  106.807411   test
+1 2023-03-13     71  106.166047   test
+2 2023-03-14     72  105.786205   test
+3 2023-03-15     73  105.737833   test
+4 2023-03-16     74  103.784019   test
+2025-05-09 16:26:54,077 - debug_train_test - INFO - Last 5 rows:
+    timestamp  value       close _split
+25 2023-04-06     95  101.190643   test
+26 2023-04-07     96  101.373168   test
+27 2023-04-08     97  101.120929   test
+28 2023-04-09     98  101.622975   test
+29 2023-04-10     99  102.032460   test
+2025-05-09 16:26:54,078 - debug_train_test - INFO - Column info: timestamp    datetime64[ns]
+value                 int64
+close               float64
+_split               object
+dtype: object
+2025-05-09 16:26:54,078 - debug_train_test - INFO - Memory usage: 0.00 MB
+2025-05-09 16:26:54,078 - debug_train_test - INFO - Split marker: ['test']
+2025-05-09 16:26:54,078 - debug_train_test - INFO - ==================================================
+2025-05-09 16:26:54,078 - debug_train_test - INFO - Checking for data isolation:
+2025-05-09 16:26:54,078 - debug_train_test - INFO - Train shape: (70, 4), Test shape: (30, 4)
+2025-05-09 16:26:54,078 - debug_train_test - INFO - Are train and test DataFrames the same object? False
+2025-05-09 16:26:54,078 - debug_train_test - INFO - Testing data isolation by modifying train DataFrame
+2025-05-09 16:26:54,078 - debug_train_test - INFO - Modified train_df[0, 'value'] to 9999
+2025-05-09 16:26:54,078 - debug_train_test - INFO - Now train_df[0, 'value'] = 9999
+2025-05-09 16:26:54,079 - debug_train_test - INFO - test_df first few rows:
+   timestamp  value       close _split
+0 2023-03-12     70  106.807411   test
+1 2023-03-13     71  106.166047   test
+2 2023-03-14     72  105.786205   test
+3 2023-03-15     73  105.737833   test
+4 2023-03-16     74  103.784019   test
+2025-05-09 16:26:54,079 - debug_train_test - INFO - ✅ No data leakage detected. Modifications to train don't affect test.
+2025-05-09 16:26:54,079 - debug_train_test - INFO - 
+
+Testing HistoricalDataHandler with config file
+2025-05-09 16:26:54,079 - debug_train_test - INFO - ==================================================
+2025-05-09 16:26:54,081 - debug_train_test - INFO - Loaded config from config/simple_ma_optimization.yaml
+2025-05-09 16:26:54,081 - data.historical_data_handler.HistoricalDataHandler - INFO - Detected timeframe from filename: MINUTE_1 for data/SPY_1min.csv
+2025-05-09 16:26:54,147 - debug_train_test - INFO - Successfully initialized data handler
+2025-05-09 16:26:54,147 - data.historical_data_handler - INFO - Data handler returning symbols: ['SPY']
+2025-05-09 16:26:54,147 - debug_train_test - INFO - Data handler initialized with symbols: ['SPY']
+2025-05-09 16:26:54,147 - debug_train_test - INFO - 
+Examining data for symbol: SPY
+2025-05-09 16:26:54,147 - data.historical_data_handler - WARNING - No data splits available. Creating default splits using all data.
+2025-05-09 16:26:54,148 - data.historical_data_handler - INFO - Switched from 'None' to 'train' split
+2025-05-09 16:26:54,148 - data.historical_data_handler - INFO -   SPY train data: 102236 rows, time range: 2024-03-26 13:30:00 to 2025-04-02 19:23:00
+2025-05-09 16:26:54,148 - debug_train_test - INFO - ===== SPY Train Data DataFrame Inspection =====
+2025-05-09 16:26:54,148 - debug_train_test - INFO - Shape: (102236, 8)
+2025-05-09 16:26:54,148 - debug_train_test - INFO - Date range: 2024-03-26 13:30:00 to 2025-04-02 19:23:00
+2025-05-09 16:26:54,149 - debug_train_test - INFO - Fingerprint: 506e12856bab3b38b9cd3db6a3aa0960
+2025-05-09 16:26:54,152 - debug_train_test - INFO - First 5 rows:
+             timestamp    open    high  ...  volume  trade_count  vwap
+0  2024-03-26 13:30:00  521.23  521.26  ...  342898          NaN   NaN
+1  2024-03-26 13:31:00  521.03  521.11  ...  186082          NaN   NaN
+2  2024-03-26 13:32:00  521.05  521.32  ...  144430          NaN   NaN
+3  2024-03-26 13:33:00  521.23  521.36  ...  120104          NaN   NaN
+4  2024-03-26 13:34:00  521.30  521.44  ...   95387          NaN   NaN
+
+[5 rows x 8 columns]
+2025-05-09 16:26:54,154 - debug_train_test - INFO - Last 5 rows:
+                  timestamp      open  ...  trade_count        vwap
+102231  2025-04-02 19:19:00  561.9900  ...       1526.0  561.836016
+102232  2025-04-02 19:20:00  562.0200  ...       1086.0  562.206070
+102233  2025-04-02 19:21:00  562.3537  ...        730.0  562.220093
+102234  2025-04-02 19:22:00  562.2200  ...        737.0  562.145192
+102235  2025-04-02 19:23:00  562.2800  ...        965.0  562.387769
+
+[5 rows x 8 columns]
+2025-05-09 16:26:54,155 - debug_train_test - INFO - Column info: timestamp       object
+open           float64
+high           float64
+low            float64
+close          float64
+volume           int64
+trade_count    float64
+vwap           float64
+dtype: object
+2025-05-09 16:26:54,155 - debug_train_test - INFO - Memory usage: 6.24 MB
+2025-05-09 16:26:54,155 - debug_train_test - INFO - ==================================================
+2025-05-09 16:26:54,155 - debug_train_test - INFO - ===== SPY Test Data DataFrame Inspection =====
+2025-05-09 16:26:54,155 - debug_train_test - INFO - Shape: (102236, 8)
+2025-05-09 16:26:54,155 - debug_train_test - INFO - Date range: 2024-03-26 13:30:00 to 2025-04-02 19:23:00
+2025-05-09 16:26:54,155 - debug_train_test - INFO - Fingerprint: 506e12856bab3b38b9cd3db6a3aa0960
+2025-05-09 16:26:54,159 - debug_train_test - INFO - First 5 rows:
+             timestamp    open    high  ...  volume  trade_count  vwap
+0  2024-03-26 13:30:00  521.23  521.26  ...  342898          NaN   NaN
+1  2024-03-26 13:31:00  521.03  521.11  ...  186082          NaN   NaN
+2  2024-03-26 13:32:00  521.05  521.32  ...  144430          NaN   NaN
+3  2024-03-26 13:33:00  521.23  521.36  ...  120104          NaN   NaN
+4  2024-03-26 13:34:00  521.30  521.44  ...   95387          NaN   NaN
+
+[5 rows x 8 columns]
+2025-05-09 16:26:54,161 - debug_train_test - INFO - Last 5 rows:
+                  timestamp      open  ...  trade_count        vwap
+102231  2025-04-02 19:19:00  561.9900  ...       1526.0  561.836016
+102232  2025-04-02 19:20:00  562.0200  ...       1086.0  562.206070
+102233  2025-04-02 19:21:00  562.3537  ...        730.0  562.220093
+102234  2025-04-02 19:22:00  562.2200  ...        737.0  562.145192
+102235  2025-04-02 19:23:00  562.2800  ...        965.0  562.387769
+
+[5 rows x 8 columns]
+2025-05-09 16:26:54,161 - debug_train_test - INFO - Column info: timestamp       object
+open           float64
+high           float64
+low            float64
+close          float64
+volume           int64
+trade_count    float64
+vwap           float64
+dtype: object
+2025-05-09 16:26:54,161 - debug_train_test - INFO - Memory usage: 6.24 MB
+2025-05-09 16:26:54,161 - debug_train_test - INFO - ==================================================
+2025-05-09 16:26:54,177 - debug_train_test - ERROR - 🛑 DATA LEAKAGE: Found 102236 overlapping timestamps between train and test!
+2025-05-09 16:26:54,178 - debug_train_test - ERROR - Example overlapping timestamps: ['2024-08-07 15:43:00', '2024-04-05 17:13:00', '2024-05-17 15:44:00', '2024-06-27 17:06:00', '2025-03-28 21:52:00']
+2025-05-09 16:26:54,178 - debug_train_test - INFO - Train data memory id: 4409851056
+2025-05-09 16:26:54,178 - debug_train_test - INFO - Test data memory id: 4409851392
+2025-05-09 16:26:54,178 - debug_train_test - INFO - ✅ Train and test are different DataFrame objects
+2025-05-09 16:26:54,178 - debug_train_test - INFO - Modifying first row of train_data 'close' column from 521.01 to 999999
+2025-05-09 16:26:54,178 - debug_train_test - INFO - ✅ Modifying train_data did not affect test_data
+2025-05-09 16:26:54,183 - debug_train_test - INFO - 
+
+Tracing Optimization Process
+2025-05-09 16:26:54,183 - debug_train_test - INFO - ==================================================

@@ -136,6 +136,15 @@ class Strategy(Component, ABC):
                 bar_data = event.data
                 
                 # Convert event data to Bar object
+                # Handle timeframe - use from data if available, otherwise use a default
+                timeframe = Timeframe.MINUTE_1  # Default to 1-minute if not specified
+                if 'timeframe' in bar_data:
+                    try:
+                        timeframe = Timeframe.from_string(bar_data['timeframe'])
+                    except (ValueError, KeyError):
+                        self.logger.debug(f"Invalid or missing timeframe in bar data, using default")
+                
+                # Create the Bar object
                 bar = Bar(
                     timestamp=bar_data['timestamp'],
                     symbol=bar_data['symbol'],
@@ -144,7 +153,7 @@ class Strategy(Component, ABC):
                     low=bar_data['low'],
                     close=bar_data['close'],
                     volume=bar_data.get('volume', 0),
-                    timeframe=Timeframe.from_string(bar_data['timeframe'])
+                    timeframe=timeframe
                 )
             
             symbol = bar.symbol

@@ -73,36 +73,147 @@ def annualized_return(equity_curve: pd.DataFrame, trades: List[Dict] = None,
     # Convert back to simple return for reporting
     return np.exp(annualized_log_return) - 1
 
-def sharpe_ratio(equity_curve: pd.DataFrame, trades: List[Dict] = None, 
+def sharpe_ratio(equity_curve: pd.DataFrame, trades: List[Dict] = None,
                 risk_free_rate: float = 0.0, annualization_factor: int = 252) -> float:
     """
     Calculate Sharpe ratio using log returns.
-    
+
     Args:
         equity_curve: DataFrame with 'equity' column
         trades: Optional list of trades
         risk_free_rate: Annualized risk-free rate
         annualization_factor: Annualization factor (252 for daily returns)
-        
+
     Returns:
         float: Sharpe ratio
     """
-    if len(equity_curve) < 2:
+    # Import logging for debugging
+    import logging
+    logger = logging.getLogger(__name__)
+
+    # Create a simple in-memory cache to avoid duplicate warnings
+    if not hasattr(sharpe_ratio, '_warning_cache'):
+        sharpe_ratio._warning_cache = set()
+
+    # Need at least 2 equity points to calculate returns
+    if equity_curve is None or len(equity_curve) < 2:
+        warn_key = "insufficient_data_points"
+        if warn_key not in sharpe_ratio._warning_cache:
+            logger.warning("Insufficient data points for Sharpe ratio calculation")
+            sharpe_ratio._warning_cache.add(warn_key)
         return 0.0
-        
+
+    # Check if equity_curve is a DataFrame (convert to DataFrame if it's a list)
+    if isinstance(equity_curve, list):
+        # Convert list of dictionaries to DataFrame
+        try:
+            equity_curve = pd.DataFrame(equity_curve)
+            # Set timestamp as index if available
+            if 'timestamp' in equity_curve.columns:
+                equity_curve.set_index('timestamp', inplace=True)
+        except Exception as e:
+            warn_key = f"df_conversion_error_{str(e)[:20]}"
+            if warn_key not in sharpe_ratio._warning_cache:
+                logger.error(f"Failed to convert equity curve to DataFrame: {e}")
+                sharpe_ratio._warning_cache.add(warn_key)
+            return 0.0
+
+    # Make sure equity column exists
+    if 'equity' not in equity_curve.columns:
+        # Try full_equity or closed_only_equity if available
+        for col in ['full_equity', 'closed_only_equity']:
+            if col in equity_curve.columns:
+                equity_curve['equity'] = equity_curve[col]
+                logger.info(f"Using {col} as equity for Sharpe ratio calculation")
+                break
+        else:
+            warn_key = f"no_equity_column_{','.join(equity_curve.columns)[:30]}"
+            if warn_key not in sharpe_ratio._warning_cache:
+                logger.warning(f"Equity column not found in equity_curve. Available: {equity_curve.columns}")
+                sharpe_ratio._warning_cache.add(warn_key)
+            return 0.0
+
+    # Check for constant equity values (flat equity curve)
+    if equity_curve['equity'].std() == 0:
+        warn_key = "constant_equity"
+        if warn_key not in sharpe_ratio._warning_cache:
+            logger.warning("Constant equity values detected - Sharpe ratio undefined")
+            sharpe_ratio._warning_cache.add(warn_key)
+        return 0.0
+
+    # IMPROVED: Check for negative equity values and handle them
+    if (equity_curve['equity'] <= 0).any():
+        warn_key = "negative_equity"
+        if warn_key not in sharpe_ratio._warning_cache:
+            logger.warning("Negative equity values detected - using absolute returns instead of log returns")
+            sharpe_ratio._warning_cache.add(warn_key)
+
+        # Use simple returns instead of log returns for negative equity
+        simple_returns = equity_curve['equity'].pct_change().dropna()
+        if len(simple_returns) == 0:
+            return 0.0
+
+        # Check if returns data is valid (not all zeros or NaN)
+        if simple_returns.std() == 0 or np.isnan(simple_returns.std()):
+            warn_key = "zero_std_simple_returns"
+            if warn_key not in sharpe_ratio._warning_cache:
+                logger.warning("Simple returns have zero standard deviation or contain NaN")
+                sharpe_ratio._warning_cache.add(warn_key)
+            return 0.0
+
+        # Calculate with simple returns
+        daily_rf_rate = risk_free_rate / annualization_factor
+        excess_returns = simple_returns - daily_rf_rate
+        sharpe = excess_returns.mean() / excess_returns.std() * np.sqrt(annualization_factor)
+
+        # Cap absurdly high values (likely numerical artifacts)
+        if abs(sharpe) > 100:
+            logger.warning(f"Extreme Sharpe ratio calculated ({sharpe:.2f}), capping at -10 or 10")
+            return 10.0 if sharpe > 0 else -10.0
+
+        logger.info(f"Calculated Sharpe ratio with simple returns: {sharpe:.4f}")
+        return sharpe
+
+    # Standard calculation with log returns for positive equity curve
     # Calculate log returns
     returns = calculate_log_returns(equity_curve)
-    
+
     if len(returns) == 0:
+        warn_key = "no_log_returns"
+        if warn_key not in sharpe_ratio._warning_cache:
+            logger.warning("No log returns could be calculated")
+            sharpe_ratio._warning_cache.add(warn_key)
         return 0.0
-        
+
+    # Check if returns data is valid (not all zeros or NaN)
+    if returns.std() == 0 or np.isnan(returns.std()):
+        warn_key = "zero_std_log_returns"
+        if warn_key not in sharpe_ratio._warning_cache:
+            logger.warning("Log returns have zero standard deviation or contain NaN")
+            sharpe_ratio._warning_cache.add(warn_key)
+        return 0.0
+
     # Daily risk-free rate using continuous compounding
     daily_rf_rate = np.log(1 + risk_free_rate) / annualization_factor
-    
+
     # Calculate annualized Sharpe ratio
     excess_returns = returns - daily_rf_rate
     sharpe = excess_returns.mean() / excess_returns.std() * np.sqrt(annualization_factor)
-    
+
+    # IMPROVED: Log detailed calculation values for debugging
+    info_key = f"sharpe_{excess_returns.mean():.4f}_{excess_returns.std():.4f}"
+    if info_key not in sharpe_ratio._warning_cache:
+        logger.info(f"Sharpe calculation: mean_excess={excess_returns.mean():.4f}, "
+                  f"std_excess={excess_returns.std():.4f}, "
+                  f"sqrt_annual={np.sqrt(annualization_factor):.2f}, "
+                  f"sharpe={sharpe:.4f}")
+        sharpe_ratio._warning_cache.add(info_key)
+
+    # Cap absurdly high values (likely numerical artifacts)
+    if abs(sharpe) > 100:
+        logger.warning(f"Extreme Sharpe ratio calculated ({sharpe:.2f}), capping at -10 or 10")
+        return 10.0 if sharpe > 0 else -10.0
+
     return sharpe
 
 def sortino_ratio(equity_curve: pd.DataFrame, trades: List[Dict] = None, 

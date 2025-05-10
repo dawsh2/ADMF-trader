@@ -154,23 +154,30 @@ class OptimizationReporter:
         parameter_space = results.get('parameter_space', {})
         report.append('PARAMETER SPACE')
         report.append('-' * 80)
-        
-        for param_name, param_info in parameter_space.items():
-            param_type = param_info.get('type', 'Not specified')
-            
-            if param_type == 'integer' or param_type == 'float':
-                param_min = param_info.get('min', 'Not specified')
-                param_max = param_info.get('max', 'Not specified')
-                param_step = param_info.get('step', 'Not specified')
-                report.append(f"{param_name}: {param_type} (min: {param_min}, max: {param_max}, step: {param_step})")
-            elif param_type == 'categorical':
-                categories = param_info.get('categories', [])
-                categories_str = ', '.join(str(c) for c in categories)
-                report.append(f"{param_name}: {param_type} (categories: {categories_str})")
-            elif param_type == 'boolean':
-                report.append(f"{param_name}: {param_type}")
-            else:
-                report.append(f"{param_name}: {param_type}")
+
+        # Check if parameter_space is a dictionary
+        if isinstance(parameter_space, dict):
+            for param_name, param_info in parameter_space.items():
+                param_type = param_info.get('type', 'Not specified')
+
+                if param_type == 'integer' or param_type == 'float':
+                    param_min = param_info.get('min', 'Not specified')
+                    param_max = param_info.get('max', 'Not specified')
+                    param_step = param_info.get('step', 'Not specified')
+                    report.append(f"{param_name}: {param_type} (min: {param_min}, max: {param_max}, step: {param_step})")
+                elif param_type == 'categorical':
+                    categories = param_info.get('categories', [])
+                    categories_str = ', '.join(str(c) for c in categories)
+                    report.append(f"{param_name}: {param_type} (categories: {categories_str})")
+                elif param_type == 'boolean':
+                    report.append(f"{param_name}: {param_type}")
+                else:
+                    report.append(f"{param_name}: {param_type}")
+        elif isinstance(parameter_space, str):
+            # Just output the parameter space as a string
+            report.append(parameter_space)
+            report.append('')
+            # Skip the detailed parameter parsing
                 
         report.append('')
         

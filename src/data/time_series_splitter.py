@@ -116,64 +116,169 @@ class TimeSeriesSplitter:
             
     def _split_by_ratio(self, df, date_col):
         """
-        Split by ratio.
-        
+        Split by ratio, ensuring separate copies of train and test data.
+
         Args:
             df (pd.DataFrame): DataFrame to split
             date_col (str): Column name with datetime values
-            
+
         Returns:
             dict: Dictionary with 'train' and 'test' keys
         """
         total_rows = len(df)
         train_size = int(total_rows * self.train_ratio)
-        
-        # Split the data
-        train_df = df.iloc[:train_size].copy()
-        test_df = df.iloc[train_size:].copy()
-        
+
+        # Split the data with explicit copies to ensure independence
+        train_df = df.iloc[:train_size].copy(deep=True)
+        test_df = df.iloc[train_size:].copy(deep=True)
+
+        # Force reset index to avoid any shared data between DataFrames
+        train_df = train_df.reset_index(drop=True)
+        test_df = test_df.reset_index(drop=True)
+
+        # Add split identifier to diagnose any reuse of data
+        train_df['_split'] = 'train'
+        test_df['_split'] = 'test'
+
+        # Verify uniqueness
+        import logging
+        logger = logging.getLogger(__name__)
+
+        # Perform extra validation - make sure train and test don't overlap in time
+        if len(train_df) > 0 and len(test_df) > 0:
+            train_times = set(train_df[date_col])
+            test_times = set(test_df[date_col])
+            overlap = train_times.intersection(test_times)
+
+            if overlap:
+                logger.warning(f"Found {len(overlap)} overlapping timestamps between train and test!")
+
+                # Remove overlapping timestamps from test set
+                logger.info(f"Removing {len(overlap)} overlapping timestamps from test set")
+                test_df = test_df[~test_df[date_col].isin(overlap)]
+                logger.info(f"After removing overlap: test={len(test_df)} rows")
+
+        # Add dataset info for debugging
+        logger.info(f"Created train dataset: {len(train_df)} rows")
+        if len(train_df) > 0:
+            logger.info(f"  Train period: {train_df[date_col].min()} to {train_df[date_col].max()}")
+
+        logger.info(f"Created test dataset: {len(test_df)} rows")
+        if len(test_df) > 0:
+            logger.info(f"  Test period: {test_df[date_col].min()} to {test_df[date_col].max()}")
+
         return {'train': train_df, 'test': test_df}
         
     def _split_by_date(self, df, date_col):
         """
-        Split by date.
-        
+        Split by date, ensuring separate copies of train and test data.
+
         Args:
             df (pd.DataFrame): DataFrame to split
             date_col (str): Column name with datetime values
-            
+
         Returns:
             dict: Dictionary with 'train' and 'test' keys
         """
-        # Split the data
-        train_df = df[df[date_col] < self.split_date].copy()
-        test_df = df[df[date_col] >= self.split_date].copy()
-        
+        # Split the data with explicit deep copies
+        train_df = df[df[date_col] < self.split_date].copy(deep=True)
+        test_df = df[df[date_col] >= self.split_date].copy(deep=True)
+
+        # Force reset index to avoid any shared data between DataFrames
+        train_df = train_df.reset_index(drop=True)
+        test_df = test_df.reset_index(drop=True)
+
+        # Add split identifier to diagnose any reuse of data
+        train_df['_split'] = 'train'
+        test_df['_split'] = 'test'
+
+        # Verify uniqueness
+        import logging
+        logger = logging.getLogger(__name__)
+
+        # Perform extra validation - make sure train and test don't overlap in time
+        if len(train_df) > 0 and len(test_df) > 0:
+            train_times = set(train_df[date_col])
+            test_times = set(test_df[date_col])
+            overlap = train_times.intersection(test_times)
+
+            if overlap:
+                logger.warning(f"Found {len(overlap)} overlapping timestamps in date split!")
+
+                # Remove overlapping timestamps from test set
+                logger.info(f"Removing {len(overlap)} overlapping timestamps from test set")
+                test_df = test_df[~test_df[date_col].isin(overlap)]
+                logger.info(f"After removing overlap: test={len(test_df)} rows")
+
+        # Add dataset info for debugging
+        logger.info(f"Created train dataset: {len(train_df)} rows")
+        if len(train_df) > 0:
+            logger.info(f"  Train period: {train_df[date_col].min()} to {train_df[date_col].max()}")
+
+        logger.info(f"Created test dataset: {len(test_df)} rows")
+        if len(test_df) > 0:
+            logger.info(f"  Test period: {test_df[date_col].min()} to {test_df[date_col].max()}")
+
         return {'train': train_df, 'test': test_df}
         
     def _split_by_fixed_periods(self, df, date_col):
         """
-        Split by fixed number of periods.
-        
+        Split by fixed number of periods, ensuring separate copies of train and test data.
+
         Args:
             df (pd.DataFrame): DataFrame to split
             date_col (str): Column name with datetime values
-            
+
         Returns:
             dict: Dictionary with 'train' and 'test' keys
         """
         total_rows = len(df)
-        
+
         # Ensure we have enough data
         if total_rows < self.train_periods + self.test_periods:
             raise ValueError(f"Not enough data: have {total_rows} rows, "
                            f"need {self.train_periods + self.test_periods}")
-                           
+
         # Calculate indices
         train_end = total_rows - self.test_periods
-        
-        # Split the data
-        train_df = df.iloc[max(0, train_end - self.train_periods):train_end].copy()
-        test_df = df.iloc[train_end:train_end + self.test_periods].copy()
-        
+
+        # Split the data with explicit deep copies
+        train_df = df.iloc[max(0, train_end - self.train_periods):train_end].copy(deep=True)
+        test_df = df.iloc[train_end:train_end + self.test_periods].copy(deep=True)
+
+        # Force reset index to avoid any shared data between DataFrames
+        train_df = train_df.reset_index(drop=True)
+        test_df = test_df.reset_index(drop=True)
+
+        # Add split identifier to diagnose any reuse of data
+        train_df['_split'] = 'train'
+        test_df['_split'] = 'test'
+
+        # Verify uniqueness
+        import logging
+        logger = logging.getLogger(__name__)
+
+        # Perform extra validation - make sure train and test don't overlap in time
+        if len(train_df) > 0 and len(test_df) > 0:
+            train_times = set(train_df[date_col])
+            test_times = set(test_df[date_col])
+            overlap = train_times.intersection(test_times)
+
+            if overlap:
+                logger.warning(f"Found {len(overlap)} overlapping timestamps in period split!")
+
+                # Remove overlapping timestamps from test set
+                logger.info(f"Removing {len(overlap)} overlapping timestamps from test set")
+                test_df = test_df[~test_df[date_col].isin(overlap)]
+                logger.info(f"After removing overlap: test={len(test_df)} rows")
+
+        # Add dataset info for debugging
+        logger.info(f"Created train dataset: {len(train_df)} rows")
+        if len(train_df) > 0:
+            logger.info(f"  Train period: {train_df[date_col].min()} to {train_df[date_col].max()}")
+
+        logger.info(f"Created test dataset: {len(test_df)} rows")
+        if len(test_df) > 0:
+            logger.info(f"  Test period: {test_df[date_col].min()} to {test_df[date_col].max()}")
+
         return {'train': train_df, 'test': test_df}

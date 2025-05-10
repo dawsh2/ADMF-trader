@@ -1,0 +1,160 @@
+2025-05-09 16:57:54,548 - __main__ - INFO - Installing fixes
+2025-05-09 16:57:54,882 - __main__ - INFO - Running direct test of train/test isolation fix
+2025-05-09 16:57:54,882 - fix_strategy_state - INFO - Starting direct test of train/test isolation...
+2025-05-09 16:57:54,887 - fix_strategy_state - INFO - 
+===== PROBLEM DEMONSTRATION (REUSING STRATEGY INSTANCE) =====
+2025-05-09 16:57:54,919 - src.strategy.implementations.simple_ma_crossover - INFO - SimpleMACrossoverStrategy initialized with fast_period=10, slow_period=30
+2025-05-09 16:57:54,919 - fix_strategy_state - INFO - Created strategy instance at 0x1063634d0
+2025-05-09 16:57:54,919 - fix_strategy_state - INFO - Strategy params: fast_period=10, slow_period=30
+2025-05-09 16:57:54,919 - fix_strategy_state - INFO - 
+Running train backtest with shared strategy...
+2025-05-09 16:57:54,919 - fix_strategy_state - INFO - TRAIN: Explicitly resetting strategy state before run
+2025-05-09 16:57:54,919 - src.strategy.implementations.simple_ma_crossover - INFO - Resetting SimpleMACrossoverStrategy state
+2025-05-09 16:57:54,919 - src.strategy.implementations.simple_ma_crossover.SimpleMACrossoverStrategy - INFO - Component shared_strategy reset
+2025-05-09 16:57:54,919 - fix_strategy_state - INFO - TRAIN: Strategy prices dict size before: 0
+2025-05-09 16:57:54,921 - src.strategy.implementations.simple_ma_crossover - INFO - SHORT signal generated for SIM: Fast MA (126.37) crossed below Slow MA (126.67)
+2025-05-09 16:57:54,921 - src.strategy.implementations.simple_ma_crossover - INFO - Signal generated: SIM SHORT, quantity=100, price=124.33002535944428, rule_id=shared_strategy_SIM_SHORT_1
+2025-05-09 16:57:54,923 - src.strategy.implementations.simple_ma_crossover - INFO - LONG signal generated for SIM: Fast MA (105.05) crossed above Slow MA (104.72)
+2025-05-09 16:57:54,923 - src.strategy.implementations.simple_ma_crossover - INFO - Signal generated: SIM LONG, quantity=100, price=107.31164361808317, rule_id=shared_strategy_SIM_LONG_2
+2025-05-09 16:57:54,924 - fix_strategy_state - INFO - TRAIN: Strategy prices dict size after: 1
+2025-05-09 16:57:54,924 - fix_strategy_state - INFO - TRAIN: Strategy prices array length for SIM: 140
+2025-05-09 16:57:54,924 - fix_strategy_state - INFO - 
+Running test backtest with same shared strategy instance...
+2025-05-09 16:57:54,924 - fix_strategy_state - INFO - TEST: Explicitly resetting strategy state before run
+2025-05-09 16:57:54,924 - src.strategy.implementations.simple_ma_crossover - INFO - Resetting SimpleMACrossoverStrategy state
+2025-05-09 16:57:54,924 - src.strategy.implementations.simple_ma_crossover.SimpleMACrossoverStrategy - INFO - Component shared_strategy reset
+2025-05-09 16:57:54,924 - fix_strategy_state - INFO - TEST: Strategy prices dict size before: 0
+2025-05-09 16:57:54,925 - src.strategy.implementations.simple_ma_crossover - INFO - SHORT signal generated for SIM: Fast MA (157.80) crossed below Slow MA (158.08)
+2025-05-09 16:57:54,925 - src.strategy.implementations.simple_ma_crossover - INFO - Signal generated: SIM SHORT, quantity=100, price=155.76580008308923, rule_id=shared_strategy_SIM_SHORT_1
+2025-05-09 16:57:54,926 - fix_strategy_state - INFO - TEST: Strategy prices dict size after: 1
+2025-05-09 16:57:54,926 - fix_strategy_state - INFO - TEST: Strategy prices array length for SIM: 60
+2025-05-09 16:57:54,926 - fix_strategy_state - INFO - 
+COMPARISON OF RESULTS WITH SHARED STRATEGY INSTANCE:
+2025-05-09 16:57:54,926 - fix_strategy_state - INFO - Train metrics: {'total_signals': 0, 'long_signals': 0, 'short_signals': 0, 'total_return': 0.0, 'sharpe_ratio': 0.0, 'prices_length': 140}
+2025-05-09 16:57:54,926 - fix_strategy_state - INFO - Test metrics: {'total_signals': 0, 'long_signals': 0, 'short_signals': 0, 'total_return': 0.0, 'sharpe_ratio': 0.0, 'prices_length': 60}
+2025-05-09 16:57:54,926 - fix_strategy_state - INFO - Train prices length: 140
+2025-05-09 16:57:54,926 - fix_strategy_state - INFO - Test prices length: 60
+2025-05-09 16:57:54,926 - fix_strategy_state - INFO - Issue detection: Are the test's price array sizes suspiciously large?
+2025-05-09 16:57:54,926 - fix_strategy_state - INFO - 
+===== SOLUTION DEMONSTRATION (FRESH STRATEGY INSTANCES) =====
+2025-05-09 16:57:54,926 - fix_strategy_state - INFO - 
+Running train backtest with new strategy...
+2025-05-09 16:57:54,926 - src.strategy.implementations.simple_ma_crossover - INFO - SimpleMACrossoverStrategy initialized with fast_period=10, slow_period=30
+2025-05-09 16:57:54,926 - fix_strategy_state - INFO - Created strategy instance at 0x1065a1f90
+2025-05-09 16:57:54,926 - fix_strategy_state - INFO - Strategy params: fast_period=10, slow_period=30
+2025-05-09 16:57:54,926 - fix_strategy_state - INFO - TRAIN: Explicitly resetting strategy state before run
+2025-05-09 16:57:54,926 - src.strategy.implementations.simple_ma_crossover - INFO - Resetting SimpleMACrossoverStrategy state
+2025-05-09 16:57:54,926 - src.strategy.implementations.simple_ma_crossover.SimpleMACrossoverStrategy - INFO - Component train_strategy reset
+2025-05-09 16:57:54,926 - fix_strategy_state - INFO - TRAIN: Strategy prices dict size before: 0
+2025-05-09 16:57:54,927 - src.strategy.implementations.simple_ma_crossover - INFO - SHORT signal generated for SIM: Fast MA (126.37) crossed below Slow MA (126.67)
+2025-05-09 16:57:54,927 - src.strategy.implementations.simple_ma_crossover - INFO - Signal generated: SIM SHORT, quantity=100, price=124.33002535944428, rule_id=train_strategy_SIM_SHORT_1
+2025-05-09 16:57:54,929 - src.strategy.implementations.simple_ma_crossover - INFO - LONG signal generated for SIM: Fast MA (105.05) crossed above Slow MA (104.72)
+2025-05-09 16:57:54,929 - src.strategy.implementations.simple_ma_crossover - INFO - Signal generated: SIM LONG, quantity=100, price=107.31164361808317, rule_id=train_strategy_SIM_LONG_2
+2025-05-09 16:57:54,930 - fix_strategy_state - INFO - TRAIN: Strategy prices dict size after: 1
+2025-05-09 16:57:54,930 - fix_strategy_state - INFO - TRAIN: Strategy prices array length for SIM: 140
+2025-05-09 16:57:54,930 - fix_strategy_state - INFO - 
+Running test backtest with new separate strategy...
+2025-05-09 16:57:54,930 - src.strategy.implementations.simple_ma_crossover - INFO - SimpleMACrossoverStrategy initialized with fast_period=10, slow_period=30
+2025-05-09 16:57:54,930 - fix_strategy_state - INFO - Created strategy instance at 0x1065a1e50
+2025-05-09 16:57:54,930 - fix_strategy_state - INFO - Strategy params: fast_period=10, slow_period=30
+2025-05-09 16:57:54,930 - fix_strategy_state - INFO - TEST: Explicitly resetting strategy state before run
+2025-05-09 16:57:54,930 - src.strategy.implementations.simple_ma_crossover - INFO - Resetting SimpleMACrossoverStrategy state
+2025-05-09 16:57:54,930 - src.strategy.implementations.simple_ma_crossover.SimpleMACrossoverStrategy - INFO - Component test_strategy reset
+2025-05-09 16:57:54,930 - fix_strategy_state - INFO - TEST: Strategy prices dict size before: 0
+2025-05-09 16:57:54,931 - src.strategy.implementations.simple_ma_crossover - INFO - SHORT signal generated for SIM: Fast MA (157.80) crossed below Slow MA (158.08)
+2025-05-09 16:57:54,931 - src.strategy.implementations.simple_ma_crossover - INFO - Signal generated: SIM SHORT, quantity=100, price=155.76580008308923, rule_id=test_strategy_SIM_SHORT_1
+2025-05-09 16:57:54,932 - fix_strategy_state - INFO - TEST: Strategy prices dict size after: 1
+2025-05-09 16:57:54,932 - fix_strategy_state - INFO - TEST: Strategy prices array length for SIM: 60
+2025-05-09 16:57:54,932 - fix_strategy_state - INFO - 
+COMPARISON OF RESULTS WITH SEPARATE STRATEGY INSTANCES:
+2025-05-09 16:57:54,932 - fix_strategy_state - INFO - Train metrics: {'total_signals': 0, 'long_signals': 0, 'short_signals': 0, 'total_return': 0.0, 'sharpe_ratio': 0.0, 'prices_length': 140}
+2025-05-09 16:57:54,932 - fix_strategy_state - INFO - Test metrics: {'total_signals': 0, 'long_signals': 0, 'short_signals': 0, 'total_return': 0.0, 'sharpe_ratio': 0.0, 'prices_length': 60}
+2025-05-09 16:57:54,932 - fix_strategy_state - INFO - Train prices length: 140
+2025-05-09 16:57:54,932 - fix_strategy_state - INFO - Test prices length: 60
+2025-05-09 16:57:54,932 - fix_strategy_state - INFO - Solution validation: Are the test's price array sizes consistent with the test data?
+2025-05-09 16:57:54,932 - fix_strategy_state - INFO - CONFIRMATION: Test prices array size is consistent with test data!
+2025-05-09 16:57:54,932 - fix_strategy_state - INFO - 
+IMPACT OF THE FIX:
+2025-05-09 16:57:54,932 - fix_strategy_state - INFO - Train metrics changed: False
+2025-05-09 16:57:54,932 - fix_strategy_state - INFO - Test metrics changed: False
+2025-05-09 16:57:54,932 - __main__ - INFO - TEST PASSED: Train/test isolation fix works properly
+2025-05-09 16:58:11,746 - __main__ - INFO - Installing fixes
+2025-05-09 16:58:12,055 - __main__ - INFO - Running direct test of train/test isolation fix
+2025-05-09 16:58:12,055 - fix_strategy_state - INFO - Starting direct test of train/test isolation...
+2025-05-09 16:58:12,062 - fix_strategy_state - INFO - 
+===== PROBLEM DEMONSTRATION (REUSING STRATEGY INSTANCE) =====
+2025-05-09 16:58:12,093 - src.strategy.implementations.simple_ma_crossover - INFO - SimpleMACrossoverStrategy initialized with fast_period=10, slow_period=30
+2025-05-09 16:58:12,093 - fix_strategy_state - INFO - Created strategy instance at 0x1088a34d0
+2025-05-09 16:58:12,093 - fix_strategy_state - INFO - Strategy params: fast_period=10, slow_period=30
+2025-05-09 16:58:12,093 - fix_strategy_state - INFO - 
+Running train backtest with shared strategy...
+2025-05-09 16:58:12,093 - fix_strategy_state - INFO - TRAIN: Explicitly resetting strategy state before run
+2025-05-09 16:58:12,093 - src.strategy.implementations.simple_ma_crossover - INFO - Resetting SimpleMACrossoverStrategy state
+2025-05-09 16:58:12,093 - src.strategy.implementations.simple_ma_crossover.SimpleMACrossoverStrategy - INFO - Component shared_strategy reset
+2025-05-09 16:58:12,093 - fix_strategy_state - INFO - TRAIN: Strategy prices dict size before: 0
+2025-05-09 16:58:12,095 - src.strategy.implementations.simple_ma_crossover - INFO - SHORT signal generated for SIM: Fast MA (126.37) crossed below Slow MA (126.67)
+2025-05-09 16:58:12,095 - src.strategy.implementations.simple_ma_crossover - INFO - Signal generated: SIM SHORT, quantity=100, price=124.33002535944428, rule_id=shared_strategy_SIM_SHORT_1
+2025-05-09 16:58:12,097 - src.strategy.implementations.simple_ma_crossover - INFO - LONG signal generated for SIM: Fast MA (105.05) crossed above Slow MA (104.72)
+2025-05-09 16:58:12,097 - src.strategy.implementations.simple_ma_crossover - INFO - Signal generated: SIM LONG, quantity=100, price=107.31164361808317, rule_id=shared_strategy_SIM_LONG_2
+2025-05-09 16:58:12,098 - fix_strategy_state - INFO - TRAIN: Strategy prices dict size after: 1
+2025-05-09 16:58:12,098 - fix_strategy_state - INFO - TRAIN: Strategy prices array length for SIM: 140
+2025-05-09 16:58:12,098 - fix_strategy_state - INFO - 
+Running test backtest with same shared strategy instance...
+2025-05-09 16:58:12,098 - fix_strategy_state - INFO - TEST: Explicitly resetting strategy state before run
+2025-05-09 16:58:12,098 - src.strategy.implementations.simple_ma_crossover - INFO - Resetting SimpleMACrossoverStrategy state
+2025-05-09 16:58:12,098 - src.strategy.implementations.simple_ma_crossover.SimpleMACrossoverStrategy - INFO - Component shared_strategy reset
+2025-05-09 16:58:12,098 - fix_strategy_state - INFO - TEST: Strategy prices dict size before: 0
+2025-05-09 16:58:12,099 - src.strategy.implementations.simple_ma_crossover - INFO - SHORT signal generated for SIM: Fast MA (157.80) crossed below Slow MA (158.08)
+2025-05-09 16:58:12,099 - src.strategy.implementations.simple_ma_crossover - INFO - Signal generated: SIM SHORT, quantity=100, price=155.76580008308923, rule_id=shared_strategy_SIM_SHORT_1
+2025-05-09 16:58:12,100 - fix_strategy_state - INFO - TEST: Strategy prices dict size after: 1
+2025-05-09 16:58:12,100 - fix_strategy_state - INFO - TEST: Strategy prices array length for SIM: 60
+2025-05-09 16:58:12,100 - fix_strategy_state - INFO - 
+COMPARISON OF RESULTS WITH SHARED STRATEGY INSTANCE:
+2025-05-09 16:58:12,100 - fix_strategy_state - INFO - Train metrics: {'total_signals': 0, 'long_signals': 0, 'short_signals': 0, 'total_return': 0.0, 'sharpe_ratio': 0.0, 'prices_length': 140}
+2025-05-09 16:58:12,100 - fix_strategy_state - INFO - Test metrics: {'total_signals': 0, 'long_signals': 0, 'short_signals': 0, 'total_return': 0.0, 'sharpe_ratio': 0.0, 'prices_length': 60}
+2025-05-09 16:58:12,100 - fix_strategy_state - INFO - Train prices length: 140
+2025-05-09 16:58:12,100 - fix_strategy_state - INFO - Test prices length: 60
+2025-05-09 16:58:12,100 - fix_strategy_state - INFO - Issue detection: Are the test's price array sizes suspiciously large?
+2025-05-09 16:58:12,100 - fix_strategy_state - INFO - 
+===== SOLUTION DEMONSTRATION (FRESH STRATEGY INSTANCES) =====
+2025-05-09 16:58:12,100 - fix_strategy_state - INFO - 
+Running train backtest with new strategy...
+2025-05-09 16:58:12,100 - src.strategy.implementations.simple_ma_crossover - INFO - SimpleMACrossoverStrategy initialized with fast_period=10, slow_period=30
+2025-05-09 16:58:12,100 - fix_strategy_state - INFO - Created strategy instance at 0x108ae1f90
+2025-05-09 16:58:12,100 - fix_strategy_state - INFO - Strategy params: fast_period=10, slow_period=30
+2025-05-09 16:58:12,100 - fix_strategy_state - INFO - TRAIN: Explicitly resetting strategy state before run
+2025-05-09 16:58:12,100 - src.strategy.implementations.simple_ma_crossover - INFO - Resetting SimpleMACrossoverStrategy state
+2025-05-09 16:58:12,100 - src.strategy.implementations.simple_ma_crossover.SimpleMACrossoverStrategy - INFO - Component train_strategy reset
+2025-05-09 16:58:12,100 - fix_strategy_state - INFO - TRAIN: Strategy prices dict size before: 0
+2025-05-09 16:58:12,102 - src.strategy.implementations.simple_ma_crossover - INFO - SHORT signal generated for SIM: Fast MA (126.37) crossed below Slow MA (126.67)
+2025-05-09 16:58:12,102 - src.strategy.implementations.simple_ma_crossover - INFO - Signal generated: SIM SHORT, quantity=100, price=124.33002535944428, rule_id=train_strategy_SIM_SHORT_1
+2025-05-09 16:58:12,103 - src.strategy.implementations.simple_ma_crossover - INFO - LONG signal generated for SIM: Fast MA (105.05) crossed above Slow MA (104.72)
+2025-05-09 16:58:12,103 - src.strategy.implementations.simple_ma_crossover - INFO - Signal generated: SIM LONG, quantity=100, price=107.31164361808317, rule_id=train_strategy_SIM_LONG_2
+2025-05-09 16:58:12,104 - fix_strategy_state - INFO - TRAIN: Strategy prices dict size after: 1
+2025-05-09 16:58:12,104 - fix_strategy_state - INFO - TRAIN: Strategy prices array length for SIM: 140
+2025-05-09 16:58:12,104 - fix_strategy_state - INFO - 
+Running test backtest with new separate strategy...
+2025-05-09 16:58:12,104 - src.strategy.implementations.simple_ma_crossover - INFO - SimpleMACrossoverStrategy initialized with fast_period=10, slow_period=30
+2025-05-09 16:58:12,104 - fix_strategy_state - INFO - Created strategy instance at 0x108ae1e50
+2025-05-09 16:58:12,105 - fix_strategy_state - INFO - Strategy params: fast_period=10, slow_period=30
+2025-05-09 16:58:12,105 - fix_strategy_state - INFO - TEST: Explicitly resetting strategy state before run
+2025-05-09 16:58:12,105 - src.strategy.implementations.simple_ma_crossover - INFO - Resetting SimpleMACrossoverStrategy state
+2025-05-09 16:58:12,105 - src.strategy.implementations.simple_ma_crossover.SimpleMACrossoverStrategy - INFO - Component test_strategy reset
+2025-05-09 16:58:12,105 - fix_strategy_state - INFO - TEST: Strategy prices dict size before: 0
+2025-05-09 16:58:12,105 - src.strategy.implementations.simple_ma_crossover - INFO - SHORT signal generated for SIM: Fast MA (157.80) crossed below Slow MA (158.08)
+2025-05-09 16:58:12,105 - src.strategy.implementations.simple_ma_crossover - INFO - Signal generated: SIM SHORT, quantity=100, price=155.76580008308923, rule_id=test_strategy_SIM_SHORT_1
+2025-05-09 16:58:12,106 - fix_strategy_state - INFO - TEST: Strategy prices dict size after: 1
+2025-05-09 16:58:12,106 - fix_strategy_state - INFO - TEST: Strategy prices array length for SIM: 60
+2025-05-09 16:58:12,106 - fix_strategy_state - INFO - 
+COMPARISON OF RESULTS WITH SEPARATE STRATEGY INSTANCES:
+2025-05-09 16:58:12,106 - fix_strategy_state - INFO - Train metrics: {'total_signals': 0, 'long_signals': 0, 'short_signals': 0, 'total_return': 0.0, 'sharpe_ratio': 0.0, 'prices_length': 140}
+2025-05-09 16:58:12,106 - fix_strategy_state - INFO - Test metrics: {'total_signals': 0, 'long_signals': 0, 'short_signals': 0, 'total_return': 0.0, 'sharpe_ratio': 0.0, 'prices_length': 60}
+2025-05-09 16:58:12,106 - fix_strategy_state - INFO - Train prices length: 140
+2025-05-09 16:58:12,106 - fix_strategy_state - INFO - Test prices length: 60
+2025-05-09 16:58:12,106 - fix_strategy_state - INFO - Solution validation: Are the test's price array sizes consistent with the test data?
+2025-05-09 16:58:12,106 - fix_strategy_state - INFO - CONFIRMATION: Test prices array size is consistent with test data!
+2025-05-09 16:58:12,106 - fix_strategy_state - INFO - 
+IMPACT OF THE FIX:
+2025-05-09 16:58:12,106 - fix_strategy_state - INFO - Train metrics changed: False
+2025-05-09 16:58:12,106 - fix_strategy_state - INFO - Test metrics changed: False
+2025-05-09 16:58:12,106 - __main__ - INFO - TEST PASSED: Train/test isolation fix works properly

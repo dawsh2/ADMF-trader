@@ -1,498 +1,565 @@
 """
-Standardized optimization module for trading strategies.
+Fixed implementation of strategy optimizer with train/test split.
 
-This module provides a consistent interface for strategy optimization,
-leveraging the analytics module for performance calculations and handling
-train/test validation.
+This implementation properly isolates train and test data, ensuring that
+strategy state is not carried over between the train and test runs.
 """
 
-import os
-import sys
 import logging
-import yaml
-import json
-import datetime
+import os
+import time
+import random
 import uuid
-import traceback
+import json
+import numpy as np
+import importlib
 from pathlib import Path
-
-# Import optimization components
-from src.strategy.optimization.parameter_space import ParameterSpace
-from src.strategy.optimization.grid_search import GridSearch
-# Update imports to match actual class names
-try:
-    from src.strategy.optimization.random_search import RandomSearch
-except ImportError:
-    from src.strategy.optimization.random_search import RandomSearchOptimizer as RandomSearch
-try:
-    from src.strategy.optimization.walk_forward import WalkForward
-except ImportError:
-    from src.strategy.optimization.walk_forward import WalkForwardOptimizer as WalkForward
-from src.strategy.optimization.objective_functions import get_objective_function, OBJECTIVES
-from src.strategy.optimization.fixed_reporter import OptimizationReporter
-
-# Standard analytics imports for consistency
-from src.analytics.metrics.functional import (
-    total_return,
-    sharpe_ratio,
-    profit_factor,
-    max_drawdown,
-    calculate_all_metrics
-)
-from src.execution.backtest.optimizing_backtest import OptimizingBacktest
-from src.strategy.strategy_factory import StrategyFactory
+from datetime import datetime
 
 # Set up logging
 logger = logging.getLogger(__name__)
 
-class StrategyOptimizer:
+class FixedOptimizer:
     """
-    Standard optimizer for trading strategies.
+    Optimizer implementation with train/test split and proper isolation.
     
-    This class handles the optimization process for strategy parameters,
-    ensuring consistent evaluation across training and test datasets.
+    This implementation ensures complete isolation between train and test
+    runs to prevent overfitting and state leakage.
     """
     
-    def __init__(self, config):
+    def __init__(self, strategy_name, config, parameter_space, objective_function=None):
         """
-        Initialize the optimizer with configuration.
+        Initialize the optimizer.
         
         Args:
-            config (dict): Optimization configuration which can be provided as:
-                - Dictionary with direct configuration
-                - Path to YAML file containing configuration
+            strategy_name (str): Name of the strategy to optimize
+            config (dict): Base configuration dictionary
+            parameter_space (object): Parameter space for optimization
+            objective_function (callable, optional): Function to evaluate results
         """
-        # Load config if it's a string (path to file)
-        if isinstance(config, str):
-            try:
-                with open(config, 'r') as f:
-                    self.config = yaml.safe_load(f)
-            except Exception as e:
-                logger.error(f"Error loading configuration file {config}: {e}")
-                raise
-        else:
-            self.config = config
-            
-        # Set up output directory
-        self.output_dir = self.config.get('output_dir', './optimization_results')
+        self.strategy_name = strategy_name
+        self.config = config
+        self.parameter_space = parameter_space
+        self.objective_function = objective_function or self._default_objective
+        self.results = None
+        self.best_parameters = None
         
-        # Create output directory if it doesn't exist
-        Path(self.output_dir).mkdir(parents=True, exist_ok=True)
+        # Get train_test_split configuration
+        self.train_test_config = config.get('train_test_split', {})
+        if not self.train_test_config:
+            # Try to find it in other config locations
+            if 'data' in config and 'train_test_split' in config['data']:
+                self.train_test_config = config['data']['train_test_split']
+            else:
+                # Use default 70/30 split
+                self.train_test_config = {
+                    'method': 'ratio',
+                    'train_ratio': 0.7,
+                    'test_ratio': 0.3
+                }
+                logger.info("Using default 70/30 train/test split")
         
-        # Set up components
-        self.parameter_space = self._build_parameter_space()
-        self.objective_function = self._get_objective_function()
-        self.strategy_factory = self._setup_strategy_factory()
+        # Make sure the train test config is consistent between top level and data section
+        if 'data' not in self.config:
+            self.config['data'] = {}
+        if 'train_test_split' not in self.config['data']:
+            self.config['data']['train_test_split'] = self.train_test_config
         
-        # Create reporter
-        self.reporter = OptimizationReporter(self.config)
-        
-    def _build_parameter_space(self):
+        # Configure the reporter for storing results
+        self.reporter = None
+        if 'reporter' in config:
+            self._configure_reporter(config['reporter'])
+    
+    def _configure_reporter(self, reporter_config):
         """
-        Build parameter space from configuration.
-        
-        Returns:
-            ParameterSpace: Parameter space for optimization
-        """
-        param_space = ParameterSpace()
-        
-        # Load parameter space configuration
-        if 'parameter_space' in self.config:
-            # Parameters are defined in the config
-            param_config = {'parameters': self.config['parameter_space']}
-            param_space.from_dict(param_config)
-        elif 'parameter_file' in self.config:
-            # Parameters are in a separate file
-            param_file = self.config['parameter_file']
-            try:
-                with open(param_file, 'r') as f:
-                    param_config = yaml.safe_load(f)
-                param_space.from_dict(param_config)
-            except Exception as e:
-                logger.error(f"Error loading parameter file {param_file}: {e}")
-                raise
-        else:
-            raise ValueError("No parameter space defined in config (use parameter_space or parameter_file)")
-            
-        return param_space
-        
-    def _get_objective_function(self):
-        """
-        Get objective function from configuration.
-        
-        Returns:
-            callable: Objective function
-        """
-        # Get objective name from config
-        objective_name = self.config.get('optimization', {}).get('objective', 'sharpe_ratio')
-        
-        # Get weights for combined objective
-        weights = self.config.get('optimization', {}).get('weights', None)
-        
-        # Create a safer version of the objective function that handles None results
-        def _safe_objective_wrapper(func):
-            def _safe_func(results):
-                if results is None:
-                    logger.warning("Objective function called with None results")
-                    return 0.0
-                try:
-                    return func(results)
-                except Exception as e:
-                    logger.error(f"Error in objective function: {e}")
-                    return 0.0
-            return _safe_func
-        
-        # If objective is combined_score, create a weighted function
-        if objective_name == 'combined_score' and weights:
-            # Extract weights
-            combined_func = lambda results: self._calculate_combined_score(results, weights)
-            return _safe_objective_wrapper(combined_func)
-        elif objective_name == 'train_test_combined':
-            # Create a function that combines train and test scores
-            train_weight = self.config.get('optimization', {}).get('train_weight', 0.4)
-            test_weight = self.config.get('optimization', {}).get('test_weight', 0.6)
-            sub_objective = self.config.get('optimization', {}).get('sub_objective', 'sharpe_ratio')
-            
-            # Get the sub-objective function
-            sub_func = get_objective_function(sub_objective)
-            
-            # Define the combined function
-            def _combined_func(results):
-                if results is None:
-                    return 0.0
-                train_results = results.get('train_results', {})
-                test_results = results.get('test_results', {})
-                train_score = sub_func(train_results) if train_results else 0.0
-                test_score = sub_func(test_results) if test_results else 0.0
-                return train_weight * train_score + test_weight * test_score
-            
-            return _safe_objective_wrapper(_combined_func)
-        else:
-            # Get standard objective function
-            standard_func = get_objective_function(objective_name)
-            return _safe_objective_wrapper(standard_func)
-            
-    def _calculate_combined_score(self, results, weights):
-        """
-        Calculate a combined score from multiple metrics.
+        Configure the reporter for storing results.
         
         Args:
-            results (dict): Backtest results
-            weights (dict): Weights for each metric
-            
-        Returns:
-            float: Combined score
+            reporter_config (dict): Reporter configuration
         """
-        if results is None:
-            return 0.0
+        try:
+            # Import the reporter class
+            from src.strategy.optimization.fixed_reporter import FixedReporter
             
-        score = 0.0
-        
-        # Calculate weighted sum of metrics
-        for metric_name, weight in weights.items():
-            if metric_name in OBJECTIVES:
-                metric_func = get_objective_function(metric_name)
-                try:
-                    metric_value = metric_func(results)
-                    score += weight * metric_value
-                except Exception as e:
-                    logger.warning(f"Error calculating metric {metric_name}: {e}")
-                
-        return score
-        
-    def _setup_strategy_factory(self):
-        """
-        Set up the strategy factory.
-        
-        Returns:
-            StrategyFactory: Strategy factory
-        """
-        # Define strategy directories
-        strategy_dirs = [
-            os.path.join(os.path.dirname(os.path.abspath(__file__)), 
-                        '..', 'implementations')
-        ]
-        
-        # If custom strategy directories are specified, add them
-        if 'strategy_dirs' in self.config:
-            strategy_dirs.extend(self.config['strategy_dirs'])
-        
-        # Create strategy factory
-        factory = StrategyFactory(strategy_dirs)
-        
-        return factory
-        
-    def _create_backtest_config(self):
-        """
-        Create backtest configuration from optimization config.
-        
-        Returns:
-            dict: Backtest configuration
-        """
-        # Start with base configuration
-        backtest_config = {}
-        
-        # Copy relevant backtest settings
-        if 'backtest' in self.config:
-            backtest_config.update(self.config['backtest'])
-            
-        # Copy data settings
-        if 'data' in self.config:
-            backtest_config['data'] = self.config['data']
-            
-        # Add fixed strategy parameters if provided
-        if 'strategy' in self.config and 'fixed_params' in self.config['strategy']:
-            backtest_config['strategy'] = {
-                'name': self.config['strategy']['name'],
-                'params': self.config['strategy']['fixed_params']
-            }
-            
-        return backtest_config
-        
-    def optimize(self):
+            # Create reporter instance
+            self.reporter = FixedReporter(
+                strategy_name=self.strategy_name,
+                parameter_space=self.parameter_space,
+                config=reporter_config
+            )
+            logger.info("Configured reporter for storing optimization results")
+        except Exception as e:
+            logger.error(f"Error configuring reporter: {e}")
+            self.reporter = None
+    
+    def optimize(self, bootstrap=None):
         """
         Run the optimization process.
         
+        Args:
+            bootstrap (object, optional): Bootstrap object providing context
+            
         Returns:
             dict: Optimization results
         """
-        # Log starting optimization
-        logger.info(f"Starting optimization for strategy: {self.config['strategy']['name']}")
-        logger.info(f"Parameter space: {self.parameter_space}")
+        logger.info(f"Starting optimization for strategy: {self.strategy_name}")
+        logger.info(f"Parameter space has {len(self.parameter_space.get_combinations())} combinations")
         
-        # Create backtest configuration
-        backtest_config = self._create_backtest_config()
+        # Get parameter combinations to test
+        parameter_combinations = self.parameter_space.get_combinations()
         
-        # Create optimization context
-        context = {
-            'strategy_factory': self.strategy_factory
-        }
+        # Check if max_bars parameter is available
+        max_bars = None
+        if bootstrap and hasattr(bootstrap, 'config') and 'max_bars' in bootstrap.config:
+            max_bars = bootstrap.config['max_bars']
+            logger.info(f"Found max_bars={max_bars} in bootstrap configuration")
+        elif 'max_bars' in self.config:
+            max_bars = self.config['max_bars']
+            logger.info(f"Found max_bars={max_bars} in optimizer configuration")
         
-        # Get optimization method
-        optimization_method = self.config.get('optimization', {}).get('method', 'grid')
+        # Add max_bars to config if defined
+        if max_bars is not None:
+            # Ensure we have a data config
+            if 'data' not in self.config:
+                self.config['data'] = {}
+            
+            # Add max_bars to data config
+            self.config['data']['max_bars'] = max_bars
+            logger.info(f"Added max_bars={max_bars} to data config")
         
-        # Get train/test split configuration
-        train_test_config = self.config.get('data', {}).get('train_test_split', {})
+        # Prepare results storage
+        all_results = []
+        best_train_score = float('-inf')
+        best_parameters = None
+        best_train_result = None
+        best_test_result = None
         
-        # Create results with a minimum structure that can be reported
-        results = {
-            'timestamp': datetime.datetime.now().strftime("%Y%m%d_%H%M%S"),
-            'id': str(uuid.uuid4()),
-            'config': self.config,
-            'parameter_space': repr(self.parameter_space),
-            'best_parameters': None,
-            'best_score': 0.0,
-            'train_results': None,
-            'test_results': None,
-            'results_grid': []
-        }
+        # Time tracking
+        start_time = time.time()
+        total_combinations = len(parameter_combinations)
+        progress_step = max(1, total_combinations // 20)  # Show progress every 5%
         
-        try:
-            # Create optimizer based on method
-            if optimization_method == 'grid':
-                logger.info("Using grid search optimization")
-                # Create optimizing backtest
-                optimizer = OptimizingBacktest('optimizer', backtest_config, self.parameter_space)
+        # Process each parameter combination
+        for idx, params in enumerate(parameter_combinations, 1):
+            # Log progress update
+            if idx % progress_step == 0 or idx == 1 or idx == total_combinations:
+                elapsed = time.time() - start_time
+                progress = idx / total_combinations * 100
+                est_total = elapsed / idx * total_combinations
+                remaining = est_total - elapsed
                 
-                # Initialize optimizer
-                optimizer.initialize(context)
+                logger.info(f"Progress: {progress:.1f}% ({idx}/{total_combinations}), " +
+                            f"Elapsed: {elapsed:.1f}s, Remaining: {remaining:.1f}s")
+            
+            # CRITICAL FIX: Create a backtest config that's a deep copy
+            # to ensure no state leakage between runs
+            import copy
+            backtest_config = copy.deepcopy(self.config)
+            
+            # CRITICAL FIX: Ensure train_test_split config is part of the backtest config
+            if 'data' not in backtest_config:
+                backtest_config['data'] = {}
+            
+            # Copy train_test_split to data config if not already present
+            if self.train_test_config and 'train_test_split' not in backtest_config['data']:
+                logger.info("Adding train_test_split configuration to backtest data config")
+                backtest_config['data']['train_test_split'] = copy.deepcopy(self.train_test_config)
+            
+            # Add current parameters to the config for this run
+            backtest_config['strategy_parameters'] = params
+            
+            # Log parameters being tested
+            params_str = ', '.join([f"{k}={v}" for k, v in params.items()])
+            logger.info(f"Testing parameters: {params_str}")
+            
+            try:
+                # Run backtest with the training data
+                logger.info(f"{'=' * 30} TRAINING BACKTEST {'=' * 30}")
                 
-                # Run optimization
-                opt_results = optimizer.optimize(
-                    self.config['strategy']['name'],
-                    self.objective_function,
-                    train_test_config
-                )
+                # CRITICAL FIX: Use a run-specific random seed derived from parameters
+                # This ensures reproducibility while keeping runs isolated
+                import hashlib
+                params_str = str(sorted(params.items()))
+                train_seed = int(hashlib.md5(f"{params_str}_train_{idx}".encode()).hexdigest(), 16) % (2**32)
+                random.seed(train_seed)
+                np.random.seed(train_seed)
                 
-                # Update results if optimization successful
-                if opt_results is not None:
-                    results.update(opt_results)
+                # CRITICAL FIX: Create a fresh bootstrap context for each run
+                # to ensure complete isolation
+                if bootstrap:
+                    # Create a fresh context with the required dependencies
+                    context = self._create_fresh_context(bootstrap, params, 'train')
                     
-            elif optimization_method == 'random':
-                logger.info("Using random search optimization")
-                # Get number of trials
-                num_trials = self.config.get('optimization', {}).get('num_trials', 100)
-                
-                # Create optimizer with random search
-                optimizer = RandomSearch(
-                    parameter_space=self.parameter_space,
-                    seed=self.config.get('optimization', {}).get('random_seed')
-                )
-                
-                # Create an objective function wrapper for optimizing backtest
-                def _objective_function(params):
-                    try:
-                        backtest = OptimizingBacktest('optimizer', backtest_config, self.parameter_space)
-                        backtest.initialize(context)
-                        backtest_results = backtest._run_backtest_with_params(
-                            self.config['strategy']['name'], 
-                            params, 
-                            'train',
-                            train_test_config
-                        )
-                        return self.objective_function(backtest_results)
-                    except Exception as e:
-                        logger.error(f"Error in objective function evaluation: {e}")
-                        return 0.0
-                
-                # Run random search
-                search_results = optimizer.search(
-                    objective_function=_objective_function,
-                    num_samples=num_trials,
-                    maximize=True,
-                    max_time=self.config.get('optimization', {}).get('max_time')
-                )
-                
-                if search_results is not None and 'best_params' in search_results:
-                    # Run backtest with best parameters on train and test sets
-                    backtest = OptimizingBacktest('optimizer', backtest_config, self.parameter_space)
+                    # Import here to avoid circular imports
+                    from src.execution.backtest.optimizing_backtest import OptimizingBacktest
+                    
+                    # Create a fresh backtest coordinator instance (with unique name)
+                    backtest_id = f"train_{idx}_{uuid.uuid4().hex[:8]}"
+                    backtest = OptimizingBacktest(
+                        name=f"backtest_{backtest_id}", 
+                        config=backtest_config,
+                        parameter_space=self.parameter_space
+                    )
+                    
+                    # Initialize with our fresh context
                     backtest.initialize(context)
                     
-                    try:
-                        train_results = backtest._run_backtest_with_params(
-                            self.config['strategy']['name'], 
-                            search_results['best_params'], 
-                            'train',
-                            train_test_config
-                        )
-                    except Exception as e:
-                        logger.error(f"Error running train backtest with best params: {e}")
-                        train_results = None
-                        
-                    try:
-                        test_results = backtest._run_backtest_with_params(
-                            self.config['strategy']['name'], 
-                            search_results['best_params'], 
-                            'test',
-                            train_test_config
-                        )
-                    except Exception as e:
-                        logger.error(f"Error running test backtest with best params: {e}")
-                        test_results = None
+                    # Get a fresh instance of the strategy
+                    strategy_factory = context.get('strategy_factory')
+                    if not strategy_factory:
+                        raise ValueError("Strategy factory not found in context")
                     
-                    # Update results
-                    results.update({
-                        'best_parameters': search_results.get('best_params'),
-                        'best_score': search_results.get('best_score', 0.0),
-                        'train_results': train_results,
-                        'test_results': test_results,
-                        'evaluations': search_results.get('evaluations', 0),
-                        'elapsed_time': search_results.get('elapsed_time', 0),
-                        'results_grid': search_results.get('results', [])
-                    })
-                
-            elif optimization_method == 'walk_forward':
-                logger.info("Using walk-forward optimization")
-                # Get walk-forward parameters
-                window_size = self.config.get('optimization', {}).get('window_size', 60)
-                step_size = self.config.get('optimization', {}).get('step_size', 20)
-                window_type = self.config.get('optimization', {}).get('window_type', 'rolling')
-                
-                # For walk-forward optimization, we'll use a simplified implementation for now
-                # Create an optimizing backtest for each window
-                logger.info(f"Walk-forward optimization with window size {window_size}, step size {step_size}")
-                
-                # This is a placeholder - actual walk-forward would use time windows
-                # For now, we'll just do a standard grid search and add the walk-forward metadata
-                backtest = OptimizingBacktest('optimizer', backtest_config, self.parameter_space)
-                backtest.initialize(context)
-                
-                # Run standard optimization with proper train/test split
-                opt_results = backtest.optimize(
-                    self.config['strategy']['name'],
-                    self.objective_function,
-                    train_test_config
-                )
-                
-                # Update results if optimization successful
-                if opt_results is not None:
-                    results.update(opt_results)
+                    # CRITICAL FIX: Force garbage collection before running
+                    # to ensure maximum memory availability
+                    import gc
+                    gc.collect()
                     
-                    # Add walk-forward specific metadata
-                    results['walk_forward'] = {
-                        'window_size': window_size,
-                        'step_size': step_size,
-                        'window_type': window_type
+                    # Run backtest with training data
+                    train_result = backtest._run_backtest_with_params(
+                        self.strategy_name,
+                        params,
+                        'train',
+                        self.train_test_config
+                    )
+                    
+                    # CRITICAL FIX: Force garbage collection after train run
+                    # to ensure no state leakage
+                    gc.collect()
+                    
+                    # Run backtest with test data
+                    logger.info(f"{'=' * 30} TESTING BACKTEST {'=' * 30}")
+                    # Use a different seed for test run
+                    test_seed = int(hashlib.md5(f"{params_str}_test_{idx}".encode()).hexdigest(), 16) % (2**32)
+                    random.seed(test_seed)
+                    np.random.seed(test_seed)
+                    
+                    # Create a fresh context for the test run
+                    test_context = self._create_fresh_context(bootstrap, params, 'test')
+                    
+                    # Create a fresh backtest instance for test
+                    backtest_id = f"test_{idx}_{uuid.uuid4().hex[:8]}"
+                    test_backtest = OptimizingBacktest(
+                        name=f"backtest_{backtest_id}",
+                        config=backtest_config,
+                        parameter_space=self.parameter_space
+                    )
+                    
+                    # Initialize with our fresh context
+                    test_backtest.initialize(test_context)
+                    
+                    # Run backtest with test data
+                    test_result = test_backtest._run_backtest_with_params(
+                        self.strategy_name,
+                        params,
+                        'test',
+                        self.train_test_config
+                    )
+                else:
+                    # No bootstrap provided, create a minimal ad-hoc backtest
+                    logger.info("Creating minimal backtest environment as no bootstrap was provided")
+                    
+                    # Create necessary components for a minimal backtest
+                    from src.data.historical_data_handler import HistoricalDataHandler
+                    from src.core.events.event_bus import EventBus
+                    from src.core.trade_repository import TradeRepository
+                    from src.execution.backtest.optimizing_backtest import OptimizingBacktest
+                    from src.strategy.strategy_factory import StrategyFactory
+                    
+                    # Create a minimal bootstrap context
+                    event_bus = EventBus()
+                    trade_repository = TradeRepository()
+                    strategy_factory = StrategyFactory()
+                    
+                    # Create a minimal context
+                    context = {
+                        'event_bus': event_bus,
+                        'trade_repository': trade_repository,
+                        'strategy_factory': strategy_factory,
+                        'config': backtest_config.copy(),
+                        'data_split': 'train'
                     }
-            else:
-                raise ValueError(f"Unknown optimization method: {optimization_method}")
+                    
+                    # Create a parameter space aware backtest coordinator
+                    backtest = OptimizingBacktest('backtest', backtest_config, self.parameter_space)
+                    backtest.initialize(context)
+                    
+                    # Run backtest with training data
+                    train_result = backtest._run_backtest_with_params(
+                        self.strategy_name,
+                        params,
+                        'train',
+                        self.train_test_config
+                    )
+                    
+                    # CRITICAL FIX: Force garbage collection after train run
+                    # to ensure no state leakage
+                    import gc
+                    gc.collect()
+                    
+                    # Run backtest with test data
+                    logger.info(f"{'=' * 30} TESTING BACKTEST {'=' * 30}")
+                    # Use a different seed for test run
+                    test_seed = int(hashlib.md5(f"{params_str}_test_{idx}".encode()).hexdigest(), 16) % (2**32)
+                    random.seed(test_seed)
+                    np.random.seed(test_seed)
+                    
+                    # Update context for test run
+                    context['data_split'] = 'test'
+                    
+                    # Create a fresh backtest instance for test
+                    backtest_id = f"test_{idx}_{uuid.uuid4().hex[:8]}"
+                    test_backtest = OptimizingBacktest(
+                        name=f"backtest_{backtest_id}",
+                        config=backtest_config,
+                        parameter_space=self.parameter_space
+                    )
+                    
+                    # Initialize with test context
+                    test_backtest.initialize(context)
+                    
+                    # Run backtest with test data
+                    test_result = test_backtest._run_backtest_with_params(
+                        self.strategy_name,
+                        params,
+                        'test',
+                        self.train_test_config
+                    )
                 
-        except Exception as e:
-            logger.error(f"Error during optimization: {e}")
-            logger.error(f"Traceback: {traceback.format_exc()}")
-            # We'll still proceed with reporting, just with empty/default results
+                # Calculate training score
+                train_score = self.objective_function(train_result)
+                test_score = self.objective_function(test_result)
+                
+                # Get statistics for display
+                train_stats = train_result.get('statistics', {})
+                test_stats = test_result.get('statistics', {})
+                
+                # Log results
+                logger.info(f"Train score: {train_score:.4f}, "
+                            f"Return: {train_stats.get('return_pct', 0):.2f}%, "
+                            f"Sharpe: {train_stats.get('sharpe_ratio', 0):.2f}")
+                logger.info(f"Test score: {test_score:.4f}, "
+                            f"Return: {test_stats.get('return_pct', 0):.2f}%, "
+                            f"Sharpe: {test_stats.get('sharpe_ratio', 0):.2f}")
+                
+                # Store result
+                result = {
+                    'parameters': params,
+                    'train_score': train_score,
+                    'test_score': test_score,
+                    'train_result': train_result,
+                    'test_result': test_result
+                }
+                
+                all_results.append(result)
+                
+                # Update best result if this is better
+                if train_score > best_train_score:
+                    best_train_score = train_score
+                    best_parameters = params
+                    best_train_result = train_result
+                    best_test_result = test_result
+                    
+                    logger.info(f"New best parameters: {params_str}")
+                    logger.info(f"Best train score: {train_score:.4f}, Best test score: {test_score:.4f}")
+                
+            except Exception as e:
+                logger.error(f"Error testing parameters {params}: {e}")
+                logger.exception("Exception details:")
+                
+                # Add failed result to track errors
+                all_results.append({
+                    'parameters': params,
+                    'train_score': float('-inf'),
+                    'test_score': float('-inf'),
+                    'error': str(e)
+                })
+                
+                # Force garbage collection to clean up resources
+                import gc
+                gc.collect()
         
-        # Ensure best_score is properly set
-        if 'best_train_score' in results and 'best_score' not in results:
-            results['best_score'] = results['best_train_score']
+        # Calculate total elapsed time
+        total_time = time.time() - start_time
+        logger.info(f"Optimization completed in {total_time:.1f} seconds")
         
-        # Log optimization completion with best parameters and score
-        logger.info(f"Optimization completed. Best parameters: {results.get('best_parameters', {})}, Best score: {results.get('best_score', 0):.4f}")
+        # Sort results by train score
+        all_results.sort(key=lambda x: x.get('train_score', float('-inf')), reverse=True)
         
-        # Print comprehensive summary to console
-        print("\nOptimization Results Summary")
-        print("=" * 80)
-        print(f"Strategy: {self.config['strategy']['name']}")
-        print(f"Best parameters: {results.get('best_parameters', {})}")
+        # Prepare final results
+        self.results = {
+            'best_parameters': best_parameters,
+            'best_train_score': best_train_score,
+            'best_test_score': self.objective_function(best_test_result) if best_test_result else float('-inf'),
+            'all_results': all_results,
+            'parameter_count': len(parameter_combinations),
+            'execution_time': total_time,
+            'train_test_split': self.train_test_config,
+            'strategy_name': self.strategy_name
+        }
         
-        # Get the best score - might be from train_score or best_score field
-        best_score = results.get('best_score', 0)
-        if best_score == 0 and 'best_train_score' in results:
-            best_score = results['best_train_score']
-        
-        print(f"Best score: {best_score:.4f}")
-        
-        # Print train/test performance if available
-        train_results = results.get('train_results', {})
-        test_results = results.get('test_results', {})
-        
-        if train_results:
-            train_stats = train_results.get('statistics', {})
-            print("\nTraining Performance:")
-            print(f"  Return: {train_stats.get('return_pct', 0):.2f}%")
-            print(f"  Sharpe Ratio: {train_stats.get('sharpe_ratio', 0):.2f}")
-            print(f"  Profit Factor: {train_stats.get('profit_factor', 0):.2f}")
-            print(f"  Max Drawdown: {train_stats.get('max_drawdown', 0):.2f}%")
-            print(f"  Trades: {train_stats.get('trades_executed', 0)}")
+        # Add more comprehensive data for plotting and analysis
+        if best_train_result and best_test_result:
+            self.results['train_results'] = best_train_result
+            self.results['test_results'] = best_test_result
             
-        if test_results:
-            test_stats = test_results.get('statistics', {})
-            print("\nTesting Performance:")
-            print(f"  Return: {test_stats.get('return_pct', 0):.2f}%")
-            print(f"  Sharpe Ratio: {test_stats.get('sharpe_ratio', 0):.2f}")
-            print(f"  Profit Factor: {test_stats.get('profit_factor', 0):.2f}")
-            print(f"  Max Drawdown: {test_stats.get('max_drawdown', 0):.2f}%")
-            print(f"  Trades: {test_stats.get('trades_executed', 0)}")
-            
-        print(f"\nDetailed reports saved to: {self.output_dir}")
-        print("=" * 80)
+            # Add trade data for deeper analysis
+            if 'trades' in best_train_result:
+                self.results['best_train_trades'] = best_train_result['trades']
+            if 'trades' in best_test_result:
+                self.results['best_test_trades'] = best_test_result['trades']
         
-        # Generate report
-        self.reporter.generate_report(results)
+        # Store parameters
+        self.best_parameters = best_parameters
         
-        # Save results
-        self._save_results(results)
+        # Generate report if reporter is configured
+        if self.reporter:
+            try:
+                self.reporter.generate_report(self.results)
+            except Exception as e:
+                logger.error(f"Error generating report: {e}")
         
-        return results
-        
-    def _save_results(self, results):
+        return self.results
+    
+    def _create_fresh_context(self, bootstrap, params, split_type):
         """
-        Save optimization results.
+        Create a fresh context for a backtest run.
+        
+        This is critical to ensure proper isolation between train and test runs.
         
         Args:
-            results (dict): Optimization results
+            bootstrap (object): Bootstrap object with the original context
+            params (dict): Strategy parameters
+            split_type (str): 'train' or 'test'
+            
+        Returns:
+            dict: Fresh context with required dependencies
         """
-        # Create filename with timestamp
-        timestamp = results.get('timestamp', 
-                             datetime.datetime.now().strftime("%Y%m%d_%H%M%S"))
-        strategy_name = self.config['strategy']['name']
-        filename = f"{strategy_name}_optimization_{timestamp}.json"
-        filepath = os.path.join(self.output_dir, filename)
+        # Create a fresh context dictionary
+        context = {}
         
-        # Save results as JSON
-        try:
-            with open(filepath, 'w') as f:
-                json.dump(results, f, indent=2, default=str)
-            logger.info(f"Results saved to {filepath}")
-        except Exception as e:
-            logger.error(f"Error saving results: {e}")
+        # Create a new event bus
+        from src.core.events.event_bus import EventBus
+        event_bus = EventBus()
+        context['event_bus'] = event_bus
+        
+        # Create a fresh trade repository
+        from src.core.trade_repository import TradeRepository
+        trade_repository = TradeRepository()
+        context['trade_repository'] = trade_repository
+        
+        # Create a fresh strategy factory
+        from src.strategy.strategy_factory import StrategyFactory
+        strategy_factory = StrategyFactory()
+        context['strategy_factory'] = strategy_factory
+        
+        # Add data split type
+        context['data_split'] = split_type
+        
+        # Add config
+        context['config'] = bootstrap.config.copy() if hasattr(bootstrap, 'config') else {}
+        
+        # Add max_bars if available
+        if hasattr(bootstrap, 'config') and 'max_bars' in bootstrap.config:
+            context['max_bars'] = bootstrap.config['max_bars']
+        
+        # Log what we've created
+        run_id = f"{split_type}_{uuid.uuid4().hex[:8]}"
+        logger.info(f"Created fresh context {run_id} for {split_type} run with parameters: {params}")
+        
+        return context
+    
+    def _default_objective(self, result):
+        """
+        Default objective function that maximizes Sharpe ratio.
+        
+        Args:
+            result (dict): Backtest result
+            
+        Returns:
+            float: Objective score
+        """
+        # Get statistics from result
+        stats = result.get('statistics', {})
+        
+        # Get Sharpe ratio, with fallback to return_pct if not available
+        sharpe = stats.get('sharpe_ratio')
+        if sharpe is None:
+            # If no Sharpe ratio, use return percentage
+            logger.warning("No Sharpe ratio available, using return percentage")
+            return stats.get('return_pct', 0) / 100  # Convert percentage to decimal
+            
+        return sharpe
+    
+    def save_results(self, filename=None):
+        """
+        Save optimization results to a file.
+        
+        Args:
+            filename (str, optional): Output filename
+            
+        Returns:
+            str: Path to saved file
+        """
+        if not self.results:
+            logger.warning("No results to save")
+            return None
+            
+        # Create results directory if it doesn't exist
+        results_dir = os.path.join(os.getcwd(), 'optimization_results')
+        os.makedirs(results_dir, exist_ok=True)
+        
+        # Generate default filename if not provided
+        if not filename:
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            filename = f"{self.strategy_name.lower()}_optimization_{timestamp}.json"
+            
+        filepath = os.path.join(results_dir, filename)
+        
+        # Prepare results for serialization
+        serializable_results = self._prepare_for_serialization(self.results)
+        
+        # Save to file
+        with open(filepath, 'w') as f:
+            json.dump(serializable_results, f, indent=2)
+            
+        logger.info(f"Saved optimization results to {filepath}")
+        return filepath
+    
+    def _prepare_for_serialization(self, obj):
+        """
+        Prepare results for JSON serialization.
+        
+        Args:
+            obj (object): Object to prepare
+            
+        Returns:
+            object: Serializable object
+        """
+        if isinstance(obj, dict):
+            # Process dictionary
+            result = {}
+            for k, v in obj.items():
+                # Skip complex objects that can't be easily serialized
+                if k in ('event_bus', 'data_handler', 'strategy', 'component_registry'):
+                    continue
+                # Skip large arrays of data
+                if k in ('price_data', 'indicator_data'):
+                    continue
+                # Process the value
+                result[k] = self._prepare_for_serialization(v)
+            return result
+        elif isinstance(obj, list):
+            # Process list
+            return [self._prepare_for_serialization(item) for item in obj]
+        elif isinstance(obj, (int, float, str, bool, type(None))):
+            # Basic types can be serialized directly
+            return obj
+        elif hasattr(obj, 'isoformat'):
+            # Handle datetime objects
+            return obj.isoformat()
+        elif hasattr(obj, 'tolist'):
+            # Handle numpy arrays
+            return obj.tolist()
+        else:
+            # Convert other objects to string
+            return str(obj)

@@ -1,0 +1,85 @@
+{
+  "timestamp": "20250509_164534",
+  "id": "ffd98b51-a34f-496e-9744-0f1b5e47880a",
+  "config": {
+    "mode": "backtest",
+    "backtest": {
+      "initial_capital": 100000.0,
+      "symbols": [
+        "SPY"
+      ],
+      "timeframe": "1min",
+      "optimize": true
+    },
+    "data": {
+      "source_type": "csv",
+      "date_column": "timestamp",
+      "date_format": "%Y-%m-%d %H:%M:%S",
+      "sources": [
+        {
+          "symbol": "SPY",
+          "file": "data/SPY_1min.csv",
+          "price_column": "close",
+          "timeframe": "MINUTE_1"
+        }
+      ],
+      "train_test_split": {
+        "method": "ratio",
+        "train_ratio": 0.7,
+        "test_ratio": 0.3
+      }
+    },
+    "strategy": {
+      "name": "simple_ma_crossover",
+      "default_params": {
+        "fast_window": 20,
+        "slow_window": 50
+      }
+    },
+    "optimization": {
+      "method": "grid",
+      "objective": "sharpe_ratio",
+      "output_dir": "./optimization_results"
+    },
+    "parameter_space": [
+      {
+        "name": "fast_window",
+        "type": "integer",
+        "min": 5,
+        "max": 25,
+        "step": 5,
+        "description": "Fast moving average window"
+      },
+      {
+        "name": "slow_window",
+        "type": "integer",
+        "min": 20,
+        "max": 60,
+        "step": 10,
+        "description": "Slow moving average window"
+      }
+    ],
+    "broker": {
+      "slippage": {
+        "type": "percentage",
+        "amount": 0.0005
+      },
+      "commission": {
+        "type": "percentage",
+        "rate": 0.0005
+      }
+    },
+    "risk": {
+      "position_sizing_method": "fixed",
+      "position_size": 100,
+      "max_position_pct": 0.05
+    },
+    "max_bars": 500
+  },
+  "parameter_space": "<src.strategy.optimization.parameter_space.ParameterSpace object at 0x10a172270>",
+  "best_parameters": null,
+  "best_score": 0.0,
+  "train_results": null,
+  "test_results": null,
+  "results_grid": []
+}

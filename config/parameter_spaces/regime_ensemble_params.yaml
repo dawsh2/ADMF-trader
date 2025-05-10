@@ -1,0 +1,84 @@
+# Parameter Space for Regime Ensemble Strategy Optimization
+# This file defines the parameter space for optimizing the regime-based ensemble strategy
+
+parameters:
+  # Regime detection parameters
+  - name: volatility_window
+    type: integer
+    min: 30
+    max: 120
+    step: 30
+    description: "Volatility calculation window"
+
+  - name: volatility_threshold
+    type: float
+    min: 0.001
+    max: 0.005
+    step: 0.001
+    description: "Volatility threshold for regime detection (adjusted for 1-minute data)"
+
+  - name: trend_ma_window
+    type: integer
+    min: 60
+    max: 240
+    step: 60
+    description: "Moving average window for trend detection"
+
+  - name: trend_threshold
+    type: float
+    min: 0.005
+    max: 0.02
+    step: 0.005
+    description: "Trend threshold for regime detection"
+
+  # Strategy parameters - Trend following
+  - name: fast_ma_window
+    type: integer
+    min: 10
+    max: 40
+    step: 10
+    description: "Fast moving average window"
+
+  - name: slow_ma_window
+    type: integer
+    min: 30
+    max: 120
+    step: 30
+    description: "Slow moving average window"
+
+  # Strategy parameters - Mean reversion
+  - name: rsi_window
+    type: integer
+    min: 14
+    max: 50
+    step: 12
+    description: "RSI calculation window"
+
+  - name: rsi_overbought
+    type: integer
+    min: 65
+    max: 80
+    step: 5
+    description: "RSI overbought threshold"
+
+  - name: rsi_oversold
+    type: integer
+    min: 20
+    max: 35
+    step: 5
+    description: "RSI oversold threshold"
+
+  # Strategy parameters - Volatility breakout
+  - name: breakout_window
+    type: integer
+    min: 20
+    max: 100
+    step: 20
+    description: "Volatility breakout calculation window"
+
+  - name: breakout_multiplier
+    type: float
+    min: 1.0
+    max: 2.5
+    step: 0.5
+    description: "ATR multiplier for breakout levels"

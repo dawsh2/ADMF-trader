@@ -1,0 +1,168 @@
+2025-05-09 16:56:13,855 - __main__ - INFO - Installing fixes
+2025-05-09 16:56:13,855 - __main__ - INFO - Creating backup of src/strategy/optimization/fixed_optimizer.py to src/strategy/optimization/fixed_optimizer.py.bak.20250509_165613
+2025-05-09 16:56:13,856 - __main__ - INFO - Installing fix from src/strategy/optimization/fixed_optimizer.py.fix to src/strategy/optimization/fixed_optimizer.py
+2025-05-09 16:56:13,858 - __main__ - INFO - Creating backup of src/execution/backtest/optimizing_backtest.py to src/execution/backtest/optimizing_backtest.py.bak.20250509_165613
+2025-05-09 16:56:13,859 - __main__ - INFO - Installing fix from src/execution/backtest/optimizing_backtest.py.fix to src/execution/backtest/optimizing_backtest.py
+2025-05-09 16:56:13,859 - __main__ - INFO - All fixes installed
+2025-05-09 16:57:07,694 - __main__ - INFO - Installing fixes
+2025-05-09 16:57:07,695 - __main__ - INFO - Creating backup of src/strategy/optimization/fixed_optimizer.py to src/strategy/optimization/fixed_optimizer.py.bak.20250509_165707
+2025-05-09 16:57:07,696 - __main__ - INFO - Installing fix from src/strategy/optimization/fixed_optimizer.py.fix to src/strategy/optimization/fixed_optimizer.py
+2025-05-09 16:57:07,697 - __main__ - INFO - Creating backup of src/execution/backtest/optimizing_backtest.py to src/execution/backtest/optimizing_backtest.py.bak.20250509_165707
+2025-05-09 16:57:07,699 - __main__ - INFO - Installing fix from src/execution/backtest/optimizing_backtest.py.fix to src/execution/backtest/optimizing_backtest.py
+2025-05-09 16:57:07,699 - __main__ - INFO - All fixes installed
+2025-05-09 16:57:07,727 - __main__ - INFO - Loading configuration from config/simple_ma_optimization.yaml
+2025-05-09 16:57:07,727 - __main__ - INFO - Setting max_bars to 200
+2025-05-09 16:57:07,727 - src.core.system_init - INFO - Logging initialized at level INFO
+2025-05-09 16:57:07,727 - src.core.system_init - INFO - Log file: main.log
+2025-05-09 16:57:07,727 - src.core.configuration.config - INFO - Loading configuration from config/simple_ma_optimization.yaml
+2025-05-09 16:57:07,729 - src.core.system_init - INFO - Loaded configuration from config/simple_ma_optimization.yaml
+2025-05-09 16:57:07,730 - src.core.event_system.event_bus - INFO - EventBus initialized with deduplication=True, enable_metrics=False, enable_replay=False
+2025-05-09 16:57:07,730 - src.core.system_init - INFO - Core components initialized
+2025-05-09 16:57:08,106 - src.core.system_init - INFO - Data handler registered with 1 symbols: ['SPY']
+2025-05-09 16:57:08,106 - src.core.system_init - INFO - Data components initialized
+2025-05-09 16:57:08,110 - src.core.system_init - INFO - Looking for strategies in: /Users/daws/ADMF-trader/src/strategy/implementations
+2025-05-09 16:57:08,112 - src.strategy.strategy_factory - INFO - Discovered strategy: simple_ma_crossover from ma_crossover_strategy.SimpleMACrossoverStrategy
+2025-05-09 16:57:08,112 - src.strategy.strategy_factory - INFO - Discovered strategy: regime_ensemble from regime_ensemble_strategy.RegimeEnsembleStrategy
+2025-05-09 16:57:08,112 - src.strategy.strategy_factory - INFO - Discovered strategy: composite_regime from composite_regime_strategy.CompositeRegimeStrategy
+2025-05-09 16:57:08,112 - src.strategy.strategy_factory - INFO - Discovered strategy: simple_ma_crossover from simple_ma_crossover.SimpleMACrossoverStrategy
+2025-05-09 16:57:08,113 - src.strategy.strategy_factory - INFO - Discovered strategy: ensemble from ensemble_strategy.EnsembleStrategy
+2025-05-09 16:57:08,114 - src.strategy.strategy_factory - INFO - Discovered strategy: mean_reversion from mean_reversion.MeanReversionStrategy
+2025-05-09 16:57:08,114 - src.strategy.strategy_factory - INFO - Discovered strategy: regime_ensemble from simple_regime_ensemble.SimpleRegimeEnsembleStrategy
+2025-05-09 16:57:08,115 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from ma_crossover_fixed.MACrossoverStrategy
+2025-05-09 16:57:08,115 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from backup.fixed_ma_crossover.MACrossoverStrategy
+2025-05-09 16:57:08,115 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from backup.ma_crossover.MACrossoverStrategy
+2025-05-09 16:57:08,116 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from backup.ma_crossover_fixed.MACrossoverStrategy
+2025-05-09 16:57:08,116 - src.strategy.strategy_factory - INFO - === Strategy Factory Debug Info ===
+2025-05-09 16:57:08,116 - src.strategy.strategy_factory - INFO - Strategy directories: ['/Users/daws/ADMF-trader/src/strategy/implementations']
+2025-05-09 16:57:08,116 - src.strategy.strategy_factory - INFO - Found 13 strategies
+2025-05-09 16:57:08,116 - src.strategy.strategy_factory - INFO -   - simple_ma_crossover: simple_ma_crossover.SimpleMACrossoverStrategy
+2025-05-09 16:57:08,116 - src.strategy.strategy_factory - INFO -   - simplemacrossoverstrategy: ma_crossover_strategy.SimpleMACrossoverStrategy
+2025-05-09 16:57:08,116 - src.strategy.strategy_factory - INFO -   - regime_ensemble: simple_regime_ensemble.SimpleRegimeEnsembleStrategy
+2025-05-09 16:57:08,116 - src.strategy.strategy_factory - INFO -   - regimeensemblestrategy: regime_ensemble_strategy.RegimeEnsembleStrategy
+2025-05-09 16:57:08,116 - src.strategy.strategy_factory - INFO -   - composite_regime: composite_regime_strategy.CompositeRegimeStrategy
+2025-05-09 16:57:08,116 - src.strategy.strategy_factory - INFO -   - compositeregimestrategy: composite_regime_strategy.CompositeRegimeStrategy
+2025-05-09 16:57:08,116 - src.strategy.strategy_factory - INFO -   - ensemble: ensemble_strategy.EnsembleStrategy
+2025-05-09 16:57:08,116 - src.strategy.strategy_factory - INFO -   - ensemblestrategy: ensemble_strategy.EnsembleStrategy
+2025-05-09 16:57:08,116 - src.strategy.strategy_factory - INFO -   - mean_reversion: mean_reversion.MeanReversionStrategy
+2025-05-09 16:57:08,116 - src.strategy.strategy_factory - INFO -   - meanreversionstrategy: mean_reversion.MeanReversionStrategy
+2025-05-09 16:57:08,116 - src.strategy.strategy_factory - INFO -   - simpleregimeensemblestrategy: simple_regime_ensemble.SimpleRegimeEnsembleStrategy
+2025-05-09 16:57:08,116 - src.strategy.strategy_factory - INFO -   - ma_crossover: backup.ma_crossover_fixed.MACrossoverStrategy
+2025-05-09 16:57:08,116 - src.strategy.strategy_factory - INFO -   - macrossoverstrategy: ma_crossover_fixed.MACrossoverStrategy
+2025-05-09 16:57:08,116 - src.strategy.strategy_factory - INFO - ===================================
+2025-05-09 16:57:08,116 - src.core.system_init - INFO - Creating strategy 'simple_ma_crossover' with params: {'fast_window': 20, 'slow_window': 50}
+2025-05-09 16:57:08,116 - simple_ma_crossover - INFO - SimpleMACrossoverStrategy initialized with fast_period=10, slow_period=30
+2025-05-09 16:57:08,116 - src.core.system_init - INFO - Strategy 'simple_ma_crossover' registered: SimpleMACrossoverStrategy
+2025-05-09 16:57:08,116 - src.core.system_init - INFO - Strategy components initialized
+2025-05-09 16:57:08,122 - src.risk.managers.risk_manager_base - INFO - Configured risk manager: risk_manager
+2025-05-09 16:57:08,122 - src.risk.managers.standard_risk_manager - INFO - Configured standard risk manager: risk_manager
+2025-05-09 16:57:08,122 - src.core.system_init - INFO - Portfolio manager initialized with $100000.00
+2025-05-09 16:57:08,122 - src.core.system_init - INFO - Risk manager initialized
+2025-05-09 16:57:08,122 - src.core.system_init - INFO - Risk components initialized
+2025-05-09 16:57:08,126 - src.execution.broker.commission_model - INFO - Commission model initialized: type=percentage, rate=0.1
+2025-05-09 16:57:08,126 - src.execution.broker.commission_model - INFO - Commission model configured: type=percentage, rate=0.0005
+2025-05-09 16:57:08,126 - src.core.system_init - INFO - Market simulator initialized
+2025-05-09 16:57:08,126 - src.core.system_init - INFO - Simulated broker initialized
+2025-05-09 16:57:08,126 - src.core.system_init - INFO - Execution components initialized
+2025-05-09 16:57:08,128 - src.execution.backtest.backtest_coordinator - INFO - Initializing backtest coordinator with context: dict_keys(['event_bus', 'trade_repository', 'config', 'symbols'])
+2025-05-09 16:57:08,128 - src.execution.broker.commission_model - INFO - Commission model initialized: type=percentage, rate=0.1
+2025-05-09 16:57:08,128 - src.execution.broker.commission_model - INFO - Commission model configured: type=percentage, rate=0.0005
+2025-05-09 16:57:08,128 - src.execution.broker.commission_model - INFO - Commission model initialized: type=percentage, rate=0.1
+2025-05-09 16:57:08,128 - src.execution.broker.commission_model - INFO - Commission model configured: type=percentage, rate=0.0005
+2025-05-09 16:57:08,128 - src.execution.backtest.backtest_coordinator - INFO - Broker components created and configured
+2025-05-09 16:57:08,128 - src.core.system_init - INFO - Registered data_handler component with BacktestCoordinator
+2025-05-09 16:57:08,128 - src.core.system_init - INFO - Registered strategy component with BacktestCoordinator
+2025-05-09 16:57:08,128 - src.core.system_init - INFO - Registered portfolio component with BacktestCoordinator
+2025-05-09 16:57:08,128 - src.core.system_init - INFO - Registered risk_manager component with BacktestCoordinator
+2025-05-09 16:57:08,128 - src.core.system_init - INFO - Registered broker component with BacktestCoordinator
+2025-05-09 16:57:08,128 - src.core.system_init - INFO - Registered market_simulator component with BacktestCoordinator
+2025-05-09 16:57:08,128 - src.core.system_init - INFO - Backtesting components initialized (BacktestCoordinator registered)
+2025-05-09 16:57:08,128 - src.core.system_init - INFO - Analytics components initialized
+2025-05-09 16:57:08,128 - src.core.system_init - INFO - System bootstrap complete
+2025-05-09 16:57:08,128 - __main__ - INFO - Enabling optimization in config
+2025-05-09 16:57:29,537 - __main__ - INFO - Installing fixes
+2025-05-09 16:57:29,537 - __main__ - INFO - Creating backup of src/strategy/optimization/fixed_optimizer.py to src/strategy/optimization/fixed_optimizer.py.bak.20250509_165729
+2025-05-09 16:57:29,538 - __main__ - INFO - Installing fix from src/strategy/optimization/fixed_optimizer.py.fix to src/strategy/optimization/fixed_optimizer.py
+2025-05-09 16:57:29,539 - __main__ - INFO - Creating backup of src/execution/backtest/optimizing_backtest.py to src/execution/backtest/optimizing_backtest.py.bak.20250509_165729
+2025-05-09 16:57:29,539 - __main__ - INFO - Installing fix from src/execution/backtest/optimizing_backtest.py.fix to src/execution/backtest/optimizing_backtest.py
+2025-05-09 16:57:29,540 - __main__ - INFO - All fixes installed
+2025-05-09 16:57:29,569 - __main__ - INFO - Loading configuration from config/simple_ma_optimization.yaml
+2025-05-09 16:57:29,569 - __main__ - INFO - Setting max_bars to 200
+2025-05-09 16:57:29,569 - src.core.system_init - INFO - Logging initialized at level INFO
+2025-05-09 16:57:29,569 - src.core.system_init - INFO - Log file: main.log
+2025-05-09 16:57:29,569 - src.core.configuration.config - INFO - Loading configuration from config/simple_ma_optimization.yaml
+2025-05-09 16:57:29,571 - src.core.system_init - INFO - Loaded configuration from config/simple_ma_optimization.yaml
+2025-05-09 16:57:29,571 - src.core.event_system.event_bus - INFO - EventBus initialized with deduplication=True, enable_metrics=False, enable_replay=False
+2025-05-09 16:57:29,571 - src.core.system_init - INFO - Core components initialized
+2025-05-09 16:57:29,919 - src.core.system_init - INFO - Data handler registered with 1 symbols: ['SPY']
+2025-05-09 16:57:29,920 - src.core.system_init - INFO - Data components initialized
+2025-05-09 16:57:29,923 - src.core.system_init - INFO - Looking for strategies in: /Users/daws/ADMF-trader/src/strategy/implementations
+2025-05-09 16:57:29,923 - src.strategy.strategy_factory - INFO - Discovered strategy: simple_ma_crossover from ma_crossover_strategy.SimpleMACrossoverStrategy
+2025-05-09 16:57:29,924 - src.strategy.strategy_factory - INFO - Discovered strategy: regime_ensemble from regime_ensemble_strategy.RegimeEnsembleStrategy
+2025-05-09 16:57:29,924 - src.strategy.strategy_factory - INFO - Discovered strategy: composite_regime from composite_regime_strategy.CompositeRegimeStrategy
+2025-05-09 16:57:29,924 - src.strategy.strategy_factory - INFO - Discovered strategy: simple_ma_crossover from simple_ma_crossover.SimpleMACrossoverStrategy
+2025-05-09 16:57:29,924 - src.strategy.strategy_factory - INFO - Discovered strategy: ensemble from ensemble_strategy.EnsembleStrategy
+2025-05-09 16:57:29,925 - src.strategy.strategy_factory - INFO - Discovered strategy: mean_reversion from mean_reversion.MeanReversionStrategy
+2025-05-09 16:57:29,926 - src.strategy.strategy_factory - INFO - Discovered strategy: regime_ensemble from simple_regime_ensemble.SimpleRegimeEnsembleStrategy
+2025-05-09 16:57:29,926 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from ma_crossover_fixed.MACrossoverStrategy
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from backup.fixed_ma_crossover.MACrossoverStrategy
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from backup.ma_crossover.MACrossoverStrategy
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO - Discovered strategy: ma_crossover from backup.ma_crossover_fixed.MACrossoverStrategy
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO - === Strategy Factory Debug Info ===
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO - Strategy directories: ['/Users/daws/ADMF-trader/src/strategy/implementations']
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO - Found 13 strategies
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO -   - simple_ma_crossover: simple_ma_crossover.SimpleMACrossoverStrategy
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO -   - simplemacrossoverstrategy: ma_crossover_strategy.SimpleMACrossoverStrategy
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO -   - regime_ensemble: simple_regime_ensemble.SimpleRegimeEnsembleStrategy
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO -   - regimeensemblestrategy: regime_ensemble_strategy.RegimeEnsembleStrategy
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO -   - composite_regime: composite_regime_strategy.CompositeRegimeStrategy
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO -   - compositeregimestrategy: composite_regime_strategy.CompositeRegimeStrategy
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO -   - ensemble: ensemble_strategy.EnsembleStrategy
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO -   - ensemblestrategy: ensemble_strategy.EnsembleStrategy
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO -   - mean_reversion: mean_reversion.MeanReversionStrategy
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO -   - meanreversionstrategy: mean_reversion.MeanReversionStrategy
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO -   - simpleregimeensemblestrategy: simple_regime_ensemble.SimpleRegimeEnsembleStrategy
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO -   - ma_crossover: backup.ma_crossover_fixed.MACrossoverStrategy
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO -   - macrossoverstrategy: ma_crossover_fixed.MACrossoverStrategy
+2025-05-09 16:57:29,927 - src.strategy.strategy_factory - INFO - ===================================
+2025-05-09 16:57:29,927 - src.core.system_init - INFO - Creating strategy 'simple_ma_crossover' with params: {'fast_window': 20, 'slow_window': 50}
+2025-05-09 16:57:29,927 - simple_ma_crossover - INFO - SimpleMACrossoverStrategy initialized with fast_period=10, slow_period=30
+2025-05-09 16:57:29,927 - src.core.system_init - INFO - Strategy 'simple_ma_crossover' registered: SimpleMACrossoverStrategy
+2025-05-09 16:57:29,928 - src.core.system_init - INFO - Strategy components initialized
+2025-05-09 16:57:29,933 - src.risk.managers.risk_manager_base - INFO - Configured risk manager: risk_manager
+2025-05-09 16:57:29,933 - src.risk.managers.standard_risk_manager - INFO - Configured standard risk manager: risk_manager
+2025-05-09 16:57:29,933 - src.core.system_init - INFO - Portfolio manager initialized with $100000.00
+2025-05-09 16:57:29,933 - src.core.system_init - INFO - Risk manager initialized
+2025-05-09 16:57:29,933 - src.core.system_init - INFO - Risk components initialized
+2025-05-09 16:57:29,936 - src.execution.broker.commission_model - INFO - Commission model initialized: type=percentage, rate=0.1
+2025-05-09 16:57:29,936 - src.execution.broker.commission_model - INFO - Commission model configured: type=percentage, rate=0.0005
+2025-05-09 16:57:29,936 - src.core.system_init - INFO - Market simulator initialized
+2025-05-09 16:57:29,936 - src.core.system_init - INFO - Simulated broker initialized
+2025-05-09 16:57:29,936 - src.core.system_init - INFO - Execution components initialized
+2025-05-09 16:57:29,938 - src.execution.backtest.backtest_coordinator - INFO - Initializing backtest coordinator with context: dict_keys(['event_bus', 'trade_repository', 'config', 'symbols'])
+2025-05-09 16:57:29,938 - src.execution.broker.commission_model - INFO - Commission model initialized: type=percentage, rate=0.1
+2025-05-09 16:57:29,938 - src.execution.broker.commission_model - INFO - Commission model configured: type=percentage, rate=0.0005
+2025-05-09 16:57:29,938 - src.execution.broker.commission_model - INFO - Commission model initialized: type=percentage, rate=0.1
+2025-05-09 16:57:29,938 - src.execution.broker.commission_model - INFO - Commission model configured: type=percentage, rate=0.0005
+2025-05-09 16:57:29,938 - src.execution.backtest.backtest_coordinator - INFO - Broker components created and configured
+2025-05-09 16:57:29,938 - src.core.system_init - INFO - Registered data_handler component with BacktestCoordinator
+2025-05-09 16:57:29,938 - src.core.system_init - INFO - Registered strategy component with BacktestCoordinator
+2025-05-09 16:57:29,938 - src.core.system_init - INFO - Registered portfolio component with BacktestCoordinator
+2025-05-09 16:57:29,938 - src.core.system_init - INFO - Registered risk_manager component with BacktestCoordinator
+2025-05-09 16:57:29,938 - src.core.system_init - INFO - Registered broker component with BacktestCoordinator
+2025-05-09 16:57:29,938 - src.core.system_init - INFO - Registered market_simulator component with BacktestCoordinator
+2025-05-09 16:57:29,938 - src.core.system_init - INFO - Backtesting components initialized (BacktestCoordinator registered)
+2025-05-09 16:57:29,938 - src.core.system_init - INFO - Analytics components initialized
+2025-05-09 16:57:29,938 - src.core.system_init - INFO - System bootstrap complete
+2025-05-09 16:57:29,938 - __main__ - INFO - Enabling optimization in config
+2025-05-09 16:57:29,945 - __main__ - INFO - Running optimization
+2025-05-09 16:57:29,945 - src.strategy.optimization.runner - INFO - Found max_bars=200 in bootstrap context
+2025-05-09 16:57:29,945 - src.strategy.optimization.runner - INFO - Using optimization method: grid
+2025-05-09 16:57:29,945 - src.strategy.optimization.runner - INFO - Using max_bars=200 for optimization
+2025-05-09 16:57:29,945 - src.strategy.optimization.runner - ERROR - Error running optimization: FixedOptimizer.__init__() missing 2 required positional arguments: 'config' and 'parameter_space'
+2025-05-09 16:57:29,945 - src.strategy.optimization.runner - ERROR - Traceback (most recent call last):
+  File "/Users/daws/ADMF-trader/src/strategy/optimization/runner.py", line 127, in run_optimization
+    optimizer = StrategyOptimizer(optimization_config)
+TypeError: FixedOptimizer.__init__() missing 2 required positional arguments: 'config' and 'parameter_space'
+
+2025-05-09 16:57:29,945 - __main__ - INFO - Optimization completed in 0.38 seconds
+2025-05-09 16:57:29,945 - __main__ - ERROR - Invalid or missing results from optimization
