@@ -399,9 +399,56 @@ class FixedOptimizer:
         
         # Add more comprehensive data for plotting and analysis
         if best_train_result and best_test_result:
+            # CRITICAL FIX: Verify train and test results are different
+            train_stats = best_train_result.get('statistics', {})
+            test_stats = best_test_result.get('statistics', {})
+
+            if train_stats == test_stats:
+                logger.error("CRITICAL ERROR: Train and test statistics are identical in optimization results!")
+                logger.error("This indicates potential data leakage or a failure in train/test isolation.")
+
+                # Add diagnostic info to the results
+                self.results['data_isolation_warning'] = "Train and test statistics are identical - potential data leakage detected"
+
+                # Compare trades to diagnose the issue
+                train_trades = best_train_result.get('trades', [])
+                test_trades = best_test_result.get('trades', [])
+
+                if len(train_trades) == len(test_trades):
+                    logger.error(f"Both train and test have exactly the same number of trades: {len(train_trades)}")
+
+                    # Check if the first few trades have the same timestamps
+                    for i in range(min(3, len(train_trades), len(test_trades))):
+                        train_entry = train_trades[i].get('entry_time', 'N/A')
+                        test_entry = test_trades[i].get('entry_time', 'N/A')
+
+                        if train_entry == test_entry:
+                            logger.error(f"Trade {i+1} has identical entry time in both datasets: {train_entry}")
+                        else:
+                            logger.info(f"Trade {i+1} has different entry times: Train={train_entry}, Test={test_entry}")
+            else:
+                # Stats are different, check if metrics are plausible
+                train_return = train_stats.get('return_pct', 0)
+                test_return = test_stats.get('return_pct', 0)
+                train_pf = train_stats.get('profit_factor', 0)
+                test_pf = test_stats.get('profit_factor', 0)
+
+                # Log differences for diagnostics
+                logger.info(f"Train/Test differences - Return: {train_return:.2f}% vs {test_return:.2f}%, "
+                           f"Sharpe: {train_stats.get('sharpe_ratio', 0):.2f} vs {test_stats.get('sharpe_ratio', 0):.2f}")
+
+                # Verify metrics are consistent within each set
+                train_consistent = (train_return > 0 and train_pf > 1) or (train_return < 0 and train_pf < 1) or abs(train_return) < 0.01
+                test_consistent = (test_return > 0 and test_pf > 1) or (test_return < 0 and test_pf < 1) or abs(test_return) < 0.01
+
+                if not train_consistent or not test_consistent:
+                    logger.warning("Inconsistent metrics detected in training or testing results!")
+                    self.results['metrics_consistency_warning'] = True
+
+            # Store the results for reporting
             self.results['train_results'] = best_train_result
             self.results['test_results'] = best_test_result
-            
+
             # Add trade data for deeper analysis
             if 'trades' in best_train_result:
                 self.results['best_train_trades'] = best_train_result['trades']

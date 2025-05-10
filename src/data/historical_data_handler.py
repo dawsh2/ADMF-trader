@@ -620,15 +620,31 @@ class HistoricalDataHandler(DataHandler):
     def update(self):
         """
         Update by moving to the next data point.
-        
+
         Returns:
             bool: True if more data is available, False otherwise
         """
+        # CRITICAL FIX: Store current bar so we can access it for diagnostics
+        self.current_bar = None
+
         # If no split is set, use full data
         if not self.current_split:
-            return self._update_full_data()
+            result = self._update_full_data()
         else:
-            return self._update_split_data()
+            result = self._update_split_data()
+
+        # Perform validation to ensure we're not mixing train and test data
+        if hasattr(self, '_split_time_range') and self.current_bar and 'timestamp' in self.current_bar:
+            min_time, max_time = self._split_time_range
+            current_time = self.current_bar.get('timestamp')
+            # Check if we're outside the valid range for this split
+            if current_time < min_time or current_time > max_time:
+                logger.error(f"CRITICAL DATA LEAK: {self.current_split} split using data from outside its time range!")
+                logger.error(f"  Bar time: {current_time}, Valid range: {min_time} to {max_time}")
+                # In a production system, you might want to raise an exception here
+                # For this fix, we'll continue but log the error
+
+        return result
             
     def _update_full_data(self):
         """
@@ -676,13 +692,16 @@ class HistoricalDataHandler(DataHandler):
                     
                     # Standardize field names
                     bar_data = CoreBar.from_dict(bar_data)
-                    
+
+                    # CRITICAL FIX: Store the current bar for time range validation
+                    self.current_bar = bar_data
+
                     # Publish the bar
                     self.event_bus.publish(Event(
                         EventType.BAR,
                         bar_data
                     ))
-                    
+
                     # Update current index
                     self.current_indices[symbol] = next_idx
                     
@@ -736,13 +755,16 @@ class HistoricalDataHandler(DataHandler):
                     
                     # Standardize field names
                     bar_data = CoreBar.from_dict(bar_data)
-                    
+
+                    # CRITICAL FIX: Store the current bar for time range validation
+                    self.current_bar = bar_data
+
                     # Publish the bar
                     self.event_bus.publish(Event(
                         EventType.BAR,
                         bar_data
                     ))
-                    
+
                     # Update current index
                     self.current_indices[symbol] = next_idx
                     
@@ -1108,60 +1130,98 @@ class HistoricalDataHandler(DataHandler):
     def update_bars(self):
         """
         Update bars and emit bar events.
-        
+
         Returns:
             bool: True if more bars are available, False otherwise
         """
+        # CRITICAL FIX: Initialize current_bar for cross-checking
+        self.current_bar = None
+
+        # CRITICAL FIX: Use the appropriate data source based on whether we're using a split
+        if hasattr(self, 'current_split') and self.current_split:
+            # Use split data
+            data_source = {}
+            for symbol in self.data.keys():
+                if symbol in self.data_splits and self.current_split in self.data_splits[symbol]:
+                    data_source[symbol] = self.data_splits[symbol][self.current_split]
+        else:
+            # Use full data
+            data_source = self.data
+
         # Find the earliest next bar across all symbols
         next_timestamp = None
         next_symbol = None
-        
-        for symbol, df in self.data.items():
+
+        for symbol, df in data_source.items():
             current_idx = self.current_indices[symbol]
-            
+
             # Check if there's more data for this symbol
             if current_idx + 1 < len(df):
                 next_idx = current_idx + 1
                 timestamp = df.iloc[next_idx]['timestamp']
-                
+
+                # CRITICAL FIX: If we have a split time range, ensure the timestamp is within it
+                if hasattr(self, '_split_time_range') and self.current_split:
+                    min_time, max_time = self._split_time_range
+                    if timestamp < min_time or timestamp > max_time:
+                        logger.warning(f"Skipping bar at {timestamp} outside of {self.current_split} time range {min_time} to {max_time}")
+                        continue  # Skip this bar since it's outside our time range
+
                 # If this is the earliest timestamp, or we haven't found any yet
                 if next_timestamp is None or timestamp < next_timestamp:
                     next_timestamp = timestamp
                     next_symbol = symbol
-                    
+
         # If no next timestamp found, we're done
         if next_timestamp is None:
             return False
             
         # Publish bars for all symbols with data at this timestamp
-        for symbol, df in self.data.items():
+        for symbol, df in data_source.items():
             current_idx = self.current_indices[symbol]
-            
+
             # Check if there's more data for this symbol
             if current_idx + 1 < len(df):
                 next_idx = current_idx + 1
                 timestamp = df.iloc[next_idx]['timestamp']
-                
+
+                # CRITICAL FIX: If we have a split time range, recheck the timestamp
+                if hasattr(self, '_split_time_range') and self.current_split:
+                    min_time, max_time = self._split_time_range
+                    if timestamp < min_time or timestamp > max_time:
+                        continue  # Skip this bar since it's outside our time range
+
                 # If this bar is at the current timestamp, publish it
                 if timestamp == next_timestamp:
                     bar_data = df.iloc[next_idx].to_dict()
-                    
+
                     # Add symbol to the bar data
                     bar_data['symbol'] = symbol
-                    
+
                     # Add timeframe to the bar data
                     if hasattr(self, 'timeframe'):
                         bar_data['timeframe'] = self.timeframe.to_string()
-                    
+
+                    # CRITICAL FIX: Store current bar for diagnosis
+                    self.current_bar = bar_data
+
                     # Publish the bar
                     self.event_bus.publish(Event(
                         EventType.BAR,
                         bar_data
                     ))
-                    
+
                     # Update current index
                     self.current_indices[symbol] = next_idx
-        
+
+        # CRITICAL FIX: Verify we're actually using data from the correct time range
+        if hasattr(self, '_split_time_range') and self.current_split and self.current_bar:
+            min_time, max_time = self._split_time_range
+            if 'timestamp' in self.current_bar:
+                current_time = self.current_bar['timestamp']
+                if current_time < min_time or current_time > max_time:
+                    logger.error(f"TIME RANGE VIOLATION in {self.current_split}: {current_time} is outside range {min_time} to {max_time}")
+
         return True
         
     def split_data(self, train_ratio: float = 0.7) -> Tuple[Dict[str, List[Bar]], Dict[str, List[Bar]]]:

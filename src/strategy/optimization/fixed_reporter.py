@@ -221,7 +221,17 @@ class OptimizationReporter:
         if test_results:
             report.append('Testing Performance:')
             test_stats = test_results.get('statistics', {})
-            
+
+            # CRITICAL FIX: Debug logging to verify test_stats is unique from train_stats
+            train_stats = train_results.get('statistics', {})
+            if test_stats == train_stats:
+                logger.error("TEST DATA ISSUE: Test statistics are identical to train statistics!")
+                logger.error("This indicates potential data leakage or reporting issue")
+
+                # Add warning to report
+                report.append("  WARNING: Test results appear identical to train results!")
+                report.append("  This could indicate an issue with the train/test split implementation.")
+
             # List all available metrics in test_stats
             for key, value in sorted(test_stats.items()):
                 if isinstance(value, (int, float)):
@@ -249,52 +259,84 @@ class OptimizationReporter:
         if train_results and test_results:
             report.append('OVERFITTING ANALYSIS')
             report.append('-' * 80)
-            
+
             train_stats = train_results.get('statistics', {})
             test_stats = test_results.get('statistics', {})
-            
+
+            # CRITICAL FIX: Check if train and test stats are identical
+            if train_stats == test_stats:
+                report.append("CRITICAL WARNING: Train and test statistics are identical!")
+                report.append("This indicates a potential data leakage issue or train/test isolation failure.")
+                report.append("Overfitting analysis cannot be performed with identical datasets.")
+                report.append("")
+
+                # Add diagnostic information on trades
+                train_trades = train_results.get('trades', [])
+                test_trades = test_results.get('trades', [])
+
+                if train_trades and test_trades:
+                    # Compare first few trades between train and test
+                    report.append("Trade Comparison (First 3 trades):")
+
+                    for i in range(min(3, len(train_trades), len(test_trades))):
+                        train_trade = train_trades[i]
+                        test_trade = test_trades[i]
+
+                        train_entry = train_trade.get('entry_time', 'N/A')
+                        test_entry = test_trade.get('entry_time', 'N/A')
+
+                        if train_entry == test_entry:
+                            report.append(f"  Trade {i+1}: Same entry time in both datasets: {train_entry}")
+                        else:
+                            report.append(f"  Trade {i+1}: Train entry: {train_entry}, Test entry: {test_entry}")
+
+                    report.append("")
+
             # Display consistency metrics
             train_metrics_consistent = train_results.get('metrics_consistent', True)
             test_metrics_consistent = test_results.get('metrics_consistent', True)
             train_trades_consistent = train_results.get('trades_equity_consistent', True)
             test_trades_consistent = test_results.get('trades_equity_consistent', True)
-            
+
             report.append("Data Consistency Check:")
             report.append(f"  Train metrics consistent: {train_metrics_consistent}")
             report.append(f"  Test metrics consistent: {test_metrics_consistent}")
             report.append(f"  Train trades/equity consistent: {train_trades_consistent}")
             report.append(f"  Test trades/equity consistent: {test_trades_consistent}")
             report.append("")
-            
+
             # Calculate performance differences
             return_diff = train_stats.get('return_pct', 0) - test_stats.get('return_pct', 0)
             sharpe_diff = train_stats.get('sharpe_ratio', 0) - test_stats.get('sharpe_ratio', 0)
             pf_diff = train_stats.get('profit_factor', 0) - test_stats.get('profit_factor', 0)
-            
+
             report.append(f"Return Difference (Train - Test): {return_diff:.2f}%")
             report.append(f"Sharpe Ratio Difference: {sharpe_diff:.2f}")
             report.append(f"Profit Factor Difference: {pf_diff:.2f}")
-            
+
             # Add overfitting assessment
             overfitting_score = (abs(return_diff) / 100 + abs(sharpe_diff) + abs(pf_diff)) / 3
-            
-            if overfitting_score < 0.2:
+
+            if return_diff == 0 and sharpe_diff == 0 and pf_diff == 0:
+                assessment = "INVALID - Train and test datasets are identical"
+                logger.error("CRITICAL ERROR: Zero differences detected between train and test results!")
+            elif overfitting_score < 0.2:
                 assessment = "Low risk of overfitting"
             elif overfitting_score < 0.5:
                 assessment = "Moderate risk of overfitting"
             else:
                 assessment = "High risk of overfitting"
-                
+
             report.append(f"Overfitting Assessment: {assessment} (Score: {overfitting_score:.2f})")
-            
+
             # Add warning about inconsistent metrics
-            if not (train_metrics_consistent and test_metrics_consistent and 
+            if not (train_metrics_consistent and test_metrics_consistent and
                    train_trades_consistent and test_trades_consistent):
                 report.append("")
                 report.append("WARNING: Metric inconsistencies detected.")
                 report.append("This may indicate issues with trade tracking or equity calculation.")
                 report.append("Consider reviewing the implementation or running debug diagnostics.")
-            
+
             report.append('')
             
         # Add parameter importance if available
@@ -460,11 +502,23 @@ class OptimizationReporter:
         # Add training metrics if available
         train_results = results.get('train_results', {})
         test_results = results.get('test_results', {})
-        
+
+        # CRITICAL FIX: Add diagnostic to check for identical train/test stats
+        train_stats = train_results.get('statistics', {})
+        test_stats = test_results.get('statistics', {})
+
+        if train_stats and test_stats and train_stats == test_stats:
+            logger.error("CRITICAL HTML REPORT ISSUE: Train and test statistics are identical!")
+            # Add warning box to HTML report
+            html.append('<div style="background-color: #ffcccc; border: 1px solid #ff0000; padding: 10px; margin: 10px 0; border-radius: 5px;">')
+            html.append('<strong>WARNING: Train and test statistics are identical!</strong>')
+            html.append('<p>This may indicate an issue with the train/test split implementation or data isolation.</p>')
+            html.append('</div>')
+
         if train_results or test_results:
             html.append('<table>')
             html.append('<tr><th>Metric</th><th>Training</th><th>Testing</th></tr>')
-            
+
             # Define metrics to display
             metrics = [
                 ('Total Return (%)', 'return_pct', ':.2f'),
@@ -474,27 +528,32 @@ class OptimizationReporter:
                 ('Win Rate', 'win_rate', ':.2f'),
                 ('Trades Executed', 'trades_executed', '')
             ]
-            
+
             for label, key, format_str in metrics:
-                train_value = train_results.get('statistics', {}).get(key, 'N/A')
-                test_value = test_results.get('statistics', {}).get(key, 'N/A')
-                
+                train_value = train_stats.get(key, 'N/A')
+                test_value = test_stats.get(key, 'N/A')
+
+                # Add row highlighting if values are identical (for non-N/A values)
+                row_style = ""
+                if train_value != 'N/A' and test_value != 'N/A' and train_value == test_value:
+                    row_style = ' style="background-color: #ffffcc;"'
+
                 if train_value != 'N/A' and format_str and isinstance(train_value, (int, float)):
                     # Safe alternative to f-string formatting
                     try:
                         train_value = format(train_value, format_str)
                     except (ValueError, TypeError):
                         train_value = str(train_value)
-                    
+
                 if test_value != 'N/A' and format_str and isinstance(test_value, (int, float)):
                     # Safe alternative to f-string formatting
                     try:
                         test_value = format(test_value, format_str)
                     except (ValueError, TypeError):
                         test_value = str(test_value)
-                    
-                html.append(f'<tr><td>{label}</td><td>{train_value}</td><td>{test_value}</td></tr>')
-                
+
+                html.append(f'<tr{row_style}><td>{label}</td><td>{train_value}</td><td>{test_value}</td></tr>')
+
             html.append('</table>')
         else:
             html.append('<p>No performance metrics available</p>')
@@ -505,26 +564,68 @@ class OptimizationReporter:
         if train_results and test_results:
             html.append('<div class="card">')
             html.append('<h2>Overfitting Analysis</h2>')
-            
+
             train_stats = train_results.get('statistics', {})
             test_stats = test_results.get('statistics', {})
-            
+
+            # CRITICAL FIX: Add warning if train and test stats are identical
+            if train_stats == test_stats:
+                html.append('<div style="background-color: #ffcccc; border: 1px solid #ff0000; padding: 10px; margin: 10px 0; border-radius: 5px;">')
+                html.append('<strong>CRITICAL WARNING: Train and test statistics are identical!</strong>')
+                html.append('<p>This indicates that train and test datasets contain the same data or there is a data isolation issue. Overfitting analysis is not valid with identical datasets.</p>')
+                html.append('</div>')
+
+                # Add detailed trade comparison
+                train_trades = train_results.get('trades', [])
+                test_trades = test_results.get('trades', [])
+
+                if train_trades and test_trades:
+                    html.append('<h3>Trade Comparison</h3>')
+                    html.append('<table>')
+                    html.append('<tr><th>#</th><th>Train Entry Time</th><th>Test Entry Time</th><th>Same?</th></tr>')
+
+                    for i in range(min(5, len(train_trades), len(test_trades))):
+                        train_trade = train_trades[i]
+                        test_trade = test_trades[i]
+
+                        train_entry = train_trade.get('entry_time', 'N/A')
+                        test_entry = test_trade.get('entry_time', 'N/A')
+
+                        is_same = train_entry == test_entry
+                        same_text = "IDENTICAL" if is_same else "Different"
+                        same_color = "#ffcccc" if is_same else "#ccffcc"
+
+                        html.append(f'<tr style="background-color: {same_color}"><td>{i+1}</td><td>{train_entry}</td><td>{test_entry}</td><td>{same_text}</td></tr>')
+
+                    html.append('</table>')
+
             # Calculate performance differences
             return_diff = train_stats.get('return_pct', 0) - test_stats.get('return_pct', 0)
             sharpe_diff = train_stats.get('sharpe_ratio', 0) - test_stats.get('sharpe_ratio', 0)
             pf_diff = train_stats.get('profit_factor', 0) - test_stats.get('profit_factor', 0)
-            
+
+            html.append('<h3>Performance Differences</h3>')
             html.append('<table>')
             html.append('<tr><th>Metric</th><th>Difference (Train - Test)</th></tr>')
-            html.append(f'<tr><td>Return (%)</td><td>{return_diff:.2f}%</td></tr>')
-            html.append(f'<tr><td>Sharpe Ratio</td><td>{sharpe_diff:.2f}</td></tr>')
-            html.append(f'<tr><td>Profit Factor</td><td>{pf_diff:.2f}</td></tr>')
+
+            # Highlight rows with zero difference
+            return_style = ' style="background-color: #ffffcc;"' if return_diff == 0 else ''
+            sharpe_style = ' style="background-color: #ffffcc;"' if sharpe_diff == 0 else ''
+            pf_style = ' style="background-color: #ffffcc;"' if pf_diff == 0 else ''
+
+            html.append(f'<tr{return_style}><td>Return (%)</td><td>{return_diff:.2f}%</td></tr>')
+            html.append(f'<tr{sharpe_style}><td>Sharpe Ratio</td><td>{sharpe_diff:.2f}</td></tr>')
+            html.append(f'<tr{pf_style}><td>Profit Factor</td><td>{pf_diff:.2f}</td></tr>')
             html.append('</table>')
-            
+
             # Add overfitting assessment
             overfitting_score = (abs(return_diff) / 100 + abs(sharpe_diff) + abs(pf_diff)) / 3
-            
-            if overfitting_score < 0.2:
+
+            if return_diff == 0 and sharpe_diff == 0 and pf_diff == 0:
+                assessment = "INVALID - Train and test datasets are identical"
+                color = "red"
+                logger.error("CRITICAL ERROR: Zero differences detected between train and test results in HTML report!")
+            elif overfitting_score < 0.2:
                 assessment = "Low risk of overfitting"
                 color = "green"
             elif overfitting_score < 0.5:
@@ -533,7 +634,7 @@ class OptimizationReporter:
             else:
                 assessment = "High risk of overfitting"
                 color = "red"
-                
+
             html.append(f'<p><strong>Overfitting Assessment:</strong> <span style="color: {color}">{assessment}</span> (Score: {overfitting_score:.2f})</p>')
             html.append('</div>')
             
@@ -853,7 +954,7 @@ class OptimizationReporter:
     def print_summary(self, results):
         """
         Print a summary of the optimization results to the console.
-        
+
         Args:
             results (dict): Optimization results
         """
@@ -861,22 +962,22 @@ class OptimizationReporter:
         if results is None:
             print("Cannot generate summary: results is None")
             return
-            
+
         # Get strategy name and timestamp
         strategy_name = self.config['strategy']['name']
         timestamp = results.get('timestamp', 'Not available')
-        
+
         # Print header
         print('=' * 80)
         print(f"OPTIMIZATION SUMMARY: {strategy_name}")
         print(f"Timestamp: {timestamp}")
         print('=' * 80)
-        
+
         # Print best parameters
         best_parameters = results.get('best_parameters', {})
         print("\nBEST PARAMETERS:")
         print('-' * 40)
-        
+
         if best_parameters is None:
             print("No valid parameters found. Optimization may have failed to produce results.")
         elif not best_parameters:
@@ -884,37 +985,54 @@ class OptimizationReporter:
         else:
             for param_name, param_value in best_parameters.items():
                 print(f"{param_name}: {param_value}")
-            
+
         # Print performance metrics
         print("\nPERFORMANCE METRICS:")
         print('-' * 40)
-        
+
         # Add training metrics if available
         train_results = results.get('train_results', {})
+        test_results = results.get('test_results', {})
+
+        # CRITICAL FIX: Check for identical train/test statistics
+        train_stats = train_results.get('statistics', {}) if train_results else {}
+        test_stats = test_results.get('statistics', {}) if test_results else {}
+
+        if train_stats and test_stats and train_stats == test_stats:
+            print("\n*** WARNING: TRAIN AND TEST STATISTICS ARE IDENTICAL! ***")
+            print("*** This indicates a problem with train/test split isolation! ***")
+            print("*** Optimization results may not be reliable! ***\n")
+
         if train_results:
             print('Training Performance:')
-            train_stats = train_results.get('statistics', {})
-            
+
             print(f"  Total Return: {train_stats.get('return_pct', 0):.2f}%")
             print(f"  Sharpe Ratio: {train_stats.get('sharpe_ratio', 0):.2f}")
             print(f"  Profit Factor: {train_stats.get('profit_factor', 0):.2f}")
             print(f"  Max Drawdown: {train_stats.get('max_drawdown', 0):.2f}%")
             print(f"  Trades: {train_stats.get('trades_executed', 0)}")
             print()
-            
+
         # Add testing metrics if available
-        test_results = results.get('test_results', {})
         if test_results:
             print('Testing Performance:')
-            test_stats = test_results.get('statistics', {})
-            
+
             print(f"  Total Return: {test_stats.get('return_pct', 0):.2f}%")
             print(f"  Sharpe Ratio: {test_stats.get('sharpe_ratio', 0):.2f}")
             print(f"  Profit Factor: {test_stats.get('profit_factor', 0):.2f}")
             print(f"  Max Drawdown: {test_stats.get('max_drawdown', 0):.2f}%")
             print(f"  Trades: {test_stats.get('trades_executed', 0)}")
             print()
-            
+
+        # If train and test results are available, show comparison
+        if train_stats and test_stats and train_stats != test_stats:
+            print('Performance Comparison (Train vs Test):')
+            print(f"  Return: {train_stats.get('return_pct', 0):.2f}% vs {test_stats.get('return_pct', 0):.2f}%")
+            print(f"  Sharpe: {train_stats.get('sharpe_ratio', 0):.2f} vs {test_stats.get('sharpe_ratio', 0):.2f}")
+            print(f"  Profit Factor: {train_stats.get('profit_factor', 0):.2f} vs {test_stats.get('profit_factor', 0):.2f}")
+            print(f"  Trades: {train_stats.get('trades_executed', 0)} vs {test_stats.get('trades_executed', 0)}")
+            print()
+
         # Print report location
         print(f"\nDetailed reports saved to: {self.output_dir}")
         print('=' * 80)
